@@ -14,5 +14,7 @@ public abstract class Weapon : MonoBehaviour
     }
 
     public abstract void DoAttack();
+
+    public abstract void DoSpecialAttack();
     public abstract void WeaponEffect();
 }

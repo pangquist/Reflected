@@ -19,6 +19,10 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] float groundDistance = 0.4f;
     [SerializeField] LayerMask groundMask;
 
+    [SerializeField] float dashDuration;
+    [SerializeField] float dashSpeed;
+    bool isDashing;
+
     private Vector3 velocity;
     [SerializeField] bool isGrounded;
     // Start is called before the first frame update
@@ -52,7 +56,30 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void Jump()
     {
+        if (isDashing)
+            return;
+
         if (isGrounded)
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+    }
+
+    public void Dash()
+    {
+        StartCoroutine("dashAction");
+    }
+
+    IEnumerator dashAction()
+    {
+        Debug.Log("Dash!");
+        isDashing = true;
+        float progress = 0;
+        while (progress < dashDuration)
+        {
+            transform.position += transform.forward * dashSpeed;
+            progress += Time.deltaTime;
+            yield return null;
+        }
+        isDashing = false;
+        yield break;
     }
 }

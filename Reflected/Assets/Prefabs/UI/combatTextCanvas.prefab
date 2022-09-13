@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9157949376974784552}
   - component: {fileID: -3652706069280983718}
   - component: {fileID: 8775303013206548599}
+  - component: {fileID: 4855057132489651007}
   m_Layer: 5
   m_Name: combatTextCanvas
   m_TagString: Untagged
@@ -116,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageText: {fileID: 8344600745196519974}
-  lifeTime: 0.75
+  lifeTime: 1
   speed: 0.01
 --- !u!114 &8775303013206548599
 MonoBehaviour:
@@ -130,6 +131,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e2d7c67ea018b4ea2f1e084ead99ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &4855057132489651007
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2213250481696795852}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eb2758a1d9f37d8449824bdcb35fe95a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8862746024979799797
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +226,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

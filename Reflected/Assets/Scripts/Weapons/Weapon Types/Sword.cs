@@ -18,6 +18,11 @@ public class Sword : Weapon
         anim.Play("Attack");
     }
 
+    public override void DoSpecialAttack()
+    {
+        anim.Play("SpecialAttack");
+    }
+
     public override void WeaponEffect()
     {
         Collider[] targets = Physics.OverlapBox(hitBox.gameObject.transform.position, hitBox.bounds.size/2);

@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
             movement.Jump();
-            //rb.AddForce(Vector3.up * player.GetJumpForce(), ForceMode.Impulse);
     }
 
     public void Move(Vector2 movementVector)
@@ -55,6 +54,17 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
             player.Attack();
+    }
 
+    public void SpecialAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            player.SpecialAttack();
+    }
+
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            movement.Dash();
     }
 }

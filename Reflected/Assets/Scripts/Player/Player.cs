@@ -41,6 +41,11 @@ public class Player : MonoBehaviour
         currentWeapon.DoAttack();
     }
 
+    public void SpecialAttack()
+    {
+        currentWeapon.DoSpecialAttack();
+    }
+
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;

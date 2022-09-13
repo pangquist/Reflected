@@ -16,10 +16,14 @@ public class Bow : Weapon
         anim.Play("Attack");
     }
 
+    public override void DoSpecialAttack()
+    {
+        anim.Play("SpecialAttack");
+    }
+
     public override void WeaponEffect()
     {
-        Projectile arrow = Instantiate(projectile, firePoint.position, Quaternion.LookRotation(targetTransform.position)).GetComponent<Projectile>();
-        //arrow.transform.parent = null;
+        Projectile arrow = Instantiate(projectile, firePoint.position, Quaternion.LookRotation(firePoint.transform.forward)).GetComponent<Projectile>();
         arrow.Fire(firePower, damage);
     }
 
