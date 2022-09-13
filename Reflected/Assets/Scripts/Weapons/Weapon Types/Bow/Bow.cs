@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bow : Weapon
 {
+    [Header("Bow Properties")]
     [SerializeField] float firePower;
     [SerializeField] GameObject projectile;
     [SerializeField] Transform firePoint;
@@ -13,7 +14,8 @@ public class Bow : Weapon
     Transform targetTransform = null;
     public override void DoAttack()
     {
-        anim.Play("Attack");
+        base.DoAttack();
+        anim.Play(comboClips[currentComboIndex].name);
     }
 
     public override void DoSpecialAttack()

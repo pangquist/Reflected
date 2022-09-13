@@ -11,10 +11,12 @@ using UnityEngine;
 /// </summary>
 public class Player : MonoBehaviour
 {
+    [Header("Stat Properties")]
     [SerializeField] float maxHealth;
     [SerializeField] float movementSpeed;
     [SerializeField] float jumpForce;
 
+    [Header("Weapon Properties")]
     [SerializeField] Weapon currentWeapon;
     
     float currentHealth;

@@ -263,7 +263,7 @@ MonoBehaviour:
   controller: {fileID: 4853948256094235925}
   cam: {fileID: 0}
   speed: 12
-  turnSmoothTime: 0.1
+  turnSmoothTime: 0.05
   gravity: -9.81
   jumpHeight: 3
   groundCheck: {fileID: 8513157165599481038}
@@ -271,9 +271,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 72
+  isGrounded: 0
   dashDuration: 0.25
   dashSpeed: 1
-  isGrounded: 0
 --- !u!114 &1831867125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +352,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 30d3111c-c806-4313-86e5-439bae5dcfa5
     m_ActionName: Player/Dash[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1831867127}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: SpecialAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fd435f42-e311-4e0d-af64-1b3fd3bff950
+    m_ActionName: Player/Special Attack[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -591,6 +607,61 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4853948255574270460}
     m_Modifications:
+    - target: {fileID: 755042739483133075, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: maxTimeBetweenCombo
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 755042739483133075, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: comboClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 755042739483133075, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: comboClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: e364617b84bf3de4ab23a04c6c452575, type: 2}
+    - target: {fileID: 755042739483133075, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: comboClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 7400000, guid: e364617b84bf3de4ab23a04c6c452575, type: 2}
+    - target: {fileID: 755042739483133075, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: comboClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 7400000, guid: 34205469c21232e4ca31f693036bc471, type: 2}
+    - target: {fileID: 2506927893811585354, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.077688
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506927893811585354, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.3590144
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506927893811585354, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 2.220061
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506927893811585354, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.003547678
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506927893811585354, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.17950657
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506927893811585354, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.26460183
+      objectReference: {fileID: 0}
     - target: {fileID: 3486430581355665398, guid: e8cf0be581178194e89c0e77417e2b20,
         type: 3}
       propertyPath: m_RootOrder

@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     Player player;
     Rigidbody rb;
 
+    bool movementLocked;
+    bool attackLocked;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -27,44 +30,60 @@ public class PlayerController : MonoBehaviour
         playerControls.Player.Enable();
     }
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
-        if (playerControls.Player.Movement.ReadValue<Vector2>() != Vector2.zero)
+        if (playerControls.Player.Movement.ReadValue<Vector2>() != Vector2.zero && !movementLocked)
             Move(playerControls.Player.Movement.ReadValue<Vector2>());
 
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !movementLocked)
             movement.Jump();
     }
 
     public void Move(Vector2 movementVector)
     {
-        movement.Move(new Vector3(movementVector.x, 0, movementVector.y).normalized);
+        if(!movementLocked)
+            movement.Move(new Vector3(movementVector.x, 0, movementVector.y).normalized);
     }
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !attackLocked)
             player.Attack();
     }
 
     public void SpecialAttack(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !attackLocked)
             player.SpecialAttack();
     }
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !movementLocked)
             movement.Dash();
+    }
+
+    public void SetMovementLocked(bool state)
+    {
+        movementLocked = state;
+    }
+
+    public bool GetMovementLocked()
+    {
+        return movementLocked;
+    }
+
+    public void SetAttackLocked(bool state)
+    {
+        attackLocked = state;
+    }
+
+    public bool GetAttackLocked()
+    {
+        return attackLocked;
     }
 }

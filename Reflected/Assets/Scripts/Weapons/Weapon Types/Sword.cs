@@ -11,11 +11,14 @@ using UnityEngine;
 /// </summary>
 public class Sword : Weapon
 {
+    [Header("Sword Properties")]
     [SerializeField] Collider hitBox;
 
     public override void DoAttack()
     {
-        anim.Play("Attack");
+        base.DoAttack();
+        anim.Play(comboClips[currentComboIndex].name);
+        currentComboIndex++;
     }
 
     public override void DoSpecialAttack()

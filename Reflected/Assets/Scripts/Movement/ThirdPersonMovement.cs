@@ -4,32 +4,44 @@ using UnityEngine;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] CharacterController controller;
     [SerializeField] Transform cam;
 
+    [Header("Stat Properties")]
     [SerializeField] float speed = 12f;
-
     [SerializeField] float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
 
+    [Header("Jump Properties")]
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float jumpHeight = 3f;
-
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance = 0.4f;
     [SerializeField] LayerMask groundMask;
+    [SerializeField] bool isGrounded;
 
+    [Header("Dash Properties")]
     [SerializeField] float dashDuration;
     [SerializeField] float dashSpeed;
+    [SerializeField] float dashCooldown;
+    float currentDashTimer;
     bool isDashing;
 
     private Vector3 velocity;
-    [SerializeField] bool isGrounded;
     // Start is called before the first frame update
+    private void Start()
+    {
+        currentDashTimer = dashCooldown;
+    }
+
     private void Update()
     {
         if (!isGrounded)
             velocity.y += gravity * Time.deltaTime;
+
+        if (currentDashTimer < dashCooldown)
+            currentDashTimer += Time.deltaTime;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         controller.Move(velocity * Time.deltaTime);
@@ -65,7 +77,11 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void Dash()
     {
-        StartCoroutine("dashAction");
+        if (currentDashTimer >= dashCooldown)
+        {
+            StartCoroutine("dashAction");
+            currentDashTimer = 0;
+        }
     }
 
     IEnumerator dashAction()
