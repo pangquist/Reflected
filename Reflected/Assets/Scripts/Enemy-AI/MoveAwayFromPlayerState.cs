@@ -6,7 +6,7 @@ public class MoveAwayFromPlayerState : State
 {
     public override void DoState(AIManager thisEnemy, Player player)
     {
-        if (distanceTo(player.gameObject.position) <= 25)
+        if (distanceTo(player) <= 25)
         {
             thisEnemy.SetMoveAwayState();
             return;

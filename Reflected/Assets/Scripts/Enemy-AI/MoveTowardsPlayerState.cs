@@ -6,7 +6,7 @@ public class MoveTowardsPlayerState : State
 {
     public override void DoState(AIManager thisEnemy, Player player)
     {
-        if (distanceTo(player.gameObject.position) >= 3)
+        if (distanceTo(player) >= 3)
         {
             thisEnemy.SetAttackPlayerState();
             return;

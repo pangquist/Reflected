@@ -8,6 +8,6 @@ public abstract class State : MonoBehaviour
 
    protected float distanceTo(Player player)
    {
-        return gameObject.transform.position - player.transform.position;
+         return Vector3.Distance(gameObject.transform.position, player.transform.position);
    }
 }

@@ -6,7 +6,7 @@ public class StartState : State
 {
     public override void DoState(AIManager thisEnemy, Player player)
     {
-        if (thisEnemy.CloseCombat() && distanceTo(player.gameObject.position) >= 5)
+        if (thisEnemy.CloseCombat() && distanceTo(player) >= 5)
         {
             thisEnemy.SetMoveTowardState();
             return;
