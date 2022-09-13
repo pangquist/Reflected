@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 635712816}
   - component: {fileID: 635712815}
   - component: {fileID: 635712814}
+  - component: {fileID: 187221122}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: healthBarCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,6 +102,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &187221122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635712812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e2d7c67ea018b4ea2f1e084ead99ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &656971666
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,6 +622,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1184083565}
   maxHealth: 5
+  combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
+    type: 3}
 --- !u!54 &9008191049098432530
 Rigidbody:
   m_ObjectHideFlags: 0
