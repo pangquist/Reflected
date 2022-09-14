@@ -18,10 +18,11 @@ public class Bow : Weapon
         anim.Play(comboClips[currentComboIndex].name);
     }
 
-    public override void DoSpecialAttack()
-    {
-        anim.Play("SpecialAttack");
-    }
+    //public override void DoSpecialAttack()
+    //{
+    //    base.DoSpecialAttack();
+    //    anim.Play("SpecialAttack");
+    //}
 
     public override void WeaponEffect()
     {

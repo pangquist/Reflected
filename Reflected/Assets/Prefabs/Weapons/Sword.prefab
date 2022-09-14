@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3486430581355665398
 Transform:
   m_ObjectHideFlags: 0
@@ -112,6 +112,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
+  comboClips:
+  - {fileID: 7400000, guid: e364617b84bf3de4ab23a04c6c452575, type: 2}
+  - {fileID: 7400000, guid: e364617b84bf3de4ab23a04c6c452575, type: 2}
+  - {fileID: 7400000, guid: 34205469c21232e4ca31f693036bc471, type: 2}
+  maxTimeBetweenCombo: 1.5
+  specialAttackCooldown: 2
   hitBox: {fileID: 2506927893811585354}
 --- !u!95 &11675922
 Animator:

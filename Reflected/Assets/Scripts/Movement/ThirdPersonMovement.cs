@@ -77,7 +77,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void Dash()
     {
-        if (currentDashTimer >= dashCooldown)
+        if (currentDashTimer >= dashCooldown && isGrounded)
         {
             StartCoroutine("dashAction");
             currentDashTimer = 0;

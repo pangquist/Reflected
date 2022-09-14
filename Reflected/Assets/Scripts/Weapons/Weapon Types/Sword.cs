@@ -21,10 +21,10 @@ public class Sword : Weapon
         currentComboIndex++;
     }
 
-    public override void DoSpecialAttack()
-    {
-        anim.Play("SpecialAttack");
-    }
+    //public override void DoSpecialAttack()
+    //{
+    //    base.DoSpecialAttack();
+    //}
 
     public override void WeaponEffect()
     {
