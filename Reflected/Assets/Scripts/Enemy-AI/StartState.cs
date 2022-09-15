@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StartState : State
 {
-    public override void DoState(AIManager thisEnemy, Player player)
+    public override void DoState(AiManager thisEnemy, Player player)
     {
         if (thisEnemy.CloseCombat() && distanceTo(player) >= 5)
         {

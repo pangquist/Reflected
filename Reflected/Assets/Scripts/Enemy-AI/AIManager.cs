@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIManager : MonoBehaviour
+public class AiManager : MonoBehaviour
 {
     private State activeState;
     private StartState startState = new StartState();
@@ -17,8 +17,8 @@ public class AIManager : MonoBehaviour
     
     void Start()
     {
-        me = GetComponent<Enemy>();
-        player = GetComponent<Player>();
+        if(!me) me = GetComponent<Enemy>();
+        if(!player) player = GetComponent<Player>();
 
         activeState = startState;
 

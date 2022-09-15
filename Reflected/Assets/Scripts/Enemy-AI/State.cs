@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class State : MonoBehaviour
 {
-   public virtual void DoState(AIManager thisEnemy, Player player) { }
+   public virtual void DoState(AiManager thisEnemy, Player player) { }
 
    protected float distanceTo(Player player)
    {

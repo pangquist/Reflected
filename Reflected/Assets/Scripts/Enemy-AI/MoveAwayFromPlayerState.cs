@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveAwayFromPlayerState : State
 {
-    public override void DoState(AIManager thisEnemy, Player player)
+    public override void DoState(AiManager thisEnemy, Player player)
     {
         if (distanceTo(player) <= 25)
         {

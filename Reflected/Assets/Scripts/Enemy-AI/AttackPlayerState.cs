@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackPlayerState : State
 {
-    public override void DoState(AIManager thisEnemy, Player player)
+    public override void DoState(AiManager thisEnemy, Player player)
     {
         if (distanceTo(player) >= 5)
         {

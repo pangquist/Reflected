@@ -15,14 +15,15 @@ public class AiDirector : MonoBehaviour
     int NumberOfRoomsSinceShop;
 
     //Player-stats
-    float playerHelathPercentage;
+    [SerializeField] Player player;
+    float playerCurrentHelathPercentage;
     int playerCurrency;
 
 
 
     void Start()
     {
-        
+        if(!player) player = GetComponent<Player>();
     }
 
     void Update()
@@ -30,12 +31,14 @@ public class AiDirector : MonoBehaviour
         if(activeRoom && enemiesInRoom > 0)
         {
             timeToClearRoom += Time.deltaTime;
+            playerCurrentHelathPercentage = player.GetHealthPercentage();
         }
 
         if (!activeRoom)
         {
             ResetRoom();
         }
+
     }
 
     private void ResetRoom()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public  class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     [SerializeField] Slider healthBar;
     [SerializeField] protected float maxHealth;
