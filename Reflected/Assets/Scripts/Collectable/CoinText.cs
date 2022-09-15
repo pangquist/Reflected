@@ -18,9 +18,10 @@ public class CoinText : MonoBehaviour
         Coin.OnCoinCollected -= IncrementCoinCount;
     }
 
-    public void IncrementCoinCount()
+    public void IncrementCoinCount(ItemData itemData)
     {
         coinCount++;
-        coinText.text = $"Coin: {coinCount}";
+        coinText.text = $"{itemData.displayName}: {coinCount}";
+        //coinText.text = $"Coin: {coinCount}";
     }
 }
