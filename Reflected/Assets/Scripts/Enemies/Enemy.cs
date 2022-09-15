@@ -24,6 +24,7 @@ public  class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         parent = gameObject.transform.parent.gameObject;
+        playerNoticed = false;
     }
 
     private void Update()
@@ -32,14 +33,14 @@ public  class Enemy : MonoBehaviour
 
         if(!playerNoticed)
         {
-            if(aggroRange <= distance)
+            if(distance <= aggroRange)
             {
                 playerNoticed = true;
             }
         }
         else
         {
-            if (aggroRange > distance)
+            if (distance > aggroRange)
             {
                 playerNoticed = false;
             }
@@ -55,6 +56,11 @@ public  class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (currentHealth == maxHealth)
+            healthBar.gameObject.SetActive(true);
+        else if (currentHealth <= 0)
+            return;
+
         currentHealth -= damage;
         healthBar.value = GetHealthPercentage();
 
