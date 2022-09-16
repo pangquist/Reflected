@@ -8,6 +8,7 @@ public class AiDirector : MonoBehaviour
     bool activeRoom;
     float timeToClearRoom;
     int enemiesInRoom;
+    [SerializeField] int numberOfSpawnpoints;
 
     //Map-stats
     int numberOfRoomsCleared;
@@ -19,6 +20,8 @@ public class AiDirector : MonoBehaviour
     float playerCurrentHelathPercentage;
     int playerCurrency;
 
+
+    EnemySpawner EnemySpawner;
 
 
     void Start()
