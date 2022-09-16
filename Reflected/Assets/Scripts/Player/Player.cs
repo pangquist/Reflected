@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 
     [Header("Weapon Properties")]
     [SerializeField] Weapon currentWeapon;
+
+    [SerializeField] Animator anim;
     
     float currentHealth;
     // Awake is called when the script instance is being loaded
@@ -51,11 +53,19 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+
+        if (currentHealth <= 0)
+            Die();
     }
 
     void Die()
     {
+        anim.Play("Death");
+    }
 
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 
     public float GetHealthPercentage()
