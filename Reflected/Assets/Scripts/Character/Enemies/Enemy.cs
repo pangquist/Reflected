@@ -3,28 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public  class Enemy : MonoBehaviour
+public  class Enemy : Character
 {
     [SerializeField] Slider healthBar;
-    [SerializeField] protected float maxHealth;
-
+    
     [SerializeField] Canvas combatTextCanvas;
     [SerializeField] float aggroRange;
 
     GameObject parent;
     Player player;
-    Animator anim;
-
-    protected float currentHealth;
+    
     bool playerNoticed;
 
-    public void Awake()
+    protected override void Awake()
     {
-        currentHealth = maxHealth;
-        anim = GetComponent<Animator>();
+        base.Awake();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         parent = gameObject.transform.parent.gameObject;
-        playerNoticed = false;
     }
 
     private void Update()
@@ -54,15 +49,13 @@ public  class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         if (currentHealth == maxHealth)
             healthBar.gameObject.SetActive(true);
         else if (currentHealth <= 0)
             return;
 
-        currentHealth -= damage;
-        healthBar.value = GetHealthPercentage();
 
         Vector3 direction = (transform.position - player.transform.position).normalized;
         direction.y = 0;
@@ -71,23 +64,7 @@ public  class Enemy : MonoBehaviour
         CombatText text = Instantiate(combatTextCanvas.gameObject, transform.position + new Vector3(0, 2, 0), Quaternion.identity).GetComponent<CombatText>();
         text.SetDamageText(damage);
 
-        if(currentHealth <= 0)
-        {
-            anim.Play("Death");
-        }
-        else
-        {
-            anim.Play("Damaged");
-        }
-    }
-
-    public float GetHealthPercentage()
-    {
-        return currentHealth / maxHealth;
-    }
-
-    public void Die()
-    {
-        Destroy(gameObject);
+        base.TakeDamage(damage);
+        healthBar.value = GetHealthPercentage();
     }
 }

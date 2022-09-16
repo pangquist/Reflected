@@ -11,6 +11,7 @@ public class Bow : Weapon
     [SerializeField] GameObject body;
 
     [SerializeField] Camera cam;
+    [SerializeField] LayerMask hitableLayers;
     Transform targetTransform = null;
     public override void DoAttack()
     {
@@ -18,15 +19,9 @@ public class Bow : Weapon
         anim.Play(comboClips[currentComboIndex].name);
     }
 
-    //public override void DoSpecialAttack()
-    //{
-    //    base.DoSpecialAttack();
-    //    anim.Play("SpecialAttack");
-    //}
-
     public override void WeaponEffect()
     {
-        Projectile arrow = Instantiate(projectile, firePoint.position, Quaternion.LookRotation(firePoint.transform.forward)).GetComponent<Projectile>();
+        Projectile arrow = Instantiate(projectile, firePoint.position, body.transform.localRotation).GetComponent<Projectile>();
         arrow.Fire(firePower, damage);
     }
 
@@ -37,18 +32,16 @@ public class Bow : Weapon
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
 
-        
-
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitableLayers))
         {
             targetTransform = hit.transform;
         }
 
-        Debug.DrawRay(ray.origin, ray.direction, Color.red);
+        //transform.rotation = Quaternion.LookRotation(targetTransform.position);
     }
 }

@@ -30,7 +30,7 @@ public abstract class Weapon : MonoBehaviour
         timeSinceLastSpecialAttack = specialAttackCooldown;
     }
 
-    public virtual void Update()
+    protected virtual void Update()
     {
         if(currentComboIndex > 0)
         {

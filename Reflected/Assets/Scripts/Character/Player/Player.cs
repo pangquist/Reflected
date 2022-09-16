@@ -9,21 +9,13 @@ using UnityEngine;
 /// <summary>
 /// Player description
 /// </summary>
-public class Player : MonoBehaviour
+public class Player : Character
 {
     [Header("Stat Properties")]
-    [SerializeField] float maxHealth;
-    [SerializeField] float movementSpeed;
     [SerializeField] float jumpForce;
 
-    [Header("Weapon Properties")]
-    [SerializeField] Weapon currentWeapon;
-
-    [SerializeField] Animator anim;
-    
-    float currentHealth;
     // Awake is called when the script instance is being loaded
-    void Awake()
+    protected override void Awake()
     {
         Cursor.visible = false;
     }
@@ -37,40 +29,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Cursor.visible)
+            Cursor.visible = false;
     }
 
-    public void Attack()
-    {
-        currentWeapon.DoAttack();
-    }
+
 
     public void SpecialAttack()
     {
         currentWeapon.DoSpecialAttack();
-    }
-
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-
-        if (currentHealth <= 0)
-            Die();
-    }
-
-    void Die()
-    {
-        anim.Play("Death");
-    }
-
-    public void Destroy()
-    {
-        Destroy(gameObject);
-    }
-
-    public float GetHealthPercentage()
-    {
-        return currentHealth / maxHealth;
     }
 
     public float GetMovementSpeed()

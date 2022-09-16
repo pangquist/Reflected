@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
 
     public void Fire(float firePower, float newDamage)
     {
-        rb.AddForce(Vector3.forward * firePower);
+        rb.AddForce(transform.forward * firePower);
         damage = newDamage;
     }
 
