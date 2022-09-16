@@ -7,6 +7,7 @@ public class ChestController : MonoBehaviour
     [SerializeField] WeightedRandomList<Transform> lootTable;
     [SerializeField] Transform itemHolder;
     GameObject spawnedObject;
+    bool hasSpawnedItem;
 
     public bool isOpen;
     //public Animator animator;
@@ -18,10 +19,11 @@ public class ChestController : MonoBehaviour
 
     public void OpenChest()
     {
-        if (!isOpen)
+        if (!isOpen )
         {
             isOpen = true;
             Debug.Log("Chest is now open...");
+            //hasSpawnedItem = true;
             //animator.SetBool("IsOpen", isOpen);
             if (spawnedObject == null)
                 SpawnItem();
