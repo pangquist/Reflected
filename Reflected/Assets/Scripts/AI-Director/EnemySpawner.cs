@@ -15,34 +15,44 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        List<GameObject> spawns = new List<GameObject>();
-        spawns = GameObject.FindGameObjectsWithTag("SpawnPoint").ToList();
-        
-        foreach(GameObject point in spawns)
-        {
-            spawnTransforms.Add(point.transform);
-        }
+        GetSpawnlocations();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            debugSpawnLocation = spawnTransforms[Random.Range(0,spawnTransforms.Count)];
+            if (spawnTransforms.Count > 0)
+            {
+                debugSpawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+            }
+            else
+            {
+                GetSpawnlocations();
+                debugSpawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+            }
+
             SpawnEnemy(enemyClose, debugSpawnLocation);
 
-            //spawnTransforms.Remove(debugSpawnLocation);
-            //in the future we might remove the spawnlocation from the list so that enemies don't spawn inside eachother.
+            spawnTransforms.Remove(debugSpawnLocation);
+
+            //Spawn location will randomly choose a location and remove it from the list, if there are no more locations in the list all locations will be added again.
         }
     }
 
-    private void getSpawnlocations()
+    private void GetSpawnlocations()
     {
+        List<GameObject> spawns = new List<GameObject>();
+        spawns = GameObject.FindGameObjectsWithTag("SpawnPoint").ToList();
 
+        foreach (GameObject point in spawns)
+        {
+            spawnTransforms.Add(point.transform);
+        }
     }
 
     private void SpawnEnemy(GameObject enemy, Transform spawnLocation)
     {
-        Instantiate(enemy, spawnLocation.position, Quaternion.Euler(0, 0, 0));
+        Instantiate(enemy, spawnLocation.position, Quaternion.Euler(0,0,0));
     }
 }
