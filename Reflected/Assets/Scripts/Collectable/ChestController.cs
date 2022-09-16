@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ChestController : MonoBehaviour
 {
-    public WeightedRandomList<Transform> lootTable;
-    public Transform itemHolder;
+    [SerializeField] WeightedRandomList<Transform> lootTable;
+    [SerializeField] Transform itemHolder;
+    GameObject spawnedObject;
 
     public bool isOpen;
     //public Animator animator;
@@ -22,7 +23,10 @@ public class ChestController : MonoBehaviour
             isOpen = true;
             Debug.Log("Chest is now open...");
             //animator.SetBool("IsOpen", isOpen);
-            ShowItem();
+            if (spawnedObject == null)
+                SpawnItem();
+            else
+                ShowItem();
         }
         else
         {
@@ -32,19 +36,25 @@ public class ChestController : MonoBehaviour
 
     void HideItem()
     {
-        itemHolder.localScale = Vector3.zero;
-        itemHolder.gameObject.SetActive(false);
-
-        foreach(Transform child in itemHolder)
-        {
-            Destroy(child.gameObject);
-        }
+        //itemHolder.localScale = Vector3.zero;
+        spawnedObject.gameObject.SetActive(false);
+        isOpen = false;
+        //foreach(GameObject child in itemHolder)
+        //{
+        //    Destroy(child);
+        //}
     }
 
     void ShowItem()
     {
-        Transform item = lootTable.GetRandom();
-        Instantiate(item, itemHolder);
+        spawnedObject.gameObject.SetActive(true);
+    }
+
+    void SpawnItem()
+    {
+        //GameObject item = lootTable.GetRandom();
+        spawnedObject = Instantiate(lootTable.GetRandom().gameObject, itemHolder.position, itemHolder.rotation);
+        spawnedObject.transform.parent = null;
         itemHolder.gameObject.SetActive(true);
     }
 }
