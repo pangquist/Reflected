@@ -17,15 +17,19 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected float maxTimeBetweenCombo;
 
     [Header("Special Attack")]
+    [SerializeField] protected AnimationClip specialAttackClip;
     [SerializeField] protected float specialAttackCooldown;
     [SerializeField] float timeSinceLastSpecialAttack;
 
-    PlayerController playerController;
+    [SerializeField] protected List<Enemy> hitEnemies;
+
+    protected PlayerController playerController;
 
     public virtual void Awake()
     {
         anim = GetComponent<Animator>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        hitEnemies = new List<Enemy>();
         currentComboIndex = 0;
         timeSinceLastSpecialAttack = specialAttackCooldown;
     }
@@ -54,19 +58,31 @@ public abstract class Weapon : MonoBehaviour
         playerController.SetAttackLocked(true);
     }
 
+
+
     public virtual void DoSpecialAttack()
     {
-        if (timeSinceLastSpecialAttack < specialAttackCooldown)
+        if (timeSinceLastSpecialAttack < specialAttackCooldown || playerController.GetAttackLocked())
             return;
 
-        anim.Play("SpecialAttack");
+        playerController.SetAttackLocked(true);
+        anim.Play(specialAttackClip.name);
         timeSinceLastSpecialAttack = 0;
     }
 
-    public abstract void WeaponEffect();
+    public virtual void WeaponEffect()
+    {
+
+    }
 
     public virtual void Unlock()
     {
         playerController.SetAttackLocked(false);
+        ClearEnemies();
+    }
+
+    public virtual void ClearEnemies()
+    {
+        hitEnemies.Clear();
     }
 }

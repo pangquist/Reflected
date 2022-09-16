@@ -21,22 +21,22 @@ public class Sword : Weapon
         currentComboIndex++;
     }
 
-    //public override void DoSpecialAttack()
-    //{
-    //    base.DoSpecialAttack();
-    //}
-
-    public override void WeaponEffect()
+    private void OnTriggerStay(Collider other)
     {
-        Collider[] targets = Physics.OverlapBox(hitBox.gameObject.transform.position, hitBox.bounds.size/2);
+        if (!playerController.GetAttackLocked())
+            return;
 
-        foreach(Collider collider in targets)
+        Enemy target;
+
+        if (other.GetComponent<Enemy>())
+            target = other.GetComponent<Enemy>();
+        else
+            return;
+
+        if (!hitEnemies.Contains(target))
         {
-            if(collider.GetComponent<Enemy>())
-            {
-                Enemy enemy = collider.GetComponent<Enemy>();
-                enemy.TakeDamage(damage);
-            }
+            target.TakeDamage(damage);
+            hitEnemies.Add(target);
         }
     }
 }
