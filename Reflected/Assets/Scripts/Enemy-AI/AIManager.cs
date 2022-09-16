@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIManager : MonoBehaviour
+public class AiManager : MonoBehaviour
 {
     private State activeState;
     private StartState startState = new StartState();
@@ -10,15 +10,17 @@ public class AIManager : MonoBehaviour
     private MoveAwayFromPlayerState moveAwayFromPlayerState = new MoveAwayFromPlayerState();
     private AttackPlayerState attackPlayerState = new AttackPlayerState();
 
-    [SerializeField] private Player player;
-    [SerializeField] private Enemy me;
+    [SerializeField] private GameObject GOplayer;
+    private Player player;
+    private Enemy me;
 
     bool closeCombat = false;
-    
+
     void Start()
     {
-        me = GetComponent<Enemy>();
-        player = GetComponent<Player>();
+        if (!me) me = GetComponent<Enemy>();
+        if (!player) player = GOplayer.GetComponent<Player>();
+        if (!GOplayer) GOplayer = GameObject.FindGameObjectWithTag("Player");
 
         activeState = startState;
 
@@ -37,4 +39,10 @@ public class AIManager : MonoBehaviour
     public bool CloseCombat() => closeCombat;
 
     public State GetActiveState() => activeState;
+
+
+    public float distanceTo(Player player)
+    {
+        return Vector3.Distance(gameObject.transform.position, player.transform.position);
+    }
 }
