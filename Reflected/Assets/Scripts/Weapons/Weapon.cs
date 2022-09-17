@@ -50,29 +50,41 @@ public abstract class Weapon : MonoBehaviour
             timeSinceLastSpecialAttack += Time.deltaTime;
     }
 
-    public virtual void DoAttack()
+    public virtual AnimationClip DoAttack()
     {
         if (playerController.GetAttackLocked())
-            return;
+            return null;
 
         playerController.SetAttackLocked(true);
+
+        if (currentComboIndex == comboClips.Length)
+            currentComboIndex = 0;
+
+        return comboClips[currentComboIndex++];
+
     }
 
-
-
-    public virtual void DoSpecialAttack()
+    public virtual AnimationClip DoSpecialAttack()
     {
-        if (timeSinceLastSpecialAttack < specialAttackCooldown || playerController.GetAttackLocked())
-            return;
-
         playerController.SetAttackLocked(true);
-        anim.Play(specialAttackClip.name);
         timeSinceLastSpecialAttack = 0;
+
+        return specialAttackClip;
     }
 
     public virtual void WeaponEffect()
     {
 
+    }
+
+    public bool IsLocked()
+    {
+        return playerController.GetAttackLocked();
+    }
+
+    public bool IsOnCooldown()
+    {
+        return timeSinceLastSpecialAttack < specialAttackCooldown;
     }
 
     public virtual void Unlock()

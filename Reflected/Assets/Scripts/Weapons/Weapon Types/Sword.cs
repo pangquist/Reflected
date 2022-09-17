@@ -14,12 +14,11 @@ public class Sword : Weapon
     [Header("Sword Properties")]
     [SerializeField] Collider hitBox;
 
-    public override void DoAttack()
-    {
-        base.DoAttack();
-        anim.Play(comboClips[currentComboIndex].name);
-        currentComboIndex++;
-    }
+    //public override AnimationClip DoAttack()
+    //{
+    //    base.DoAttack();
+        
+    //}
 
     private void OnTriggerStay(Collider other)
     {
