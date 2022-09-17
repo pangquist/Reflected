@@ -84,6 +84,11 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
+    public void AddSpeed(float amount)
+    {
+        speed += amount;
+    }
+
     IEnumerator dashAction()
     {
         Debug.Log("Dash!");
