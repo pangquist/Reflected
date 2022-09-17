@@ -28,7 +28,7 @@ public class FillHealthBar : MonoBehaviour
         }
 
         float fillValue = playerHealth.currentHealth / playerHealth.maxHealth;
-        Debug.Log(fillValue);
+        //Debug.Log(fillValue);
         //if(fillValue <= slider.maxValue / 3)
         //{
         //    fillImage.color = Color.magenta;
