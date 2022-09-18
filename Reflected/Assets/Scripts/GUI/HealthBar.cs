@@ -21,7 +21,7 @@ public class HealthBar : MonoBehaviour
         fillImage.color = healthBarColor;
         bgImage.color = healthBarBGColor;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        healthBar.maxValue = player.maxHealth;
+        healthBar.maxValue = player.GetMaxHealth();
     }
         // Update is called once per frame
         void Update()
@@ -29,14 +29,14 @@ public class HealthBar : MonoBehaviour
         
         
         //healthBar.fillRect.
-        healthBar.value = player.currentHealth;
+        healthBar.value = player.GetCurrentHealth();
         //healthBar.image.color = healthBarColor;
         //healthBar.fillRect.GetComponent<Image>().color = healthBarColor;
         //healthBar.handleRect.GetComponent<Image>().color = healthBarColor;
     }
     public void HealthbarUpdate()
     {
-        healthBar.value = player.currentHealth;
+        healthBar.value = player.GetCurrentHealth();
         fillImage.color = healthBarColor;
     }
 }

@@ -20,9 +20,9 @@ public class UiPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + player.currentHealth.ToString();
-        damageText.text = "Damage: " + player.currentHealth.ToString();
+        healthText.text = "Health: " + player.GetCurrentHealth().ToString();
+        damageText.text = "Damage: " + player.GetCurrentHealth().ToString();
         speedText.text = "Speed: " + player.GetMovementSpeed().ToString();
-        attackspeedText.text = "Attack Speed: " + player.currentHealth.ToString();
+        attackspeedText.text = "Attack Speed: " + player.GetCurrentHealth().ToString();
     }
 }

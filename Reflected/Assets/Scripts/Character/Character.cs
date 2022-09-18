@@ -49,4 +49,24 @@ public class Character : MonoBehaviour
     {
         return currentHealth / maxHealth;
     }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public float GetDamage()
+    {
+        return currentWeapon.GetDamage();
+    }
+
+    public float GetAttackSpeed()
+    {
+        return 1; //replace with attack speed
+    }
 }

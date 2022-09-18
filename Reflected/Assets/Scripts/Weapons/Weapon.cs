@@ -97,4 +97,9 @@ public abstract class Weapon : MonoBehaviour
     {
         hitEnemies.Clear();
     }
+
+    public float GetDamage()
+    {
+        return damage;
+    }
 }
