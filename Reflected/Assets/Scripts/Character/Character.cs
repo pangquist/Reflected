@@ -13,21 +13,10 @@ public class Character : MonoBehaviour
     [Header("Weapon Properties")]
     [SerializeField] protected Weapon currentWeapon;
 
-
     protected virtual void Awake()
     {
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
-    }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public virtual void TakeDamage(float damage)
@@ -44,10 +33,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void Attack()
-    {
-        currentWeapon.DoAttack();
-    }
+
 
     void Die()
     {

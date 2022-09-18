@@ -14,29 +14,28 @@ public class Sword : Weapon
     [Header("Sword Properties")]
     [SerializeField] Collider hitBox;
 
-    public override void DoAttack()
-    {
-        base.DoAttack();
-        anim.Play(comboClips[currentComboIndex].name);
-        currentComboIndex++;
-    }
-
-    //public override void DoSpecialAttack()
+    //public override AnimationClip DoAttack()
     //{
-    //    base.DoSpecialAttack();
+    //    base.DoAttack();
+        
     //}
 
-    public override void WeaponEffect()
+    private void OnTriggerStay(Collider other)
     {
-        Collider[] targets = Physics.OverlapBox(hitBox.gameObject.transform.position, hitBox.bounds.size/2);
+        if (!playerController.GetAttackLocked())
+            return;
 
-        foreach(Collider collider in targets)
+        Enemy target;
+
+        if (other.GetComponent<Enemy>())
+            target = other.GetComponent<Enemy>();
+        else
+            return;
+
+        if (!hitEnemies.Contains(target))
         {
-            if(collider.GetComponent<Enemy>())
-            {
-                Enemy enemy = collider.GetComponent<Enemy>();
-                enemy.TakeDamage(damage);
-            }
+            target.TakeDamage(damage);
+            hitEnemies.Add(target);
         }
     }
 }

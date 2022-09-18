@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
 
     bool movementLocked;
-    bool attackLocked;
+    [SerializeField] bool attackLocked;
 
     void Awake()
     {

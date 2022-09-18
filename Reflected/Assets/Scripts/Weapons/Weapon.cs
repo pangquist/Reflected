@@ -17,15 +17,19 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected float maxTimeBetweenCombo;
 
     [Header("Special Attack")]
+    [SerializeField] protected AnimationClip specialAttackClip;
     [SerializeField] protected float specialAttackCooldown;
     [SerializeField] float timeSinceLastSpecialAttack;
 
-    PlayerController playerController;
+    [SerializeField] protected List<Enemy> hitEnemies;
+
+    protected PlayerController playerController;
 
     public virtual void Awake()
     {
         anim = GetComponent<Animator>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        hitEnemies = new List<Enemy>();
         currentComboIndex = 0;
         timeSinceLastSpecialAttack = specialAttackCooldown;
     }
@@ -46,27 +50,51 @@ public abstract class Weapon : MonoBehaviour
             timeSinceLastSpecialAttack += Time.deltaTime;
     }
 
-    public virtual void DoAttack()
+    public virtual AnimationClip DoAttack()
     {
         if (playerController.GetAttackLocked())
-            return;
+            return null;
 
         playerController.SetAttackLocked(true);
+
+        if (currentComboIndex == comboClips.Length)
+            currentComboIndex = 0;
+
+        return comboClips[currentComboIndex++];
+
     }
 
-    public virtual void DoSpecialAttack()
+    public virtual AnimationClip DoSpecialAttack()
     {
-        if (timeSinceLastSpecialAttack < specialAttackCooldown)
-            return;
-
-        anim.Play("SpecialAttack");
+        playerController.SetAttackLocked(true);
         timeSinceLastSpecialAttack = 0;
+
+        return specialAttackClip;
     }
 
-    public abstract void WeaponEffect();
+    public virtual void WeaponEffect()
+    {
+
+    }
+
+    public bool IsLocked()
+    {
+        return playerController.GetAttackLocked();
+    }
+
+    public bool IsOnCooldown()
+    {
+        return timeSinceLastSpecialAttack < specialAttackCooldown;
+    }
 
     public virtual void Unlock()
     {
         playerController.SetAttackLocked(false);
+        ClearEnemies();
+    }
+
+    public virtual void ClearEnemies()
+    {
+        hitEnemies.Clear();
     }
 }
