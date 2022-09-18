@@ -12,18 +12,18 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Stat Properties")]
-    [SerializeField] float maxHealth;
+    [SerializeField] public float maxHealth;
     [SerializeField] float movementSpeed;
     [SerializeField] float jumpForce;
 
     [Header("Weapon Properties")]
     [SerializeField] Weapon currentWeapon;
-    
-    float currentHealth;
+
+    public float currentHealth;
     // Awake is called when the script instance is being loaded
     void Awake()
     {
-
+        currentHealth = maxHealth;
     }
 
     // Start is called before the first frame update
@@ -50,7 +50,9 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        
         currentHealth -= damage;
+        
     }
 
     void Die()
