@@ -50,11 +50,12 @@ public abstract class Weapon : MonoBehaviour
             timeSinceLastSpecialAttack += Time.deltaTime;
     }
 
-    public virtual AnimationClip DoAttack()
+    public virtual AnimationClip DoAttack(float newDamage)
     {
         if (playerController.GetAttackLocked())
             return null;
 
+        damage = newDamage;
         playerController.SetAttackLocked(true);
 
         if (currentComboIndex == comboClips.Length)

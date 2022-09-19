@@ -12,8 +12,13 @@ public class MirrorPiece : MonoBehaviour
     [SerializeField] List<MirrorPiece> nextPieces = new List<MirrorPiece>();
     Image currentImage;
 
+<<<<<<< Updated upstream
     [SerializeField] float resourceCost;
     [SerializeField] bool isPlaceable;
+=======
+    [SerializeField] float value;
+
+>>>>>>> Stashed changes
     bool isActive;
     
     [Header("Stat Changes")]
@@ -58,5 +63,10 @@ public class MirrorPiece : MonoBehaviour
     public bool IsActive()
     {
         return isActive;
+    }
+
+    public float GetValue()
+    {
+        return value;
     }
 }
