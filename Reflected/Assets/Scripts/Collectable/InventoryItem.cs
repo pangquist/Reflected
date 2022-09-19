@@ -6,8 +6,8 @@ using System;
 [Serializable] //Alows it to show up in the inspector
 public class InventoryItem
 {
-    public ItemData itemData;
-    public int stackSize;
+    [SerializeField] public ItemData itemData;
+    [SerializeField] public int stackSize;
 
     public InventoryItem(ItemData item)
     {

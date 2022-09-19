@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour//, ISavable
 {
     public List<InventoryItem> inventory = new List<InventoryItem>();
-    private Dictionary<ItemData, InventoryItem> itemDictionary = new Dictionary<ItemData, InventoryItem>();
+    //[SerializeField]
+    public Dictionary<ItemData, InventoryItem> itemDictionary = new Dictionary<ItemData, InventoryItem>();
 
     private void OnEnable() //Subscribing to events
     {
@@ -47,6 +49,27 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-    
 
+    //public object SaveState()
+    //{
+    //    return new SaveData()
+    //    {
+    //        inventory = this.inventory,
+    //        itemDictionary = this.itemDictionary
+    //    };
+    //}
+
+    //public void LoadState(object state)
+    //{
+    //    var saveData = (SaveData)state;
+    //    inventory = saveData.inventory;
+    //    itemDictionary = saveData.itemDictionary;
+    //}
+
+    //[Serializable]
+    //private struct SaveData
+    //{
+    //    public List<InventoryItem> inventory;
+    //    public Dictionary<ItemData, InventoryItem> itemDictionary;
+    //}
 }
