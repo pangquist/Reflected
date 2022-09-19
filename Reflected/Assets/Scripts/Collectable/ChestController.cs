@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChestController : MonoBehaviour
 {
-    [SerializeField] WeightedRandomList<Transform> lootTable;
+    [SerializeField] WeightedRandomList<LootPool> lootTable;
     [SerializeField] Transform itemHolder;
     GameObject spawnedObject;
     bool hasSpawnedItem;
@@ -55,7 +55,7 @@ public class ChestController : MonoBehaviour
     void SpawnItem()
     {
         //GameObject item = lootTable.GetRandom();
-        spawnedObject = Instantiate(lootTable.GetRandom().gameObject, itemHolder.position, itemHolder.rotation);
+        spawnedObject = Instantiate(lootTable.GetRandom().GetItem(), itemHolder.position, itemHolder.rotation);
         spawnedObject.transform.parent = null;
         itemHolder.gameObject.SetActive(true);
     }

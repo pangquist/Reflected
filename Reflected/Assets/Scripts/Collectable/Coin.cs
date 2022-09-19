@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Coin : MonoBehaviour, ICollectable
+public class Coin : MonoBehaviour, ICollectable, IMagnetic
 {
     public static event HandleCoinCollected OnCoinCollected;
     public delegate void HandleCoinCollected(ItemData itemData);

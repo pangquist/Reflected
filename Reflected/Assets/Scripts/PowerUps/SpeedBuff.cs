@@ -9,6 +9,6 @@ public class SpeedBuff : PowerUpEffect
 
     public override void Apply(GameObject target)
     {
-        target.GetComponent<ThirdPersonMovement>().AddSpeed(amount);
+        target.GetComponent<StatSystem>().AddMovementSpeed(amount);
     }
 }

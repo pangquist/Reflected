@@ -54,6 +54,7 @@ public class Inventory : MonoBehaviour//, ISavable
     //{
     //    return new SaveData()
     //    {
+    //        foreach(var v in i)
     //        inventory = this.inventory,
     //        itemDictionary = this.itemDictionary
     //    };
@@ -69,7 +70,9 @@ public class Inventory : MonoBehaviour//, ISavable
     //[Serializable]
     //private struct SaveData
     //{
-    //    public List<InventoryItem> inventory;
-    //    public Dictionary<ItemData, InventoryItem> itemDictionary;
+    //    public string displayName;
+    //    public int amount;
+    //    //public List<InventoryItem> inventory;
+    //    //public Dictionary<ItemData, InventoryItem> itemDictionary;
     //}
 }

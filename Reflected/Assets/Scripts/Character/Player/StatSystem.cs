@@ -12,18 +12,6 @@ public class StatSystem : MonoBehaviour, ISavable
     [SerializeField] float attackSpeed;
     [SerializeField] float areaOfEffect;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ResetStats()
     {
         //Should be called upon death
@@ -35,14 +23,41 @@ public class StatSystem : MonoBehaviour, ISavable
         areaOfEffect = 0;
     }
 
-    public float GetMaxHealthIncrease()
-    {
-        return maxHealthIncrease;
-    }
+    public float GetMaxHealthIncrease() => maxHealthIncrease;
+    public float GetDamageReduction() => damageReduction;
+    public float GetMovementSpeed() => movementSpeed;
+    public float GetDamageIncrease() => damageIncrease;
+    public float GetAttackSpeed() => attackSpeed;
+    public float GetAreaOfEffect() => areaOfEffect;
 
     public void AddMaxHealth(float amount)
     {
         maxHealthIncrease += amount;
+    }
+
+    public void AddDamageReduction(float amount)
+    {
+        damageReduction += amount;
+    }
+
+    public void AddMovementSpeed(float amount)
+    {
+        movementSpeed += amount;
+    }
+
+    public void AddDamageIncrease(float amount)
+    {
+        damageIncrease += amount;
+    }
+
+    public void AddAttackSpeed(float amount)
+    {
+        attackSpeed += amount;
+    }
+
+    public void AddAreaOfEffect( float amount)
+    {
+        areaOfEffect += amount;
     }
 
     public object SaveState()
