@@ -548,9 +548,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
+  canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
+    type: 3}
   activatedSprite: {fileID: 21300000, guid: 531ec83020de24b7f80dd45b4fca5db6, type: 3}
   mirror: {fileID: 439172439}
-  neededPiece: {fileID: 0}
+  nextPieces:
+  - {fileID: 809048563}
+  resourceCost: 0
+  isPlaceable: 1
+  modifiedValue: Damage
+  value: 0
 --- !u!114 &252342372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,7 +692,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 500, y: 0}
+  m_AnchoredPosition: {x: 500, y: -59}
   m_SizeDelta: {x: 750, y: 1050}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &439172439
@@ -848,9 +855,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
+  canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
+    type: 3}
   activatedSprite: {fileID: 21300000, guid: 531ec83020de24b7f80dd45b4fca5db6, type: 3}
   mirror: {fileID: 732945600}
-  neededPiece: {fileID: 884866176}
+  nextPieces:
+  - {fileID: 884866176}
+  resourceCost: 0
+  isPlaceable: 0
+  modifiedValue: 
+  value: 0
 --- !u!114 &591939053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,7 +943,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -500, y: 0}
+  m_AnchoredPosition: {x: -500, y: -58.99999}
   m_SizeDelta: {x: 750, y: 1050}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &732945598
@@ -1189,9 +1203,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
+  canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
+    type: 3}
   activatedSprite: {fileID: 21300000, guid: 531ec83020de24b7f80dd45b4fca5db6, type: 3}
   mirror: {fileID: 439172439}
-  neededPiece: {fileID: 252342371}
+  nextPieces:
+  - {fileID: 1899379170}
+  resourceCost: 0
+  isPlaceable: 0
+  modifiedValue: 
+  value: 0
 --- !u!114 &809048564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1281,9 +1302,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
+  canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
+    type: 3}
   activatedSprite: {fileID: 21300000, guid: 531ec83020de24b7f80dd45b4fca5db6, type: 3}
   mirror: {fileID: 732945600}
-  neededPiece: {fileID: 1912488488}
+  nextPieces: []
+  resourceCost: 0
+  isPlaceable: 0
+  modifiedValue: 
+  value: 0
 --- !u!114 &884866177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1502,7 +1529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 787, y: 812.43097}
+  m_AnchoredPosition: {x: 856, y: 534}
   m_SizeDelta: {x: 160, y: 123.138}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1037186756
@@ -2046,9 +2073,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
+  canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
+    type: 3}
   activatedSprite: {fileID: 21300000, guid: 531ec83020de24b7f80dd45b4fca5db6, type: 3}
   mirror: {fileID: 439172439}
-  neededPiece: {fileID: 809048563}
+  nextPieces: []
+  resourceCost: 0
+  isPlaceable: 0
+  modifiedValue: 
+  value: 0
 --- !u!114 &1899379171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2138,9 +2171,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
+  canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
+    type: 3}
   activatedSprite: {fileID: 21300000, guid: 531ec83020de24b7f80dd45b4fca5db6, type: 3}
   mirror: {fileID: 732945600}
-  neededPiece: {fileID: 0}
+  nextPieces:
+  - {fileID: 591939052}
+  resourceCost: 0
+  isPlaceable: 1
+  modifiedValue: 
+  value: 0
 --- !u!114 &1912488489
 MonoBehaviour:
   m_ObjectHideFlags: 0

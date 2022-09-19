@@ -22,6 +22,7 @@ public class Player : Character
     {
         currentWeapon = weapons[weaponIndex];
         currentWeapon.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
