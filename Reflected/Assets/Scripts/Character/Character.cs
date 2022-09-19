@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [Header("Charcter Properties")]
+    [Header("Character Properties")]
     [SerializeField] protected float maxHealth;
     [SerializeField] protected float movementSpeed;
     protected float currentHealth;
     protected Animator anim;
 
-    [Header("Weapon Properties")]
-    [SerializeField] protected Weapon currentWeapon;
+    protected Weapon currentWeapon;
 
     protected virtual void Awake()
     {
