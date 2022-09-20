@@ -12,7 +12,8 @@ public class InventoryItem
     public InventoryItem(ItemData item)
     {
         itemData = item;
-        AddToStack();
+        //AddToStack();
+        AddMoreToStack(item.amount);
     }
 
     public void AddToStack()
@@ -23,5 +24,15 @@ public class InventoryItem
     public void RemoveFromStack()
     {
         stackSize--;
+    }
+
+    public void AddMoreToStack(int amount)
+    {
+        stackSize += amount;
+    }
+
+    public void RemoveMoreFromStack(int amount)
+    {
+        stackSize -= amount;
     }
 }

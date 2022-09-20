@@ -24,4 +24,10 @@ public class CoinText : MonoBehaviour
         coinText.text = $"{itemData.displayName}: {coinCount}";
         //coinText.text = $"Coin: {coinCount}";
     }
+
+    public void DecrementCoinCount(ItemData itemData)
+    {
+        coinCount--;
+        coinText.text = $"{itemData.displayName}: {coinCount}";
+    }
 }

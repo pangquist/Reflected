@@ -8,5 +8,6 @@ using System;
 public class ItemData : ScriptableObject
 {
     [SerializeField] public string displayName;
+    [SerializeField] public int amount;
     //public Sprite icon; //Should be added later
 }

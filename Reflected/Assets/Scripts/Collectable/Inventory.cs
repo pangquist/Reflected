@@ -13,19 +13,21 @@ public class Inventory : MonoBehaviour//, ISavable
     {
         MirrorShard.OnShardCollected += Add;
         Coin.OnCoinCollected += Add;
+        Diamond.OnDiamondCollected += Add;
     }
 
     private void OnDisable()
     {
         MirrorShard.OnShardCollected -= Add;
         Coin.OnCoinCollected -= Add;
+        Diamond.OnDiamondCollected -= Add;
     }
 
     public void Add(ItemData itemData)
     {
         if(itemDictionary.TryGetValue(itemData, out InventoryItem item))
         {
-            item.AddToStack();
+            item.AddMoreToStack(itemData.amount);
             Debug.Log($"{item.itemData.displayName} total stack is now {item.stackSize}");
         }
         else
@@ -41,13 +43,31 @@ public class Inventory : MonoBehaviour//, ISavable
     {
         if(itemDictionary.TryGetValue(itemData, out InventoryItem item))
         {
-            item.RemoveFromStack();
-            if(item.stackSize == 0)
+            if (item.stackSize >= itemData.amount)
             {
-                inventory.Remove(item);
-                itemDictionary.Remove(itemData);
+                item.RemoveMoreFromStack(itemData.amount);
+                if (item.stackSize == 0)
+                {
+                    inventory.Remove(item);
+                    itemDictionary.Remove(itemData);
+                }
             }
+            
         }
+    }
+
+    public bool HaveEnoughCurrency(ItemData itemData)
+    {
+        if (itemDictionary.TryGetValue(itemData, out InventoryItem item))
+        {
+            return item.stackSize >= itemData.amount;
+        }
+        else
+        {
+            Debug.Log("Need more " + itemData.displayName + " to use this");
+        }
+
+        return false;
     }
 
     //public object SaveState()
