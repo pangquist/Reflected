@@ -10,7 +10,7 @@ public class AttackSpeed : PowerUpEffect
     public override void Apply(GameObject target)
     {
         target.GetComponent<StatSystem>().AddAttackSpeed(amount);
-        Debug.Log("You attack like a champ now");
+        Debug.Log("Attack speed +" + amount);
     }
 
 }

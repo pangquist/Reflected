@@ -27,12 +27,12 @@ public class ChestController : MonoBehaviour
             //animator.SetBool("IsOpen", isOpen);
             if (spawnedObject == null)
                 SpawnItem();
-            else
-                ShowItem();
+            //else
+            //    ShowItem();
         }
         else
         {
-            HideItem();
+            //HideItem();
         }
     }
 
