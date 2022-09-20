@@ -55,20 +55,25 @@ public class LayoutGenerator : MonoBehaviour
     [Range(0, 3)]
     [SerializeField] private int roomPadding;
 
-    [Tooltip("Alters the odds of a room being divided along its short or long side, resulting in square or stretched rooms. " +
-        "0 = Square (dividing long side), 0.5 = Even mix, 1 = Stretched (dividing short side)")]
+    [Tooltip("Alters the odds of a room being split its long or short side, resulting in square or stretched children. " +
+        "0 = Square (splitting long side), 0.5 = No bias, 1 = Stretched (splitting short side)")]
     [Range(0f, 1f)]
-    [SerializeField] private float divisionBias;
+    [SerializeField] private float splitDirectionBias;
 
-    [Header("Passageways")]
+    [Tooltip("Alters the odds of a room being split near its center or edges, resulting in evenly or unevenly sized children. " +
+        "-1 = Even (splitting near center), 0 = No bias, 1 = Uneven (splitting near edges)")]
+    [Range(-0.98f, 0.98f)]
+    [SerializeField] private float splitLocationBias;
 
-    [SerializeField] private bool addRandomPassageways;
+    [Header("Chambers")]
+
+    [SerializeField] private bool addRandomChambers;
 
     [Range(0f, 1f)]
-    [SerializeField] private float minPassageways;
+    [SerializeField] private float minChambers;
 
     [Range(0f, 1f)]
-    [SerializeField] private float maxPassageways;
+    [SerializeField] private float maxChambers;
 
     // Read only fields
 
@@ -114,7 +119,7 @@ public class LayoutGenerator : MonoBehaviour
 
         RandomizeMapSize();
         RoomNode firstRoom = new RoomNode(0, 0, mapWidth, mapHeight);
-        RecursiveDivision(ref firstRoom);
+        RecursiveSplit(ref firstRoom);
         ShrinkRooms();
         Build();
 
@@ -133,71 +138,75 @@ public class LayoutGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Divides the provided room into smaller rooms recursively
+    /// Splits the provided room into smaller rooms recursively
     /// </summary>
-    private void RecursiveDivision(ref RoomNode room)
+    private void RecursiveSplit(ref RoomNode room)
     {
         // If the room is too big
         if (room.rect.width - roomPadding * 2 > maxRoomLength || room.rect.height - roomPadding * 2 > maxRoomLength)
         {
-            // Try dividing it
-            if (TryDivision(ref room))
+            // Try splitting it
+            if (TrySplit(ref room))
                 return;
             else
-                Debug.LogWarning("Room was too big, but could not be divided.");
+                Debug.LogWarning("Room was too big, but could not be split. " + room.rect.width + "x" + room.rect.height);
         }
 
         // If the room is not too big
         else
         {
-            // 50% chance to try dividing it
-            if (Random.Range(0f, 1f) < 0.5f && TryDivision(ref room))
+            // 50% chance to try splitting it
+            if (Random.Range(0f, 1f) < 0.5f && TrySplit(ref room))
                 return;
         }
 
-        // This room was not divided: Add as leaf node
+        // This room was not split: Add as leaf node
         finalRects.Add(room.rect);
         leafNodes.Add(room);
     }
 
-    private bool TryDivision(ref RoomNode room)
+    private bool TrySplit(ref RoomNode room)
     {
-        // Check if big enough to be divided
+        // Check if big enough to be split
 
-        bool horizontalDivisionPossible =
-            room.rect.height >= minRoomLength * 2 + roomPadding * 4 &&
-            room.rect.width * room.rect.height >= minRoomArea * 2 + roomPadding * room.rect.width * 2;
+        bool horizontalSplitPossible = SplitPossible(room.rect.height, room.rect.width);
+        bool verticalSplitPossible   = SplitPossible(room.rect.width, room.rect.height);
 
-        bool verticalDivisionPossible =
-            room.rect.width >= minRoomLength * 2 + roomPadding * 4 &&
-            room.rect.width * room.rect.height >= minRoomArea * 2 + roomPadding * room.rect.height * 2;
+        // (height, width) = Test for horizontal split
+        // (width, height) = Test for vertical split
 
-        // Can be divided
-        if (horizontalDivisionPossible || verticalDivisionPossible)
+        bool SplitPossible(int a, int b)
+        {
+            return a >= minRoomLength * 2 + roomPadding * 4 &&
+                (b - roomPadding * 2) * (a * 0.5f - roomPadding * 2) >= minRoomArea;
+        }
+
+        // Can be split
+        if (horizontalSplitPossible || verticalSplitPossible)
         {
             // If vertical not possible: Horizontal
-            if (!verticalDivisionPossible)
-                DivideHorizontally(ref room);
+            if (!verticalSplitPossible)
+                SplitHorizontally(ref room);
 
             // If horizontal not possible: Vertical
-            else if (!horizontalDivisionPossible)
-                DivideVertically(ref room);
+            else if (!horizontalSplitPossible)
+                SplitVertically(ref room);
 
-            // If both directions possible: Use division bias
-            else if (Random.Range(0f, 1f) < divisionBias)
-                DivideLongSide(ref room);
+            // If both directions possible: Use split bias
+            else if (Random.Range(0f, 1f) < splitDirectionBias)
+                SplitLongSide(ref room);
 
             else
-                DivideShortSide(ref room);
+                SplitShortSide(ref room);
 
-            // Continue with recursive division on children
-            RecursiveDivision(ref room.child1);
-            RecursiveDivision(ref room.child2);
+            // Continue with recursive split on children
+            RecursiveSplit(ref room.child1);
+            RecursiveSplit(ref room.child2);
 
             return true;
         }
 
-        // Can not be divided
+        // Can not be split
         else
         {
             return false;
@@ -205,70 +214,88 @@ public class LayoutGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Chooses direction of division randomly
+    /// Chooses direction of split randomly
     /// </summary>
-    private void DivideRandomly(ref RoomNode room)
+    private void SplitRandomly(ref RoomNode room)
     {
         if (Random.Range(0f, 1f) < 0.5f)
-            DivideHorizontally(ref room);
+            SplitHorizontally(ref room);
         else
-            DivideVertically(ref room);
+            SplitVertically(ref room);
     }
 
     /// <summary>
-    /// Divides the room by its short side
+    /// Splits the room by its short side
     /// </summary>
-    private void DivideShortSide(ref RoomNode room)
+    private void SplitShortSide(ref RoomNode room)
     {
         if (room.rect.width == room.rect.height)
-            DivideRandomly(ref room);
+            SplitRandomly(ref room);
 
         else if (room.rect.width > room.rect.height)
-            DivideVertically(ref room);
+            SplitVertically(ref room);
 
         else
-            DivideHorizontally(ref room);
+            SplitHorizontally(ref room);
     }
 
     /// <summary>
-    /// Divides the room by its long side
+    /// Splits the room by its long side
     /// </summary>
-    private void DivideLongSide(ref RoomNode room)
+    private void SplitLongSide(ref RoomNode room)
     {
         if (room.rect.width == room.rect.height)
-            DivideRandomly(ref room);
+            SplitRandomly(ref room);
 
         else if (room.rect.width > room.rect.height)
-            DivideHorizontally(ref room);
+            SplitHorizontally(ref room);
 
         else
-            DivideVertically(ref room);
+            SplitVertically(ref room);
     }
 
     /// <summary>
-    /// Divides the room into two children by dividing horizontally
+    /// Splits the room into two children by splitting horizontally
     /// </summary>
-    private void DivideHorizontally(ref RoomNode room)
+    private void SplitHorizontally(ref RoomNode room)
     {
-        int minY = minRoomLength + roomPadding * 2;
-        int maxY = room.rect.height - minRoomLength - roomPadding * 2;
-        int split = Random.Range(minY, maxY + 1);
+        int minRoomHeight = Mathf.Max(minRoomLength, minRoomArea / (room.rect.width - roomPadding * 2));
+        int minY = minRoomHeight + roomPadding * 2;
+        int maxY = room.rect.height - minRoomHeight - roomPadding * 2;
+        int y = GetSplitLocation(minY, maxY);
 
-        room.child1 = new RoomNode(room.rect.x, room.rect.y, room.rect.width, split);
-        room.child2 = new RoomNode(room.rect.x, room.rect.y + split, room.rect.width, room.rect.height - split);
+        room.child1 = new RoomNode(room.rect.x, room.rect.y, room.rect.width, y);
+        room.child2 = new RoomNode(room.rect.x, room.rect.y + y, room.rect.width, room.rect.height - y);
     }
 
     /// <summary>
-    /// Divides the room into two children by dividing vertically
+    /// Splits the room into two children by splitting vertically
     /// </summary>
-    private void DivideVertically(ref RoomNode room)
+    private void SplitVertically(ref RoomNode room)
     {
-        int minX = minRoomLength + roomPadding * 2;
-        int maxX = room.rect.width - minRoomLength - roomPadding * 2;
-        int split = Random.Range(minX, maxX + 1);
+        int minRoomWidth = Mathf.Max(minRoomLength, minRoomArea / (room.rect.height - roomPadding * 2));
+        int minX = minRoomWidth + roomPadding * 2;
+        int maxX = room.rect.width - minRoomWidth - roomPadding * 2;
+        int x = GetSplitLocation(minX, maxX);
 
-        room.child1 = new RoomNode(room.rect.x, room.rect.y, split, room.rect.height);
-        room.child2 = new RoomNode(room.rect.x + split, room.rect.y, room.rect.width - split, room.rect.height);
+        room.child1 = new RoomNode(room.rect.x, room.rect.y, x, room.rect.height);
+        room.child2 = new RoomNode(room.rect.x + x, room.rect.y, room.rect.width - x, room.rect.height);
+    }
+
+    /// <summary>
+    /// Returns a location within the provided range using the location bias variable.
+    /// </summary>
+    private int GetSplitLocation(int min, int max)
+    {
+        float x = Random.Range(0f, 1f); // Random input
+
+        float y = x.LerpValueCustomSmoothstep(splitLocationBias); // Biased output
+
+        float floatingLocation = min + (max - min) * y; // Translate to floating point location
+
+        int roundedLocation = (int)(floatingLocation + 0.5f); // Round to nearest integer
+
+        return roundedLocation;
     }
 
     /// <summary>
@@ -286,7 +313,7 @@ public class LayoutGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Builds the map layout in the world by instantiating blocks
+    /// Builds the map layout in the world using blocks
     /// </summary>
     private void Build()
     {

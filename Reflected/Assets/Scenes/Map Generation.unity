@@ -402,18 +402,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 750615257749562003, guid: 12c3bb198b0954a1383726accf26f23f, type: 3}
   seed: 0
-  minMapWidth: 30
-  minMapHeight: 30
+  minMapWidth: 40
+  minMapHeight: 40
   maxMapWidth: 50
   maxMapHeight: 50
-  minRoomLength: 3
-  maxRoomLength: 8
-  minRoomArea: 12
-  roomPadding: 0
-  divisionBias: 0.2
-  addRandomPassageways: 0
-  minPassageways: 0.5
-  maxPassageways: 0.8
+  minRoomLength: 4
+  maxRoomLength: 10
+  minRoomArea: 20
+  roomPadding: 1
+  splitDirectionBias: 0.2
+  splitLocationBias: -0.2
+  addRandomChambers: 0
+  minChambers: 0.5
+  maxChambers: 0.8
   mapWidth: 0
   mapHeight: 0
   finalRects: []
