@@ -129,7 +129,7 @@ MonoBehaviour:
   meshFilter: {fileID: 3025152262871226804}
   meshCollider: {fileID: 3025152262871226806}
   mapScale: 5
-  heightMultiplier: 3
+  heightMultiplier: 7
   terrainTypes:
   - name: Water
     height: 0.3
@@ -162,10 +162,19 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.2210203
     - serializedVersion: 3
+      time: 0.7099341
+      value: 0.9987757
+      inSlope: -0.0074605346
+      outSlope: -0.0074605346
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.4015539
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1.4306908
-      outSlope: 1.4306908
+      inSlope: 0.0042206943
+      outSlope: 0.0042206943
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -174,12 +183,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   waves:
-  - seed: 142
-    frequency: 0.4
-    amplitude: 2
-  - seed: 6666
-    frequency: 0.15
-    amplitude: 5
-  - seed: 1337
+  - seed: 15
     frequency: 1
+    amplitude: 1
+  - seed: 500
+    frequency: 0.5
     amplitude: 10
