@@ -294,8 +294,8 @@ public class LayoutGenerator : MonoBehaviour
         {
             GameObject roomBlock = GameObject.Instantiate(block, transform);
             roomBlock.transform.position = new Vector3(room.rect.x, -1, room.rect.y);
-            roomBlock.transform.localScale = new Vector3(room.rect.width, 1, room.rect.height);
-            roomBlock.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = new Color(0f, Random.Range(0f, 1f), 0f);
+            //roomBlock.transform.localScale = new Vector3(room.rect.width, 1, room.rect.height);
+            //roomBlock.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = new Color(0f, Random.Range(0f, 1f), 0f);
         }
     }
 
