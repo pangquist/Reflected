@@ -5,11 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PowerUps/MaxHealth")]
 public class HealthBuff : PowerUpEffect
 {
-    public int amount;
+    [SerializeField] public int amount;
 
     public override void Apply(GameObject target)
     {
         target.GetComponent<StatSystem>().AddMaxHealth(amount);
         Debug.Log("Health +" + amount);
+    }
+
+    public void Awake()
+    {
+        description = "Increases your total max health by " + amount;
     }
 }

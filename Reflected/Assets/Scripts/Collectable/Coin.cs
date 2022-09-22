@@ -20,6 +20,7 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        coinData.amount = UnityEngine.Random.Range(1, 10);
     }
 
     public void Collect()

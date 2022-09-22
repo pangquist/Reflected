@@ -39,13 +39,13 @@ public class Inventory : MonoBehaviour//, ISavable
         }
     }
 
-    public void Remove(ItemData itemData)
+    public void Remove(ItemData itemData, int amount)
     {
         if(itemDictionary.TryGetValue(itemData, out InventoryItem item))
         {
-            if (item.stackSize >= itemData.amount)
+            if (item.stackSize >= amount)
             {
-                item.RemoveMoreFromStack(itemData.amount);
+                item.RemoveMoreFromStack(amount);
                 if (item.stackSize == 0)
                 {
                     inventory.Remove(item);
@@ -56,11 +56,11 @@ public class Inventory : MonoBehaviour//, ISavable
         }
     }
 
-    public bool HaveEnoughCurrency(ItemData itemData)
+    public bool HaveEnoughCurrency(ItemData itemData, int amount)
     {
         if (itemDictionary.TryGetValue(itemData, out InventoryItem item))
         {
-            return item.stackSize >= itemData.amount;
+            return item.stackSize >= amount;
         }
         else
         {

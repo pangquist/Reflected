@@ -23,10 +23,10 @@ public class ChestControllerPay : MonoBehaviour
         Inventory inventory = gameObject.GetComponent<Inventory>();
         if (inventory)
         {
-            if (!isOpen && inventory.HaveEnoughCurrency(payment)) //
+            if (!isOpen && inventory.HaveEnoughCurrency(payment, amountToPay)) //
             {
                 isOpen = true;
-                inventory.Remove(payment);
+                inventory.Remove(payment, amountToPay);
                 Debug.Log("Chest is now open...");
                 if (spawnedObject == null)
                     SpawnItem();
