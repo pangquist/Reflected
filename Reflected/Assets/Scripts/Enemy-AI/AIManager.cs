@@ -74,7 +74,7 @@ public class AiManager : MonoBehaviour
         //agent.destination = goal.position;
 
         //activeState.DoState(this, player);
-        activeState.DoState(this, goal, agent);
+        activeState.DoState(this, player, goal, agent);
     }
 
     public void SetMoveTowardState() => activeState = moveTowardsPlayerState;
@@ -87,9 +87,9 @@ public class AiManager : MonoBehaviour
     public State GetActiveState() => activeState;
 
 
-    public float distanceTo(Transform goal)
+    public float distanceTo()
     {
-        Debug.Log(Vector3.Distance(this.gameObject.transform.position, goal.position));
-        return Vector3.Distance(this.gameObject.transform.position, goal.position);
+        //Debug.Log(Vector3.Distance(this.gameObject.transform.position, goal.position));
+        return Vector3.Distance(this.gameObject.transform.position, GOplayer.transform.position);
     }
 }

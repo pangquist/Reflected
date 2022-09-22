@@ -5,9 +5,9 @@ using UnityEngine.AI;
 
 public class AttackPlayerState : State
 {
-    public override void DoState(AiManager thisEnemy, /*Player player,*/ Transform goal, NavMeshAgent agent)
+    public override void DoState(AiManager thisEnemy, Player player, Transform goal, NavMeshAgent agent)
     {
-        if (thisEnemy.distanceTo(goal) >= 5)
+        if (thisEnemy.distanceTo(player) >= 5)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
@@ -19,6 +19,6 @@ public class AttackPlayerState : State
 
     private void DoAttack()
     {
-        Debug.Log("You got smashed mate! uwu");
+        Debug.Log("Enemy attacked you!");
     }
 }

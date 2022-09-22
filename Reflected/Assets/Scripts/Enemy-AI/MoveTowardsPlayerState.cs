@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class MoveTowardsPlayerState : State
 {
-    public override void DoState(AiManager thisEnemy, /*Player player,*/ Transform goal, NavMeshAgent agent)
+    public override void DoState(AiManager thisEnemy, Player player, Transform goal, NavMeshAgent agent)
     {
         //if (thisEnemy.distanceTo(player) >= 3)
         //{
@@ -13,7 +13,7 @@ public class MoveTowardsPlayerState : State
         //    return;
         //}
 
-        if (thisEnemy.distanceTo(goal) <= 3)
+        if (thisEnemy.distanceTo() <= 3)
         {
             thisEnemy.SetAttackPlayerState();
             agent.isStopped=true;
@@ -21,13 +21,13 @@ public class MoveTowardsPlayerState : State
         }
 
 
-        DoMoveToward(/*player,*/ goal, agent);
+        DoMoveToward(player, goal, agent);
     }
 
-    private void DoMoveToward(/*Player player,*/ Transform goal, NavMeshAgent agent)
+    private void DoMoveToward(Player player, Transform goal, NavMeshAgent agent)
     {
-        Debug.Log("DoMoveToward entered");
+        Debug.Log("MoveTowardsPlayer");
         //NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = goal.position;
+        agent.destination = player.gameObject.transform.position;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class MoveAwayFromPlayerState : State
 {
-    public override void DoState(AiManager thisEnemy, /*Player player,*/ Transform goal, NavMeshAgent agent)
+    public override void DoState(AiManager thisEnemy, Player player, Transform goal, NavMeshAgent agent)
     {
         //if (thisEnemy.distanceTo(player) <= 25)
         //{
