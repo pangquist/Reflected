@@ -5,7 +5,13 @@ using System;
 
 public class Coin : MonoBehaviour, ICollectable
 {
-    public static event Action OnCoinCollected;
+    public static event HandleCoinCollected OnCoinCollected;
+    public delegate void HandleCoinCollected(ItemData itemData);
+    //Delagate return type and arguments must match that of the Add in the inventory script
+    public ItemData coinData;
+    //The lines above allows for the action to be handled adding the item to the inventory
+    //using ascriptable object in the collectable folder
+
     Rigidbody rb;
     bool hasTarget;
     Vector3 targetPosition;
@@ -20,7 +26,7 @@ public class Coin : MonoBehaviour, ICollectable
     {
         Debug.Log("You collected a coin");
         Destroy(gameObject);
-        OnCoinCollected?.Invoke();
+        OnCoinCollected?.Invoke(coinData);
     }
 
     public void FixedUpdate()

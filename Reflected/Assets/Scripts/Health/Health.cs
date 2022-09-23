@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, ISavable
 {
     public float maxHealth = 10;
     public float currentHealth;
@@ -22,10 +23,33 @@ public class Health : MonoBehaviour
     }
 
     public void Heal(int amount)
-    {       
-        if(currentHealth < maxHealth)
+    {
+        if (currentHealth < maxHealth)
         {
             currentHealth += amount;
         }
+    }
+
+    public object SaveState()
+    {
+        return new SaveData()
+        {
+            currentHealth = this.currentHealth,
+            maxHealth = this.maxHealth
+        };
+    }
+
+    public void LoadState(object state)
+    {
+        var saveData = (SaveData)state;
+        currentHealth = saveData.currentHealth;
+        maxHealth = saveData.maxHealth;
+    }
+
+    [Serializable]
+    private struct SaveData
+    {
+        public float currentHealth;
+        public float maxHealth;
     }
 }
