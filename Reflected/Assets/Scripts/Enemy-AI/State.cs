@@ -5,12 +5,12 @@ using UnityEngine.AI;
 
 public abstract class State : MonoBehaviour
 {
-   public virtual void DoState(AiManager thisEnemy, Player player, Transform goal, NavMeshAgent agent) { }
+   public virtual void DoState(AiManager thisEnemy, Transform target, NavMeshAgent agent) { }
 
 
     // Methods and other which all behavior may need.
-    protected float distanceTo(Transform goal)
-    {
-        return Vector3.Distance(gameObject.transform.position, goal.position);
-    }
+    //protected float distanceTo(Transform target)
+    //{
+    //    return Vector3.Distance(gameObject.transform.position, target.position);
+    //}
 }

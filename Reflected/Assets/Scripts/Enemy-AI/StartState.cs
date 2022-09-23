@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class StartState : State
 {
-    public override void DoState(AiManager thisEnemy, Player player, Transform goal, NavMeshAgent agent)
+    public override void DoState(AiManager thisEnemy, Transform target, NavMeshAgent agent)
     {
         //if (thisEnemy.CloseCombat() && thisEnemy.distanceTo(player) >= 5)
         //{

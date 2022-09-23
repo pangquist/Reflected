@@ -20,11 +20,11 @@ public class AiManager : MonoBehaviour
     private AttackPlayerState attackPlayerState;
 
     [SerializeField] private GameObject GOplayer;
-    private Player player; //This is not assigned correctly
+    private Player player; //This is not assigned correctly. Ignore for now and just use goal for the agent.
     private Enemy me;
 
     private NavMeshAgent agent;
-    private Transform goal; //Instead of using the player at the moment.
+    private Transform target; //Instead of using the player at the moment.
 
     bool closeCombat = false;
 
@@ -57,14 +57,16 @@ public class AiManager : MonoBehaviour
         moveTowardsPlayerState = gameObject.AddComponent<MoveTowardsPlayerState>();
         moveAwayFromPlayerState = gameObject.AddComponent<MoveAwayFromPlayerState>();
         attackPlayerState = gameObject.AddComponent<AttackPlayerState>();
+        //Need: Melee attack & Ranged attack
+        //Need: Touch attack
 
         //Set active player state
         //activeState = startState;
-        activeState = moveTowardsPlayerState;
+        activeState = moveTowardsPlayerState; //For specific states
 
         //AI Navmesh setup
         agent = GetComponent<NavMeshAgent>();
-        goal = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
 
         if (gameObject.tag == "Melee") closeCombat = true;
     }
@@ -74,22 +76,20 @@ public class AiManager : MonoBehaviour
         //agent.destination = goal.position;
 
         //activeState.DoState(this, player);
-        activeState.DoState(this, player, goal, agent);
+        activeState.DoState(this, target, agent);
     }
 
     public void SetMoveTowardState() => activeState = moveTowardsPlayerState;
     public void SetMoveAwayState() => activeState = moveAwayFromPlayerState;
     public void SetAttackPlayerState() => activeState = attackPlayerState;
     public void SetStartState() => activeState = startState;
-
     public bool CloseCombat() => closeCombat;
-
     public State GetActiveState() => activeState;
 
 
-    public float distanceTo()
+    public float distanceTo(Transform target)
     {
-        //Debug.Log(Vector3.Distance(this.gameObject.transform.position, goal.position));
-        return Vector3.Distance(this.gameObject.transform.position, GOplayer.transform.position);
+        //Debug.Log(Vector3.Distance(this.gameObject.transform.position, target.position));
+        return Vector3.Distance(this.gameObject.transform.position, target.position);
     }
 }

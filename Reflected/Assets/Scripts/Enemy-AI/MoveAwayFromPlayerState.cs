@@ -5,19 +5,21 @@ using UnityEngine.AI;
 
 public class MoveAwayFromPlayerState : State
 {
-    public override void DoState(AiManager thisEnemy, Player player, Transform goal, NavMeshAgent agent)
+    public override void DoState(AiManager thisEnemy, Transform target, NavMeshAgent agent)
     {
-        //if (thisEnemy.distanceTo(player) <= 25)
-        //{
-        //    //thisEnemy.SetMoveAwayState();
-        //    return;
-        //}
+        if (thisEnemy.distanceTo(target) >= 15)
+        {
+            thisEnemy.SetAttackPlayerState();
+            return;
+        }
 
-        DoMoveAway();
+        DoMoveAway(target, agent);
     }
 
-    private void DoMoveAway()
+    private void DoMoveAway(Transform target, NavMeshAgent agent)
     {
-        //pick a random spot away from the player and move there?
+        int multiplier = 1;
+        Vector3 moveTo = transform.position + ((transform.position - target.position + new Vector3(Random.Range(-12, 12), 0, Random.Range(-15, 12)) * multiplier));
+        agent.destination = moveTo;
     }
 }
