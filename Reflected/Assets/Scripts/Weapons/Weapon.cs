@@ -6,7 +6,7 @@ public abstract class Weapon : MonoBehaviour
 {
     [Header("Weapon Properties")]
     protected Animator anim;
-    [SerializeField] protected float damage;
+    protected float damage;
 
     protected float speed;
 
@@ -96,6 +96,11 @@ public abstract class Weapon : MonoBehaviour
     public virtual void ClearEnemies()
     {
         hitEnemies.Clear();
+    }
+
+    public void SetDamage(float newDamage)
+    {
+        damage = newDamage;
     }
 
     public float GetDamage()
