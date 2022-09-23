@@ -1412,18 +1412,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &490196484 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1831867126, guid: 208b911f792bd8d40991cc24ecabd06b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1776205247}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2253763db99494c4e9e3bf8bf774f269, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &508109639
 GameObject:
   m_ObjectHideFlags: 3
@@ -1714,8 +1702,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyClose: {fileID: 1148144323}
   enemyRange: {fileID: 1148144323}
-  debugSpawnLocation: {fileID: 913650138}
-  numberOfSpawnpoints: 0
 --- !u!4 &731846943
 Transform:
   m_ObjectHideFlags: 0
@@ -1743,8 +1729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e3af25565bdbb4bac61c61b2160744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfSpawnpoints: 0
-  player: {fileID: 490196484}
+  spawntime: 0
+  amountOfEnemies: 0
 --- !u!1 &732757652
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,7 +2115,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045973623}
-  m_LocalRotation: {x: 0.049441963, y: 0.3750056, z: -0.020033805, w: 0.9254863}
+  m_LocalRotation: {x: 0.04944197, y: 0.37500563, z: -0.02003381, w: 0.9254863}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2533,7 +2519,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398225961}
-  m_LocalRotation: {x: 0.04944196, y: 0.3750056, z: -0.0200338, w: 0.9254863}
+  m_LocalRotation: {x: 0.049441963, y: 0.37500566, z: -0.020033807, w: 0.9254863}
   m_LocalPosition: {x: -20.883186, y: 10, z: -21.538166}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3436,7 +3422,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1638642526938596585, guid: a6ef236ed9d6e5543a238deed3a04f8c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a6ef236ed9d6e5543a238deed3a04f8c, type: 3}
 --- !u!1 &2025198800
 GameObject:
