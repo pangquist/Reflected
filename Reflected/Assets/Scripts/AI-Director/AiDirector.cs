@@ -4,44 +4,64 @@ using UnityEngine;
 
 public class AiDirector : MonoBehaviour
 {
+    //Difficulty
+    string difficultyLevel;
+    const string easy = "easy";
+    const string medium = "medium";
+    const string hard = "hard";
+    [SerializeField] float spawntime;
+    [SerializeField] int amountOfEnemies;
+
     //Room-stats
     bool activeRoom;
-    float timeToClearRoom;
+    bool inbetweenRooms;
     int enemiesInRoom;
-    [SerializeField] int numberOfSpawnpoints;
+    float timeToClearRoom;
+    List<float> clearTimesList = new List<float>();
 
     //Map-stats
     int numberOfRoomsCleared;
     int numberOfRoomsLeftOnMap;
     int NumberOfRoomsSinceShop;
+    List<int> numberOfEnemiesKilled = new List<int>();
 
     //Player-stats
-    [SerializeField] Player player;
+    Player player;
     float playerCurrentHelathPercentage;
     int playerCurrency;
 
 
-    EnemySpawner EnemySpawner;
+    EnemySpawner enemySpawner;
 
 
     void Start()
     {
-        if(!player) player = GetComponent<Player>();
+        //if(!player) player = GetComponent<Player>();
+        //if(!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
+
+        if (!player)
+        {
+            player = GetComponent<Player>();
+            Debug.Log("player found");
+        }
+        if (!enemySpawner)
+        {
+            enemySpawner = GetComponent<EnemySpawner>();
+            Debug.Log("enemySpawner found");
+        }
+
+        difficultyLevel = medium;
     }
 
     void Update()
     {
-        if(activeRoom && enemiesInRoom > 0)
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            timeToClearRoom += Time.deltaTime;
-            playerCurrentHelathPercentage = player.GetHealthPercentage();
+            checkDifficulty();
+            enemySpawner.SpawnEnemy(spawntime, amountOfEnemies);
         }
 
-        if (!activeRoom)
-        {
-            ResetRoom();
-        }
-
+        CheckRoomActivity();
     }
 
     private void ResetRoom()
@@ -54,6 +74,46 @@ public class AiDirector : MonoBehaviour
     {
         numberOfRoomsCleared = 0;
         numberOfRoomsLeftOnMap = 0;
+        clearTimesList.Clear();
+    }
 
+    private void checkDifficulty()
+    {
+        if (difficultyLevel == easy)
+        {
+            spawntime = 2;
+            amountOfEnemies = 4;
+        }
+        else if (difficultyLevel == medium)
+        {
+            spawntime = 1;
+            amountOfEnemies = 6;
+        }
+        else if (difficultyLevel == hard)
+        {
+            spawntime = 0.5f;
+            amountOfEnemies = 9;
+        }
+    }
+
+    private void CheckRoomActivity()
+    {
+        if (activeRoom && enemiesInRoom > 0)
+        {
+            timeToClearRoom += Time.deltaTime;
+            playerCurrentHelathPercentage = player.GetHealthPercentage();
+        }
+        if (enemiesInRoom == 0)
+        {
+            activeRoom = false;
+            inbetweenRooms = true;
+        }
+        if (!activeRoom && inbetweenRooms)
+        {
+            clearTimesList.Add(timeToClearRoom);
+            numberOfEnemiesKilled.Add(amountOfEnemies * 2);
+            ResetRoom();
+            inbetweenRooms = false;
+        }
     }
 }

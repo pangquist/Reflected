@@ -8,10 +8,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject enemyClose;
     [SerializeField] GameObject enemyRange;
 
-    List<SpawnLocation> spawnLocations = new List<SpawnLocation>();
+    //List<SpawnLocation> spawnLocations = new List<SpawnLocation>();
     List<Transform> spawnTransforms = new List<Transform>();
-    [SerializeField] Transform debugSpawnLocation;
-    [SerializeField] int numberOfSpawnpoints;
+    Transform spawnLocation;
 
     void Start()
     {
@@ -20,26 +19,34 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            if (spawnTransforms.Count > 0)
-            {
-                debugSpawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-            }
-            else
-            {
-                GetSpawnlocations();
-                debugSpawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-            }
 
-            SpawnEnemy(enemyClose, debugSpawnLocation);
-
-            spawnTransforms.Remove(debugSpawnLocation);
-
-            //Spawn location will randomly choose a location and remove it from the list, if there are no more locations in the list all locations will be added again.
-        }
     }
 
+    public void SpawnEnemy(float spawnTime, int enemyAmount)
+    {
+        StartCoroutine(SpawnWave(spawnTime, enemyAmount));
+    }
+
+    private IEnumerator SpawnWave(float spawnTime, int enemyAmount)
+    {
+        for (int i = 0; i < enemyAmount; i++)
+        {
+            if (spawnTransforms.Count <= 0) GetSpawnlocations();
+            spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+            Instantiate(enemyClose, spawnLocation.position, Quaternion.Euler(0, 0, 0));
+            spawnTransforms.Remove(spawnLocation);
+        }
+
+        yield return new WaitForSeconds(spawnTime);
+
+        for (int i = 0; i < enemyAmount; i++)
+        {
+            if (spawnTransforms.Count <= 0) GetSpawnlocations();
+            spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+            Instantiate(enemyClose, spawnLocation.position, Quaternion.Euler(0, 0, 0));
+            spawnTransforms.Remove(spawnLocation);
+        }
+    }
     private void GetSpawnlocations()
     {
         List<GameObject> spawns = new List<GameObject>();
@@ -49,10 +56,5 @@ public class EnemySpawner : MonoBehaviour
         {
             spawnTransforms.Add(point.transform);
         }
-    }
-
-    private void SpawnEnemy(GameObject enemy, Transform spawnLocation)
-    {
-        Instantiate(enemy, spawnLocation.position, Quaternion.Euler(0,0,0));
     }
 }
