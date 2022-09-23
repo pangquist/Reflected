@@ -22,6 +22,7 @@ public class Mirror : MonoBehaviour
     public void PlacePiece(MirrorPiece newPiece)
     {
         activePieces.Add(newPiece);
+        newPiece.SetIsActive(true);
     }
 
     public List<MirrorPiece> GetActivePieces()
