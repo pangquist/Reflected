@@ -129,14 +129,17 @@ MonoBehaviour:
   meshFilter: {fileID: 3025152262871226804}
   meshCollider: {fileID: 3025152262871226806}
   mapScale: 5
-  heightMultiplier: 7
+  heightMultiplier: 10
   terrainTypes:
   - name: Water
     height: 0.3
     color: {r: 0.14618193, g: 0.39342377, b: 0.6886792, a: 0}
-  - name: Grass
+  - name: Dirt
     height: 0.5
-    color: {r: 0.042052325, g: 0.5943396, b: 0.065387204, a: 0}
+    color: {r: 0.5283019, g: 0.25023612, b: 0.08721964, a: 0}
+  - name: Grass
+    height: 0.7
+    color: {r: 0.099012084, g: 0.8396226, b: 0.13052742, a: 0}
   - name: Rock
     height: 1
     color: {r: 0.2924528, g: 0.27451938, b: 0.27451938, a: 0}
@@ -162,8 +165,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.2210203
     - serializedVersion: 3
-      time: 0.7099341
-      value: 0.9987757
+      time: 0.9099341
+      value: 1.0011342
       inSlope: -0.0074605346
       outSlope: -0.0074605346
       tangentMode: 0
@@ -173,8 +176,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.0042206943
-      outSlope: 0.0042206943
+      inSlope: -0.012592526
+      outSlope: -0.012592526
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
