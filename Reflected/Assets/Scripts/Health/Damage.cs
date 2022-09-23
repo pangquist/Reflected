@@ -27,7 +27,7 @@ public class Damage : MonoBehaviour
         {
             Destroy(gameObject);
 
-            var healthComponent = other.GetComponent<Health>();
+            var healthComponent = other.GetComponent<PlayerHealth>();
             if(healthComponent != null)
             {
                 Debug.Log("damaged");

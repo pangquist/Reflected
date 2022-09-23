@@ -3,53 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Health : MonoBehaviour, ISavable
+public class Health : MonoBehaviour, IMagnetic
 {
-    public float maxHealth = 10;
-    public float currentHealth;
-    // Start is called before the first frame update
-    void Start()
+    public PowerUpEffect powerUpEffect;
+  
+    Rigidbody rb;
+    bool hasTarget;
+    Vector3 targetPosition;
+    float moveSpeed = 5f;
+
+    private void Awake()
     {
-        currentHealth = maxHealth;
+        rb = GetComponent<Rigidbody>();
     }
 
-    public void TakeDamage(int amount)
+    private void OnTriggerEnter(Collider other)
     {
-        currentHealth -= amount;
-        if (currentHealth <= 0)
+        if (other.gameObject.CompareTag("Player"))
         {
-            //You die
+            Destroy(gameObject);
+            powerUpEffect.Apply(other.gameObject);
         }
     }
 
-    public void Heal(int amount)
+    public void FixedUpdate()
     {
-        if (currentHealth < maxHealth)
+        if (hasTarget)
         {
-            currentHealth += amount;
+            Vector3 targetDirection = (targetPosition - transform.position).normalized;
+            rb.velocity = new Vector3(targetDirection.x, 0, targetDirection.z) * moveSpeed;
         }
     }
 
-    public object SaveState()
+    public void SetTarget(Vector3 position)
     {
-        return new SaveData()
-        {
-            currentHealth = this.currentHealth,
-            maxHealth = this.maxHealth
-        };
-    }
-
-    public void LoadState(object state)
-    {
-        var saveData = (SaveData)state;
-        currentHealth = saveData.currentHealth;
-        maxHealth = saveData.maxHealth;
-    }
-
-    [Serializable]
-    private struct SaveData
-    {
-        public float currentHealth;
-        public float maxHealth;
+        targetPosition = position;
+        hasTarget = true;
     }
 }

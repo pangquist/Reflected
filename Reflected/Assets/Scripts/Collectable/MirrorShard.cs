@@ -12,16 +12,6 @@ public class MirrorShard : MonoBehaviour, ICollectable
     //The lines above allows for the action to be handled adding the item to the inventory
     //using ascriptable object in the collectable folder
 
-    Rigidbody rb;
-    bool hasTarget;
-    Vector3 targetPosition;
-    float moveSpeed = 5f;
-
-    //private void Awake()
-    //{
-    //    rb = GetComponent<Rigidbody>();
-    //}
-
     public void Collect()
     {
         Debug.Log("You collected a mirror shard");
@@ -29,18 +19,4 @@ public class MirrorShard : MonoBehaviour, ICollectable
         OnShardCollected?.Invoke(mirroShardData); //?. makes sure it's not null and that there are listeners to the event
     }
 
-    //public void FixedUpdate()
-    //{
-    //    if (hasTarget)
-    //    {
-    //        Vector3 targetDirection = (targetPosition - transform.position).normalized;
-    //        rb.velocity = new Vector3(targetDirection.x, 0, targetDirection.z) * moveSpeed;
-    //    }
-    //}
-
-    //public void SetTarget(Vector3 position)
-    //{
-    //    targetPosition = position;
-    //    hasTarget = true;
-    //}
 }
