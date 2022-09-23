@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using System.Linq;
+using Random = UnityEngine.Random;
 
 public static class Extensions
 {
@@ -25,14 +27,19 @@ public static class Extensions
     }
 
     /// <summary>
-    /// Inflates the edges of this Rectangle by the provided amount.
+    /// Returns the result of this Rect inflated by the provided amount.
     /// </summary>
-    public static void Inflate(this ref Rect rect, float x, float y)
+    public static Rect Inflated(this Rect r, float x, float y)
     {
-        rect.x -= x;
-        rect.y -= y;
-        rect.width += x * 2.0f;
-        rect.height += y * 2.0f;
+        return new Rect(r.x - x, r.y - y, r.width + x * 2f, r.height + y * 2f);
+    }
+
+    /// <summary>
+    /// Returns the result of this RectInt inflated by the provided amount.
+    /// </summary>
+    public static RectInt Inflated(this RectInt r, int x, int y)
+    {
+        return new RectInt(r.x - x, r.y - y, r.width + x * 2, r.height + y * 2);
     }
 
     /// <summary>
@@ -132,6 +139,43 @@ public static class Extensions
         return new Vector2(
             Mathf.Cos(radians) * (point.x - pivot.x) - Mathf.Sin(radians) * (point.y - pivot.y) + pivot.x,
             Mathf.Sin(radians) * (point.x - pivot.x) + Mathf.Cos(radians) * (point.y - pivot.y) + pivot.y);
+    }
+
+    /// <summary>
+    /// Shuffles this list.
+    /// </summary>
+    public static void Shuffle<T>(this IList<T> values)
+    {
+        for (int i = 0; i < values.Count; ++i)
+        {
+            T temp = values[i];
+            int randomIndex = Random.Range(i, values.Count);
+            values[i] = values[randomIndex];
+            values[randomIndex] = temp;
+        }
+    }
+
+    /// <summary>
+    /// Returns whether or not the two rectangles overlap and their overlapping area.
+    /// </summary>
+    public static bool Overlaps(this RectInt rect, RectInt other, out RectInt result)
+    {
+        result = new RectInt();
+
+        if (!rect.Overlaps(other))
+            return false;
+
+        int minX = Math.Max(rect.min.x, other.min.x);
+        int maxX = Math.Min(rect.max.x, other.max.x);
+
+        int minY = Math.Max(rect.min.y, other.min.y);
+        int maxY = Math.Min(rect.max.y, other.max.y);
+
+        Vector2Int min = new Vector2Int(minX, minY);
+        Vector2Int max = new Vector2Int(maxX, maxY);
+
+        result.SetMinMax(min, max);
+        return true;
     }
 
 }

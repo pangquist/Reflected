@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class LayoutGenerator : MonoBehaviour
+public class RoomGenerator : MonoBehaviour
 {
     private class RoomNode
     {
@@ -17,42 +17,27 @@ public class LayoutGenerator : MonoBehaviour
         }
     }
 
-    // Adjustable fields
+    [Header("Warnings")]
+
+    [SerializeField] private bool logWarnigns;
 
     [Header("References")]
 
-    [SerializeField] private GameObject block;
+    [SerializeField] private MapGenerator mapGenerator;
+    [SerializeField] private GameObject roomPrefab;
 
-    [Header("Seed")]
+    [Header("Rooms")]
 
-    [SerializeField] private int seed;
-
-    [Header("Map Size")]
-
-    [Range(30, 200)]
-    [SerializeField] private int minMapWidth;
-
-    [Range(30, 200)]
-    [SerializeField] private int minMapHeight;
-
-    [Range(30, 200)]
-    [SerializeField] private int maxMapWidth;
-
-    [Range(30, 200)]
-    [SerializeField] private int maxMapHeight;
-
-    [Header("Room Size")]
-
-    [Range(3, 20)]
+    [Range(3, 50)]
     [SerializeField] private int minRoomLength;
 
-    [Range(4, 30)]
+    [Range(3, 50)]
     [SerializeField] private int maxRoomLength;
 
-    [Range(9, 200)]
+    [Range(1, 2500)]
     [SerializeField] private int minRoomArea;
 
-    [Range(0, 3)]
+    [Range(1, 10)]
     [SerializeField] private int roomPadding;
 
     [Tooltip("Alters the odds of a room being split its long or short side, resulting in square or stretched children. " +
@@ -65,76 +50,26 @@ public class LayoutGenerator : MonoBehaviour
     [Range(-0.98f, 0.98f)]
     [SerializeField] private float splitLocationBias;
 
-    [Header("Chambers")]
+    private List<RectInt> rects = new List<RectInt>();
 
-    [SerializeField] private bool addRandomChambers;
+    // Properties
 
-    [Range(0f, 1f)]
-    [SerializeField] private float minChambers;
+    public int RoomPadding => roomPadding;
 
-    [Range(0f, 1f)]
-    [SerializeField] private float maxChambers;
-
-    // Read only fields
-
-    [Header("Read Only")]
-    
-    [ReadOnly][SerializeField] private int mapWidth;
-    [ReadOnly][SerializeField] private int mapHeight;
-    [ReadOnly][SerializeField] private List<RectInt> finalRects;
-
-    // Hidden fields
-
-    private List<RoomNode> leafNodes = new List<RoomNode>();
-
-    private void Start()
-    {
-        NewMap();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            NewMap();
-    }
-
-    /// <summary>
-    /// Generates a new map using the current settings
-    /// </summary>
-    public void NewMap()
+    public void Generate(Map map)
     {
         // Clear data
 
-        finalRects.Clear();
-        leafNodes.Clear();
+        rects.Clear();
 
-        foreach (Transform child in transform)
-            GameObject.Destroy(child.gameObject);
+        // Generate rooms
 
-        // New seed
-
-        Random.InitState(seed != 0 ? seed : (int)System.DateTime.Now.Ticks);
-
-        // Generate map
-
-        RandomizeMapSize();
-        RoomNode firstRoom = new RoomNode(0, 0, mapWidth, mapHeight);
+        RoomNode firstRoom = new RoomNode(0, 0, map.SizeX, map.SizeZ);
         RecursiveSplit(ref firstRoom);
         ShrinkRooms();
-        Build();
+        InstantiateRooms(map);
 
-        Debug.Log("Layout complete. " + leafNodes.Count + " rooms created.");
-    }
-
-    /// <summary>
-    /// Randomizes the size of the map
-    /// </summary>
-    private void RandomizeMapSize()
-    {
-        mapWidth = Random.Range(minMapWidth, maxMapWidth + 1);
-        mapHeight = Random.Range(minMapHeight, maxMapHeight + 1);
-
-        Debug.Log("Generating map with size: " + mapWidth + "x" + mapHeight);
+        mapGenerator.Log("Rooms: " + rects.Count);
     }
 
     /// <summary>
@@ -148,8 +83,9 @@ public class LayoutGenerator : MonoBehaviour
             // Try splitting it
             if (TrySplit(ref room))
                 return;
-            else
-                Debug.LogWarning("Room was too big, but could not be split. " + room.rect.width + "x" + room.rect.height);
+
+            else if (logWarnigns)
+                Debug.LogWarning("RooomGenerator: Room was too big, but could not be split. (Room size: " + room.rect.width + "x" + room.rect.height + ")");
         }
 
         // If the room is not too big
@@ -161,8 +97,7 @@ public class LayoutGenerator : MonoBehaviour
         }
 
         // This room was not split: Add as leaf node
-        finalRects.Add(room.rect);
-        leafNodes.Add(room);
+        rects.Add(room.rect);
     }
 
     private bool TrySplit(ref RoomNode room)
@@ -303,26 +238,26 @@ public class LayoutGenerator : MonoBehaviour
     /// </summary>
     private void ShrinkRooms()
     {
-        foreach (RoomNode room in leafNodes)
+        RectInt rect;
+        for (int i = rects.Count - 1; i >= 0; --i)
         {
-            room.rect.x += roomPadding;
-            room.rect.y += roomPadding;
-            room.rect.width -= roomPadding * 2;
-            room.rect.height -= roomPadding * 2;
+            rect = rects[i];
+            rects[i] = new RectInt(
+                rect.x + roomPadding,
+                rect.y + roomPadding,
+                rect.width - roomPadding * 2,
+                rect.height - roomPadding * 2);
         }
     }
 
     /// <summary>
-    /// Builds the map layout in the world using blocks
+    /// Instantiates all rooms as child objects of the map
     /// </summary>
-    private void Build()
+    private void InstantiateRooms(Map map)
     {
-        foreach (RoomNode room in leafNodes)
+        for (int i = 0; i < rects.Count; ++i)
         {
-            GameObject roomBlock = GameObject.Instantiate(block, transform);
-            roomBlock.transform.position = new Vector3(room.rect.x, -1, room.rect.y);
-            roomBlock.transform.localScale = new Vector3(room.rect.width, 1, room.rect.height);
-            roomBlock.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = new Color(0f, Random.Range(0f, 1f), 0f);
+            map.Rooms.Add(GameObject.Instantiate(roomPrefab, map.transform).GetComponent<Room>().Initialize(rects[i], i));
         }
     }
 
