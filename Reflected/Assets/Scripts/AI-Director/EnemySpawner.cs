@@ -29,6 +29,8 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnWave(float spawnTime, int enemyAmount)
     {
+        yield return new WaitForSeconds(spawnTime * 2);
+
         for (int i = 0; i < enemyAmount; i++)
         {
             if (spawnTransforms.Count <= 0) GetSpawnlocations();

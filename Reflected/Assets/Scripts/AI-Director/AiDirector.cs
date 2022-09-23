@@ -5,18 +5,18 @@ using UnityEngine;
 public class AiDirector : MonoBehaviour
 {
     //Difficulty
-    string difficultyLevel;
+    [SerializeField] string difficultyLevel;
     const string easy = "easy";
     const string medium = "medium";
     const string hard = "hard";
-    [SerializeField] float spawntime;
-    [SerializeField] int amountOfEnemies;
+    float spawntime;
+    int amountOfEnemies;
 
     //Room-stats
     bool activeRoom;
     bool inbetweenRooms;
     int enemiesInRoom;
-    float timeToClearRoom;
+    [SerializeField] float timeToClearRoom;
     List<float> clearTimesList = new List<float>();
 
     //Map-stats
@@ -27,7 +27,7 @@ public class AiDirector : MonoBehaviour
 
     //Player-stats
     Player player;
-    float playerCurrentHelathPercentage;
+    [SerializeField] float playerCurrentHelathPercentage;
     int playerCurrency;
 
 
@@ -36,31 +36,17 @@ public class AiDirector : MonoBehaviour
 
     void Start()
     {
-        //if(!player) player = GetComponent<Player>();
-        //if(!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
-
-        if (!player)
-        {
-            player = GetComponent<Player>();
-            Debug.Log("player found");
-        }
-        if (!enemySpawner)
-        {
-            enemySpawner = GetComponent<EnemySpawner>();
-            Debug.Log("enemySpawner found");
-        }
+        if (!player) player = GetComponent<Player>();
+        if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
 
         difficultyLevel = medium;
+        checkDifficulty();
+        activeRoom = false;
+        inbetweenRooms = false;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            checkDifficulty();
-            enemySpawner.SpawnEnemy(spawntime, amountOfEnemies);
-        }
-
         CheckRoomActivity();
     }
 
@@ -98,10 +84,18 @@ public class AiDirector : MonoBehaviour
 
     private void CheckRoomActivity()
     {
+        if (!activeRoom && !inbetweenRooms)
+        {
+            activeRoom = true;
+            checkDifficulty();
+            enemiesInRoom = amountOfEnemies * 2;
+            enemySpawner.SpawnEnemy(spawntime, amountOfEnemies);
+
+        }
         if (activeRoom && enemiesInRoom > 0)
         {
             timeToClearRoom += Time.deltaTime;
-            playerCurrentHelathPercentage = player.GetHealthPercentage();
+            //playerCurrentHelathPercentage = player.GetHealthPercentage();
         }
         if (enemiesInRoom == 0)
         {
