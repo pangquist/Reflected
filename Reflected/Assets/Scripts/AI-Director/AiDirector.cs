@@ -36,7 +36,7 @@ public class AiDirector : MonoBehaviour
 
     void Start()
     {
-        if (!player) player = GetComponent<Player>();
+        if (!player) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
 
         difficultyLevel = medium;
@@ -95,7 +95,7 @@ public class AiDirector : MonoBehaviour
         if (activeRoom && enemiesInRoom > 0)
         {
             timeToClearRoom += Time.deltaTime;
-            //playerCurrentHelathPercentage = player.GetHealthPercentage();
+            playerCurrentHelathPercentage = player.GetHealthPercentage();
         }
         if (enemiesInRoom == 0)
         {
