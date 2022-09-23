@@ -11,41 +11,44 @@ using UnityEditor;
 [CustomEditor(typeof(Player))]
 public class PlayerEditorTemplate : Editor
 {
-	public enum DisplayCategory
+    public enum DisplayCategory
     {
-		Basic, Combat
+        Basic, Combat
     }
 
-	public DisplayCategory categoryToDisplay;
+    public DisplayCategory categoryToDisplay;
 
-	public override void OnInspectorGUI()
-	{
-		categoryToDisplay = (DisplayCategory)EditorGUILayout.EnumPopup("Display", categoryToDisplay);
+    public override void OnInspectorGUI()
+    {
+        categoryToDisplay = (DisplayCategory)EditorGUILayout.EnumPopup("Display", categoryToDisplay);
 
-		EditorGUILayout.Space();
+        EditorGUILayout.Space();
 
-		switch (categoryToDisplay)
+        switch (categoryToDisplay)
         {
-			case DisplayCategory.Basic:
-				DisplayBasicInfo();
-				break;
-				case DisplayCategory.Combat:
-				DisplayCombatInfo();
-				break ;
+            case DisplayCategory.Basic:
+                DisplayBasicInfo();
+                break;
+            case DisplayCategory.Combat:
+                DisplayCombatInfo();
+                break;
         }
 
-		serializedObject.ApplyModifiedProperties();
-	}
+        serializedObject.ApplyModifiedProperties();
+    }
 
-	void DisplayBasicInfo()
+    void DisplayBasicInfo()
     {
-		EditorGUILayout.PropertyField(serializedObject.FindProperty("maxHealth"));
-		EditorGUILayout.PropertyField(serializedObject.FindProperty("movementSpeed"));
-		EditorGUILayout.PropertyField(serializedObject.FindProperty("jumpForce"));
-	}
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("maxHealth"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("movementSpeed"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("jumpForce"));
+    }
 
-	void DisplayCombatInfo()
+    void DisplayCombatInfo()
     {
-		EditorGUILayout.PropertyField(serializedObject.FindProperty("weapons"));
-	}
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("damage"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("attackSpeed"));
+        EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("weapons"));
+    }
 }

@@ -17,12 +17,22 @@ public class Player : Character
     [SerializeField] List<Weapon> weapons = new List<Weapon>();
     int weaponIndex = 0;
 
+    UpgradeManager upgradeManager;
+    bool lightDimension;
+
     // Start is called before the first frame update
     void Start()
     {
+        ChangeStats();
         currentWeapon = weapons[weaponIndex];
         currentWeapon.gameObject.SetActive(true);
+        currentWeapon.SetDamage(damage);
+
         Cursor.lockState = CursorLockMode.Locked;
+        lightDimension = true;
+        //upgradeManager = GameObject.Find("UpgradeManager").GetComponent<UpgradeManager>();
+        //upgradeManager.AddPlayer(this);
+
     }
 
     // Update is called once per frame
@@ -76,5 +86,27 @@ public class Player : Character
     public void DoWeaponEffect()
     {
         currentWeapon.WeaponEffect();
+    }
+
+    public void ChangeStats()
+    {
+        if (lightDimension)
+        {
+            //maxHealth = upgradeManager.GetLightPieces()[0].GetValue();
+            //movementSpeed = upgradeManager.GetLightPieces()[1].GetValue();
+
+        }
+        else
+        {
+            //foreach (MirrorPiece piece in upgradeManager.GetDarkPieces())
+            //{
+
+            //}
+        }
+    }
+
+    public void SwapDimension()
+    {
+
     }
 }

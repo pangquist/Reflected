@@ -7,6 +7,8 @@ public class Character : MonoBehaviour
     [Header("Character Properties")]
     [SerializeField] protected float maxHealth;
     [SerializeField] protected float movementSpeed;
+    [SerializeField] protected float damage;
+    [SerializeField] protected float attackSpeed;
     protected float currentHealth;
     protected Animator anim;
 
@@ -61,11 +63,11 @@ public class Character : MonoBehaviour
 
     public float GetDamage()
     {
-        return currentWeapon.GetDamage();
+        return damage;
     }
 
     public float GetAttackSpeed()
     {
-        return 1; //replace with attack speed
+        return attackSpeed; //replace with attack speed
     }
 }

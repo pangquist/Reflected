@@ -59,4 +59,14 @@ public class MirrorPiece : MonoBehaviour
     {
         return isActive;
     }
+
+    public string GetVariable()
+    {
+        return modifiedValue;
+    }
+
+    public float GetValue()
+    {
+        return value;
+    }
 }
