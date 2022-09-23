@@ -13,7 +13,7 @@ public class InventoryItem
     {
         itemData = item;
         //AddToStack();
-        AddMoreToStack(item.amount);
+        //AddMoreToStack(item.amount);
     }
 
     public void AddToStack()

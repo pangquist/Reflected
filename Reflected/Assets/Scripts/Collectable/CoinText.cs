@@ -9,6 +9,11 @@ public class CoinText : MonoBehaviour
     [SerializeField] Inventory playerInventory;
     int coinCount;
 
+    private void Awake()
+    {
+        coinText.text = $"{playerInventory.inventory[0].itemData.displayName}: {playerInventory.inventory[0].stackSize}";
+    }
+
     private void OnEnable()
     {
         Coin.OnCoinCollected += IncrementCoinCount;
