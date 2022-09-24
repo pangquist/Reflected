@@ -31,6 +31,7 @@ public class AttackPlayerState : State
         }
 
         FaceTarget(target.position);
+        agent.destination = thisEnemy.transform.position;
         DoAttack();
     }
 
@@ -45,6 +46,6 @@ public class AttackPlayerState : State
         Vector3 lookPos = target - transform.position;
         lookPos.y = 0;
         Quaternion rotation = Quaternion.LookRotation(lookPos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.02f);
     }
 }
