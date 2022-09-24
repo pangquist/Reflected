@@ -21,7 +21,8 @@ public class AiManager : MonoBehaviour
 
     [SerializeField] private GameObject GOplayer;
     private Player player; //This is not assigned correctly. Ignore for now and just use goal for the agent.
-    private Enemy me;
+    //private Enemy me;
+    private PlaceholderEnemyScript me;
 
     private NavMeshAgent agent;
     private Transform target; //Instead of using the player at the moment.
@@ -37,7 +38,8 @@ public class AiManager : MonoBehaviour
 
         if (!me)
         {
-            me = GetComponent<Enemy>();
+            //me = GetComponent<Enemy>();
+            me = GetComponent<PlaceholderEnemyScript>();
             Debug.Log("Assignmed Enemy component");
         }
         if (!GOplayer)
