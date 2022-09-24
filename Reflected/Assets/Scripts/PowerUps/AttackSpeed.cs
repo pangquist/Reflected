@@ -4,13 +4,18 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "PowerUps/Attack")]
 public class AttackSpeed : PowerUpEffect
-{
-    public float amount;
+{    
+    [SerializeField] public float amount;
 
     public override void Apply(GameObject target)
     {
-        //target.GetComponent<ThirdPersonMovement>().speed += amount;
-        Debug.Log("You attack like a champ now");
+        target.GetComponent<StatSystem>().AddAttackSpeed(amount);
+        Debug.Log("Attack speed +" + amount);
+    }
+
+    public void Awake()
+    {
+        description = "Increases your attack speed by " + amount;
     }
 
 }
