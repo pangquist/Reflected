@@ -28,6 +28,7 @@ public class AiManager : MonoBehaviour
     private Transform target; //Instead of using the player at the moment.
 
     bool closeCombat = false;
+    bool areaOfEffect = false;
 
     void Start()
     {
@@ -64,13 +65,15 @@ public class AiManager : MonoBehaviour
 
         //Set active player state
         //activeState = startState;
-        activeState = moveTowardsPlayerState; //For specific states
+        activeState = attackPlayerState; //For specific states
 
         //AI Navmesh setup
         agent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
+        //I plan to have an enum for better stucture for this part.
         if (gameObject.tag == "Melee") closeCombat = true;
+        else if (gameObject.tag == "AOE") areaOfEffect = true;
     }
     private void Update()
     {
@@ -85,7 +88,10 @@ public class AiManager : MonoBehaviour
     public void SetMoveAwayState() => activeState = moveAwayFromPlayerState;
     public void SetAttackPlayerState() => activeState = attackPlayerState;
     public void SetStartState() => activeState = startState;
+
+    //I plan to have an enum for better stucture for this part.
     public bool CloseCombat() => closeCombat;
+    public bool AOE() => areaOfEffect;
     public State GetActiveState() => activeState;
 
 
