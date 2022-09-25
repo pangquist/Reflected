@@ -15,7 +15,7 @@ public class MirrorPiece : MonoBehaviour
     [SerializeField] float resourceCost;
     [SerializeField] bool isPlaceable;
     bool isActive;
-    
+
     [Header("Stat Changes")]
     [SerializeField] string modifiedValue;
     [SerializeField] float value;
@@ -36,9 +36,10 @@ public class MirrorPiece : MonoBehaviour
         mirror.PlacePiece(this);
         currentImage.sprite = activatedSprite;
 
-        foreach(MirrorPiece piece in nextPieces)
+        foreach (MirrorPiece piece in nextPieces)
         {
-            piece.SetIsPlaceable(true);
+            if (!piece.IsActive())
+                piece.SetIsPlaceable(true);
         }
 
         // resourceAmount -= resourceCost;

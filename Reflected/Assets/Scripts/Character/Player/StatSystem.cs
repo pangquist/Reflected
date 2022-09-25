@@ -12,15 +12,90 @@ public class StatSystem : MonoBehaviour, ISavable
     [SerializeField] float attackSpeed;
     [SerializeField] float areaOfEffect;
 
+    Player player;
+    UpgradeManager upgradeManager;
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
+        upgradeManager = GameObject.Find("UpgradeManager").GetComponent<UpgradeManager>();
+        ResetStats();
+
+        if (upgradeManager)
+            GetLightStats();
+    }
+
+    public void GetLightStats()
+    {
+        foreach (MirrorPiece piece in upgradeManager.GetLightPieces())
+        {
+            if (piece.GetVariable() == "Damage")
+            {
+                AddDamageIncrease(piece.GetValue());
+            }
+            else if (piece.GetVariable() == "Damage Reduction")
+            {
+                AddDamageReduction(piece.GetValue());
+            }
+            else if (piece.GetVariable() == "Movement Speed")
+            {
+                AddMovementSpeed(piece.GetValue());
+            }
+            else if (piece.GetVariable() == "Health")
+            {
+                AddMaxHealth(piece.GetValue());
+            }
+            else if (piece.GetVariable() == "Attack Speed")
+            {
+                AddAttackSpeed(piece.GetValue());
+            }
+            else if (piece.GetVariable() == "AoE")
+            {
+                AddAreaOfEffect(piece.GetValue());
+            }
+        }
+    }
+
+    public void GetDarkStats()
+    {
+        foreach (MirrorPiece piece in upgradeManager.GetDarkPieces())
+        {
+            if (piece.GetVariable() == "Damage")
+            {
+                AddDamageIncrease(piece.GetValue());
+            }
+            else if (piece.GetVariable() == "Damage Reduction")
+            {
+                AddDamageReduction(piece.GetValue());
+            }
+            else if (piece.GetVariable() == "Movement Speed")
+            {
+                AddMovementSpeed(piece.GetValue());
+            }
+            else if (piece.GetVariable() == "Health")
+            {
+                AddMaxHealth(piece.GetValue());
+            }
+            else if (piece.GetVariable() == "Attack Speed")
+            {
+                AddAttackSpeed(piece.GetValue());
+            }
+            else if (piece.GetVariable() == "AoE")
+            {
+                AddAreaOfEffect(piece.GetValue());
+            }
+        }
+    }
+
     public void ResetStats()
     {
         //Should be called upon death
-        maxHealthIncrease = 0;
-        damageReduction = 0;
-        movementSpeed = 0;
-        damageIncrease = 0;
-        attackSpeed = 0;
-        areaOfEffect = 0;
+        maxHealthIncrease = 1;
+        damageReduction = 1;
+        movementSpeed = 1;
+        damageIncrease = 1;
+        attackSpeed = 1;
+        areaOfEffect = 1;
     }
 
     public float GetMaxHealthIncrease() => maxHealthIncrease;
@@ -55,7 +130,7 @@ public class StatSystem : MonoBehaviour, ISavable
         attackSpeed += amount;
     }
 
-    public void AddAreaOfEffect( float amount)
+    public void AddAreaOfEffect(float amount)
     {
         areaOfEffect += amount;
     }
