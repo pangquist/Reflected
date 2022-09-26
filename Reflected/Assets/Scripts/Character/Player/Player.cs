@@ -23,6 +23,9 @@ public class Player : Character, ISavable
     UpgradeManager upgradeManager;
     bool lightDimension;
 
+    public delegate void InteractWithObject();
+    public static event InteractWithObject OnObjectInteraction;
+
     protected override void Awake()
     {
         base.Awake();
@@ -116,6 +119,11 @@ public class Player : Character, ISavable
             dimensionManager.SetMirrorDimension();
 
         ChangeStats();
+    }
+
+    public void Interact()
+    {
+        OnObjectInteraction.Invoke();
     }
 
     public StatSystem GetStats()
