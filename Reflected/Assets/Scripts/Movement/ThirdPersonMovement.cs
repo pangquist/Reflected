@@ -29,9 +29,11 @@ public class ThirdPersonMovement : MonoBehaviour
     bool isDashing;
 
     private Vector3 velocity;
+    private AbilityCooldowns cooldownstarter;
     // Start is called before the first frame update
     private void Start()
     {
+        cooldownstarter = FindObjectOfType<AbilityCooldowns>();
         currentDashTimer = dashCooldown;
     }
 
@@ -65,7 +67,18 @@ public class ThirdPersonMovement : MonoBehaviour
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
     }
-
+    public float GetDashCooldown()
+    {
+        return dashCooldown;
+    }
+    public bool IsOnCooldown()
+    {
+        return currentDashTimer < dashCooldown;
+    }
+    public float GetCurrentCooldown()
+    {
+        return dashCooldown - currentDashTimer;
+    }
     public void Jump()
     {
         if (isDashing)
@@ -81,6 +94,7 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             StartCoroutine("dashAction");
             currentDashTimer = 0;
+            cooldownstarter.Ability2Use();
         }
     }
 
