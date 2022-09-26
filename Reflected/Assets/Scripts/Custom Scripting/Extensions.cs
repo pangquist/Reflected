@@ -158,9 +158,9 @@ public static class Extensions
     /// <summary>
     /// Returns whether or not the two rectangles overlap and their overlapping area.
     /// </summary>
-    public static bool Overlaps(this RectInt rect, RectInt other, out RectInt result)
+    public static bool Overlaps(this RectInt rect, RectInt other, out RectInt overlap)
     {
-        result = new RectInt();
+        overlap = new RectInt();
 
         if (!rect.Overlaps(other))
             return false;
@@ -174,8 +174,25 @@ public static class Extensions
         Vector2Int min = new Vector2Int(minX, minY);
         Vector2Int max = new Vector2Int(maxX, maxY);
 
-        result.SetMinMax(min, max);
+        overlap.SetMinMax(min, max);
         return true;
     }
+
+    /// <summary>
+    /// Returns the y coordinate for this RectInt's top side (y + height)
+    /// </summary>
+    public static int Top(this RectInt rect)
+    {
+        return rect.y + rect.height;
+    }
+
+    /// <summary>
+    /// Returns the x coordinate for this RectInt's right side (x + width)
+    /// </summary>
+    public static int Right(this RectInt rect)
+    {
+        return rect.x + rect.width;
+    }
+
 
 }

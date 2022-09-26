@@ -25,9 +25,10 @@ public class Map : MonoBehaviour
         name = "Map";
     }
 
-    private void Update()
+    public void DeactivateAll()
     {
-        
+        foreach (Room room in rooms)
+            room.Deactivate(null);
     }
 
 }

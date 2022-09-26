@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Wall : MonoBehaviour
@@ -11,14 +12,13 @@ public class Wall : MonoBehaviour
 
     [Header("Read Only")]
 
-    [ReadOnly][SerializeField] private BoundsInt bounds;
+    [ReadOnly][SerializeField] private CardinalDirection direction;
 
     private static int height;
     private static int thickness;
 
     // Properties
 
-    public BoundsInt Bounds => bounds;
     public static int Thickness => thickness;
     public static int Height => height;
 
@@ -28,41 +28,21 @@ public class Wall : MonoBehaviour
         Wall.height = height;
     }
 
-    private void Initialize(int x, int z, int sizeX, int sizeZ)
+    public Wall Initialize(CardinalDirection direction)
     {
-        bounds = new BoundsInt(x, 0, z, sizeX, height, sizeZ);
+        this.direction = direction;
+        name = "Wall " + direction.ToString();
 
+        return this;
+    }
+
+    public Wall AddPortion(RectInt rect)
+    {
         GameObject block = GameObject.Instantiate(blockPrefab, transform);
-        block.transform.position = bounds.position;
-        block.transform.localScale = bounds.size;
+        block.transform.position = new Vector3(rect.x, 0, rect.y);
+        block.transform.localScale = new Vector3(rect.width, height, rect.height);
         block.GetComponentInChildren<MeshRenderer>().material.color = new Color(1f, 1f, 1f);
-    }
 
-    public Wall InitializeNorth(RectInt r, bool extend)
-    {
-        name = "Wall North";
-        Initialize(r.x - (extend ? thickness : 0), r.y + r.height, r.width + thickness * (extend ? 2 : 0), thickness);
-        return this;
-    }
-
-    public Wall InitializeSouth(RectInt r, bool extend)
-    {
-        name = "Wall South";
-        Initialize(r.x - (extend ? thickness : 0), r.y - thickness, r.width + thickness * (extend ? 2 : 0), thickness);
-        return this;
-    }
-
-    public Wall InitializeWest(RectInt r, bool extend)
-    {
-        name = "Wall West";
-        Initialize(r.x - thickness, r.y - (extend ? thickness : 0), thickness, r.height + thickness * (extend ? 2 : 0));
-        return this;
-    }
-
-    public Wall InitializeEast(RectInt r, bool extend)
-    {
-        name = "Wall East";
-        Initialize(r.x + r.width, r.y - (extend ? thickness : 0), thickness, r.height + thickness * (extend ? 2 : 0));
         return this;
     }
 
