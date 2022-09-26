@@ -2,6 +2,7 @@
 // Script created by Valter Lindecrantz at the Game Development Program, MAU, 2022.
 //
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine;
 /// <summary>
 /// Player description
 /// </summary>
-public class Player : Character
+public class Player : Character, ISavable
 {
     [SerializeField] StatSystem stats;
 
@@ -22,16 +23,15 @@ public class Player : Character
     UpgradeManager upgradeManager;
     bool lightDimension;
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         currentWeapon = weapons[weaponIndex];
         currentWeapon.gameObject.SetActive(true);
         currentWeapon.SetDamage(damage);
 
         Cursor.lockState = CursorLockMode.Locked;
         lightDimension = true;
-
     }
 
     // Update is called once per frame
@@ -122,4 +122,31 @@ public class Player : Character
     {
         return stats;
     }
+
+
+    #region SaveLoad
+    [Serializable]
+    private struct SaveData
+    {
+        public float currentHealth;
+        public float maxHealth;
+    }
+
+    public object SaveState()
+    {
+        return new SaveData()
+        {
+            currentHealth = this.currentHealth,
+            maxHealth = this.maxHealth
+        };
+    }
+
+    public void LoadState(object state)
+    {
+        var saveData = (SaveData)state;
+        currentHealth = saveData.currentHealth;
+        maxHealth = saveData.maxHealth;
+    }
+
+    #endregion
 }

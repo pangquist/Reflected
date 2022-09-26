@@ -34,7 +34,10 @@ public class Character : MonoBehaviour
         }
     }
 
-
+    public virtual void Heal(int amount)
+    {
+        currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
+    }
 
     void Die()
     {

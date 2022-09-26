@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//OBSOLETE
+
+
 public class PlayerHealth : MonoBehaviour, ISavable
 {
     public float maxHealth = 10;
