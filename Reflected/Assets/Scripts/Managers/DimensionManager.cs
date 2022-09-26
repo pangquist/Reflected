@@ -16,6 +16,7 @@ public class DimensionManager : MonoBehaviour
     [SerializeField] VolumeProfile trueProfile;
     [SerializeField] VolumeProfile mirrorProfile;
 
+    [SerializeField] List<ChangeableObject> changeableObjects;
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -24,10 +25,21 @@ public class DimensionManager : MonoBehaviour
     public void SetTrueDimension()
     {
         volume.profile = trueProfile;
+
+        foreach (ChangeableObject changeableObject in changeableObjects)
+            changeableObject.ChangeToTrueMesh();
     }
 
     public void SetMirrorDimension()
     {
         volume.profile = mirrorProfile;
+
+        foreach (ChangeableObject changeableObject in changeableObjects)
+            changeableObject.ChangeToMirrorMesh();
+    }
+
+    public void AddChangeableObject(ChangeableObject newObject)
+    {
+        changeableObjects.Add(newObject);
     }
 }
