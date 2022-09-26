@@ -50,6 +50,10 @@ public class RoomGenerator : MonoBehaviour
     [Range(-0.98f, 0.98f)]
     [SerializeField] private float splitLocationBias;
 
+    [Tooltip("Chance of attempting to split a room which is not to big")]
+    [Range(0f, 1f)]
+    [SerializeField] private float splitChance;
+
     private List<RectInt> rects = new List<RectInt>();
 
     // Properties
@@ -91,8 +95,8 @@ public class RoomGenerator : MonoBehaviour
         // If the room is not too big
         else
         {
-            // 50% chance to try splitting it
-            if (Random.Range(0f, 1f) < 0.5f && TrySplit(ref room))
+            // Chance to try splitting it
+            if (Random.Range(0f, 1f) < splitChance && TrySplit(ref room))
                 return;
         }
 

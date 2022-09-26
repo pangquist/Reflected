@@ -14,12 +14,14 @@ public class Room : MonoBehaviour
     [ReadOnly][SerializeField] private Floor floor;
     [ReadOnly][SerializeField] private List<Wall> walls;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
+    [ReadOnly][SerializeField] private bool cleared;
     
     // Properties
 
     public RectInt Rect => rect;
     public Floor Floor => floor;
     public List<Wall> Walls => walls;
+    public List<Chamber> Chambers => chambers;
 
     public Room Initialize(RectInt rect, int index)
     {
@@ -33,9 +35,30 @@ public class Room : MonoBehaviour
         floor = GameObject.Instantiate(floorPrefab, transform).GetComponent<Floor>().Initialize(rect.Inflated(wallThickness, wallThickness));
     }
 
-    public void LinkChamber(Chamber chamber)
+    /// <summary>
+    /// Deactivates this room and all connected chambers except the caller
+    /// </summary>
+    /// <param name="caller"></param>
+    public void Deactivate(Chamber caller)
     {
-        chambers.Add(chamber);
+        foreach (Chamber chamber in chambers)
+        {
+            if (chamber != caller)
+                chamber.gameObject.SetActive(false);
+        }
+
+        gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Activates all connected chambers
+    /// </summary>
+    /// <param name="caller"></param>
+    private void OnActivate()
+    {
+        foreach (Chamber chamber in chambers)
+            chamber.gameObject.SetActive(true);
+
+        gameObject.SetActive(true);
+    }
 }
