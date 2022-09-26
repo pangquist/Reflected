@@ -77,6 +77,8 @@ public class Player : Character
         return jumpForce;
     }
 
+    
+
     public void UnlockWeapon()
     {
         currentWeapon.Unlock();

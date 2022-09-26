@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class TabScript : MonoBehaviour
 {
     [SerializeField] GameObject uiPanel;
+    [SerializeField] GameObject CurrencyPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +19,13 @@ public class TabScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
             {
+            CurrencyPanel.SetActive(true);
             uiPanel.SetActive(true);
         }
         if(Input.GetKeyUp(KeyCode.Tab))
             {
             uiPanel.SetActive(false);
+            CurrencyPanel.SetActive(false);
         }
     }
 }

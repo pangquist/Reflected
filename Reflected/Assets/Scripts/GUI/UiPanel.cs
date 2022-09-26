@@ -10,7 +10,7 @@ public class UiPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI speedText;
     [SerializeField] TextMeshProUGUI attackspeedText;
     
-    Player player;
+    private Player player;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +21,8 @@ public class UiPanel : MonoBehaviour
     void Update()
     {
         healthText.text = "Health: " + player.GetCurrentHealth().ToString();
-        damageText.text = "Damage: " + player.GetCurrentHealth().ToString();
+        damageText.text = "Damage: " + player.GetDamage().ToString();
         speedText.text = "Speed: " + player.GetMovementSpeed().ToString();
-        attackspeedText.text = "Attack Speed: " + player.GetCurrentHealth().ToString();
+        attackspeedText.text = "Attack Speed: " + player.GetAttackSpeed().ToString();
     }
 }

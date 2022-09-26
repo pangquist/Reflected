@@ -70,4 +70,8 @@ public class Character : MonoBehaviour
     {
         return attackSpeed; //replace with attack speed
     }
+    public Weapon GetCurrentWeapon()
+    {
+        return currentWeapon;
+    }
 }
