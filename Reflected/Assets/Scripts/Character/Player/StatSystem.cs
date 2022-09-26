@@ -20,7 +20,14 @@ public class StatSystem : MonoBehaviour, ISavable
     private void Start()
     {
         player = GetComponent<Player>();
-        upgradeManager = GameObject.Find("UpgradeManager").GetComponent<UpgradeManager>();
+        try
+        {
+            upgradeManager = GameObject.Find("UpgradeManager").GetComponent<UpgradeManager>();
+        }
+        catch(Exception e)
+        {
+
+        }
         ResetStats();
 
         if (upgradeManager)
