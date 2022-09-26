@@ -84,14 +84,6 @@ public class AiDirector : MonoBehaviour
 
     private void CheckRoomActivity()
     {
-        if (!activeRoom && !inbetweenRooms)
-        {
-            activeRoom = true;
-            checkDifficulty();
-            enemiesInRoom = amountOfEnemies * 2;
-            enemySpawner.SpawnEnemy(spawntime, amountOfEnemies);
-
-        }
         if (activeRoom && enemiesInRoom > 0)
         {
             timeToClearRoom += Time.deltaTime;
@@ -109,5 +101,13 @@ public class AiDirector : MonoBehaviour
             ResetRoom();
             inbetweenRooms = false;
         }
+    }
+
+    public void EnterRoom()
+    {
+        activeRoom = true;
+        checkDifficulty();
+        enemiesInRoom = amountOfEnemies * 2;
+        enemySpawner.SpawnEnemy(spawntime, amountOfEnemies);
     }
 }
