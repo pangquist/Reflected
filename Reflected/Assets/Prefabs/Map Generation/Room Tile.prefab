@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3025152262871226806}
   - component: {fileID: 3025152262871226801}
   - component: {fileID: 3025152262871226800}
+  - component: {fileID: 4630491421817127434}
   m_Layer: 0
   m_Name: Room Tile
   m_TagString: Untagged
@@ -192,3 +193,28 @@ MonoBehaviour:
   - seed: 500
     frequency: 0.5
     amplitude: 10
+  - seed: 44
+    frequency: 0.8
+    amplitude: 5
+  - seed: 8976
+    frequency: 0.2
+    amplitude: 20
+--- !u!114 &4630491421817127434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3025152262871226803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cf2e39d51b23448ac307bfa90f8b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileGeneration: {fileID: 3025152262871226800}
+  decorations:
+  - terrain: Grass
+    gameObject:
+    - {fileID: 100000, guid: faf4490e54e692d4dbb982513c8bf5fa, type: 3}
+    - {fileID: 100000, guid: 2f0008fa544791a4c902dfef9ed32ab5, type: 3}
+    - {fileID: 100000, guid: 22862dc526fa4354c8d2459cf7b19dc7, type: 3}

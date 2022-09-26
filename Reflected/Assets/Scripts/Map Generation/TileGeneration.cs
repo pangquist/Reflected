@@ -16,15 +16,15 @@ public class TileGeneration : MonoBehaviour
     [SerializeField]
     private MeshRenderer tileRenderer;
     [SerializeField]
-    private MeshFilter meshFilter;
+    public MeshFilter meshFilter;
     [SerializeField]
     private MeshCollider meshCollider;
     [SerializeField]
-    private float mapScale;
+    public float mapScale;
     [SerializeField]
     private float heightMultiplier;
     [SerializeField]
-    private TerrainType[] terrainTypes;
+    public TerrainType[] terrainTypes;
     [SerializeField]
     private AnimationCurve heightCurve;
     [SerializeField]
@@ -36,6 +36,15 @@ public class TileGeneration : MonoBehaviour
     }
     void GenerateTile()
     {
+        float[,] heightMap = GenerateHeightMap();
+        
+        Texture2D tileTexture = BuildTexture(heightMap);
+        this.tileRenderer.material.mainTexture = tileTexture;
+        UpdateMeshVertices(heightMap);
+    }
+
+    public float[,] GenerateHeightMap()
+    {
         // calculate tile depth and width based on the mesh vertices
         Vector3[] meshVertices = this.meshFilter.mesh.vertices;
         int tileDepth = (int)Mathf.Sqrt(meshVertices.Length);
@@ -43,12 +52,8 @@ public class TileGeneration : MonoBehaviour
         // calculate the offsets based on the tile position
         float offsetX = -this.gameObject.transform.position.x;
         float offsetZ = -this.gameObject.transform.position.z;
-
-        float[,] heightMap = this.noiseMapGeneration.GenerateNoiseMap(tileDepth, tileWidth, this.mapScale, offsetX, offsetZ, waves);
         // generate a heightMap using noise
-        Texture2D tileTexture = BuildTexture(heightMap);
-        this.tileRenderer.material.mainTexture = tileTexture;
-        UpdateMeshVertices(heightMap);
+        return this.noiseMapGeneration.GenerateNoiseMap(tileDepth, tileWidth, this.mapScale, offsetX, offsetZ, waves);
     }
     private Texture2D BuildTexture(float[,] heightMap)
     {
