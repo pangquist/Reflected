@@ -67,6 +67,12 @@ public class PlayerController : MonoBehaviour
             movement.Dash();
     }
 
+    public void SwapDimension(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            player.SwapDimension();
+    }
+
     public void SetMovementLocked(bool state)
     {
         movementLocked = state;

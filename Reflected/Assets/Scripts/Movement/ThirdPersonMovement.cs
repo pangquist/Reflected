@@ -7,6 +7,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] CharacterController controller;
     [SerializeField] Transform cam;
+    [SerializeField] StatSystem stats;
 
     [Header("Stat Properties")]
     [SerializeField] float speed = 12f;
@@ -62,7 +63,7 @@ public class ThirdPersonMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            controller.Move(moveDir.normalized * speed * stats.GetMovementSpeed() * Time.deltaTime);
         }
     }
 

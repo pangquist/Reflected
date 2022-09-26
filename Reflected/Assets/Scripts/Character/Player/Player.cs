@@ -11,6 +11,8 @@ using UnityEngine;
 /// </summary>
 public class Player : Character
 {
+    [SerializeField] StatSystem stats;
+
     [Header("Stat Properties")]
     [SerializeField] float jumpForce;
 
@@ -23,15 +25,12 @@ public class Player : Character
     // Start is called before the first frame update
     void Start()
     {
-        ChangeStats();
         currentWeapon = weapons[weaponIndex];
         currentWeapon.gameObject.SetActive(true);
         currentWeapon.SetDamage(damage);
 
         Cursor.lockState = CursorLockMode.Locked;
         lightDimension = true;
-        //upgradeManager = GameObject.Find("UpgradeManager").GetComponent<UpgradeManager>();
-        //upgradeManager.AddPlayer(this);
 
     }
 
@@ -92,21 +91,33 @@ public class Player : Character
     {
         if (lightDimension)
         {
-            //maxHealth = upgradeManager.GetLightPieces()[0].GetValue();
-            //movementSpeed = upgradeManager.GetLightPieces()[1].GetValue();
+            stats.GetLightStats();
 
         }
         else
         {
-            //foreach (MirrorPiece piece in upgradeManager.GetDarkPieces())
-            //{
-
-            //}
+            stats.GetDarkStats();
         }
+
+        currentWeapon.SetDamage(damage);
     }
 
     public void SwapDimension()
     {
+        lightDimension = !lightDimension;
 
+        DimensionManager dimensionManager = GameObject.Find("Post Processing").GetComponent<DimensionManager>();
+
+        if (lightDimension)
+            dimensionManager.SetTrueDimension();
+        else
+            dimensionManager.SetMirrorDimension();
+
+        ChangeStats();
+    }
+
+    public StatSystem GetStats()
+    {
+        return stats;
     }
 }

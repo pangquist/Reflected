@@ -24,11 +24,13 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected List<Enemy> hitEnemies;
 
     protected PlayerController playerController;
+    Player player;
 
     public virtual void Awake()
     {
         anim = GetComponent<Animator>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        player = GameObject.Find("Player").GetComponent<Player>();
         hitEnemies = new List<Enemy>();
         currentComboIndex = 0;
         timeSinceLastSpecialAttack = specialAttackCooldown;
@@ -105,6 +107,6 @@ public abstract class Weapon : MonoBehaviour
 
     public float GetDamage()
     {
-        return damage;
+        return damage * player.GetStats().GetDamageIncrease();
     }
 }

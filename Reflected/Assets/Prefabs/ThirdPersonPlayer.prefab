@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 1831867125}
   - component: {fileID: 1831867127}
   - component: {fileID: 556736295478248411}
+  - component: {fileID: 1776205249}
   m_Layer: 0
   m_Name: ThirdPersonPlayer
   m_TagString: Player
@@ -162,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 4853948256094235925}
   cam: {fileID: 0}
+  stats: {fileID: 1776205249}
   speed: 12
   turnSmoothTime: 0.05
   gravity: -9.81
@@ -170,10 +172,10 @@ MonoBehaviour:
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 8
   isGrounded: 0
-  dashDuration: 0.25
-  dashSpeed: 1
+  dashDuration: 0.2
+  dashSpeed: 0.5
   dashCooldown: 3
 --- !u!114 &1831867126
 MonoBehaviour:
@@ -189,8 +191,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   movementSpeed: 0.25
+  damage: 3
+  attackSpeed: 1
+  stats: {fileID: 1776205249}
   jumpForce: 20
-  weapons: []
+  weapons:
+  - {fileID: 755042740901322163}
+  - {fileID: 4491102441571836711}
 --- !u!114 &1831867125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +292,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fd435f42-e311-4e0d-af64-1b3fd3bff950
     m_ActionName: Player/Special Attack[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1831867126}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: SwapDimension
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2ee7a2fd-0294-4d88-ba43-1dc16beef7e9
+    m_ActionName: Player/Swap Dimension[/Keyboard/ctrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -313,7 +336,7 @@ Animator:
   m_GameObject: {fileID: 4853948256094235928}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 601dfbb2547bec247a16acbd3dff3c43, type: 2}
+  m_Controller: {fileID: 9100000, guid: d4fc830cc68b9ee4cb3f8cc63fc8744d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -323,6 +346,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1776205249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853948256094235928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ea501e0d374ec4f82416575d95fa72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthIncrease: 0
+  damageReduction: 0
+  movementSpeed: 0
+  damageIncrease: 0
+  attackSpeed: 0
+  areaOfEffect: 0
 --- !u!1001 &785148376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -345,6 +386,26 @@ PrefabInstance:
       propertyPath: body
       value: 
       objectReference: {fileID: 4853948256094235928}
+    - target: {fileID: 4491102440787741439, guid: 2760863139400254fad38b3f8ef4ad9c,
+        type: 3}
+      propertyPath: maxTimeBetweenCombo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4491102440787741439, guid: 2760863139400254fad38b3f8ef4ad9c,
+        type: 3}
+      propertyPath: hitableLayers.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4491102440787741439, guid: 2760863139400254fad38b3f8ef4ad9c,
+        type: 3}
+      propertyPath: comboClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4491102440787741439, guid: 2760863139400254fad38b3f8ef4ad9c,
+        type: 3}
+      propertyPath: comboClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: 3410d1ca0a552194ebc9a21abe018200, type: 2}
     - target: {fileID: 8357193135869404768, guid: 2760863139400254fad38b3f8ef4ad9c,
         type: 3}
       propertyPath: m_Name
@@ -378,17 +439,17 @@ PrefabInstance:
     - target: {fileID: 9110556978354828655, guid: 2760863139400254fad38b3f8ef4ad9c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.2734174
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 9110556978354828655, guid: 2760863139400254fad38b3f8ef4ad9c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.063323736
+      value: 0.857
       objectReference: {fileID: 0}
     - target: {fileID: 9110556978354828655, guid: 2760863139400254fad38b3f8ef4ad9c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.308
+      value: 0.685
       objectReference: {fileID: 0}
     - target: {fileID: 9110556978354828655, guid: 2760863139400254fad38b3f8ef4ad9c,
         type: 3}
@@ -398,17 +459,17 @@ PrefabInstance:
     - target: {fileID: 9110556978354828655, guid: 2760863139400254fad38b3f8ef4ad9c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9110556978354828655, guid: 2760863139400254fad38b3f8ef4ad9c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9110556978354828655, guid: 2760863139400254fad38b3f8ef4ad9c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9110556978354828655, guid: 2760863139400254fad38b3f8ef4ad9c,
         type: 3}
@@ -427,6 +488,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2760863139400254fad38b3f8ef4ad9c, type: 3}
+--- !u!114 &4491102441571836711 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4491102440787741439, guid: 2760863139400254fad38b3f8ef4ad9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 785148376}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6838a92f7e77c5408f63a9d85cfe7b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &8678534820172236580 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8678534819681267452, guid: 2760863139400254fad38b3f8ef4ad9c,
@@ -440,6 +513,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5234984451825949051}
     m_Modifications:
+    - target: {fileID: 11675922, guid: e8cf0be581178194e89c0e77417e2b20, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755042739483133075, guid: e8cf0be581178194e89c0e77417e2b20,
+        type: 3}
+      propertyPath: specialAttackClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 96e20070f198a8b46a04e307c4b4e6ae, type: 2}
     - target: {fileID: 755042739483133075, guid: e8cf0be581178194e89c0e77417e2b20,
         type: 3}
       propertyPath: maxTimeBetweenCombo
@@ -454,17 +536,17 @@ PrefabInstance:
         type: 3}
       propertyPath: comboClips.Array.data[0]
       value: 
-      objectReference: {fileID: 7400000, guid: e364617b84bf3de4ab23a04c6c452575, type: 2}
+      objectReference: {fileID: 7400000, guid: 669c04a4f6500054895d21f45ee281a8, type: 2}
     - target: {fileID: 755042739483133075, guid: e8cf0be581178194e89c0e77417e2b20,
         type: 3}
       propertyPath: comboClips.Array.data[1]
       value: 
-      objectReference: {fileID: 7400000, guid: e364617b84bf3de4ab23a04c6c452575, type: 2}
+      objectReference: {fileID: 7400000, guid: 669c04a4f6500054895d21f45ee281a8, type: 2}
     - target: {fileID: 755042739483133075, guid: e8cf0be581178194e89c0e77417e2b20,
         type: 3}
       propertyPath: comboClips.Array.data[2]
       value: 
-      objectReference: {fileID: 7400000, guid: 34205469c21232e4ca31f693036bc471, type: 2}
+      objectReference: {fileID: 7400000, guid: 96e20070f198a8b46a04e307c4b4e6ae, type: 2}
     - target: {fileID: 2506927893811585354, guid: e8cf0be581178194e89c0e77417e2b20,
         type: 3}
       propertyPath: m_Size.x
@@ -573,10 +655,22 @@ PrefabInstance:
     - target: {fileID: 4465265746802164985, guid: e8cf0be581178194e89c0e77417e2b20,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8cf0be581178194e89c0e77417e2b20, type: 3}
+--- !u!114 &755042740901322163 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 755042739483133075, guid: e8cf0be581178194e89c0e77417e2b20,
+    type: 3}
+  m_PrefabInstance: {fileID: 1552439584}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aaea9a5699f20546a8c6155ec6bc735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3622321145254531607
 PrefabInstance:
   m_ObjectHideFlags: 0

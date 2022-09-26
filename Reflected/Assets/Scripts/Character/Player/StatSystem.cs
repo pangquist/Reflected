@@ -12,6 +12,8 @@ public class StatSystem : MonoBehaviour, ISavable
     [SerializeField] float attackSpeed;
     [SerializeField] float areaOfEffect;
 
+    List<string> statNames = new List<string> { "Health, Damage Reduction, Movement Speed, Damage, Attack Speed, AoE" };
+
     Player player;
     UpgradeManager upgradeManager;
 
@@ -27,62 +29,70 @@ public class StatSystem : MonoBehaviour, ISavable
 
     public void GetLightStats()
     {
-        foreach (MirrorPiece piece in upgradeManager.GetLightPieces())
+        ResetStats();
+
+        Dictionary<string, float> stats = upgradeManager.GetLightPieces();
+
+        foreach(KeyValuePair<string, float> pair in stats)
         {
-            if (piece.GetVariable() == "Damage")
+            if (pair.Key == "Damage")
             {
-                AddDamageIncrease(piece.GetValue());
+                AddDamageIncrease(pair.Value);
             }
-            else if (piece.GetVariable() == "Damage Reduction")
+            else if (pair.Key == "Damage Reduction")
             {
-                AddDamageReduction(piece.GetValue());
+                AddDamageReduction(pair.Value);
             }
-            else if (piece.GetVariable() == "Movement Speed")
+            else if (pair.Key == "Movement Speed")
             {
-                AddMovementSpeed(piece.GetValue());
+                AddMovementSpeed(pair.Value);
             }
-            else if (piece.GetVariable() == "Health")
+            else if (pair.Key == "Health")
             {
-                AddMaxHealth(piece.GetValue());
+                AddMaxHealth(pair.Value);
             }
-            else if (piece.GetVariable() == "Attack Speed")
+            else if (pair.Key == "Attack Speed")
             {
-                AddAttackSpeed(piece.GetValue());
+                AddAttackSpeed(pair.Value);
             }
-            else if (piece.GetVariable() == "AoE")
+            else if (pair.Key == "AoE")
             {
-                AddAreaOfEffect(piece.GetValue());
+                AddAreaOfEffect(pair.Value);
             }
         }
     }
 
     public void GetDarkStats()
     {
-        foreach (MirrorPiece piece in upgradeManager.GetDarkPieces())
+        ResetStats();
+
+        Dictionary<string, float> stats = upgradeManager.GetDarkPieces();
+
+        foreach (KeyValuePair<string, float> pair in stats)
         {
-            if (piece.GetVariable() == "Damage")
+            if (pair.Key == "Damage")
             {
-                AddDamageIncrease(piece.GetValue());
+                AddDamageIncrease(pair.Value);
             }
-            else if (piece.GetVariable() == "Damage Reduction")
+            else if (pair.Key == "Damage Reduction")
             {
-                AddDamageReduction(piece.GetValue());
+                AddDamageReduction(pair.Value);
             }
-            else if (piece.GetVariable() == "Movement Speed")
+            else if (pair.Key == "Movement Speed")
             {
-                AddMovementSpeed(piece.GetValue());
+                AddMovementSpeed(pair.Value);
             }
-            else if (piece.GetVariable() == "Health")
+            else if (pair.Key == "Health")
             {
-                AddMaxHealth(piece.GetValue());
+                AddMaxHealth(pair.Value);
             }
-            else if (piece.GetVariable() == "Attack Speed")
+            else if (pair.Key == "Attack Speed")
             {
-                AddAttackSpeed(piece.GetValue());
+                AddAttackSpeed(pair.Value);
             }
-            else if (piece.GetVariable() == "AoE")
+            else if (pair.Key == "AoE")
             {
-                AddAreaOfEffect(piece.GetValue());
+                AddAreaOfEffect(pair.Value);
             }
         }
     }

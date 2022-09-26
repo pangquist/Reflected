@@ -45,6 +45,7 @@ public class MovementEditorTemplate : Editor
 
 	void DisplayBasicInfo()
     {
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("stats"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("controller"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("cam"));
 	}

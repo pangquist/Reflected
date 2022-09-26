@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 252342371}
   - component: {fileID: 252342374}
   m_Layer: 5
-  m_Name: Damage 20%
+  m_Name: Damage 100
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -597,7 +597,7 @@ MonoBehaviour:
   resourceCost: 0
   isPlaceable: 1
   modifiedValue: Damage
-  value: 0.2
+  value: 1
 --- !u!114 &252342372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2416,18 +2416,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1586034226}
-        m_TargetAssemblyTypeName: SceneControl, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Combat
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2013064282}
         m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
         m_MethodName: GetActiveUpgrades
@@ -2438,6 +2426,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1586034226}
+        m_TargetAssemblyTypeName: SceneControl, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Combat
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1037186757
@@ -3800,7 +3800,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightMirror: {fileID: 439172439}
   darkMirror: {fileID: 732945600}
-  allActivePieces: []
   player: {fileID: 0}
 --- !u!4 &2013064283
 Transform:
