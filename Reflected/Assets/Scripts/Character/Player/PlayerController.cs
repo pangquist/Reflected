@@ -73,6 +73,12 @@ public class PlayerController : MonoBehaviour
             player.SwapDimension();
     }
 
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            player.Interact();
+    }
+
     public void SetMovementLocked(bool state)
     {
         movementLocked = state;
