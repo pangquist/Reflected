@@ -1,22 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MoveTowardsPlayerState : State
 {
-    public override void DoState(AiManager thisEnemy, Player player)
+    public override void DoState(AiManager thisEnemy, Transform target, NavMeshAgent agent)
     {
-        if (thisEnemy.distanceTo(player) <= 3)
+        //if (thisEnemy.distanceTo(player) >= 3)
+        //{
+        //    thisEnemy.SetAttackPlayerState();
+        //    return;
+        //}
+
+        if (thisEnemy.distanceTo(target) <= 3 && thisEnemy.CloseCombat())
         {
             thisEnemy.SetAttackPlayerState();
+            agent.isStopped = true;
+            return;
+        }
+        else if (thisEnemy.distanceTo(target)<=15 && !thisEnemy.CloseCombat())
+        {
+            thisEnemy.SetAttackPlayerState();
+            agent.isStopped = true;
             return;
         }
 
-        DoMoveToward();
+
+        DoMoveToward(target, agent);
     }
 
-    private void DoMoveToward()
+    private void DoMoveToward(Transform target, NavMeshAgent agent)
     {
-        //should we use A*? or some built in unity function? Or something more simple? 
+        Debug.Log("MoveTowardsPlayer");
+        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        agent.destination = target.gameObject.transform.position;
     }
 }

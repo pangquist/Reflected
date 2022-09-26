@@ -365,7 +365,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2131914258}
+  - component: {fileID: 2131914261}
   - component: {fileID: 2131914259}
+  - component: {fileID: 2131914260}
+  - component: {fileID: 2131914262}
   m_Layer: 0
   m_Name: Map Generator
   m_TagString: Untagged
@@ -400,20 +403,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1bfc091be9de409190778b307bddcd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 750615257749562003, guid: 12c3bb198b0954a1383726accf26f23f, type: 3}
+  logWarnigns: 0
+  mapGenerator: {fileID: 2131914261}
+  roomPrefab: {fileID: 3527660496102937234, guid: 62d6fab13445b435da4b703c6f53ddc2,
+    type: 3}
+  minRoomLength: 8
+  maxRoomLength: 18
+  minRoomArea: 73
+  roomPadding: 2
+  splitDirectionBias: 0.2
+  splitLocationBias: -0.2
+--- !u!114 &2131914260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31265c5a2d54841c58a71de8df0ab000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logWarnigns: 1
+  mapGenerator: {fileID: 2131914261}
+  chamberPrefab: {fileID: 5641552476762302183, guid: 4b53138cb48ed46cb9b6016113532ad8,
+    type: 3}
+  chamberSize: 2
+  chamberMargin: 2
+  addRandomChambers: 0
+  minChambers: 0.5
+  maxChambers: 0.8
+--- !u!114 &2131914261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de50f2f6ce164e709e0aa856b0c7f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   seed: 0
-  minMapWidth: 30
-  minMapHeight: 30
-  maxMapWidth: 50
-  maxMapHeight: 50
-  minRoomLength: 3
-  maxRoomLength: 8
-  minRoomArea: 12
-  roomPadding: 0
-  divisionBias: 0.2
-  addRandomPassageways: 0
-  minPassageways: 0.5
-  maxPassageways: 0.8
-  mapWidth: 0
-  mapHeight: 0
-  finalRects: []
+  mapPrefab: {fileID: 6645767010589061385, guid: b0f3362468123494eb359ebf7bd01687,
+    type: 3}
+  roomGenerator: {fileID: 2131914259}
+  chamberGenerator: {fileID: 2131914260}
+  wallGenerator: {fileID: 2131914262}
+  minMapSizeX: 120
+  maxMapSizeX: 140
+  minMapSizeZ: 80
+  maxMapSizeZ: 90
+  trials: 1
+  interval: 0
+  log: 
+--- !u!114 &2131914262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341d2123541614e04b80a457d1535104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logWarnigns: 0
+  mapGenerator: {fileID: 2131914261}
+  wallPrefab: {fileID: 8436335846310740216, guid: ebb1aec0dd2db4e868f323ad1c3ea8b3,
+    type: 3}
+  doorPrefab: {fileID: 0}
+  wallHeight: 4
+  wallThickness: 1
