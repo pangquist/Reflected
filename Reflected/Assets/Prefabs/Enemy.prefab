@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 9192418967733528636}
   - component: {fileID: 9192418967741204444}
   - component: {fileID: 6576467921308985043}
-  - component: {fileID: 1638642526938596585}
   m_Layer: 0
   m_Name: Blossom
   m_TagString: Untagged
@@ -136,24 +135,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8ec940f670973459ddf18f039565fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
   maxHealth: 10
+  movementSpeed: 0
+  damage: 0
+  attackSpeed: 0
+  healthBar: {fileID: 0}
   combatTextCanvas: {fileID: 0}
   aggroRange: 2
---- !u!114 &1638642526938596585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9192418967733826588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d97dff8a4437e94dbd947d6de5d2f65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GOplayer: {fileID: 4853948256094235928, guid: 208b911f792bd8d40991cc24ecabd06b,
-    type: 3}
 --- !u!1 &9192418967733826624
 GameObject:
   m_ObjectHideFlags: 0
