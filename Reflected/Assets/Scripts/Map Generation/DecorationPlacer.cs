@@ -24,28 +24,34 @@ public class DecorationPlacer : MonoBehaviour
 
     void SpawnDecorations()
     {
-        Vector3[] meshVertices = this.tileGeneration.meshFilter.mesh.vertices;
+        Vector3[] meshVertices = this.tileGeneration.MeshFilter().mesh.vertices;
+        Vector3[] visitedVertices = new Vector3[meshVertices.Length];
 
         float offsetX = -this.gameObject.transform.position.x;
         float offsetZ = -this.gameObject.transform.position.z;
-        TerrainType[] terrainTypes = this.tileGeneration.terrainTypes;
+        TerrainType[] terrainTypes = this.tileGeneration.TerrainTypes();
 
-        foreach (Vector3 vertex in meshVertices)
+        for (int i = 0; i < meshVertices.Length; i++)
         {
             foreach(TerrainType terrain in terrainTypes)
             {
-                foreach (DecorationList decorationList in decorations)
+                if (meshVertices[i].y  <= this.tileGeneration.HeightCurve().Evaluate(terrain.height) * this.tileGeneration.HeightMultiplier())
                 {
-                    if (decorationList.terrain == terrain.name)
+                    if(meshVertices[i] != visitedVertices[i])
                     {
-                        if (Random.Range(1, 100) == 1)
+                        foreach (DecorationList decorationList in decorations)
                         {
-                            if (vertex.y > terrain.height)
+                            if (decorationList.terrain == terrain.name)
                             {
-                                Instantiate(decorationList.gameObject[Random.Range(0, decorationList.gameObject.Length)].gameObject, new Vector3(vertex.x - offsetX, vertex.y, vertex.z - offsetZ), Quaternion.identity);
+                                if (Random.Range(1, 10) == 1)
+                                {
+                                    Instantiate(decorationList.gameObject[Random.Range(0, decorationList.gameObject.Length)].gameObject, new Vector3(meshVertices[i].x - offsetX, meshVertices[i].y, meshVertices[i].z - offsetZ), Quaternion.identity);
+                                }
                             }
                         }
+                        visitedVertices[i] = meshVertices[i];
                     }
+                    
                 }
             } 
         }

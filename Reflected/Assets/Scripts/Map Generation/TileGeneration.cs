@@ -16,19 +16,25 @@ public class TileGeneration : MonoBehaviour
     [SerializeField]
     private MeshRenderer tileRenderer;
     [SerializeField]
-    public MeshFilter meshFilter;
+    private MeshFilter meshFilter;
     [SerializeField]
     private MeshCollider meshCollider;
     [SerializeField]
-    public float mapScale;
+    private float mapScale;
     [SerializeField]
     private float heightMultiplier;
     [SerializeField]
-    public TerrainType[] terrainTypes;
+    private TerrainType[] terrainTypes;
     [SerializeField]
     private AnimationCurve heightCurve;
     [SerializeField]
     private Wave[] waves;
+
+    public TerrainType[] TerrainTypes(){ return terrainTypes; }
+    public float MapScale() { return mapScale; }
+    public float HeightMultiplier() { return heightMultiplier; }
+    public MeshFilter MeshFilter() { return meshFilter; }
+    public AnimationCurve HeightCurve() { return heightCurve; }
 
     void Start()
     {
