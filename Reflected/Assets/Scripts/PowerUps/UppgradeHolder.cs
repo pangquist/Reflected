@@ -25,7 +25,7 @@ public class UppgradeHolder : MonoBehaviour
             case UppgradeState.ready:
                 if (Input.GetKeyDown(key))
                 {
-                    uppgrade.Active();
+                    uppgrade.Active(gameObject);
                     state = UppgradeState.active;
                     activeTime = uppgrade.avtiveTime;
                 }
@@ -37,6 +37,7 @@ public class UppgradeHolder : MonoBehaviour
                 }
                 else
                 {
+                    uppgrade.BeginCooldown(gameObject);
                     state = UppgradeState.cooldown;
                     cooldownTime = uppgrade.cooldownTime;
                 }                
