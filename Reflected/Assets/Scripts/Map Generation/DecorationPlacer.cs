@@ -32,20 +32,20 @@ public class DecorationPlacer : MonoBehaviour
 
         foreach (Vector3 vertex in meshVertices)
         {
-            foreach(DecorationList decorationList in decorations)
+            foreach(TerrainType terrain in terrainTypes)
             {
-                for (int i = 0; i < terrainTypes.Length; i++)
+                foreach (DecorationList decorationList in decorations)
                 {
-                    if(decorationList.terrain == terrainTypes[i].name)
+                    if (decorationList.terrain == terrain.name)
                     {
-                        if (Random.Range(1, 20) == 1)
+                        if (Random.Range(1, 100) == 1)
                         {
-                            if (terrainTypes[i].height < vertex.y && i== terrainTypes.Length || terrainTypes[i].height < vertex.y && vertex.y < terrainTypes[i + 1].height)
+                            if (vertex.y > terrain.height)
                             {
                                 Instantiate(decorationList.gameObject[Random.Range(0, decorationList.gameObject.Length)].gameObject, new Vector3(vertex.x - offsetX, vertex.y, vertex.z - offsetZ), Quaternion.identity);
                             }
                         }
-                    } 
+                    }
                 }
             } 
         }
