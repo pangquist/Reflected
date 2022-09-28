@@ -31,7 +31,7 @@ public class TileGeneration : MonoBehaviour
     private Wave[] waves;
 
     public TerrainType[] TerrainTypes(){ return terrainTypes; }
-    public float MapScale() { return mapScale; }
+    public float MapScale { get; set; }
     public float HeightMultiplier() { return heightMultiplier; }
     public MeshFilter MeshFilter() { return meshFilter; }
     public AnimationCurve HeightCurve() { return heightCurve; }

@@ -43,9 +43,9 @@ public class DecorationPlacer : MonoBehaviour
                         {
                             if (decorationList.terrain == terrain.name)
                             {
-                                if (Random.Range(1, 10) == 1)
+                                if (Random.Range(1, 50) == 1)
                                 {
-                                    Instantiate(decorationList.gameObject[Random.Range(0, decorationList.gameObject.Length)].gameObject, new Vector3(meshVertices[i].x - offsetX, meshVertices[i].y, meshVertices[i].z - offsetZ), Quaternion.identity);
+                                    Instantiate(decorationList.gameObject[Random.Range(0, decorationList.gameObject.Length)].gameObject, new Vector3(meshVertices[i].x - offsetX, meshVertices[i].y, meshVertices[i].z - offsetZ), Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)));
                                 }
                             }
                         }
