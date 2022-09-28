@@ -53,7 +53,7 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < enemyAmount; i++)
         {
-            GetRandomEnemy();
+            GetBiasedEnemy();
             if (spawnTransforms.Count <= 0) GetSpawnlocations();
             spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
             Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0));
@@ -66,9 +66,9 @@ public class EnemySpawner : MonoBehaviour
         List<GameObject> spawns = new List<GameObject>();
         spawns = GameObject.FindGameObjectsWithTag("SpawnPoint").ToList();
 
-        foreach (GameObject point in spawns)
+        foreach (GameObject spawnPoint in spawns)
         {
-            spawnTransforms.Add(point.transform);
+            spawnTransforms.Add(spawnPoint.transform);
         }
     }
 
