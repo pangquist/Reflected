@@ -24,23 +24,24 @@ public class StatSystem : MonoBehaviour, ISavable
         {
             upgradeManager = GameObject.Find("UpgradeManager").GetComponent<UpgradeManager>();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
 
         }
-        ResetStats();
 
-        if (upgradeManager)
-            GetLightStats();
+        GetLightStats();
     }
 
     public void GetLightStats()
     {
+        if (!upgradeManager)
+            return;
+
         ResetStats();
 
         Dictionary<string, float> stats = upgradeManager.GetLightPieces();
 
-        foreach(KeyValuePair<string, float> pair in stats)
+        foreach (KeyValuePair<string, float> pair in stats)
         {
             if (pair.Key == "Damage")
             {
@@ -71,6 +72,9 @@ public class StatSystem : MonoBehaviour, ISavable
 
     public void GetDarkStats()
     {
+        if (!upgradeManager)
+            return;
+
         ResetStats();
 
         Dictionary<string, float> stats = upgradeManager.GetDarkPieces();

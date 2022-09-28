@@ -26,6 +26,8 @@ public class Player : Character, ISavable
     public delegate void InteractWithObject();
     public static event InteractWithObject OnObjectInteraction;
 
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -80,8 +82,6 @@ public class Player : Character, ISavable
         return jumpForce;
     }
 
-    
-
     public void UnlockWeapon()
     {
         currentWeapon.Unlock();
@@ -97,7 +97,6 @@ public class Player : Character, ISavable
         if (lightDimension)
         {
             stats.GetLightStats();
-
         }
         else
         {
@@ -111,12 +110,16 @@ public class Player : Character, ISavable
     {
         lightDimension = !lightDimension;
 
-        DimensionManager dimensionManager = GameObject.Find("Post Processing").GetComponent<DimensionManager>();
+        DimensionManager dimensionManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
 
         if (lightDimension)
+        {
             dimensionManager.SetTrueDimension();
+        }
         else
+        {
             dimensionManager.SetMirrorDimension();
+        }
 
         ChangeStats();
     }
