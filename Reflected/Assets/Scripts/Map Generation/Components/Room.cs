@@ -15,13 +15,21 @@ public class Room : MonoBehaviour
     [ReadOnly][SerializeField] private List<Wall> walls;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private bool cleared;
-    
+
+    private static Map map;
+
     // Properties
 
     public RectInt Rect => rect;
     public Floor Floor => floor;
     public List<Wall> Walls => walls;
     public List<Chamber> Chambers => chambers;
+    public bool Cleared => cleared;
+
+    public static void StaticInitialize(Map map)
+    {
+        Room.map = map;
+    }
 
     public Room Initialize(RectInt rect, int index)
     {
@@ -33,6 +41,15 @@ public class Room : MonoBehaviour
     public void CreateFloor(int wallThickness)
     {
         floor = GameObject.Instantiate(floorPrefab, transform).GetComponent<Floor>().Initialize(rect.Inflated(wallThickness, wallThickness));
+    }
+
+    private void Update()
+    {
+        if (map.ActiveRoom != this)
+            return;
+
+        if (!cleared)
+            SetCleared(true);
     }
 
     /// <summary>
@@ -47,6 +64,7 @@ public class Room : MonoBehaviour
                 chamber.gameObject.SetActive(false);
         }
 
+        map.ActiveRoom = null;
         gameObject.SetActive(false);
     }
 
@@ -54,11 +72,24 @@ public class Room : MonoBehaviour
     /// Activates all connected chambers
     /// </summary>
     /// <param name="caller"></param>
-    private void OnActivate()
+    public void Activate()
     {
+        map.ActiveRoom = this;
+
         foreach (Chamber chamber in chambers)
             chamber.gameObject.SetActive(true);
+    }
 
-        gameObject.SetActive(true);
+    public void SetCleared(bool cleared)
+    {
+        this.cleared = cleared;
+
+        if (cleared)
+            foreach (Chamber chamber in chambers)
+                chamber.Open(this);
+
+        else
+            foreach (Chamber chamber in chambers)
+                chamber.Close(this);
     }
 }

@@ -62,11 +62,7 @@ public class RoomGenerator : MonoBehaviour
 
     public void Generate(Map map)
     {
-        // Clear data
-
-        rects.Clear();
-
-        // Generate rooms
+        Room.StaticInitialize(map);
 
         RoomNode firstRoom = new RoomNode(0, 0, map.SizeX, map.SizeZ);
         RecursiveSplit(ref firstRoom);
@@ -74,6 +70,7 @@ public class RoomGenerator : MonoBehaviour
         InstantiateRooms(map);
 
         mapGenerator.Log("Rooms: " + rects.Count);
+        rects.Clear();
     }
 
     /// <summary>

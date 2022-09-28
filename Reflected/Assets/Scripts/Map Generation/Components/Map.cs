@@ -10,6 +10,7 @@ public class Map : MonoBehaviour
     [ReadOnly][SerializeField] private int sizeZ;
     [ReadOnly][SerializeField] private List<Room> rooms;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
+    [ReadOnly][SerializeField] private Room activeRoom;
 
     // Properties
 
@@ -17,6 +18,8 @@ public class Map : MonoBehaviour
     public int SizeZ => sizeZ;
     public List<Room> Rooms => rooms;
     public List<Chamber> Chambers => chambers;
+
+    public Room ActiveRoom { get { return activeRoom; } set { activeRoom = value; } }
 
     public void Initialize(int sizeX, int sizeZ)
     {
@@ -31,4 +34,11 @@ public class Map : MonoBehaviour
             room.Deactivate(null);
     }
 
+    public void SetStartRoom(int roomIndex)
+    {
+        Room startRoom = rooms[roomIndex];
+        startRoom.gameObject.SetActive(true);
+        startRoom.Activate();
+        startRoom.SetCleared(true);
+    }
 }

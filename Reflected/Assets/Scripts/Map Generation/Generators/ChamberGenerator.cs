@@ -66,13 +66,7 @@ public class ChamberGenerator : MonoBehaviour
 
     public void Generate(Map map)
     {
-        // Clear data
-
-        nodes.Clear();
-        paths.Clear();
-        removedPaths.Clear();
-
-        // Generate chambers
+        Chamber.StaticInitialize(map);
 
         FindPaths(map);
         int maxPaths = paths.Count;
@@ -84,6 +78,10 @@ public class ChamberGenerator : MonoBehaviour
         mapGenerator.Log("Final chambers: " + paths.Count + "/" + maxPaths + " (" + (100f * paths.Count / maxPaths).ToString("0") + "%)");
 
         InstantiateChambers(map);
+
+        nodes.Clear();
+        paths.Clear();
+        removedPaths.Clear();
     }
 
     private void FindPaths(Map map)

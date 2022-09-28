@@ -32,10 +32,15 @@ public class WallGenerator : MonoBehaviour
     [Range(0f, 5f)]
     [SerializeField] private float doorTransitionDuration;
 
-    public void Generate(Map map)
+    private void Awake()
     {
         Wall.StaticInitialize(wallThickness, wallHeight);
-        Door.StaticInitialize(doorThickness, doorTransitionDuration);
+        Door.StaticInitialize(doorThickness);
+    }
+
+    public void Generate(Map map)
+    {
+        Awake();
 
         Array cardinalDirections = Enum.GetValues(typeof(CardinalDirection));
         RectInt roomRect, wallPortion, overlap, portion1, portion2;
@@ -87,7 +92,7 @@ public class WallGenerator : MonoBehaviour
 
                             // Add door to Chamber
                             CardinalDirection doorDirection = (CardinalDirection)cardinalDirections.GetValue(((int)direction + 2) % 4);
-                            chamber.Doors.Add(InstantiateDoor(chamber, room, doorDirection, overlap));
+                            chamber.AddDoor(InstantiateDoor(chamber, room, doorDirection, overlap));
                         }
 
                         // Continue looking for chambers overlapping this portion
@@ -99,9 +104,7 @@ public class WallGenerator : MonoBehaviour
                 // Add collected portions to the Wall
 
                 foreach (RectInt portion in wallPortions)
-                {
                     room.Walls[room.Walls.Count - 1].AddPortion(portion);
-                }
 
                 // Move on to the next Wall
             }
