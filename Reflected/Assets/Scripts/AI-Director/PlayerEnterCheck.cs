@@ -5,17 +5,20 @@ using UnityEngine;
 public class PlayerEnterCheck : MonoBehaviour
 {
     [SerializeField] AiDirector aiDirector;
+    private bool collisionDecected;
     void Start()
     {
         if (!aiDirector) aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
+        collisionDecected = false;
     }
 
     void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (!collisionDecected && collision.gameObject.tag == "Player")
         {
             //Debug.Log("Enterd");
             aiDirector.EnterRoom();
+            collisionDecected = true;
         }
     }
 }
