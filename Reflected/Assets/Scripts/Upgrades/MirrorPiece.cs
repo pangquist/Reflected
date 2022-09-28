@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class MirrorPiece : MonoBehaviour
 {
+
+    [Header("Piece Description")]
+    [TextArea(10, 20)]
+    [SerializeField] string PieceDescription;
+
+    [Header("References")]
     [SerializeField] Sprite deactivatedSprite;
     [SerializeField] Sprite canBeActivatedSprite;
     [SerializeField] Sprite activatedSprite;

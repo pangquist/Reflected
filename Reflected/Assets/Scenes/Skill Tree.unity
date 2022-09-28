@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 252342371}
   - component: {fileID: 252342374}
   m_Layer: 5
-  m_Name: Damage 100
+  m_Name: Damage 25%
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: Increases the Players base damage by 25%.
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -892,6 +893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -1050,6 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -1209,6 +1212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -1371,6 +1375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -1724,6 +1729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: Increases the base Maximum Health of the player by 15%.
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -1824,6 +1830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -1983,6 +1990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -2215,6 +2223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -2510,6 +2519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -2747,6 +2757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: Increases the Damage Reduction of the player by 10%.
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -2904,6 +2915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -3244,6 +3256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -3545,6 +3558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: Increases the base Movement Speed of the Player by 15%.
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -3645,6 +3659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceDescription: 
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
