@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnWave(float spawnTime, int enemyAmount)
     {
-        yield return new WaitForSeconds(spawnTime * 2);
+        yield return new WaitForSeconds(spawnTime);
 
         for (int i = 0; i < enemyAmount; i++)
         {
