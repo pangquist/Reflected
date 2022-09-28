@@ -143,12 +143,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6838a92f7e77c5408f63a9d85cfe7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 8678534819681267452}
-  damage: 2
+  comboClips: []
+  maxTimeBetweenCombo: 0
+  specialAttackClip: {fileID: 0}
+  specialAttackCooldown: 0
+  timeSinceLastSpecialAttack: 0
+  hitEnemies: []
   firePower: 500
   projectile: {fileID: 6041024079821305079, guid: c232a2adf6328be43bd44e6b95afdbb2,
     type: 3}
   firePoint: {fileID: 3715314175662455756}
+  body: {fileID: 0}
+  cam: {fileID: 0}
+  hitableLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &8678534819681267452
 Animator:
   serializedVersion: 4
@@ -157,9 +166,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8357193135869404768}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 805b1d07b2ff44846867781d4661e0ce, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
