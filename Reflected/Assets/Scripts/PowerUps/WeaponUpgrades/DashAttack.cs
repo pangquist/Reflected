@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Uppgrade/dash")]
 public class DashAttack : Uppgrade
 {
     public float dashVelocity;
