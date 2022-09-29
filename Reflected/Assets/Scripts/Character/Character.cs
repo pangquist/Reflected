@@ -11,10 +11,8 @@ public class Character : MonoBehaviour, IEffectable
     [SerializeField] protected float attackSpeed;
     protected float currentHealth;
     protected List<StatusEffect> statusEffects;
-    protected float currentEffectTime = 0f;
-    protected float nextTickTime = 0f;
-    protected Animator anim;
     protected List<GameObject> effectParticles;
+    protected Animator anim;    
 
     protected Weapon currentWeapon;
 
@@ -22,15 +20,12 @@ public class Character : MonoBehaviour, IEffectable
     {
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
+        statusEffects = new List<StatusEffect>();
+        effectParticles = new List<GameObject>();
     }
 
     protected virtual void Update()
     {
-        //foreach (StatusEffect status in statusEffects)
-        //{
-            
-        //    HandleEffect(status);
-        //}
         if (statusEffects.Count > 0) HandleEffect();
     }
 
@@ -98,13 +93,9 @@ public class Character : MonoBehaviour, IEffectable
         //effectParticles.Add(Instantiate(data.EffectParticles, transform));
     }
 
-    public void RemoveEffect()
+    public void RemoveEffect(StatusEffect status)
     {
-        //statusEffects.Remove()
-        //statusEffects = null;
-        //Need to be reset otherwise the next DOT won't apply
-        currentEffectTime = 0;
-        nextTickTime = 0;
+        statusEffects.Remove(status);
         //if (effectParticles != null) Destroy(effectParticles);
     }
 
@@ -131,9 +122,10 @@ public class Character : MonoBehaviour, IEffectable
         for (int i = 0; i < statusEffects.Count; i++)
         {
             statusEffects[i].SetCurrentEffectTime(Time.deltaTime);
+            //Debug.Log(statusEffects[i].effect.name);
             if (statusEffects[i].currentEffectTime >= statusEffects[i].effect.LifeTime)
             {
-                RemoveEffect();
+                RemoveEffect(statusEffects[i]);
                 continue;
             }
 
@@ -144,31 +136,30 @@ public class Character : MonoBehaviour, IEffectable
             }
         }
         
-    }
+    } 
+}
 
-    [System.Serializable]
-    public struct StatusEffect
+[System.Serializable]
+public class StatusEffect
+{
+    public StatusEffectData effect;
+    public float currentEffectTime;
+    public float nextTickTime;
+
+    public StatusEffect(StatusEffectData effect)
     {
-        public StatusEffectData effect;
-        public float currentEffectTime;
-        public float nextTickTime;
-
-        public StatusEffect(StatusEffectData effect)
-        {
-            this.effect = effect;
-            currentEffectTime = 0f;
-            nextTickTime = 0f;
-        }
-
-        public void SetCurrentEffectTime(float time)
-        {
-            currentEffectTime += time;
-        }
-
-        public void SetNextTickTime()
-        {
-            nextTickTime += effect.TickSpeed;
-        }
+        this.effect = effect;
+        currentEffectTime = 0f;
+        nextTickTime = 0f;
     }
 
+    public void SetCurrentEffectTime(float time)
+    {
+        currentEffectTime += time;
+    }
+
+    public void SetNextTickTime()
+    {
+        nextTickTime += effect.TickSpeed;
+    }
 }

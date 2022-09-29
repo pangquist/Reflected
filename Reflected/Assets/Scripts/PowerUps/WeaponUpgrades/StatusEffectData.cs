@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Uppgrade/StatusEffect")]
+[CreateAssetMenu(menuName = "Uppgrade/StatusEffectData")]
 public class StatusEffectData : Uppgrade
 {
     public float DOTAmount;

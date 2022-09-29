@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IEffectable
 {
     public void ApplyEffect(StatusEffectData data);
-    public void RemoveEffect();
+    public void RemoveEffect(StatusEffect status);
 
     public void HandleEffect();
 
