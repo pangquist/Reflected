@@ -26,6 +26,7 @@ public class Floor : MonoBehaviour
         block.transform.position = new Vector3(rect.x, -1, rect.y) * MapGenerator.ChunkSize;
         block.transform.localScale = new Vector3(rect.width, 1, rect.height) * MapGenerator.ChunkSize;
         block.GetComponentInChildren<MeshRenderer>().material.color = new Color(0f, 1f, 0f);
+        block.GetComponentInChildren<ReCalcCubeTexture>().Calculate();
 
         return this;
     }

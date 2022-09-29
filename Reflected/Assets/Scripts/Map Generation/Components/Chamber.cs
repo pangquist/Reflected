@@ -87,6 +87,11 @@ public class Chamber : MonoBehaviour
         floor = GameObject.Instantiate(floorPrefab, transform).GetComponent<Floor>().Initialize(floorRect);
     }
 
+    public void ScaleUpData()
+    {
+        rect = new RectInt(rect.position * MapGenerator.ChunkSize, rect.size * MapGenerator.ChunkSize);
+    }
+
     private void Update()
     {
         // Ensure there is no active transition, no cooldown, there is an active room, and the active room is cleared
@@ -124,13 +129,15 @@ public class Chamber : MonoBehaviour
         while (openDoor.IsOpen)
             yield return null;
 
+        // Move player if necessary
         if (triggerBounds.Contains(player.transform.position) == false)
             player.transform.position = triggerBounds.center;
 
         // Deactivate previous room
-        openDoor.Room.Deactivate(this);
+        if (map.SingleActiveRoom)
+            openDoor.Room.Deactivate(this);
 
-        // Wait another 0.5 seconds
+        // Pause
         for (float timer = 0; timer < pause; timer += Time.deltaTime)
             yield return null;
 

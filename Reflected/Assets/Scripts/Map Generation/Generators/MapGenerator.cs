@@ -96,6 +96,12 @@ public class MapGenerator : MonoBehaviour
         chamberGenerator.Generate(map);
         wallGenerator.Generate(map);
 
+        foreach (Room room in map.Rooms)
+            room.ScaleUpData();
+
+        foreach (Chamber chamber in map.Chambers)
+            chamber.ScaleUpData();
+
         // Log
 
         Log("");

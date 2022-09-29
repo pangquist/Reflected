@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
+    [Header("Values")]
+
+    [SerializeField] private bool singleActiveRoom;
+
     [Header("Read Only")]
 
     [ReadOnly][SerializeField] private int sizeX;
@@ -18,6 +22,7 @@ public class Map : MonoBehaviour
     public int SizeZ => sizeZ;
     public List<Room> Rooms => rooms;
     public List<Chamber> Chambers => chambers;
+    public bool SingleActiveRoom => singleActiveRoom;
 
     public Room ActiveRoom { get { return activeRoom; } set { activeRoom = value; } }
 
@@ -40,5 +45,7 @@ public class Map : MonoBehaviour
         startRoom.gameObject.SetActive(true);
         startRoom.Activate();
         startRoom.SetCleared(true);
+
+        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(startRoom.Rect.center.x, 1, startRoom.Rect.center.y);
     }
 }

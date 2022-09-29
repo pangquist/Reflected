@@ -42,6 +42,7 @@ public class Wall : MonoBehaviour
         block.transform.position = new Vector3(rect.x, 0, rect.y) * MapGenerator.ChunkSize;
         block.transform.localScale = new Vector3(rect.width, height, rect.height) * MapGenerator.ChunkSize;
         block.GetComponentInChildren<MeshRenderer>().material.color = new Color(1f, 1f, 1f);
+        block.GetComponentInChildren<ReCalcCubeTexture>().Calculate();
 
         return this;
     }

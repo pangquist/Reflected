@@ -1320,7 +1320,7 @@ MonoBehaviour:
   minRoomLength: 6
   maxRoomLength: 18
   minRoomArea: 48
-  roomPadding: 2
+  roomPadding: 1
   splitDirectionBias: 0.2
   splitLocationBias: -0.1
   splitChance: 0.1
@@ -1340,7 +1340,7 @@ MonoBehaviour:
   mapGenerator: {fileID: 2131914261}
   chamberPrefab: {fileID: 5641552476762302183, guid: 4b53138cb48ed46cb9b6016113532ad8,
     type: 3}
-  chamberSize: 2
+  chamberSize: 1
   chamberMargin: 2
   addRandomChambers: 1
   minChambers: 0.5
@@ -1363,12 +1363,12 @@ MonoBehaviour:
   roomGenerator: {fileID: 2131914259}
   chamberGenerator: {fileID: 2131914260}
   wallGenerator: {fileID: 2131914262}
-  deactivateRooms: 1
+  deactivateRooms: 0
   minMapSizeX: 90
   maxMapSizeX: 100
   minMapSizeZ: 70
   maxMapSizeZ: 80
-  chunkSize: 6
+  chunkSize: 8
   trials: 1
   interval: 0
   log: 
@@ -1390,7 +1390,7 @@ MonoBehaviour:
     type: 3}
   doorPrefab: {fileID: 5687791239041163175, guid: 4f9eca1e07a1b4683b683c70b5709bbe,
     type: 3}
-  wallHeight: 4
+  wallHeight: 3
   wallThickness: 1
-  doorThickness: 0.5
+  doorThickness: 0.25
   doorTransitionDuration: 0.5

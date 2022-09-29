@@ -43,6 +43,11 @@ public class Room : MonoBehaviour
         floor = GameObject.Instantiate(floorPrefab, transform).GetComponent<Floor>().Initialize(rect.Inflated(wallThickness, wallThickness));
     }
 
+    public void ScaleUpData()
+    {
+        rect = new RectInt(rect.position * MapGenerator.ChunkSize, rect.size * MapGenerator.ChunkSize);
+    }
+
     private void Update()
     {
         if (map.ActiveRoom != this)
