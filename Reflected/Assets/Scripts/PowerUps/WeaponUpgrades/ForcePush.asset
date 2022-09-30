@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72c62792371fb674785cbec583d2da0a, type: 3}
-  m_Name: MinorHealthBuff
+  m_Script: {fileID: 11500000, guid: 9e4dbe7dc325b414b9b78c3d9a547033, type: 3}
+  m_Name: ForcePush
   m_EditorClassIdentifier: 
-  description: Increases your total max health by 5
-  value: 0
-  amount: 5
+  name: ForcePush
+  cooldownTime: 2
+  avtiveTime: 1
+  pushAmount: 500
+  pushRadius: 10

@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c72016e111392284fad843dd5312d73f, type: 3}
-  m_Name: MinorSpeedBuff
+  m_Script: {fileID: 11500000, guid: 4a65c8d5ff49a224f985ee36db9194a4, type: 3}
+  m_Name: Freeze
   m_EditorClassIdentifier: 
-  description: 
-  value: 0
-  amount: 8
+  name: Frozen
+  cooldownTime: 0
+  avtiveTime: 0
+  DOTAmount: 0
+  TickSpeed: 1
+  MovementPenalty: 0.2
+  LifeTime: 4

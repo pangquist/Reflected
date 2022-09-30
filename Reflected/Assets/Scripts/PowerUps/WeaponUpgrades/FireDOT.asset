@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d26f164fbbe9b9b4d9809b54acfb2c68, type: 3}
-  m_Name: CoinData
+  m_Script: {fileID: 11500000, guid: 4a65c8d5ff49a224f985ee36db9194a4, type: 3}
+  m_Name: FireDOT
   m_EditorClassIdentifier: 
-  displayName: Coin
-  amount: 1
-  description: An item to purchase items in the shop or to open chests
-  value: 1
+  name: Burning
+  cooldownTime: 0
+  avtiveTime: 1
+  DOTAmount: 2
+  TickSpeed: 1
+  MovementPenalty: 1
+  LifeTime: 3
