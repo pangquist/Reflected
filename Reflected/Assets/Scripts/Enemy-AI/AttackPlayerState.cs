@@ -5,8 +5,11 @@ using UnityEngine.AI;
 
 
 //Plan is to have different scrips for each type of attack. But I might just put everything in here for the pre-production. Then fix in production.
+//Also, make each attack script already attached to the prefab to avoid having to use the resouce folder to spawn at runtime. Then you can just use prefabs for projectiles etc.
 public class AttackPlayerState : State
 {
+    private float attackTimer = 0f;
+    public float attackRate = 1f;
     public override void DoState(AiManager thisEnemy, Transform target, NavMeshAgent agent)
     {
         Debug.Log(thisEnemy.CloseCombat());
@@ -32,19 +35,31 @@ public class AttackPlayerState : State
             return;
         }
 
+        attackTimer += Time.deltaTime;
+
         FaceTarget(target.position);
         agent.destination = thisEnemy.transform.position;
-        DoAttack(thisEnemy, target);
+        if(attackTimer >= attackRate)
+        {
+            DoAttack(thisEnemy, target);
+            attackTimer = 0f;
+        }
     }
 
     private void DoAttack(AiManager thisEnemy, Transform target)
     {
-        if (thisEnemy.AOE())
+        if (!thisEnemy.CloseCombat() && !thisEnemy.AOE())
+        {
+            //GameObject projectileObject = (GameObject)Resources.Load("ProjectileTestObject");
+            //FireProjectile(target, projectileObject);
+        }
+        else if (thisEnemy.AOE())
         {
             //aoeObject = GameObject.Find("AOETestObject");
             GameObject aoeObject = (GameObject)Resources.Load("AOETestObject");
             FireAreaOfEffect(target, aoeObject);
         }
+        
         Debug.Log("Enemy attacked you!");
     }
 
@@ -61,14 +76,15 @@ public class AttackPlayerState : State
 
     }
 
-    private void FireProjectile()
+    private void FireProjectile(Transform target, GameObject projectileObject)
     {
-
+        Instantiate(projectileObject, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), gameObject.transform.rotation);
+        //Send info for handling movement to projectile.
     }
 
     private void FireAreaOfEffect(Transform target, GameObject aoeObject)
     {
-        Debug.Log(target.position);
+        //Debug.Log(target.position);
         Instantiate(aoeObject, new Vector3(target.transform.position.x, target.transform.position.y - 0.499f, target.transform.position.z), target.rotation);
 
         //Instantiate(aoeObject, new Vector3(0, 0.01f, 0), target.rotation);
