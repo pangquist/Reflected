@@ -11,5 +11,6 @@ public class ItemData : ScriptableObject
     [SerializeField] public int amount;
     [TextArea(15, 20)]
     [SerializeField] public string description;
+    [SerializeField] public int value;
     //public Sprite icon; //Should be added later
 }
