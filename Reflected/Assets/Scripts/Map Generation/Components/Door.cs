@@ -8,6 +8,10 @@ public class Door : MonoBehaviour
 
     [SerializeField] private GameObject blockPrefab;
 
+    [Header("Values")]
+
+    [SerializeField] private float transitionDuration;
+
     [Header("Read Only")]
 
     [ReadOnly][SerializeField] private Room room;
@@ -16,21 +20,19 @@ public class Door : MonoBehaviour
     [ReadOnly][SerializeField] private GameObject block;
 
     private static float thickness;
-    private static float transitionDuration;
 
     // Properties
 
     public static float Thickness => thickness;
-    public static float TransitionDuration => transitionDuration;
 
+    public float TransitionDuration => transitionDuration;
     public bool IsOpen => isOpen;
     public Room Room => room;
     public Vector3 MeasuringPosition => measuringPosition;
 
-    public static void StaticInitialize(float thickness, float transitionDuration)
+    public static void StaticInitialize(float thickness)
     {
         Door.thickness = thickness;
-        Door.transitionDuration = transitionDuration;
     }
 
     public Door Initialize(CardinalDirection direction, Rect rect, Room room)
@@ -39,9 +41,10 @@ public class Door : MonoBehaviour
         name = "Door " + direction.ToString();
 
         block = GameObject.Instantiate(blockPrefab, transform);
-        block.transform.position = new Vector3(rect.x, 0, rect.y);
-        block.transform.localScale = new Vector3(rect.width, Wall.Height, rect.height);
+        block.transform.position = new Vector3(rect.x, 0, rect.y) * MapGenerator.ChunkSize;
+        block.transform.localScale = new Vector3(rect.width, Wall.Height, rect.height) * MapGenerator.ChunkSize;
         block.GetComponentInChildren<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
+        block.GetComponentInChildren<ReCalcCubeTexture>().Calculate();
 
         measuringPosition = block.transform.GetChild(0).position;
 
@@ -53,13 +56,14 @@ public class Door : MonoBehaviour
         if (isOpen)
             yield return 0;
 
-        while (block.transform.position.y > -Wall.Height)
+        while (block.transform.position.y > -Wall.Height * MapGenerator.ChunkSize)
         {
             yield return null;
-            block.transform.position -= new Vector3(0, Wall.Height / transitionDuration * Time.deltaTime, 0);  
+            block.transform.position -= new Vector3(0, Wall.Height * MapGenerator.ChunkSize / transitionDuration * Time.deltaTime, 0);  
         }
 
-        block.transform.position = new Vector3(block.transform.position.x, -Wall.Height, block.transform.position.z);
+        block.transform.position = new Vector3(block.transform.position.x, -Wall.Height * MapGenerator.ChunkSize, block.transform.position.z);
+        block.SetActive(false);
         isOpen = true;
         yield return 0;
     }
@@ -69,10 +73,12 @@ public class Door : MonoBehaviour
         if (!isOpen)
             yield return 0;
 
+        block.SetActive(true);
+
         while (block.transform.position.y < 0)
         {
             yield return null;
-            block.transform.position += new Vector3(0, Wall.Height / transitionDuration * Time.deltaTime, 0);
+            block.transform.position += new Vector3(0, Wall.Height * MapGenerator.ChunkSize / transitionDuration * Time.deltaTime, 0);
         }
 
         block.transform.position = new Vector3(block.transform.position.x, 0, block.transform.position.z);
