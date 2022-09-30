@@ -55,8 +55,7 @@ public  class Enemy : Character
             healthBar.gameObject.SetActive(true);
         else if (currentHealth <= 0)
         {
-            AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
-            aiDirector.killEnemyInRoom();
+            Die();
             return;
         }
 
@@ -69,5 +68,12 @@ public  class Enemy : Character
 
         base.TakeDamage(damage);
         healthBar.value = GetHealthPercentage();
+    }
+
+    protected override void Die()
+    {
+        AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
+        aiDirector.killEnemyInRoom();
+        base.Die();
     }
 }

@@ -11,7 +11,6 @@ public class EnemySpawner : MonoBehaviour
     GameObject enemyToSpawn;
     List<GameObject> enemyList = new List<GameObject>();
 
-    //List<SpawnLocation> spawnLocations = new List<SpawnLocation>();
     List<Transform> spawnTransforms = new List<Transform>();
     Transform spawnLocation;
 
