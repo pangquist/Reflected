@@ -70,12 +70,12 @@ public class AbilityCooldowns : MonoBehaviour
 
     private void Ability2()
     {
-        if (thirdPersonMovement.IsOnCooldown())
+        if (thirdPersonMovement.GetDash().IsOnCooldown())
         {
-            ability2text.text = Mathf.RoundToInt(thirdPersonMovement.GetCurrentCooldown()).ToString();
-            ability2Image.fillAmount -= 1 / thirdPersonMovement.GetDashCooldown() * Time.deltaTime;
+            ability2text.text = Mathf.RoundToInt(thirdPersonMovement.GetDash().GetCooldown()).ToString();
+            ability2Image.fillAmount -= 1 / thirdPersonMovement.GetDash().GetCooldown() * Time.deltaTime;
         }
-        else if (!thirdPersonMovement.IsOnCooldown())
+        else if (!thirdPersonMovement.GetDash().IsOnCooldown())
         {
             ability2text.gameObject.SetActive(false);
             ability2Image.fillAmount = 0;

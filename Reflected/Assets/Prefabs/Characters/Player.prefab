@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 1776205249}
   - component: {fileID: 3300737997665956876}
   - component: {fileID: 314780156446943036}
+  - component: {fileID: -5578710902767352825}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -177,9 +178,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   isGrounded: 0
-  dashDuration: 0.2
-  dashSpeed: 0.5
-  dashCooldown: 3
+  dashAbility: {fileID: -5578710902767352825}
 --- !u!114 &1831867126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +410,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 4d785bf7-9520-4a9c-8376-ff3fe878717f
+--- !u!114 &-5578710902767352825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853948256094235928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39961dc55dc306a4e820b9e6ce5f8bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityIcon: {fileID: 0}
+  cooldown: 3
+  abilityName: Dash
+  dashDuration: 0.25
+  dashSpeed: 0.5
 --- !u!1001 &785148376
 PrefabInstance:
   m_ObjectHideFlags: 0
