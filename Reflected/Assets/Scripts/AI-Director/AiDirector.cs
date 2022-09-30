@@ -9,26 +9,26 @@ public class AiDirector : MonoBehaviour
     const string easy = "easy";
     const string medium = "medium";
     const string hard = "hard";
-    float spawntime;
-    int amountOfEnemies;
+    [SerializeField] float spawntime;
+    [SerializeField] int amountOfEnemies;
 
     //Room-stats
     bool activeRoom;
     bool inbetweenRooms;
-    int enemiesInRoom;
+    [SerializeField] int enemiesInRoom;
     [SerializeField] float timeToClearRoom;
     List<float> clearTimesList = new List<float>();
 
     //Map-stats
-    int numberOfRoomsCleared;
-    int numberOfRoomsLeftOnMap;
-    int NumberOfRoomsSinceShop;
-    int numberOfEnemiesKilled;
+    [SerializeField] int numberOfRoomsCleared;
+    [SerializeField] int numberOfRoomsLeftOnMap;
+    [SerializeField] int NumberOfRoomsSinceShop;
+    [SerializeField] int numberOfEnemiesKilled;
 
     //Player-stats
     Player player;
     [SerializeField] float playerCurrentHelathPercentage;
-    int playerCurrency;
+    [SerializeField] int temporaryCurrency;
 
 
     EnemySpawner enemySpawner;
@@ -66,8 +66,6 @@ public class AiDirector : MonoBehaviour
 
     private void checkDifficulty()
     {
-
-
         if (difficultyLevel == easy)
         {
             spawntime = 2;
@@ -111,7 +109,6 @@ public class AiDirector : MonoBehaviour
 
     public void EnterRoom()
     {
-        activeRoom = true;
         checkDifficulty();
         enemiesInRoom = amountOfEnemies * 2;
         enemySpawner.SpawnEnemy(spawntime, amountOfEnemies);
