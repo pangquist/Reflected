@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a65c8d5ff49a224f985ee36db9194a4, type: 3}
-  m_Name: Freeze
+  m_Script: {fileID: 11500000, guid: 9e4dbe7dc325b414b9b78c3d9a547033, type: 3}
+  m_Name: ForcePush
   m_EditorClassIdentifier: 
-  name: Frozen
-  cooldownTime: 0
-  avtiveTime: 0
-  DOTAmount: 0
-  TickSpeed: 1
-  MovementPenalty: 0.2
-  LifeTime: 4
+  name: ForcePush
+  cooldownTime: 2
+  avtiveTime: 1
+  pushAmount: 500
+  pushRadius: 10

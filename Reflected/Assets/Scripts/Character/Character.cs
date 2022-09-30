@@ -87,6 +87,20 @@ public class Character : MonoBehaviour, IEffectable
         return currentWeapon;
     }
 
+    public float MovementPenalty()
+    {
+        float movementPenalty = 1;
+        if(statusEffects.Count > 0)
+        {
+            foreach (StatusEffect status in statusEffects)
+            {
+                movementPenalty *= status.effect.MovementPenalty;
+            }
+            
+        }
+        return movementPenalty;
+    }
+
     public void ApplyEffect(StatusEffectData data)
     {
         statusEffects.Add(new StatusEffect(data));
