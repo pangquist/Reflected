@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    [Header("References")]
-
-    [SerializeField] private GameObject floorPrefab;
-
     [Header("Read Only")]
 
     [ReadOnly][SerializeField] private RectInt rect;
-    [ReadOnly][SerializeField] private Floor floor;
     [ReadOnly][SerializeField] private List<Wall> walls;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private bool cleared;
@@ -21,7 +16,6 @@ public class Room : MonoBehaviour
     // Properties
 
     public RectInt Rect => rect;
-    public Floor Floor => floor;
     public List<Wall> Walls => walls;
     public List<Chamber> Chambers => chambers;
     public bool Cleared => cleared;
@@ -36,11 +30,6 @@ public class Room : MonoBehaviour
         this.rect = rect;
         name = "Room " + index;
         return this;
-    }
-
-    public void CreateFloor(int wallThickness)
-    {
-        floor = GameObject.Instantiate(floorPrefab, transform).GetComponent<Floor>().Initialize(rect.Inflated(wallThickness, wallThickness));
     }
 
     public void ScaleUpData()

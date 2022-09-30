@@ -30,11 +30,12 @@ public class TileGeneration : MonoBehaviour
     [SerializeField]
     private Wave[] waves;
 
-    void Start()
+    private void Start()
     {
         GenerateTile();
     }
-    void GenerateTile()
+
+    private void GenerateTile()
     {
         // calculate tile depth and width based on the mesh vertices
         Vector3[] meshVertices = this.meshFilter.mesh.vertices;
@@ -50,6 +51,7 @@ public class TileGeneration : MonoBehaviour
         this.tileRenderer.material.mainTexture = tileTexture;
         UpdateMeshVertices(heightMap);
     }
+
     private Texture2D BuildTexture(float[,] heightMap)
     {
         int tileDepth = heightMap.GetLength(0);
@@ -76,6 +78,7 @@ public class TileGeneration : MonoBehaviour
 
         return tileTexture;
     }
+
     private void UpdateMeshVertices(float[,] heightMap)
     {
         int tileDepth = heightMap.GetLength(0);

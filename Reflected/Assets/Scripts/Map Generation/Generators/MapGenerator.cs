@@ -14,6 +14,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private RoomGenerator roomGenerator;
     [SerializeField] private ChamberGenerator chamberGenerator;
     [SerializeField] private WallGenerator wallGenerator;
+    [SerializeField] private WaterGenerator waterGenerator;
+    [SerializeField] private TerrainGenerator terrainGenerator;
 
     [Header("Map")]
 
@@ -54,6 +56,8 @@ public class MapGenerator : MonoBehaviour
     public RoomGenerator RoomGenerator => roomGenerator;
     public ChamberGenerator ChamberGenerator => chamberGenerator;
     public WallGenerator WallGenerator => wallGenerator;
+    public WaterGenerator WaterGenerator => waterGenerator;
+    public TerrainGenerator TerrainGenerator => terrainGenerator;
 
     private void Start()
     {
@@ -95,6 +99,10 @@ public class MapGenerator : MonoBehaviour
         roomGenerator.Generate(map);
         chamberGenerator.Generate(map);
         wallGenerator.Generate(map);
+        waterGenerator.Generate(map);
+        terrainGenerator.Generate(map);
+
+        // Scale up data
 
         foreach (Room room in map.Rooms)
             room.ScaleUpData();

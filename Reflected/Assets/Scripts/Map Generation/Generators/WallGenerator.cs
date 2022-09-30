@@ -48,7 +48,6 @@ public class WallGenerator : MonoBehaviour
 
         foreach (Room room in map.Rooms)
         {
-            room.CreateFloor(wallThickness);
             roomRect = room.Rect;
 
             foreach (CardinalDirection direction in cardinalDirections)
@@ -114,8 +113,6 @@ public class WallGenerator : MonoBehaviour
 
         foreach (Chamber chamber in map.Chambers)
         {
-            chamber.CreateFloor(wallThickness);
-
             if (chamber.Orientation == Orientation.Horizontal)
             {
                 roomRect = chamber.Rect.Inflated(-wallThickness, 0);

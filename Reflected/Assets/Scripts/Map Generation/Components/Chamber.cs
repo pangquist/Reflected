@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Chamber : MonoBehaviour
 {
-    [Header("References")]
-
-    [SerializeField] private GameObject floorPrefab;
-
     [Header("Values")]
 
     [Range(0f, 3f)]
@@ -22,7 +18,6 @@ public class Chamber : MonoBehaviour
     [ReadOnly][SerializeField] private Orientation orientation;
     [ReadOnly][SerializeField] private RectInt rect;
     [ReadOnly][SerializeField] private Bounds triggerBounds;
-    [ReadOnly][SerializeField] private Floor floor;
     [ReadOnly][SerializeField] private Door door1;
     [ReadOnly][SerializeField] private Door door2;
     [ReadOnly][SerializeField] private List<Wall> walls;
@@ -73,18 +68,6 @@ public class Chamber : MonoBehaviour
 
         else if (door2 == null)
             door2 = door;
-    }
-
-    public void CreateFloor(int wallThickness)
-    {
-        RectInt floorRect;
-
-        if (orientation == Orientation.Horizontal)
-            floorRect = rect.Inflated(0, wallThickness);
-        else
-            floorRect = rect.Inflated(wallThickness, 0);
-
-        floor = GameObject.Instantiate(floorPrefab, transform).GetComponent<Floor>().Initialize(floorRect);
     }
 
     public void ScaleUpData()

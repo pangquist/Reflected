@@ -230,7 +230,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225411049}
-  m_LocalRotation: {x: 0.04733239, y: -0.22343895, z: 0.010863712, w: 0.97350746}
+  m_LocalRotation: {x: 0.047332384, y: -0.22343896, z: 0.010863712, w: 0.97350746}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1279,6 +1279,8 @@ GameObject:
   - component: {fileID: 2131914259}
   - component: {fileID: 2131914260}
   - component: {fileID: 2131914262}
+  - component: {fileID: 2131914264}
+  - component: {fileID: 2131914263}
   m_Layer: 0
   m_Name: Map Generator
   m_TagString: Untagged
@@ -1363,7 +1365,9 @@ MonoBehaviour:
   roomGenerator: {fileID: 2131914259}
   chamberGenerator: {fileID: 2131914260}
   wallGenerator: {fileID: 2131914262}
-  deactivateRooms: 0
+  waterGenerator: {fileID: 2131914264}
+  terrainGenerator: {fileID: 2131914263}
+  deactivateRooms: 1
   minMapSizeX: 90
   maxMapSizeX: 100
   minMapSizeZ: 70
@@ -1394,3 +1398,33 @@ MonoBehaviour:
   wallThickness: 1
   doorThickness: 0.25
   doorTransitionDuration: 0.5
+--- !u!114 &2131914263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e4a15bc1748d74e80b53d876355a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainChunkPrefab: {fileID: 2332618423109250269, guid: 5754e2c27e53f47ccb8aa4da3a242f20,
+    type: 3}
+  startY: 0
+--- !u!114 &2131914264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e186adf3b6641c5b315316baa655fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterPrefab: {fileID: 6428712266764001271, guid: 58d55d0ea3b8c4c37b748771affd912a,
+    type: 3}
+  waterLevel: 2
