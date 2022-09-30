@@ -16,7 +16,6 @@ public class PlayerEnterCheck : MonoBehaviour
     {
         if (!collisionDecected && collision.gameObject.tag == "Player")
         {
-            //Debug.Log("Enterd");
             aiDirector.EnterRoom();
             collisionDecected = true;
         }
