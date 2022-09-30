@@ -37,6 +37,8 @@ public class Player : Character, ISavable
 
         Cursor.lockState = CursorLockMode.Locked;
         lightDimension = true;
+
+        ChangeStats();
     }
 
     // Update is called once per frame
