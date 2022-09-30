@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MirrorPiece : MonoBehaviour
 {
+
+    [Header("Piece Description")]
+    [TextArea(10, 20)]
+    [SerializeField] string pieceDescription;
+
+    [Header("References")]
     [SerializeField] Sprite deactivatedSprite;
     [SerializeField] Sprite canBeActivatedSprite;
     [SerializeField] Sprite activatedSprite;
@@ -15,10 +22,12 @@ public class MirrorPiece : MonoBehaviour
     [SerializeField] float resourceCost;
     [SerializeField] bool isPlaceable;
     bool isActive;
-    
+
     [Header("Stat Changes")]
     [SerializeField] string modifiedValue;
     [SerializeField] float value;
+
+    [SerializeField] UIText pieceEffectText;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +35,8 @@ public class MirrorPiece : MonoBehaviour
         DontDestroyOnLoad(this);
         currentImage = GetComponent<Image>();
         currentImage.sprite = deactivatedSprite;
+
+        pieceEffectText = GameObject.Find("Piece Effect Text").GetComponent<UIText>();
     }
 
     public void PlaceInMirror()
@@ -36,9 +47,10 @@ public class MirrorPiece : MonoBehaviour
         mirror.PlacePiece(this);
         currentImage.sprite = activatedSprite;
 
-        foreach(MirrorPiece piece in nextPieces)
+        foreach (MirrorPiece piece in nextPieces)
         {
-            piece.SetIsPlaceable(true);
+            if (!piece.IsActive())
+                piece.SetIsPlaceable(true);
         }
 
         // resourceAmount -= resourceCost;
@@ -68,5 +80,15 @@ public class MirrorPiece : MonoBehaviour
     public float GetValue()
     {
         return value;
+    }
+
+    public void SetTextToEffect()
+    {
+        pieceEffectText.ChangeText(pieceDescription);
+    }
+
+    public void SetTextToNull()
+    {
+        pieceEffectText.ChangeText("");
     }
 }

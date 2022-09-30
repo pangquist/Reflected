@@ -34,7 +34,10 @@ public class Character : MonoBehaviour
         }
     }
 
-
+    public virtual void Heal(int amount)
+    {
+        currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
+    }
 
     void Die()
     {
@@ -69,5 +72,9 @@ public class Character : MonoBehaviour
     public float GetAttackSpeed()
     {
         return attackSpeed; //replace with attack speed
+    }
+    public Weapon GetCurrentWeapon()
+    {
+        return currentWeapon;
     }
 }

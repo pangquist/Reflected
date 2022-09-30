@@ -34,7 +34,7 @@ public class Sword : Weapon
 
         if (!hitEnemies.Contains(target))
         {
-            target.TakeDamage(damage);
+            target.TakeDamage(GetDamage());
             hitEnemies.Add(target);
         }
     }

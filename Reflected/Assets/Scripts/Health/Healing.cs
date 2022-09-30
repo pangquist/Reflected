@@ -9,6 +9,6 @@ public class Healing : PowerUpEffect
 
     public override void Apply(GameObject target)
     {
-        target.GetComponent<PlayerHealth>().Heal(amount);
+        target.GetComponent<Player>().Heal(amount);
     }
 }

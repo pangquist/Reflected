@@ -12,15 +12,111 @@ public class StatSystem : MonoBehaviour, ISavable
     [SerializeField] float attackSpeed;
     [SerializeField] float areaOfEffect;
 
+    List<string> statNames = new List<string> { "Health, Damage Reduction, Movement Speed, Damage, Attack Speed, AoE" };
+
+    Player player;
+    UpgradeManager upgradeManager;
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
+        try
+        {
+            upgradeManager = GameObject.Find("UpgradeManager").GetComponent<UpgradeManager>();
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        GetLightStats();
+    }
+
+    public void GetLightStats()
+    {
+        if (!upgradeManager)
+            return;
+
+        ResetStats();
+
+        Dictionary<string, float> stats = upgradeManager.GetLightPieces();
+
+        foreach (KeyValuePair<string, float> pair in stats)
+        {
+            if (pair.Key == "Damage")
+            {
+                AddDamageIncrease(pair.Value);
+            }
+            else if (pair.Key == "Damage Reduction")
+            {
+                AddDamageReduction(pair.Value);
+            }
+            else if (pair.Key == "Movement Speed")
+            {
+                AddMovementSpeed(pair.Value);
+            }
+            else if (pair.Key == "Health")
+            {
+                AddMaxHealth(pair.Value);
+            }
+            else if (pair.Key == "Attack Speed")
+            {
+                AddAttackSpeed(pair.Value);
+            }
+            else if (pair.Key == "AoE")
+            {
+                AddAreaOfEffect(pair.Value);
+            }
+        }
+    }
+
+    public void GetDarkStats()
+    {
+        if (!upgradeManager)
+            return;
+
+        ResetStats();
+
+        Dictionary<string, float> stats = upgradeManager.GetDarkPieces();
+
+        foreach (KeyValuePair<string, float> pair in stats)
+        {
+            if (pair.Key == "Damage")
+            {
+                AddDamageIncrease(pair.Value);
+            }
+            else if (pair.Key == "Damage Reduction")
+            {
+                AddDamageReduction(pair.Value);
+            }
+            else if (pair.Key == "Movement Speed")
+            {
+                AddMovementSpeed(pair.Value);
+            }
+            else if (pair.Key == "Health")
+            {
+                AddMaxHealth(pair.Value);
+            }
+            else if (pair.Key == "Attack Speed")
+            {
+                AddAttackSpeed(pair.Value);
+            }
+            else if (pair.Key == "AoE")
+            {
+                AddAreaOfEffect(pair.Value);
+            }
+        }
+    }
+
     public void ResetStats()
     {
         //Should be called upon death
-        maxHealthIncrease = 0;
-        damageReduction = 0;
-        movementSpeed = 0;
-        damageIncrease = 0;
-        attackSpeed = 0;
-        areaOfEffect = 0;
+        maxHealthIncrease = 1;
+        damageReduction = 1;
+        movementSpeed = 1;
+        damageIncrease = 1;
+        attackSpeed = 1;
+        areaOfEffect = 1;
     }
 
     public float GetMaxHealthIncrease() => maxHealthIncrease;
@@ -55,7 +151,7 @@ public class StatSystem : MonoBehaviour, ISavable
         attackSpeed += amount;
     }
 
-    public void AddAreaOfEffect( float amount)
+    public void AddAreaOfEffect(float amount)
     {
         areaOfEffect += amount;
     }

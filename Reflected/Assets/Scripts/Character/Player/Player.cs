@@ -2,6 +2,7 @@
 // Script created by Valter Lindecrantz at the Game Development Program, MAU, 2022.
 //
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,10 @@ using UnityEngine;
 /// <summary>
 /// Player description
 /// </summary>
-public class Player : Character
+public class Player : Character, ISavable
 {
+    [SerializeField] StatSystem stats;
+
     [Header("Stat Properties")]
     [SerializeField] float jumpForce;
 
@@ -20,19 +23,22 @@ public class Player : Character
     UpgradeManager upgradeManager;
     bool lightDimension;
 
-    // Start is called before the first frame update
-    void Start()
+    public delegate void InteractWithObject();
+    public static event InteractWithObject OnObjectInteraction;
+
+
+
+    protected override void Awake()
     {
-        ChangeStats();
+        base.Awake();
         currentWeapon = weapons[weaponIndex];
         currentWeapon.gameObject.SetActive(true);
         currentWeapon.SetDamage(damage);
 
         Cursor.lockState = CursorLockMode.Locked;
         lightDimension = true;
-        //upgradeManager = GameObject.Find("UpgradeManager").GetComponent<UpgradeManager>();
-        //upgradeManager.AddPlayer(this);
 
+        ChangeStats();
     }
 
     // Update is called once per frame
@@ -92,21 +98,68 @@ public class Player : Character
     {
         if (lightDimension)
         {
-            //maxHealth = upgradeManager.GetLightPieces()[0].GetValue();
-            //movementSpeed = upgradeManager.GetLightPieces()[1].GetValue();
-
+            stats.GetLightStats();
         }
         else
         {
-            //foreach (MirrorPiece piece in upgradeManager.GetDarkPieces())
-            //{
-
-            //}
+            stats.GetDarkStats();
         }
+
+        currentWeapon.SetDamage(damage);
     }
 
     public void SwapDimension()
     {
+        lightDimension = !lightDimension;
 
+        DimensionManager dimensionManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
+
+        if (lightDimension)
+        {
+            dimensionManager.SetTrueDimension();
+        }
+        else
+        {
+            dimensionManager.SetMirrorDimension();
+        }
+
+        ChangeStats();
     }
+
+    public void Interact()
+    {
+        OnObjectInteraction.Invoke();
+    }
+
+    public StatSystem GetStats()
+    {
+        return stats;
+    }
+
+
+    #region SaveLoad
+    [Serializable]
+    private struct SaveData
+    {
+        public float currentHealth;
+        public float maxHealth;
+    }
+
+    public object SaveState()
+    {
+        return new SaveData()
+        {
+            currentHealth = this.currentHealth,
+            maxHealth = this.maxHealth
+        };
+    }
+
+    public void LoadState(object state)
+    {
+        var saveData = (SaveData)state;
+        currentHealth = saveData.currentHealth;
+        maxHealth = saveData.maxHealth;
+    }
+
+    #endregion
 }

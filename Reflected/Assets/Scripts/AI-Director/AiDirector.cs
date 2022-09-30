@@ -23,7 +23,7 @@ public class AiDirector : MonoBehaviour
     int numberOfRoomsCleared;
     int numberOfRoomsLeftOnMap;
     int NumberOfRoomsSinceShop;
-    List<int> numberOfEnemiesKilled = new List<int>();
+    int numberOfEnemiesKilled;
 
     //Player-stats
     Player player;
@@ -43,6 +43,7 @@ public class AiDirector : MonoBehaviour
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
+        if (player.GetCurrentWeapon().GetType() == typeof(Sword)) enemySpawner.SetMeleePlayer();
     }
 
     void Update()
@@ -65,6 +66,8 @@ public class AiDirector : MonoBehaviour
 
     private void checkDifficulty()
     {
+
+
         if (difficultyLevel == easy)
         {
             spawntime = 2;
@@ -84,30 +87,39 @@ public class AiDirector : MonoBehaviour
 
     private void CheckRoomActivity()
     {
-        if (!activeRoom && !inbetweenRooms)
-        {
-            activeRoom = true;
-            checkDifficulty();
-            enemiesInRoom = amountOfEnemies * 2;
-            enemySpawner.SpawnEnemy(spawntime, amountOfEnemies);
-
-        }
-        if (activeRoom && enemiesInRoom > 0)
+        if (activeRoom && enemiesInRoom > 0) // Player is in a room with enemies
         {
             timeToClearRoom += Time.deltaTime;
             playerCurrentHelathPercentage = player.GetHealthPercentage();
         }
-        if (enemiesInRoom == 0)
+        else if (enemiesInRoom == 0) // Player kills last enemy in a room
         {
             activeRoom = false;
             inbetweenRooms = true;
         }
-        if (!activeRoom && inbetweenRooms)
+        else if (!activeRoom && inbetweenRooms) // Player have killed all enemies in a room but have not left the room
         {
             clearTimesList.Add(timeToClearRoom);
-            numberOfEnemiesKilled.Add(amountOfEnemies * 2);
+            numberOfRoomsCleared++;
+            numberOfRoomsLeftOnMap--;
+            NumberOfRoomsSinceShop++;
+            
             ResetRoom();
             inbetweenRooms = false;
         }
+    }
+
+    public void EnterRoom()
+    {
+        activeRoom = true;
+        checkDifficulty();
+        enemiesInRoom = amountOfEnemies * 2;
+        enemySpawner.SpawnEnemy(spawntime, amountOfEnemies);
+    }
+
+    public void killEnemyInRoom()
+    {
+        enemiesInRoom--;
+        numberOfEnemiesKilled++;
     }
 }

@@ -54,8 +54,11 @@ public  class Enemy : Character
         if (currentHealth == maxHealth)
             healthBar.gameObject.SetActive(true);
         else if (currentHealth <= 0)
+        {
+            AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
+            aiDirector.killEnemyInRoom();
             return;
-
+        }
 
         Vector3 direction = (transform.position - player.transform.position).normalized;
         direction.y = 0;

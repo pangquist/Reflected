@@ -14,8 +14,12 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private RoomGenerator roomGenerator;
     [SerializeField] private ChamberGenerator chamberGenerator;
     [SerializeField] private WallGenerator wallGenerator;
+    [SerializeField] private WaterGenerator waterGenerator;
+    [SerializeField] private TerrainGenerator terrainGenerator;
 
     [Header("Map")]
+
+    [SerializeField] private bool deactivateRooms;
 
     [Range(10, 500)]
     [SerializeField] private int minMapSizeX;
@@ -28,6 +32,9 @@ public class MapGenerator : MonoBehaviour
 
     [Range(10, 500)]
     [SerializeField] private int maxMapSizeZ;
+
+    [Range(1, 20)]
+    [SerializeField] private int chunkSize;
 
     [Header("Testing")]
 
@@ -44,12 +51,18 @@ public class MapGenerator : MonoBehaviour
 
     // Properties
 
+    public static int ChunkSize { get; private set; }
+
     public RoomGenerator RoomGenerator => roomGenerator;
     public ChamberGenerator ChamberGenerator => chamberGenerator;
     public WallGenerator WallGenerator => wallGenerator;
+    public WaterGenerator WaterGenerator => waterGenerator;
+    public TerrainGenerator TerrainGenerator => terrainGenerator;
 
     private void Start()
     {
+        ChunkSize = chunkSize;
+
         if (trials == 1)
             Generate();
         else
@@ -58,7 +71,7 @@ public class MapGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.M))
             Start();
     }
 
@@ -67,19 +80,18 @@ public class MapGenerator : MonoBehaviour
         // Prepare
 
         log = " --- MAP GENERATION LOG ---\n";
-
         int newSeed = seed != 0 ? seed : (int)System.DateTime.Now.Ticks;
         Random.InitState(newSeed);
         Log("Seed: " + newSeed);
-        
         Destroy(GameObject.Find("Map"));
-        Map map = GameObject.Instantiate(mapPrefab).GetComponent<Map>();
 
-        // Generate map
+        // Initialize map
 
         int sizeX = Random.Range(minMapSizeX, maxMapSizeX + 1);
         int sizeZ = Random.Range(minMapSizeZ, maxMapSizeZ + 1);
         Log("Map Size: " + sizeX + "x" + sizeZ + " chunks");
+
+        Map map = GameObject.Instantiate(mapPrefab).GetComponent<Map>();
         map.Initialize(sizeX, sizeZ);
 
         // Generate
@@ -87,11 +99,28 @@ public class MapGenerator : MonoBehaviour
         roomGenerator.Generate(map);
         chamberGenerator.Generate(map);
         wallGenerator.Generate(map);
+        waterGenerator.Generate(map);
+        terrainGenerator.Generate(map);
+
+        // Scale up data
+
+        foreach (Room room in map.Rooms)
+            room.ScaleUpData();
+
+        foreach (Chamber chamber in map.Chambers)
+            chamber.ScaleUpData();
 
         // Log
 
         Log("");
         Debug.Log(log);
+
+        // Start
+
+        if (deactivateRooms)
+            map.DeactivateAll();
+
+        map.SetStartRoom(0);
     }
 
     private IEnumerator Coroutine_BulkGenerate()

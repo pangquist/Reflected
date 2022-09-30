@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FillHealthBar : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
+    public Player playerHealth;
     public Image fillImage;
     private Slider slider;
     // Start is called before the first frame update
@@ -27,7 +27,7 @@ public class FillHealthBar : MonoBehaviour
             fillImage.enabled = true;
         }
 
-        float fillValue = playerHealth.currentHealth / playerHealth.maxHealth;
+        //float fillValue = playerHealth.currentHealth / playerHealth.maxHealth;
         //Debug.Log(fillValue);
         //if(fillValue <= slider.maxValue / 3)
         //{
@@ -38,6 +38,6 @@ public class FillHealthBar : MonoBehaviour
         //    fillImage.color = Color.red;
         //}
 
-        slider.value = fillValue;
+        //slider.value = fillValue;
     }
 }

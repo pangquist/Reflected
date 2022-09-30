@@ -22,9 +22,9 @@ public class ChamberGenerator : MonoBehaviour
         public int index;
         public Node node1, node2;
         public RectInt overlap;
-        public Chamber.Orientation orientation;
+        public Orientation orientation;
 
-        public Path(int index, Node node1, Node node2, RectInt overlap, Chamber.Orientation orientation)
+        public Path(int index, Node node1, Node node2, RectInt overlap, Orientation orientation)
         {
             this.index = index;
             this.node1 = node1;
@@ -66,13 +66,7 @@ public class ChamberGenerator : MonoBehaviour
 
     public void Generate(Map map)
     {
-        // Clear data
-
-        nodes.Clear();
-        paths.Clear();
-        removedPaths.Clear();
-
-        // Generate chambers
+        Chamber.StaticInitialize(map);
 
         FindPaths(map);
         int maxPaths = paths.Count;
@@ -84,6 +78,10 @@ public class ChamberGenerator : MonoBehaviour
         mapGenerator.Log("Final chambers: " + paths.Count + "/" + maxPaths + " (" + (100f * paths.Count / maxPaths).ToString("0") + "%)");
 
         InstantiateChambers(map);
+
+        nodes.Clear();
+        paths.Clear();
+        removedPaths.Clear();
     }
 
     private void FindPaths(Map map)
@@ -130,10 +128,10 @@ public class ChamberGenerator : MonoBehaviour
                 // Check if the two rooms could be connected
 
                 if (horizontal1.Overlaps(horizontal2, out overlap) && overlap.height >= chamberSize)
-                    NewConnection(i, j, overlap, Chamber.Orientation.Horizontal);
+                    NewConnection(i, j, overlap, Orientation.Horizontal);
 
                 else if (vertical1.Overlaps(vertical2, out overlap) && overlap.width >= chamberSize)
-                    NewConnection(i, j, overlap, Chamber.Orientation.Vertical);
+                    NewConnection(i, j, overlap, Orientation.Vertical);
             }
         }
 
@@ -147,7 +145,7 @@ public class ChamberGenerator : MonoBehaviour
         }
     }
 
-    private void NewConnection(int i, int j, RectInt overlap, Chamber.Orientation orientation)
+    private void NewConnection(int i, int j, RectInt overlap, Orientation orientation)
     {
         paths.Add(new Path(paths.Count, nodes[i], nodes[j], overlap, orientation));
         nodes[i].adjacentNodes.Add(nodes[j]);
@@ -235,7 +233,7 @@ public class ChamberGenerator : MonoBehaviour
         {
             RectInt rect = path.overlap;
 
-            if (path.orientation == Chamber.Orientation.Horizontal)
+            if (path.orientation == Orientation.Horizontal)
             {
                 rect.y += Random.Range(0, rect.height - chamberSize);
                 rect.height = chamberSize;

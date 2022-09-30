@@ -25,10 +25,21 @@ public abstract class Weapon : MonoBehaviour
 
     protected PlayerController playerController;
 
+    Player player;
+
+    private AbilityCooldowns cooldownstarter;
+
+
+
     public virtual void Awake()
     {
         anim = GetComponent<Animator>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+
+        player = GameObject.Find("Player").GetComponent<Player>();
+
+        cooldownstarter = FindObjectOfType<AbilityCooldowns>();
+
         hitEnemies = new List<Enemy>();
         currentComboIndex = 0;
         timeSinceLastSpecialAttack = specialAttackCooldown;
@@ -68,7 +79,7 @@ public abstract class Weapon : MonoBehaviour
     {
         playerController.SetAttackLocked(true);
         timeSinceLastSpecialAttack = 0;
-
+        cooldownstarter.Ability1Use();
         return specialAttackClip;
     }
 
@@ -85,6 +96,14 @@ public abstract class Weapon : MonoBehaviour
     public bool IsOnCooldown()
     {
         return timeSinceLastSpecialAttack < specialAttackCooldown;
+    }
+    public float GetCooldown()
+    {
+        return specialAttackCooldown;
+    }
+    public float GetCurrentCooldown()
+    {
+        return specialAttackCooldown - timeSinceLastSpecialAttack;
     }
 
     public virtual void Unlock()
@@ -105,6 +124,6 @@ public abstract class Weapon : MonoBehaviour
 
     public float GetDamage()
     {
-        return damage;
+        return damage * player.GetStats().GetDamageIncrease();
     }
 }
