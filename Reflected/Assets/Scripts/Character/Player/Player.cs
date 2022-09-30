@@ -21,8 +21,6 @@ public class Player : Character, ISavable
     [SerializeField] List<Weapon> weapons = new List<Weapon>();
     int weaponIndex = 0;
 
-    //UpgradeManager upgradeManager;
-
     DimensionManager dimensionManager;
 
     bool lightDimension;

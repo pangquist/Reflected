@@ -11,10 +11,10 @@ using UnityEngine;
 /// </summary>
 public abstract class Ability : MonoBehaviour
 {
-    [Header("Stats")]
+    [Header("Ability Stats")]
     [SerializeField] protected Sprite abilityIcon;
     [SerializeField] protected float cooldown;
-    [SerializeField] protected float cooldownTimer;
+    [SerializeField] protected float remainingCooldown;
     [SerializeField] protected string abilityName;
 
     protected AbilityCooldowns cooldownstarter;
@@ -26,21 +26,26 @@ public abstract class Ability : MonoBehaviour
 
     public virtual void DoEffect()
     {
-        cooldownTimer = cooldown;
+        remainingCooldown = cooldown;
     }
     void Update()
     {
         if(IsOnCooldown())
-            cooldownTimer -= Time.deltaTime;
+            remainingCooldown -= Time.deltaTime;
     }
 
     public bool IsOnCooldown()
     {
-        return cooldownTimer > 0;
+        return remainingCooldown > 0;
     }
 
-    public float GetCooldown()
+    public float GetRemainingCooldown()
     {
-        return cooldown;
+        return remainingCooldown;
+    }
+
+    public Sprite GetIcon()
+    {
+        return abilityIcon;
     }
 }

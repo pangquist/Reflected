@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public class AbilityCooldowns : MonoBehaviour
 {
     [Header("Ability 1")]
-    [SerializeField] Image ability1Image;
+    [SerializeField] Image ability1Icon;
+    [SerializeField] Image ability1FillImage;
     [SerializeField] TextMeshProUGUI ability1text;
     [Header("Ability 2")]
-    [SerializeField] Image ability2Image;
+    [SerializeField] Image ability2Icon;
+    [SerializeField] Image ability2FillImage;
     [SerializeField] TextMeshProUGUI ability2text;
 
     private Weapon weapon;
@@ -24,8 +26,10 @@ public class AbilityCooldowns : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
         weapon = player.GetCurrentWeapon();
-        ability1Image.fillAmount = 0;
-        ability2Image.fillAmount = 0;
+        ability1FillImage.fillAmount = 0;
+        ability2FillImage.fillAmount = 0;
+
+        ability2Icon.sprite = thirdPersonMovement.GetDash().GetIcon();
     }
 
     // Update is called once per frame
@@ -38,13 +42,13 @@ public class AbilityCooldowns : MonoBehaviour
 
     public void Ability1Use()
     {
-        ability1Image.fillAmount = 1;
+        ability1FillImage.fillAmount = 1;
         ability1text.gameObject.SetActive(true);
     }
 
     public void Ability2Use()
     {
-        ability2Image.fillAmount = 1;
+        ability2FillImage.fillAmount = 1;
         ability2text.gameObject.SetActive(true);
     }
 
@@ -53,16 +57,16 @@ public class AbilityCooldowns : MonoBehaviour
         if (weapon.IsOnCooldown())
         {
             ability1text.text = Mathf.RoundToInt(weapon.GetCurrentCooldown()).ToString();
-            ability1Image.fillAmount -= 1 / weapon.GetCooldown() * Time.deltaTime;
+            ability1FillImage.fillAmount -= 1 / weapon.GetCooldown() * Time.deltaTime;
         }
         else if (!weapon.IsOnCooldown())
         {
             ability1text.gameObject.SetActive(false);
-            ability1Image.fillAmount = 0;
+            ability1FillImage.fillAmount = 0;
         }
-        if (ability1Image.fillAmount <= 0)
+        if (ability1FillImage.fillAmount <= 0)
         {
-            ability1Image.fillAmount = 0;
+            ability1FillImage.fillAmount = 0;
         }
 
 
@@ -72,17 +76,17 @@ public class AbilityCooldowns : MonoBehaviour
     {
         if (thirdPersonMovement.GetDash().IsOnCooldown())
         {
-            ability2text.text = Mathf.RoundToInt(thirdPersonMovement.GetDash().GetCooldown()).ToString();
-            ability2Image.fillAmount -= 1 / thirdPersonMovement.GetDash().GetCooldown() * Time.deltaTime;
+            ability2text.text = Mathf.RoundToInt(thirdPersonMovement.GetDash().GetRemainingCooldown()).ToString();
+            ability2FillImage.fillAmount -= 1 / thirdPersonMovement.GetDash().GetRemainingCooldown() * Time.deltaTime;
         }
         else if (!thirdPersonMovement.GetDash().IsOnCooldown())
         {
             ability2text.gameObject.SetActive(false);
-            ability2Image.fillAmount = 0;
+            ability2FillImage.fillAmount = 0;
         }
-        if (ability2Image.fillAmount <= 0)
+        if (ability2FillImage.fillAmount <= 0)
         {
-            ability2Image.fillAmount = 0;
+            ability2FillImage.fillAmount = 0;
         }
 
     }
