@@ -16,6 +16,8 @@ public abstract class Ability : MonoBehaviour
     [SerializeField] protected float cooldown;
     [SerializeField] protected float remainingCooldown;
     [SerializeField] protected string abilityName;
+    [SerializeField] protected float damage;
+    [SerializeField] protected bool debug;
 
     protected AbilityCooldowns cooldownstarter;
 

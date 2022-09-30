@@ -13,7 +13,6 @@ using UnityEngine;
 public class Player : Character, ISavable
 {
     [SerializeField] StatSystem stats;
-    [SerializeField] GameObject chargeBar;
 
     [Header("Stat Properties")]
     [SerializeField] float jumpForce;
@@ -22,11 +21,14 @@ public class Player : Character, ISavable
     int weaponIndex = 0;
 
     DimensionManager dimensionManager;
+    [SerializeField] SwappingAbility swapAbility;
+    [SerializeField] GameObject chargeBar;
 
-    bool lightDimension;
+    bool trueDimension;
 
     public delegate void InteractWithObject();
     public static event InteractWithObject OnObjectInteraction;
+
 
 
 
@@ -42,7 +44,7 @@ public class Player : Character, ISavable
         dimensionManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
         dimensionManager.SetStatSystem(stats);
         dimensionManager.UpdateChargeBar(chargeBar);
-        lightDimension = true;
+        trueDimension = true;
 
         ChangeStats();
     }
@@ -103,7 +105,7 @@ public class Player : Character, ISavable
 
     public void ChangeStats()
     {
-        if (lightDimension)
+        if (trueDimension)
         {
             stats.GetLightStats();
         }
@@ -117,11 +119,11 @@ public class Player : Character, ISavable
 
     public void SwapDimension()
     {
-        if (lightDimension && dimensionManager.CanSwapTrue())
+        if (trueDimension && dimensionManager.CanSwapTrue())
         {
             dimensionManager.SetTrueDimension();
         }
-        else if (!lightDimension && dimensionManager.CanSwapMirror())
+        else if (!trueDimension && dimensionManager.CanSwapMirror())
         {
             dimensionManager.SetMirrorDimension();
         }
@@ -129,8 +131,10 @@ public class Player : Character, ISavable
             return;
 
         dimensionManager.UpdateChargeBar(chargeBar);
+        if(swapAbility)
+            swapAbility.DoEffect();
 
-        lightDimension = !lightDimension;
+        trueDimension = !trueDimension;
         ChangeStats();
     }
 
