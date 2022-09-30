@@ -8,21 +8,24 @@ public class Interactable : MonoBehaviour
     public bool isInRange;
     public KeyCode interactKey;
     public UnityEvent interactAction;
+
+    Player player;
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        Player.OnObjectInteraction += Interact;
     }
 
     // Update is called once per frame
-    void Update()
+    void Interact()
     {
         if (isInRange)
         {
-            if (Input.GetKeyDown(interactKey))
-            {
-                interactAction.Invoke();
-            }
+            interactAction.Invoke();
+            Debug.Log("interact key down...");
+
         }
     }
 

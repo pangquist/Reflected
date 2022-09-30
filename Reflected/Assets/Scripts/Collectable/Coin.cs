@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Coin : MonoBehaviour, ICollectable
+public class Coin : MonoBehaviour, ICollectable, IMagnetic
 {
     public static event HandleCoinCollected OnCoinCollected;
     public delegate void HandleCoinCollected(ItemData itemData);
@@ -19,7 +19,12 @@ public class Coin : MonoBehaviour, ICollectable
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();        
+    }
+
+    private void Start()
+    {
+        coinData.amount = UnityEngine.Random.Range(1, 10);
     }
 
     public void Collect()

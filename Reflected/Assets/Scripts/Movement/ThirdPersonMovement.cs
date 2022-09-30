@@ -7,6 +7,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] CharacterController controller;
     [SerializeField] Transform cam;
+    [SerializeField] StatSystem stats;
 
     [Header("Stat Properties")]
     [SerializeField] float speed = 12f;
@@ -29,9 +30,11 @@ public class ThirdPersonMovement : MonoBehaviour
     bool isDashing;
 
     private Vector3 velocity;
+    private AbilityCooldowns cooldownstarter;
     // Start is called before the first frame update
     private void Start()
     {
+        cooldownstarter = FindObjectOfType<AbilityCooldowns>();
         currentDashTimer = dashCooldown;
     }
 
@@ -62,10 +65,21 @@ public class ThirdPersonMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            controller.Move(moveDir.normalized * speed * stats.GetMovementSpeed() * Time.deltaTime);
         }
     }
-
+    public float GetDashCooldown()
+    {
+        return dashCooldown;
+    }
+    public bool IsOnCooldown()
+    {
+        return currentDashTimer < dashCooldown;
+    }
+    public float GetCurrentCooldown()
+    {
+        return dashCooldown - currentDashTimer;
+    }
     public void Jump()
     {
         if (isDashing)
@@ -81,6 +95,7 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             StartCoroutine("dashAction");
             currentDashTimer = 0;
+            cooldownstarter.Ability2Use();
         }
     }
 

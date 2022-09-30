@@ -49,6 +49,7 @@ public class SaveLoadSystem : MonoBehaviour
         }
     }
 
+    //Find all gameobjects with an SavableEntiry component and tells them to save
     void SaveState(Dictionary<string, object> state)
     {
         foreach(var savable in FindObjectsOfType<SavableEntity>())
@@ -57,6 +58,7 @@ public class SaveLoadSystem : MonoBehaviour
         }
     }
 
+    //Find all gameobjects with an SavableEntiry component and tells them to load
     void LoadState(Dictionary<string, object> state)
     {
         foreach(var savable in FindObjectsOfType<SavableEntity>())

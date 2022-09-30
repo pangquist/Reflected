@@ -2,6 +2,7 @@
 // Script created by Valter Lindecrantz at the Game Development Program, MAU, 2022.
 //
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,19 +10,31 @@ using UnityEngine;
 /// <summary>
 /// Player description
 /// </summary>
-public class Player : Character
+public class Player : Character, ISavable
 {
+    [SerializeField] StatSystem stats;
+
     [Header("Stat Properties")]
     [SerializeField] float jumpForce;
 
     [SerializeField] List<Weapon> weapons = new List<Weapon>();
     int weaponIndex = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    UpgradeManager upgradeManager;
+    bool lightDimension;
+
+    public delegate void InteractWithObject();
+    public static event InteractWithObject OnObjectInteraction;
+
+    protected override void Awake()
     {
+        base.Awake();
         currentWeapon = weapons[weaponIndex];
         currentWeapon.gameObject.SetActive(true);
+        currentWeapon.SetDamage(damage);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        lightDimension = true;
     }
 
     // Update is called once per frame
@@ -67,6 +80,8 @@ public class Player : Character
         return jumpForce;
     }
 
+    
+
     public void UnlockWeapon()
     {
         currentWeapon.Unlock();
@@ -76,4 +91,70 @@ public class Player : Character
     {
         currentWeapon.WeaponEffect();
     }
+
+    public void ChangeStats()
+    {
+        if (lightDimension)
+        {
+            stats.GetLightStats();
+
+        }
+        else
+        {
+            stats.GetDarkStats();
+        }
+
+        currentWeapon.SetDamage(damage);
+    }
+
+    public void SwapDimension()
+    {
+        lightDimension = !lightDimension;
+
+        DimensionManager dimensionManager = GameObject.Find("Post Processing").GetComponent<DimensionManager>();
+
+        if (lightDimension)
+            dimensionManager.SetTrueDimension();
+        else
+            dimensionManager.SetMirrorDimension();
+
+        ChangeStats();
+    }
+
+    public void Interact()
+    {
+        OnObjectInteraction.Invoke();
+    }
+
+    public StatSystem GetStats()
+    {
+        return stats;
+    }
+
+
+    #region SaveLoad
+    [Serializable]
+    private struct SaveData
+    {
+        public float currentHealth;
+        public float maxHealth;
+    }
+
+    public object SaveState()
+    {
+        return new SaveData()
+        {
+            currentHealth = this.currentHealth,
+            maxHealth = this.maxHealth
+        };
+    }
+
+    public void LoadState(object state)
+    {
+        var saveData = (SaveData)state;
+        currentHealth = saveData.currentHealth;
+        maxHealth = saveData.maxHealth;
+    }
+
+    #endregion
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] Image bgImage;
     [SerializeField] Color healthBarColor;
     [SerializeField] Color healthBarBGColor;
+    [SerializeField] TextMeshProUGUI healthText;
     Player player;
     
 
@@ -26,8 +28,8 @@ public class HealthBar : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
-        
-        
+
+        healthText.text = player.GetCurrentHealth().ToString() + "/" + player.GetMaxHealth().ToString();
         //healthBar.fillRect.
         healthBar.value = player.GetCurrentHealth();
         //healthBar.image.color = healthBarColor;

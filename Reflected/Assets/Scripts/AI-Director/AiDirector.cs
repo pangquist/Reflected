@@ -4,44 +4,50 @@ using UnityEngine;
 
 public class AiDirector : MonoBehaviour
 {
+    //Difficulty
+    [SerializeField] string difficultyLevel;
+    const string easy = "easy";
+    const string medium = "medium";
+    const string hard = "hard";
+    float spawntime;
+    int amountOfEnemies;
+
     //Room-stats
     bool activeRoom;
-    float timeToClearRoom;
+    bool inbetweenRooms;
     int enemiesInRoom;
-    [SerializeField] int numberOfSpawnpoints;
+    [SerializeField] float timeToClearRoom;
+    List<float> clearTimesList = new List<float>();
 
     //Map-stats
     int numberOfRoomsCleared;
     int numberOfRoomsLeftOnMap;
     int NumberOfRoomsSinceShop;
+    List<int> numberOfEnemiesKilled = new List<int>();
 
     //Player-stats
-    [SerializeField] Player player;
-    float playerCurrentHelathPercentage;
+    Player player;
+    [SerializeField] float playerCurrentHelathPercentage;
     int playerCurrency;
 
 
-    EnemySpawner EnemySpawner;
+    EnemySpawner enemySpawner;
 
 
     void Start()
     {
-        if(!player) player = GetComponent<Player>();
+        if (!player) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
+
+        difficultyLevel = medium;
+        checkDifficulty();
+        activeRoom = false;
+        inbetweenRooms = false;
     }
 
     void Update()
     {
-        if(activeRoom && enemiesInRoom > 0)
-        {
-            timeToClearRoom += Time.deltaTime;
-            playerCurrentHelathPercentage = player.GetHealthPercentage();
-        }
-
-        if (!activeRoom)
-        {
-            ResetRoom();
-        }
-
+        CheckRoomActivity();
     }
 
     private void ResetRoom()
@@ -54,6 +60,54 @@ public class AiDirector : MonoBehaviour
     {
         numberOfRoomsCleared = 0;
         numberOfRoomsLeftOnMap = 0;
+        clearTimesList.Clear();
+    }
 
+    private void checkDifficulty()
+    {
+        if (difficultyLevel == easy)
+        {
+            spawntime = 2;
+            amountOfEnemies = 4;
+        }
+        else if (difficultyLevel == medium)
+        {
+            spawntime = 1;
+            amountOfEnemies = 6;
+        }
+        else if (difficultyLevel == hard)
+        {
+            spawntime = 0.5f;
+            amountOfEnemies = 9;
+        }
+    }
+
+    private void CheckRoomActivity()
+    {
+        if (!activeRoom && !inbetweenRooms)
+        {
+            activeRoom = true;
+            checkDifficulty();
+            enemiesInRoom = amountOfEnemies * 2;
+            enemySpawner.SpawnEnemy(spawntime, amountOfEnemies);
+
+        }
+        if (activeRoom && enemiesInRoom > 0)
+        {
+            timeToClearRoom += Time.deltaTime;
+            playerCurrentHelathPercentage = player.GetHealthPercentage();
+        }
+        if (enemiesInRoom == 0)
+        {
+            activeRoom = false;
+            inbetweenRooms = true;
+        }
+        if (!activeRoom && inbetweenRooms)
+        {
+            clearTimesList.Add(timeToClearRoom);
+            numberOfEnemiesKilled.Add(amountOfEnemies * 2);
+            ResetRoom();
+            inbetweenRooms = false;
+        }
     }
 }
