@@ -114,6 +114,11 @@ public class Player : Character, ISavable
             stats.GetDarkStats();
         }
 
+        //foreach(AnimationClip clip in currentWeapon.GetBasicAttack())
+        //{
+            
+        //}
+        anim.speed = stats.GetAttackSpeed();
         currentWeapon.SetDamage(damage);
     }
 
