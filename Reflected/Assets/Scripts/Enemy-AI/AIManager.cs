@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AiManager : MonoBehaviour
+public class AIManager : MonoBehaviour
 {
     // ---- Illegal (Cannot use new for Monobehavior scripts) ----
     //private StartState startState = new StartState();

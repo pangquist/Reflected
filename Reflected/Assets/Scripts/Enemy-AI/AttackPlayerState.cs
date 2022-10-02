@@ -10,7 +10,7 @@ public class AttackPlayerState : State
 {
     private float attackTimer = 0f;
     public float attackRate = 1f;
-    public override void DoState(AiManager thisEnemy, Transform target, NavMeshAgent agent)
+    public override void DoState(AIManager thisEnemy, Transform target, NavMeshAgent agent)
     {
         Debug.Log(thisEnemy.CloseCombat());
         //If melee and too far away, move towards target.
@@ -46,7 +46,7 @@ public class AttackPlayerState : State
         }
     }
 
-    private void DoAttack(AiManager thisEnemy, Transform target)
+    private void DoAttack(AIManager thisEnemy, Transform target)
     {
         if (!thisEnemy.CloseCombat() && !thisEnemy.AOE())
         {
@@ -68,7 +68,7 @@ public class AttackPlayerState : State
         Vector3 lookPos = target - transform.position;
         lookPos.y = 0;
         Quaternion rotation = Quaternion.LookRotation(lookPos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.02f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
     }
 
     private void MeleeAttack()
@@ -85,7 +85,7 @@ public class AttackPlayerState : State
     private void FireAreaOfEffect(Transform target, GameObject aoeObject)
     {
         //Debug.Log(target.position);
-        Instantiate(aoeObject, new Vector3(target.transform.position.x, target.transform.position.y - 0.499f, target.transform.position.z), target.rotation);
+        Instantiate(aoeObject, new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z), target.rotation);
 
         //Instantiate(aoeObject, new Vector3(0, 0.01f, 0), target.rotation);
 

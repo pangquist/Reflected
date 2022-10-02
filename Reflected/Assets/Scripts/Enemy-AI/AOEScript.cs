@@ -9,6 +9,7 @@ public class AOEScript : MonoBehaviour
     void Start()
     {
         despawnTimer = 0f;
+        //this.GetComponent<MeshRenderer>().material.color = new Color(177f, 66f, 238f, 1f);
     }
 
     
