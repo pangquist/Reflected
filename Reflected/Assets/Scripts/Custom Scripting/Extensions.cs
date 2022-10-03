@@ -224,9 +224,4 @@ public static class Extensions
             button.Disable();
     }
 
-    public static T GetRandom<T>(this List<T> list)
-    {
-        return list[Random.Range(0, list.Count)];
-    }
-
 }

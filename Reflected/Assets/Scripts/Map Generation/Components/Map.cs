@@ -15,8 +15,6 @@ public class Map : MonoBehaviour
     [ReadOnly][SerializeField] private List<Room> rooms;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private Room activeRoom;
-    [ReadOnly][SerializeField] private Room startRoom;
-    [ReadOnly][SerializeField] private Room bossRoom;
     [ReadOnly][SerializeField] private DimensionManager dimensionManager;
 
     // Properties
@@ -29,8 +27,6 @@ public class Map : MonoBehaviour
     public DimensionManager DimensionManager => dimensionManager;
 
     public Room ActiveRoom { get { return activeRoom; } set { activeRoom = value; } }
-    public Room StartRoom  { get { return startRoom;  } set { startRoom  = value; } }
-    public Room BossRoom   { get { return bossRoom;   } set { bossRoom   = value; } }
 
     public void Initialize(int sizeX, int sizeZ)
     {
@@ -47,12 +43,13 @@ public class Map : MonoBehaviour
             room.Deactivate(null);
     }
 
-    public void Begin()
+    public void SetStartRoom(int roomIndex)
     {
+        Room startRoom = rooms[roomIndex];
         startRoom.gameObject.SetActive(true);
         startRoom.Activate();
         startRoom.SetCleared(true);
 
-        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(startRoom.Rect.center.x, 10, startRoom.Rect.center.y);
+        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(startRoom.Rect.center.x, 15, startRoom.Rect.center.y);
     }
 }

@@ -13,7 +13,6 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject mapPrefab;
     [SerializeField] private RoomGenerator roomGenerator;
     [SerializeField] private ChamberGenerator chamberGenerator;
-    [SerializeField] private RoomTypeGenerator roomTypeGenerator;
     [SerializeField] private WallGenerator wallGenerator;
     [SerializeField] private WaterGenerator waterGenerator;
     [SerializeField] private TerrainGenerator terrainGenerator;
@@ -56,7 +55,6 @@ public class MapGenerator : MonoBehaviour
 
     public RoomGenerator RoomGenerator => roomGenerator;
     public ChamberGenerator ChamberGenerator => chamberGenerator;
-    public RoomTypeGenerator RoomTypeGenerator => roomTypeGenerator;
     public WallGenerator WallGenerator => wallGenerator;
     public WaterGenerator WaterGenerator => waterGenerator;
     public TerrainGenerator TerrainGenerator => terrainGenerator;
@@ -98,12 +96,11 @@ public class MapGenerator : MonoBehaviour
 
         // Generate
 
-        roomGenerator    .Generate(map);
-        chamberGenerator .Generate(map);
-        roomTypeGenerator.Generate(map);
-        wallGenerator    .Generate(map);
-        waterGenerator   .Generate(map);
-        terrainGenerator .Generate(map);
+        roomGenerator.Generate(map);
+        chamberGenerator.Generate(map);
+        wallGenerator.Generate(map);
+        waterGenerator.Generate(map);
+        terrainGenerator.Generate(map);
 
         // Scale up data
 
@@ -118,12 +115,12 @@ public class MapGenerator : MonoBehaviour
         Log("");
         Debug.Log(log);
 
-        // Begin
+        // Start
 
         if (deactivateRooms)
             map.DeactivateAll();
 
-        map.Begin();
+        map.SetStartRoom(0);
     }
 
     private IEnumerator Coroutine_BulkGenerate()

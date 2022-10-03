@@ -55,15 +55,3 @@ public enum Dimension
     True,
     Mirror
 }
-
-/// <summary>
-/// Start, Peaceful, Shop, Monster, Boss
-/// </summary>
-public enum RoomType
-{
-    Start,
-    Peaceful,
-    Shop,
-    Monster,
-    Boss
-}

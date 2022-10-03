@@ -1094,7 +1094,6 @@ GameObject:
   - component: {fileID: 2131914261}
   - component: {fileID: 2131914259}
   - component: {fileID: 2131914260}
-  - component: {fileID: 2131914265}
   - component: {fileID: 2131914262}
   - component: {fileID: 2131914264}
   - component: {fileID: 2131914263}
@@ -1181,7 +1180,6 @@ MonoBehaviour:
     type: 3}
   roomGenerator: {fileID: 2131914259}
   chamberGenerator: {fileID: 2131914260}
-  roomTypeGenerator: {fileID: 2131914265}
   wallGenerator: {fileID: 2131914262}
   waterGenerator: {fileID: 2131914264}
   terrainGenerator: {fileID: 2131914263}
@@ -1246,19 +1244,3 @@ MonoBehaviour:
   waterPrefab: {fileID: 6428712266764001271, guid: 58d55d0ea3b8c4c37b748771affd912a,
     type: 3}
   waterLevel: 2
---- !u!114 &2131914265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131914256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f06689369f4b4e91b59a16814d1ccd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapGenerator: {fileID: 2131914261}
-  peacefulChance: 0.1
-  randomizeStartRoom: 1
-  randomizeBossRoom: 1
