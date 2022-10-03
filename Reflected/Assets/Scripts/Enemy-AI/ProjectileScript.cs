@@ -38,7 +38,7 @@ public class ProjectileScript : MonoBehaviour
     public void SetUp(Vector3 target, Vector3 spawnPoint, float projectileForce)
     {
         direction = target - spawnPoint;
-        Debug.Log("Direction " + direction);
+        //Debug.Log("Direction " + direction);
         this.projectileForce = projectileForce;
         GetComponent<Rigidbody>().AddForce(direction.normalized * projectileForce, ForceMode.Impulse);
         Debug.Log("Projectile SetUp entered");
