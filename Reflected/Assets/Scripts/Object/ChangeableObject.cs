@@ -29,7 +29,7 @@ public class ChangeableObject : MonoBehaviour
 
     void Start()
     {
-        GameObject.Find("DimensionManager").GetComponent<DimensionManager>().AddChangeableObject(this);
+        GameObject.Find("Dimension Manager").GetComponent<DimensionManager>().AddChangeableObject(this);
         objects[0] = gameObject;
 
         if (!hasChildren)
