@@ -314,7 +314,7 @@ PrefabInstance:
     - target: {fileID: 7509292486471657741, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.068580054
+      value: 0.068580024
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486471657741, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -324,7 +324,7 @@ PrefabInstance:
     - target: {fileID: 7509292486471657741, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.103309676
+      value: -0.10330963
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486471657741, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -364,7 +364,7 @@ PrefabInstance:
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.004315741
+      value: 0.004315696
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -374,7 +374,7 @@ PrefabInstance:
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.002022451
+      value: 0.0020224398
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487351524866, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -404,12 +404,12 @@ PrefabInstance:
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.96567446
+      value: 0.9656744
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1320226
+      value: 0.13202259
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -419,7 +419,7 @@ PrefabInstance:
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.030301798
+      value: 0.030301778
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488300453720, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -429,17 +429,17 @@ PrefabInstance:
     - target: {fileID: 7509292488300453720, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.08056076
+      value: 0.08056071
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488300453720, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.22293751
+      value: -0.22293754
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488300453720, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.018490272
+      value: 0.018490275
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2333b69884c50d54eac2de350810c1e6, type: 3}
@@ -579,6 +579,7 @@ GameObject:
   - component: {fileID: 2131914262}
   - component: {fileID: 2131914264}
   - component: {fileID: 2131914263}
+  - component: {fileID: 2131914266}
   - component: {fileID: 2131914265}
   m_Layer: 0
   m_Name: Map Generator
@@ -712,6 +713,7 @@ MonoBehaviour:
   terrainChunkPrefab: {fileID: 2332618423109250269, guid: 5754e2c27e53f47ccb8aa4da3a242f20,
     type: 3}
   noiseMapGenerator: {fileID: 2131914265}
+  decorationPlacer: {fileID: 2131914266}
   startY: 0
   mapScale: 14
   heightMultiplier: 6
@@ -807,3 +809,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9886ff0bc490e1d43aad013ea86adbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2131914266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cf2e39d51b23448ac307bfa90f8b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 2131914263}
+  decorations:
+  - terrain: Sand
+    gameObject:
+    - {fileID: 100000, guid: f85b6ac778412504e9810b2aba984bfa, type: 3}
+  - terrain: Grass
+    gameObject:
+    - {fileID: 6067280026813596915, guid: 1cd09309530feb143967ad3180111df6, type: 3}

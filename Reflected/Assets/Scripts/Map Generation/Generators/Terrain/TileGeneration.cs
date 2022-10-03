@@ -23,11 +23,12 @@ public class TileGeneration : MonoBehaviour
     [SerializeField]
     private Wave[] waves;
 
-    public TerrainType[] TerrainTypes() { return terrainTypes; }
     public float MapScale { get; set; }
+    public TerrainType[] TerrainTypes() { return terrainTypes; }
     public float HeightMultiplier() { return heightMultiplier; }
-    public MeshFilter MeshFilter() { return meshFilter; }
     public AnimationCurve HeightCurve() { return heightCurve; }
+    public MeshFilter MeshFilter() { return meshFilter; }
+    
 
     void Start()
     {

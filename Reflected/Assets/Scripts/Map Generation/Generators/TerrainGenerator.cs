@@ -15,23 +15,22 @@ public class TerrainGenerator : MonoBehaviour
 
     [SerializeField] private GameObject terrainChunkPrefab;
 
-    [SerializeField]
-    NoiseMapGenerator noiseMapGenerator;
+    [SerializeField] NoiseMapGenerator noiseMapGenerator;
+    [SerializeField] DecorationPlacer decorationPlacer;
 
     [Header("Terrain")]
 
     [SerializeField] private float startY;
 
-    [SerializeField]
-    private float mapScale;
-    [SerializeField]
-    private float heightMultiplier;
-    [SerializeField]
-    private TerrainType[] terrainTypes;
-    [SerializeField]
-    private AnimationCurve heightCurve;
-    [SerializeField]
-    private Wave[] waves;
+    [SerializeField] private float mapScale;
+    [SerializeField] private float heightMultiplier;
+    [SerializeField] private TerrainType[] terrainTypes;
+    [SerializeField] private AnimationCurve heightCurve;
+    [SerializeField] private Wave[] waves;
+
+    public TerrainType[] TerrainTypes() { return terrainTypes; }
+    public float HeightMultiplier() { return heightMultiplier; }
+    public AnimationCurve HeightCurve() { return heightCurve; }
 
     public void Generate(Map map)
     {
@@ -54,6 +53,7 @@ public class TerrainGenerator : MonoBehaviour
                         // Instantiate a new TerrainChunk
                         GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.transform);
                         GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
+                        decorationPlacer.PlaceDecorations(terrainChunk.GetComponent<TerrainChunk>());
                         break;
                     }
                 }

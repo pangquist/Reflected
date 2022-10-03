@@ -11,47 +11,44 @@ public class DecorationList
 
 public class DecorationPlacer : MonoBehaviour
 {
-    [SerializeField]
-    DecorationList[] decorations;
+    [Header("References")]
+    [SerializeField] TerrainGenerator terrainGenerator;
 
-    // Start is called before the first frame update
-    void Start()
+    [Header("Decorations")]
+    [SerializeField] DecorationList[] decorations;
+
+    public void PlaceDecorations(TerrainChunk terrainChunk)
     {
-        SpawnDecorations();
-    }
+        Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;
+        Vector3[] visitedVertices = new Vector3[meshVertices.Length];
 
-    void SpawnDecorations()
-    {
-        //Vector3[] meshVertices = this.tileGeneration.MeshFilter().mesh.vertices;
-        //Vector3[] visitedVertices = new Vector3[meshVertices.Length];
+        float offsetX = -terrainChunk.transform.position.x;
+        float offsetZ = -terrainChunk.transform.position.z;
+        TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
 
-        //float offsetX = -this.gameObject.transform.position.x;
-        //float offsetZ = -this.gameObject.transform.position.z;
-        //TerrainType[] terrainTypes = this.tileGeneration.TerrainTypes();
+        for (int i = 0; i < meshVertices.Length; i++)
+        {
+            foreach (TerrainType terrain in terrainTypes)
+            {
+                if (meshVertices[i].y <= terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier())
+                {
+                    if (meshVertices[i] != visitedVertices[i])
+                    {
+                        foreach (DecorationList decorationList in decorations)
+                        {
+                            if (decorationList.terrain == terrain.name)
+                            {
+                                if (Random.Range(1, 50) == 1)
+                                {
+                                    Instantiate(decorationList.gameObject[Random.Range(0, decorationList.gameObject.Length)].gameObject, new Vector3(meshVertices[i].x - offsetX, meshVertices[i].y, meshVertices[i].z - offsetZ), Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), terrainChunk.transform);
+                                }
+                            }
+                        }
+                        visitedVertices[i] = meshVertices[i];
+                    }
 
-        //for (int i = 0; i < meshVertices.Length; i++)
-        //{
-        //    foreach(TerrainType terrain in terrainTypes)
-        //    {
-        //        if (meshVertices[i].y  <= this.tileGeneration.HeightCurve().Evaluate(terrain.height) * this.tileGeneration.HeightMultiplier())
-        //        {
-        //            if(meshVertices[i] != visitedVertices[i])
-        //            {
-        //                foreach (DecorationList decorationList in decorations)
-        //                {
-        //                    if (decorationList.terrain == terrain.name)
-        //                    {
-        //                        if (Random.Range(1, 50) == 1)
-        //                        {
-        //                            Instantiate(decorationList.gameObject[Random.Range(0, decorationList.gameObject.Length)].gameObject, new Vector3(meshVertices[i].x - offsetX, meshVertices[i].y, meshVertices[i].z - offsetZ), Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)));
-        //                        }
-        //                    }
-        //                }
-        //                visitedVertices[i] = meshVertices[i];
-        //            }
-                    
-        //        }
-        //    } 
-        //}
+                }
+            }
+        }
     }
 }
