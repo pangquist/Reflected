@@ -22,8 +22,8 @@ public class DecorationPlacer : MonoBehaviour
         Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;
         Vector3[] visitedVertices = new Vector3[meshVertices.Length];
 
-        float offsetX = -terrainChunk.transform.position.x;
-        float offsetZ = -terrainChunk.transform.position.z;
+        float offsetX = -terrainChunk.transform.position.x + 4;
+        float offsetZ = -terrainChunk.transform.position.z + 4;
         TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
 
         for (int i = 0; i < meshVertices.Length; i++)
@@ -40,7 +40,10 @@ public class DecorationPlacer : MonoBehaviour
                             {
                                 if (Random.Range(1, 50) == 1)
                                 {
-                                    Instantiate(decorationList.gameObject[Random.Range(0, decorationList.gameObject.Length)].gameObject, new Vector3(meshVertices[i].x - offsetX, meshVertices[i].y, meshVertices[i].z - offsetZ), Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), terrainChunk.transform);
+                                    Matrix4x4 localToWorld = transform.localToWorldMatrix;
+                                    Vector3 position = terrainChunk.transform.rotation * localToWorld.MultiplyPoint3x4(meshVertices[i]);
+                                    position = new Vector3(position.x - offsetX, position.y, position.z - offsetZ);
+                                    Instantiate(decorationList.gameObject[Random.Range(0, decorationList.gameObject.Length)].gameObject, position, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), terrainChunk.transform);
                                 }
                             }
                         }
