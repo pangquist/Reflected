@@ -10,6 +10,7 @@ public class Room : MonoBehaviour
     [ReadOnly][SerializeField] private List<Wall> walls;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private bool cleared;
+    [ReadOnly][SerializeField] private RoomType type;
 
     private static Map map;
 
@@ -19,6 +20,7 @@ public class Room : MonoBehaviour
     public List<Wall> Walls => walls;
     public List<Chamber> Chambers => chambers;
     public bool Cleared => cleared;
+    public RoomType Type => type;
 
     public static void StaticInitialize(Map map)
     {
@@ -30,6 +32,11 @@ public class Room : MonoBehaviour
         this.rect = rect;
         name = "Room " + index;
         return this;
+    }
+
+    public void SetType(RoomType type)
+    {
+        this.type = type;
     }
 
     public void ScaleUpData()
@@ -73,7 +80,11 @@ public class Room : MonoBehaviour
 
         if (!cleared)
         {
-            GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>().EnterRoom();
+            if (type == RoomType.Monster || type == RoomType.Boss)
+                GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>().EnterRoom();
+
+            else
+                SetCleared(true);
         }
     }
 
@@ -86,7 +97,8 @@ public class Room : MonoBehaviour
             foreach (Chamber chamber in chambers)
                 chamber.Open(this);
 
-            map.DimensionManager.GainCharges(1);
+            if (type == RoomType.Monster || type == RoomType.Boss)
+                map.DimensionManager.GainCharges(1);
         }
           
         else
