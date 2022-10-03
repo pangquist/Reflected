@@ -75,7 +75,6 @@ public class Room : MonoBehaviour
         foreach (Chamber chamber in chambers)
             chamber.gameObject.SetActive(true);
 
-        if (!aiDirector) aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
 
         if (!cleared)
         {
