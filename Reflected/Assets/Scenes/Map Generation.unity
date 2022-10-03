@@ -404,22 +404,22 @@ PrefabInstance:
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9656744
+      value: 0.96567446
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13202263
+      value: 0.1320226
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.22164114
+      value: -0.2216412
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.03030179
+      value: 0.030301798
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488300453720, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -579,6 +579,7 @@ GameObject:
   - component: {fileID: 2131914262}
   - component: {fileID: 2131914264}
   - component: {fileID: 2131914263}
+  - component: {fileID: 2131914265}
   m_Layer: 0
   m_Name: Map Generator
   m_TagString: Untagged
@@ -710,7 +711,75 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainChunkPrefab: {fileID: 2332618423109250269, guid: 5754e2c27e53f47ccb8aa4da3a242f20,
     type: 3}
+  noiseMapGenerator: {fileID: 2131914265}
   startY: 0
+  mapScale: 14
+  heightMultiplier: 6
+  terrainTypes:
+  - name: Sand
+    height: 0.3
+    color: {r: 1, g: 0.89326143, b: 0.5330188, a: 1}
+  - name: Grass
+    height: 1
+    color: {r: 0, g: 0.764151, b: 0.1169192, a: 1}
+  heightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.000117194606
+      inSlope: -0.04240895
+      outSlope: -0.04240895
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.45530614
+    - serializedVersion: 3
+      time: 0.25143746
+      value: 0.390176
+      inSlope: 1.1430753
+      outSlope: 1.1430753
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.2661503
+      outWeight: 0.14730963
+    - serializedVersion: 3
+      time: 0.4902078
+      value: 0.45880124
+      inSlope: 0.8897923
+      outSlope: 0.8897923
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.30100933
+      outWeight: 0.46178788
+    - serializedVersion: 3
+      time: 0.7218784
+      value: 0.9537931
+      inSlope: 0.5385164
+      outSlope: 0.5385164
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.26991832
+      outWeight: 0.19913422
+    - serializedVersion: 3
+      time: 1
+      value: 1.0002189
+      inSlope: 0.004363577
+      outSlope: 0.004363577
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.4279568
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  waves:
+  - seed: 15
+    frequency: 1
+    amplitude: 1
+  - seed: 500
+    frequency: 0.5
+    amplitude: 10
 --- !u!114 &2131914264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,3 +795,15 @@ MonoBehaviour:
   waterPrefab: {fileID: 6428712266764001271, guid: 58d55d0ea3b8c4c37b748771affd912a,
     type: 3}
   waterLevel: 2
+--- !u!114 &2131914265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9886ff0bc490e1d43aad013ea86adbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

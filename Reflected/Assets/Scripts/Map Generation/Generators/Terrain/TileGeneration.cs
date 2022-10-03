@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class TerrainType
-{
-    public string name;
-    public float height;
-    public Color color;
-}
 public class TileGeneration : MonoBehaviour
 {
     [SerializeField]
-    NoiseMapGeneration noiseMapGeneration;
+    NoiseMapGenerator noiseMapGeneration;
     [SerializeField]
     private MeshRenderer tileRenderer;
     [SerializeField]
@@ -44,7 +37,7 @@ public class TileGeneration : MonoBehaviour
     private void GenerateTile()
     {
         float[,] heightMap = GenerateHeightMap();
-        
+
         Texture2D tileTexture = BuildTexture(heightMap);
         this.tileRenderer.material.mainTexture = tileTexture;
         UpdateMeshVertices(heightMap);
