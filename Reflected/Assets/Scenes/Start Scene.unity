@@ -8236,7 +8236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1317323119
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8849,7 +8849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  description: Decreases the amount of charges required to Swap to the Mirror Dimension
+    by 1.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -9667,7 +9668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  description: Decreases the amount of charges required to Swap to the True Dimension
+    by 1.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -10673,7 +10675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  description: Increases the Maximum Health of the player while in the True Dimension
+    by 15%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -11433,8 +11436,9 @@ GameObject:
   - component: {fileID: 1916553272}
   - component: {fileID: 1916553271}
   - component: {fileID: 1916553270}
+  - component: {fileID: 1916553274}
   m_Layer: 5
-  m_Name: DarkPiece2
+  m_Name: Damage 15%
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11528,7 +11532,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  description: Increases the Damage of the player while in the Mirror Dimension by
+    15%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -11536,8 +11541,8 @@ MonoBehaviour:
   nextNode: []
   resourceCost: 0
   isPlaceable: 1
-  modifiedValue: 
-  value: 0
+  modifiedValue: Damage
+  value: 0.15
   nodeEffectText: {fileID: 0}
 --- !u!114 &1916553272
 MonoBehaviour:
@@ -11577,6 +11582,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916553268}
   m_CullTransparentMesh: 1
+--- !u!114 &1916553274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916553268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1916553271}
+          m_TargetAssemblyTypeName: TechTreeNode, Assembly-CSharp
+          m_MethodName: SetTextToEffect
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1916553271}
+          m_TargetAssemblyTypeName: TechTreeNode, Assembly-CSharp
+          m_MethodName: SetTextToNull
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1926897976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12957,8 +13007,9 @@ GameObject:
   - component: {fileID: 2096297813}
   - component: {fileID: 2096297812}
   - component: {fileID: 2096297811}
+  - component: {fileID: 2096297815}
   m_Layer: 5
-  m_Name: DarkPiece3
+  m_Name: Attack Speed 10%
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13052,7 +13103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  description: Increases the Attack Speed of the player while in the Mirror Dimension
+    by 10%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -13060,8 +13112,8 @@ MonoBehaviour:
   nextNode: []
   resourceCost: 0
   isPlaceable: 1
-  modifiedValue: 
-  value: 0
+  modifiedValue: Attack Speed
+  value: 0.1
   nodeEffectText: {fileID: 0}
 --- !u!114 &2096297813
 MonoBehaviour:
@@ -13101,6 +13153,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2096297809}
   m_CullTransparentMesh: 1
+--- !u!114 &2096297815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096297809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2096297812}
+          m_TargetAssemblyTypeName: TechTreeNode, Assembly-CSharp
+          m_MethodName: SetTextToEffect
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2096297812}
+          m_TargetAssemblyTypeName: TechTreeNode, Assembly-CSharp
+          m_MethodName: SetTextToNull
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2096788157
 GameObject:
   m_ObjectHideFlags: 0
