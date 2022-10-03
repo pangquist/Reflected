@@ -548,7 +548,7 @@ PrefabInstance:
     - target: {fileID: 7509292486471657741, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.068580024
+      value: 0.068580054
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486471657741, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -558,7 +558,7 @@ PrefabInstance:
     - target: {fileID: 7509292486471657741, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.10330963
+      value: -0.103309676
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486471657741, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -598,7 +598,7 @@ PrefabInstance:
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.004315696
+      value: 0.004315741
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -608,7 +608,7 @@ PrefabInstance:
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0020224398
+      value: 0.0020224454
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487351524866, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -643,17 +643,17 @@ PrefabInstance:
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13202259
+      value: 0.13202263
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.2216412
+      value: -0.22164114
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.030301778
+      value: 0.03030179
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488300453720, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -663,17 +663,17 @@ PrefabInstance:
     - target: {fileID: 7509292488300453720, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.08056071
+      value: 0.08056076
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488300453720, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.22293754
+      value: -0.22293751
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488300453720, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.018490275
+      value: 0.018490272
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2333b69884c50d54eac2de350810c1e6, type: 3}
@@ -947,7 +947,7 @@ MonoBehaviour:
   terrainChunkPrefab: {fileID: 2332618423109250269, guid: 5754e2c27e53f47ccb8aa4da3a242f20,
     type: 3}
   noiseMapGenerator: {fileID: 2131914265}
-  decorationPlacer: {fileID: 2131914266}
+  objectPlacer: {fileID: 2131914266}
   startY: 0
   mapScale: 14
   heightMultiplier: 6
@@ -1056,11 +1056,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 2131914263}
-  decorations:
+  objects:
   - terrain: Sand
-    gameObject:
-    - {fileID: 100000, guid: f85b6ac778412504e9810b2aba984bfa, type: 3}
-    - {fileID: 2572951519100550845, guid: b6f5ecbc5fd265a49b724a958a79623b, type: 3}
+    terrainObjects:
+      list:
+      - item: {fileID: 2572951519100550845, guid: b6f5ecbc5fd265a49b724a958a79623b,
+          type: 3}
+        weight: 1
+      - item: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+        weight: 2
   - terrain: Grass
-    gameObject:
-    - {fileID: 6067280026813596915, guid: 1cd09309530feb143967ad3180111df6, type: 3}
+    terrainObjects:
+      list:
+      - item: {fileID: 100000, guid: f81deb958887e4e429ded035b43db140, type: 3}
+        weight: 1

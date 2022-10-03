@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class DecorationList
+public class ObjectList
 {
     public string terrain;
-    public GameObject[] gameObject;
+    public WeightedRandomList<GameObject> terrainObjects;
 }
 
-public class DecorationPlacer : MonoBehaviour
+public class ObjectPlacer : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] TerrainGenerator terrainGenerator;
 
     [Header("Decorations")]
-    [SerializeField] DecorationList[] decorations;
+    [SerializeField] ObjectList[] objects;
 
     public void PlaceDecorations(TerrainChunk terrainChunk)
     {
@@ -34,16 +34,16 @@ public class DecorationPlacer : MonoBehaviour
                 {
                     if (meshVertices[i] != visitedVertices[i])
                     {
-                        foreach (DecorationList decorationList in decorations)
+                        foreach (ObjectList objectList in objects)
                         {
-                            if (decorationList.terrain == terrain.name)
+                            if (objectList.terrain == terrain.name)
                             {
                                 if (Random.Range(1, 50) == 1)
                                 {
                                     Matrix4x4 localToWorld = transform.localToWorldMatrix;
                                     Vector3 position = terrainChunk.transform.rotation * localToWorld.MultiplyPoint3x4(meshVertices[i]);
                                     position = new Vector3(position.x - offsetX, position.y, position.z - offsetZ);
-                                    Instantiate(decorationList.gameObject[Random.Range(0, decorationList.gameObject.Length)].gameObject, position, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), terrainChunk.transform);
+                                    Instantiate(objectList.terrainObjects.GetRandom(), position, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), terrainChunk.transform);
                                 }
                             }
                         }
