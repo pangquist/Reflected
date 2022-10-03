@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -56,7 +57,6 @@ public class DimensionManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
         SetDimension(Dimension.True);
         UpdateChargeBar();
     }
@@ -136,6 +136,9 @@ public class DimensionManager : MonoBehaviour
 
     private void UpdateChargeBar()
     {
+        if (SceneManager.GetActiveScene().name == "Start Scene")
+            return;
+
         Slider chargeSlider = chargeBar.GetComponent<Slider>();
         TMP_Text sliderText = chargeBar.transform.Find("ChargeText").GetComponent<TMP_Text>();
 

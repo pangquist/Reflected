@@ -44,7 +44,7 @@ public class SettingsMenu : Menu
     public void OnClick_Setting(int setting)
     {
         string option = settings.NextOption((Setting)setting);
-        EventSystem.current.currentSelectedGameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = option;
+        EventSystem.current.currentSelectedGameObject.transform.GetComponentInChildren<TextMeshProUGUI>().text = option;
     }
 
     private void UpdateOptionTexts()
