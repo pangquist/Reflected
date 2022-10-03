@@ -23,11 +23,6 @@ public class Inventory : MonoBehaviour, ISavable
 
     private void OnEnable() //Subscribing to events
     {
-//#if UNITY_EDITOR
-//        dataBase = (ItemDatabaseData)AssetDatabase.LoadAssetAtPath("Assets/Scripts/Inventory/Database.asset", typeof(ItemDatabaseData));
-//#else
-//        dataBase = Resources.Load<ItemDatabaseData>("Database");
-//#endif
         MirrorShard.OnShardCollected += Add;
         Coin.OnCoinCollected += Add;
         Diamond.OnDiamondCollected += Add;
@@ -81,7 +76,8 @@ public class Inventory : MonoBehaviour, ISavable
         {
             coinAmount = inventory[0].stackSize,
             diamondAmount = inventory[1].stackSize,
-            mirrorShardAmount = inventory[2].stackSize
+            mirrorShardAmount = inventory[2].stackSize,
+            trueMirrorShardAmount = inventory[3].stackSize
         };
     }
 
@@ -91,6 +87,7 @@ public class Inventory : MonoBehaviour, ISavable
         inventory[0].AddMoreToStack(saveData.coinAmount);
         inventory[1].AddMoreToStack(saveData.diamondAmount);
         inventory[2].AddMoreToStack(saveData.mirrorShardAmount);
+        inventory[3].AddMoreToStack(saveData.trueMirrorShardAmount);
     }
 
     [Serializable]
@@ -98,7 +95,8 @@ public class Inventory : MonoBehaviour, ISavable
     {
         public int coinAmount;
         public int diamondAmount;
-        public int mirrorShardAmount;        
+        public int mirrorShardAmount;
+        public int trueMirrorShardAmount;
     }
 
 

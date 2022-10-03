@@ -13,6 +13,8 @@ public class Room : MonoBehaviour
 
     private static Map map;
 
+    AiDirector aiDirector;
+
     // Properties
 
     public RectInt Rect => rect;
@@ -72,6 +74,14 @@ public class Room : MonoBehaviour
 
         foreach (Chamber chamber in chambers)
             chamber.gameObject.SetActive(true);
+
+
+        if (!cleared)
+        {
+            if (!aiDirector) aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
+
+            aiDirector.EnterRoom();
+        }
     }
 
     public void SetCleared(bool cleared)
