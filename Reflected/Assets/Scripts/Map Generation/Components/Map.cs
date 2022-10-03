@@ -15,6 +15,7 @@ public class Map : MonoBehaviour
     [ReadOnly][SerializeField] private List<Room> rooms;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private Room activeRoom;
+    [ReadOnly][SerializeField] private DimensionManager dimensionManager;
 
     // Properties
 
@@ -23,6 +24,7 @@ public class Map : MonoBehaviour
     public List<Room> Rooms => rooms;
     public List<Chamber> Chambers => chambers;
     public bool SingleActiveRoom => singleActiveRoom;
+    public DimensionManager DimensionManager => dimensionManager;
 
     public Room ActiveRoom { get { return activeRoom; } set { activeRoom = value; } }
 
@@ -31,6 +33,8 @@ public class Map : MonoBehaviour
         this.sizeX = sizeX;
         this.sizeZ = sizeZ;
         name = "Map";
+
+        dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
     }
 
     public void DeactivateAll()

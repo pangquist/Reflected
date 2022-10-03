@@ -13,8 +13,6 @@ public class Room : MonoBehaviour
 
     private static Map map;
 
-    AiDirector aiDirector;
-
     // Properties
 
     public RectInt Rect => rect;
@@ -51,7 +49,6 @@ public class Room : MonoBehaviour
     /// <summary>
     /// Deactivates this room and all connected chambers except the caller
     /// </summary>
-    /// <param name="caller"></param>
     public void Deactivate(Chamber caller)
     {
         foreach (Chamber chamber in chambers)
@@ -67,7 +64,6 @@ public class Room : MonoBehaviour
     /// <summary>
     /// Activates all connected chambers
     /// </summary>
-    /// <param name="caller"></param>
     public void Activate()
     {
         map.ActiveRoom = this;
@@ -75,12 +71,9 @@ public class Room : MonoBehaviour
         foreach (Chamber chamber in chambers)
             chamber.gameObject.SetActive(true);
 
-
         if (!cleared)
         {
-            if (!aiDirector) aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
-
-            aiDirector.EnterRoom();
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>().EnterRoom();
         }
     }
 
@@ -89,11 +82,17 @@ public class Room : MonoBehaviour
         this.cleared = cleared;
 
         if (cleared)
+        {
             foreach (Chamber chamber in chambers)
                 chamber.Open(this);
 
+            map.DimensionManager.GainCharges(1);
+        }
+          
         else
+        {
             foreach (Chamber chamber in chambers)
                 chamber.Close(this);
+        } 
     }
 }
