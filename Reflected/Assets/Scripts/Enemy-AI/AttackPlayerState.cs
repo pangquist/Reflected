@@ -12,7 +12,6 @@ public class AttackPlayerState : State
     public float attackRate = 1f;
     public override void DoState(AIManager thisEnemy, Transform target, NavMeshAgent agent)
     {
-        Debug.Log(thisEnemy.CloseCombat());
         //If melee and too far away, move towards target.
         if (thisEnemy.distanceTo(target) >= 5 && thisEnemy.CloseCombat())
         {
@@ -42,6 +41,7 @@ public class AttackPlayerState : State
         if(attackTimer >= attackRate)
         {
             DoAttack(thisEnemy, target);
+            Debug.Log("Enemy attacked you!");
             attackTimer = 0f;
         }
     }
@@ -50,17 +50,16 @@ public class AttackPlayerState : State
     {
         if (!thisEnemy.CloseCombat() && !thisEnemy.AOE())
         {
-            //GameObject projectileObject = (GameObject)Resources.Load("ProjectileTestObject");
-            //FireProjectile(target, projectileObject);
+            GameObject projectileObject = (GameObject)Resources.Load("ProjectileTestObject");
+            FireProjectile(target, projectileObject);
         }
         else if (thisEnemy.AOE())
         {
+            attackRate = 5f;
             //aoeObject = GameObject.Find("AOETestObject");
             GameObject aoeObject = (GameObject)Resources.Load("AOETestObject");
             FireAreaOfEffect(target, aoeObject);
         }
-        
-        Debug.Log("Enemy attacked you!");
     }
 
     private void FaceTarget(Vector3 target)
@@ -78,14 +77,15 @@ public class AttackPlayerState : State
 
     private void FireProjectile(Transform target, GameObject projectileObject)
     {
-        Instantiate(projectileObject, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), gameObject.transform.rotation);
-        //Send info for handling movement to projectile.
+        GameObject currentProjectile = Instantiate(projectileObject, gameObject.GetComponent<AIManager>().firePoint.position, Quaternion.identity);
+        currentProjectile.GetComponent<ProjectileScript>().SetUp(target.position, gameObject.GetComponent<AIManager>().firePoint.position, 2f);
+        //Debug.Log("FirePoint POS: " + gameObject.GetComponent<AIManager>().firePoint.position);
     }
 
     private void FireAreaOfEffect(Transform target, GameObject aoeObject)
     {
         //Debug.Log(target.position);
-        Instantiate(aoeObject, new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z), target.rotation);
+        Instantiate(aoeObject, new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z), Quaternion.identity);
 
         //Instantiate(aoeObject, new Vector3(0, 0.01f, 0), target.rotation);
 

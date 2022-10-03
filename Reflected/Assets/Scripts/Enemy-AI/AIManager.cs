@@ -30,6 +30,8 @@ public class AIManager : MonoBehaviour
     bool closeCombat = false;
     bool areaOfEffect = false;
 
+    public Transform firePoint;
+
     void Start()
     {
         //Assign components
@@ -53,7 +55,11 @@ public class AIManager : MonoBehaviour
             player = GOplayer.GetComponent<Player>();
             Debug.Log("Assigned Player Component from GOplayer");
         }
-
+        //if (firePoint == null)
+        //{
+        //    //Debug. Will be better when rewritten into different scripts.
+        //    firePoint = gameObject.transform.GetChild(0).GetChild(0).transform;
+        //}
 
         //Instansiate state scripts
         startState = gameObject.AddComponent<StartState>();
@@ -74,6 +80,8 @@ public class AIManager : MonoBehaviour
         //I plan to have an enum for better stucture for this part.
         if (gameObject.tag == "Melee") closeCombat = true;
         else if (gameObject.tag == "AOE") areaOfEffect = true;
+
+
     }
     private void Update()
     {
@@ -81,6 +89,7 @@ public class AIManager : MonoBehaviour
         //agent.destination = goal.position;
 
         //activeState.DoState(this, player);
+        //Debug.Log("FirePoint POS: " + firePoint.position);
         activeState.DoState(this, target, agent);
     }
 
