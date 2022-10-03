@@ -37,27 +37,37 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnWave(float spawnTime, int enemyAmount)
     {
-        yield return new WaitForSeconds(spawnTime);
 
-        for (int i = 0; i < enemyAmount; i++)
+        try
         {
-            GetRandomEnemy();
-            if (spawnTransforms.Count <= 0) GetSpawnlocations();
-            spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-            Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0));
-            spawnTransforms.Remove(spawnLocation);
+            //yield return new WaitForSeconds(spawnTime);
+
+            for (int i = 0; i < enemyAmount; i++)
+            {
+                GetRandomEnemy();
+                if (spawnTransforms.Count <= 0) GetSpawnlocations();
+                spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+                Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0));
+                spawnTransforms.Remove(spawnLocation);
+            }
+
+            //yield return new WaitForSeconds(spawnTime);
+
+            for (int i = 0; i < enemyAmount; i++)
+            {
+                GetBiasedEnemy();
+                if (spawnTransforms.Count <= 0) GetSpawnlocations();
+                spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+                Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0));
+                spawnTransforms.Remove(spawnLocation);
+            }
+        }
+        catch
+        {
+
         }
 
-        yield return new WaitForSeconds(spawnTime);
-
-        for (int i = 0; i < enemyAmount; i++)
-        {
-            GetBiasedEnemy();
-            if (spawnTransforms.Count <= 0) GetSpawnlocations();
-            spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-            Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0));
-            spawnTransforms.Remove(spawnLocation);
-        }
+        yield return null;
     }
 
     private void GetSpawnlocations()
