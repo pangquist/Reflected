@@ -27,6 +27,8 @@ public class AiDirector : MonoBehaviour
     [SerializeField] int numberOfRoomsLeftOnMap;
     [SerializeField] int NumberOfRoomsSinceShop;
     [SerializeField] int numberOfEnemiesKilled;
+    Map map;
+
 
     //Player-stats
     Player player;
@@ -41,6 +43,7 @@ public class AiDirector : MonoBehaviour
     {
         if (!player) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
+        //if(!map) map = GameObject.Find("Map Generator").GetComponent<Map>();
 
         difficultyLevel = medium;
         checkDifficulty();
@@ -79,7 +82,6 @@ public class AiDirector : MonoBehaviour
             amountOfEnemiesToSpawn = Random.Range(9, 12);
         }
     }
-
     private void CheckRoomActivity()
     {
         if (activeRoom) // Player is in a room with enemies
@@ -110,8 +112,7 @@ public class AiDirector : MonoBehaviour
 
         timeToClearRoom = 0;
     }
-
-    public void EnterRoom() //is called when exiting a "chamber" (from playerEnterCheck-script)
+    public void EnterRoom() //is called when a new room activates (from Room-script)
     {
         activeRoom = true;
         checkDifficulty();
@@ -119,13 +120,11 @@ public class AiDirector : MonoBehaviour
 
         enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn);
     }
-
-    public void killEnemyInRoom()
+    public void killEnemyInRoom() //is called when enemy dies (from enemy-script)
     {
         enemiesInRoom--;
         numberOfEnemiesKilled++;
     }
-
     private void calculateAverageTime()
     {
         avergaeTimeToClearRoom = clearTimesList.Sum() / clearTimesList.Count();
