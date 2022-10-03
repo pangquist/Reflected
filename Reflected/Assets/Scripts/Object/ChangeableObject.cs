@@ -58,4 +58,12 @@ public class ChangeableObject : MonoBehaviour
             objects[i].GetComponent<MeshFilter>().mesh = mirrorMeshes[i];
         }
     }
+
+    public void UpdateMesh()
+    {
+        if (DimensionManager.CurrentDimension == Dimension.True)
+            ChangeToTrueMesh();
+        else
+            ChangeToMirrorMesh();
+    }
 }

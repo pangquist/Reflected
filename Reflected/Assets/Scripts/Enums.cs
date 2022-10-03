@@ -46,3 +46,12 @@ public enum RelativeDirection
     Up,
     Down
 }
+
+/// <summary>
+/// True, Mirror
+/// </summary>
+public enum Dimension
+{
+    True,
+    Mirror
+}
