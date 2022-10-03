@@ -75,6 +75,11 @@ public abstract class Weapon : MonoBehaviour
 
     }
 
+    public virtual void AttackWithoutAnimation()
+    {
+
+    }
+
     public virtual AnimationClip DoSpecialAttack()
     {
         playerController.SetAttackLocked(true);
