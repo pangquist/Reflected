@@ -13,6 +13,7 @@ using UnityEngine;
 public class Player : Character, ISavable
 {
     [SerializeField] StatSystem stats;
+    [SerializeField] GameObject chargeBar;
 
     [Header("Stat Properties")]
     [SerializeField] float jumpForce;
@@ -20,7 +21,10 @@ public class Player : Character, ISavable
     [SerializeField] List<Weapon> weapons = new List<Weapon>();
     int weaponIndex = 0;
 
-    UpgradeManager upgradeManager;
+    //UpgradeManager upgradeManager;
+
+    DimensionManager dimensionManager;
+
     bool lightDimension;
 
     public delegate void InteractWithObject();
@@ -36,12 +40,19 @@ public class Player : Character, ISavable
         currentWeapon.SetDamage(damage);
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        dimensionManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
+        dimensionManager.SetStatSystem(stats);
+        dimensionManager.UpdateChargeBar(chargeBar);
         lightDimension = true;
+
+        ChangeStats();
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if (Cursor.visible)
             Cursor.visible = false;
 
@@ -108,19 +119,20 @@ public class Player : Character, ISavable
 
     public void SwapDimension()
     {
-        lightDimension = !lightDimension;
-
-        DimensionManager dimensionManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
-
-        if (lightDimension)
+        if (lightDimension && dimensionManager.CanSwapTrue())
         {
             dimensionManager.SetTrueDimension();
         }
-        else
+        else if (!lightDimension && dimensionManager.CanSwapMirror())
         {
             dimensionManager.SetMirrorDimension();
         }
+        else
+            return;
 
+        dimensionManager.UpdateChargeBar(chargeBar);
+
+        lightDimension = !lightDimension;
         ChangeStats();
     }
 

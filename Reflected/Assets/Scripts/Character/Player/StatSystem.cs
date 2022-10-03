@@ -11,8 +11,10 @@ public class StatSystem : MonoBehaviour, ISavable
     [SerializeField] float damageIncrease;
     [SerializeField] float attackSpeed;
     [SerializeField] float areaOfEffect;
+    [SerializeField] int chargesToSwapTrue;
+    [SerializeField] int chargesToSwapMirror;
 
-    List<string> statNames = new List<string> { "Health, Damage Reduction, Movement Speed, Damage, Attack Speed, AoE" };
+    //List<string> statNames = new List<string> { "Health, Damage Reduction, Movement Speed, Damage, Attack Speed, AoE, Charges To Swap" };
 
     Player player;
     UpgradeManager upgradeManager;
@@ -67,6 +69,14 @@ public class StatSystem : MonoBehaviour, ISavable
             {
                 AddAreaOfEffect(pair.Value);
             }
+            else if(pair.Key == "True Charges")
+            {
+                ChangeChargesToSwapTrue((int)pair.Value);
+            }
+            else if (pair.Key == "Mirror Charges")
+            {
+                ChangeChargesToSwapMirror((int)pair.Value);
+            }
         }
     }
 
@@ -105,6 +115,14 @@ public class StatSystem : MonoBehaviour, ISavable
             {
                 AddAreaOfEffect(pair.Value);
             }
+            else if (pair.Key == "True Charges")
+            {
+                ChangeChargesToSwapTrue((int)pair.Value);
+            }
+            else if (pair.Key == "Mirror Charges")
+            {
+                ChangeChargesToSwapMirror((int)pair.Value);
+            }
         }
     }
 
@@ -117,6 +135,8 @@ public class StatSystem : MonoBehaviour, ISavable
         damageIncrease = 1;
         attackSpeed = 1;
         areaOfEffect = 1;
+        chargesToSwapTrue = 0;
+        chargesToSwapMirror = 0;
     }
 
     public float GetMaxHealthIncrease() => maxHealthIncrease;
@@ -125,6 +145,8 @@ public class StatSystem : MonoBehaviour, ISavable
     public float GetDamageIncrease() => damageIncrease;
     public float GetAttackSpeed() => attackSpeed;
     public float GetAreaOfEffect() => areaOfEffect;
+    public int GetChargesToSwapTrue() => chargesToSwapTrue;
+    public int GetChargesToSwapMirror() => chargesToSwapMirror;
 
     public void AddMaxHealth(float amount)
     {
@@ -154,6 +176,16 @@ public class StatSystem : MonoBehaviour, ISavable
     public void AddAreaOfEffect(float amount)
     {
         areaOfEffect += amount;
+    }
+
+    public void ChangeChargesToSwapTrue(int amount)
+    {
+        chargesToSwapTrue += amount;
+    }
+
+    public void ChangeChargesToSwapMirror(int amount)
+    {
+        chargesToSwapMirror += amount;
     }
 
     public object SaveState()

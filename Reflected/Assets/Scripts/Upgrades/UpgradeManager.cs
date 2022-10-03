@@ -44,8 +44,6 @@ public class UpgradeManager : MonoBehaviour
 
     public Dictionary<string, float> GetLightPieces()
     {
-
-
         return lightVariables;
     }
 
@@ -53,17 +51,6 @@ public class UpgradeManager : MonoBehaviour
     {
         return darkVariables;
     }
-
-    //public List<MirrorPiece> GetLightPieces()
-    //{
-    //    return lightMirror.GetActivePieces();
-    //}
-
-    //public List<MirrorPiece> GetDarkPieces()
-    //{
-    //    return darkMirror.GetActivePieces();
-    //}
-
     public void AddPlayer(Player newPlayer)
     {
         player = newPlayer;

@@ -128,6 +128,10 @@ public class Chamber : MonoBehaviour
         closedDoor.Room.gameObject.SetActive(true);
         closedDoor.Room.Activate();
 
+        //Add charges to the Dimension Manager when the new door opens, move to enemy spawned later
+        DimensionManager dimManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
+        dimManager.GainCharges(1);
+
         // Start opening the closed door
         StartCoroutine(closedDoor.Coroutine_Open());
 

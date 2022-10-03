@@ -22,8 +22,9 @@ public  class Enemy : Character
         parent = gameObject.transform.parent.gameObject;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         float distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
 
         if(!playerNoticed)
