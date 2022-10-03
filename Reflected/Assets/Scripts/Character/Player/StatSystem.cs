@@ -41,7 +41,7 @@ public class StatSystem : MonoBehaviour, ISavable
 
         ResetStats();
 
-        Dictionary<string, float> stats = upgradeManager.GetLightPieces();
+        Dictionary<string, float> stats = upgradeManager.GetTrueNodes();
 
         foreach (KeyValuePair<string, float> pair in stats)
         {
@@ -87,7 +87,7 @@ public class StatSystem : MonoBehaviour, ISavable
 
         ResetStats();
 
-        Dictionary<string, float> stats = upgradeManager.GetDarkPieces();
+        Dictionary<string, float> stats = upgradeManager.GetTrueNodes();
 
         foreach (KeyValuePair<string, float> pair in stats)
         {
