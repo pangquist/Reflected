@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public  class Enemy : Character
 {
-    [SerializeField] Slider healthBar;
+    [SerializeField] Image healthBar;
     
     [SerializeField] Canvas combatTextCanvas;
     [SerializeField] float aggroRange;
@@ -56,8 +56,7 @@ public  class Enemy : Character
             healthBar.gameObject.SetActive(true);
         else if (currentHealth <= 0)
         {
-            AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
-            aiDirector.killEnemyInRoom();
+            Die();
             return;
         }
 
@@ -69,6 +68,20 @@ public  class Enemy : Character
         text.SetDamageText(damage);
 
         base.TakeDamage(damage);
-        healthBar.value = GetHealthPercentage();
+        healthBar.fillAmount = GetHealthPercentage();
+    }
+
+    protected override void Die()
+    {
+        AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
+        aiDirector.killEnemyInRoom();
+        base.Die();
+    }
+
+    public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instaintiated (from the EnemySpanwer-script)
+    {
+        currentHealth += maxHealth * extraDifficultyPercentage;
+
+        damage += damage * extraDifficultyPercentage;
     }
 }

@@ -24,8 +24,7 @@ public class Player : Character, ISavable
     //UpgradeManager upgradeManager;
 
     DimensionManager dimensionManager;
-
-    bool lightDimension;
+    [SerializeField] Ability swapAbility;
 
     public delegate void InteractWithObject();
     public static event InteractWithObject OnObjectInteraction;
@@ -41,10 +40,8 @@ public class Player : Character, ISavable
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        dimensionManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
+        dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
         dimensionManager.SetStatSystem(stats);
-        dimensionManager.UpdateChargeBar(chargeBar);
-        lightDimension = true;
 
         ChangeStats();
     }
@@ -108,7 +105,7 @@ public class Player : Character, ISavable
 
     public void ChangeStats()
     {
-        if (lightDimension)
+        if (DimensionManager.True)
         {
             stats.GetLightStats();
         }
@@ -122,21 +119,12 @@ public class Player : Character, ISavable
 
     public void SwapDimension()
     {
-        if (lightDimension && dimensionManager.CanSwapTrue())
+        if (dimensionManager.TrySwap())
         {
-            dimensionManager.SetTrueDimension();
+            ChangeStats();
+            if (swapAbility)
+                swapAbility.DoEffect();
         }
-        else if (!lightDimension && dimensionManager.CanSwapMirror())
-        {
-            dimensionManager.SetMirrorDimension();
-        }
-        else
-            return;
-
-        dimensionManager.UpdateChargeBar(chargeBar);
-
-        lightDimension = !lightDimension;
-        ChangeStats();
     }
 
     public void Interact()

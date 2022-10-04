@@ -48,7 +48,7 @@ public class Character : MonoBehaviour, IEffectable
         currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
     }
 
-    void Die()
+    protected virtual void Die()
     {
         anim.Play("Death");
     }

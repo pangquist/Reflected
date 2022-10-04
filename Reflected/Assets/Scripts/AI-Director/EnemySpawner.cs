@@ -11,7 +11,6 @@ public class EnemySpawner : MonoBehaviour
     GameObject enemyToSpawn;
     List<GameObject> enemyList = new List<GameObject>();
 
-    //List<SpawnLocation> spawnLocations = new List<SpawnLocation>();
     List<Transform> spawnTransforms = new List<Transform>();
     Transform spawnLocation;
 
@@ -31,34 +30,42 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    public void SpawnEnemy(float spawnTime, int enemyAmount)
+    public void SpawnEnemy(float spawnTime, int enemyAmount, float enemyadaptiveDifficulty)
     {
-        StartCoroutine(SpawnWave(spawnTime, enemyAmount));
+        StartCoroutine(SpawnWave(spawnTime, enemyAmount, enemyadaptiveDifficulty));
     }
 
-    private IEnumerator SpawnWave(float spawnTime, int enemyAmount)
+    private IEnumerator SpawnWave(float spawnTime, int enemyAmount, float enemyAdaptiveDifficulty)
     {
-        yield return new WaitForSeconds(spawnTime);
-
-        for (int i = 0; i < enemyAmount; i++)
+        try
         {
-            GetRandomEnemy();
-            if (spawnTransforms.Count <= 0) GetSpawnlocations();
-            spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-            Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0));
-            spawnTransforms.Remove(spawnLocation);
+            //yield return new WaitForSeconds(spawnTime);
+
+            for (int i = 0; i < enemyAmount; i++)
+            {
+                GetRandomEnemy();
+                if (spawnTransforms.Count <= 0) GetSpawnlocations();
+                spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+                Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponent<Enemy>().AdaptiveDifficulty(enemyAdaptiveDifficulty);
+                spawnTransforms.Remove(spawnLocation);
+            }
+
+            //yield return new WaitForSeconds(spawnTime);
+
+            for (int i = 0; i < enemyAmount; i++)
+            {
+                GetBiasedEnemy();
+                if (spawnTransforms.Count <= 0) GetSpawnlocations();
+                spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+                Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponent<Enemy>().AdaptiveDifficulty(enemyAdaptiveDifficulty);
+                spawnTransforms.Remove(spawnLocation);
+            }
         }
-
-        yield return new WaitForSeconds(spawnTime);
-
-        for (int i = 0; i < enemyAmount; i++)
+        catch
         {
-            GetBiasedEnemy();
-            if (spawnTransforms.Count <= 0) GetSpawnlocations();
-            spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-            Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0));
-            spawnTransforms.Remove(spawnLocation);
+
         }
+        yield return null;
     }
 
     private void GetSpawnlocations()
@@ -85,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (meleePlayer)
         {
-            if(percentage <= bias)
+            if (percentage <= bias)
             {
                 enemyToSpawn = enemyRange;
             }

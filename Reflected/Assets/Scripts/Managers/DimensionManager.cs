@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -14,57 +15,90 @@ using UnityEngine.UI;
 /// </summary>
 public class DimensionManager : MonoBehaviour
 {
-    [SerializeField] Volume volume;
-    [SerializeField] VolumeProfile trueProfile;
-    [SerializeField] VolumeProfile mirrorProfile;
+    [Header("Post processing")]
+    [SerializeField] private Volume volume;
+    [SerializeField] private VolumeProfile trueProfile;
+    [SerializeField] private VolumeProfile mirrorProfile;
 
-    [SerializeField] List<ChangeableObject> changeableObjects;
+    [Header("Lighting")]
+    [SerializeField] private GameObject trueLighting;
+    [SerializeField] private GameObject mirrorLighting;
 
+    [Header("Skybox")]
+    [SerializeField] private Material trueSkybox;
+    [SerializeField] private Material mirrorSkybox;
 
-    [Header("Charges")]
-    [SerializeField] int maximumCharges;
-    [SerializeField] int currentCharges;
-    [SerializeField] int requiredChargesTrue;
-    [SerializeField] int requiredChargesMirror;
+    [Header("Changeable")]
+    [SerializeField] private List<ChangeableObject> changeableObjects;
 
-    StatSystem statSystem;
+    [Header("Ability")]
+    [SerializeField] private GameObject chargeBar;
+    [SerializeField] private int maximumCharges;
+    [SerializeField] private int currentCharges;
 
-    //public enum Dimension
-    //{
-    //    True, Mirror
-    //};
+    [Header("Read Only")]
+    [ReadOnly][SerializeField] private StatSystem statSystem;
 
-    //public Dimension currentDimension;
+    private static Dimension currentDimension;
 
-    void Awake()
+    // Properties
+
+    public static Dimension CurrentDimension => currentDimension;
+
+    /// <summary>
+    /// Returns true if the current dimension is True
+    /// </summary>
+    public static bool True => currentDimension == Dimension.True;
+
+    /// <summary>
+    /// Returns true if the current dimension is Mirror
+    /// </summary>
+    public static bool Mirror => currentDimension == Dimension.Mirror;
+
+    private void Awake()
     {
-        DontDestroyOnLoad(this);
+        SetDimension(Dimension.True);
+        UpdateChargeBar();
     }
 
-    public void SetTrueDimension()
+    /// <summary>
+    /// Swaps dimension if fully charged. Returns whether or not the swap was successful
+    /// </summary>
+    public bool TrySwap()
     {
-        if (currentCharges < requiredChargesTrue)
-            return;
+        if (!CanSwap())
+            return false;
 
-        currentCharges -= requiredChargesTrue + statSystem.GetChargesToSwapTrue();
-
-        volume.profile = trueProfile;
-
-        foreach (ChangeableObject changeableObject in changeableObjects)
-            changeableObject.ChangeToTrueMesh();
+        ForcedSwap();
+        ResetCharges();
+        return true;
     }
 
-    public void SetMirrorDimension()
+    /// <summary>
+    /// Swaps dimension without affecting charges.
+    /// </summary>
+    public void ForcedSwap()
     {
-        if (currentCharges < requiredChargesMirror)
-            return;
+        SetDimension(Mirror ? Dimension.True : Dimension.Mirror);
+    }
 
-        currentCharges -= requiredChargesMirror + statSystem.GetChargesToSwapMirror();
+    /// <summary>
+    /// Sets the current dimension to Mirror regardless of current charges
+    /// </summary>
+    public void SetDimension(Dimension dimension)
+    {
+        currentDimension = dimension;
 
-        volume.profile = mirrorProfile;
+        volume.profile = True ? trueProfile : mirrorProfile;
+
+        trueLighting.SetActive(True);
+        mirrorLighting.SetActive(Mirror);
+
+        RenderSettings.skybox = True ? trueSkybox : mirrorSkybox;
+        RenderSettings.fog = Mirror;
 
         foreach (ChangeableObject changeableObject in changeableObjects)
-            changeableObject.ChangeToMirrorMesh();
+            changeableObject.UpdateMesh();
     }
 
     public void AddChangeableObject(ChangeableObject newObject)
@@ -72,29 +106,36 @@ public class DimensionManager : MonoBehaviour
         changeableObjects.Add(newObject);
     }
     
-    public bool CanSwapTrue()
+    public bool CanSwap()
     {
-        return currentCharges >= requiredChargesTrue + statSystem.GetChargesToSwapTrue();
+        return currentCharges >= maximumCharges;
     }
 
-    public bool CanSwapMirror()
+    public void SetMaxCharges(int newCharges)
     {
-        return currentCharges >= requiredChargesMirror + statSystem.GetChargesToSwapMirror();
+        maximumCharges = newCharges;
+        UpdateChargeBar();
     }
 
-    public void SetRequiredChargesTrue(int newCharges)
+    public int GetCurrentCharges()
     {
-        requiredChargesTrue = newCharges;
+        return currentCharges;
     }
 
-    public void SetRequiredChargesMirror(int newCharges)
+    public int GetMaxCharges()
     {
-        requiredChargesMirror = newCharges;
+        return maximumCharges;
     }
-
     public void GainCharges(int addCharges)
     {
-        currentCharges += Mathf.Clamp(addCharges, addCharges, maximumCharges-currentCharges);
+        currentCharges = Mathf.Clamp(currentCharges + addCharges, 0, maximumCharges);
+        UpdateChargeBar();
+    }
+
+    public void ResetCharges()
+    {
+        currentCharges = 0;
+        UpdateChargeBar();
     }
 
     public void SetStatSystem(StatSystem newStatSystem)
@@ -102,12 +143,16 @@ public class DimensionManager : MonoBehaviour
         statSystem = newStatSystem;
     }
 
-    public void UpdateChargeBar(GameObject go)
+    private void UpdateChargeBar()
     {
-        Slider chargeSlider = go.GetComponent<Slider>();
-        TMP_Text sliderText = go.transform.Find("ChargeText").GetComponent<TMP_Text>();
+        if (SceneManager.GetActiveScene().name == "Start Scene")
+            return;
 
-        chargeSlider.value = (float)currentCharges / (float)maximumCharges;
+        Slider chargeSlider = chargeBar.GetComponent<Slider>();
+        TMP_Text sliderText = chargeBar.transform.Find("ChargeText").GetComponent<TMP_Text>();
+
+        chargeSlider.value = maximumCharges == 0 ? 1f : (float)currentCharges / (float)maximumCharges;
         sliderText.text = currentCharges + " / " + maximumCharges;
     }
+
 }

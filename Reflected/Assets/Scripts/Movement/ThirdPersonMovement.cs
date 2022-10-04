@@ -24,28 +24,15 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] bool isGrounded;
 
     [Header("Dash Properties")]
-    [SerializeField] float dashDuration;
-    [SerializeField] float dashSpeed;
-    [SerializeField] float dashCooldown;
-    float currentDashTimer;
-    bool isDashing;
+    [SerializeField] Dash dashAbility;
 
     private Vector3 velocity;
-    private AbilityCooldowns cooldownstarter;
     // Start is called before the first frame update
-    private void Start()
-    {
-        cooldownstarter = FindObjectOfType<AbilityCooldowns>();
-        currentDashTimer = dashCooldown;
-    }
 
     private void Update()
     {
         if (!isGrounded)
             velocity.y += gravity * Time.deltaTime;
-
-        if (currentDashTimer < dashCooldown)
-            currentDashTimer += Time.deltaTime;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         controller.Move(velocity * Time.deltaTime);
@@ -69,21 +56,10 @@ public class ThirdPersonMovement : MonoBehaviour
             controller.Move(moveDir.normalized * speed * stats.GetMovementSpeed() * CharacterMovementPenalty() * Time.deltaTime);
         }
     }
-    public float GetDashCooldown()
-    {
-        return dashCooldown;
-    }
-    public bool IsOnCooldown()
-    {
-        return currentDashTimer < dashCooldown;
-    }
-    public float GetCurrentCooldown()
-    {
-        return dashCooldown - currentDashTimer;
-    }
+
     public void Jump()
     {
-        if (isDashing)
+        if (dashAbility.IsDashing())
             return;
 
         if (isGrounded)
@@ -92,32 +68,20 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void Dash()
     {
-        if (currentDashTimer >= dashCooldown && isGrounded)
+        if (isGrounded)
         {
-            StartCoroutine("dashAction");
-            currentDashTimer = 0;
-            cooldownstarter.Ability2Use();
+            dashAbility.DoEffect();
         }
+    }
+
+    public Dash GetDash()
+    {
+        return dashAbility;
     }
 
     public void AddSpeed(float amount)
     {
         speed += amount;
-    }
-
-    IEnumerator dashAction()
-    {
-        Debug.Log("Dash!");
-        isDashing = true;
-        float progress = 0;
-        while (progress < dashDuration)
-        {
-            transform.position += transform.forward * dashSpeed;
-            progress += Time.deltaTime;
-            yield return null;
-        }
-        isDashing = false;
-        yield break;
     }
 
     private float CharacterMovementPenalty()

@@ -41,15 +41,16 @@ public class AiDirectorEditor : Editor
 
     void DisplayStatisticInfo()
     {
-        
         EditorGUILayout.TextField("DifficultyLevel");
         EditorGUILayout.PropertyField(serializedObject.FindProperty("difficultyLevel"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("spawntime"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("amountOfEnemies"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("amountOfEnemiesToSpawn"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("avergaeTimeToClearRoom"));
         EditorGUILayout.Space();
         EditorGUILayout.TextField("Room Statistics");
         EditorGUILayout.PropertyField(serializedObject.FindProperty("enemiesInRoom"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("timeToClearRoom"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("activeRoom"));
         EditorGUILayout.Space();
         EditorGUILayout.TextField("Player Statistics");
         EditorGUILayout.PropertyField(serializedObject.FindProperty("playerCurrentHelathPercentage"));
@@ -60,8 +61,6 @@ public class AiDirectorEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("numberOfRoomsCleared"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("numberOfRoomsLeftOnMap"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("NumberOfRoomsSinceShop"));
-
-
     }
 
     void DisplayPlayerInfo()
