@@ -10,6 +10,7 @@ public class AbilityCooldowns : MonoBehaviour
     [SerializeField] Image ability1Icon;
     [SerializeField] Image ability1FillImage;
     [SerializeField] TextMeshProUGUI ability1text;
+
     [Header("Ability 2")]
     [SerializeField] Image ability2Icon;
     [SerializeField] Image ability2FillImage;

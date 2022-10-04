@@ -7,6 +7,9 @@ public class PowerUpUi : MonoBehaviour
 {
     [SerializeField] GameObject UpgradeUiPanel;
     private Player player;
+
+    private List<PowerUpEffect> Powerups;
+
     // Start is called before the first frame update
     void Start()
     {
