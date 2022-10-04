@@ -77,4 +77,11 @@ public  class Enemy : Character
         aiDirector.killEnemyInRoom();
         base.Die();
     }
+
+    public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instaintiated (from the EnemySpanwer-script)
+    {
+        currentHealth += maxHealth * extraDifficultyPercentage;
+
+        damage += damage * extraDifficultyPercentage;
+    }
 }
