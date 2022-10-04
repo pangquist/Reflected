@@ -7,20 +7,17 @@ public class TerrainChunk : MonoBehaviour
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private MeshCollider meshCollider;
+    [SerializeField] private RectInt rect;
 
     public MeshRenderer MeshRenderer() { return meshRenderer; }
     public MeshFilter MeshFilter() { return meshFilter; }
     public MeshCollider MeshCollider() { return meshCollider; }
+    public RectInt Rect() { return rect; }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Initialize(Mesh mesh, RectInt rect)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        meshFilter.mesh = mesh;
+        meshCollider.sharedMesh = mesh;
+        this.rect = rect;
     }
 }

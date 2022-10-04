@@ -35,49 +35,40 @@ public class TerrainGenerator : MonoBehaviour
 
     public void Generate(Map map)
     {
-        Mesh mesh = PlaneMeshGenerator.GenerateHorizontal(MapGenerator.ChunkSize, MapGenerator.ChunkSize, 1, true);
-        terrainChunkPrefab.GetComponentInChildren<MeshFilter>().mesh = mesh;
-        terrainChunkPrefab.GetComponentInChildren<MeshCollider>().sharedMesh = mesh;
-        terrainChunkPrefab.transform.GetChild(0).position = new Vector3(MapGenerator.ChunkSize * 0.5f, 0, MapGenerator.ChunkSize * 0.5f);
 
-        for (int xChunkIndex = 0; xChunkIndex < map.SizeX; xChunkIndex++)
+        foreach (Room room in map.Rooms)
         {
-            for (int zChunkIndex = 0; zChunkIndex < map.SizeZ; zChunkIndex++)
-            {
-                // Calculate the tile position based on the X and Z indices
-                Vector3 tilePosition = new Vector3(xChunkIndex * MapGenerator.ChunkSize + MapGenerator.ChunkSize, startY, zChunkIndex * MapGenerator.ChunkSize + MapGenerator.ChunkSize);
+            RectInt roomRect = room.Rect.Inflated(1, 1);
+            Mesh mesh = PlaneMeshGenerator.GenerateHorizontal(roomRect.width * MapGenerator.ChunkSize, roomRect.height * MapGenerator.ChunkSize, 1, true);
+            
 
-                foreach (Room room in map.Rooms)
-                {
-                    if (room.Rect.Inflated(1, 1).Contains(new Vector2Int(xChunkIndex, zChunkIndex)))
-                    {
-                        // Instantiate a new TerrainChunk
-                        GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.transform);
-                        GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
-                        //BakeNavMesh(terrainChunk.GetComponentInChildren<NavMeshSurface>());
-                        objectPlacer.PlaceDecorations(terrainChunk.GetComponent<TerrainChunk>());
-                        break;
-                    }
-                }
+            Vector3 position = new Vector3(roomRect.center.x * MapGenerator.ChunkSize, startY, roomRect.center.y * MapGenerator.ChunkSize);
+            // Instantiate a new TerrainChunk
+            TerrainChunk terrainChunk = Instantiate(terrainChunkPrefab, position, Quaternion.Euler(0, 180, 0), room.transform).GetComponent<TerrainChunk>();
+            terrainChunk.Initialize(mesh, roomRect);
 
-                foreach (Chamber chamber in map.Chambers)
-                {
-                    RectInt rect;
+            GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
+            //BakeNavMesh(terrainChunk.GetComponentInChildren<NavMeshSurface>());
+            objectPlacer.PlaceDecorations(terrainChunk.GetComponent<TerrainChunk>());
+        }
 
-                    if (chamber.Orientation == Orientation.Horizontal)
-                        rect = chamber.Rect.Inflated(0, 1);
-                    else
-                        rect = chamber.Rect.Inflated(1, 0);
+        foreach (Chamber chamber in map.Chambers)
+        {
+            RectInt rect;
 
-                    if (rect.Contains(new Vector2Int(xChunkIndex, zChunkIndex)))
-                    {
-                        // Instantiate a new TerrainChunk
-                        GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), chamber.transform);
-                        GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
-                        break;
-                    }
-                }
-            }
+            if (chamber.Orientation == Orientation.Horizontal)
+                rect = chamber.Rect.Inflated(0, 1);
+            else
+                rect = chamber.Rect.Inflated(1, 0);
+
+            Mesh mesh = PlaneMeshGenerator.GenerateHorizontal(rect.width * MapGenerator.ChunkSize, rect.height * MapGenerator.ChunkSize, 1, true);
+
+            Vector3 position = new Vector3(rect.center.x * MapGenerator.ChunkSize, startY, rect.center.y * MapGenerator.ChunkSize);
+            // Instantiate a new TerrainChunk
+            TerrainChunk terrainChunk = Instantiate(terrainChunkPrefab, position, Quaternion.Euler(0, 180, 0), chamber.transform).GetComponent<TerrainChunk>();
+            terrainChunk.Initialize(mesh, rect);
+
+            GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
         }
     }
 
@@ -94,8 +85,8 @@ public class TerrainGenerator : MonoBehaviour
     {
         // calculate chunk depth and width based on the mesh vertices
         Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;
-        int chunkDepth = (int)Mathf.Sqrt(meshVertices.Length);
-        int chunkWidth = chunkDepth;
+        int chunkDepth = terrainChunk.Rect().width * MapGenerator.ChunkSize + 1;
+        int chunkWidth = terrainChunk.Rect().height * MapGenerator.ChunkSize + 1;
         // calculate the offsets based on the tile position
         float offsetX = -terrainChunk.transform.position.x;
         float offsetZ = -terrainChunk.transform.position.z;
@@ -149,7 +140,7 @@ public class TerrainGenerator : MonoBehaviour
 
                 TerrainType terrain = PickTerrainType(height);
 
-                colorMap[colorIndex] = terrain.color;
+                colorMap[colorIndex] = new Color(height, height, height);
             }
         }
         // create a new texture and set its pixel colors
@@ -157,7 +148,7 @@ public class TerrainGenerator : MonoBehaviour
         chunkTexture.wrapMode = TextureWrapMode.Clamp;
         chunkTexture.SetPixels(colorMap);
         chunkTexture.Apply();
-
+        System.IO.File.WriteAllBytes("C:/Users/Pangquist/heightMap.png", chunkTexture.EncodeToPNG());
         return chunkTexture;
     }
 
