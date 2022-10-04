@@ -78,7 +78,7 @@ public  class Enemy : Character
         base.Die();
     }
 
-    public void AdaptiveDifficulty(float extraDifficultyPercentage)
+    public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instaintiated (from the EnemySpanwer-script)
     {
         currentHealth += maxHealth * extraDifficultyPercentage;
 
