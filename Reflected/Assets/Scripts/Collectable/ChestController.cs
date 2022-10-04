@@ -12,7 +12,7 @@ public class ChestController : Chest
             isOpen = true;
             Debug.Log("Chest is now open...");
             if (spawnedObject == null)
-                SetItems();
+                SpawnItem(1);
         }
     }
 

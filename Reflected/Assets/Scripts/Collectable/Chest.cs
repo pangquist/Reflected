@@ -8,6 +8,7 @@ public abstract class Chest : MonoBehaviour
     [SerializeField] protected List<GameObject> pickablePowerUps;
     [SerializeField] protected Transform itemHolder;
     protected GameObject spawnedObject;
+    protected GameObject itemToSpawn;
     protected int numberOfPickablePowerups = 3;
 
     public bool isOpen;
@@ -16,6 +17,8 @@ public abstract class Chest : MonoBehaviour
     protected void Start()
     {
         //animator = GetComponent<Animator>();
+        //SetItems();
+        itemToSpawn = lootTable.GetRandom().GetItem();
     }
 
     public abstract void OpenChest(GameObject gameObject);
@@ -46,12 +49,10 @@ public abstract class Chest : MonoBehaviour
 
     protected void SpawnItem(int index)
     {
-        if(index == -1)
-        {
-            spawnedObject = Instantiate(pickablePowerUps[index], itemHolder.position, itemHolder.rotation);
-            spawnedObject.transform.parent = null;
-            itemHolder.gameObject.SetActive(true);
-        }        
+        //spawnedObject = Instantiate(pickablePowerUps[index], itemHolder.position, itemHolder.rotation);
+        spawnedObject = Instantiate(itemToSpawn, itemHolder.position, itemHolder.rotation);
+        spawnedObject.transform.parent = null;
+        itemHolder.gameObject.SetActive(true);
     }
 
     protected void SetItems()
