@@ -40,5 +40,6 @@ public class UiPanel : MonoBehaviour
         coin.text = inventory.inventory[0].stackSize.ToString();
         gems.text = inventory.inventory[1].stackSize.ToString();
         mirrorShard.text = inventory.inventory[2].stackSize.ToString();
+        trueShard.text = inventory.inventory[3].stackSize.ToString();   
     }
 }
