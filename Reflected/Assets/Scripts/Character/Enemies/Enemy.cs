@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public  class Enemy : Character
+public class Enemy : Character
 {
     [SerializeField] Image healthBar;
-    
+
     [SerializeField] Canvas combatTextCanvas;
     [SerializeField] float aggroRange;
 
     GameObject parent;
     Player player;
-    
+
     bool playerNoticed;
 
     protected override void Awake()
@@ -27,9 +27,9 @@ public  class Enemy : Character
         base.Update();
         float distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
 
-        if(!playerNoticed)
+        if (!playerNoticed)
         {
-            if(distance <= aggroRange)
+            if (distance <= aggroRange)
             {
                 playerNoticed = true;
             }
@@ -42,7 +42,7 @@ public  class Enemy : Character
             }
         }
 
-        if(playerNoticed)
+        if (playerNoticed)
         {
             Vector3 direction = (transform.position - player.transform.position).normalized;
             direction.y = 0;
@@ -76,6 +76,24 @@ public  class Enemy : Character
         AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
         aiDirector.killEnemyInRoom();
         base.Die();
+    }
+
+    public IEnumerator Freeze(float slowedMovementSpeed ,float timeFrozen)
+    {
+        float oldMovmentSpeed = movementSpeed;
+        movementSpeed *= slowedMovementSpeed;
+
+        yield return new WaitForSeconds(timeFrozen);
+
+        movementSpeed = oldMovmentSpeed;
+    }
+    public IEnumerator TakeDamageOverTime(float damageOverTime, float time)
+    {
+        for (int i = 0; i < time; i++)
+        {
+            currentHealth -= damageOverTime / time;
+            yield return new WaitForSeconds(1);
+        }
     }
 
     public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instaintiated (from the EnemySpanwer-script)
