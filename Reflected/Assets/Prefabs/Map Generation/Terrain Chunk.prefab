@@ -9,9 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1004545449157618813}
-  - component: {fileID: 3003521132044643102}
-  - component: {fileID: 3919895079874219050}
-  - component: {fileID: 1072643155279158566}
+  - component: {fileID: 6696364092895694207}
   m_Layer: 3
   m_Name: Terrain Chunk
   m_TagString: Untagged
@@ -35,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3003521132044643102
+--- !u!114 &6696364092895694207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,119 +42,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2332618423109250269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9886ff0bc490e1d43aad013ea86adbd0, type: 3}
+  m_Script: {fileID: 11500000, guid: de17b04b506a2604ea50f2a52bc2144f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3919895079874219050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2332618423109250269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d9f2e1b83390b42b6cad41ef3f4ea4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  noiseMapGeneration: {fileID: 3003521132044643102}
-  tileRenderer: {fileID: 6951540968647215804}
+  meshRenderer: {fileID: 6951540968647215804}
   meshFilter: {fileID: 6951540968647215807}
   meshCollider: {fileID: 6951540968647215805}
-  mapScale: 14
-  heightMultiplier: 6
-  terrainTypes:
-  - name: Sand
-    height: 0.3
-    color: {r: 1, g: 0.89326143, b: 0.5330188, a: 1}
-  - name: Grass
-    height: 1
-    color: {r: 0, g: 0.764151, b: 0.1169192, a: 1}
-  heightCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: -0.000117194606
-      inSlope: -0.04240895
-      outSlope: -0.04240895
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0
-      outWeight: 0.45530614
-    - serializedVersion: 3
-      time: 0.25143746
-      value: 0.390176
-      inSlope: 1.1430753
-      outSlope: 1.1430753
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.2661503
-      outWeight: 0.14730963
-    - serializedVersion: 3
-      time: 0.4902078
-      value: 0.45880124
-      inSlope: 0.8897923
-      outSlope: 0.8897923
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.30100933
-      outWeight: 0.46178788
-    - serializedVersion: 3
-      time: 0.7218784
-      value: 0.9537931
-      inSlope: 0.5385164
-      outSlope: 0.5385164
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.26991832
-      outWeight: 0.19913422
-    - serializedVersion: 3
-      time: 1
-      value: 1.0002189
-      inSlope: 0.004363577
-      outSlope: 0.004363577
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.4279568
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  waves:
-  - seed: 15
-    frequency: 1
-    amplitude: 1
-  - seed: 500
-    frequency: 0.5
-    amplitude: 10
---- !u!114 &1072643155279158566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2332618423109250269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0cf2e39d51b23448ac307bfa90f8b52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileGeneration: {fileID: 3919895079874219050}
-  decorations:
-  - terrain: Sand
-    gameObject:
-    - {fileID: 3967780735622217405, guid: a6ef236ed9d6e5543a238deed3a04f8c, type: 3}
-    - {fileID: 1249020213497638079, guid: 53aece54b4a973e4b9539ca60f21fc9e, type: 3}
-    - {fileID: 1587186571227895905, guid: 6ff9ba4ffb95a5c4ba983080ffaf6832, type: 3}
-  - terrain: Grass
-    gameObject:
-    - {fileID: 136287558307536572, guid: c4eb0db332a48404b8f1a6cc13bce9ab, type: 3}
-    - {fileID: 527581394202791689, guid: 4a7be64aa8953144d90bcc190968ea0e, type: 3}
-    - {fileID: 3339087211254786059, guid: 1f61011e827191341b102017967ccd8a, type: 3}
-    - {fileID: 7448233757750244883, guid: 3a387027a1e66664c8fd8e32550b2c9e, type: 3}
-    - {fileID: 1587186571227895905, guid: 6ff9ba4ffb95a5c4ba983080ffaf6832, type: 3}
-    - {fileID: 1249020213497638079, guid: 53aece54b4a973e4b9539ca60f21fc9e, type: 3}
 --- !u!1 &6951540968647215800
 GameObject:
   m_ObjectHideFlags: 0
