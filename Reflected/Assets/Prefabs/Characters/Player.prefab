@@ -196,6 +196,7 @@ MonoBehaviour:
   damage: 3
   attackSpeed: 1
   stats: {fileID: 1776205249}
+  chargeBar: {fileID: 0}
   jumpForce: 20
   weapons:
   - {fileID: 755042740901322163}
@@ -326,6 +327,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 14d901a6-029d-4527-b355-a6f68eacb4fe
     m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 28ef800b-37c9-44ae-bb51-ba403e2297b1
+    m_ActionName: Player/Back[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -376,12 +381,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ea501e0d374ec4f82416575d95fa72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthIncrease: 0
-  damageReduction: 0
+  maxHealthIncrease: 1
+  damageReduction: 1
   movementSpeed: 1
-  damageIncrease: 0
-  attackSpeed: 0
-  areaOfEffect: 0
+  damageIncrease: 1
+  attackSpeed: 1
+  areaOfEffect: 1
+  chargesToSwapTrue: 0
+  chargesToSwapMirror: 0
 --- !u!114 &3300737997665956876
 MonoBehaviour:
   m_ObjectHideFlags: 0

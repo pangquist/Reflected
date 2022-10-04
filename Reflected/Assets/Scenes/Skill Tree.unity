@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 252342374}
   - component: {fileID: 252342375}
   m_Layer: 5
-  m_Name: Damage 25%
+  m_Name: TrueSwap -1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieceDescription: Increases the Damage of the player in the True Dimension by 25%.
+  pieceDescription: Reduces the needed charges to swap to the True Dimension by 1.
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
@@ -599,8 +599,8 @@ MonoBehaviour:
   - {fileID: 809048563}
   resourceCost: 0
   isPlaceable: 1
-  modifiedValue: Damage
-  value: 0.25
+  modifiedValue: True Charges
+  value: -1
   pieceEffectText: {fileID: 0}
 --- !u!114 &252342372
 MonoBehaviour:
@@ -3895,13 +3895,14 @@ GameObject:
   - component: {fileID: 1912488490}
   - component: {fileID: 1912488488}
   - component: {fileID: 1912488489}
+  - component: {fileID: 1912488493}
   m_Layer: 5
-  m_Name: DarkPiece1
+  m_Name: MirrorSwap -1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1912488488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3914,18 +3915,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieceDescription: 
+  pieceDescription: Reduces the needed charges to swap to the Mirror Dimension by
+    1.
   deactivatedSprite: {fileID: 21300000, guid: 431680e4c1d544238a4745d795cc0ac9, type: 3}
   canBeActivatedSprite: {fileID: 21300000, guid: 3e5224fe88e144f68b198fdee4a58b2d,
     type: 3}
   activatedSprite: {fileID: 21300000, guid: 531ec83020de24b7f80dd45b4fca5db6, type: 3}
   mirror: {fileID: 732945600}
-  nextPieces:
-  - {fileID: 591939052}
+  nextPieces: []
   resourceCost: 0
   isPlaceable: 1
-  modifiedValue: 
-  value: 0
+  modifiedValue: Mirror Charges
+  value: -1
   pieceEffectText: {fileID: 0}
 --- !u!114 &1912488489
 MonoBehaviour:
@@ -4038,9 +4039,54 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -127.000015, y: 476.00006}
+  m_AnchoredPosition: {x: -1, y: 380}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1912488493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912488487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1912488488}
+          m_TargetAssemblyTypeName: MirrorPiece, Assembly-CSharp
+          m_MethodName: SetTextToEffect
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1912488488}
+          m_TargetAssemblyTypeName: MirrorPiece, Assembly-CSharp
+          m_MethodName: SetTextToNull
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2013064281
 GameObject:
   m_ObjectHideFlags: 0

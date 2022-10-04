@@ -13,7 +13,7 @@ public class PlayerEditorTemplate : Editor
 {
     public enum DisplayCategory
     {
-        Basic, Combat
+        Basic, Combat, Dimension
     }
 
     public DisplayCategory categoryToDisplay;
@@ -31,6 +31,9 @@ public class PlayerEditorTemplate : Editor
                 break;
             case DisplayCategory.Combat:
                 DisplayCombatInfo();
+                break;
+                case DisplayCategory.Dimension:
+                DisplayDimensionInfo();
                 break;
         }
 
@@ -51,5 +54,10 @@ public class PlayerEditorTemplate : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("attackSpeed"));
         EditorGUILayout.Space();
         EditorGUILayout.PropertyField(serializedObject.FindProperty("weapons"));
+    }
+
+    void DisplayDimensionInfo()
+    {
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("chargeBar"));
     }
 }

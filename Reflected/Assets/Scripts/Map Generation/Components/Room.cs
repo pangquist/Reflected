@@ -10,6 +10,7 @@ public class Room : MonoBehaviour
     [ReadOnly][SerializeField] private List<Wall> walls;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private bool cleared;
+    [ReadOnly][SerializeField] private RoomType type;
 
     private static Map map;
 
@@ -19,6 +20,7 @@ public class Room : MonoBehaviour
     public List<Wall> Walls => walls;
     public List<Chamber> Chambers => chambers;
     public bool Cleared => cleared;
+    public RoomType Type => type;
 
     public static void StaticInitialize(Map map)
     {
@@ -30,6 +32,11 @@ public class Room : MonoBehaviour
         this.rect = rect;
         name = "Room " + index;
         return this;
+    }
+
+    public void SetType(RoomType type)
+    {
+        this.type = type;
     }
 
     public void ScaleUpData()
@@ -49,7 +56,6 @@ public class Room : MonoBehaviour
     /// <summary>
     /// Deactivates this room and all connected chambers except the caller
     /// </summary>
-    /// <param name="caller"></param>
     public void Deactivate(Chamber caller)
     {
         foreach (Chamber chamber in chambers)
@@ -65,13 +71,21 @@ public class Room : MonoBehaviour
     /// <summary>
     /// Activates all connected chambers
     /// </summary>
-    /// <param name="caller"></param>
     public void Activate()
     {
         map.ActiveRoom = this;
 
         foreach (Chamber chamber in chambers)
             chamber.gameObject.SetActive(true);
+
+        if (!cleared)
+        {
+            if (type == RoomType.Monster || type == RoomType.Boss)
+                GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>().EnterRoom();
+
+            else
+                SetCleared(true);
+        }
     }
 
     public void SetCleared(bool cleared)
@@ -79,11 +93,18 @@ public class Room : MonoBehaviour
         this.cleared = cleared;
 
         if (cleared)
+        {
             foreach (Chamber chamber in chambers)
                 chamber.Open(this);
 
+            if (type == RoomType.Monster || type == RoomType.Boss)
+                map.DimensionManager.GainCharges(1);
+        }
+          
         else
+        {
             foreach (Chamber chamber in chambers)
                 chamber.Close(this);
+        } 
     }
 }
