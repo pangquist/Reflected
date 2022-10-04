@@ -24,6 +24,7 @@ public class Player : Character, ISavable
     //UpgradeManager upgradeManager;
 
     DimensionManager dimensionManager;
+    [SerializeField] Ability swapAbility;
 
     public delegate void InteractWithObject();
     public static event InteractWithObject OnObjectInteraction;
@@ -116,7 +117,11 @@ public class Player : Character, ISavable
     public void SwapDimension()
     {
         if (dimensionManager.TrySwap())
+        {
             ChangeStats();
+            if (swapAbility)
+                swapAbility.DoEffect();
+        }
     }
 
     public void Interact()
