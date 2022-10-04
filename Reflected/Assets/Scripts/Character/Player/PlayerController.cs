@@ -98,4 +98,10 @@ public class PlayerController : MonoBehaviour
     {
         return attackLocked;
     }
+
+    public bool Back()
+    {
+        return playerControls.Player.Back.triggered;
+    }
+
 }

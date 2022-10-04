@@ -22,8 +22,9 @@ public  class Enemy : Character
         parent = gameObject.transform.parent.gameObject;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         float distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
 
         if(!playerNoticed)
@@ -54,8 +55,10 @@ public  class Enemy : Character
         if (currentHealth == maxHealth)
             healthBar.gameObject.SetActive(true);
         else if (currentHealth <= 0)
+        {
+            Die();
             return;
-
+        }
 
         Vector3 direction = (transform.position - player.transform.position).normalized;
         direction.y = 0;
@@ -66,5 +69,12 @@ public  class Enemy : Character
 
         base.TakeDamage(damage);
         healthBar.value = GetHealthPercentage();
+    }
+
+    protected override void Die()
+    {
+        AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
+        aiDirector.killEnemyInRoom();
+        base.Die();
     }
 }

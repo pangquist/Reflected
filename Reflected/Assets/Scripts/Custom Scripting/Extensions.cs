@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using System.Linq;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public static class Extensions
 {
@@ -194,5 +195,38 @@ public static class Extensions
         return rect.x + rect.width;
     }
 
+    /// <summary>
+    /// Enables interactions with this Button and triggers its "Normal" animation
+    /// </summary>
+    public static void Enable(this Button button)
+    {
+        button.interactable = true;
+        button.animator.SetTrigger("Normal");
+    }
+
+    /// <summary>
+    /// Disables interactions with this Button and triggers its "Disabled" animation
+    /// </summary>
+    public static void Disable(this Button button)
+    {
+        button.interactable = false;
+        button.animator.SetTrigger("Disabled");
+    }
+
+    /// <summary>
+    /// Enables or disables this Button
+    /// </summary>
+    public static void SetEnabled(this Button button, bool enable)
+    {
+        if (enable)
+            button.Enable();
+        else
+            button.Disable();
+    }
+
+    public static T GetRandom<T>(this List<T> list)
+    {
+        return list[Random.Range(0, list.Count)];
+    }
 
 }

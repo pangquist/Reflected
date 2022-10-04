@@ -9,7 +9,7 @@ public class AiDirectorEditor : Editor
 {
     public enum DisplayCategory
     {
-        Statistics, Combat
+        Statistics, Player, ActiveRoom, Map
     }
 
     public DisplayCategory categoryToDisplay;
@@ -25,8 +25,14 @@ public class AiDirectorEditor : Editor
             case DisplayCategory.Statistics:
                 DisplayStatisticInfo();
                 break;
-            case DisplayCategory.Combat:
-                DisplayCombatInfo();
+            case DisplayCategory.Player:
+                DisplayPlayerInfo();
+                break;
+            case DisplayCategory.ActiveRoom:
+                DisplayActiveRoomInfo();
+                break;
+            case DisplayCategory.Map:
+                DisplayMapInfo();
                 break;
         }
 
@@ -35,13 +41,49 @@ public class AiDirectorEditor : Editor
 
     void DisplayStatisticInfo()
     {
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("timeToClearRoom"));
+        EditorGUILayout.TextField("DifficultyLevel");
         EditorGUILayout.PropertyField(serializedObject.FindProperty("difficultyLevel"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("spawntime"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("amountOfEnemiesToSpawn"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("avergaeTimeToClearRoom"));
+        EditorGUILayout.Space();
+        EditorGUILayout.TextField("Room Statistics");
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("enemiesInRoom"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("timeToClearRoom"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("activeRoom"));
+        EditorGUILayout.Space();
+        EditorGUILayout.TextField("Player Statistics");
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("playerCurrentHelathPercentage"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("temporaryCurrency"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("numberOfEnemiesKilled"));
+        EditorGUILayout.Space();
+        EditorGUILayout.TextField("Map Statistics");
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("numberOfRoomsCleared"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("numberOfRoomsLeftOnMap"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("NumberOfRoomsSinceShop"));
     }
 
-    void DisplayCombatInfo()
+    void DisplayPlayerInfo()
     {
-        EditorGUILayout.Space();
+        EditorGUILayout.TextField("Player Statistics");
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("playerCurrentHelathPercentage"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("temporaryCurrency"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("numberOfEnemiesKilled"));
+    }
+
+    void DisplayActiveRoomInfo()
+    {
+        EditorGUILayout.TextField("Room Statistics");
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("enemiesInRoom"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("timeToClearRoom"));
+    }
+
+    void DisplayMapInfo()
+    {
+        EditorGUILayout.TextField("Map Statistics");
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("numberOfRoomsCleared"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("numberOfRoomsLeftOnMap"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("NumberOfRoomsSinceShop"));
     }
 }
 

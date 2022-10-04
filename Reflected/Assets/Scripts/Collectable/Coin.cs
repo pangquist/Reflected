@@ -25,6 +25,7 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
     private void Start()
     {
         coinData.amount = UnityEngine.Random.Range(1, 10);
+        coinData.value = coinData.amount;
     }
 
     public void Collect()

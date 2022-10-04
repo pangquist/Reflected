@@ -13,6 +13,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] float speed = 12f;
     [SerializeField] float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
+    private float movementPenalty;
 
     [Header("Jump Properties")]
     [SerializeField] float gravity = -9.81f;
@@ -65,7 +66,7 @@ public class ThirdPersonMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * stats.GetMovementSpeed() * Time.deltaTime);
+            controller.Move(moveDir.normalized * speed * stats.GetMovementSpeed() * CharacterMovementPenalty() * Time.deltaTime);
         }
     }
     public float GetDashCooldown()
@@ -117,5 +118,10 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         isDashing = false;
         yield break;
+    }
+
+    private float CharacterMovementPenalty()
+    {
+        return GetComponent<Character>().MovementPenalty();
     }
 }

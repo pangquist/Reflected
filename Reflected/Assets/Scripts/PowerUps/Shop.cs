@@ -5,15 +5,13 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     [SerializeField] WeightedRandomList<LootPool> lootTablePowerUps;
-    //[SerializeField] WeightedRandomList<LootPool> lootTableCollectables;
+    [SerializeField] WeightedRandomList<LootPool> lootTableCollectables;
     [SerializeField] List<GameObject> shopItems;
-    //[SerializeField] GameObject[] shopItems = new GameObject[4];
     [SerializeField] Transform itemHolder;
     [SerializeField] ItemData payment;
     GameObject spawnedObject;
 
     //public Animator animator;
-    //[SerializeField] int amountToPay = 1;
     [SerializeField] int numberOfCollectableItems = 2;
     [SerializeField] int numberOfPowerUps = 2;
     int totalNumberOfItems;
@@ -25,16 +23,20 @@ public class Shop : MonoBehaviour
         PopulateShop();
     }
 
-    public void BuyItem(GameObject gameObject)
+    public void BuyItem(GameObject gameObject) //Have to send in an index here for the shop to give you that item
     {
+        //The index you give should be put in on line 37 and 38
         Inventory inventory = gameObject.GetComponent<Inventory>();
         if (inventory)
         {
-            if (totalNumberOfItems > 0 && inventory.HaveEnoughCurrency(payment, shopItems[totalNumberOfItems - 1].GetComponent<InteractablePowerUp>().powerUpEffect.value)) //
+            if (shopItems.Count > 0 && inventory.HaveEnoughCurrency(payment, shopItems[totalNumberOfItems - 1].GetComponent<InteractablePowerUp>().powerUpEffect.value)) 
             {
-                inventory.Remove(payment, shopItems[totalNumberOfItems - 1].GetComponent<InteractablePowerUp>().powerUpEffect.value);                                
+                                               
                 if (spawnedObject == null)
+                {
+                    inventory.Remove(payment, shopItems[totalNumberOfItems - 1].GetComponent<InteractablePowerUp>().powerUpEffect.value);
                     SpawnItem(--totalNumberOfItems);
+                }                    
                 else
                     Debug.Log("Spawn not working");
             }
@@ -43,8 +45,8 @@ public class Shop : MonoBehaviour
 
     void SpawnItem(int index)
     {
-        //GameObject item = lootTable.GetRandom();
         spawnedObject = Instantiate(shopItems[index], itemHolder.position, itemHolder.rotation);
+        shopItems.RemoveAt(index);
         Debug.Log("Item should spawn...");
         spawnedObject.transform.parent = null;
         itemHolder.gameObject.SetActive(true);
@@ -59,9 +61,14 @@ public class Shop : MonoBehaviour
 
         //for (int i = 0; i < numberOfCollectableItems; i++)
         //{
-        //    shopItems.Add(lootTablePowerUps.GetRandom().GetItem());
+        //    shopItems.Add(lootTableCollectables.GetRandom().GetItem());
         //}
 
         totalNumberOfItems = numberOfPowerUps; // + numberOfCollectableItems;
     }
+
+    public List<GameObject> GetShopItems()
+    {
+        return shopItems;
+    } 
 }
