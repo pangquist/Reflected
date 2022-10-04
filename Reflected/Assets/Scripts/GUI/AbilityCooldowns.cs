@@ -77,7 +77,7 @@ public class AbilityCooldowns : MonoBehaviour
         if (thirdPersonMovement.GetDash().IsOnCooldown())
         {
             ability2text.text = Mathf.RoundToInt(thirdPersonMovement.GetDash().GetRemainingCooldown()).ToString();
-            ability2FillImage.fillAmount -= 1 / thirdPersonMovement.GetDash().GetRemainingCooldown() * Time.deltaTime;
+            ability2FillImage.fillAmount = thirdPersonMovement.GetDash().GetCooldownPercentage();
         }
         else if (!thirdPersonMovement.GetDash().IsOnCooldown())
         {

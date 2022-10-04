@@ -46,6 +46,11 @@ public abstract class Ability : MonoBehaviour
         return remainingCooldown;
     }
 
+    public float GetCooldownPercentage()
+    {
+        return remainingCooldown / cooldown;
+    }
+
     public Sprite GetIcon()
     {
         return abilityIcon;
