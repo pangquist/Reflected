@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public  class Enemy : Character
 {
-    [SerializeField] Slider healthBar;
+    [SerializeField] Image healthBar;
     
     [SerializeField] Canvas combatTextCanvas;
     [SerializeField] float aggroRange;
@@ -68,7 +68,7 @@ public  class Enemy : Character
         text.SetDamageText(damage);
 
         base.TakeDamage(damage);
-        healthBar.value = GetHealthPercentage();
+        healthBar.fillAmount = GetHealthPercentage();
     }
 
     protected override void Die()

@@ -117,6 +117,15 @@ public class DimensionManager : MonoBehaviour
         UpdateChargeBar();
     }
 
+    public int GetCurrentCharges()
+    {
+        return currentCharges;
+    }
+
+    public int GetMaxCharges()
+    {
+        return maximumCharges;
+    }
     public void GainCharges(int addCharges)
     {
         currentCharges = Mathf.Clamp(currentCharges + addCharges, 0, maximumCharges);
