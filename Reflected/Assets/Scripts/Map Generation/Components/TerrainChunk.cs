@@ -11,16 +11,4 @@ public class TerrainChunk : MonoBehaviour
     public MeshRenderer MeshRenderer() { return meshRenderer; }
     public MeshFilter MeshFilter() { return meshFilter; }
     public MeshCollider MeshCollider() { return meshCollider; }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
