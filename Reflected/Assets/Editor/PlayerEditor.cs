@@ -59,5 +59,6 @@ public class PlayerEditorTemplate : Editor
     void DisplayDimensionInfo()
     {
         EditorGUILayout.PropertyField(serializedObject.FindProperty("chargeBar"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("swapAbility"));
     }
 }

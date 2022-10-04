@@ -67,8 +67,6 @@ public class MovementEditorTemplate : Editor
 
 	void DisplayDashingInfo()
     {
-		EditorGUILayout.PropertyField(serializedObject.FindProperty("dashDuration"));
-		EditorGUILayout.PropertyField(serializedObject.FindProperty("dashSpeed"));
-		EditorGUILayout.PropertyField(serializedObject.FindProperty("dashCooldown"));
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("dashAbility"));
 	}
 }
