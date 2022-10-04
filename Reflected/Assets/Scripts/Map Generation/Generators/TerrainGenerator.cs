@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [System.Serializable]
 public class TerrainType
@@ -53,6 +54,7 @@ public class TerrainGenerator : MonoBehaviour
                         // Instantiate a new TerrainChunk
                         GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.transform);
                         GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
+                        //BakeNavMesh(terrainChunk.GetComponentInChildren<NavMeshSurface>());
                         objectPlacer.PlaceDecorations(terrainChunk.GetComponent<TerrainChunk>());
                         break;
                     }
@@ -101,6 +103,37 @@ public class TerrainGenerator : MonoBehaviour
         return this.noiseMapGenerator.GenerateNoiseMap(chunkDepth, chunkWidth, this.mapScale, offsetX, offsetZ, waves);
     }
 
+    private void UpdateMeshVertices(float[,] heightMap, TerrainChunk terrainChunk)
+    {
+        int chunkDepth = heightMap.GetLength(0);
+        int chunkWidth = heightMap.GetLength(1);
+        Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;
+        // iterate through all the heightMap coordinates, updating the vertex index
+        int vertexIndex = 0;
+        for (int zIndex = 0; zIndex < chunkDepth; zIndex++)
+        {
+            for (int xIndex = 0; xIndex < chunkWidth; xIndex++)
+            {
+                float height = heightMap[zIndex, xIndex];
+                Vector3 vertex = meshVertices[vertexIndex];
+                // change the vertex Y coordinate, proportional to the height value
+                meshVertices[vertexIndex] = new Vector3(vertex.x, this.heightCurve.Evaluate(height) * this.heightMultiplier, vertex.z);
+                vertexIndex++;
+            }
+        }
+        // update the vertices in the mesh and update its properties
+        terrainChunk.MeshFilter().mesh.vertices = meshVertices;
+        terrainChunk.MeshFilter().mesh.RecalculateBounds();
+        terrainChunk.MeshFilter().mesh.RecalculateNormals();
+        // update the mesh collider
+        terrainChunk.MeshCollider().sharedMesh = terrainChunk.MeshFilter().mesh;
+    }
+
+    private void BakeNavMesh(NavMeshSurface surface)
+    {
+        surface.BuildNavMesh();
+    }
+
     private Texture2D BuildTexture(float[,] heightMap)
     {
         int chunkDepth = heightMap.GetLength(0);
@@ -126,32 +159,6 @@ public class TerrainGenerator : MonoBehaviour
         chunkTexture.Apply();
 
         return chunkTexture;
-    }
-
-    private void UpdateMeshVertices(float[,] heightMap, TerrainChunk terrainChunk)
-    {
-        int chunkDepth = heightMap.GetLength(0);
-        int chunkWidth = heightMap.GetLength(1);
-        Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;
-        // iterate through all the heightMap coordinates, updating the vertex index
-        int vertexIndex = 0;
-        for (int zIndex = 0; zIndex < chunkDepth; zIndex++)
-        {
-            for (int xIndex = 0; xIndex < chunkWidth; xIndex++)
-            {
-                float height = heightMap[zIndex, xIndex];
-                Vector3 vertex = meshVertices[vertexIndex];
-                // change the vertex Y coordinate, proportional to the height value
-                meshVertices[vertexIndex] = new Vector3(vertex.x, this.heightCurve.Evaluate(height) * this.heightMultiplier, vertex.z);
-                vertexIndex++;
-            }
-        }
-        // update the vertices in the mesh and update its properties
-        terrainChunk.MeshFilter().mesh.vertices = meshVertices;
-        terrainChunk.MeshFilter().mesh.RecalculateBounds();
-        terrainChunk.MeshFilter().mesh.RecalculateNormals();
-        // update the mesh collider
-        terrainChunk.MeshCollider().sharedMesh = terrainChunk.MeshFilter().mesh;
     }
 
     TerrainType PickTerrainType(float height)
