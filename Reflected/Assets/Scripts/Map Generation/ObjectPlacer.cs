@@ -22,8 +22,8 @@ public class ObjectPlacer : MonoBehaviour
         Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;
         Vector3[] visitedVertices = new Vector3[meshVertices.Length];
 
-        float offsetX = -terrainChunk.transform.position.x + 4;
-        float offsetZ = -terrainChunk.transform.position.z + 4;
+        float offsetX = -terrainChunk.transform.position.x + MapGenerator.ChunkSize * 0.5f;
+        float offsetZ = -terrainChunk.transform.position.z + MapGenerator.ChunkSize * 0.5f;
         TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
 
         for (int i = 0; i < meshVertices.Length; i++)

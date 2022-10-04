@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -101,6 +102,7 @@ public class MapGenerator : MonoBehaviour
         wallGenerator.Generate(map);
         waterGenerator.Generate(map);
         terrainGenerator.Generate(map);
+        BakeNavMesh(map.GetComponent<NavMeshSurface>());
 
         // Scale up data
 
@@ -151,5 +153,10 @@ public class MapGenerator : MonoBehaviour
     public void Log(string text)
     {
         log += "\n" + text;
+    }
+
+    private void BakeNavMesh(NavMeshSurface surface)
+    {
+        surface.BuildNavMesh();
     }
 }
