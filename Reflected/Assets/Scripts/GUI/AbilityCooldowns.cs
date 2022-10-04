@@ -9,6 +9,7 @@ public class AbilityCooldowns : MonoBehaviour
     [Header("Ability 1")]
     [SerializeField] Image ability1Image;
     [SerializeField] TextMeshProUGUI ability1text;
+
     [Header("Ability 2")]
     [SerializeField] Image ability2Image;
     [SerializeField] TextMeshProUGUI ability2text;
