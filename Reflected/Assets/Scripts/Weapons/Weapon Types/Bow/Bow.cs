@@ -25,6 +25,13 @@ public class Bow : Weapon
         if (!cam) cam = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
+    public override void AttackWithoutAnimation()
+    {
+        base.AttackWithoutAnimation();
+        Projectile arrow = Instantiate(projectile, firePoint.position, cam.transform.localRotation).GetComponent<Projectile>();
+        arrow.Fire(firePower, damage);
+    }
+
     public override void WeaponEffect()
     {
         Projectile arrow = Instantiate(projectile, firePoint.position, body.transform.localRotation).GetComponent<Projectile>();
