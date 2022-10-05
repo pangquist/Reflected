@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject enemyClose;
     [SerializeField] GameObject enemyRange;
+    [SerializeField] GameObject enemyAOE;
 
     GameObject enemyToSpawn;
     List<GameObject> enemyList = new List<GameObject>();
@@ -16,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
 
     bool meleePlayer;
 
-    int bias = 70;
+    [SerializeField] int spawnBias = 60;
 
     void Start()
     {
@@ -90,24 +91,38 @@ public class EnemySpawner : MonoBehaviour
 
         if (meleePlayer)
         {
-            if (percentage <= bias)
+            if (percentage <= spawnBias)
             {
                 enemyToSpawn = enemyRange;
             }
             else
             {
-                enemyToSpawn = enemyClose;
+                if(percentage % 2 == 0)
+                {
+                    enemyToSpawn = enemyClose;
+                }
+                else
+                {
+                    enemyToSpawn = enemyAOE;
+                }
             }
         }
         else if (!meleePlayer)
         {
-            if (percentage <= bias)
+            if (percentage <= spawnBias)
             {
                 enemyToSpawn = enemyClose;
             }
             else
             {
-                enemyToSpawn = enemyRange;
+                if (percentage % 2 == 0)
+                {
+                    enemyToSpawn = enemyRange;
+                }
+                else
+                {
+                    enemyToSpawn = enemyAOE;
+                }
             }
         }
     }
