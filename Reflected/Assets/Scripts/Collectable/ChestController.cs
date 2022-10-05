@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChestController : Chest
 {
 
-    public override void OpenChest()
+    public override void OpenChest(GameObject gameObject)
     {
         if (!isOpen )
         {
