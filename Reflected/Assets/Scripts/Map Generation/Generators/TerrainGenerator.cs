@@ -55,7 +55,7 @@ public class TerrainGenerator : MonoBehaviour
                         GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.transform);
                         GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
                         //BakeNavMesh(terrainChunk.GetComponentInChildren<NavMeshSurface>());
-                        objectPlacer.PlaceDecorations(terrainChunk.GetComponent<TerrainChunk>());
+                        objectPlacer.PlaceDecorations(terrainChunk.GetComponent<TerrainChunk>(), room);
                         break;
                     }
                 }
