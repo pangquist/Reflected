@@ -28,6 +28,9 @@ public class DimensionManager : MonoBehaviour
     [SerializeField] private Material trueSkybox;
     [SerializeField] private Material mirrorSkybox;
 
+    //[Header("Music")]
+    private MusicManager musicManager;
+
     [Header("Changeable")]
     [SerializeField] private List<ChangeableObject> changeableObjects;
 
@@ -57,8 +60,10 @@ public class DimensionManager : MonoBehaviour
 
     private void Awake()
     {
+        musicManager = GameObject.Find("Music Manager").GetComponent<MusicManager>();
+
         SetDimension(Dimension.True);
-        //UpdateChargeBar();
+        UpdateChargeBar();
     }
 
     /// <summary>
@@ -91,6 +96,8 @@ public class DimensionManager : MonoBehaviour
 
         volume.profile = True ? trueProfile : mirrorProfile;
 
+        musicManager.SwapMusicScore(dimension);
+
         trueLighting.SetActive(True);
         mirrorLighting.SetActive(Mirror);
 
@@ -114,7 +121,7 @@ public class DimensionManager : MonoBehaviour
     public void SetMaxCharges(int newCharges)
     {
         maximumCharges = newCharges;
-        //UpdateChargeBar();
+        UpdateChargeBar();
     }
 
     public int GetCurrentCharges()
@@ -129,13 +136,13 @@ public class DimensionManager : MonoBehaviour
     public void GainCharges(int addCharges)
     {
         currentCharges = Mathf.Clamp(currentCharges + addCharges, 0, maximumCharges);
-        //UpdateChargeBar();
+        UpdateChargeBar();
     }
 
     public void ResetCharges()
     {
         currentCharges = 0;
-        //UpdateChargeBar();
+        UpdateChargeBar();
     }
 
     public void SetStatSystem(StatSystem newStatSystem)
@@ -143,16 +150,16 @@ public class DimensionManager : MonoBehaviour
         statSystem = newStatSystem;
     }
 
-    //private void UpdateChargeBar()
-    //{
-    //    if (SceneManager.GetActiveScene().name == "Start Scene")
-    //        return;
+    private void UpdateChargeBar()
+    {
+        if (SceneManager.GetActiveScene().name == "Start Scene")
+            return;
 
-    //    Slider chargeSlider = chargeBar.GetComponent<Slider>();
-    //    TMP_Text sliderText = chargeBar.transform.Find("ChargeText").GetComponent<TMP_Text>();
+        //Slider chargeSlider = chargeBar.GetComponent<Slider>();
+        //TMP_Text sliderText = chargeBar.transform.Find("ChargeText").GetComponent<TMP_Text>();
 
-    //    chargeSlider.value = maximumCharges == 0 ? 1f : (float)currentCharges / (float)maximumCharges;
-    //    sliderText.text = currentCharges + " / " + maximumCharges;
-    //}
+        //chargeSlider.value = maximumCharges == 0 ? 1f : (float)currentCharges / (float)maximumCharges;
+        //sliderText.text = currentCharges + " / " + maximumCharges;
+    }
 
 }

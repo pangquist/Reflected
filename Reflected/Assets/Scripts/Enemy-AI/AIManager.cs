@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AiManager : MonoBehaviour
+public class AIManager : MonoBehaviour
 {
     // ---- Illegal (Cannot use new for Monobehavior scripts) ----
     //private StartState startState = new StartState();
@@ -21,14 +21,16 @@ public class AiManager : MonoBehaviour
 
     [SerializeField] private GameObject GOplayer;
     private Player player; //This is not assigned correctly. Ignore for now and just use goal for the agent.
-    //private Enemy me;
-    private PlaceholderEnemyScript me;
+    private Enemy me;
+    //private PlaceholderEnemyScript me;
 
     private NavMeshAgent agent;
     private Transform target; //Instead of using the player at the moment.
 
     bool closeCombat = false;
     bool areaOfEffect = false;
+
+    public Transform firePoint;
 
     void Start()
     {
@@ -39,21 +41,25 @@ public class AiManager : MonoBehaviour
 
         if (!me)
         {
-            //me = GetComponent<Enemy>();
-            me = GetComponent<PlaceholderEnemyScript>();
-            Debug.Log("Assignmed Enemy component");
+            me = GetComponent<Enemy>();
+            //me = GetComponent<PlaceholderEnemyScript>();
+            //Debug.Log("Assignmed Enemy component");
         }
         if (!GOplayer)
         {
             GOplayer = GameObject.FindGameObjectWithTag("Player");
-            Debug.Log("Assigned GOplayer from tag");
+            //Debug.Log("Assigned GOplayer from tag");
         }
         if (!player)
         {
             player = GOplayer.GetComponent<Player>();
-            Debug.Log("Assigned Player Component from GOplayer");
+            //Debug.Log("Assigned Player Component from GOplayer");
         }
-
+        //if (firePoint == null)
+        //{
+        //    //Debug. Will be better when rewritten into different scripts.
+        //    firePoint = gameObject.transform.GetChild(0).GetChild(0).transform;
+        //}
 
         //Instansiate state scripts
         startState = gameObject.AddComponent<StartState>();
@@ -74,6 +80,8 @@ public class AiManager : MonoBehaviour
         //I plan to have an enum for better stucture for this part.
         if (gameObject.tag == "Melee") closeCombat = true;
         else if (gameObject.tag == "AOE") areaOfEffect = true;
+
+
     }
     private void Update()
     {
@@ -81,6 +89,7 @@ public class AiManager : MonoBehaviour
         //agent.destination = goal.position;
 
         //activeState.DoState(this, player);
+        //Debug.Log("FirePoint POS: " + firePoint.position);
         activeState.DoState(this, target, agent);
     }
 

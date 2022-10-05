@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AiDirector : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class AiDirector : MonoBehaviour
 
 
     EnemySpawner enemySpawner;
+    [SerializeField] GameObject chest;
 
 
     void Start()
@@ -45,7 +47,7 @@ public class AiDirector : MonoBehaviour
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
         //if(!map) map = GameObject.Find("Map Generator").GetComponent<Map>();
 
-        difficultyLevel = medium;
+        difficultyLevel = easy;
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
@@ -97,6 +99,7 @@ public class AiDirector : MonoBehaviour
         if (inbetweenRooms) //All enemies are killed but player is still in same room
         {
             UpdateRoomStatistics();
+            SpawnChest();
 
             inbetweenRooms = false;
         }
@@ -130,8 +133,14 @@ public class AiDirector : MonoBehaviour
     {
         float extraStats = numberOfRoomsCleared * 0.02f;
 
-        extraStats += 10f / calculateAverageTime();
+        if(avergaeTimeToClearRoom < 0) extraStats += 10f / calculateAverageTime();
         
         return extraStats;
+    }
+
+    private void SpawnChest()
+    {
+        Vector3 spawnPosition = player.transform.position + new Vector3(5, 5, 0);
+        Instantiate(chest, spawnPosition, Quaternion.Euler(0, 0, 0));
     }
 }

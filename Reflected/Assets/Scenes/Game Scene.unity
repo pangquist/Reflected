@@ -176,6 +176,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4465265745920826841, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4491102441571836711, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: cam
@@ -422,6 +427,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3434030415582317932, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -692.70996
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466060085952198480, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -616.56433
+      objectReference: {fileID: 0}
     - target: {fileID: 3547903056167095001, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -556,6 +571,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703789952655171876, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 267.29004
       objectReference: {fileID: 0}
     - target: {fileID: 4703789952769518239, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -755,12 +775,12 @@ PrefabInstance:
     - target: {fileID: 4763105907550617729, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -848.88007
+      value: -848.8801
       objectReference: {fileID: 0}
     - target: {fileID: 4763105907550617729, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -59.347687
+      value: -59.347626
       objectReference: {fileID: 0}
     - target: {fileID: 5821881590750259855, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -830,7 +850,12 @@ PrefabInstance:
     - target: {fileID: 9136811861998602656, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 91.35007
+      value: 91.3501
+      objectReference: {fileID: 0}
+    - target: {fileID: 9136811861998602656, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -89.14252
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8913e296c288ecd4baea3cc071f5a107, type: 3}
@@ -958,12 +983,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 106576845}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1466415716 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6853535804890002183, guid: 8913e296c288ecd4baea3cc071f5a107,
-    type: 3}
-  m_PrefabInstance: {fileID: 460816353}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1585387490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1030,7 +1049,7 @@ PrefabInstance:
         type: 3}
       propertyPath: chargeBar
       value: 
-      objectReference: {fileID: 1466415716}
+      objectReference: {fileID: 0}
     - target: {fileID: 2829834791762003369, guid: 8df54e6d7ba6b4ac0afee75c599ca9ac,
         type: 3}
       propertyPath: m_Name
@@ -1148,17 +1167,17 @@ PrefabInstance:
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0043157265
+      value: 0.0043157334
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.23482165
+      value: -0.23482168
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.002022437
+      value: 0.0020224454
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487351524866, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -1240,6 +1259,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1342714239502989496, guid: 642b62b3c7d88a14ab0ea70ca13c138c,
+        type: 3}
+      propertyPath: enemyAOE
+      value: 
+      objectReference: {fileID: 7351243042550154464, guid: db9ec6a5a03fb67498735a28dfec1aab,
+        type: 3}
+    - target: {fileID: 1342714239502989496, guid: 642b62b3c7d88a14ab0ea70ca13c138c,
+        type: 3}
+      propertyPath: enemyClose
+      value: 
+      objectReference: {fileID: 8113125744219651150, guid: 285ac89c3d2c76b4eadc6868728c6635,
+        type: 3}
+    - target: {fileID: 1342714239502989496, guid: 642b62b3c7d88a14ab0ea70ca13c138c,
+        type: 3}
+      propertyPath: enemyRange
+      value: 
+      objectReference: {fileID: 6900703334262475049, guid: 3a34ae39652064b46872628414d68782,
+        type: 3}
     - target: {fileID: 3416188018436451582, guid: 642b62b3c7d88a14ab0ea70ca13c138c,
         type: 3}
       propertyPath: m_RootOrder
@@ -1318,6 +1355,8 @@ GameObject:
   - component: {fileID: 2131914262}
   - component: {fileID: 2131914264}
   - component: {fileID: 2131914263}
+  - component: {fileID: 2131914267}
+  - component: {fileID: 2131914266}
   m_Layer: 0
   m_Name: Map Generator
   m_TagString: Untagged
@@ -1450,7 +1489,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainChunkPrefab: {fileID: 2332618423109250269, guid: 5754e2c27e53f47ccb8aa4da3a242f20,
     type: 3}
+  noiseMapGenerator: {fileID: 2131914266}
+  objectPlacer: {fileID: 2131914267}
   startY: 0
+  mapScale: 14
+  heightMultiplier: 6
+  terrainTypes:
+  - name: Underwater
+    height: 0.2
+    color: {r: 0.6509804, g: 0.58431375, b: 0.3529412, a: 1}
+  - name: Sand
+    height: 0.3
+    color: {r: 0.6509434, g: 0.58589846, b: 0.35310608, a: 1}
+  - name: Grass
+    height: 1
+    color: {r: 0.26553044, g: 0.4811321, b: 0.37424803, a: 1}
+  heightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.000117194606
+      inSlope: -0.04240895
+      outSlope: -0.04240895
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.45530614
+    - serializedVersion: 3
+      time: 0.25143746
+      value: 0.390176
+      inSlope: 1.1430753
+      outSlope: 1.1430753
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.2661503
+      outWeight: 0.14730963
+    - serializedVersion: 3
+      time: 0.4902078
+      value: 0.45880124
+      inSlope: 0.8897923
+      outSlope: 0.8897923
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.30100933
+      outWeight: 0.46178788
+    - serializedVersion: 3
+      time: 0.7218784
+      value: 0.9537931
+      inSlope: 0.5385164
+      outSlope: 0.5385164
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.26991832
+      outWeight: 0.19913422
+    - serializedVersion: 3
+      time: 1
+      value: 1.0002189
+      inSlope: 0.004363577
+      outSlope: 0.004363577
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.4279568
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  waves:
+  - seed: 15
+    frequency: 1
+    amplitude: 1
+  - seed: 500
+    frequency: 0.5
+    amplitude: 10
 --- !u!114 &2131914264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1482,3 +1593,63 @@ MonoBehaviour:
   peacefulChance: 0.1
   randomizeStartRoom: 1
   randomizeBossRoom: 1
+--- !u!114 &2131914266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9886ff0bc490e1d43aad013ea86adbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2131914267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cf2e39d51b23448ac307bfa90f8b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 2131914263}
+  chancePerVertex: 0.07
+  objects:
+  - terrain: Underwater
+    terrainObjects:
+      list:
+      - item: {fileID: 8826354705480561022, guid: 31695ec91881c594ea4a93e4c7717d56,
+          type: 3}
+        weight: 1
+      - item: {fileID: 8826354705480561022, guid: 268f5c8d84e285f49ae0e85bdce5cbd0,
+          type: 3}
+        weight: 1
+      - item: {fileID: 8218204736594959539, guid: 8f5c6f6a700c6e045a97b08515ebf92a,
+          type: 3}
+        weight: 1
+  - terrain: Sand
+    terrainObjects:
+      list:
+      - item: {fileID: 2572951519100550845, guid: b6f5ecbc5fd265a49b724a958a79623b,
+          type: 3}
+        weight: 1
+  - terrain: Grass
+    terrainObjects:
+      list:
+      - item: {fileID: 1249020213497638079, guid: 53aece54b4a973e4b9539ca60f21fc9e,
+          type: 3}
+        weight: 14
+      - item: {fileID: 1587186571227895905, guid: 6ff9ba4ffb95a5c4ba983080ffaf6832,
+          type: 3}
+        weight: 1
+      - item: {fileID: 7448233757750244883, guid: 3a387027a1e66664c8fd8e32550b2c9e,
+          type: 3}
+        weight: 1
+      - item: {fileID: 527581394202791689, guid: 4a7be64aa8953144d90bcc190968ea0e,
+          type: 3}
+        weight: 1

@@ -14,12 +14,6 @@ public class Sword : Weapon
     [Header("Sword Properties")]
     [SerializeField] Collider hitBox;
 
-    //public override AnimationClip DoAttack()
-    //{
-    //    base.DoAttack();
-
-    //}
-
     public override void AttackWithoutAnimation()
     {
         base.AttackWithoutAnimation();

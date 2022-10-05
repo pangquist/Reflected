@@ -23,7 +23,7 @@ public class Shop : MonoBehaviour
         PopulateShop();
     }
 
-    public void BuyItem(GameObject gameObject) //Have to send in an index here for the shop to give you that item
+    public void BuyItem(GameObject gameObject, int index) //Have to send in an index here for the shop to give you that item
     {
         //The index you give should be put in on line 37 and 38
         Inventory inventory = gameObject.GetComponent<Inventory>();

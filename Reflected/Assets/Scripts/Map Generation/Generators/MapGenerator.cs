@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -105,6 +106,13 @@ public class MapGenerator : MonoBehaviour
         waterGenerator   .Generate(map);
         terrainGenerator .Generate(map);
 
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.SetActive(false);
+
+        BakeNavMesh(map.GetComponent<NavMeshSurface>());
+
+        player.SetActive(true);
+
         // Scale up data
 
         foreach (Room room in map.Rooms)
@@ -154,5 +162,10 @@ public class MapGenerator : MonoBehaviour
     public void Log(string text)
     {
         log += "\n" + text;
+    }
+
+    private void BakeNavMesh(NavMeshSurface surface)
+    {
+        surface.BuildNavMesh();
     }
 }
