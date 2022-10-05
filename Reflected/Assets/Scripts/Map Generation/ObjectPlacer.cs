@@ -43,7 +43,7 @@ public class ObjectPlacer : MonoBehaviour
                                     Matrix4x4 localToWorld = transform.localToWorldMatrix;
                                     Vector3 position = terrainChunk.transform.rotation * localToWorld.MultiplyPoint3x4(meshVertices[i]);
                                     position = new Vector3(position.x - offsetX, position.y, position.z - offsetZ);
-                                    Instantiate(objectList.terrainObjects.GetRandom(), position, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), terrainChunk.transform);
+                                    Instantiate(objectList.terrainObjects.GetRandom(), position, Quaternion.identity, terrainChunk.transform);
                                 }
                             }
                         }
