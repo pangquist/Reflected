@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class Enemy : Character
 {
@@ -9,6 +10,8 @@ public class Enemy : Character
 
     [SerializeField] Canvas combatTextCanvas;
     [SerializeField] float aggroRange;
+
+    [SerializeField] WeightedRandomList<GameObject> LootDropList;
 
     GameObject parent;
     Player player;
@@ -25,29 +28,29 @@ public class Enemy : Character
     protected override void Update()
     {
         base.Update();
-        float distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
+        //float distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
 
-        if (!playerNoticed)
-        {
-            if (distance <= aggroRange)
-            {
-                playerNoticed = true;
-            }
-        }
-        else
-        {
-            if (distance > aggroRange)
-            {
-                playerNoticed = false;
-            }
-        }
+        //if (!playerNoticed)
+        //{
+        //    if (distance <= aggroRange)
+        //    {
+        //        playerNoticed = true;
+        //    }
+        //}
+        //else
+        //{
+        //    if (distance > aggroRange)
+        //    {
+        //        playerNoticed = false;
+        //    }
+        //}
 
-        if (playerNoticed)
-        {
-            Vector3 direction = (transform.position - player.transform.position).normalized;
-            direction.y = 0;
-            parent.transform.rotation = Quaternion.LookRotation(direction);
-        }
+        //if (playerNoticed)
+        //{
+        //    Vector3 direction = (transform.position - player.transform.position).normalized;
+        //    direction.y = 0;
+        //    parent.transform.rotation = Quaternion.LookRotation(direction);
+        //}
     }
 
     public override void TakeDamage(float damage)
@@ -75,6 +78,7 @@ public class Enemy : Character
     {
         AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
         aiDirector.killEnemyInRoom();
+        LootDrop(transform);
         base.Die();
     }
 
@@ -101,5 +105,11 @@ public class Enemy : Character
         currentHealth += maxHealth * extraDifficultyPercentage;
 
         damage += damage * extraDifficultyPercentage;
+    }
+
+    public void LootDrop(Transform lootDropPosition)
+    {
+        Vector3 spawnPosition = lootDropPosition.position + new Vector3(0, 1, 0);
+        Instantiate(LootDropList.GetRandom(), spawnPosition, Quaternion.Euler(0,0,0));
     }
 }

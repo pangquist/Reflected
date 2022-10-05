@@ -33,6 +33,8 @@ public class Character : MonoBehaviour, IEffectable
     {
         currentHealth -= damage;
 
+        Debug.Log("current health: " + currentHealth);
+
         if (currentHealth <= 0)
         {
             Die();
@@ -51,6 +53,7 @@ public class Character : MonoBehaviour, IEffectable
     protected virtual void Die()
     {
         anim.Play("Death");
+        Debug.Log("Character Dead");
     }
 
     public void Destroy()

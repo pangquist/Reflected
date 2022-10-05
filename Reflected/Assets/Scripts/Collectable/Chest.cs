@@ -21,13 +21,13 @@ public abstract class Chest : MonoBehaviour
         itemToSpawn = lootTable.GetRandom().GetItem();
     }
 
-    public abstract void OpenChest(GameObject gameObject);
+    public abstract void OpenChest();
 
     public virtual void UseChest(GameObject gameObject)
     {
         if (!isOpen)
         {
-            OpenChest(gameObject);
+            //OpenChest(gameObject);
         }
         else
         {

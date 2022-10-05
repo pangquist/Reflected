@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class State : MonoBehaviour
 {
-   public virtual void DoState(AiManager thisEnemy, Transform target, NavMeshAgent agent) { }
+   public virtual void DoState(AIManager thisEnemy, Transform target, NavMeshAgent agent) { }
 
 
     // Methods and other which all behavior may need.
