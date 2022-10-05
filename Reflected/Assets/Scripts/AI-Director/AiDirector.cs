@@ -47,7 +47,7 @@ public class AiDirector : MonoBehaviour
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
         //if(!map) map = GameObject.Find("Map Generator").GetComponent<Map>();
 
-        difficultyLevel = medium;
+        difficultyLevel = easy;
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
@@ -133,7 +133,7 @@ public class AiDirector : MonoBehaviour
     {
         float extraStats = numberOfRoomsCleared * 0.02f;
 
-        extraStats += 10f / calculateAverageTime();
+        if(avergaeTimeToClearRoom < 0) extraStats += 10f / calculateAverageTime();
         
         return extraStats;
     }
