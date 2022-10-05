@@ -118,15 +118,20 @@ public class AiDirector : MonoBehaviour
         checkDifficulty();
         enemiesInRoom = amountOfEnemiesToSpawn * 2;
 
-        enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn);
+        enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn, EnemyStatModifier());
     }
     public void killEnemyInRoom() //is called when enemy dies (from enemy-script)
     {
         enemiesInRoom--;
         numberOfEnemiesKilled++;
     }
-    private void calculateAverageTime()
+    private float calculateAverageTime() => avergaeTimeToClearRoom = clearTimesList.Sum() / clearTimesList.Count();
+    private float EnemyStatModifier()
     {
-        avergaeTimeToClearRoom = clearTimesList.Sum() / clearTimesList.Count();
+        float extraStats = numberOfRoomsCleared * 0.02f;
+
+        extraStats += 10f / calculateAverageTime();
+        
+        return extraStats;
     }
 }

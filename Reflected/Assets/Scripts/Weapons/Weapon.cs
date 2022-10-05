@@ -61,6 +61,11 @@ public abstract class Weapon : MonoBehaviour
             timeSinceLastSpecialAttack += Time.deltaTime;
     }
 
+    //public virtual AnimationClip[] GetBasicAttack()
+    //{
+    //    return comboClips;
+    //}
+
     public virtual AnimationClip DoAttack()
     {
         if (playerController.GetAttackLocked())
@@ -72,6 +77,11 @@ public abstract class Weapon : MonoBehaviour
             currentComboIndex = 0;
 
         return comboClips[currentComboIndex++];
+
+    }
+
+    public virtual void AttackWithoutAnimation()
+    {
 
     }
 

@@ -19,7 +19,12 @@ public class TechTreeNode : MonoBehaviour
     [SerializeField] List<TechTreeNode> nextNode = new List<TechTreeNode>();
     Image currentImage;
 
+    float resourceAmount; //Will be placed in an inventoryManager
+    int gemAmount;
+
     [SerializeField] float resourceCost;
+    [SerializeField] bool hasGemCost;
+    [SerializeField] int gemCost;
     [SerializeField] bool isPlaceable;
     bool isActive;
 
@@ -48,7 +53,7 @@ public class TechTreeNode : MonoBehaviour
 
     public void PlaceInMirror()
     {
-        if (!isPlaceable) // || resourceCost > resourceAmount
+        if (!CanBePlaced())
             return;
 
         techTree.PlaceNode(this);
@@ -60,7 +65,15 @@ public class TechTreeNode : MonoBehaviour
                 node.SetIsPlaceable(true);
         }
 
-        // resourceAmount -= resourceCost;
+        resourceAmount -= resourceCost;
+    }
+
+    public bool CanBePlaced()
+    {
+        if (hasGemCost)
+            return (isPlaceable && resourceCost <= resourceAmount && gemCost <= gemAmount);
+        else
+            return (isPlaceable && resourceCost <= resourceAmount);
     }
 
     public void SetIsActive(bool state)
