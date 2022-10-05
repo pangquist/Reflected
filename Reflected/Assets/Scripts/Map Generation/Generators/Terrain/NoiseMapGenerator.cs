@@ -9,7 +9,7 @@ public class Wave
     public float frequency;
     public float amplitude;
 }
-public class NoiseMapGeneration : MonoBehaviour
+public class NoiseMapGenerator : MonoBehaviour
 {
     public float[,] GenerateNoiseMap(int mapDepth, int mapWidth, float scale, float offsetX, float offsetZ, Wave[] waves)
     {

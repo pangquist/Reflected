@@ -10,7 +10,6 @@ public class Shop : MonoBehaviour
     [SerializeField] Transform itemHolder;
     [SerializeField] ItemData payment;
     GameObject spawnedObject;
-    Inventory inventory;
 
     //public Animator animator;
     [SerializeField] int numberOfCollectableItems = 2;
@@ -24,20 +23,19 @@ public class Shop : MonoBehaviour
         PopulateShop();
     }
 
-    public void BuyItem(int index) //Have to send in an index here for the shop to give you that item
+    public void BuyItem(GameObject gameObject, int index) //Have to send in an index here for the shop to give you that item
     {
         //The index you give should be put in on line 37 and 38
-        inventory = FindObjectOfType<Inventory>();
+        Inventory inventory = gameObject.GetComponent<Inventory>();
         if (inventory)
         {
-            if (shopItems.Count > 0 && inventory.HaveEnoughCurrency(payment, shopItems[index].GetComponent<InteractablePowerUp>().powerUpEffect.value)) 
+            if (shopItems.Count > 0 && inventory.HaveEnoughCurrency(payment, shopItems[totalNumberOfItems - 1].GetComponent<InteractablePowerUp>().powerUpEffect.value)) 
             {
                                                
                 if (spawnedObject == null)
                 {
-                    Debug.Log("Bought " + index.ToString());
-                    inventory.Remove(payment, shopItems[index].GetComponent<InteractablePowerUp>().powerUpEffect.value);
-                    SpawnItem(index);
+                    inventory.Remove(payment, shopItems[totalNumberOfItems - 1].GetComponent<InteractablePowerUp>().powerUpEffect.value);
+                    SpawnItem(--totalNumberOfItems);
                 }                    
                 else
                     Debug.Log("Spawn not working");

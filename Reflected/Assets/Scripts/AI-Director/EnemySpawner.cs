@@ -30,14 +30,13 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    public void SpawnEnemy(float spawnTime, int enemyAmount)
+    public void SpawnEnemy(float spawnTime, int enemyAmount, float enemyadaptiveDifficulty)
     {
-        StartCoroutine(SpawnWave(spawnTime, enemyAmount));
+        StartCoroutine(SpawnWave(spawnTime, enemyAmount, enemyadaptiveDifficulty));
     }
 
-    private IEnumerator SpawnWave(float spawnTime, int enemyAmount)
+    private IEnumerator SpawnWave(float spawnTime, int enemyAmount, float enemyAdaptiveDifficulty)
     {
-
         try
         {
             //yield return new WaitForSeconds(spawnTime);
@@ -47,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
                 GetRandomEnemy();
                 if (spawnTransforms.Count <= 0) GetSpawnlocations();
                 spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-                Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0));
+                Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponent<Enemy>().AdaptiveDifficulty(enemyAdaptiveDifficulty);
                 spawnTransforms.Remove(spawnLocation);
             }
 
@@ -58,7 +57,7 @@ public class EnemySpawner : MonoBehaviour
                 GetBiasedEnemy();
                 if (spawnTransforms.Count <= 0) GetSpawnlocations();
                 spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-                Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0));
+                Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponent<Enemy>().AdaptiveDifficulty(enemyAdaptiveDifficulty);
                 spawnTransforms.Remove(spawnLocation);
             }
         }
@@ -66,7 +65,6 @@ public class EnemySpawner : MonoBehaviour
         {
 
         }
-
         yield return null;
     }
 
@@ -94,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (meleePlayer)
         {
-            if(percentage <= bias)
+            if (percentage <= bias)
             {
                 enemyToSpawn = enemyRange;
             }

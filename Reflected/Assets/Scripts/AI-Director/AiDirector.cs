@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AiDirector : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class AiDirector : MonoBehaviour
 
 
     EnemySpawner enemySpawner;
+    [SerializeField] GameObject chest;
 
 
     void Start()
@@ -97,6 +99,7 @@ public class AiDirector : MonoBehaviour
         if (inbetweenRooms) //All enemies are killed but player is still in same room
         {
             UpdateRoomStatistics();
+            SpawnChest();
 
             inbetweenRooms = false;
         }
@@ -118,15 +121,27 @@ public class AiDirector : MonoBehaviour
         checkDifficulty();
         enemiesInRoom = amountOfEnemiesToSpawn * 2;
 
-        enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn);
+        enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn, EnemyStatModifier());
     }
     public void killEnemyInRoom() //is called when enemy dies (from enemy-script)
     {
         enemiesInRoom--;
         numberOfEnemiesKilled++;
     }
-    private void calculateAverageTime()
+    private float calculateAverageTime() => avergaeTimeToClearRoom = clearTimesList.Sum() / clearTimesList.Count();
+    private float EnemyStatModifier()
     {
-        avergaeTimeToClearRoom = clearTimesList.Sum() / clearTimesList.Count();
+        float extraStats = numberOfRoomsCleared * 0.02f;
+
+        extraStats += 10f / calculateAverageTime();
+        
+        return extraStats;
+    }
+
+    private void SpawnChest()
+    {
+        Debug.Log("spawn chest");
+        Vector3 spawnPosition = player.transform.position + new Vector3(5, 5, 0);
+        Instantiate(chest, spawnPosition, Quaternion.Euler(0, 0, 0));
     }
 }

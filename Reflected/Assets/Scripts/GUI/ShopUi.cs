@@ -22,23 +22,22 @@ public class ShopUi : MonoBehaviour
 
     void Start()
     {
-        shopObject = GameObject.FindGameObjectWithTag("Shop").GetComponent<GameObject>();
-        shop = FindObjectOfType<Shop>();
-        shopList = shop.GetShopItems();
+        //shopObject = GameObject.FindGameObjectWithTag("Shop").GetComponent<GameObject>();
+        //shop = FindObjectOfType<Shop>();
+        //shopList = shop.GetShopItems();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Cursor.visible = true;
+        //Cursor.visible = true;
 
-
-        for (int i = 0; i < shopList.Count; i++)
-        {
+        //for (int i = 0; i < shopList.Count; i++)
+        //{
             
-            itemName.text = shopList[i].GetComponent<InteractablePowerUp>().powerUpEffect.description;
-            itemCost.text = shopList[i].GetComponent<InteractablePowerUp>().powerUpEffect.value.ToString();
+        //    itemName.text = shopList[i].GetComponent<InteractablePowerUp>().powerUpEffect.description;
+        //    itemCost.text = shopList[i].GetComponent<InteractablePowerUp>().powerUpEffect.value.ToString();
 
-        }
+        //}
     }
 }
