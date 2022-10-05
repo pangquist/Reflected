@@ -10,6 +10,7 @@ public class AttackPlayerState : State
 {
     private float attackTimer = 0f;
     public float attackRate = 1f;
+    private Vector3 offSet = new Vector3(0, 0.5f, 0);
     public override void DoState(AIManager thisEnemy, Transform target, NavMeshAgent agent)
     {
         //If melee and too far away, move towards target.
@@ -82,8 +83,9 @@ public class AttackPlayerState : State
 
     private void FireProjectile(Transform target, GameObject projectileObject)
     {
+        
         GameObject currentProjectile = Instantiate(projectileObject, gameObject.GetComponent<AIManager>().firePoint.position, Quaternion.identity);
-        currentProjectile.GetComponent<ProjectileScript>().SetUp(target.position, gameObject.GetComponent<AIManager>().firePoint.position, 2f);
+        currentProjectile.GetComponent<ProjectileScript>().SetUp(target.position + offSet, gameObject.GetComponent<AIManager>().firePoint.position, 2f);
         //Debug.Log("FirePoint POS: " + gameObject.GetComponent<AIManager>().firePoint.position);
     }
 
