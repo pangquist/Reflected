@@ -140,7 +140,6 @@ public class AiDirector : MonoBehaviour
 
     private void SpawnChest()
     {
-        Debug.Log("spawn chest");
         Vector3 spawnPosition = player.transform.position + new Vector3(5, 5, 0);
         Instantiate(chest, spawnPosition, Quaternion.Euler(0, 0, 0));
     }
