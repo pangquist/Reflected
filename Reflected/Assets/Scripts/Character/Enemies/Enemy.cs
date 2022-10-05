@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class Enemy : Character
 {
@@ -9,6 +10,8 @@ public class Enemy : Character
 
     [SerializeField] Canvas combatTextCanvas;
     [SerializeField] float aggroRange;
+
+    [SerializeField] WeightedRandomList<GameObject> LootDropList;
 
     GameObject parent;
     Player player;
@@ -75,6 +78,7 @@ public class Enemy : Character
     {
         AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
         aiDirector.killEnemyInRoom();
+        LootDrop(transform);
         base.Die();
     }
 
@@ -101,5 +105,10 @@ public class Enemy : Character
         currentHealth += maxHealth * extraDifficultyPercentage;
 
         damage += damage * extraDifficultyPercentage;
+    }
+
+    public void LootDrop(Transform lootDropPosition)
+    {
+        Instantiate(LootDropList.GetRandom(), lootDropPosition.position, Quaternion.Euler(0,0,0));
     }
 }
