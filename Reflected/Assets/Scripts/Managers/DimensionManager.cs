@@ -32,7 +32,7 @@ public class DimensionManager : MonoBehaviour
     [SerializeField] private List<ChangeableObject> changeableObjects;
 
     [Header("Ability")]
-    [SerializeField] private GameObject chargeBar;
+    //[SerializeField] private GameObject chargeBar;
     [SerializeField] private int maximumCharges;
     [SerializeField] private int currentCharges;
 
@@ -148,11 +148,11 @@ public class DimensionManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Start Scene")
             return;
 
-        Slider chargeSlider = chargeBar.GetComponent<Slider>();
-        TMP_Text sliderText = chargeBar.transform.Find("ChargeText").GetComponent<TMP_Text>();
+        //Slider chargeSlider = chargeBar.GetComponent<Slider>();
+        //TMP_Text sliderText = chargeBar.transform.Find("ChargeText").GetComponent<TMP_Text>();
 
-        chargeSlider.value = maximumCharges == 0 ? 1f : (float)currentCharges / (float)maximumCharges;
-        sliderText.text = currentCharges + " / " + maximumCharges;
+        //chargeSlider.value = maximumCharges == 0 ? 1f : (float)currentCharges / (float)maximumCharges;
+        //sliderText.text = currentCharges + " / " + maximumCharges;
     }
 
 }
