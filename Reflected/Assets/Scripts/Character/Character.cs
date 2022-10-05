@@ -33,7 +33,7 @@ public class Character : MonoBehaviour, IEffectable
     {
         currentHealth -= damage;
 
-        Debug.Log("current health: " + currentHealth);
+        //Debug.Log("current health: " + currentHealth);
 
         if (currentHealth <= 0)
         {
