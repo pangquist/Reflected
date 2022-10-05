@@ -68,11 +68,11 @@ public class Player : Character, ISavable
     }
     public void Attack()
     {
-        //if (!currentWeapon.IsLocked())
-        //    anim.Play(currentWeapon.DoAttack().name);
-
         if (!currentWeapon.IsLocked())
-            currentWeapon.AttackWithoutAnimation();
+            anim.Play(currentWeapon.DoAttack().name);
+
+        //if (!currentWeapon.IsLocked())
+        //    currentWeapon.AttackWithoutAnimation();
     }
 
     public void SpecialAttack()
