@@ -78,7 +78,7 @@ public class AttackPlayerState : State
 
     private void MeleeAttack(GameObject meleeObject)
     {
-        Instantiate(meleeObject, gameObject.GetComponent<AIManager>().firePoint.position, Quaternion.identity);
+        Instantiate(meleeObject, gameObject.GetComponent<AIManager>().firePoint.position, gameObject.transform.rotation);
     }
 
     private void FireProjectile(Transform target, GameObject projectileObject)
@@ -92,7 +92,7 @@ public class AttackPlayerState : State
     private void FireAreaOfEffect(Transform target, GameObject aoeObject)
     {
         //Debug.Log(target.position);
-        Instantiate(aoeObject, new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z), gameObject.transform.rotation);
+        GameObject currentAOE = Instantiate(aoeObject, new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z), Quaternion.identity);
 
         //Instantiate(aoeObject, new Vector3(0, 0.01f, 0), target.rotation);
 

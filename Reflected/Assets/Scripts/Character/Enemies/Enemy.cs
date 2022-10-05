@@ -25,29 +25,29 @@ public class Enemy : Character
     protected override void Update()
     {
         base.Update();
-        float distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
+        //float distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
 
-        if (!playerNoticed)
-        {
-            if (distance <= aggroRange)
-            {
-                playerNoticed = true;
-            }
-        }
-        else
-        {
-            if (distance > aggroRange)
-            {
-                playerNoticed = false;
-            }
-        }
+        //if (!playerNoticed)
+        //{
+        //    if (distance <= aggroRange)
+        //    {
+        //        playerNoticed = true;
+        //    }
+        //}
+        //else
+        //{
+        //    if (distance > aggroRange)
+        //    {
+        //        playerNoticed = false;
+        //    }
+        //}
 
-        if (playerNoticed)
-        {
-            Vector3 direction = (transform.position - player.transform.position).normalized;
-            direction.y = 0;
-            parent.transform.rotation = Quaternion.LookRotation(direction);
-        }
+        //if (playerNoticed)
+        //{
+        //    Vector3 direction = (transform.position - player.transform.position).normalized;
+        //    direction.y = 0;
+        //    parent.transform.rotation = Quaternion.LookRotation(direction);
+        //}
     }
 
     public override void TakeDamage(float damage)
