@@ -7,9 +7,10 @@ public class ChestControllerPay : Chest
     [SerializeField] ItemData payment;
     [SerializeField] public int amountToPay = 1;
 
-    public override void OpenChest(GameObject gameObject)
+    public override void OpenChest()
     {
-        Inventory inventory = gameObject.GetComponent<Inventory>();
+        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+
         amountToPay = itemToSpawn.GetComponent<InteractablePowerUp>().powerUpEffect.value;
         if (inventory)
         {

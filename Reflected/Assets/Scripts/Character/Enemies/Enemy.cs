@@ -109,6 +109,7 @@ public class Enemy : Character
 
     public void LootDrop(Transform lootDropPosition)
     {
-        Instantiate(LootDropList.GetRandom(), lootDropPosition.position, Quaternion.Euler(0,0,0));
+        Vector3 spawnPosition = lootDropPosition.position + new Vector3(0, 2, 0);
+        Instantiate(LootDropList.GetRandom(), spawnPosition, Quaternion.Euler(90,0,0));
     }
 }

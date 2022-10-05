@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AiDirector : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class AiDirector : MonoBehaviour
 
 
     EnemySpawner enemySpawner;
+    [SerializeField] GameObject chest;
 
 
     void Start()
@@ -97,6 +99,7 @@ public class AiDirector : MonoBehaviour
         if (inbetweenRooms) //All enemies are killed but player is still in same room
         {
             UpdateRoomStatistics();
+            SpawnChest();
 
             inbetweenRooms = false;
         }
@@ -133,5 +136,11 @@ public class AiDirector : MonoBehaviour
         extraStats += 10f / calculateAverageTime();
         
         return extraStats;
+    }
+
+    private void SpawnChest()
+    {
+        Vector3 spawnPosition = player.transform.position + new Vector3(5, 5, 0);
+        Instantiate(chest, spawnPosition, Quaternion.Euler(0, 0, 0));
     }
 }
