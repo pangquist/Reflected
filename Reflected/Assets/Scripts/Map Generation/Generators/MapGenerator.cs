@@ -105,7 +105,13 @@ public class MapGenerator : MonoBehaviour
         wallGenerator    .Generate(map);
         waterGenerator   .Generate(map);
         terrainGenerator .Generate(map);
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.SetActive(false);
+
         BakeNavMesh(map.GetComponent<NavMeshSurface>());
+
+        player.SetActive(true);
 
         // Scale up data
 
