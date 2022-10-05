@@ -41,7 +41,7 @@ public class AttackPlayerState : State
         if(attackTimer >= attackRate)
         {
             DoAttack(thisEnemy, target);
-            Debug.Log("Enemy attacked you!");
+            //Debug.Log("Enemy attacked you!");
             attackTimer = 0f;
         }
     }
@@ -60,6 +60,11 @@ public class AttackPlayerState : State
             GameObject aoeObject = (GameObject)Resources.Load("AOETestObject");
             FireAreaOfEffect(target, aoeObject);
         }
+        else if (thisEnemy.CloseCombat())
+        {
+            GameObject meleeObject = (GameObject)Resources.Load("MeleeHitbox");
+            MeleeAttack(meleeObject);
+        }
     }
 
     private void FaceTarget(Vector3 target)
@@ -70,9 +75,9 @@ public class AttackPlayerState : State
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
     }
 
-    private void MeleeAttack()
+    private void MeleeAttack(GameObject meleeObject)
     {
-
+        Instantiate(meleeObject, gameObject.GetComponent<AIManager>().firePoint.position, Quaternion.identity);
     }
 
     private void FireProjectile(Transform target, GameObject projectileObject)
@@ -85,7 +90,7 @@ public class AttackPlayerState : State
     private void FireAreaOfEffect(Transform target, GameObject aoeObject)
     {
         //Debug.Log(target.position);
-        Instantiate(aoeObject, new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z), Quaternion.identity);
+        Instantiate(aoeObject, new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z), gameObject.transform.rotation);
 
         //Instantiate(aoeObject, new Vector3(0, 0.01f, 0), target.rotation);
 

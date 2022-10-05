@@ -13,7 +13,7 @@ public class MoveTowardsPlayerState : State
         //    return;
         //}
 
-        if (thisEnemy.distanceTo(target) <= 3 && thisEnemy.CloseCombat())
+        if (thisEnemy.distanceTo(target) <= 2f && thisEnemy.CloseCombat())
         {
             thisEnemy.SetAttackPlayerState();
             agent.isStopped = true;

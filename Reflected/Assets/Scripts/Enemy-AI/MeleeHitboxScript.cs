@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AOEScript : MonoBehaviour
+public class MeleeHitboxScript : MonoBehaviour
 {
-    public float upTime = 3f;
+    public float upTime = 0.5f;
     private float despawnTimer;
-    private float iFrames = 0.5f;
-    private float damageTimer;
+    private bool damageDone;
 
     private Rigidbody rb;
-    public int damageAmount = 3;
+    public int damageAmount = 5;
 
     void Start()
     {
         despawnTimer = 0f;
-        damageTimer = 0f;
-        //this.GetComponent<MeshRenderer>().material.color = new Color(177f, 66f, 238f, 1f);
+        damageDone = false;
     }
 
-    
     void Update()
     {
         despawnTimer += Time.deltaTime;
@@ -33,21 +30,18 @@ public class AOEScript : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         //Debug.Log("AOE collision triggered");
-        damageTimer += Time.deltaTime;
-        if (damageTimer >= iFrames)
+        if (!damageDone)
         {
             if (other.tag == "Player")
             {
                 var healthComponent = other.GetComponent<Player>();
                 if (healthComponent != null)
                 {
-                    Debug.Log("damaged by AOE");
-                    damageTimer = 0f;
+                    Debug.Log("damaged by Melee");
+                    damageDone = true;
                     healthComponent.TakeDamage(damageAmount);
-
                 }
             }
-            damageTimer = 0f;
         }
     }
 }

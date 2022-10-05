@@ -41,12 +41,12 @@ public class ProjectileScript : MonoBehaviour
         //Debug.Log("Direction " + direction);
         this.projectileForce = projectileForce;
         GetComponent<Rigidbody>().AddForce(direction.normalized * projectileForce, ForceMode.Impulse);
-        Debug.Log("Projectile SetUp entered");
+        //Debug.Log("Projectile SetUp entered");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Projectile collision triggered");
+        //Debug.Log("Projectile collision triggered");
         if (other.tag == "Player")
         {
             var healthComponent = other.GetComponent<Player>();
@@ -54,12 +54,13 @@ public class ProjectileScript : MonoBehaviour
             {
                 Debug.Log("damaged by projectile");
                 Destroy(this.gameObject);
-                //healthComponent.TakeDamage(damageAmount);
+                healthComponent.TakeDamage(damageAmount);
+                
             }
 
             Destroy(this.gameObject);
         }
 
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 }
