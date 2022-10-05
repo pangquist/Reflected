@@ -32,7 +32,7 @@ public class MoveTowardsPlayerState : State
 
     private void DoMoveToward(Transform target, NavMeshAgent agent)
     {
-        Debug.Log("MoveTowardsPlayer");
+        //Debug.Log("MoveTowardsPlayer");
         //NavMeshAgent agent = GetComponent<NavMeshAgent>();
         agent.destination = target.gameObject.transform.position;
     }

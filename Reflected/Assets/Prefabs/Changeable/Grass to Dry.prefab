@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 1249020213497213087}
   - component: {fileID: 1249020213516985407}
   - component: {fileID: 5901202891374564246}
+  - component: {fileID: 6350914466598641474}
   m_Layer: 0
   m_Name: Grass to Dry
   m_TagString: Untagged
@@ -341,6 +342,25 @@ MonoBehaviour:
   - {fileID: 4300004, guid: a3150f899f8f22d40b38eceb217ef831, type: 3}
   - {fileID: 4300004, guid: a3150f899f8f22d40b38eceb217ef831, type: 3}
   hasChildren: 0
+--- !u!114 &6350914466598641474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249020213497638079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ffc1699600a540708047a2873447209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomizeRotationX: 0
+  randomizeRotationY: 1
+  randomizeRotationZ: 0
+  randomizeScale: 1
+  minScale: 1.8
+  maxScale: 2.2
+  scaleBias: -0.4
 --- !u!1 &4415694134736298201
 GameObject:
   m_ObjectHideFlags: 0
