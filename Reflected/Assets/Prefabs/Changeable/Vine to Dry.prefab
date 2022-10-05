@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2552988342898024613}
   - component: {fileID: 2552988342899122789}
   - component: {fileID: 2157740666869570064}
+  - component: {fileID: 7712404364054721469}
   m_Layer: 0
   m_Name: Vine to Dry
   m_TagString: Untagged
@@ -102,3 +103,22 @@ MonoBehaviour:
   mirrorMeshes:
   - {fileID: 4300000, guid: e91cf0a88a8f7be44a4a4b4852ac81e9, type: 3}
   hasChildren: 0
+--- !u!114 &7712404364054721469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552988342896934053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ffc1699600a540708047a2873447209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomizeRotationX: 0
+  randomizeRotationY: 0
+  randomizeRotationZ: 0
+  randomizeScale: 1
+  minScale: 0.8
+  maxScale: 1.2
+  scaleBias: -0.4

@@ -26,7 +26,6 @@ public class ChangeableObject : MonoBehaviour
             objects = new GameObject[1];
     }
 
-
     void Start()
     {
         GameObject.Find("Dimension Manager").GetComponent<DimensionManager>().AddChangeableObject(this);

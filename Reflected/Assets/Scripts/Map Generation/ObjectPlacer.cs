@@ -14,6 +14,10 @@ public class ObjectPlacer : MonoBehaviour
     [Header("References")]
     [SerializeField] TerrainGenerator terrainGenerator;
 
+    [Header("Values")]
+    [Range(0f, 1f)]
+    [SerializeField] float chancePerVertex;
+
     [Header("Decorations")]
     [SerializeField] ObjectList[] objects;
 
@@ -40,12 +44,12 @@ public class ObjectPlacer : MonoBehaviour
                             {
                                 if (objectList.terrain == terrain.name)
                                 {
-                                    if (Random.Range(1, 50) == 1)
+                                    if (Random.Range(0f, 1f) < chancePerVertex)
                                     {
                                         Matrix4x4 localToWorld = transform.localToWorldMatrix;
                                         Vector3 position = terrainChunk.transform.rotation * localToWorld.MultiplyPoint3x4(meshVertices[i]);
                                         position = new Vector3(position.x - offsetX, position.y, position.z - offsetZ);
-                                        Instantiate(objectList.terrainObjects.GetRandom(), position, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), terrainChunk.transform);
+                                        Instantiate(objectList.terrainObjects.GetRandom(), position, Quaternion.identity, terrainChunk.transform);
                                     }
                                 }
                             }
