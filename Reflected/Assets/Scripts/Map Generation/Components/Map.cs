@@ -51,7 +51,6 @@ public class Map : MonoBehaviour
     {
         startRoom.gameObject.SetActive(true);
         startRoom.Activate();
-        startRoom.SetCleared(true);
         
         GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(startRoom.Rect.center.x, 10, startRoom.Rect.center.y);
     }

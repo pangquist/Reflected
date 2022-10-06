@@ -90,7 +90,7 @@ public class WallGenerator : MonoBehaviour
                             wallPortions.Add(portion2);
 
                             // Add door to Chamber
-                            CardinalDirection doorDirection = (CardinalDirection)cardinalDirections.GetValue(((int)direction + 2) % 4);
+                            CardinalDirection doorDirection = direction.GetNext().GetNext();
                             chamber.AddDoor(InstantiateDoor(chamber, room, doorDirection, overlap));
                         }
 

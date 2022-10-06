@@ -7,17 +7,16 @@ public class Door : MonoBehaviour
     [Header("References")]
 
     [SerializeField] private GameObject blockPrefab;
+    [SerializeField] private Animator animator;
 
     [Header("Values")]
 
-    [SerializeField] private float transitionDuration;
+    [SerializeField] private float animationDuration;
 
     [Header("Read Only")]
 
     [ReadOnly][SerializeField] private Room room;
     [ReadOnly][SerializeField] private bool isOpen;
-    [ReadOnly][SerializeField] private Vector3 measuringPosition;
-    [ReadOnly][SerializeField] private GameObject block;
 
     private static float thickness;
 
@@ -25,10 +24,9 @@ public class Door : MonoBehaviour
 
     public static float Thickness => thickness;
 
-    public float TransitionDuration => transitionDuration;
+    public float AnimationDuration => animationDuration;
     public bool IsOpen => isOpen;
     public Room Room => room;
-    public Vector3 MeasuringPosition => measuringPosition;
 
     public static void StaticInitialize(float thickness)
     {
@@ -39,51 +37,39 @@ public class Door : MonoBehaviour
     {
         this.room = room;
         name = "Door " + direction.ToString();
+        animator.speed = 1f / animationDuration;
 
-        block = GameObject.Instantiate(blockPrefab, transform);
-        block.transform.position = new Vector3(rect.x, 0, rect.y) * MapGenerator.ChunkSize;
-        block.transform.localScale = new Vector3(rect.width, Wall.Height, rect.height) * MapGenerator.ChunkSize;
-        block.GetComponentInChildren<MeshRenderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
-        block.GetComponentInChildren<ReCalcCubeTexture>().Calculate();
+        transform.position = new Vector3(rect.center.x, 0, rect.center.y) * MapGenerator.ChunkSize;
 
-        measuringPosition = block.transform.GetChild(0).position;
-
+        if (direction == CardinalDirection.West || direction == CardinalDirection.East)
+        {
+            transform.Rotate(0f, 90f, 0f);
+            transform.localScale = new Vector3(rect.height, Wall.Height, rect.width) * MapGenerator.ChunkSize;
+        }
+        else
+        {
+            transform.localScale = new Vector3(rect.width, Wall.Height, rect.height) * MapGenerator.ChunkSize;
+        }
+        
         return this;
     }
 
-    public IEnumerator Coroutine_Open()
+    public void Open()
     {
         if (isOpen)
-            yield return 0;
+            return;
 
-        while (block.transform.position.y > -Wall.Height * MapGenerator.ChunkSize)
-        {
-            yield return null;
-            block.transform.position -= new Vector3(0, Wall.Height * MapGenerator.ChunkSize / transitionDuration * Time.deltaTime, 0);  
-        }
-
-        block.transform.position = new Vector3(block.transform.position.x, -Wall.Height * MapGenerator.ChunkSize, block.transform.position.z);
-        block.SetActive(false);
+        animator.SetTrigger("Open");
         isOpen = true;
-        yield return 0;
     }
 
-    public IEnumerator Coroutine_Close()
+    public void Close()
     {
         if (!isOpen)
-            yield return 0;
+            return;
 
-        block.SetActive(true);
-
-        while (block.transform.position.y < 0)
-        {
-            yield return null;
-            block.transform.position += new Vector3(0, Wall.Height * MapGenerator.ChunkSize / transitionDuration * Time.deltaTime, 0);
-        }
-
-        block.transform.position = new Vector3(block.transform.position.x, 0, block.transform.position.z);
+        animator.SetTrigger("Close");
         isOpen = false;
-        yield return 0;
     }
 
 }
