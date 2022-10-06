@@ -28,6 +28,9 @@ public class DimensionManager : MonoBehaviour
     [SerializeField] private Material trueSkybox;
     [SerializeField] private Material mirrorSkybox;
 
+    //[Header("Music")]
+    private MusicManager musicManager;
+
     [Header("Changeable")]
     [SerializeField] private List<ChangeableObject> changeableObjects;
 
@@ -57,6 +60,8 @@ public class DimensionManager : MonoBehaviour
 
     private void Awake()
     {
+        musicManager = GameObject.Find("Music Manager").GetComponent<MusicManager>();
+
         SetDimension(Dimension.True);
         UpdateChargeBar();
     }
@@ -90,6 +95,8 @@ public class DimensionManager : MonoBehaviour
         currentDimension = dimension;
 
         volume.profile = True ? trueProfile : mirrorProfile;
+
+        musicManager.SwapMusicScore(dimension);
 
         trueLighting.SetActive(True);
         mirrorLighting.SetActive(Mirror);

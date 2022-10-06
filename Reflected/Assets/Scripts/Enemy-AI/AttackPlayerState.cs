@@ -83,9 +83,11 @@ public class AttackPlayerState : State
 
     private void FireProjectile(Transform target, GameObject projectileObject)
     {
-        
         GameObject currentProjectile = Instantiate(projectileObject, gameObject.GetComponent<AIManager>().firePoint.position, Quaternion.identity);
-        currentProjectile.GetComponent<ProjectileScript>().SetUp(target.position + offSet, gameObject.GetComponent<AIManager>().firePoint.position, 2f);
+        if(currentProjectile != null)
+        {
+            currentProjectile.GetComponent<ProjectileScript>().SetUp(target.position + offSet, gameObject.GetComponent<AIManager>().firePoint.position, 2f);
+        }
         //Debug.Log("FirePoint POS: " + gameObject.GetComponent<AIManager>().firePoint.position);
     }
 
