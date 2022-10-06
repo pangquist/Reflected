@@ -9,6 +9,7 @@ public class AiDirector : MonoBehaviour
 {
     //Difficulty
     [SerializeField] string difficultyLevel;
+    const string superEasy = "superEasy";
     const string easy = "easy";
     const string medium = "medium";
     const string hard = "hard";
@@ -68,6 +69,11 @@ public class AiDirector : MonoBehaviour
 
     private void checkDifficulty()
     {
+        if(difficultyLevel == superEasy)
+        {
+            spawntime = 2;
+            amountOfEnemiesToSpawn = Random.Range(1, 3);
+        }
         if (difficultyLevel == easy)
         {
             spawntime = 2;
