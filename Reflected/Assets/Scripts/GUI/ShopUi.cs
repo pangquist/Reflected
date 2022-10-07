@@ -19,6 +19,7 @@ public class ShopUi : MonoBehaviour
     [SerializeField] TextMeshProUGUI itemName;
     [SerializeField] TextMeshProUGUI itemCost;
     [SerializeField] List<GameObject> buttonList;
+    private int buttonIndex;
 
 
     public List<GameObject> shopList;
@@ -35,7 +36,7 @@ public class ShopUi : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-       
+
 
         //for (int i = 0; i < shopList.Count; i++)
         //{
@@ -48,14 +49,15 @@ public class ShopUi : MonoBehaviour
 
     public void CreateButtons()
     {
-        
+
         Debug.Log(shopList.Count);
         for (int i = 0; i < shopList.Count; i++)
         {
             Debug.Log("Created 1 Button");
+            buttonIndex = buttonList.Count;
             buttonList.Add(Instantiate(buttonObject, shopPanel.transform));
             SetButtons(buttonList[i], shopList[i]);
-            
+
         }
     }
 
@@ -65,5 +67,21 @@ public class ShopUi : MonoBehaviour
         //button.GetComponent<TextMeshProUGUI>().text = powerUp.GetComponent<InteractablePowerUp>().powerUpEffect.description;
         //button.GetComponent<TextMeshProUGUI>().text = "hello";
     }
+
+    public int GetButtonIndex()
+    {
+        return buttonIndex;
+    }
+
+    public List<GameObject> GetButtonList()
+    {
+        return buttonList;
+    }
+
+
+    
+
+
+    
 
 }
