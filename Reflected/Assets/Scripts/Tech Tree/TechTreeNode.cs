@@ -33,6 +33,7 @@ public class TechTreeNode : MonoBehaviour
     [SerializeField] float value;
 
     [SerializeField] TextMeshProUGUI nodeEffectText;
+    [SerializeField] TextMeshProUGUI nodeCostText;
 
     private void Start()
     {
@@ -41,6 +42,7 @@ public class TechTreeNode : MonoBehaviour
         currentImage.color = deactivatedColor;
 
         nodeEffectText = GameObject.Find("Node Effect Text").GetComponent<TextMeshProUGUI>();
+        nodeCostText = GameObject.Find("Node Cost Text").GetComponent<TextMeshProUGUI>();
 
         foreach (Transform child in transform)
             nextNode.Add(child.GetComponent<TechTreeNode>());
@@ -105,10 +107,15 @@ public class TechTreeNode : MonoBehaviour
     public void SetTextToEffect()
     {
         nodeEffectText.text = description;
+        if (hasGemCost)
+            nodeCostText.text = resourceAmount + " / " + resourceCost + "\n" + gemAmount + " / " + gemCost;
+        else
+            nodeCostText.text = resourceAmount + " / " + resourceCost;
     }
 
     public void SetTextToNull()
     {
         nodeEffectText.text = "";
+        nodeCostText.text = "";
     }
 }

@@ -24,7 +24,7 @@ public class StatSystem : MonoBehaviour, ISavable
         player = GetComponent<Player>();
         try
         {
-            upgradeManager = GameObject.Find("UpgradeManager").GetComponent<UpgradeManager>();
+            upgradeManager = GameObject.Find("Upgrade Manager").GetComponent<UpgradeManager>();
         }
         catch (Exception e)
         {
@@ -87,7 +87,7 @@ public class StatSystem : MonoBehaviour, ISavable
 
         ResetStats();
 
-        Dictionary<string, float> stats = upgradeManager.GetTrueNodes();
+        Dictionary<string, float> stats = upgradeManager.GetMirrorNodes();
 
         foreach (KeyValuePair<string, float> pair in stats)
         {
@@ -137,6 +137,7 @@ public class StatSystem : MonoBehaviour, ISavable
         areaOfEffect = 1;
         chargesToSwapTrue = 0;
         chargesToSwapMirror = 0;
+        attackSpeed = 1;
     }
 
     public float GetMaxHealthIncrease() => maxHealthIncrease;

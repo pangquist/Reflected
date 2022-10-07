@@ -12,10 +12,6 @@ public class UpgradeManager : MonoBehaviour
     Dictionary<string, float> trueVariables;
     Dictionary<string, float> mirrorVariables;
 
-    //[SerializeField] List<TechTreeNode> allActiveNodes = new List<TechTreeNode>();
-
-    [SerializeField] Player player;
-
     void Start()
     {
         trueVariables = new Dictionary<string, float>();
@@ -25,6 +21,9 @@ public class UpgradeManager : MonoBehaviour
 
     public void GetActiveUpgrades()
     {
+        trueVariables.Clear();
+        mirrorVariables.Clear();
+
         foreach (TechTreeNode node in trueTechTree.GetActiveNodes())
         {
             if (!trueVariables.ContainsKey(node.GetVariable()))
@@ -50,10 +49,5 @@ public class UpgradeManager : MonoBehaviour
     public Dictionary<string, float> GetMirrorNodes()
     {
         return mirrorVariables;
-    }
-
-    public void AddPlayer(Player newPlayer)
-    {
-        player = newPlayer;
     }
 }
