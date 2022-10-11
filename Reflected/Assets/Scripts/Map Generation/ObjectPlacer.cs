@@ -21,7 +21,19 @@ public class ObjectPlacer : MonoBehaviour
     [Header("Decorations")]
     [SerializeField] ObjectList[] objects;
 
-    public void PlaceDecorations(TerrainChunk terrainChunk, Room room)
+    public void Place(Map map)
+    {
+        foreach(Room room in map.Rooms)
+        {
+            TerrainChunk[] chunks = room.GetComponentsInChildren<TerrainChunk>();
+            for (int i = 0; i < chunks.Length; i++)
+            {
+                PlaceDecorations(chunks[i], room);
+            }
+        }
+    }
+
+    private void PlaceDecorations(TerrainChunk terrainChunk, Room room)
     {
         Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;
         Vector3[] visitedVertices = new Vector3[meshVertices.Length];

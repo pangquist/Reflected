@@ -17,7 +17,6 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private GameObject terrainChunkPrefab;
 
     [SerializeField] NoiseMapGenerator noiseMapGenerator;
-    [SerializeField] ObjectPlacer objectPlacer;
 
     [Header("Terrain")]
 
@@ -61,8 +60,6 @@ public class TerrainGenerator : MonoBehaviour
                         // Instantiate a new TerrainChunk
                         GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.transform);
                         GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
-                        //BakeNavMesh(terrainChunk.GetComponentInChildren<NavMeshSurface>());
-                        objectPlacer.PlaceDecorations(terrainChunk.GetComponent<TerrainChunk>(), room);
                         break;
                     }
                 }

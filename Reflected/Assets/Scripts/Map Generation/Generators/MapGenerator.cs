@@ -18,6 +18,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private WallGenerator wallGenerator;
     [SerializeField] private WaterGenerator waterGenerator;
     [SerializeField] private TerrainGenerator terrainGenerator;
+    [SerializeField] private ObjectPlacer objectPlacer;
 
     [Header("Map")]
 
@@ -61,6 +62,7 @@ public class MapGenerator : MonoBehaviour
     public WallGenerator WallGenerator => wallGenerator;
     public WaterGenerator WaterGenerator => waterGenerator;
     public TerrainGenerator TerrainGenerator => terrainGenerator;
+    public ObjectPlacer ObjectPlacer => objectPlacer;
 
     private void Start()
     {
@@ -113,6 +115,8 @@ public class MapGenerator : MonoBehaviour
         BakeNavMesh(map.GetComponent<NavMeshSurface>());
 
         player.SetActive(true);
+
+        objectPlacer.Place(map);
 
         // Scale up data
 
