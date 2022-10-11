@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+//This class is currently depricated. It was the old code used for pre-production. Use the 'AiManager2' script for the current script.
+
 public class AIManager : MonoBehaviour
 {
     // ---- Illegal (Cannot use new for Monobehavior scripts) ----
@@ -90,7 +93,7 @@ public class AIManager : MonoBehaviour
 
         //activeState.DoState(this, player);
         //Debug.Log("FirePoint POS: " + firePoint.position);
-        activeState.DoState(this, target, agent);
+        //activeState.DoState(this, target, agent);
     }
 
     public void SetMoveTowardState() => activeState = moveTowardsPlayerState;

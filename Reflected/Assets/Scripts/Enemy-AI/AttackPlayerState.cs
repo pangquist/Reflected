@@ -6,29 +6,30 @@ using UnityEngine.AI;
 
 //Plan is to have different scrips for each type of attack. But I might just put everything in here for the pre-production. Then fix in production.
 //Also, make each attack script already attached to the prefab to avoid having to use the resouce folder to spawn at runtime. Then you can just use prefabs for projectiles etc.
+
 public class AttackPlayerState : State
 {
     private float attackTimer = 0f;
     public float attackRate = 1f;
     private Vector3 offSet = new Vector3(0, 0.5f, 0);
-    public override void DoState(AIManager thisEnemy, Transform target, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
     {
         //If melee and too far away, move towards target.
-        if (thisEnemy.distanceTo(target) >= 5 && thisEnemy.CloseCombat())
+        if (thisEnemy.distanceTo(player.transform) >= 5 && thisEnemy.CloseCombat())
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
             return;
         }
         //If ranged and too close, move away from target.
-        else if (thisEnemy.distanceTo(target) <= 7 && !thisEnemy.CloseCombat())
+        else if (thisEnemy.distanceTo(player.transform) <= 7 && !thisEnemy.CloseCombat())
         {
             thisEnemy.SetMoveAwayState();
             agent.isStopped = false;
             return;
         }
         //If ranged and too far away, move towards target.
-        else if (thisEnemy.distanceTo(target) >= 20 && !thisEnemy.CloseCombat())
+        else if (thisEnemy.distanceTo(player.transform) >= 20 && !thisEnemy.CloseCombat())
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
@@ -37,29 +38,29 @@ public class AttackPlayerState : State
 
         attackTimer += Time.deltaTime;
 
-        FaceTarget(target.position);
+        FaceTarget(player.transform.position);
         agent.destination = thisEnemy.transform.position;
         if(attackTimer >= attackRate)
         {
-            DoAttack(thisEnemy, target);
+            DoAttack(thisEnemy, player);
             //Debug.Log("Enemy attacked you!");
             attackTimer = 0f;
         }
     }
 
-    private void DoAttack(AIManager thisEnemy, Transform target)
+    private void DoAttack(AiManager2 thisEnemy, Player player)
     {
-        if (!thisEnemy.CloseCombat() && !thisEnemy.AOE())
+        if (!thisEnemy.CloseCombat() && !thisEnemy.AoeCombat())
         {
             GameObject projectileObject = (GameObject)Resources.Load("ProjectileTestObject");
-            FireProjectile(target, projectileObject);
+            FireProjectile(player.transform, projectileObject);
         }
-        else if (thisEnemy.AOE())
+        else if (thisEnemy.AoeCombat())
         {
             attackRate = 5f;
             //aoeObject = GameObject.Find("AOETestObject");
             GameObject aoeObject = (GameObject)Resources.Load("AOETestObject");
-            FireAreaOfEffect(target, aoeObject);
+            FireAreaOfEffect(player.transform, aoeObject);
         }
         else if (thisEnemy.CloseCombat())
         {
