@@ -29,9 +29,16 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private AnimationCurve heightCurve;
     [SerializeField] private Wave[] waves;
 
+    private float randomSeed = 0;
+
     public TerrainType[] TerrainTypes() { return terrainTypes; }
     public float HeightMultiplier() { return heightMultiplier; }
     public AnimationCurve HeightCurve() { return heightCurve; }
+
+    public void SetRandomSeed(float seed)
+    {
+        randomSeed = seed / 10000;
+    }
 
     public void Generate(Map map)
     {
@@ -100,7 +107,7 @@ public class TerrainGenerator : MonoBehaviour
         float offsetX = -terrainChunk.transform.position.x;
         float offsetZ = -terrainChunk.transform.position.z;
         // generate a heightMap using noise
-        return this.noiseMapGenerator.GenerateNoiseMap(chunkDepth, chunkWidth, this.mapScale, offsetX, offsetZ, waves);
+        return this.noiseMapGenerator.GenerateNoiseMap(chunkDepth, chunkWidth, this.mapScale, offsetX, offsetZ, waves, randomSeed);
     }
 
     private void UpdateMeshVertices(float[,] heightMap, TerrainChunk terrainChunk)

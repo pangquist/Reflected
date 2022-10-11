@@ -85,6 +85,7 @@ public class MapGenerator : MonoBehaviour
         log = " --- MAP GENERATION LOG ---\n";
         int newSeed = seed != 0 ? seed : (int)System.DateTime.Now.Ticks;
         Random.InitState(newSeed);
+        terrainGenerator.SetRandomSeed(newSeed);
         Log("Seed: " + newSeed);
         Destroy(GameObject.Find("Map"));
 

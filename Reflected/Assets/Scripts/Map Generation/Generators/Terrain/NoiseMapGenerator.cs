@@ -11,7 +11,7 @@ public class Wave
 }
 public class NoiseMapGenerator : MonoBehaviour
 {
-    public float[,] GenerateNoiseMap(int mapDepth, int mapWidth, float scale, float offsetX, float offsetZ, Wave[] waves)
+    public float[,] GenerateNoiseMap(int mapDepth, int mapWidth, float scale, float offsetX, float offsetZ, Wave[] waves, float randomSeed)
     {
         // create an empty noise map with the mapDepth and mapWidth coordinates
         float[,] noiseMap = new float[mapDepth, mapWidth];
@@ -27,7 +27,7 @@ public class NoiseMapGenerator : MonoBehaviour
                 float normalization = 0f;
                 foreach(Wave wave in waves)
                 {
-                    noise += wave.amplitude * Mathf.PerlinNoise(sampleX * wave.frequency + wave.seed, sampleZ * wave.frequency + wave.seed);
+                    noise += wave.amplitude * Mathf.PerlinNoise(sampleX * wave.frequency + wave.seed + randomSeed, sampleZ * wave.frequency + wave.seed + randomSeed);
                     normalization += wave.amplitude;
                 }
 
