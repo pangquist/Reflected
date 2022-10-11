@@ -47,10 +47,11 @@ public class TechTreeNode : MonoBehaviour
         foreach (Transform child in transform)
             nextNode.Add(child.GetComponent<TechTreeNode>());
 
-        SetIsPlaceable(transform.parent.name == "Nodes");
-
         if (description == "")
             description = name;
+
+        if (isPlaceable)
+            currentImage.color = canBeActivatedColor;
     }
 
     public void PlaceInMirror()
