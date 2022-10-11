@@ -74,4 +74,32 @@ public class ObjectPlacer : MonoBehaviour
         }
        
     }
+
+    private void NewPlaceDecorations(Room room)
+    {
+        Vector3 start = new Vector3(room.Rect.position.x, 50, room.Rect.position.y);
+        Vector3 end = new Vector3(room.Rect.position.x + room.Rect.width, 50, room.Rect.position.y + room.Rect.height);
+        TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
+
+        for (float x = start.x; x < end.x; x++)
+        {
+            for (float z = start.z; z < end.z; z++)
+            {
+                if (Random.Range(0f, 1f) < chancePerVertex)
+                {
+                    Ray ray = new Ray(new Vector3(x, start.y, z), -transform.up);
+                    RaycastHit hit;
+                    Physics.Raycast(ray, out hit);
+
+                    foreach (TerrainType terrain in terrainTypes)
+                    {
+                        if (hit.point.y <= terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier())
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
