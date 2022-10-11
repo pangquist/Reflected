@@ -5,6 +5,12 @@ using UnityEngine;
 public class InteractablePowerUp : MonoBehaviour
 {
     public PowerUpEffect powerUpEffect;
+    public WeightedRandomList<PowerUpEffect> RarityPool;
+
+    private void Start()
+    {
+        powerUpEffect = RarityPool.GetRandom();
+    }
 
     public void ApplyOnInteraction()
     {
