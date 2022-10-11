@@ -59,6 +59,8 @@ public class ShopUi : MonoBehaviour
         shopObject = GameObject.FindGameObjectWithTag("Shop").GetComponent<GameObject>();
         shopList = shop.GetShopItems();
         Debug.Log(shopList.Count);
+        if (buttonList.Count == shopList.Count)
+            return;
         for (int i = 0; i < shopList.Count; i++)
         {
             Debug.Log("Created 1 Button");
