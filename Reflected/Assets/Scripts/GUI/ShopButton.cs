@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.ComponentModel;
 
 public class ShopButton : MonoBehaviour
 {
@@ -11,7 +12,13 @@ public class ShopButton : MonoBehaviour
     [SerializeField] Shop shop;
     [SerializeField] GameObject button;
     [SerializeField] int index;
+    [SerializeField] Image costImage;
+    [SerializeField] Image itemImage;
+    [SerializeField] TextMeshProUGUI itemText;
+    [SerializeField] TextMeshProUGUI costText;
+
     ShopUi shopUi;
+    List<GameObject> buttonList;
 
     public List<GameObject> shopList;
 
@@ -20,22 +27,46 @@ public class ShopButton : MonoBehaviour
         shop = FindObjectOfType<Shop>();
         shopList = shop.GetShopItems();
         shopUi = FindObjectOfType<ShopUi>();
-        index = shopUi.GetButtonIndex();
-        List<GameObject> buttonList; shopUi.GetButtonList();
+
+        buttonList = shopUi.GetButtonList();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
+    public int GetIndex()
+    {
+        return index;
+    }
+
+   
 
     public void CreateBuyOrder()
     {
-        Debug.Log("index" + index);
+        if(shop.BuyItem(index))
+        {
+            buttonList.Remove(button);
+            if (gameObject != null)
+                Destroy(gameObject);
 
-        shop.BuyItem(index);
-        //buttonList[index].SetActive(false);
+            for (int i = 0; i < buttonList.Count; i++)
+            {
+                if (buttonList[i].GetComponent<ShopButton>().index > index)
+                {
+                    buttonList[i].GetComponent<ShopButton>().index--;
+                }
+            }
+        }
+        
+    }
+    public void SetButton(GameObject powerUp, int buttonIndex)
+    {
+        index = buttonIndex;
+        costText.text = powerUp.GetComponent<InteractablePowerUp>().powerUpEffect.value.ToString();
+        itemText.text = powerUp.GetComponent<InteractablePowerUp>().powerUpEffect.description;
 
     }
 }

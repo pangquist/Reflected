@@ -24,7 +24,7 @@ public class Shop : MonoBehaviour
         PopulateShop();
     }
 
-    public void BuyItem(int index) //Have to send in an index here for the shop to give you that item
+    public bool BuyItem(int index) //Have to send in an index here for the shop to give you that item
     {
         //The index you give should be put in on line 37 and 38
         inventory = FindObjectOfType<Inventory>();
@@ -40,12 +40,21 @@ public class Shop : MonoBehaviour
                     Debug.Log("Bought");
                     inventory.Remove(payment, shopItems[index].GetComponent<InteractablePowerUp>().powerUpEffect.value);
                     SpawnItem(index);
+                    return true;
                 }                    
                 else
+                {
                     Debug.Log("Spawn not working");
+                    return false;
+                }
+                    
             }
-            
+            else
+                return false;
+
         }
+        else
+            return false;
     }
 
     void SpawnItem(int index)

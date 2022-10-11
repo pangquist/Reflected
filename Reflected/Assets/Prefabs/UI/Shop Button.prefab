@@ -438,13 +438,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shop: {fileID: 0}
-  shopPanel: {fileID: 0}
-  buttonObject: {fileID: 0}
-  CostImage: {fileID: 0}
-  itemImage: {fileID: 0}
-  itemName: {fileID: 0}
-  itemCost: {fileID: 0}
-  buttonList: []
+  button: {fileID: 0}
+  index: 0
+  costImage: {fileID: 6563177185327327366}
+  itemImage: {fileID: 5759464009541793943}
+  itemText: {fileID: 7264090303359142833}
+  costText: {fileID: 3016180744670838679}
   shopList: []
 --- !u!1 &8711180700243888141
 GameObject:
@@ -539,8 +538,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
