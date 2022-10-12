@@ -7,6 +7,7 @@ public abstract class PowerUpEffect : ScriptableObject
     [TextArea(15, 20)]
     [SerializeField] public string description;
     [SerializeField] public int value = 1;
+    [SerializeField] public float amount;    
 
     public abstract void Apply(GameObject target);
 }

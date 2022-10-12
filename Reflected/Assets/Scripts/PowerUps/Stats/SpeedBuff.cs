@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PowerUps/Speed")]
 public class SpeedBuff : PowerUpEffect
 {
-    [SerializeField] public float amount;
 
     public override void Apply(GameObject target)
     {

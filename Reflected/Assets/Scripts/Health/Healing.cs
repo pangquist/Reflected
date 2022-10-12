@@ -5,10 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PowerUps/Health")]
 public class Healing : PowerUpEffect
 {
-    public int amount;
-
     public override void Apply(GameObject target)
     {
-        target.GetComponent<Player>().Heal(amount);
+        target.GetComponent<Player>().Heal((int)amount);
     }
 }

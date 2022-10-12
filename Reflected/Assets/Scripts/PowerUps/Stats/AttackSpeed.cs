@@ -4,9 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "PowerUps/Attack")]
 public class AttackSpeed : PowerUpEffect
-{    
-    [SerializeField] public float amount;
-
+{        
     public override void Apply(GameObject target)
     {
         target.GetComponent<StatSystem>().AddAttackSpeed(amount);

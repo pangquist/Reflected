@@ -5,11 +5,17 @@ using UnityEngine;
 public class InteractablePowerUp : MonoBehaviour
 {
     public PowerUpEffect powerUpEffect;
-    public WeightedRandomList<PowerUpEffect> RarityPool;
+    [SerializeField] public WeightedRandomList<Rarity> rarityTiers;
+    [SerializeField] public Rarity myRarity;
+    //[SerializeField] public float amount;
+    //[SerializeField] public int value;
+    //public WeightedRandomList<PowerUpEffect> RarityPool;
 
     private void Start()
     {
-        powerUpEffect = RarityPool.GetRandom();
+        myRarity = rarityTiers.GetRandom();
+        powerUpEffect.amount *= myRarity.amountMultiplier;
+        powerUpEffect.value *= myRarity.valueMultiplier;
     }
 
     public void ApplyOnInteraction()
