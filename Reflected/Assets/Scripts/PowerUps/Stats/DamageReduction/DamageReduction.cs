@@ -6,7 +6,7 @@ using UnityEngine;
 public class DamageReduction : PowerUpEffect
 {
     
-    public override void Apply(GameObject target)
+    public override void Apply(GameObject target, float amount)
     {
         target.GetComponent<StatSystem>().AddDamageReduction(amount);
         Debug.Log("Reduction +" + amount);

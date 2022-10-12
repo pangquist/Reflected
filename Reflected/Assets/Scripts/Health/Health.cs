@@ -22,7 +22,7 @@ public class Health : MonoBehaviour, IMagnetic
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            powerUpEffect.Apply(other.gameObject);
+            powerUpEffect.Apply(other.gameObject, powerUpEffect.amount); //Should be changed from
         }
     }
 

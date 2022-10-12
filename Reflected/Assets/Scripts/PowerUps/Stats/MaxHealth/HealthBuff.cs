@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PowerUps/MaxHealth")]
 public class HealthBuff : PowerUpEffect
 {
-    public override void Apply(GameObject target)
+    public override void Apply(GameObject target, float amount)
     {
         target.GetComponent<StatSystem>().AddMaxHealth(amount);
         Debug.Log("Health +" + amount);

@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpeedBuff : PowerUpEffect
 {
 
-    public override void Apply(GameObject target)
+    public override void Apply(GameObject target, float amount)
     {
         target.GetComponent<StatSystem>().AddMovementSpeed(amount);
         Debug.Log("Speed +" + amount);

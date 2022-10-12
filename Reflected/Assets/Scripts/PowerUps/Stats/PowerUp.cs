@@ -6,13 +6,16 @@ public class PowerUp : MonoBehaviour
 {
     public PowerUpEffect powerUpEffect;
     [SerializeField] public WeightedRandomList<Rarity> rarityTiers;
-    public Rarity myRarity;
+    [SerializeField] public Rarity myRarity;
+    [SerializeField] public float amount;
+    [SerializeField] public int value;
+    //public WeightedRandomList<PowerUpEffect> RarityPool;
 
     private void Start()
     {
         myRarity = rarityTiers.GetRandom();
-        powerUpEffect.amount *= myRarity.amountMultiplier;
-        powerUpEffect.value *= myRarity.valueMultiplier;
+        amount = powerUpEffect.amount * myRarity.amountMultiplier;
+        value = powerUpEffect.value * myRarity.valueMultiplier;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,7 +23,7 @@ public class PowerUp : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            powerUpEffect.Apply(other.gameObject);
+            powerUpEffect.Apply(other.gameObject, amount);
         }        
     }
 }
