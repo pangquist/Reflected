@@ -95,7 +95,7 @@ public class ObjectPlacer : MonoBehaviour
                     {
                         if (hit.point.y <= terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier())
                         {
-
+                            Collider[] closeObjects = Physics.OverlapSphere(hit.point, 3);
                         }
                     }
                 }
