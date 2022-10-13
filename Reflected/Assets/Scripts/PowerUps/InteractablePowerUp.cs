@@ -18,6 +18,16 @@ public class InteractablePowerUp : MonoBehaviour
         value = powerUpEffect.value * myRarity.valueMultiplier;
     }
 
+    public void SetProperties()
+    {
+        if(myRarity != null)
+        {
+            myRarity = rarityTiers.GetRandom();
+            amount = powerUpEffect.amount * myRarity.amountMultiplier;
+            value = powerUpEffect.value * myRarity.valueMultiplier;
+        }        
+    }
+
     public void ApplyOnInteraction()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");

@@ -20,7 +20,7 @@ public class ChestControllerPay : Chest
                 inventory.Remove(payment, amountToPay);
                 Debug.Log("Chest is now open...");
                 if (spawnedObject == null)
-                    SpawnItem(1);
+                    SpawnItem(0);
             }
         }
         

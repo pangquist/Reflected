@@ -9,4 +9,9 @@ public class Healing : PowerUpEffect
     {
         target.GetComponent<Player>().Heal((int)amount);
     }
+
+    public void Awake()
+    {
+        description = "Increases your Health by " + amount;
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Chest : MonoBehaviour
 {
     [SerializeField] protected WeightedRandomList<LootPool> lootTable;
+    [SerializeField] protected WeightedRandomList<GameObject> powerups;
     [SerializeField] protected List<GameObject> pickablePowerUps;
     [SerializeField] protected Transform itemHolder;
     protected GameObject spawnedObject;
@@ -17,7 +18,7 @@ public abstract class Chest : MonoBehaviour
     protected void Start()
     {
         //animator = GetComponent<Animator>();
-        //SetItems();
+        SetItems();
         itemToSpawn = lootTable.GetRandom().GetItem();
     }
 
@@ -60,7 +61,11 @@ public abstract class Chest : MonoBehaviour
         LootPool rarityOfPowerUps = lootTable.GetRandom();
         for (int i = 0; i < numberOfPickablePowerups; i++)
         {
-            pickablePowerUps.Add(rarityOfPowerUps.GetItem());
+            //pickablePowerUps.Add(rarityOfPowerUps.GetItem());
+            pickablePowerUps.Add(powerups.GetRandom());
+            pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties();            
         }
+        Debug.Log(pickablePowerUps[0].GetComponent<InteractablePowerUp>().myRarity);
+        Debug.Log(pickablePowerUps[0].GetComponent<InteractablePowerUp>().amount);
     }
 }
