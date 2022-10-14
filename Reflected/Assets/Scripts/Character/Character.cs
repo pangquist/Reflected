@@ -10,7 +10,7 @@ public class Character : MonoBehaviour, IEffectable
     [SerializeField] protected float damage;
     [SerializeField] protected float attackSpeed;
     protected float currentHealth;
-    protected List<StatusEffect> statusEffects;
+    protected List<Effect> statusEffects;
     protected List<GameObject> effectParticles;
     protected Animator anim;    
 
@@ -20,7 +20,7 @@ public class Character : MonoBehaviour, IEffectable
     {
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
-        statusEffects = new List<StatusEffect>();
+        statusEffects = new List<Effect>();
         effectParticles = new List<GameObject>();
     }
 
@@ -95,7 +95,7 @@ public class Character : MonoBehaviour, IEffectable
         float movementPenalty = 1;
         if(statusEffects.Count > 0)
         {
-            foreach (StatusEffect status in statusEffects)
+            foreach (Effect status in statusEffects)
             {
                 movementPenalty *= status.effect.MovementPenalty;
             }
@@ -106,11 +106,11 @@ public class Character : MonoBehaviour, IEffectable
 
     public void ApplyEffect(StatusEffectData data)
     {
-        statusEffects.Add(new StatusEffect(data));
+        statusEffects.Add(new Effect(data));
         //effectParticles.Add(Instantiate(data.EffectParticles, transform));
     }
 
-    public void RemoveEffect(StatusEffect status)
+    public void RemoveEffect(Effect status)
     {
         statusEffects.Remove(status);
         //if (effectParticles != null) Destroy(effectParticles);
@@ -157,13 +157,13 @@ public class Character : MonoBehaviour, IEffectable
 }
 
 [System.Serializable]
-public class StatusEffect
+public class Effect
 {
     public StatusEffectData effect;
     public float currentEffectTime;
     public float nextTickTime;
 
-    public StatusEffect(StatusEffectData effect)
+    public Effect(StatusEffectData effect)
     {
         this.effect = effect;
         currentEffectTime = 0f;

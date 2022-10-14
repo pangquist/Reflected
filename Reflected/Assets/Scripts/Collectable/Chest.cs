@@ -15,7 +15,7 @@ public abstract class Chest : MonoBehaviour
     public bool isOpen;
     //public Animator animator;
 
-    protected void Start()
+    protected virtual void Start()
     {
         //animator = GetComponent<Animator>();
         SetItems();
@@ -50,15 +50,15 @@ public abstract class Chest : MonoBehaviour
 
     protected void SpawnItem(int index)
     {
-        //spawnedObject = Instantiate(pickablePowerUps[index], itemHolder.position, itemHolder.rotation);
-        spawnedObject = Instantiate(itemToSpawn, itemHolder.position, itemHolder.rotation);
+        spawnedObject = Instantiate(pickablePowerUps[index], itemHolder.position, itemHolder.rotation);
+        //spawnedObject = Instantiate(itemToSpawn, itemHolder.position, itemHolder.rotation);
         spawnedObject.transform.parent = null;
         itemHolder.gameObject.SetActive(true);
     }
 
     protected void SetItems()
     {
-        LootPool rarityOfPowerUps = lootTable.GetRandom();
+        //LootPool rarityOfPowerUps = lootTable.GetRandom();
         for (int i = 0; i < numberOfPickablePowerups; i++)
         {
             //pickablePowerUps.Add(rarityOfPowerUps.GetItem());

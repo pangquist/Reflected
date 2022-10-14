@@ -114,12 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootTablePowerUps:
     list:
-    - item: {fileID: 11400000, guid: 892b28201fa865044b1e5f2b3d437230, type: 2}
+    - item: {fileID: 11400000, guid: ea21b166b33241243b5d16dc9fc7ece0, type: 2}
       weight: 1
-    - item: {fileID: 11400000, guid: d536d9397f02d90498550c649d9f99b4, type: 2}
-      weight: 2
-    - item: {fileID: 11400000, guid: 4fbd9c3ffae248d44b962fe3f7fa05c0, type: 2}
-      weight: 4
   lootTableCollectables:
     list:
     - item: {fileID: 11400000, guid: 8f258e08f82e407409161d4c8a39c908, type: 2}
@@ -250,12 +246,12 @@ PrefabInstance:
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
@@ -295,7 +291,7 @@ PrefabInstance:
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DOTDamage : MonoBehaviour
+public class StatusEffect : MonoBehaviour
 {
     [SerializeField] private StatusEffectData data;
     private Rigidbody rb;
@@ -21,4 +21,5 @@ public class DOTDamage : MonoBehaviour
             effectable.ApplyEffect(data);
         }
     }
+
 }

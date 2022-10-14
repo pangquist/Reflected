@@ -1469,6 +1469,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 208b911f792bd8d40991cc24ecabd06b, type: 3}
+--- !u!1 &1427417583 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4465265745920826841, guid: 208b911f792bd8d40991cc24ecabd06b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1427417582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1427417591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427417583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39affb887a85f8b4f9066dbd99e0d75a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1458332825
 GameObject:
   m_ObjectHideFlags: 0
@@ -3195,17 +3213,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory
       objectReference: {fileID: 0}
-    - target: {fileID: 2506594628468105534, guid: d7f916e757e553843af38e00244b4226,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2506594628468105535, guid: d7f916e757e553843af38e00244b4226,
-        type: 3}
-      propertyPath: dataBase
-      value: 
-      objectReference: {fileID: 11400000, guid: 71600749265f3e94caca3ec858925bbb,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7f916e757e553843af38e00244b4226, type: 3}
 --- !u!1001 &2626944598793072294
@@ -4052,6 +4059,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1507107452627659742, guid: 781b8fde2fcec114baaf67d676c65301,
         type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507107452627659742, guid: 781b8fde2fcec114baaf67d676c65301,
+        type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -4119,22 +4131,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8049254639379775926, guid: 781b8fde2fcec114baaf67d676c65301,
-        type: 3}
-      propertyPath: lootTableCollectables.list.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8049254639379775926, guid: 781b8fde2fcec114baaf67d676c65301,
-        type: 3}
-      propertyPath: lootTableCollectables.list.Array.data[0].item
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f258e08f82e407409161d4c8a39c908,
-        type: 2}
-    - target: {fileID: 8049254639379775926, guid: 781b8fde2fcec114baaf67d676c65301,
-        type: 3}
-      propertyPath: lootTableCollectables.list.Array.data[0].weight
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8049254639379775927, guid: 781b8fde2fcec114baaf67d676c65301,
         type: 3}

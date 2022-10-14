@@ -11,7 +11,7 @@ public class ChestControllerPay : Chest
     {
         Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 
-        amountToPay = itemToSpawn.GetComponent<InteractablePowerUp>().powerUpEffect.value;
+        //amountToPay = itemToSpawn.GetComponent<InteractablePowerUp>().powerUpEffect.value;
         if (inventory)
         {
             if (!isOpen && inventory.HaveEnoughCurrency(payment, amountToPay)) 

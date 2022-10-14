@@ -13,6 +13,7 @@ public class Sword : Weapon
 {
     [Header("Sword Properties")]
     [SerializeField] Collider hitBox;
+    [SerializeField] List<StatusEffectData> statusEffectDatas;
 
     public override void AttackWithoutAnimation()
     {
@@ -35,6 +36,15 @@ public class Sword : Weapon
         {
             target.TakeDamage(GetDamage());
             hitEnemies.Add(target);
+            for (int i = 0; i < statusEffectDatas.Capacity; i++)
+            {
+                GetComponent<WeaponStatusEffect>().ApplyEffectToTarget(target.GetComponent<Collider>(), statusEffectDatas[i]);
+            }
         }
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+        
+    //}
 }

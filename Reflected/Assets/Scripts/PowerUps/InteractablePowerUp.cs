@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractablePowerUp : MonoBehaviour
+public class InteractablePowerUp : MonoBehaviour, IBuyable
 {
     public PowerUpEffect powerUpEffect;
     [SerializeField] public WeightedRandomList<Rarity> rarityTiers;
@@ -20,7 +20,7 @@ public class InteractablePowerUp : MonoBehaviour
 
     public void SetProperties()
     {
-        if(myRarity != null)
+        if(myRarity == null)
         {
             myRarity = rarityTiers.GetRandom();
             amount = powerUpEffect.amount * myRarity.amountMultiplier;
@@ -33,5 +33,15 @@ public class InteractablePowerUp : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Destroy(gameObject);
         powerUpEffect.Apply(player.gameObject, amount);
+    }
+
+    public int GetValue()
+    {
+        return value;
+    }
+
+    public string GetDescription()
+    {
+        return powerUpEffect.description;
     }
 }
