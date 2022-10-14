@@ -6,7 +6,7 @@ public class Room : MonoBehaviour
 {
     [Header("Read Only")]
 
-    [ReadOnly][SerializeField] private RectInt rect;
+    [ReadOnly][SerializeField] private Rect rect;
     [ReadOnly][SerializeField] private List<Wall> walls;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private bool cleared;
@@ -16,7 +16,7 @@ public class Room : MonoBehaviour
 
     // Properties
 
-    public RectInt Rect => rect;
+    public Rect Rect => rect;
     public List<Wall> Walls => walls;
     public List<Chamber> Chambers => chambers;
     public bool Cleared => cleared;
@@ -27,7 +27,7 @@ public class Room : MonoBehaviour
         Room.map = map;
     }
 
-    public Room Initialize(RectInt rect, int index)
+    public Room Initialize(Rect rect, int index)
     {
         this.rect = rect;
         name = "Room " + index;
@@ -41,7 +41,7 @@ public class Room : MonoBehaviour
 
     public void ScaleUpData()
     {
-        rect = new RectInt(rect.position * MapGenerator.ChunkSize, rect.size * MapGenerator.ChunkSize);
+        rect = new Rect(rect.position * MapGenerator.ChunkSize, rect.size * MapGenerator.ChunkSize);
     }
 
     private void Update()

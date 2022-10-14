@@ -16,6 +16,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private ChamberGenerator chamberGenerator;
     [SerializeField] private RoomTypeGenerator roomTypeGenerator;
     [SerializeField] private WallGenerator wallGenerator;
+    [SerializeField] private PillarGenerator pillarGenerator;
     [SerializeField] private WaterGenerator waterGenerator;
     [SerializeField] private TerrainGenerator terrainGenerator;
 
@@ -24,15 +25,19 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private bool deactivateRooms;
 
     [Range(10, 500)]
+    [Tooltip("In chunks")]
     [SerializeField] private int minMapSizeX;
 
     [Range(10, 500)]
+    [Tooltip("In chunks")]
     [SerializeField] private int maxMapSizeX;
 
     [Range(10, 500)]
+    [Tooltip("In chunks")]
     [SerializeField] private int minMapSizeZ;
 
     [Range(10, 500)]
+    [Tooltip("In chunks")]
     [SerializeField] private int maxMapSizeZ;
 
     [Range(1, 20)]
@@ -55,12 +60,13 @@ public class MapGenerator : MonoBehaviour
 
     public static int ChunkSize { get; private set; }
 
-    public RoomGenerator RoomGenerator => roomGenerator;
-    public ChamberGenerator ChamberGenerator => chamberGenerator;
+    public RoomGenerator     RoomGenerator     => roomGenerator;
+    public ChamberGenerator  ChamberGenerator  => chamberGenerator;
     public RoomTypeGenerator RoomTypeGenerator => roomTypeGenerator;
-    public WallGenerator WallGenerator => wallGenerator;
-    public WaterGenerator WaterGenerator => waterGenerator;
-    public TerrainGenerator TerrainGenerator => terrainGenerator;
+    public WallGenerator     WallGenerator     => wallGenerator;
+    public PillarGenerator   PillarGenerator   => pillarGenerator;
+    public WaterGenerator    WaterGenerator    => waterGenerator;
+    public TerrainGenerator  TerrainGenerator  => terrainGenerator;
 
     private void Start()
     {
@@ -97,21 +103,11 @@ public class MapGenerator : MonoBehaviour
         Map map = GameObject.Instantiate(mapPrefab).GetComponent<Map>();
         map.Initialize(sizeX, sizeZ);
 
-        // Generate
+        // Generate layout
 
         roomGenerator    .Generate(map);
         chamberGenerator .Generate(map);
-        roomTypeGenerator.Generate(map);
-        wallGenerator    .Generate(map);
-        waterGenerator   .Generate(map);
-        terrainGenerator .Generate(map);
-
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.SetActive(false);
-
-        BakeNavMesh(map.GetComponent<NavMeshSurface>());
-
-        player.SetActive(true);
+        map.GenerateGraph();
 
         // Scale up data
 
@@ -120,6 +116,19 @@ public class MapGenerator : MonoBehaviour
 
         foreach (Chamber chamber in map.Chambers)
             chamber.ScaleUpData();
+
+        // Continue generation
+
+        roomTypeGenerator.Generate(map);
+        wallGenerator    .Generate(map);
+        pillarGenerator  .Generate(map);
+        waterGenerator   .Generate(map);
+        terrainGenerator .Generate(map);
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.SetActive(false);
+        BakeNavMesh(map.GetComponent<NavMeshSurface>());
+        player.SetActive(true);
 
         // Log
 
