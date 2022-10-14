@@ -19,9 +19,6 @@ public class TechTreeNode : MonoBehaviour
     [SerializeField] List<TechTreeNode> nextNode = new List<TechTreeNode>();
     Image currentImage;
 
-    float resourceAmount; //Will be placed in an inventoryManager
-    int gemAmount;
-
     [SerializeField] ItemData resource;
     [SerializeField] int resourceCost;
     [SerializeField] bool hasGemCost;
@@ -74,7 +71,6 @@ public class TechTreeNode : MonoBehaviour
                 node.SetIsPlaceable(true);
         }
 
-        //resourceAmount -= resourceCost;
         inventory.Remove(resource, resourceCost);
 
         if (hasGemCost)
