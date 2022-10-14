@@ -71,6 +71,7 @@ public abstract class Weapon : MonoBehaviour
         if (playerController.GetAttackLocked())
             return null;
 
+        ClearEnemies();
         playerController.SetAttackLocked(true);
 
         if (currentComboIndex == comboClips.Length)
@@ -87,6 +88,7 @@ public abstract class Weapon : MonoBehaviour
 
     public virtual AnimationClip DoSpecialAttack()
     {
+        ClearEnemies();
         playerController.SetAttackLocked(true);
         timeSinceLastSpecialAttack = 0;
         cooldownstarter.Ability1Use();
@@ -119,7 +121,6 @@ public abstract class Weapon : MonoBehaviour
     public virtual void Unlock()
     {
         playerController.SetAttackLocked(false);
-        ClearEnemies();
     }
 
     public virtual void ClearEnemies()

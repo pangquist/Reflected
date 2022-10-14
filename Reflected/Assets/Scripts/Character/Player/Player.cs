@@ -134,7 +134,12 @@ public class Player : Character, ISavable
         return stats;
     }
 
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
 
+        anim.Play("TakeDamage");
+    }
     #region SaveLoad
     [Serializable]
     private struct SaveData

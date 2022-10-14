@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 {
     PlayerControls playerControls;
     [SerializeField] ThirdPersonMovement movement;
-    
+
     [SerializeField] Player player;
     //[SerializeField] Rigidbody rb;
 
@@ -29,7 +29,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Move(playerControls.Player.Movement.ReadValue<Vector2>());
+        if (player)
+            Move(playerControls.Player.Movement.ReadValue<Vector2>());
     }
 
     public void Jump(InputAction.CallbackContext context)
