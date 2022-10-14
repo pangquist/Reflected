@@ -43,8 +43,8 @@ public class Sword : Weapon
         }
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-        
-    //}
+    public void AddStatusEffect(StatusEffectData effect)
+    {
+        statusEffectDatas.Add(effect);
+    }
 }
