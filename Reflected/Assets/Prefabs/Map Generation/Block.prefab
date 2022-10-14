@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3572175555066523243}
   - component: {fileID: 156727234336743253}
   - component: {fileID: 284851535504861851}
-  - component: {fileID: 7295601170904504140}
   - component: {fileID: 8134341058079132129}
+  - component: {fileID: 4004058147300041438}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -103,7 +103,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4661fd69111d54f548797b776fdcf3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!208 &7295601170904504140
+--- !u!33 &8134341058079132129
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128741352362540837}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!208 &4004058147300041438
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,14 +127,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!33 &8134341058079132129
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128741352362540837}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &750615257749562003
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [System.Serializable]
 public class ObjectList
@@ -17,6 +18,8 @@ public class ObjectPlacer : MonoBehaviour
     [Header("Values")]
     [Range(0f, 1f)]
     [SerializeField] float chancePerVertex;
+    [Range(5f, 15f)]
+    [SerializeField] float obstacleDistance;
 
     [Header("Decorations")]
     [SerializeField] ObjectList[] objects;
@@ -78,37 +81,87 @@ public class ObjectPlacer : MonoBehaviour
 
     private void NewPlaceDecorations(Room room)
     {
-        Vector3 start = new Vector3(room.Rect.position.x, 50, room.Rect.position.y);
-        Vector3 end = new Vector3(room.Rect.position.x + room.Rect.width, 50, room.Rect.position.y + room.Rect.height);
+        Vector3 start = new Vector3(room.Rect.position.x, 0, room.Rect.position.y);
+        Vector3 end = new Vector3(room.Rect.position.x + room.Rect.width, 0, room.Rect.position.y + room.Rect.height);
         TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
 
-        for (float x = start.x; x < end.x; x++)
+        foreach (ObjectList objectList in objects)
         {
-            for (float z = start.z; z < end.z; z++)
+            int terrainNr = 0;
+            foreach (TerrainType terrain in terrainTypes)
             {
-                if (Random.Range(0f, 1f) < chancePerVertex)
+                if (objectList.terrain == terrain.name)
                 {
-                    Ray ray = new Ray(new Vector3(x, start.y, z), -transform.up);
-                    RaycastHit hit;
-                    Physics.Raycast(ray, out hit);
+                    float height = terrainGenerator.HeightCurve().Evaluate(terrainTypes[terrainNr].height) * terrainGenerator.HeightMultiplier();
 
-                    foreach (TerrainType terrain in terrainTypes)
+                    float otherHeight = 0;
+                    if (terrainNr > 0)
+                        otherHeight = terrainGenerator.HeightCurve().Evaluate(terrainTypes[terrainNr - 1].height) * terrainGenerator.HeightMultiplier();
+
+                    foreach (WeightedRandomList<UnityEngine.GameObject>.Pair pair in objectList.terrainObjects.list)
                     {
-                        if (hit.point.y <= terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier())
+                        for (int i = 0; i < pair.weight; i++)
                         {
-                            //Collider[] closeObjects = Physics.OverlapSphere(hit.point, 3);
-
-                            foreach (ObjectList objectList in objects)
+                            Ray ray = new Ray(new Vector3(Random.Range(start.x, end.x), 20, Random.Range(start.z, end.z)), -transform.up);
+                            RaycastHit hit;
+                            if(Physics.Raycast(ray, out hit))
                             {
-                                if (objectList.terrain == terrain.name)
+                                if (otherHeight < hit.point.y && hit.point.y <= height)
                                 {
-                                    Instantiate(objectList.terrainObjects.GetRandom(), hit.point, Quaternion.identity, room.transform);
+                                    bool close = false;
+
+                                    if (pair.item.gameObject.GetComponent<NavMeshObstacle>())
+                                    {
+                                        Collider[] closeObjects = Physics.OverlapSphere(hit.point, obstacleDistance);
+
+                                        foreach (Collider collider in closeObjects)
+                                        {
+                                            if (collider.gameObject.GetComponent<NavMeshObstacle>())
+                                            {
+                                                close = true;
+                                            }
+                                        }
+                                    }
+
+                                    if(!close)
+                                        Instantiate(pair.item, hit.point, Quaternion.identity, room.transform);
                                 }
                             }
                         }
                     }
                 }
+                terrainNr++;
             }
         }
+
+        //for (float x = start.x; x < end.x; x++)
+        //{
+        //    for (float z = start.z; z < end.z; z++)
+        //    {
+        //        if (Random.Range(0f, 1f) < chancePerVertex)
+        //        {
+        //            Ray ray = new Ray(new Vector3(x, start.y, z), -transform.up);
+        //            RaycastHit hit;
+        //            Physics.Raycast(ray, out hit);
+
+        //            foreach (TerrainType terrain in terrainTypes)
+        //            {
+        //                if (hit.point.y <= terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier())
+        //                {
+        //                    //Collider[] closeObjects = Physics.OverlapSphere(hit.point, 3);
+
+        //                    foreach (ObjectList objectList in objects)
+        //                    {
+        //                        if (objectList.terrain == terrain.name)
+        //                        {
+        //                            Instantiate(objectList.terrainObjects.GetRandom(), hit.point, Quaternion.identity, room.transform);
+        //                            //placed = true;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
