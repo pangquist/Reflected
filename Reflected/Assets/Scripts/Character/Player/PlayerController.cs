@@ -13,28 +13,23 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     PlayerControls playerControls;
-    ThirdPersonMovement movement;
+    [SerializeField] ThirdPersonMovement movement;
     
-    Player player;
-    Rigidbody rb;
+    [SerializeField] Player player;
+    //[SerializeField] Rigidbody rb;
 
     bool movementLocked;
-    [SerializeField] bool attackLocked;
+    bool attackLocked;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        player = GetComponent<Player>();
-        movement = GetComponent<ThirdPersonMovement>();
         playerControls = new PlayerControls();
         playerControls.Player.Enable();
     }
 
     void Update()
     {
-        if (playerControls.Player.Movement.ReadValue<Vector2>() != Vector2.zero && !movementLocked)
-            Move(playerControls.Player.Movement.ReadValue<Vector2>());
-
+        Move(playerControls.Player.Movement.ReadValue<Vector2>());
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -45,8 +40,9 @@ public class PlayerController : MonoBehaviour
 
     public void Move(Vector2 movementVector)
     {
-        if(!movementLocked)
+        if (!movementLocked)
             movement.Move(new Vector3(movementVector.x, 0, movementVector.y).normalized);
+
     }
 
     public void Attack(InputAction.CallbackContext context)
@@ -92,6 +88,16 @@ public class PlayerController : MonoBehaviour
     public void SetAttackLocked(bool state)
     {
         attackLocked = state;
+    }
+
+    public void LockAttack()
+    {
+        attackLocked = true;
+    }
+
+    public void UnlockAttack()
+    {
+        attackLocked = false;
     }
 
     public bool GetAttackLocked()

@@ -34,7 +34,7 @@ public abstract class Weapon : MonoBehaviour
     public virtual void Awake()
     {
         anim = GetComponent<Animator>();
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerController = GameObject.Find("Playerbody").GetComponent<PlayerController>();
 
         player = GameObject.Find("Player").GetComponent<Player>();
 

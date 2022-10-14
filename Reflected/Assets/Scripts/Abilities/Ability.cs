@@ -26,9 +26,11 @@ public abstract class Ability : MonoBehaviour
         cooldownstarter = FindObjectOfType<AbilityCooldowns>();
     }
 
-    public virtual void DoEffect()
+    public virtual bool DoEffect()
     {
         remainingCooldown = cooldown;
+
+        return true;
     }
     void Update()
     {
@@ -54,5 +56,10 @@ public abstract class Ability : MonoBehaviour
     public Sprite GetIcon()
     {
         return abilityIcon;
+    }
+
+    public string GetName()
+    {
+        return abilityName;
     }
 }

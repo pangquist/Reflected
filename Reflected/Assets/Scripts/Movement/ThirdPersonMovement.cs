@@ -8,6 +8,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] CharacterController controller;
     [SerializeField] Transform cam;
     [SerializeField] StatSystem stats;
+    [SerializeField] Animator animator;
 
     [Header("Stat Properties")]
     [SerializeField] float speed = 12f;
@@ -35,6 +36,8 @@ public class ThirdPersonMovement : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        animator.SetFloat("velY", velocity.y);
+        animator.SetBool("isGrounded", isGrounded);
         controller.Move(velocity * Time.deltaTime);
     }
 
@@ -46,14 +49,24 @@ public class ThirdPersonMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
+        animator.SetFloat("velX", direction.x);
+        animator.SetFloat("velZ", direction.z);
+
         if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+
+            if (moveDir.x != 0 || moveDir.z != 0)
+                animator.SetBool("isRunning", true);
+
             controller.Move(moveDir.normalized * speed * stats.GetMovementSpeed() * CharacterMovementPenalty() * Time.deltaTime);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
         }
     }
 
@@ -63,14 +76,18 @@ public class ThirdPersonMovement : MonoBehaviour
             return;
 
         if (isGrounded)
+        {
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+        }
     }
 
     public void Dash()
     {
         if (isGrounded)
         {
-            dashAbility.DoEffect();
+            if (dashAbility.DoEffect())
+                animator.Play(dashAbility.GetName());
         }
     }
 

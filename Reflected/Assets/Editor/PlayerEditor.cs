@@ -46,6 +46,7 @@ public class PlayerEditorTemplate : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("maxHealth"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("movementSpeed"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("jumpForce"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("anim"));
     }
 
     void DisplayCombatInfo()
