@@ -7,13 +7,13 @@ public class RoomGenerator : MonoBehaviour
 {
     private class RoomNode
     {
-        public RectInt rect;
+        public Rect rect;
         public RoomNode child1 = null;
         public RoomNode child2 = null;
 
-        public RoomNode(int x, int y, int width, int height)
+        public RoomNode(float x, float y, float width, float height)
         {
-            rect = new RectInt(x, y, width, height);
+            rect = new Rect(x, y, width, height);
         }
     }
 
@@ -29,15 +29,19 @@ public class RoomGenerator : MonoBehaviour
     [Header("Rooms")]
 
     [Range(3, 50)]
+    [Tooltip("In chunks")]
     [SerializeField] private int minRoomLength;
 
     [Range(3, 50)]
+    [Tooltip("In chunks")]
     [SerializeField] private int maxRoomLength;
 
     [Range(1, 2500)]
+    [Tooltip("In chunks")]
     [SerializeField] private int minRoomArea;
 
     [Range(1, 10)]
+    [Tooltip("In chunks")]
     [SerializeField] private int roomPadding;
 
     [Tooltip("Alters the odds of a room being split its long or short side, resulting in square or stretched children. " +
@@ -54,7 +58,7 @@ public class RoomGenerator : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float splitChance;
 
-    private List<RectInt> rects = new List<RectInt>();
+    private List<Rect> rects = new List<Rect>();
 
     // Properties
 
@@ -111,7 +115,7 @@ public class RoomGenerator : MonoBehaviour
         // (height, width) = Test for horizontal split
         // (width, height) = Test for vertical split
 
-        bool SplitPossible(int a, int b)
+        bool SplitPossible(float a, float b)
         {
             return a >= minRoomLength * 2 + roomPadding * 4 &&
                 (b - roomPadding * 2) * (a * 0.5f - roomPadding * 2) >= minRoomArea;
@@ -195,10 +199,10 @@ public class RoomGenerator : MonoBehaviour
     /// </summary>
     private void SplitHorizontally(ref RoomNode room)
     {
-        int minRoomHeight = Mathf.Max(minRoomLength, minRoomArea / (room.rect.width - roomPadding * 2));
-        int minY = minRoomHeight + roomPadding * 2;
-        int maxY = room.rect.height - minRoomHeight - roomPadding * 2;
-        int y = GetSplitLocation(minY, maxY);
+        float minRoomHeight = Mathf.Max(minRoomLength, minRoomArea / (room.rect.width - roomPadding * 2));
+        float minY = minRoomHeight + roomPadding * 2;
+        float maxY = room.rect.height - minRoomHeight - roomPadding * 2;
+        float y = GetSplitLocation(minY, maxY);
 
         room.child1 = new RoomNode(room.rect.x, room.rect.y, room.rect.width, y);
         room.child2 = new RoomNode(room.rect.x, room.rect.y + y, room.rect.width, room.rect.height - y);
@@ -209,10 +213,10 @@ public class RoomGenerator : MonoBehaviour
     /// </summary>
     private void SplitVertically(ref RoomNode room)
     {
-        int minRoomWidth = Mathf.Max(minRoomLength, minRoomArea / (room.rect.height - roomPadding * 2));
-        int minX = minRoomWidth + roomPadding * 2;
-        int maxX = room.rect.width - minRoomWidth - roomPadding * 2;
-        int x = GetSplitLocation(minX, maxX);
+        float minRoomWidth = Mathf.Max(minRoomLength, minRoomArea / (room.rect.height - roomPadding * 2));
+        float minX = minRoomWidth + roomPadding * 2;
+        float maxX = room.rect.width - minRoomWidth - roomPadding * 2;
+        float x = GetSplitLocation(minX, maxX);
 
         room.child1 = new RoomNode(room.rect.x, room.rect.y, x, room.rect.height);
         room.child2 = new RoomNode(room.rect.x + x, room.rect.y, room.rect.width - x, room.rect.height);
@@ -221,7 +225,7 @@ public class RoomGenerator : MonoBehaviour
     /// <summary>
     /// Returns a location within the provided range using the location bias variable.
     /// </summary>
-    private int GetSplitLocation(int min, int max)
+    private int GetSplitLocation(float min, float max)
     {
         float x = Random.Range(0f, 1f); // Random input
 
@@ -239,11 +243,11 @@ public class RoomGenerator : MonoBehaviour
     /// </summary>
     private void ShrinkRooms()
     {
-        RectInt rect;
+        Rect rect;
         for (int i = rects.Count - 1; i >= 0; --i)
         {
             rect = rects[i];
-            rects[i] = new RectInt(
+            rects[i] = new Rect(
                 rect.x + roomPadding,
                 rect.y + roomPadding,
                 rect.width - roomPadding * 2,

@@ -430,7 +430,12 @@ PrefabInstance:
     - target: {fileID: 3434030415582317932, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -692.70996
+      value: -692.70984
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466060085952198480, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 425.48294
       objectReference: {fileID: 0}
     - target: {fileID: 3466060085952198480, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -780,7 +785,7 @@ PrefabInstance:
     - target: {fileID: 4763105907550617729, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -59.347626
+      value: -59.34761
       objectReference: {fileID: 0}
     - target: {fileID: 5821881590750259855, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -796,6 +801,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015028412430424291, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 425.48294
       objectReference: {fileID: 0}
     - target: {fileID: 7806777676189186301, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -826,6 +836,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 13.320007
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970068262492351453, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 425.48294
       objectReference: {fileID: 0}
     - target: {fileID: 8215079499412126164, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -1162,22 +1177,22 @@ PrefabInstance:
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9720268
+      value: 0.97202677
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0043157334
+      value: 0.004315726
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.23482168
+      value: -0.2348216
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0020224454
+      value: 0.0020224336
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487351524866, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -1353,6 +1368,7 @@ GameObject:
   - component: {fileID: 2131914260}
   - component: {fileID: 2131914265}
   - component: {fileID: 2131914262}
+  - component: {fileID: 2131914268}
   - component: {fileID: 2131914264}
   - component: {fileID: 2131914263}
   - component: {fileID: 2131914267}
@@ -1418,7 +1434,7 @@ MonoBehaviour:
   mapGenerator: {fileID: 2131914261}
   chamberPrefab: {fileID: 5641552476762302183, guid: 4b53138cb48ed46cb9b6016113532ad8,
     type: 3}
-  chamberSize: 1
+  chamberSize: 2
   chamberMargin: 2
   addRandomChambers: 1
   minChambers: 0.5
@@ -1442,13 +1458,14 @@ MonoBehaviour:
   chamberGenerator: {fileID: 2131914260}
   roomTypeGenerator: {fileID: 2131914265}
   wallGenerator: {fileID: 2131914262}
+  pillarGenerator: {fileID: 2131914268}
   waterGenerator: {fileID: 2131914264}
   terrainGenerator: {fileID: 2131914263}
-  deactivateRooms: 1
-  minMapSizeX: 90
-  maxMapSizeX: 100
-  minMapSizeZ: 70
-  maxMapSizeZ: 80
+  deactivateRooms: 0
+  minMapSizeX: 70
+  maxMapSizeX: 90
+  minMapSizeZ: 100
+  maxMapSizeZ: 120
   chunkSize: 8
   trials: 1
   interval: 0
@@ -1471,10 +1488,10 @@ MonoBehaviour:
     type: 3}
   doorPrefab: {fileID: 5687791239041163175, guid: 4f9eca1e07a1b4683b683c70b5709bbe,
     type: 3}
-  wallHeight: 3
-  wallThickness: 1
-  doorThickness: 0.25
-  doorTransitionDuration: 0.5
+  wallHeight: 22
+  wallThickness: 4
+  doorThickness: 1
+  doorIndent: 0.5
 --- !u!114 &2131914263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1653,3 +1670,21 @@ MonoBehaviour:
       - item: {fileID: 527581394202791689, guid: 4a7be64aa8953144d90bcc190968ea0e,
           type: 3}
         weight: 1
+--- !u!114 &2131914268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8315c1d7713f643588828b0760f8c056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pillarPrefab: {fileID: 2509104792265355968, guid: c20cfcd7e8eea4288bf6273722672535,
+    type: 3}
+  width: 4
+  protrudingDepth: 1.5
+  protrudingHeight: 1.5
+  distance: 20

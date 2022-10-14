@@ -33,24 +33,18 @@ public class Door : MonoBehaviour
         Door.thickness = thickness;
     }
 
-    public Door Initialize(CardinalDirection direction, Rect rect, Room room)
+    public Door Initialize(CardinalDirection direction, Room room, Vector2 position, float width)
     {
         this.room = room;
         name = "Door " + direction.ToString();
         animator.speed = 1f / animationDuration;
 
-        transform.position = new Vector3(rect.center.x, 0, rect.center.y) * MapGenerator.ChunkSize;
+        transform.position = new Vector3(position.x, 0, position.y);
+        transform.localScale = new Vector3(width, Wall.Height, thickness);
 
         if (direction == CardinalDirection.West || direction == CardinalDirection.East)
-        {
             transform.Rotate(0f, 90f, 0f);
-            transform.localScale = new Vector3(rect.height, Wall.Height, rect.width) * MapGenerator.ChunkSize;
-        }
-        else
-        {
-            transform.localScale = new Vector3(rect.width, Wall.Height, rect.height) * MapGenerator.ChunkSize;
-        }
-        
+
         return this;
     }
 

@@ -50,7 +50,7 @@ MonoBehaviour:
   blockPrefab: {fileID: 750615257749562003, guid: 12c3bb198b0954a1383726accf26f23f,
     type: 3}
   animator: {fileID: 4129281576517482264}
-  animationDuration: 1
+  animationDuration: 0.75
   room: {fileID: 0}
   isOpen: 0
 --- !u!95 &4129281576517482264
@@ -85,6 +85,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Block 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3572175555066523243, guid: 12c3bb198b0954a1383726accf26f23f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 28702d1b59555ff47b733620604f0dba, type: 2}
     - target: {fileID: 8134341058079132129, guid: 12c3bb198b0954a1383726accf26f23f,
         type: 3}
       propertyPath: m_Mesh
@@ -190,6 +195,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Block 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3572175555066523243, guid: 12c3bb198b0954a1383726accf26f23f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 28702d1b59555ff47b733620604f0dba, type: 2}
     - target: {fileID: 8134341058079132129, guid: 12c3bb198b0954a1383726accf26f23f,
         type: 3}
       propertyPath: m_Mesh

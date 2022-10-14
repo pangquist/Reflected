@@ -16,7 +16,7 @@ public class Chamber : MonoBehaviour
     [ReadOnly][SerializeField] private Room room1;
     [ReadOnly][SerializeField] private Room room2;
     [ReadOnly][SerializeField] private Orientation orientation;
-    [ReadOnly][SerializeField] private RectInt rect;
+    [ReadOnly][SerializeField] private Rect rect;
     [ReadOnly][SerializeField] private Bounds triggerBounds;
     [ReadOnly][SerializeField] private Door door1;
     [ReadOnly][SerializeField] private Door door2;
@@ -32,9 +32,11 @@ public class Chamber : MonoBehaviour
 
     public Orientation Orientation => orientation;
     public List<Wall> Walls => walls;
+    public Room Room1 => room1;
+    public Room Room2 => room2;
     public Door Door1 => door1;
     public Door Door2 => door2;
-    public RectInt Rect => rect;
+    public Rect Rect => rect;
 
     public static void StaticInitialize(Map map)
     {
@@ -42,7 +44,7 @@ public class Chamber : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    public Chamber Initialize(Room room1, Room room2, RectInt rect, Orientation orientation)
+    public Chamber Initialize(Room room1, Room room2, Rect rect, Orientation orientation)
     {
         this.room1 = room1;
         this.room2 = room2;
@@ -72,7 +74,7 @@ public class Chamber : MonoBehaviour
 
     public void ScaleUpData()
     {
-        rect = new RectInt(rect.position * MapGenerator.ChunkSize, rect.size * MapGenerator.ChunkSize);
+        rect = new Rect(rect.position * MapGenerator.ChunkSize, rect.size * MapGenerator.ChunkSize);
     }
 
     private void Update()

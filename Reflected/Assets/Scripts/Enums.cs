@@ -9,7 +9,7 @@ public enum Orientation
 }
 
 /// <summary>
-/// North, South, West, East
+/// North, East, South, West
 /// </summary>
 public enum CardinalDirection
 {
