@@ -116,7 +116,7 @@ public class MapGenerator : MonoBehaviour
 
         player.SetActive(true);
 
-        objectPlacer.Place(map);
+        
 
         // Scale up data
 
@@ -125,6 +125,8 @@ public class MapGenerator : MonoBehaviour
 
         foreach (Chamber chamber in map.Chambers)
             chamber.ScaleUpData();
+
+        objectPlacer.Place(map);
 
         // Log
 

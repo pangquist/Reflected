@@ -28,7 +28,8 @@ public class ObjectPlacer : MonoBehaviour
             TerrainChunk[] chunks = room.GetComponentsInChildren<TerrainChunk>();
             for (int i = 0; i < chunks.Length; i++)
             {
-                PlaceDecorations(chunks[i], room);
+                //PlaceDecorations(chunks[i], room);
+                NewPlaceDecorations(room);
             }
         }
     }
@@ -95,7 +96,15 @@ public class ObjectPlacer : MonoBehaviour
                     {
                         if (hit.point.y <= terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier())
                         {
-                            Collider[] closeObjects = Physics.OverlapSphere(hit.point, 3);
+                            //Collider[] closeObjects = Physics.OverlapSphere(hit.point, 3);
+
+                            foreach (ObjectList objectList in objects)
+                            {
+                                if (objectList.terrain == terrain.name)
+                                {
+                                    Instantiate(objectList.terrainObjects.GetRandom(), hit.point, Quaternion.identity, room.transform);
+                                }
+                            }
                         }
                     }
                 }
