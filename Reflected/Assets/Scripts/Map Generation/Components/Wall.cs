@@ -20,6 +20,7 @@ public class Wall : MonoBehaviour
     [ReadOnly][SerializeField] private Orientation orientation;
     [ReadOnly][SerializeField] private int length;
     [ReadOnly][SerializeField] private List<GameObject> portions;
+    [ReadOnly][SerializeField] private List<Pillar> pillars;
 
     private static int height;
     private static int thickness;
@@ -32,6 +33,7 @@ public class Wall : MonoBehaviour
     public CardinalDirection Direction => direction;
     public Orientation Orientation => orientation;
     public List<GameObject> Portions => portions;
+    public List<Pillar> Pillars => pillars;
 
     public static void StaticInitialize(int thickness, int height)
     {

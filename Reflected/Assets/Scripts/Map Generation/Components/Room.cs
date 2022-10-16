@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PathCreation;
 
 public class Room : MonoBehaviour
 {
     [Header("Read Only")]
 
     [ReadOnly][SerializeField] private Rect rect;
-    [ReadOnly][SerializeField] private List<Wall> walls;
-    [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private bool cleared;
     [ReadOnly][SerializeField] private RoomType type;
+    [ReadOnly][SerializeField] private List<Wall> walls;
+    [ReadOnly][SerializeField] private List<Chamber> chambers;
+    [ReadOnly][SerializeField] private List<PathCreator> paths;
 
     private static Map map;
 
@@ -21,6 +23,28 @@ public class Room : MonoBehaviour
     public List<Chamber> Chambers => chambers;
     public bool Cleared => cleared;
     public RoomType Type => type;
+    public List<PathCreator> Paths => paths;
+
+    private void Start()
+    {
+        if (type == RoomType.Boss)
+        {
+            foreach (Wall wall in walls)
+            {
+                foreach (GameObject portion in wall.Portions)
+                    portion.GetComponentInChildren<MeshRenderer>().material.color = new Color(0.3f, 0.3f, 0.3f);
+
+                foreach (Pillar pillar in wall.Pillars)
+                    pillar.GetComponentInChildren<MeshRenderer>().material.color = new Color(0.6f, 0.1f, 0.1f);
+            }
+
+            foreach (Chamber chamber in chambers)
+            {
+                foreach (Pillar pillar in chamber.Pillars)
+                    pillar.GetComponentInChildren<MeshRenderer>().material.color = new Color(0.6f, 0.1f, 0.1f);
+            }
+        }
+    }
 
     public static void StaticInitialize(Map map)
     {

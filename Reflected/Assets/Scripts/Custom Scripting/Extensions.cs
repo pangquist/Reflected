@@ -205,6 +205,15 @@ public static class Extensions
     }
 
     /// <summary>
+    /// Returns whether or not this rectangle fully contains the provided rectangle
+    /// </summary>
+    public static bool Contains(this Rect rect, Rect other)
+    {
+        Rect overlap;
+        return rect.Overlaps(other, out overlap) && overlap.size == other.size;
+    }
+
+    /// <summary>
     /// Returns the y coordinate for this RectInt's top side (y + height)
     /// </summary>
     public static int Top(this RectInt rect)
@@ -265,5 +274,20 @@ public static class Extensions
         return new Rect(bounds.min.x, bounds.min.z, bounds.size.x, bounds.size.z);
     }
 
+    /// <summary>
+    /// Returns the area of this rectangle
+    /// </summary>
+    public static float Area(this Rect rect)
+    {
+        return rect.width * rect.height;
+    }
+
+    /// <summary>
+    /// Returns the area of this rectangle
+    /// </summary>
+    public static int Area(this RectInt rect)
+    {
+        return rect.width * rect.height;
+    }
 
 }

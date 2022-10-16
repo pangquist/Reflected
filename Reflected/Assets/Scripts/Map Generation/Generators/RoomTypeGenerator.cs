@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
 
 public class RoomTypeGenerator : MonoBehaviour
 {
@@ -12,10 +15,6 @@ public class RoomTypeGenerator : MonoBehaviour
 
     [Range(0f, 1f)]
     [SerializeField] private float peacefulChance;
-
-    [SerializeField] private bool randomizeStartRoom;
-
-    [SerializeField] private bool randomizeBossRoom;
 
     public void Generate(Map map)
     {
@@ -29,31 +28,88 @@ public class RoomTypeGenerator : MonoBehaviour
                 room.SetType(RoomType.Monster);
         }
 
-        // Set start room
+        DetermineStartRoom(map);
+        DetermineBossRoom(map);
+    }
 
-        int maxExclusive = map.Rooms.Count - (randomizeBossRoom ? 0 : 1);
-        int startRoom = randomizeStartRoom ? Random.Range(0, maxExclusive) : 0;
+    private void DetermineStartRoom(Map map)
+    {
+        Rect mapRect = new Rect(0, 0, map.SizeX, map.SizeZ);
+        Room startRoom = map.Rooms[0];
 
-        map.StartRoom = map.Rooms[startRoom];
+        foreach (Room room in map.Rooms)
+        {
+            if (room.Rect.Contains(mapRect.center))
+            {
+                startRoom = room;
+                break;
+            }
+
+            if (Vector2.Distance(room.Rect.center, mapRect.center) < Vector2.Distance(startRoom.Rect.center, mapRect.center))
+                startRoom = room;
+        }
+
+        map.StartRoom = startRoom;
         map.StartRoom.SetType(RoomType.Start);
 
-        // Set boss room
+        mapGenerator.Log("Start room: " + map.StartRoom.name);
+    }
 
-        int bossRoom = startRoom;
+    private void DetermineBossRoom(Map map)
+    {
+        Rect mapRect = new Rect(0, 0, map.SizeX, map.SizeZ);
 
-        while (bossRoom == startRoom)
-            bossRoom = randomizeStartRoom ? Random.Range(0, map.Rooms.Count) : map.Rooms.Count;
+        Dictionary<Room, float> bossRooms = new Dictionary<Room, float>();
+        KeyValuePair<Room, float>[] orderedArray;
 
-        map.BossRoom = map.Rooms[bossRoom];
+        // Find potential boss rooms by locating the outer rooms
+
+        for (int i = 1; bossRooms.Count == 0; ++i)
+        {
+            Rect inflatedMapRect = mapRect.Inflated(-i, -i);
+
+            foreach (Room room in map.Rooms)
+            {
+                if (inflatedMapRect.Contains(room.Rect) == false)
+                {
+                    bossRooms.Add(room, 0);
+                }
+            }       
+        }
+
+        // Test 1: Distance to start room (more is better)
+
+        orderedArray = bossRooms.OrderBy(pair => Vector2.Distance(pair.Key.Rect.center, map.StartRoom.Rect.center)).ToArray();
+        OrderToFitness(1f);
+
+        // Test 2: Area (more is better)
+
+        orderedArray = bossRooms.OrderBy(pair => pair.Key.Rect.Area()).ToArray();
+        OrderToFitness(1f);
+
+        // Test 3: Graph reachability (more is better)
+
+        orderedArray = bossRooms.OrderBy(pair => map.Graph.TraverseGraph(map.StartRoom, pair.Key)).ToArray();
+        OrderToFitness(1f);
+
+        // Adds fitness to potential boss rooms based of the order orderedArray (higher index = more fitness)
+        void OrderToFitness(float weight)
+        {
+            for (int i = 0; i < orderedArray.Length; ++i)
+            {
+                bossRooms[orderedArray[i].Key] += (float)i / (orderedArray.Length - 1) * weight;
+            }
+        }
+
+        // Find room with highest fitness score
+
+        orderedArray = bossRooms.OrderBy(pair => -pair.Value).ToArray();
+
+        map.BossRoom = orderedArray.ElementAt(0).Key;
         map.BossRoom.SetType(RoomType.Boss);
 
-        //foreach (TerrainPlane terrainPlane in map.Rooms[bossRoom].GetComponentsInChildren<TerrainPlane>())
-            //terrainPlane.GetComponentInChildren<Material>().color = new Color(150, 60, 20);
-
-        // Log
-
-        mapGenerator.Log("Start room: " + startRoom);
-        mapGenerator.Log("Boss room: " + bossRoom);
+        mapGenerator.Log("Boss room: " + map.BossRoom.name);
+        mapGenerator.Log("Boss room fittness: " + orderedArray.ElementAt(0).Value.ToString("0.00") + " / 3");
     }
 
 }

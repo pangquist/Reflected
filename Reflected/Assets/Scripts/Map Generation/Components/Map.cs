@@ -46,6 +46,15 @@ public class Map : MonoBehaviour
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
     }
 
+    public void ScaleUpData()
+    {
+        foreach (Room room in rooms)
+            room.ScaleUpData();
+
+        foreach (Chamber chamber in chambers)
+            chamber.ScaleUpData();
+    }
+
     public void GenerateGraph()
     {
         graph.Generate();

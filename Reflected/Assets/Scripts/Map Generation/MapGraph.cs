@@ -11,6 +11,7 @@ public class MapGraph : MonoBehaviour
         public List<Node> adjacentNodes = new List<Node>();
         public List<Edge> adjacentEdges = new List<Edge>();
         public bool marked;
+        public Vector2 position;
 
         public Node(Room room)
         {
@@ -24,6 +25,7 @@ public class MapGraph : MonoBehaviour
         public List<Node> adjacentNodes = new List<Node>();
         public List<Edge> adjacentEdges = new List<Edge>();
         public bool marked;
+        public Vector2 position;
 
         public Edge(Chamber chamber)
         {
@@ -38,6 +40,11 @@ public class MapGraph : MonoBehaviour
     [ReadOnly][SerializeField] private List<Node> nodes;
     [ReadOnly][SerializeField] private List<Edge> edges;
 
+    // Properties
+
+    public List<Node> Nodes => nodes;
+    public List<Edge> Edges => edges;
+
     public void Generate()
     {
         nodes = new List<Node>();
@@ -45,8 +52,12 @@ public class MapGraph : MonoBehaviour
 
         nodes.Add(new Node(map.Rooms[0]));
 
+        // Create and link most components
+
         RecursiveBuild(nodes[0]);
         ClearMarked();
+
+        // Link adjacent edges to eachother
 
         foreach (Edge edge1 in edges)
         {
@@ -60,8 +71,16 @@ public class MapGraph : MonoBehaviour
             }
         }
 
-        int traversedNodes = TraverseGraph();
-        Debug.Log(traversedNodes + "/" + map.Rooms.Count);
+        // Determine position for each component
+
+        foreach (Node node in nodes)
+            node.position = node.room.Rect.center;
+
+        foreach (Edge edge in edges)
+            edge.position = edge.chamber.Rect.center;
+
+        if (TraverseGraph() != map.Rooms.Count)
+            Debug.LogWarning("MapGraph: Cannot traverse graph fully");
     }
 
     private void RecursiveBuild(Node node)
@@ -112,26 +131,41 @@ public class MapGraph : MonoBehaviour
         RecursiveBuild(node);
     }
 
-    private int TraverseGraph()
+    /// <summary>
+    /// Traverses the graph Node to Node
+    /// </summary>
+    /// <returns>Returns the number of Nodes reached</returns>
+    public int TraverseGraph(Node start = null)
     {
-        int markedNodes = TraverseNodeToNode(nodes[0]);
+        int markedNodes = NodeToNode(start != null ? start : nodes[0]);
         ClearMarked();
         return markedNodes;
     }
 
-    private int TraverseNodeToNode(Node node)
+    /// <summary>
+    /// Traverses the graph Node to Node
+    /// </summary>
+    /// <returns>Returns the number of Nodes reached</returns>
+    public int TraverseGraph(Room start, Room skip)
+    {
+        nodes.Find(node => node.room == skip).marked = true;
+
+        return TraverseGraph(nodes.Find(node => node.room == start));
+    }
+
+    private int NodeToNode(Node node)
     {
         node.marked = true;
         int markedNodes = 1;
 
         foreach (Node adjacentNode in node.adjacentNodes)
             if (!adjacentNode.marked)
-                markedNodes += TraverseNodeToNode(adjacentNode);
+                markedNodes += NodeToNode(adjacentNode);
 
         return markedNodes;
     }
 
-    private void ClearMarked()
+    public void ClearMarked()
     {
         foreach (Node node in nodes)
             node.marked = false;

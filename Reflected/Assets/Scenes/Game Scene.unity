@@ -1177,22 +1177,22 @@ PrefabInstance:
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97202677
+      value: 0.9720268
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.004315726
+      value: 0.0043157265
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.2348216
+      value: -0.23482165
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0020224336
+      value: 0.002022437
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487351524866, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -1366,6 +1366,7 @@ GameObject:
   - component: {fileID: 2131914261}
   - component: {fileID: 2131914259}
   - component: {fileID: 2131914260}
+  - component: {fileID: 2131914269}
   - component: {fileID: 2131914265}
   - component: {fileID: 2131914262}
   - component: {fileID: 2131914268}
@@ -1456,6 +1457,7 @@ MonoBehaviour:
     type: 3}
   roomGenerator: {fileID: 2131914259}
   chamberGenerator: {fileID: 2131914260}
+  pathGenerator: {fileID: 2131914269}
   roomTypeGenerator: {fileID: 2131914265}
   wallGenerator: {fileID: 2131914262}
   pillarGenerator: {fileID: 2131914268}
@@ -1688,3 +1690,17 @@ MonoBehaviour:
   protrudingDepth: 1.5
   protrudingHeight: 1.5
   distance: 20
+--- !u!114 &2131914269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5041900523e0451f94623666ba503a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPrefab: {fileID: 316618593525123048, guid: b844475432cdd470db621627f176749f,
+    type: 3}
