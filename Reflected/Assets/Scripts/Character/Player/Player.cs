@@ -74,9 +74,6 @@ public class Player : Character, ISavable
     }
     public void Attack()
     {
-        //if (!currentWeapon.IsLocked())
-        //    anim.Play(currentWeapon.DoAttack().name);
-
         if (basicAbility.IsOnCooldown())
             return;
 
@@ -85,10 +82,6 @@ public class Player : Character, ISavable
 
     public void SpecialAttack()
     {
-        //if (currentWeapon.IsLocked() || currentWeapon.IsOnCooldown())
-        //    return;
-
-        //anim.Play(currentWeapon.DoSpecialAttack().name);
         if (specialAbility.IsOnCooldown())
             return;
 
@@ -104,12 +97,6 @@ public class Player : Character, ISavable
     {
         return jumpForce;
     }
-
-    //public void UnlockWeapon()
-    //{
-    //    currentWeapon.Unlock();
-    //}
-
     public void DoWeaponEffect()
     {
         currentWeapon.WeaponEffect();

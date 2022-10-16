@@ -57,6 +57,7 @@ public class Enemy : Character
         aiDirector.killEnemyInRoom();
         LootDrop(transform);
         player.RemoveEnemy(this);
+        anim.Play("Death");
         base.Die();
     }
 

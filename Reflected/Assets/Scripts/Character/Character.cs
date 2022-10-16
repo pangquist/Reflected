@@ -59,9 +59,12 @@ public class Character : MonoBehaviour, IEffectable
         Debug.Log("Character Dead");
     }
 
-    public void Destroy()
+    protected void Destroy()
     {
-        Destroy(gameObject);
+        if (transform.parent != null)
+            Destroy(transform.parent.gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public float GetHealthPercentage()
