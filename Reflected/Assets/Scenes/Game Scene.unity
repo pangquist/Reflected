@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.8
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.07737239, g: 0.1742914, b: 0.29488918, a: 0.8}
+  m_IndirectSpecularColor: {r: 0.07740041, g: 0.17435639, b: 0.29502767, a: 0.8}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -195,22 +195,77 @@ PrefabInstance:
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13202257
+      value: 0.13202259
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.22164114
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.030301772
+      value: 0.030301753
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292487349488125, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.080560714
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292487349488125, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.018490251
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292487970045864, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.6005478
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292487970045864, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.068579845
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292487970045864, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.103309855
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292488277444768, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292488277444768, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292488307742550, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292488307742550, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292488307742550, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488307742550, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.004315756
+      value: 0.0043157334
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488307742550, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.002022452
+      value: 0.0020224426
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 208b911f792bd8d40991cc24ecabd06b, type: 3}
@@ -908,6 +963,7 @@ GameObject:
   - component: {fileID: 2131914259}
   - component: {fileID: 2131914260}
   - component: {fileID: 2131914265}
+  - component: {fileID: 2131914269}
   - component: {fileID: 2131914262}
   - component: {fileID: 2131914268}
   - component: {fileID: 2131914264}
@@ -996,17 +1052,18 @@ MonoBehaviour:
   mapPrefab: {fileID: 6645767010589061385, guid: b0f3362468123494eb359ebf7bd01687,
     type: 3}
   roomGenerator: {fileID: 2131914259}
-  chamberGenerator: {fileID: 2131914260}
   roomTypeGenerator: {fileID: 2131914265}
+  chamberGenerator: {fileID: 2131914260}
+  pathGenerator: {fileID: 2131914269}
   wallGenerator: {fileID: 2131914262}
   pillarGenerator: {fileID: 2131914268}
   waterGenerator: {fileID: 2131914264}
   terrainGenerator: {fileID: 2131914263}
-  deactivateRooms: 0
+  deactivateRooms: 1
   minMapSizeX: 70
-  maxMapSizeX: 90
-  minMapSizeZ: 100
-  maxMapSizeZ: 120
+  maxMapSizeX: 80
+  minMapSizeZ: 70
+  maxMapSizeZ: 80
   chunkSize: 8
   trials: 1
   interval: 0
@@ -1149,8 +1206,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapGenerator: {fileID: 2131914261}
   peacefulChance: 0.1
-  randomizeStartRoom: 1
-  randomizeBossRoom: 1
 --- !u!114 &2131914266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1229,3 +1284,18 @@ MonoBehaviour:
   protrudingDepth: 1.5
   protrudingHeight: 1.5
   distance: 20
+--- !u!114 &2131914269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131914256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5041900523e0451f94623666ba503a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPrefab: {fileID: 316618593525123048, guid: b844475432cdd470db621627f176749f,
+    type: 3}
+  level: 10
