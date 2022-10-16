@@ -21,6 +21,7 @@ public class Chamber : MonoBehaviour
     [ReadOnly][SerializeField] private Door door1;
     [ReadOnly][SerializeField] private Door door2;
     [ReadOnly][SerializeField] private List<Wall> walls;
+    [ReadOnly][SerializeField] private List<Pillar> pillars;
 
     private static bool inTransition;
     private static Map map;
@@ -32,6 +33,7 @@ public class Chamber : MonoBehaviour
 
     public Orientation Orientation => orientation;
     public List<Wall> Walls => walls;
+    public List<Pillar> Pillars => pillars;
     public Room Room1 => room1;
     public Room Room2 => room2;
     public Door Door1 => door1;

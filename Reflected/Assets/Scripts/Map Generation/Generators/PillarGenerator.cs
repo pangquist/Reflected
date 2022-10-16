@@ -138,6 +138,7 @@ public class PillarGenerator : MonoBehaviour
         Pillar pillar = GameObject.Instantiate(pillarPrefab, wall.transform).GetComponent<Pillar>().Initialize();
         pillar.transform.position = new Vector3(position.x, 0f, position.y);
         pillar.transform.localScale = wallPillarScale;
+        wall.Pillars.Add(pillar);
 
         if (wall.Orientation == Orientation.Vertical)
             pillar.transform.Rotate(0f, 90f, 0f);
@@ -148,6 +149,7 @@ public class PillarGenerator : MonoBehaviour
         Pillar pillar = GameObject.Instantiate(pillarPrefab, chamber.transform).GetComponent<Pillar>().Initialize();
         pillar.transform.position = new Vector3(position.x, 0f, position.y);
         pillar.transform.localScale = chamberPillarScale;
+        chamber.Pillars.Add(pillar);
 
         if (chamber.Orientation == Orientation.Horizontal)
             pillar.transform.Rotate(0f, 90f, 0f);

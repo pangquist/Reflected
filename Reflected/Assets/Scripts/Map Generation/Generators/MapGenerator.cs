@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PathCreation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,8 +14,9 @@ public class MapGenerator : MonoBehaviour
 
     [SerializeField] private GameObject mapPrefab;
     [SerializeField] private RoomGenerator roomGenerator;
-    [SerializeField] private ChamberGenerator chamberGenerator;
     [SerializeField] private RoomTypeGenerator roomTypeGenerator;
+    [SerializeField] private ChamberGenerator chamberGenerator;
+    [SerializeField] private PathGenerator pathGenerator;
     [SerializeField] private WallGenerator wallGenerator;
     [SerializeField] private PillarGenerator pillarGenerator;
     [SerializeField] private WaterGenerator waterGenerator;
@@ -61,8 +63,9 @@ public class MapGenerator : MonoBehaviour
     public static int ChunkSize { get; private set; }
 
     public RoomGenerator     RoomGenerator     => roomGenerator;
-    public ChamberGenerator  ChamberGenerator  => chamberGenerator;
     public RoomTypeGenerator RoomTypeGenerator => roomTypeGenerator;
+    public ChamberGenerator  ChamberGenerator  => chamberGenerator;
+    public PathGenerator     PathGenerator     => pathGenerator;
     public WallGenerator     WallGenerator     => wallGenerator;
     public PillarGenerator   PillarGenerator   => pillarGenerator;
     public WaterGenerator    WaterGenerator    => waterGenerator;
@@ -88,7 +91,7 @@ public class MapGenerator : MonoBehaviour
     {
         // Prepare
 
-        log = " --- MAP GENERATION LOG ---\n";
+        log = "Map generation log\n";
         int newSeed = seed != 0 ? seed : (int)System.DateTime.Now.Ticks;
         Random.InitState(newSeed);
         Log("Seed: " + newSeed);
@@ -103,23 +106,16 @@ public class MapGenerator : MonoBehaviour
         Map map = GameObject.Instantiate(mapPrefab).GetComponent<Map>();
         map.Initialize(sizeX, sizeZ);
 
-        // Generate layout
+        // Generate map
 
         roomGenerator    .Generate(map);
         chamberGenerator .Generate(map);
+
         map.GenerateGraph();
-
-        // Scale up data
-
-        foreach (Room room in map.Rooms)
-            room.ScaleUpData();
-
-        foreach (Chamber chamber in map.Chambers)
-            chamber.ScaleUpData();
-
-        // Continue generation
-
         roomTypeGenerator.Generate(map);
+        map.ScaleUpData();
+
+        pathGenerator    .Generate(map);
         wallGenerator    .Generate(map);
         pillarGenerator  .Generate(map);
         waterGenerator   .Generate(map);
