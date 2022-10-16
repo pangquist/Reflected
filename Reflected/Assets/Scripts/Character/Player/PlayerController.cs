@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Player player;
     //[SerializeField] Rigidbody rb;
 
-    bool movementLocked;
-    bool attackLocked;
+    [SerializeField] bool movementLocked;
+    [SerializeField] bool actionLocked;
 
     void Awake()
     {
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && !movementLocked)
+        if (context.performed && !movementLocked && !actionLocked)
             movement.Jump();
     }
 
@@ -48,19 +48,19 @@ public class PlayerController : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed && !attackLocked)
+        if (context.performed && !actionLocked)
             player.Attack();
     }
 
     public void SpecialAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && !attackLocked)
+        if (context.performed && !actionLocked)
             player.SpecialAttack();
     }
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && !movementLocked)
+        if (context.performed && !movementLocked && !actionLocked)
             movement.Dash();
     }
 
@@ -85,30 +85,29 @@ public class PlayerController : MonoBehaviour
     {
         return movementLocked;
     }
-
-    public void SetAttackLocked(bool state)
-    {
-        attackLocked = state;
-    }
-
-    public void LockAttack()
-    {
-        attackLocked = true;
-    }
-
-    public void UnlockAttack()
-    {
-        attackLocked = false;
-    }
-
-    public bool GetAttackLocked()
-    {
-        return attackLocked;
-    }
-
     public bool Back()
     {
         return playerControls.Player.Back.triggered;
     }
 
+    public void SetActionLocked(bool state)
+    {
+        actionLocked = state;
+    }
+
+
+    public void ActionLock()
+    {
+        actionLocked = true;
+    }
+
+    public void ActionUnlock()
+    {
+        actionLocked = false;
+    }
+
+    public bool GetActionLock()
+    {
+        return actionLocked;
+    }
 }

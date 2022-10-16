@@ -26,6 +26,8 @@ public class Player : Character, ISavable
     DimensionManager dimensionManager;
     MusicManager musicManager;
 
+    [SerializeField] Ability basicAbility;
+    [SerializeField] Ability specialAbility;
     [SerializeField] Ability swapAbility;
 
     public delegate void InteractWithObject();
@@ -72,16 +74,25 @@ public class Player : Character, ISavable
     }
     public void Attack()
     {
-        if (!currentWeapon.IsLocked())
-            anim.Play(currentWeapon.DoAttack().name);
+        //if (!currentWeapon.IsLocked())
+        //    anim.Play(currentWeapon.DoAttack().name);
+
+        if (basicAbility.IsOnCooldown())
+            return;
+
+        anim.Play(basicAbility.GetAnimation().name);
     }
 
     public void SpecialAttack()
     {
-        if (currentWeapon.IsLocked() || currentWeapon.IsOnCooldown())
+        //if (currentWeapon.IsLocked() || currentWeapon.IsOnCooldown())
+        //    return;
+
+        //anim.Play(currentWeapon.DoSpecialAttack().name);
+        if (specialAbility.IsOnCooldown())
             return;
 
-        anim.Play(currentWeapon.DoSpecialAttack().name);
+        anim.Play(specialAbility.GetAnimation().name);
     }
 
     public float GetMovementSpeed()
@@ -94,10 +105,10 @@ public class Player : Character, ISavable
         return jumpForce;
     }
 
-    public void UnlockWeapon()
-    {
-        currentWeapon.Unlock();
-    }
+    //public void UnlockWeapon()
+    //{
+    //    currentWeapon.Unlock();
+    //}
 
     public void DoWeaponEffect()
     {
@@ -136,6 +147,11 @@ public class Player : Character, ISavable
     public StatSystem GetStats()
     {
         return stats;
+    }
+
+    public Ability GetSpecialAbility()
+    {
+        return specialAbility;
     }
 
     public override void TakeDamage(float damage)
