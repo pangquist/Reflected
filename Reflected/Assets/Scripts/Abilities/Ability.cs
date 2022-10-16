@@ -13,6 +13,8 @@ public abstract class Ability : MonoBehaviour
 {
     [Header("Ability Stats")]
     [SerializeField] protected Sprite abilityIcon;
+    [SerializeField] AudioClip abilitySound;
+    [SerializeField] AudioSource abilitySource;
     [SerializeField] protected float cooldown;
     [SerializeField] protected float remainingCooldown;
     [SerializeField] protected string abilityName;
@@ -29,7 +31,7 @@ public abstract class Ability : MonoBehaviour
     public virtual bool DoEffect()
     {
         remainingCooldown = cooldown;
-
+        abilitySource.PlayOneShot(abilitySound);
         return true;
     }
     void Update()

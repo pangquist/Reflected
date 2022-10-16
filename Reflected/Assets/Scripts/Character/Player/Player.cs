@@ -21,9 +21,11 @@ public class Player : Character, ISavable
     [SerializeField] List<Weapon> weapons = new List<Weapon>();
     int weaponIndex = 0;
 
-    //UpgradeManager upgradeManager;
+    [SerializeField] List<Enemy> aggroedEnemies = new List<Enemy>();
 
     DimensionManager dimensionManager;
+    MusicManager musicManager;
+
     [SerializeField] Ability swapAbility;
 
     public delegate void InteractWithObject();
@@ -41,6 +43,8 @@ public class Player : Character, ISavable
         Cursor.lockState = CursorLockMode.Locked;
 
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
+        musicManager = dimensionManager.GetComponentInChildren<MusicManager>();
+
         dimensionManager.SetStatSystem(stats);
 
         ChangeStats();
@@ -140,6 +144,39 @@ public class Player : Character, ISavable
 
         anim.Play("TakeDamage");
     }
+
+    public void AddEnemy(Enemy enemy)
+    {
+        if (aggroedEnemies.Contains(enemy))
+            return;
+
+        if (aggroedEnemies.Count == 0)
+        {
+            musicManager.ChangeMusicIntensity(1);
+        }
+
+        aggroedEnemies.Add(enemy);
+    }
+
+    public void RemoveEnemy(Enemy enemy)
+    {
+        if (!aggroedEnemies.Contains(enemy))
+            return;
+
+
+        aggroedEnemies.Remove(enemy);
+
+        if (aggroedEnemies.Count == 0)
+        {
+            musicManager.ChangeMusicIntensity(-1);
+        }
+    }
+
+    public List<Enemy> GetEnemies()
+    {
+        return aggroedEnemies;
+    }
+
     #region SaveLoad
     [Serializable]
     private struct SaveData
