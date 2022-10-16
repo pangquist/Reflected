@@ -136,6 +136,11 @@ public class Player : Character, ISavable
         return stats;
     }
 
+    public Animator GetAnim()
+    {
+        return anim;
+    }
+
     public Ability GetSpecialAbility()
     {
         return specialAbility;

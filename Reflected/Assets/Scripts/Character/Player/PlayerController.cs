@@ -99,11 +99,13 @@ public class PlayerController : MonoBehaviour
     public void ActionLock()
     {
         actionLocked = true;
+        player.GetAnim().SetBool("actionLocked", true);
     }
 
     public void ActionUnlock()
     {
         actionLocked = false;
+        player.GetAnim().SetBool("actionLocked", false);
     }
 
     public bool GetActionLock()
