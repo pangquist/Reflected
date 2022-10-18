@@ -146,13 +146,6 @@ public class Player : Character, ISavable
         return specialAbility;
     }
 
-    public override void TakeDamage(float damage)
-    {
-        base.TakeDamage(damage);
-
-        //anim.Play("TakeDamage");
-    }
-
     public void AddEnemy(Enemy enemy)
     {
         if (aggroedEnemies.Contains(enemy))

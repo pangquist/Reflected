@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] bool movementLocked;
     [SerializeField] bool actionLocked;
+    [SerializeField] bool dead;
 
     void Awake()
     {
@@ -35,44 +36,44 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && !movementLocked && !actionLocked)
+        if (context.performed && !movementLocked && !actionLocked && !dead)
             movement.Jump();
     }
 
     public void Move(Vector2 movementVector)
     {
-        if (!movementLocked)
+        if (!movementLocked && !dead)
             movement.Move(new Vector3(movementVector.x, 0, movementVector.y).normalized);
 
     }
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed && !actionLocked)
+        if (context.performed && !actionLocked && !dead)
             player.Attack();
     }
 
     public void SpecialAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && !actionLocked)
+        if (context.performed && !actionLocked && !dead)
             player.SpecialAttack();
     }
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && !movementLocked && !actionLocked)
+        if (context.performed && !movementLocked && !actionLocked && !dead)
             movement.Dash();
     }
 
     public void SwapDimension(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !dead)
             player.SwapDimension();
     }
 
     public void Interact(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !dead)
             player.Interact();
     }
 
@@ -95,6 +96,10 @@ public class PlayerController : MonoBehaviour
         actionLocked = state;
     }
 
+    public void SetDead()
+    {
+        dead = true;
+    }
 
     public void ActionLock()
     {

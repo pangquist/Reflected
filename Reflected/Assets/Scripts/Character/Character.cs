@@ -13,6 +13,7 @@ public class Character : MonoBehaviour, IEffectable
     protected List<StatusEffect> statusEffects;
     protected List<GameObject> effectParticles;
     [SerializeField] protected Animator anim;
+    bool isDead;
 
     protected Weapon currentWeapon;
 
@@ -34,9 +35,10 @@ public class Character : MonoBehaviour, IEffectable
 
     public virtual void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        if (isDead)
+            return;
 
-        //Debug.Log("current health: " + currentHealth);
+        currentHealth -= damage;
 
         if (currentHealth <= 0)
         {
@@ -56,7 +58,7 @@ public class Character : MonoBehaviour, IEffectable
     protected virtual void Die()
     {
         anim.Play("Death");
-        Debug.Log("Character Dead");
+        isDead = true;
     }
 
     protected void Destroy()
