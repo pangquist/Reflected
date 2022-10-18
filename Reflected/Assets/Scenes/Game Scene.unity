@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.8
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.07740041, g: 0.17435639, b: 0.29502767, a: 0.8}
+  m_IndirectSpecularColor: {r: 0.077268176, g: 0.17427145, b: 0.2950537, a: 0.8}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -194,13 +194,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.96567446
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13202259
+      value: 0.13202262
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.22164114
+      value: -0.22164106
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
@@ -210,27 +215,32 @@ PrefabInstance:
     - target: {fileID: 7509292487349488125, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.080560714
+      value: 0.08056073
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487349488125, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.018490251
+      value: 0.018490274
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487970045864, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.6005478
+      value: 3.6005483
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487970045864, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.068579845
+      value: 0.06857982
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487970045864, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.103309855
+      value: -0.103309825
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509292488277444768, guid: 208b911f792bd8d40991cc24ecabd06b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488277444768, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
@@ -260,12 +270,12 @@ PrefabInstance:
     - target: {fileID: 7509292488307742550, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0043157334
+      value: 0.004315756
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488307742550, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0020224426
+      value: 0.002022452
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 208b911f792bd8d40991cc24ecabd06b, type: 3}
@@ -1059,6 +1069,7 @@ MonoBehaviour:
   pillarGenerator: {fileID: 2131914268}
   waterGenerator: {fileID: 2131914264}
   terrainGenerator: {fileID: 2131914263}
+  objectPlacer: {fileID: 2131914267}
   deactivateRooms: 1
   minMapSizeX: 70
   maxMapSizeX: 80
@@ -1105,7 +1116,6 @@ MonoBehaviour:
   terrainChunkPrefab: {fileID: 2332618423109250269, guid: 5754e2c27e53f47ccb8aa4da3a242f20,
     type: 3}
   noiseMapGenerator: {fileID: 2131914266}
-  objectPlacer: {fileID: 2131914267}
   startY: 0
   mapScale: 14
   heightMultiplier: 6
@@ -1231,7 +1241,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 2131914263}
-  chancePerVertex: 0.07
+  objectMultiplier: 5
+  wallPadding: 2
+  obstacleDistance: 5
+  avoidCenter: 1
   objects:
   - terrain: Underwater
     terrainObjects:
