@@ -78,9 +78,34 @@ public class PlayerController : MonoBehaviour
             player.Interact();
     }
 
-    public void SetMovementLocked(bool state)
+    public void MovementLock()
     {
-        movementLocked = state;
+        movementLocked = true;
+        player.GetAnim().SetBool("movementLocked", true);
+    }
+
+    public void LockPlayer()
+    {
+        movementLocked = true;
+        player.GetAnim().SetBool("movementLocked", true);
+
+        actionLocked = true;
+        player.GetAnim().SetBool("actionLocked", true);
+    }
+
+    public void UnlockPlayer()
+    {
+        movementLocked = false;
+        player.GetAnim().SetBool("movementLocked", false);
+
+        actionLocked = false;
+        player.GetAnim().SetBool("actionLocked", false);
+    }
+
+    public void MovementUnlock()
+    {
+        movementLocked = false;
+        player.GetAnim().SetBool("movementLocked", false);
     }
 
     public bool GetMovementLocked()
