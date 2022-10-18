@@ -14,11 +14,6 @@ public class Sword : Weapon
     [Header("Sword Properties")]
     [SerializeField] Collider hitBox;
 
-    public override void AttackWithoutAnimation()
-    {
-        base.AttackWithoutAnimation();
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (!playerController.GetActionLock())
