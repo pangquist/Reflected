@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Projectile : MonoBehaviour
 {
+    protected enum projectileType {normal, fire, freeze, explosive}
+    protected projectileType currentProjectile;
     protected Rigidbody rb;
     [SerializeField] float lifeTime;
     protected float damage;
@@ -12,6 +14,7 @@ public abstract class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         Destroy(gameObject, lifeTime);
+        lifeTime = 4;
     }
 
     void Update()

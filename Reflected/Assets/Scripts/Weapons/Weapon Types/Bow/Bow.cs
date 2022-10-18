@@ -6,7 +6,7 @@ public class Bow : Weapon
 {
     [Header("Bow Properties")]
     [SerializeField] float firePower;
-    [SerializeField] GameObject projectile;
+    GameObject projectile;
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject body;
 
@@ -14,20 +14,18 @@ public class Bow : Weapon
     [SerializeField] LayerMask hitableLayers;
     Transform targetTransform = null;
 
+    [SerializeField] List<Projectile> projectiles = new List<Projectile>();
+    [SerializeField] int powerUpIndex;
+
     private void Start()
     {
         if (!cam) cam = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
-    public override void AttackWithoutAnimation()
-    {
-        base.AttackWithoutAnimation();
-        Projectile arrow = Instantiate(projectile, firePoint.position, cam.transform.localRotation).GetComponent<Projectile>();
-        arrow.Fire(firePower, damage);
-    }
-
     public override void WeaponEffect()
     {
+        projectile = projectiles[powerUpIndex].gameObject;
+
         Projectile arrow = Instantiate(projectile, firePoint.position, body.transform.localRotation).GetComponent<Projectile>();
         arrow.Fire(firePower, damage);
     }

@@ -8,10 +8,11 @@ public class ExplosiveArrow : Projectile
     [SerializeField] float blastRadius;
     [SerializeField] float explosionforce = 10;
 
-    private void Update()
+    private void Start()
     {
-
+        currentProjectile = projectileType.fire;
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         var surrondingObjects = Physics.OverlapSphere(transform.position, blastRadius);
