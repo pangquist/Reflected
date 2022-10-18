@@ -11,5 +11,4 @@ public class StatusEffectData : Uppgrade
     public float LifeTime;
 
     //public GameObject EffectParticles;
-  
 }

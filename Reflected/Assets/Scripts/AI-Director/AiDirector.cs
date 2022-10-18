@@ -46,7 +46,6 @@ public class AiDirector : MonoBehaviour
     {
         if (!player) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
-        //if(!map) map = GameObject.Find("Map Generator").GetComponent<Map>();
 
         difficultyLevel = superEasy;
         checkDifficulty();
