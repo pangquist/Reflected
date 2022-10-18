@@ -35,11 +35,6 @@ public abstract class Weapon : MonoBehaviour
 
     }
 
-    public virtual void AttackWithoutAnimation()
-    {
-
-    }
-
     public virtual void WeaponEffect()
     {
 
