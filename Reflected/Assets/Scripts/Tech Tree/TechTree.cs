@@ -6,11 +6,14 @@ public class TechTree : MonoBehaviour
 {
     [SerializeField] List<TechTreeNode> activeNodes = new List<TechTreeNode>();
     List<TechTreeNode> allNodes = new List<TechTreeNode>();
-
+    [SerializeField] bool isTrueTree;
     // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
+        if (isTrueTree)
+            GameObject.Find("Upgrade Manager").GetComponent<UpgradeManager>().AddTree(this, Dimension.True);
+        else
+            GameObject.Find("Upgrade Manager").GetComponent<UpgradeManager>().AddTree(this, Dimension.Mirror);
     }
 
     // Update is called once per frame

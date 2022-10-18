@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// PlayerController description
@@ -116,5 +117,10 @@ public class PlayerController : MonoBehaviour
     public bool GetActionLock()
     {
         return actionLocked;
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

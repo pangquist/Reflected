@@ -15,6 +15,11 @@ public class Inventory : MonoBehaviour, ISavable
     {
         DontDestroyOnLoad(this);
 
+        Inventory[] array = FindObjectsOfType<Inventory>();
+        
+        if (array.Length > 1)
+            Destroy(gameObject);
+
         for (int i = 0; i < dataBase.items.Length; i++)
         {
             InventoryItem newItem = new InventoryItem(dataBase.items[i]);
