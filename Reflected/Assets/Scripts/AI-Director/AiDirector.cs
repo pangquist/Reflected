@@ -125,7 +125,7 @@ public class AiDirector : MonoBehaviour
     {
         activeRoom = true;
         checkDifficulty();
-        enemiesInRoom = amountOfEnemiesToSpawn * 2;
+        enemiesInRoom = amountOfEnemiesToSpawn * 4;
 
         enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn, EnemyStatModifier());
     }

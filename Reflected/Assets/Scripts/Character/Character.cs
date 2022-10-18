@@ -9,7 +9,7 @@ public class Character : MonoBehaviour, IEffectable
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected float damage;
     [SerializeField] protected float attackSpeed;
-    protected float currentHealth;
+    [SerializeField] protected float currentHealth;
     protected List<StatusEffect> statusEffects;
     protected List<GameObject> effectParticles;
     [SerializeField] protected Animator anim;
