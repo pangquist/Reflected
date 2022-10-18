@@ -14,12 +14,6 @@ public class Bow : Weapon
     [SerializeField] LayerMask hitableLayers;
     Transform targetTransform = null;
 
-    //public override void DoAttack()
-    //{
-    //    base.DoAttack();
-    //    anim.Play(comboClips[currentComboIndex].name);
-    //}
-
     private void Start()
     {
         if (!cam) cam = GameObject.Find("Main Camera").GetComponent<Camera>();

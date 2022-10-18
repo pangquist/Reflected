@@ -150,7 +150,7 @@ public class Player : Character, ISavable
     {
         base.TakeDamage(damage);
 
-        anim.Play("TakeDamage");
+        //anim.Play("TakeDamage");
     }
 
     public void AddEnemy(Enemy enemy)
