@@ -118,24 +118,6 @@ public class Character : MonoBehaviour, IEffectable
 
     public void HandleEffect()
     {        
-        //foreach (StatusEffect status in statusEffects)
-        //{
-        //    status.currentEffectTime += Time.deltaTime;
-        //    if (status.currentEffectTime >= status.effect.LifeTime)
-        //    {
-        //        RemoveEffect();
-        //        continue;
-        //    }
-
-        //    //if (status == null) 
-
-        //    if (status.effect.DOTAmount != 0 && status.currentEffectTime > status.nextTickTime)
-        //    {
-        //        status.nextTickTime += status.effect.TickSpeed;
-        //        TakeDamage(status.effect.DOTAmount);
-        //    }
-        //}
-
         for (int i = 0; i < statusEffects.Count; i++)
         {
             statusEffects[i].SetCurrentEffectTime(Time.deltaTime);
