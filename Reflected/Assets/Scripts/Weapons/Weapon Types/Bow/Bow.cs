@@ -48,6 +48,6 @@ public class Bow : Weapon
             targetTransform = hit.transform;
         }
 
-        transform.rotation = cam.transform.rotation;
+        transform.parent.rotation = cam.transform.rotation;
     }
 }
