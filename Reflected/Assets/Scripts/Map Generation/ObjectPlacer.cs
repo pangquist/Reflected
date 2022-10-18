@@ -16,6 +16,8 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] TerrainGenerator terrainGenerator;
 
     [Header("Values")]
+    [Range(1, 5)]
+    [SerializeField] int objectMultiplier;
     [Range(2f, 8f)]
     [SerializeField] float wallPadding;
     [Range(3f, 15f)]
@@ -29,11 +31,7 @@ public class ObjectPlacer : MonoBehaviour
     {
         foreach(Room room in map.Rooms)
         {
-            TerrainChunk[] chunks = room.GetComponentsInChildren<TerrainChunk>();
-            for (int i = 0; i < chunks.Length; i++)
-            {
-                PlaceDecorations(room);
-            }
+            PlaceDecorations(room);
         }
     }
 
@@ -59,8 +57,9 @@ public class ObjectPlacer : MonoBehaviour
 
                     foreach (WeightedRandomList<UnityEngine.GameObject>.Pair pair in objectList.terrainObjects.list)
                     {
-                        for (int i = 0; i < pair.weight; i++)
+                        for (int i = 0; i < pair.weight * objectMultiplier * 10; i++)
                         {
+                            Debug.Log(pair.item + " " + i);
                             Ray ray = new Ray(new Vector3(Random.Range(start.x + wallPadding, end.x - wallPadding), 20, Random.Range(start.z + wallPadding, end.z - wallPadding)), -transform.up);
                             RaycastHit hit;
                             if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
