@@ -570,7 +570,8 @@ MonoBehaviour:
   damage: 5
   debug: 0
   abilityAnimation: {fileID: 7400000, guid: d4d774a2f7abe6a4e9ac924c1db1d08f, type: 2}
-  player: {fileID: 0}
+  player: {fileID: 1831867126}
+  sword: {fileID: 1925594761}
 --- !u!1001 &1498519205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -696,12 +697,12 @@ PrefabInstance:
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.19863868
+      value: -0.19863872
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0039016055
+      value: -0.0039016006
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487351524866, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -1025,6 +1026,7 @@ MonoBehaviour:
   player: {fileID: 1831867126}
   movementLocked: 0
   actionLocked: 0
+  dead: 0
 --- !u!114 &1271279111
 MonoBehaviour:
   m_ObjectHideFlags: 0
