@@ -53,8 +53,7 @@ public class Inventory : MonoBehaviour, ISavable
             if (item.stackSize >= amount)
             {
                 item.RemoveMoreFromStack(amount);
-            }
-            
+            }  
         }
     }
 
