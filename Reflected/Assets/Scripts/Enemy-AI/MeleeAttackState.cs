@@ -24,14 +24,15 @@ public class MeleeAttackState : State
         agent.destination = thisEnemy.transform.position;
         if (attackTimer >= attackRate)
         {
-            DoAttack();
+            Debug.Log("About to attack");
+            DoAttack(thisEnemy);
             attackTimer = 0f;
         }
     }
 
-    private void DoAttack()
+    private void DoAttack(AiManager2 thisEnemy)
     {
-        Instantiate(meleeObject, gameObject.GetComponent<AIManager>().firePoint.position, gameObject.transform.rotation);
+        Instantiate(meleeObject, thisEnemy.firePoint.position, gameObject.transform.rotation);
     }
 
     private void FaceTarget(Vector3 target)

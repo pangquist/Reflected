@@ -40,10 +40,10 @@ public class RangedAttackState : State
 
     private void FireProjectile(AiManager2 thisEnemy, Player player /*Transform target*/)
     {
-        GameObject currentProjectile = Instantiate(projectileObject, gameObject.GetComponent<AIManager>().firePoint.position, Quaternion.identity);
+        GameObject currentProjectile = Instantiate(projectileObject, thisEnemy.firePoint.position, Quaternion.identity);
         if (currentProjectile != null)
         {
-            currentProjectile.GetComponent<ProjectileScript>().SetUp(player.transform.position /*target.position*/ + offSet, gameObject.GetComponent<AIManager>().firePoint.position, 2f);
+            currentProjectile.GetComponent<ProjectileScript>().SetUp(player.transform.position /*target.position*/ + offSet, thisEnemy.firePoint.position, 2f);
         }
     }
 
