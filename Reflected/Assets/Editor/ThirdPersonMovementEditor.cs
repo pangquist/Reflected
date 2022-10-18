@@ -48,6 +48,7 @@ public class MovementEditorTemplate : Editor
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("stats"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("controller"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("cam"));
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("animator"));
 	}
 
 	void DisplayMovementInfo()
@@ -63,6 +64,7 @@ public class MovementEditorTemplate : Editor
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("groundCheck"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("groundDistance"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("groundMask"));
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("isGrounded"));
 	}
 
 	void DisplayDashingInfo()

@@ -13,11 +13,15 @@ public abstract class Ability : MonoBehaviour
 {
     [Header("Ability Stats")]
     [SerializeField] protected Sprite abilityIcon;
+    [SerializeField] List<AudioClip> abilitySounds = new List<AudioClip>();
+    [SerializeField] AudioSource abilitySource;
     [SerializeField] protected float cooldown;
     [SerializeField] protected float remainingCooldown;
     [SerializeField] protected string abilityName;
     [SerializeField] protected float damage;
     [SerializeField] protected bool debug;
+    [SerializeField] AnimationClip abilityAnimation;
+    [SerializeField] protected Player player;
 
     protected AbilityCooldowns cooldownstarter;
 
@@ -26,13 +30,26 @@ public abstract class Ability : MonoBehaviour
         cooldownstarter = FindObjectOfType<AbilityCooldowns>();
     }
 
-    public virtual void DoEffect()
+    public virtual bool DoEffect()
     {
         remainingCooldown = cooldown;
+        if (abilitySounds.Count != 0 && abilitySource)
+            abilitySource.PlayOneShot(abilitySounds[Random.Range(0,abilitySounds.Count)]);
+        return true;
     }
-    void Update()
+
+    public virtual AnimationClip GetAnimation()
     {
-        if(IsOnCooldown())
+        remainingCooldown = cooldown;
+        if (abilitySounds.Count != 0 && abilitySource)
+            abilitySource.PlayOneShot(abilitySounds[Random.Range(0, abilitySounds.Count)]);
+
+        return abilityAnimation;
+    }
+
+    protected virtual void Update()
+    {
+        if (IsOnCooldown())
             remainingCooldown -= Time.deltaTime;
     }
 
@@ -54,5 +71,10 @@ public abstract class Ability : MonoBehaviour
     public Sprite GetIcon()
     {
         return abilityIcon;
+    }
+
+    public string GetName()
+    {
+        return abilityName;
     }
 }

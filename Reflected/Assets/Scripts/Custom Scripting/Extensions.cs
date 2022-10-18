@@ -175,8 +175,42 @@ public static class Extensions
         Vector2Int min = new Vector2Int(minX, minY);
         Vector2Int max = new Vector2Int(maxX, maxY);
 
-        overlap.SetMinMax(min, max);
+        overlap.min = min;
+        overlap.max = max;
         return true;
+    }
+
+    /// <summary>
+    /// Returns whether or not the two rectangles overlap and their overlapping area.
+    /// </summary>
+    public static bool Overlaps(this Rect rect, Rect other, out Rect overlap)
+    {
+        overlap = new Rect();
+
+        if (!rect.Overlaps(other))
+            return false;
+
+        float minX = Math.Max(rect.min.x, other.min.x);
+        float maxX = Math.Min(rect.max.x, other.max.x);
+
+        float minY = Math.Max(rect.min.y, other.min.y);
+        float maxY = Math.Min(rect.max.y, other.max.y);
+
+        Vector2 min = new Vector2(minX, minY);
+        Vector2 max = new Vector2(maxX, maxY);
+
+        overlap.min = min;
+        overlap.max = max;
+        return true;
+    }
+
+    /// <summary>
+    /// Returns whether or not this rectangle fully contains the provided rectangle
+    /// </summary>
+    public static bool Contains(this Rect rect, Rect other)
+    {
+        Rect overlap;
+        return rect.Overlaps(other, out overlap) && overlap.size == other.size;
     }
 
     /// <summary>
@@ -224,9 +258,36 @@ public static class Extensions
             button.Disable();
     }
 
+    /// <summary>
+    /// Returns a random item from the list.
+    /// </summary>
     public static T GetRandom<T>(this List<T> list)
     {
         return list[Random.Range(0, list.Count)];
+    }
+
+    /// <summary>
+    /// Returns a Rect representing the XZ plane (bottom and top) of this Bounds
+    /// </summary>
+    public static Rect XZPlane(this Bounds bounds)
+    {
+        return new Rect(bounds.min.x, bounds.min.z, bounds.size.x, bounds.size.z);
+    }
+
+    /// <summary>
+    /// Returns the area of this rectangle
+    /// </summary>
+    public static float Area(this Rect rect)
+    {
+        return rect.width * rect.height;
+    }
+
+    /// <summary>
+    /// Returns the area of this rectangle
+    /// </summary>
+    public static int Area(this RectInt rect)
+    {
+        return rect.width * rect.height;
     }
 
 }

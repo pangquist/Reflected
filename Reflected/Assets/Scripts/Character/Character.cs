@@ -12,14 +12,17 @@ public class Character : MonoBehaviour, IEffectable
     protected float currentHealth;
     protected List<StatusEffect> statusEffects;
     protected List<GameObject> effectParticles;
-    protected Animator anim;    
+    [SerializeField] protected Animator anim;
 
     protected Weapon currentWeapon;
 
     protected virtual void Awake()
     {
         currentHealth = maxHealth;
-        anim = GetComponent<Animator>();
+
+        if (this.GetType() != typeof(Player))
+            anim = GetComponent<Animator>();
+
         statusEffects = new List<StatusEffect>();
         effectParticles = new List<GameObject>();
     }
@@ -56,9 +59,12 @@ public class Character : MonoBehaviour, IEffectable
         Debug.Log("Character Dead");
     }
 
-    public void Destroy()
+    protected void Destroy()
     {
-        Destroy(gameObject);
+        if (transform.parent != null)
+            Destroy(transform.parent.gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public float GetHealthPercentage()
@@ -93,13 +99,13 @@ public class Character : MonoBehaviour, IEffectable
     public float MovementPenalty()
     {
         float movementPenalty = 1;
-        if(statusEffects.Count > 0)
+        if (statusEffects.Count > 0)
         {
             foreach (StatusEffect status in statusEffects)
             {
                 movementPenalty *= status.effect.MovementPenalty;
             }
-            
+
         }
         return movementPenalty;
     }
@@ -117,7 +123,7 @@ public class Character : MonoBehaviour, IEffectable
     }
 
     public void HandleEffect()
-    {        
+    {
         //foreach (StatusEffect status in statusEffects)
         //{
         //    status.currentEffectTime += Time.deltaTime;
@@ -152,8 +158,8 @@ public class Character : MonoBehaviour, IEffectable
                 TakeDamage(statusEffects[i].effect.DOTAmount);
             }
         }
-        
-    } 
+
+    }
 }
 
 [System.Serializable]

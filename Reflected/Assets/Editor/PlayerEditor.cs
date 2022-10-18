@@ -13,7 +13,7 @@ public class PlayerEditorTemplate : Editor
 {
     public enum DisplayCategory
     {
-        Basic, Combat, Dimension
+        Basic, Combat, Abilities, Dimension
     }
 
     public DisplayCategory categoryToDisplay;
@@ -32,7 +32,10 @@ public class PlayerEditorTemplate : Editor
             case DisplayCategory.Combat:
                 DisplayCombatInfo();
                 break;
-                case DisplayCategory.Dimension:
+            case DisplayCategory.Abilities:
+                DisplayAbilityInfo();
+                break;
+            case DisplayCategory.Dimension:
                 DisplayDimensionInfo();
                 break;
         }
@@ -46,8 +49,15 @@ public class PlayerEditorTemplate : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("maxHealth"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("movementSpeed"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("jumpForce"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("anim"));
     }
 
+    void DisplayAbilityInfo()
+    {
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("basicAbility"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("specialAbility"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("swapAbility"));
+    }
     void DisplayCombatInfo()
     {
         EditorGUILayout.PropertyField(serializedObject.FindProperty("damage"));

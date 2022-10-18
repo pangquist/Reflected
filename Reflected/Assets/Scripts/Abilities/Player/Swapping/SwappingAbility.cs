@@ -4,8 +4,10 @@ using UnityEngine;
 
 public abstract class SwappingAbility : Ability
 {
-    public override void DoEffect()
+    public override bool DoEffect()
     {
         base.DoEffect();
+
+        return true;
     }
 }

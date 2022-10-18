@@ -21,9 +21,13 @@ public class Player : Character, ISavable
     [SerializeField] List<Weapon> weapons = new List<Weapon>();
     int weaponIndex = 0;
 
-    //UpgradeManager upgradeManager;
+    [SerializeField] List<Enemy> aggroedEnemies = new List<Enemy>();
 
     DimensionManager dimensionManager;
+    MusicManager musicManager;
+
+    [SerializeField] Ability basicAbility;
+    [SerializeField] Ability specialAbility;
     [SerializeField] Ability swapAbility;
 
     public delegate void InteractWithObject();
@@ -41,6 +45,8 @@ public class Player : Character, ISavable
         Cursor.lockState = CursorLockMode.Locked;
 
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
+        musicManager = dimensionManager.GetComponentInChildren<MusicManager>();
+
         dimensionManager.SetStatSystem(stats);
 
         ChangeStats();
@@ -68,19 +74,18 @@ public class Player : Character, ISavable
     }
     public void Attack()
     {
-        if (!currentWeapon.IsLocked())
-            anim.Play(currentWeapon.DoAttack().name);
+        if (basicAbility.IsOnCooldown())
+            return;
 
-        //if (!currentWeapon.IsLocked())
-        //    currentWeapon.AttackWithoutAnimation();
+        anim.Play(basicAbility.GetAnimation().name);
     }
 
     public void SpecialAttack()
     {
-        if (currentWeapon.IsLocked() || currentWeapon.IsOnCooldown())
+        if (specialAbility.IsOnCooldown())
             return;
 
-        anim.Play(currentWeapon.DoSpecialAttack().name);
+        anim.Play(specialAbility.GetAnimation().name);
     }
 
     public float GetMovementSpeed()
@@ -92,12 +97,6 @@ public class Player : Character, ISavable
     {
         return jumpForce;
     }
-
-    public void UnlockWeapon()
-    {
-        currentWeapon.Unlock();
-    }
-
     public void DoWeaponEffect()
     {
         currentWeapon.WeaponEffect();
@@ -137,6 +136,54 @@ public class Player : Character, ISavable
         return stats;
     }
 
+    public Animator GetAnim()
+    {
+        return anim;
+    }
+
+    public Ability GetSpecialAbility()
+    {
+        return specialAbility;
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        anim.Play("TakeDamage");
+    }
+
+    public void AddEnemy(Enemy enemy)
+    {
+        if (aggroedEnemies.Contains(enemy))
+            return;
+
+        if (aggroedEnemies.Count == 0)
+        {
+            musicManager.ChangeMusicIntensity(1);
+        }
+
+        aggroedEnemies.Add(enemy);
+    }
+
+    public void RemoveEnemy(Enemy enemy)
+    {
+        if (!aggroedEnemies.Contains(enemy))
+            return;
+
+
+        aggroedEnemies.Remove(enemy);
+
+        if (aggroedEnemies.Count == 0)
+        {
+            musicManager.ChangeMusicIntensity(-1);
+        }
+    }
+
+    public List<Enemy> GetEnemies()
+    {
+        return aggroedEnemies;
+    }
 
     #region SaveLoad
     [Serializable]

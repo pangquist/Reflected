@@ -13,57 +13,54 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     PlayerControls playerControls;
-    ThirdPersonMovement movement;
-    
-    Player player;
-    Rigidbody rb;
+    [SerializeField] ThirdPersonMovement movement;
 
-    bool movementLocked;
-    [SerializeField] bool attackLocked;
+    [SerializeField] Player player;
+    //[SerializeField] Rigidbody rb;
+
+    [SerializeField] bool movementLocked;
+    [SerializeField] bool actionLocked;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        player = GetComponent<Player>();
-        movement = GetComponent<ThirdPersonMovement>();
         playerControls = new PlayerControls();
         playerControls.Player.Enable();
     }
 
     void Update()
     {
-        if (playerControls.Player.Movement.ReadValue<Vector2>() != Vector2.zero && !movementLocked)
+        if (player)
             Move(playerControls.Player.Movement.ReadValue<Vector2>());
-
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && !movementLocked)
+        if (context.performed && !movementLocked && !actionLocked)
             movement.Jump();
     }
 
     public void Move(Vector2 movementVector)
     {
-        if(!movementLocked)
+        if (!movementLocked)
             movement.Move(new Vector3(movementVector.x, 0, movementVector.y).normalized);
+
     }
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed && !attackLocked)
+        if (context.performed && !actionLocked)
             player.Attack();
     }
 
     public void SpecialAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && !attackLocked)
+        if (context.performed && !actionLocked)
             player.SpecialAttack();
     }
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && !movementLocked)
+        if (context.performed && !movementLocked && !actionLocked)
             movement.Dash();
     }
 
@@ -88,20 +85,31 @@ public class PlayerController : MonoBehaviour
     {
         return movementLocked;
     }
-
-    public void SetAttackLocked(bool state)
-    {
-        attackLocked = state;
-    }
-
-    public bool GetAttackLocked()
-    {
-        return attackLocked;
-    }
-
     public bool Back()
     {
         return playerControls.Player.Back.triggered;
     }
 
+    public void SetActionLocked(bool state)
+    {
+        actionLocked = state;
+    }
+
+
+    public void ActionLock()
+    {
+        actionLocked = true;
+        player.GetAnim().SetBool("actionLocked", true);
+    }
+
+    public void ActionUnlock()
+    {
+        actionLocked = false;
+        player.GetAnim().SetBool("actionLocked", false);
+    }
+
+    public bool GetActionLock()
+    {
+        return actionLocked;
+    }
 }

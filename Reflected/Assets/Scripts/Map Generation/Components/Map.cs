@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
+    [Header("References")]
+
+    [SerializeField] private MapGraph graph;
+
     [Header("Values")]
 
     [SerializeField] private bool singleActiveRoom;
@@ -27,6 +31,7 @@ public class Map : MonoBehaviour
     public List<Chamber> Chambers => chambers;
     public bool SingleActiveRoom => singleActiveRoom;
     public DimensionManager DimensionManager => dimensionManager;
+    public MapGraph Graph => graph;
 
     public Room ActiveRoom { get { return activeRoom; } set { activeRoom = value; } }
     public Room StartRoom  { get { return startRoom;  } set { startRoom  = value; } }
@@ -41,6 +46,20 @@ public class Map : MonoBehaviour
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
     }
 
+    public void ScaleUpData()
+    {
+        foreach (Room room in rooms)
+            room.ScaleUpData();
+
+        foreach (Chamber chamber in chambers)
+            chamber.ScaleUpData();
+    }
+
+    public void GenerateGraph()
+    {
+        graph.Generate();
+    }
+
     public void DeactivateAll()
     {
         foreach (Room room in rooms)
@@ -51,7 +70,6 @@ public class Map : MonoBehaviour
     {
         startRoom.gameObject.SetActive(true);
         startRoom.Activate();
-        startRoom.SetCleared(true);
         
         GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(startRoom.Rect.center.x, 10, startRoom.Rect.center.y);
     }

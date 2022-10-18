@@ -10,16 +10,16 @@ public abstract class Weapon : MonoBehaviour
 
     protected float speed;
 
-    [Header("Combo")]
-    float comboTimer;
-    protected int currentComboIndex;
-    [SerializeField] protected AnimationClip[] comboClips;
-    [SerializeField] protected float maxTimeBetweenCombo;
+    //[Header("Combo")]
+    //float comboTimer;
+    //protected int currentComboIndex;
+    //[SerializeField] protected AnimationClip[] comboClips;
+    //[SerializeField] protected float maxTimeBetweenCombo;
 
-    [Header("Special Attack")]
-    [SerializeField] protected AnimationClip specialAttackClip;
-    [SerializeField] protected float specialAttackCooldown;
-    [SerializeField] float timeSinceLastSpecialAttack;
+    //[Header("Special Attack")]
+    //[SerializeField] protected AnimationClip specialAttackClip;
+    //[SerializeField] protected float specialAttackCooldown;
+    //[SerializeField] float timeSinceLastSpecialAttack;
 
     [SerializeField] protected List<Enemy> hitEnemies;
 
@@ -34,31 +34,31 @@ public abstract class Weapon : MonoBehaviour
     public virtual void Awake()
     {
         anim = GetComponent<Animator>();
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerController = GameObject.Find("Playerbody").GetComponent<PlayerController>();
 
         player = GameObject.Find("Player").GetComponent<Player>();
 
-        cooldownstarter = FindObjectOfType<AbilityCooldowns>();
+        //cooldownstarter = FindObjectOfType<AbilityCooldowns>();
 
         hitEnemies = new List<Enemy>();
-        currentComboIndex = 0;
-        timeSinceLastSpecialAttack = specialAttackCooldown;
+        //currentComboIndex = 0;
+        //timeSinceLastSpecialAttack = specialAttackCooldown;
     }
 
     protected virtual void Update()
     {
-        if(currentComboIndex > 0)
-        {
-            comboTimer += Time.deltaTime;
-            if(comboTimer > maxTimeBetweenCombo)
-            {
-                comboTimer = 0;
-                currentComboIndex = 0;
-            }
-        }
+        //if(currentComboIndex > 0)
+        //{
+        //    comboTimer += Time.deltaTime;
+        //    if(comboTimer > maxTimeBetweenCombo)
+        //    {
+        //        comboTimer = 0;
+        //        currentComboIndex = 0;
+        //    }
+        //}
 
-        if (timeSinceLastSpecialAttack < specialAttackCooldown)
-            timeSinceLastSpecialAttack += Time.deltaTime;
+        //if (timeSinceLastSpecialAttack < specialAttackCooldown)
+        //    timeSinceLastSpecialAttack += Time.deltaTime;
     }
 
     //public virtual AnimationClip[] GetBasicAttack()
@@ -66,61 +66,62 @@ public abstract class Weapon : MonoBehaviour
     //    return comboClips;
     //}
 
-    public virtual AnimationClip DoAttack()
-    {
-        if (playerController.GetAttackLocked())
-            return null;
+    //public virtual AnimationClip DoAttack()
+    //{
+    //    if (playerController.GetAttackLocked())
+    //        return null;
 
-        playerController.SetAttackLocked(true);
+    //    ClearEnemies();
+    //    playerController.SetAttackLocked(true);
 
-        if (currentComboIndex == comboClips.Length)
-            currentComboIndex = 0;
+    //if (currentComboIndex == comboClips.Length)
+    //    currentComboIndex = 0;
 
-        return comboClips[currentComboIndex++];
+    //return comboClips[currentComboIndex++];
 
-    }
+    //}
 
     public virtual void AttackWithoutAnimation()
     {
 
     }
 
-    public virtual AnimationClip DoSpecialAttack()
-    {
-        playerController.SetAttackLocked(true);
-        timeSinceLastSpecialAttack = 0;
-        cooldownstarter.Ability1Use();
-        return specialAttackClip;
-    }
+    //public virtual AnimationClip DoSpecialAttack()
+    //{
+    //    ClearEnemies();
+    //    playerController.SetAttackLocked(true);
+    //    timeSinceLastSpecialAttack = 0;
+    //    cooldownstarter.Ability1Use();
+    //    return specialAttackClip;
+    //}
 
     public virtual void WeaponEffect()
     {
 
     }
 
-    public bool IsLocked()
-    {
-        return playerController.GetAttackLocked();
-    }
+    //public bool IsLocked()
+    //{
+    //    return playerController.GetActionLock();
+    //}
 
-    public bool IsOnCooldown()
-    {
-        return timeSinceLastSpecialAttack < specialAttackCooldown;
-    }
-    public float GetCooldown()
-    {
-        return specialAttackCooldown;
-    }
-    public float GetCurrentCooldown()
-    {
-        return specialAttackCooldown - timeSinceLastSpecialAttack;
-    }
+    //public bool IsOnCooldown()
+    //{
+    //    return timeSinceLastSpecialAttack < specialAttackCooldown;
+    //}
+    //public float GetCooldown()
+    //{
+    //    return specialAttackCooldown;
+    //}
+    //public float GetCurrentCooldown()
+    //{
+    //    return specialAttackCooldown - timeSinceLastSpecialAttack;
+    //}
 
-    public virtual void Unlock()
-    {
-        playerController.SetAttackLocked(false);
-        ClearEnemies();
-    }
+    //public virtual void Unlock()
+    //{
+    //    playerController.SetActionLocked(false);
+    //}
 
     public virtual void ClearEnemies()
     {

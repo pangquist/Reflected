@@ -112,7 +112,7 @@ public class ObjectPlacer : MonoBehaviour
         float offsetZ = -terrainChunk.transform.position.z + MapGenerator.ChunkSize * 0.5f;
         TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
 
-        if (room.Rect.Contains(new Vector2Int((int)(terrainChunk.transform.position.x - MapGenerator.ChunkSize) / MapGenerator.ChunkSize, (int)(terrainChunk.transform.position.z - MapGenerator.ChunkSize) / MapGenerator.ChunkSize)))
+        if (room.Rect.Contains(new Vector2(terrainChunk.transform.position.x - MapGenerator.ChunkSize, terrainChunk.transform.position.z - MapGenerator.ChunkSize)))
         {
             for (int i = 0; i < meshVertices.Length; i++)
             {

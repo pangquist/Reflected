@@ -16,11 +16,12 @@ public class Chamber : MonoBehaviour
     [ReadOnly][SerializeField] private Room room1;
     [ReadOnly][SerializeField] private Room room2;
     [ReadOnly][SerializeField] private Orientation orientation;
-    [ReadOnly][SerializeField] private RectInt rect;
+    [ReadOnly][SerializeField] private Rect rect;
     [ReadOnly][SerializeField] private Bounds triggerBounds;
     [ReadOnly][SerializeField] private Door door1;
     [ReadOnly][SerializeField] private Door door2;
     [ReadOnly][SerializeField] private List<Wall> walls;
+    [ReadOnly][SerializeField] private List<Pillar> pillars;
 
     private static bool inTransition;
     private static Map map;
@@ -32,9 +33,12 @@ public class Chamber : MonoBehaviour
 
     public Orientation Orientation => orientation;
     public List<Wall> Walls => walls;
+    public List<Pillar> Pillars => pillars;
+    public Room Room1 => room1;
+    public Room Room2 => room2;
     public Door Door1 => door1;
     public Door Door2 => door2;
-    public RectInt Rect => rect;
+    public Rect Rect => rect;
 
     public static void StaticInitialize(Map map)
     {
@@ -42,7 +46,7 @@ public class Chamber : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    public Chamber Initialize(Room room1, Room room2, RectInt rect, Orientation orientation)
+    public Chamber Initialize(Room room1, Room room2, Rect rect, Orientation orientation)
     {
         this.room1 = room1;
         this.room2 = room2;
@@ -72,7 +76,7 @@ public class Chamber : MonoBehaviour
 
     public void ScaleUpData()
     {
-        rect = new RectInt(rect.position * MapGenerator.ChunkSize, rect.size * MapGenerator.ChunkSize);
+        rect = new Rect(rect.position * MapGenerator.ChunkSize, rect.size * MapGenerator.ChunkSize);
     }
 
     private void Update()
@@ -90,8 +94,8 @@ public class Chamber : MonoBehaviour
         Door closedDoor = door1.IsOpen ? door2 : door1;
 
         // Check distance from player to each door
-        float distanceToOpenDoor   = Vector3.Distance(player.transform.position, openDoor  .MeasuringPosition);
-        float distanceToClosedDoor = Vector3.Distance(player.transform.position, closedDoor.MeasuringPosition);
+        float distanceToOpenDoor   = Vector3.Distance(player.transform.position, openDoor  .transform.position);
+        float distanceToClosedDoor = Vector3.Distance(player.transform.position, closedDoor.transform.position);
 
         // If the player is closer to the closed door than the open door
         if (distanceToClosedDoor < distanceToOpenDoor)
@@ -106,30 +110,37 @@ public class Chamber : MonoBehaviour
         inTransition = true;
 
         // Start closing the open door
-        StartCoroutine(openDoor.Coroutine_Close());
+        openDoor.Close();
 
         // Wait til closed
-        while (openDoor.IsOpen)
+        for (float timer = 0; timer < openDoor.AnimationDuration; timer += Time.deltaTime)
             yield return null;
 
         // Move player if necessary
         if (triggerBounds.Contains(player.transform.position) == false)
+        {
             player.transform.position = triggerBounds.center;
+            Debug.Log("Moved player into " + name);
+        }
 
         // Deactivate previous room
         if (map.SingleActiveRoom)
             openDoor.Room.Deactivate(this);
 
-        // Pause
-        for (float timer = 0; timer < pause; timer += Time.deltaTime)
-            yield return null;
-
         // Activate next room
         closedDoor.Room.gameObject.SetActive(true);
         closedDoor.Room.Activate();
 
+        // Pause
+        for (float timer = 0; timer < pause; timer += Time.deltaTime)
+            yield return null;
+
         // Start opening the closed door
-        StartCoroutine(closedDoor.Coroutine_Open());
+        closedDoor.Open();
+
+        // Wait til opened
+        for (float timer = 0; timer < closedDoor.AnimationDuration; timer += Time.deltaTime)
+            yield return null;
 
         // End transition
         StartCoroutine(Coroutine_Cooldown());
@@ -143,10 +154,10 @@ public class Chamber : MonoBehaviour
     public void Open(Room caller)
     {
         if (door1.Room == caller)
-            StartCoroutine(door1.Coroutine_Open());
+            door1.Open();
 
         else if (door2.Room == caller)
-            StartCoroutine(door2.Coroutine_Open());
+            door2.Open();
     }
 
     /// <summary>
@@ -155,10 +166,10 @@ public class Chamber : MonoBehaviour
     public void Close(Room caller)
     {
         if (door1.Room == caller)
-            StartCoroutine(door1.Coroutine_Close());
+            door1.Close();
 
         else if (door2.Room == caller)
-            StartCoroutine(door2.Coroutine_Close());
+            door2.Close();
     }
 
     /// <summary>

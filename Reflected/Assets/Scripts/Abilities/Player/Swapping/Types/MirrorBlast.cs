@@ -6,7 +6,7 @@ public class MirrorBlast : SwappingAbility
 {
     [Header("Mirror Blast Specifics")]
     [SerializeField] float range;
-    public override void DoEffect()
+    public override bool DoEffect()
     {
         base.DoEffect();
 
@@ -25,6 +25,7 @@ public class MirrorBlast : SwappingAbility
             }
         }
 
+        return true;
     }
 
     [ExecuteInEditMode]

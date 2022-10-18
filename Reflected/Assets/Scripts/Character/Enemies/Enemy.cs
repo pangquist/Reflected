@@ -56,6 +56,8 @@ public class Enemy : Character
         AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
         aiDirector.killEnemyInRoom();
         LootDrop(transform);
+        player.RemoveEnemy(this);
+        anim.Play("Death");
         base.Die();
     }
 

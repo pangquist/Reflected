@@ -19,11 +19,10 @@ public class TechTreeNode : MonoBehaviour
     [SerializeField] List<TechTreeNode> nextNode = new List<TechTreeNode>();
     Image currentImage;
 
-    float resourceAmount; //Will be placed in an inventoryManager
-    int gemAmount;
-
-    [SerializeField] float resourceCost;
+    [SerializeField] ItemData resource;
+    [SerializeField] int resourceCost;
     [SerializeField] bool hasGemCost;
+    [SerializeField] ItemData gemResource;
     [SerializeField] int gemCost;
     [SerializeField] bool isPlaceable;
     bool isActive;
@@ -33,22 +32,29 @@ public class TechTreeNode : MonoBehaviour
     [SerializeField] float value;
 
     [SerializeField] TextMeshProUGUI nodeEffectText;
+    [SerializeField] TextMeshProUGUI nodeCostText;
+
+    Inventory inventory;
 
     private void Start()
     {
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         currentImage = GetComponent<Image>();
         currentImage.color = deactivatedColor;
 
         nodeEffectText = GameObject.Find("Node Effect Text").GetComponent<TextMeshProUGUI>();
+        nodeCostText = GameObject.Find("Node Cost Text").GetComponent<TextMeshProUGUI>();
 
         foreach (Transform child in transform)
             nextNode.Add(child.GetComponent<TechTreeNode>());
 
-        SetIsPlaceable(transform.parent.name == "Nodes");
-
         if (description == "")
             description = name;
+
+        if (isPlaceable)
+            currentImage.color = canBeActivatedColor;
+
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
     }
 
     public void PlaceInMirror()
@@ -65,15 +71,18 @@ public class TechTreeNode : MonoBehaviour
                 node.SetIsPlaceable(true);
         }
 
-        resourceAmount -= resourceCost;
+        inventory.Remove(resource, resourceCost);
+
+        if (hasGemCost)
+            inventory.Remove(gemResource, gemCost);
     }
 
     public bool CanBePlaced()
     {
         if (hasGemCost)
-            return (isPlaceable && resourceCost <= resourceAmount && gemCost <= gemAmount);
+            return (isPlaceable && inventory.HaveEnoughCurrency(resource, resourceCost) && inventory.HaveEnoughCurrency(gemResource, gemCost));
         else
-            return (isPlaceable && resourceCost <= resourceAmount);
+            return (isPlaceable && inventory.HaveEnoughCurrency(resource, resourceCost));
     }
 
     public void SetIsActive(bool state)
@@ -105,10 +114,15 @@ public class TechTreeNode : MonoBehaviour
     public void SetTextToEffect()
     {
         nodeEffectText.text = description;
+        if (hasGemCost)
+            nodeCostText.text = inventory.GetItemAmount(resource) + " / " + resourceCost + "\n" + inventory.GetItemAmount(gemResource) + " / " + gemCost;
+        else
+            nodeCostText.text = inventory.GetItemAmount(resource) + " / " + resourceCost;
     }
 
     public void SetTextToNull()
     {
         nodeEffectText.text = "";
+        nodeCostText.text = "";
     }
 }

@@ -21,10 +21,10 @@ public class ChamberGenerator : MonoBehaviour
     {
         public int index;
         public Node node1, node2;
-        public RectInt overlap;
+        public Rect overlap;
         public Orientation orientation;
 
-        public Path(int index, Node node1, Node node2, RectInt overlap, Orientation orientation)
+        public Path(int index, Node node1, Node node2, Rect overlap, Orientation orientation)
         {
             this.index = index;
             this.node1 = node1;
@@ -46,9 +46,11 @@ public class ChamberGenerator : MonoBehaviour
     [Header("Chambers")]
 
     [Range(1, 20)]
+    [Tooltip("In chunks")]
     [SerializeField] private int chamberSize;
 
     [Range(0, 20)]
+    [Tooltip("In chunks")]
     [SerializeField] private int chamberMargin;
 
     [Tooltip("Around 55-60% of chambers are necessary.")]
@@ -89,9 +91,9 @@ public class ChamberGenerator : MonoBehaviour
         foreach (Room room in map.Rooms)
             nodes.Add(new Node(room));
 
-        RectInt horizontal1, horizontal2, vertical1, vertical2, overlap;
+        Rect horizontal1, horizontal2, vertical1, vertical2, overlap;
 
-        bool GetRects(Room room, out RectInt horizontal, out RectInt vertical)
+        bool GetRects(Room room, out Rect horizontal, out Rect vertical)
         {
             horizontal = room.Rect.Inflated(mapGenerator.RoomGenerator.RoomPadding * 2, -chamberMargin);
             vertical   = room.Rect.Inflated(-chamberMargin, mapGenerator.RoomGenerator.RoomPadding * 2);
@@ -145,7 +147,7 @@ public class ChamberGenerator : MonoBehaviour
         }
     }
 
-    private void NewConnection(int i, int j, RectInt overlap, Orientation orientation)
+    private void NewConnection(int i, int j, Rect overlap, Orientation orientation)
     {
         paths.Add(new Path(paths.Count, nodes[i], nodes[j], overlap, orientation));
         nodes[i].adjacentNodes.Add(nodes[j]);
@@ -231,7 +233,7 @@ public class ChamberGenerator : MonoBehaviour
 
         foreach (Path path in paths)
         {
-            RectInt rect = path.overlap;
+            Rect rect = path.overlap;
 
             if (path.orientation == Orientation.Horizontal)
             {

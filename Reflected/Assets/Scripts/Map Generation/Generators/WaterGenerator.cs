@@ -14,17 +14,17 @@ public class WaterGenerator : MonoBehaviour
 
     public void Generate(Map map)
     {
+        Rect waterRect;
+
         foreach (Room room in map.Rooms)
         {
-            RectInt waterRect = room.Rect.Inflated(Wall.Thickness, Wall.Thickness);
+            waterRect = room.Rect.Inflated(Wall.Thickness, Wall.Thickness);
 
             GameObject.Instantiate(waterPrefab, room.transform).GetComponent<Water>().Initialize(waterRect, waterLevel);
         }
 
         foreach (Chamber chamber in map.Chambers)
         {
-            RectInt waterRect;
-
             if (chamber.Orientation == Orientation.Horizontal)
                 waterRect = chamber.Rect.Inflated(0, Wall.Thickness);
             else
