@@ -5,40 +5,40 @@ using UnityEngine.AI;
 
 public class MoveTowardsPlayerState : State
 {
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player /*Transform target*/, NavMeshAgent agent)
     {
         //Test if this works
         switch (thisEnemy.currentCombatBehavior)
         {
             case AiManager2.CombatBehavior.CloseCombat: //Should be "thisEnemy.Combat..." but it doesnt work??
-                Debug.Log("Switch case: CloseCombat entered");
+                Debug.Log("Switch case: CloseCombat entered at position: " + transform.position);
                 break;
 
             case AiManager2.CombatBehavior.RangedCombat:
-                Debug.Log("Switch case: RangedCombat entered");
+                Debug.Log("Switch case: RangedCombat entered at position: " + transform.position);
                 break;
 
             case AiManager2.CombatBehavior.AoeCombat:
-                Debug.Log("Switch case: AoeCombat entered");
+                Debug.Log("Switch case: AoeCombat entered at position: " + transform.position);
                 break;
 
             default:
                 break;
         }
         
-        if (thisEnemy.distanceTo(player.transform) <= 2f && thisEnemy.CloseCombat())
+        if (thisEnemy.distanceTo(player.transform /*target*/) <= 2f && thisEnemy.CloseCombat())
         {
             thisEnemy.SetMeleeAttackState();
             agent.isStopped = true;
             return;
         }
-        else if (thisEnemy.distanceTo(player.transform)<=15f && thisEnemy.RangedCombat())
+        else if (thisEnemy.distanceTo(player.transform /*target*/) <=15f && thisEnemy.RangedCombat())
         {
             thisEnemy.SetRangedAttackState();
             agent.isStopped = true;
             return;
         }
-        else if (thisEnemy.distanceTo(player.transform)<= 15f && thisEnemy.AoeCombat())
+        else if (thisEnemy.distanceTo(player.transform /*target*/) <= 15f && thisEnemy.AoeCombat())
         {
             thisEnemy.SetAoeAttackState();
             agent.isStopped = true;
@@ -46,7 +46,7 @@ public class MoveTowardsPlayerState : State
         }
 
 
-        DoMoveToward(player.transform, agent);
+        DoMoveToward(player.transform /*target*/, agent);
     }
 
     private void DoMoveToward(Transform target, NavMeshAgent agent)

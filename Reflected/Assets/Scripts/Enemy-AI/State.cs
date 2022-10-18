@@ -11,7 +11,7 @@ public abstract class State : MonoBehaviour
     /// <param name="thisEnemy"></param>
     /// <param name="player"></param>
     /// <param name="agent"></param>
-    public virtual void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent) { }
+    public virtual void DoState(AiManager2 thisEnemy, Player player /*Transform target*/, NavMeshAgent agent) { }
 
     // Methods and other which all behavior may need.
     //protected float distanceTo(Transform target)

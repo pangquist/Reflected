@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class StartState : State
 {
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player /*Transform target*/, NavMeshAgent agent)
     {
         //This class is currently not used, as all transitions between states are handled in those particular states.
         //This was meant to choose the start state for the AI, but no matter what you choose as the start state it will transition to what it should be.

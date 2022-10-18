@@ -12,24 +12,24 @@ public class AttackPlayerState : State
     private float attackTimer = 0f;
     public float attackRate = 1f;
     private Vector3 offSet = new Vector3(0, 0.5f, 0);
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player /*Transform target*/, NavMeshAgent agent)
     {
         //If melee and too far away, move towards target.
-        if (thisEnemy.distanceTo(player.transform) >= 5 && thisEnemy.CloseCombat())
+        if (thisEnemy.distanceTo(player.transform /*target*/) >= 5 && thisEnemy.CloseCombat())
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
             return;
         }
         //If ranged and too close, move away from target.
-        else if (thisEnemy.distanceTo(player.transform) <= 7 && !thisEnemy.CloseCombat())
+        else if (thisEnemy.distanceTo(player.transform /*target*/) <= 7 && !thisEnemy.CloseCombat())
         {
             thisEnemy.SetMoveAwayState();
             agent.isStopped = false;
             return;
         }
         //If ranged and too far away, move towards target.
-        else if (thisEnemy.distanceTo(player.transform) >= 20 && !thisEnemy.CloseCombat())
+        else if (thisEnemy.distanceTo(player.transform /*target*/) >= 20 && !thisEnemy.CloseCombat())
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
@@ -38,29 +38,29 @@ public class AttackPlayerState : State
 
         attackTimer += Time.deltaTime;
 
-        FaceTarget(player.transform.position);
+        FaceTarget(player.transform.position /*target.position*/);
         agent.destination = thisEnemy.transform.position;
         if(attackTimer >= attackRate)
         {
-            DoAttack(thisEnemy, player);
+            DoAttack(thisEnemy, player /*target*/);
             //Debug.Log("Enemy attacked you!");
             attackTimer = 0f;
         }
     }
 
-    private void DoAttack(AiManager2 thisEnemy, Player player)
+    private void DoAttack(AiManager2 thisEnemy, Player player /*Transform target*/)
     {
         if (!thisEnemy.CloseCombat() && !thisEnemy.AoeCombat())
         {
             GameObject projectileObject = (GameObject)Resources.Load("ProjectileTestObject");
-            FireProjectile(player.transform, projectileObject);
+            FireProjectile(player.transform /*target*/, projectileObject);
         }
         else if (thisEnemy.AoeCombat())
         {
             attackRate = 5f;
             //aoeObject = GameObject.Find("AOETestObject");
             GameObject aoeObject = (GameObject)Resources.Load("AOETestObject");
-            FireAreaOfEffect(player.transform, aoeObject);
+            FireAreaOfEffect(player.transform /*target*/, aoeObject);
         }
         else if (thisEnemy.CloseCombat())
         {

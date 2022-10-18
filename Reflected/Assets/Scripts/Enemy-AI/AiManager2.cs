@@ -16,12 +16,11 @@ public class AiManager2 : MonoBehaviour
     private RangedAttackState rangedAttackState;
     private AoeAttackState aoeAttackState;
 
-    //[SerializeField] private GameObject GOplayer; //Redunant
-    private Player player;
-    private Enemy me;
+    [SerializeField] private Player player;
+    [SerializeField] private Enemy me;
 
-    private NavMeshAgent agent;
-    //private Transform target; //Redundat
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Transform target; //Should be redundat as you can just use player.transform but it does not work for some reason. Get help.
 
     bool closeCombat = false;
     bool rangedCombat = false;
@@ -36,15 +35,12 @@ public class AiManager2 : MonoBehaviour
     {
         if (me == null)
         {
-            me = gameObject.GetComponent<Enemy>();
+            me = GetComponentInChildren<Enemy>();
         }
         if (player == null)
         {
-            Debug.Log("Player was not assigned. Entered assign in start function");
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-            Debug.Log("Assiged player position: " + player.transform.position);
         }
-
 
         //if (firePoint == null)
         //{
@@ -56,7 +52,8 @@ public class AiManager2 : MonoBehaviour
         startState = gameObject.AddComponent<StartState>();
         moveTowardsPlayerState = gameObject.AddComponent<MoveTowardsPlayerState>();
         moveAwayFromPlayerState = gameObject.AddComponent<MoveAwayFromPlayerState>();
-        //attackPlayerState = gameObject.AddComponent<AttackPlayerState>(); //Transformed into the 3 states below:
+
+        //Make an if depending on type of enemy so it does not try to get all components
         meleeAttackState = gameObject.GetComponent<MeleeAttackState>();
         rangedAttackState = gameObject.GetComponent<RangedAttackState>();
         aoeAttackState = gameObject.GetComponent<AoeAttackState>();
@@ -67,7 +64,8 @@ public class AiManager2 : MonoBehaviour
 
         //AI Navmesh setup
         agent = GetComponent<NavMeshAgent>();
-        //target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+
 
         //Old. Here if nessecary, but I want to use enum instead.
         if (gameObject.tag == "Melee") closeCombat = true;
@@ -81,8 +79,9 @@ public class AiManager2 : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(player);
+        //Debug.Log(player);
         activeState.DoState(this, player, agent);
+        //activeState.DoState(this, target, agent);
     }
 
     public void SetMoveTowardState() => activeState = moveTowardsPlayerState;

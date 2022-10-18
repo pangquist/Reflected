@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 6900703334262475223}
   - component: {fileID: 6900703334262475221}
   - component: {fileID: 6900703334262475220}
+  - component: {fileID: 8297080184358867037}
+  - component: {fileID: 901658614}
   m_Layer: 0
   m_Name: Enemy Ranged
-  m_TagString: Untagged
+  m_TagString: Ranged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +43,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6900703334262475049}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d97dff8a4437e94dbd947d6de5d2f65, type: 3}
   m_Name: 
@@ -70,6 +72,39 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8297080184358867037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900703334262475049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dadd66639242df4b80408ea6a617fc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  me: {fileID: 0}
+  agent: {fileID: 0}
+  target: {fileID: 0}
+  firePoint: {fileID: 7284026279379451955}
+  currentCombatBehavior: 1
+--- !u!114 &901658614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900703334262475049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2e88e8fb26a5841a0efb68b0e0ff2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRate: 1
+  projectileObject: {fileID: 3454243261011872517, guid: c603512b7c4feeb4d9911fef3debfe50,
+    type: 3}
 --- !u!1001 &6900703333846797598
 PrefabInstance:
   m_ObjectHideFlags: 0

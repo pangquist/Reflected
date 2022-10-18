@@ -9,9 +9,9 @@ public class MeleeAttackState : State
     public float attackRate = 1f;
 
     public GameObject meleeObject;
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player /*Transform target*/, NavMeshAgent agent)
     {
-        if (thisEnemy.distanceTo(player.transform) >= 5)
+        if (thisEnemy.distanceTo(player.transform /*target*/) >= 5f)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
@@ -20,16 +20,16 @@ public class MeleeAttackState : State
 
         attackTimer += Time.deltaTime;
 
-        FaceTarget(player.transform.position);
+        FaceTarget(player.transform.position /*target.position*/);
         agent.destination = thisEnemy.transform.position;
         if (attackTimer >= attackRate)
         {
-            DoAttack(thisEnemy, player);
+            DoAttack();
             attackTimer = 0f;
         }
     }
 
-    private void DoAttack(AiManager2 thisEnemy, Player player)
+    private void DoAttack()
     {
         Instantiate(meleeObject, gameObject.GetComponent<AIManager>().firePoint.position, gameObject.transform.rotation);
     }
