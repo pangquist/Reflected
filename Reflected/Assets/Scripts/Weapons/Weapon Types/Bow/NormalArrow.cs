@@ -15,5 +15,6 @@ public class NormalArrow : Projectile
         {
             other.GetComponent<Enemy>().TakeDamage(damage);
         }
+        Destroy(gameObject);
     }
 }

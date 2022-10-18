@@ -19,5 +19,6 @@ public class FreezingArrow : Projectile
             other.gameObject.GetComponent<Enemy>().Freeze(slowedMovementSpeed, timeFrozen);
             other.GetComponent<Enemy>().TakeDamage(damage);
         }
+        Destroy(gameObject);
     }
 }

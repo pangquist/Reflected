@@ -19,5 +19,6 @@ public class FireArrow : Projectile
             other.gameObject.GetComponent<Enemy>().TakeDamageOverTime(damageOverTime, time);
             other.GetComponent<Enemy>().TakeDamage(damage);
         }
+        Destroy(gameObject);
     }
 }

@@ -13,10 +13,14 @@ public class ExplosiveArrow : Projectile
         currentProjectile = projectileType.fire;
     }
 
+    void Update()
+    {
+        Gizmos.DrawSphere(transform.position, blastRadius);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         var surrondingObjects = Physics.OverlapSphere(transform.position, blastRadius);
-
         foreach (var obj in surrondingObjects)
         {
             if (obj.GetComponent<Enemy>())
@@ -25,5 +29,7 @@ public class ExplosiveArrow : Projectile
                 obj.GetComponent<Enemy>().TakeDamage(colleteralDamage);
             }
         }
+
+        Destroy(gameObject);
     }
 }

@@ -19,7 +19,6 @@ public abstract class Weapon : MonoBehaviour
     private AbilityCooldowns cooldownstarter;
 
 
-
     public virtual void Awake()
     {
         anim = GetComponent<Animator>();
