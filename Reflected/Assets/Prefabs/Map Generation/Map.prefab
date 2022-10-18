@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3064647064204136908}
   - component: {fileID: 1146558929127419464}
+  - component: {fileID: 7648788261191837507}
   - component: {fileID: 3792813478823738156}
   m_Layer: 0
   m_Name: Map
@@ -45,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d93a9f61a82b24cce8f1349d607173bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  graph: {fileID: 7648788261191837507}
   singleActiveRoom: 1
   sizeX: 0
   sizeZ: 0
@@ -54,6 +56,21 @@ MonoBehaviour:
   startRoom: {fileID: 0}
   bossRoom: {fileID: 0}
   dimensionManager: {fileID: 0}
+--- !u!114 &7648788261191837507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6645767010589061385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac21fc91b1ce465b9456f6bcb6b54c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 1146558929127419464}
+  nodes: []
+  edges: []
 --- !u!114 &3792813478823738156
 MonoBehaviour:
   m_ObjectHideFlags: 0

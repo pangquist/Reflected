@@ -18,19 +18,19 @@ public class WallGenerator : MonoBehaviour
 
     [Header("Walls")]
 
-    [Range(1, 10)]
+    [Range(0, 100)][Tooltip("In tiles")]
     [SerializeField] private int wallHeight;
 
-    [Range(1, 5)]
+    [Range(0, 50)][Tooltip("In tiles")]
     [SerializeField] private int wallThickness;
 
     [Header("Doors")]
 
-    [Range(0f, 1f)]
+    [Range(0f, 5f)][Tooltip("In tiles")]
     [SerializeField] private float doorThickness;
 
-    [Range(0f, 5f)]
-    [SerializeField] private float doorTransitionDuration;
+    [Range(0f, 2f)][Tooltip("In tiles")]
+    [SerializeField] private float doorIndent;
 
     private void Awake()
     {
@@ -43,8 +43,8 @@ public class WallGenerator : MonoBehaviour
         Awake();
 
         Array cardinalDirections = Enum.GetValues(typeof(CardinalDirection));
-        RectInt roomRect, wallPortion, overlap, portion1, portion2;
-        List<RectInt> wallPortions = new List<RectInt>();
+        Rect roomRect, wallPortion, overlap, portion1, portion2;
+        List<Rect> wallPortions = new List<Rect>();
 
         foreach (Room room in map.Rooms)
         {
@@ -75,14 +75,14 @@ public class WallGenerator : MonoBehaviour
 
                             if (chamber.Orientation == Orientation.Horizontal)
                             {
-                                portion1 = new RectInt(wallPortion.x, wallPortion.y, wallPortion.width, overlap.y - wallPortion.y);
-                                portion2 = new RectInt(wallPortion.x, overlap.Top(), wallPortion.width, wallPortion.Top() - overlap.Top());
+                                portion1 = new Rect(wallPortion.x, wallPortion.y, wallPortion.width, overlap.y - wallPortion.y);
+                                portion2 = new Rect(wallPortion.x, overlap.yMax, wallPortion.width, wallPortion.yMax - overlap.yMax);
                             }
 
                             else // (chamber.Orientation == Orientation.Vertical)
                             {
-                                portion1 = new RectInt(wallPortion.x, wallPortion.y, overlap.x - wallPortion.x, wallPortion.height);
-                                portion2 = new RectInt(overlap.Right(), wallPortion.y, wallPortion.Right() - overlap.Right(), wallPortion.height);
+                                portion1 = new Rect(wallPortion.x, wallPortion.y, overlap.x - wallPortion.x, wallPortion.height);
+                                portion2 = new Rect(overlap.xMax, wallPortion.y, wallPortion.xMax - overlap.xMax, wallPortion.height);
                             }
 
                             // Change the current portion and add a second
@@ -90,7 +90,7 @@ public class WallGenerator : MonoBehaviour
                             wallPortions.Add(portion2);
 
                             // Add door to Chamber
-                            CardinalDirection doorDirection = (CardinalDirection)cardinalDirections.GetValue(((int)direction + 2) % 4);
+                            CardinalDirection doorDirection = direction.GetNext().GetNext();
                             chamber.AddDoor(InstantiateDoor(chamber, room, doorDirection, overlap));
                         }
 
@@ -102,7 +102,7 @@ public class WallGenerator : MonoBehaviour
 
                 // Add collected portions to the Wall
 
-                foreach (RectInt portion in wallPortions)
+                foreach (Rect portion in wallPortions)
                     room.Walls[room.Walls.Count - 1].AddPortion(portion);
 
                 // Move on to the next Wall
@@ -111,6 +111,7 @@ public class WallGenerator : MonoBehaviour
             // Move on to the next Room
         }
 
+        /*
         foreach (Chamber chamber in map.Chambers)
         {
             if (chamber.Orientation == Orientation.Horizontal)
@@ -127,36 +128,37 @@ public class WallGenerator : MonoBehaviour
                 chamber.Walls.Add(InstantiateSinglePortionWall(CardinalDirection.East, chamber.transform, roomRect));
             }
         }
+        */
     }
 
     /// <summary>
-    /// Returns the RectInt of a Wall as seen from above
+    /// Returns the Rect of a Wall as seen from above
     /// </summary>
-    private RectInt GetWallRect(CardinalDirection direction, RectInt roomRect)
+    private Rect GetWallRect(CardinalDirection direction, Rect roomRect)
     {
         switch (direction)
         {
             case CardinalDirection.North:
-                return new RectInt(roomRect.x - wallThickness, roomRect.y + roomRect.height, roomRect.width + wallThickness * 2, wallThickness);
+                return new Rect(roomRect.x - wallThickness, roomRect.y + roomRect.height, roomRect.width + wallThickness * 2, wallThickness);
 
             case CardinalDirection.South:
-                return new RectInt(roomRect.x - wallThickness, roomRect.y - wallThickness, roomRect.width + wallThickness * 2, wallThickness);
+                return new Rect(roomRect.x - wallThickness, roomRect.y - wallThickness, roomRect.width + wallThickness * 2, wallThickness);
 
             case CardinalDirection.West:
-                return new RectInt(roomRect.x - wallThickness, roomRect.y - wallThickness, wallThickness, roomRect.height + wallThickness * 2);
+                return new Rect(roomRect.x - wallThickness, roomRect.y - wallThickness, wallThickness, roomRect.height + wallThickness * 2);
 
             case CardinalDirection.East:
-                return new RectInt(roomRect.x + roomRect.width, roomRect.y - wallThickness, wallThickness, roomRect.height + wallThickness * 2);
+                return new Rect(roomRect.x + roomRect.width, roomRect.y - wallThickness, wallThickness, roomRect.height + wallThickness * 2);
 
             default:
-                return new RectInt();
+                return new Rect();
         }
     }
 
     /// <summary>
     /// Instantiates, initializes, and returns a Wall with one portion
     /// </summary>
-    private Wall InstantiateSinglePortionWall(CardinalDirection direction, Transform parentTransform, RectInt roomRect)
+    private Wall InstantiateSinglePortionWall(CardinalDirection direction, Transform parentTransform, Rect roomRect)
     {
         return InstantiateWall(direction, parentTransform).AddPortion(GetWallRect(direction, roomRect));
     }
@@ -172,40 +174,33 @@ public class WallGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns the Rect of a door as seen from above
+    /// Returns the position of a door based of the overlap of a room and a chamber
     /// </summary>
-    private Rect GetDoorRect(CardinalDirection direction, RectInt overlap)
+    private Vector2 GetDoorPosition(CardinalDirection direction, Rect overlap)
     {
-        Rect doorRect = new Rect();
+        if (direction == CardinalDirection.North)
+            return new Vector2(overlap.center.x, overlap.yMax - doorThickness * 0.5f - doorIndent);
 
-        // Set position
+        else if (direction == CardinalDirection.East)
+            return new Vector2(overlap.xMax - doorThickness * 0.5f - doorIndent, overlap.center.y);
 
-        if (direction == CardinalDirection.South || direction == CardinalDirection.West)
-            doorRect.position = new Vector2(overlap.x, overlap.y);
+        else if (direction == CardinalDirection.South)
+            return new Vector2(overlap.center.x, overlap.yMin + doorThickness * 0.5f + doorIndent);
 
-        else if (direction == CardinalDirection.North)
-            doorRect.position = new Vector2(overlap.x, overlap.Top() - doorThickness * wallThickness);
-
-        else // (direction == CardinalDirection.East)
-            doorRect.position = new Vector2(overlap.Right() - doorThickness * wallThickness, overlap.y);
-
-        // Set size
-
-        if (direction == CardinalDirection.North || direction == CardinalDirection.South)
-            doorRect.size = new Vector2(overlap.width, doorThickness * wallThickness);
-
-        else // (direction == CardinalDirection.West || direction == CardinalDirection.East)
-            doorRect.size = new Vector2(doorThickness * wallThickness, overlap.height);
-
-        return doorRect;
+        else // (direction == CardinalDirection.West)
+            return new Vector2(overlap.xMin + doorThickness * 0.5f + doorIndent, overlap.center.y);
     }
 
     /// <summary>
     /// Instantiates, initializes, and returns a door
     /// </summary>
-    private Door InstantiateDoor(Chamber chamber, Room room, CardinalDirection direction, RectInt overlap)
+    private Door InstantiateDoor(Chamber chamber, Room room, CardinalDirection direction, Rect overlap)
     {
-        return GameObject.Instantiate(doorPrefab, chamber.transform).GetComponent<Door>().Initialize(direction, GetDoorRect(direction, overlap), room);
+        float width = direction == CardinalDirection.North || direction == CardinalDirection.South ? overlap.width : overlap.height;
+        width -= mapGenerator.PillarGenerator.Width;
+
+        return GameObject.Instantiate(doorPrefab, chamber.transform).GetComponent<Door>()
+            .Initialize(direction, room, GetDoorPosition(direction, overlap), width);
     }
 
 }

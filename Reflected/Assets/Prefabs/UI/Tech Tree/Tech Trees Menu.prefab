@@ -97,11 +97,14 @@ MonoBehaviour:
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 7987579025464662141}
-  nextNode: []
-  resourceCost: 0
+  nextNode:
+  - {fileID: 2722516576218331628}
+  resource: {fileID: 11400000, guid: 45cf331588cc0a94c86deeb7792edb24, type: 2}
+  resourceCost: 100
   hasGemCost: 0
-  gemCost: 0
-  isPlaceable: 1
+  gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
+  gemCost: 1
+  isPlaceable: 0
   modifiedValue: Damage
   value: 0.15
   nodeEffectText: {fileID: 0}
@@ -305,10 +308,12 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 7987579025464662141}
   nextNode: []
-  resourceCost: 0
+  resource: {fileID: 11400000, guid: 45cf331588cc0a94c86deeb7792edb24, type: 2}
+  resourceCost: 100
   hasGemCost: 0
-  gemCost: 0
-  isPlaceable: 1
+  gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
+  gemCost: 1
+  isPlaceable: 0
   modifiedValue: Attack Speed
   value: 0.1
   nodeEffectText: {fileID: 0}
@@ -515,9 +520,11 @@ MonoBehaviour:
   - {fileID: 2722516576727277414}
   - {fileID: 5866135421495088770}
   - {fileID: 5051632911782484931}
-  resourceCost: 0
+  resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
+  resourceCost: 100
   hasGemCost: 0
-  gemCost: 0
+  gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
+  gemCost: 1
   isPlaceable: 0
   modifiedValue: Health
   value: 0.15
@@ -721,10 +728,13 @@ MonoBehaviour:
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 7987579025464662141}
-  nextNode: []
-  resourceCost: 0
+  nextNode:
+  - {fileID: 2722516576045991567}
+  resource: {fileID: 11400000, guid: 45cf331588cc0a94c86deeb7792edb24, type: 2}
+  resourceCost: 100
   hasGemCost: 0
-  gemCost: 0
+  gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
+  gemCost: 1
   isPlaceable: 1
   modifiedValue: Mirror Charges
   value: -1
@@ -930,11 +940,13 @@ MonoBehaviour:
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 2722516576375373293}
-  - {fileID: 2722516576375373293}
+  - {fileID: 8851899489701552726}
   - {fileID: 5866135421495088770}
-  resourceCost: 0
+  resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
+  resourceCost: 100
   hasGemCost: 1
-  gemCost: 0
+  gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
+  gemCost: 1
   isPlaceable: 1
   modifiedValue: True Charges
   value: -1
@@ -1232,11 +1244,13 @@ MonoBehaviour:
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
-  techTree: {fileID: 0}
+  techTree: {fileID: 3394559597376095408}
   nextNode: []
-  resourceCost: 0
+  resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
+  resourceCost: 100
   hasGemCost: 0
-  gemCost: 0
+  gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
+  gemCost: 1
   isPlaceable: 0
   modifiedValue: Movement Speed
   value: 0.15
@@ -1381,7 +1395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 114.7, y: -68.6}
+  m_AnchoredPosition: {x: 114.7, y: -68.600006}
   m_SizeDelta: {x: 113.5318, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5866135421495088828
@@ -1439,14 +1453,16 @@ MonoBehaviour:
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
-  techTree: {fileID: 0}
+  techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 2722516576727277414}
   - {fileID: 2722516576375373293}
   - {fileID: 8851899489701552726}
-  resourceCost: 0
+  resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
+  resourceCost: 100
   hasGemCost: 0
-  gemCost: 0
+  gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
+  gemCost: 1
   isPlaceable: 0
   modifiedValue: Damage
   value: 0.15
@@ -1591,7 +1607,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 6.4596863, y: -68.6}
+  m_AnchoredPosition: {x: 6.4596863, y: -68.600006}
   m_SizeDelta: {x: 128.2818, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8851899489701552744
@@ -1649,13 +1665,15 @@ MonoBehaviour:
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
-  techTree: {fileID: 0}
+  techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 5866135421495088770}
   - {fileID: 2722516576727277414}
-  resourceCost: 0
+  resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
+  resourceCost: 100
   hasGemCost: 0
-  gemCost: 0
+  gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
+  gemCost: 1
   isPlaceable: 0
   modifiedValue: Health
   value: 0.15
@@ -2259,9 +2277,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2722516577062555595}
+    - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -2269,8 +2302,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: GetActiveUpgrades
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: TechTreesMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UpgradeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2129893453708287471, guid: 991bd7bf55ba94db0a07179dc186ba32,
         type: 3}

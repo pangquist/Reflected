@@ -13,6 +13,8 @@ public class Inventory : MonoBehaviour, ISavable
 
     public void Awake()
     {
+        DontDestroyOnLoad(this);
+
         for (int i = 0; i < dataBase.items.Length; i++)
         {
             InventoryItem newItem = new InventoryItem(dataBase.items[i]);
@@ -51,8 +53,7 @@ public class Inventory : MonoBehaviour, ISavable
             if (item.stackSize >= amount)
             {
                 item.RemoveMoreFromStack(amount);
-            }
-            
+            }  
         }
     }
 
@@ -68,6 +69,16 @@ public class Inventory : MonoBehaviour, ISavable
         }
 
         return false;
+    }
+
+    public int GetItemAmount(ItemData itemData)
+    {
+        if (itemDictionary.TryGetValue(itemData, out InventoryItem item))
+        {
+            return item.stackSize;
+        }
+        else
+            return 0;
     }
 
     public object SaveState()

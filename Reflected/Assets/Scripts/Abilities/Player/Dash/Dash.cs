@@ -9,15 +9,17 @@ public class Dash : Ability
     [SerializeField] float dashSpeed;
     bool isDashing;
 
-    public override void DoEffect()
+    public override bool DoEffect()
     {
         if (IsOnCooldown())
-            return;
+            return false;
 
         base.DoEffect();
 
         cooldownstarter.Ability2Use();
         StartCoroutine(dashAction());
+
+        return true;
     }
 
     IEnumerator dashAction()

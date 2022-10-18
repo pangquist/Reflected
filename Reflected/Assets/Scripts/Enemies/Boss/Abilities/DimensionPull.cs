@@ -18,9 +18,10 @@ public class DimensionPull : Ability
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
     }
 
-    public override void DoEffect()
+    public override bool DoEffect()
     {
         base.DoEffect();
         dimensionManager.ForcedSwap();
+        return true;
     }
 }

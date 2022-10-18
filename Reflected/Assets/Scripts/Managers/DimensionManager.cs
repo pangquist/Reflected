@@ -29,7 +29,7 @@ public class DimensionManager : MonoBehaviour
     [SerializeField] private Material mirrorSkybox;
 
     //[Header("Music")]
-    private MusicManager musicManager;
+    [SerializeField] private MusicManager musicManager;
 
     [Header("Changeable")]
     [SerializeField] private List<ChangeableObject> changeableObjects;
@@ -62,7 +62,7 @@ public class DimensionManager : MonoBehaviour
     {
         musicManager = GameObject.Find("Music Manager").GetComponent<MusicManager>();
 
-        SetDimension(Dimension.True);
+        //SetDimension(Dimension.True);
         UpdateChargeBar();
     }
 

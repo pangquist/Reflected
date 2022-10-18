@@ -30,6 +30,7 @@ public class AbilityCooldowns : MonoBehaviour
         ability1FillImage.fillAmount = 0;
         ability2FillImage.fillAmount = 0;
 
+        ability1Icon.sprite = player.GetSpecialAbility().GetIcon();
         ability2Icon.sprite = thirdPersonMovement.GetDash().GetIcon();
     }
 
@@ -55,16 +56,19 @@ public class AbilityCooldowns : MonoBehaviour
 
     private void Ability1()
     {
-        if (weapon.IsOnCooldown())
+        Ability ability = player.GetSpecialAbility();
+
+        if (ability.IsOnCooldown())
         {
-            ability1text.text = Mathf.RoundToInt(weapon.GetCurrentCooldown()).ToString();
-            ability1FillImage.fillAmount -= 1 / weapon.GetCooldown() * Time.deltaTime;
+            ability1text.text = Mathf.RoundToInt(ability.GetRemainingCooldown()).ToString();
+            ability1FillImage.fillAmount = ability.GetCooldownPercentage();
         }
-        else if (!weapon.IsOnCooldown())
+        else
         {
             ability1text.gameObject.SetActive(false);
             ability1FillImage.fillAmount = 0;
         }
+
         if (ability1FillImage.fillAmount <= 0)
         {
             ability1FillImage.fillAmount = 0;

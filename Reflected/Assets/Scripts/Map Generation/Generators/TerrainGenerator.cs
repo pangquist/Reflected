@@ -17,7 +17,6 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private GameObject terrainChunkPrefab;
 
     [SerializeField] NoiseMapGenerator noiseMapGenerator;
-    [SerializeField] ObjectPlacer objectPlacer;
 
     [Header("Terrain")]
 
@@ -29,9 +28,16 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private AnimationCurve heightCurve;
     [SerializeField] private Wave[] waves;
 
+    private float randomSeed = 0;
+
     public TerrainType[] TerrainTypes() { return terrainTypes; }
     public float HeightMultiplier() { return heightMultiplier; }
     public AnimationCurve HeightCurve() { return heightCurve; }
+
+    public void SetRandomSeed(float seed)
+    {
+        randomSeed = seed / 10000;
+    }
 
     public void Generate(Map map)
     {
@@ -45,31 +51,38 @@ public class TerrainGenerator : MonoBehaviour
             for (int zChunkIndex = 0; zChunkIndex < map.SizeZ; zChunkIndex++)
             {
                 // Calculate the tile position based on the X and Z indices
-                Vector3 tilePosition = new Vector3(xChunkIndex * MapGenerator.ChunkSize + MapGenerator.ChunkSize, startY, zChunkIndex * MapGenerator.ChunkSize + MapGenerator.ChunkSize);
+                Vector3 tilePosition = new Vector3(
+                    xChunkIndex * MapGenerator.ChunkSize + MapGenerator.ChunkSize,
+                    startY,
+                    zChunkIndex * MapGenerator.ChunkSize + MapGenerator.ChunkSize);
+
+                Rect terrainRect = new Rect(
+                    tilePosition.x - MapGenerator.ChunkSize,
+                    tilePosition.z - MapGenerator.ChunkSize,
+                    MapGenerator.ChunkSize,
+                    MapGenerator.ChunkSize);
 
                 foreach (Room room in map.Rooms)
                 {
-                    if (room.Rect.Inflated(1, 1).Contains(new Vector2Int(xChunkIndex, zChunkIndex)))
+                    if (room.Rect.Inflated(1, 1).Overlaps(terrainRect))
                     {
                         // Instantiate a new TerrainChunk
-                        GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.transform);
+                        GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.transform.Find("Terrain"));
                         GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
-                        //BakeNavMesh(terrainChunk.GetComponentInChildren<NavMeshSurface>());
-                        objectPlacer.PlaceDecorations(terrainChunk.GetComponent<TerrainChunk>(), room);
                         break;
                     }
                 }
 
                 foreach (Chamber chamber in map.Chambers)
                 {
-                    RectInt rect;
+                    Rect chamberRect;
 
                     if (chamber.Orientation == Orientation.Horizontal)
-                        rect = chamber.Rect.Inflated(0, 1);
+                        chamberRect = chamber.Rect.Inflated(0, 1);
                     else
-                        rect = chamber.Rect.Inflated(1, 0);
+                        chamberRect = chamber.Rect.Inflated(1, 0);
 
-                    if (rect.Contains(new Vector2Int(xChunkIndex, zChunkIndex)))
+                    if (chamberRect.Overlaps(terrainRect))
                     {
                         // Instantiate a new TerrainChunk
                         GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), chamber.transform);
@@ -100,7 +113,7 @@ public class TerrainGenerator : MonoBehaviour
         float offsetX = -terrainChunk.transform.position.x;
         float offsetZ = -terrainChunk.transform.position.z;
         // generate a heightMap using noise
-        return this.noiseMapGenerator.GenerateNoiseMap(chunkDepth, chunkWidth, this.mapScale, offsetX, offsetZ, waves);
+        return this.noiseMapGenerator.GenerateNoiseMap(chunkDepth, chunkWidth, this.mapScale, offsetX, offsetZ, waves, randomSeed);
     }
 
     private void UpdateMeshVertices(float[,] heightMap, TerrainChunk terrainChunk)

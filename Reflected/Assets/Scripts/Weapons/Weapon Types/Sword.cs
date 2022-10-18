@@ -21,7 +21,7 @@ public class Sword : Weapon
 
     private void OnTriggerStay(Collider other)
     {
-        if (!playerController.GetAttackLocked())
+        if (!playerController.GetActionLock())
             return;
 
         Enemy target;
