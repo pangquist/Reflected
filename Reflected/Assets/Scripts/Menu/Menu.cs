@@ -14,6 +14,9 @@ public abstract class Menu : MonoBehaviour
     {
         if (menuManager == null)
             menuManager = GameObject.Find("Canvas").GetComponent<MenuManager>();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     protected virtual void Update()

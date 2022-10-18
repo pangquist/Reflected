@@ -50,6 +50,8 @@ public class Player : Character, ISavable
         dimensionManager.SetStatSystem(stats);
 
         ChangeStats();
+
+        anim.Play("GetUp");
     }
 
     // Update is called once per frame

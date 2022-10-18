@@ -27,7 +27,6 @@ public class MusicManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
         intensityLevel = 0;
 
         currentTrack = trueMusic[intensityLevel];
