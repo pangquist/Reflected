@@ -15,33 +15,47 @@ public class Shop : MonoBehaviour
     [SerializeField] int numberOfCollectableItems = 2;
     [SerializeField] int numberOfPowerUps = 2;
     int totalNumberOfItems;
-
+    Inventory inventory;
 
     private void Start()
     {
         //animator = GetComponent<Animator>();
+        
         PopulateShop();
     }
 
-    public void BuyItem(int index) //Have to send in an index here for the shop to give you that item
+    public bool BuyItem(int index) //Have to send in an index here for the shop to give you that item
     {
         //The index you give should be put in on line 37 and 38
-        Inventory inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+        inventory = FindObjectOfType<Inventory>();
+        //Inventory inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+        Debug.Log("Trying to buy");
         if (inventory)
         {
-
-            if (shopItems.Count > 0 && inventory.HaveEnoughCurrency(payment, shopItems[totalNumberOfItems - 1].GetComponent<IBuyable>().GetValue())) 
+            Debug.Log(shopItems[0]);
+            if (shopItems.Count > 0 && inventory.HaveEnoughCurrency(payment, shopItems[index].GetComponent<IBuyable>().GetValue()))
             {
-
+                Debug.Log("Close");
                 if (spawnedObject == null)
                 {
-                    inventory.Remove(payment, shopItems[totalNumberOfItems - 1].GetComponent<IBuyable>().GetValue());
-                    SpawnItem(--totalNumberOfItems);
-                }                    
+                    Debug.Log("Bought");
+                    inventory.Remove(payment, shopItems[index].GetComponent<IBuyable>().GetValue());
+                    SpawnItem(index);
+                    return true;
+                }
                 else
+                {
                     Debug.Log("Spawn not working");
+                    return false;
+                }
+
             }
+            else
+                return false;
+
         }
+        else
+            return false;
     }
 
     void SpawnItem(int index)
@@ -66,6 +80,8 @@ public class Shop : MonoBehaviour
         {
             shopItems.Add(lootTableCollectables.GetRandom().GetItem());
         }
+        //Debug.Log(shopItems.Count);
+        //Debug.Log(shopItems[0]);
 
         totalNumberOfItems = numberOfPowerUps + numberOfCollectableItems;
     }

@@ -65,7 +65,7 @@ public abstract class Chest : MonoBehaviour
             pickablePowerUps.Add(powerups.GetRandom());
             pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties();            
         }
-        Debug.Log(pickablePowerUps[0].GetComponent<InteractablePowerUp>().myRarity);
-        Debug.Log(pickablePowerUps[0].GetComponent<InteractablePowerUp>().amount);
+        Debug.Log("Chest" + pickablePowerUps[0].GetComponent<InteractablePowerUp>().myRarity);
+        Debug.Log("Chest" + pickablePowerUps[0].GetComponent<InteractablePowerUp>().amount);
     }
 }
