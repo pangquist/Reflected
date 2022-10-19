@@ -60,6 +60,12 @@ public class Character : MonoBehaviour, IEffectable
         isDead = true;
     }
 
+
+    public List<Effect> GetStatusEffectList()
+    {
+        return statusEffects;
+    }
+
     protected void Destroy()
     {
         if (transform.parent != null)

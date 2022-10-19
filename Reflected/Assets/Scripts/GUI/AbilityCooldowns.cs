@@ -19,7 +19,6 @@ public class AbilityCooldowns : MonoBehaviour
     private Weapon weapon;
     private Player player;
     [SerializeField] private ThirdPersonMovement thirdPersonMovement;
-    PowerUp powerUp;
 
     // Start is called before the first frame update
     void Start()
