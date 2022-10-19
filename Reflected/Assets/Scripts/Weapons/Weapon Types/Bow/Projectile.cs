@@ -7,7 +7,7 @@ public abstract class Projectile : MonoBehaviour
     protected enum projectileType {normal, fire, freeze, explosive}
     protected projectileType currentProjectile;
     protected Rigidbody rb;
-    [SerializeField] float lifeTime;
+    [SerializeField] protected float lifeTime;
     [SerializeField] protected StatusEffectData data;
     protected float damage;
 

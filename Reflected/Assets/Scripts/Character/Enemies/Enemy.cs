@@ -61,23 +61,23 @@ public class Enemy : Character
         base.Die();
     }
 
-    public IEnumerator Freeze(float slowedMovementSpeed ,float timeFrozen)
-    {
-        float oldMovmentSpeed = movementSpeed;
-        movementSpeed *= slowedMovementSpeed;
+    //public IEnumerator Freeze(float slowedMovementSpeed ,float timeFrozen)
+    //{
+    //    float oldMovmentSpeed = movementSpeed;
+    //    movementSpeed *= slowedMovementSpeed;
 
-        yield return new WaitForSeconds(timeFrozen);
+    //    yield return new WaitForSeconds(timeFrozen);
 
-        movementSpeed = oldMovmentSpeed;
-    }
-    public IEnumerator TakeDamageOverTime(float damageOverTime, float time)
-    {
-        for (int i = 0; i < time; i++)
-        {
-            currentHealth -= damageOverTime / time;
-            yield return new WaitForSeconds(1);
-        }
-    }
+    //    movementSpeed = oldMovmentSpeed;
+    //}
+    //public IEnumerator TakeDamageOverTime(float damageOverTime, float time)
+    //{
+    //    for (int i = 0; i < time; i++)
+    //    {
+    //        currentHealth -= damageOverTime / time;
+    //        yield return new WaitForSeconds(1);
+    //    }
+    //}
 
     public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instaintiated (from the EnemySpanwer-script)
     {

@@ -6,23 +6,12 @@ public class PewPew : Ability
 {
     [SerializeField] Bow bow;
 
-    void Start()
-    {
-        
-    }
-
     public override bool DoEffect()
     {
         base.DoEffect();
 
-        
+        bow.WeaponEffect();
 
         return true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

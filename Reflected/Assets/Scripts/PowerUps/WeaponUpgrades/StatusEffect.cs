@@ -18,7 +18,7 @@ public class StatusEffect : MonoBehaviour
         var effectable = collider.GetComponent<IEffectable>();
         if (effectable != null)
         {
-            effectable.ApplyEffect(data);
+            effectable.ApplyEffect(data, 1);
         }
     }
 

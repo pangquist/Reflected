@@ -11,6 +11,7 @@ public class ExplosiveArrow : Projectile
     private void Start()
     {
         currentProjectile = projectileType.fire;
+        Destroy(gameObject, lifeTime);
     }
 
     void Update()

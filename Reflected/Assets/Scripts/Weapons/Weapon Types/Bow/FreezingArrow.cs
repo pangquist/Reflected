@@ -7,6 +7,7 @@ public class FreezingArrow : Projectile
     private void Start()
     {
         currentProjectile = projectileType.freeze;
+        Destroy(gameObject, lifeTime);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -79,7 +79,8 @@ public class Player : Character, ISavable
         if (basicAbility.IsOnCooldown())
             return;
 
-        anim.Play(basicAbility.GetAnimation().name);
+        //anim.Play(basicAbility.GetAnimation().name);
+        basicAbility.DoEffect();
     }
 
     public void SpecialAttack()

@@ -7,6 +7,7 @@ public class NormalArrow : Projectile
     private void Start()
     {
         currentProjectile = projectileType.normal;
+        Destroy(gameObject, lifeTime);
     }
    
     private void OnTriggerEnter(Collider other)
@@ -14,7 +15,7 @@ public class NormalArrow : Projectile
         if (other.GetComponent<Enemy>())
         {
             other.GetComponent<Enemy>().TakeDamage(damage);
+            
         }
-        Destroy(gameObject);
     }
 }
