@@ -33,7 +33,7 @@ public class Shop : MonoBehaviour
         if (inventory)
         {
             Debug.Log(shopItems[0]);
-            if (shopItems.Count > 0 && inventory.HaveEnoughCurrency(payment, shopItems[index].GetComponent<IBuyable>().GetValue())) 
+            if (shopItems.Count > 0 && inventory.HaveEnoughCurrency(payment, shopItems[index].GetComponent<IBuyable>().GetValue()))
             {
                 Debug.Log("Close");
                 if (spawnedObject == null)
@@ -42,13 +42,13 @@ public class Shop : MonoBehaviour
                     inventory.Remove(payment, shopItems[index].GetComponent<IBuyable>().GetValue());
                     SpawnItem(index);
                     return true;
-                }                    
+                }
                 else
                 {
                     Debug.Log("Spawn not working");
                     return false;
                 }
-                    
+
             }
             else
                 return false;

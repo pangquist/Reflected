@@ -65,8 +65,8 @@ public class ShopButton : MonoBehaviour
     public void SetButton(GameObject powerUp, int buttonIndex)
     {
         index = buttonIndex;
-        costText.text = powerUp.GetComponent<InteractablePowerUp>().powerUpEffect.value.ToString();
-        itemText.text = powerUp.GetComponent<InteractablePowerUp>().powerUpEffect.description;
+        costText.text = powerUp.GetComponent<IBuyable>().GetValue().ToString();
+        itemText.text = powerUp.GetComponent<IBuyable>().GetDescription();
 
     }
 }

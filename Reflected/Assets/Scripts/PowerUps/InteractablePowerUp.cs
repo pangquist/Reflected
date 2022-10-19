@@ -20,11 +20,13 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
 
     public void SetProperties()
     {
-        if(myRarity == null)
+        Debug.Log("Set properties " + myRarity);
+        if (myRarity == null)
         {
             myRarity = rarityTiers.GetRandom();
             amount = powerUpEffect.amount * myRarity.amountMultiplier;
             value = powerUpEffect.value * myRarity.valueMultiplier;
+            
         }        
     }
 
