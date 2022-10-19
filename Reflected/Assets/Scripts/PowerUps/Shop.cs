@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] WeightedRandomList<LootPool> lootTablePowerUps;
-    [SerializeField] WeightedRandomList<LootPool> lootTableCollectables;
+    [SerializeField] WeightedRandomList<GameObject> lootTablePowerUps;
+    [SerializeField] WeightedRandomList<GameObject> lootTableCollectables;
+    [SerializeField] WeightedRandomList<Rarity> rarityTiers;
     [SerializeField] List<GameObject> shopItems;
     [SerializeField] Transform itemHolder;
     [SerializeField] ItemData payment;
@@ -20,7 +21,8 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         //animator = GetComponent<Animator>();
-        
+        //lootTablePowerUps = GameObject.FindObjectOfType<LootPoolManager>().GetPowerupPool();
+        //lootTableCollectables = GameObject.FindObjectOfType<LootPoolManager>().GetCollectablePool();
         PopulateShop();
     }
 
@@ -71,18 +73,15 @@ public class Shop : MonoBehaviour
     {
         for (int i = 0; i < numberOfPowerUps; i++)
         {
-            shopItems.Add(lootTablePowerUps.GetRandom().GetItem());
-            shopItems[i].GetComponent<InteractablePowerUp>().SetProperties();
-            Debug.Log("Powerup " + i + " " + shopItems[i].GetComponent<InteractablePowerUp>().GetValue());
+            shopItems.Add(lootTablePowerUps.GetRandom());
+            shopItems[i].GetComponent<InteractablePowerUp>().SetProperties(rarityTiers.GetRandom());
+            Debug.Log("Powerup " + i + ": value:" + shopItems[i].GetComponent<InteractablePowerUp>().GetValue() + ". amount: " + shopItems[i].GetComponent<InteractablePowerUp>().amount);
         }
 
         for (int i = 0; i < numberOfCollectableItems; i++)
         {
-            shopItems.Add(lootTableCollectables.GetRandom().GetItem());
+            shopItems.Add(lootTableCollectables.GetRandom());
         }
-        //Debug.Log(shopItems.Count);
-        //Debug.Log(shopItems[0]);
-
         totalNumberOfItems = numberOfPowerUps + numberOfCollectableItems;
     }
 
