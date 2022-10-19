@@ -23,7 +23,6 @@ public class Character : MonoBehaviour, IEffectable
 
         if (this.GetType() != typeof(Player))
             anim = GetComponent<Animator>();
-        }
         statusEffects = new List<Effect>();
         effectParticles = new List<GameObject>();
     }
