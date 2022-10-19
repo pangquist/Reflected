@@ -10,7 +10,7 @@ public class Character : MonoBehaviour, IEffectable
     [SerializeField] protected float damage;
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected float currentHealth;
-    protected List<StatusEffect> statusEffects;
+    protected List<Effect> statusEffects;
     protected List<GameObject> effectParticles;
     [SerializeField] protected Animator anim;
     bool isDead;
@@ -23,8 +23,7 @@ public class Character : MonoBehaviour, IEffectable
 
         if (this.GetType() != typeof(Player))
             anim = GetComponent<Animator>();
-
-        statusEffects = new List<StatusEffect>();
+        statusEffects = new List<Effect>();
         effectParticles = new List<GameObject>();
     }
 
@@ -103,7 +102,7 @@ public class Character : MonoBehaviour, IEffectable
         float movementPenalty = 1;
         if (statusEffects.Count > 0)
         {
-            foreach (StatusEffect status in statusEffects)
+            foreach (Effect status in statusEffects)
             {
                 movementPenalty *= status.effect.MovementPenalty;
             }
@@ -114,18 +113,18 @@ public class Character : MonoBehaviour, IEffectable
 
     public void ApplyEffect(StatusEffectData data, float scale)
     {
-        statusEffects.Add(new StatusEffect(data, scale));
+        statusEffects.Add(new Effect(data, scale));
         //effectParticles.Add(Instantiate(data.EffectParticles, transform));
     }
 
-    public void RemoveEffect(StatusEffect status)
+    public void RemoveEffect(Effect status)
     {
         statusEffects.Remove(status);
         //if (effectParticles != null) Destroy(effectParticles);
     }
 
     public void HandleEffect()
-    {
+    {        
         for (int i = 0; i < statusEffects.Count; i++)
         {
             statusEffects[i].SetCurrentEffectTime(Time.deltaTime);
@@ -146,14 +145,15 @@ public class Character : MonoBehaviour, IEffectable
 }
 
 [System.Serializable]
-public class StatusEffect
+public class Effect
 {
     public StatusEffectData effect;
     public float currentEffectTime;
     public float nextTickTime;
     public float totalDamage;
 
-    public StatusEffect(StatusEffectData effect, float scale)
+
+    public Effect(StatusEffectData effect, float scale)
     {
         this.effect = effect;
         currentEffectTime = 0f;

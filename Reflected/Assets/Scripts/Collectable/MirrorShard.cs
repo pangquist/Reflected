@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class MirrorShard : MonoBehaviour, ICollectable
+public class MirrorShard : MonoBehaviour, ICollectable, IBuyable
 {
     public static event HandleShardCollected OnShardCollected;
     public delegate void HandleShardCollected(ItemData itemData);
@@ -19,4 +19,13 @@ public class MirrorShard : MonoBehaviour, ICollectable
         OnShardCollected?.Invoke(mirroShardData); //?. makes sure it's not null and that there are listeners to the event
     }
 
+    public int GetValue()
+    {
+        return mirroShardData.value;
+    }
+
+    public string GetDescription()
+    {
+        return mirroShardData.description;
+    }
 }

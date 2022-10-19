@@ -5,11 +5,10 @@ using UnityEngine;
 public interface IEffectable
 {
     public void ApplyEffect(StatusEffectData data, float scale);
-    public void RemoveEffect(StatusEffect status);
+    public void RemoveEffect(Effect status);
 
-    public void HandleEffect();
 
-    
+    public void HandleEffect(); 
 }
 
 
