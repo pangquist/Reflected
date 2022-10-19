@@ -23,18 +23,19 @@ public class Shop : MonoBehaviour
         PopulateShop();
     }
 
-    public void BuyItem(GameObject gameObject, int index) //Have to send in an index here for the shop to give you that item
+    public void BuyItem(int index) //Have to send in an index here for the shop to give you that item
     {
         //The index you give should be put in on line 37 and 38
-        Inventory inventory = gameObject.GetComponent<Inventory>();
+        Inventory inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         if (inventory)
         {
-            if (shopItems.Count > 0 && inventory.HaveEnoughCurrency(payment, shopItems[totalNumberOfItems - 1].GetComponent<InteractablePowerUp>().powerUpEffect.value)) 
+
+            if (shopItems.Count > 0 && inventory.HaveEnoughCurrency(payment, shopItems[totalNumberOfItems - 1].GetComponent<IBuyable>().GetValue())) 
             {
-                                               
+
                 if (spawnedObject == null)
                 {
-                    inventory.Remove(payment, shopItems[totalNumberOfItems - 1].GetComponent<InteractablePowerUp>().powerUpEffect.value);
+                    inventory.Remove(payment, shopItems[totalNumberOfItems - 1].GetComponent<IBuyable>().GetValue());
                     SpawnItem(--totalNumberOfItems);
                 }                    
                 else
@@ -57,14 +58,16 @@ public class Shop : MonoBehaviour
         for (int i = 0; i < numberOfPowerUps; i++)
         {
             shopItems.Add(lootTablePowerUps.GetRandom().GetItem());
+            shopItems[i].GetComponent<InteractablePowerUp>().SetProperties();
+            Debug.Log("Powerup " + i + " " + shopItems[i].GetComponent<InteractablePowerUp>().GetValue());
         }
 
-        //for (int i = 0; i < numberOfCollectableItems; i++)
-        //{
-        //    shopItems.Add(lootTableCollectables.GetRandom().GetItem());
-        //}
+        for (int i = 0; i < numberOfCollectableItems; i++)
+        {
+            shopItems.Add(lootTableCollectables.GetRandom().GetItem());
+        }
 
-        totalNumberOfItems = numberOfPowerUps; // + numberOfCollectableItems;
+        totalNumberOfItems = numberOfPowerUps + numberOfCollectableItems;
     }
 
     public List<GameObject> GetShopItems()

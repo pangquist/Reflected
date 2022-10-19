@@ -13,6 +13,7 @@ public class Sword : Weapon
 {
     [Header("Sword Properties")]
     [SerializeField] Collider hitBox;
+    [SerializeField] List<StatusEffectData> statusEffectDatas;
 
     private void OnTriggerStay(Collider other)
     {
@@ -30,6 +31,15 @@ public class Sword : Weapon
         {
             target.TakeDamage(GetDamage());
             hitEnemies.Add(target);
+            for (int i = 0; i < statusEffectDatas.Capacity; i++)
+            {
+                GetComponent<WeaponStatusEffect>().ApplyEffectToTarget(target.GetComponent<Collider>(), statusEffectDatas[i]);
+            }
         }
+    }
+
+    public void AddStatusEffect(StatusEffectData effect)
+    {
+        statusEffectDatas.Add(effect);
     }
 }
