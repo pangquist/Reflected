@@ -80,8 +80,8 @@ public class Shop : MonoBehaviour
         {
             shopItems.Add(lootTableCollectables.GetRandom().GetItem());
         }
-        Debug.Log(shopItems.Count);
-        Debug.Log(shopItems[0]);
+        //Debug.Log(shopItems.Count);
+        //Debug.Log(shopItems[0]);
 
         totalNumberOfItems = numberOfPowerUps + numberOfCollectableItems;
     }
