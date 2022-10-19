@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class FreezingArrow : Projectile
 {
-    [SerializeField] float timeFrozen;
-    [SerializeField] float slowedMovementSpeed;
-
     private void Start()
     {
         currentProjectile = projectileType.freeze;
@@ -16,8 +13,8 @@ public class FreezingArrow : Projectile
     {
         if (other.GetComponent<Enemy>())
         {
-            other.gameObject.GetComponent<Enemy>().Freeze(slowedMovementSpeed, timeFrozen);
             other.GetComponent<Enemy>().TakeDamage(damage);
+            other.GetComponent<IEffectable>().ApplyEffect(data, 1);
         }
         Destroy(gameObject);
     }

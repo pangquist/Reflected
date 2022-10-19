@@ -8,6 +8,7 @@ public abstract class Projectile : MonoBehaviour
     protected projectileType currentProjectile;
     protected Rigidbody rb;
     [SerializeField] float lifeTime;
+    [SerializeField] protected StatusEffectData data;
     protected float damage;
 
     void Awake()

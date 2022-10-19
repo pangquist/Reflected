@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3095503156984515421}
   - component: {fileID: 4540184064951610809}
   - component: {fileID: 5174354039760716652}
-  - component: {fileID: 3939338163698569271}
   - component: {fileID: 5175566854545040523}
   m_Layer: 0
   m_Name: FreezeArrow
@@ -117,19 +116,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3939338163698569271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6041024079821305079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86aa1a42ad9e89b488600a20bf7dcbc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 4
 --- !u!114 &5175566854545040523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,5 +129,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 4
-  timeFrozen: 0
-  slowedMovementSpeed: 0
+  data: {fileID: 11400000, guid: 9f203df6c49767844be5d3d038e05301, type: 2}

@@ -112,9 +112,9 @@ public class Character : MonoBehaviour, IEffectable
         return movementPenalty;
     }
 
-    public void ApplyEffect(StatusEffectData data)
+    public void ApplyEffect(StatusEffectData data, float scale)
     {
-        statusEffects.Add(new StatusEffect(data));
+        statusEffects.Add(new StatusEffect(data, scale));
         //effectParticles.Add(Instantiate(data.EffectParticles, transform));
     }
 
@@ -139,7 +139,7 @@ public class Character : MonoBehaviour, IEffectable
             if (statusEffects[i].effect.DOTAmount != 0 && statusEffects[i].currentEffectTime > statusEffects[i].nextTickTime)
             {
                 statusEffects[i].SetNextTickTime();
-                TakeDamage(statusEffects[i].effect.DOTAmount);
+                TakeDamage(statusEffects[i].totalDamage);
             }
         }
     }
@@ -151,12 +151,14 @@ public class StatusEffect
     public StatusEffectData effect;
     public float currentEffectTime;
     public float nextTickTime;
+    public float totalDamage;
 
-    public StatusEffect(StatusEffectData effect)
+    public StatusEffect(StatusEffectData effect, float scale)
     {
         this.effect = effect;
         currentEffectTime = 0f;
         nextTickTime = 0f;
+        totalDamage = effect.DOTAmount * scale;
     }
 
     public void SetCurrentEffectTime(float time)
