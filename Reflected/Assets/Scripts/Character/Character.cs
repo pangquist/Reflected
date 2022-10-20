@@ -104,10 +104,11 @@ public class Character : MonoBehaviour, IEffectable
         {
             foreach (Effect status in statusEffects)
             {
-                movementPenalty *= status.effect.MovementPenalty;
+                movementPenalty *= (1 - status.effect.MovementPenalty);
             }
 
         }
+        //Debug.Log("Movement penalty total: " + movementPenalty);
         return movementPenalty;
     }
 

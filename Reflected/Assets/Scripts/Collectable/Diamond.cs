@@ -27,4 +27,6 @@ public class Diamond : MonoBehaviour, ICollectable, IBuyable
     {
         return diamondData.description;
     }
+
+
 }

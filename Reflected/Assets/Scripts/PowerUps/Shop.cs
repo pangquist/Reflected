@@ -21,8 +21,17 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         //animator = GetComponent<Animator>();
-        //lootTablePowerUps = GameObject.FindObjectOfType<LootPoolManager>().GetPowerupPool();
-        //lootTableCollectables = GameObject.FindObjectOfType<LootPoolManager>().GetCollectablePool();
+        lootTablePowerUps = FindObjectOfType<LootPoolManager>().GetPowerupPool();
+        lootTableCollectables = FindObjectOfType<LootPoolManager>().GetCollectablePool();
+        //foreach (var pair in lootTableCollectables.list)
+        //{
+        //    if (pair.item.GetComponent<IBuyable>() == null)
+        //    {
+        //        pair.weight = 0;
+        //    }
+        //}
+
+        rarityTiers = FindObjectOfType<LootPoolManager>().GetRarityList();
         PopulateShop();
     }
 
@@ -63,6 +72,11 @@ public class Shop : MonoBehaviour
     void SpawnItem(int index)
     {
         spawnedObject = Instantiate(shopItems[index], itemHolder.position, itemHolder.rotation);
+        if (spawnedObject.GetComponent<InteractablePowerUp>())
+        {
+            spawnedObject.GetComponent<InteractablePowerUp>().SetProperties(shopItems[index].GetComponent<InteractablePowerUp>().GetRarity());
+        }
+        
         shopItems.RemoveAt(index);
         Debug.Log("Item should spawn...");
         spawnedObject.transform.parent = null;

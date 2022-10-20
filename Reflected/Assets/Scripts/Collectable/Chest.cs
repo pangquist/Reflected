@@ -11,7 +11,7 @@ public abstract class Chest : MonoBehaviour
     [SerializeField] protected Transform itemHolder;
     protected GameObject spawnedObject;
     //protected GameObject itemToSpawn;
-    protected Rarity myRarity;
+    [SerializeField] protected Rarity myRarity;
     protected int numberOfPickablePowerups = 3;
 
     public bool isOpen;
@@ -20,7 +20,8 @@ public abstract class Chest : MonoBehaviour
     protected virtual void Start()
     {
         //animator = GetComponent<Animator>();
-        myRarity = rarityTiers.GetRandom();
+        powerups = FindObjectOfType<LootPoolManager>().GetPowerupPool();
+        myRarity = FindObjectOfType<LootPoolManager>().GetRandomRarity();
         SetItems();
         //itemToSpawn = lootTable.GetRandom().GetItem();
     }
@@ -54,6 +55,7 @@ public abstract class Chest : MonoBehaviour
     protected void SpawnItem(int index)
     {
         spawnedObject = Instantiate(pickablePowerUps[index], itemHolder.position, itemHolder.rotation);
+        spawnedObject.GetComponent<InteractablePowerUp>().SetProperties(myRarity);
         //spawnedObject = Instantiate(itemToSpawn, itemHolder.position, itemHolder.rotation);
         spawnedObject.transform.parent = null;
         itemHolder.gameObject.SetActive(true);

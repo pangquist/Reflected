@@ -6,4 +6,5 @@ public interface IBuyable
 {
     public int GetValue();
     public string GetDescription();
+    //public Rarity GetRarity();
 }
