@@ -75,7 +75,8 @@ public class Player : Character, ISavable
             currentWeapon.SetDamage(damage);
         }
 
-    }
+    }    
+
     public void Attack()
     {
         if(weaponIndex == 1)

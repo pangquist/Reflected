@@ -10,9 +10,4 @@ public class DamageBuff : PowerUpEffect
         target.GetComponent<StatSystem>().AddDamageIncrease(amount);
         Debug.Log("Damage +" + amount);
     }
-
-    public void Awake()
-    {
-        description = "Increases your damage by " + amount;
-    }
 }
