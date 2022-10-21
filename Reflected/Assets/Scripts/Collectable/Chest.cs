@@ -72,6 +72,6 @@ public abstract class Chest : MonoBehaviour
         }
         //Debug.Log("Chest" + pickablePowerUps[0].GetComponent<InteractablePowerUp>().myRarity);
         //Debug.Log("Chest" + pickablePowerUps[0].GetComponent<InteractablePowerUp>().amount);
-        Debug.Log("Number of powerups to choose from is " + pickablePowerUps.Count);
+        //Debug.Log("Number of powerups to choose from is " + pickablePowerUps.Count);
     }
 }

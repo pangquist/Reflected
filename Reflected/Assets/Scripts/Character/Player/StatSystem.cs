@@ -15,6 +15,8 @@ public class StatSystem : MonoBehaviour, ISavable
     [SerializeField] int chargesToSwapTrue;
     [SerializeField] int chargesToSwapMirror;
 
+    public static event HandleMxHealthIncrease OnMaxHealthIncrease;
+    public delegate void HandleMxHealthIncrease();
     //List<string> statNames = new List<string> { "Health, Damage Reduction, Movement Speed, Damage, Attack Speed, AoE, Charges To Swap" };
 
     Player player;
@@ -138,7 +140,7 @@ public class StatSystem : MonoBehaviour, ISavable
     public void ResetStats()
     {
         //Should be called upon death
-        maxHealthIncrease = 1;
+        maxHealthIncrease = 0;
         damageReduction = 1;
         movementSpeed = 1;
         damageIncrease = 1;

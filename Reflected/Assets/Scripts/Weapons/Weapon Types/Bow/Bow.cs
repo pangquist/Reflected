@@ -14,8 +14,7 @@ public class Bow : Weapon
     [SerializeField] LayerMask hitableLayers;
     Transform targetTransform = null;
 
-    [SerializeField] List<Projectile> projectiles = new List<Projectile>();
-    [SerializeField] int powerUpIndex;
+    [SerializeField] List<Projectile> projectiles = new List<Projectile>();    
 
     private void Start()
     {

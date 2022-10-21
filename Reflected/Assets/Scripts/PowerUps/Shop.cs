@@ -21,8 +21,8 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         //animator = GetComponent<Animator>();
-        lootTablePowerUps = FindObjectOfType<LootPoolManager>().GetPowerupPool();
-        lootTableCollectables = FindObjectOfType<LootPoolManager>().GetCollectablePool();
+        //lootTablePowerUps = FindObjectOfType<LootPoolManager>().GetPowerupPool();
+        //lootTableCollectables = FindObjectOfType<LootPoolManager>().GetCollectablePool();
         //foreach (var pair in lootTableCollectables.list)
         //{
         //    if (pair.item.GetComponent<IBuyable>() == null)
@@ -31,7 +31,7 @@ public class Shop : MonoBehaviour
         //    }
         //}
 
-        rarityTiers = FindObjectOfType<LootPoolManager>().GetRarityList();
+        //rarityTiers = FindObjectOfType<LootPoolManager>().GetRarityList();
         PopulateShop();
     }
 
@@ -43,7 +43,6 @@ public class Shop : MonoBehaviour
         Debug.Log("Trying to buy");
         if (inventory)
         {
-            Debug.Log(shopItems[0]);
             if (shopItems.Count > 0 && inventory.HaveEnoughCurrency(payment, shopItems[index].GetComponent<IBuyable>().GetValue()))
             {
                 Debug.Log("Close");
@@ -89,7 +88,7 @@ public class Shop : MonoBehaviour
         {
             shopItems.Add(lootTablePowerUps.GetRandom());
             shopItems[i].GetComponent<InteractablePowerUp>().SetProperties(rarityTiers.GetRandom());
-            Debug.Log("Powerup " + i + ": value:" + shopItems[i].GetComponent<InteractablePowerUp>().GetValue() + ". amount: " + shopItems[i].GetComponent<InteractablePowerUp>().amount);
+            //Debug.Log("Powerup " + i + ": value:" + shopItems[i].GetComponent<InteractablePowerUp>().GetValue() + ". amount: " + shopItems[i].GetComponent<InteractablePowerUp>().amount);
         }
 
         for (int i = 0; i < numberOfCollectableItems; i++)

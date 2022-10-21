@@ -47,6 +47,7 @@ public class LootPoolManager : MonoBehaviour
     private void AddPowerupPickRate(PowerUpEffect powerupEffectData)
     {
         powerupPickAmount[powerupEffectData] += 1;
+        Debug.Log(powerupPickAmount[powerupEffectData]);
     }
 
     public WeightedRandomList<GameObject> GetPowerupPool()
@@ -67,5 +68,10 @@ public class LootPoolManager : MonoBehaviour
     public Rarity GetRandomRarity()
     {
         return rarityTiers.GetRandom();
+    }
+
+    public int GetAmountPicked(PowerUpEffect powerupEffectData)
+    {
+        return powerupPickAmount[powerupEffectData];
     }
 }

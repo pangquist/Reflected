@@ -73,7 +73,8 @@ public class Player : Character, ISavable
             currentWeapon.gameObject.SetActive(true);
         }
 
-    }
+    }    
+
     public void Attack()
     {
         if (basicAbility.IsOnCooldown())
