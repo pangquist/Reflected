@@ -14,9 +14,7 @@ public class StatSystem : MonoBehaviour, ISavable
     [SerializeField] float cooldownDecrease;
     [SerializeField] int chargesToSwapTrue;
     [SerializeField] int chargesToSwapMirror;
-
-    public static event HandleMxHealthIncrease OnMaxHealthIncrease;
-    public delegate void HandleMxHealthIncrease();
+    
     //List<string> statNames = new List<string> { "Health, Damage Reduction, Movement Speed, Damage, Attack Speed, AoE, Charges To Swap" };
 
     Player player;

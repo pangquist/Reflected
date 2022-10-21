@@ -32,16 +32,6 @@ public class Character : MonoBehaviour, IEffectable
         if (statusEffects.Count > 0) HandleEffect();
     }
 
-    //private void OnEnable()
-    //{
-    //    StatSystem.OnMaxHealthIncrease += AddPowerupPickRate;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    StatSystem.OnMaxHealthIncrease -= AddPowerupPickRate;
-    //}
-
     public virtual void TakeDamage(float damage)
     {
         if (isDead)
