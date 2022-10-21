@@ -10,9 +10,4 @@ public class CooldownBuff : PowerUpEffect
         target.GetComponent<StatSystem>().AddCooldownDecrease(amount);
         Debug.Log("Damage +" + amount);
     }
-
-    public void Awake()
-    {
-        description = "Decreases your cooldown by " + amount;
-    }
 }

@@ -37,7 +37,7 @@ public class Character : MonoBehaviour, IEffectable
         if (isDead)
             return;
 
-        currentHealth -= damage;
+        currentHealth -= Mathf.Clamp(damage, 0, currentHealth); 
 
         if (currentHealth <= 0)
         {
@@ -49,7 +49,7 @@ public class Character : MonoBehaviour, IEffectable
         }
     }
 
-    public virtual void Heal(int amount)
+    public virtual void Heal(float amount)
     {
         currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
     }
@@ -104,16 +104,17 @@ public class Character : MonoBehaviour, IEffectable
         {
             foreach (Effect status in statusEffects)
             {
-                movementPenalty *= status.effect.MovementPenalty;
+                movementPenalty *= (1 - status.effect.MovementPenalty);
             }
 
         }
+        //Debug.Log("Movement penalty total: " + movementPenalty);
         return movementPenalty;
     }
 
-    public void ApplyEffect(StatusEffectData data)
+    public void ApplyEffect(StatusEffectData data, float scale)
     {
-        statusEffects.Add(new Effect(data));
+        statusEffects.Add(new Effect(data, scale));
         //effectParticles.Add(Instantiate(data.EffectParticles, transform));
     }
 
@@ -138,7 +139,10 @@ public class Character : MonoBehaviour, IEffectable
             if (statusEffects[i].effect.DOTAmount != 0 && statusEffects[i].currentEffectTime > statusEffects[i].nextTickTime)
             {
                 statusEffects[i].SetNextTickTime();
-                TakeDamage(statusEffects[i].effect.DOTAmount);
+                if (statusEffects[i].totalDamage > 0)
+                    TakeDamage(statusEffects[i].totalDamage);
+                else
+                    Heal(-1 * statusEffects[i].totalDamage);
             }
         }
     }
@@ -150,12 +154,15 @@ public class Effect
     public StatusEffectData effect;
     public float currentEffectTime;
     public float nextTickTime;
+    public float totalDamage;
 
-    public Effect(StatusEffectData effect)
+
+    public Effect(StatusEffectData effect, float scale)
     {
         this.effect = effect;
         currentEffectTime = 0f;
         nextTickTime = 0f;
+        totalDamage = effect.DOTAmount * scale;
     }
 
     public void SetCurrentEffectTime(float time)

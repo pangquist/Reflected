@@ -11,9 +11,4 @@ public class SpeedBuff : PowerUpEffect
         target.GetComponent<StatSystem>().AddMovementSpeed(amount);
         Debug.Log("Speed +" + amount);
     }
-
-    public void Awake()
-    {
-        description = "Increases your movement speed by " + amount;
-    }
 }

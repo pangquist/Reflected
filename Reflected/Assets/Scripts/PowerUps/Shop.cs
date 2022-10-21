@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] WeightedRandomList<LootPool> lootTablePowerUps;
-    [SerializeField] WeightedRandomList<LootPool> lootTableCollectables;
+    [SerializeField] WeightedRandomList<GameObject> lootTablePowerUps;
+    [SerializeField] WeightedRandomList<GameObject> lootTableCollectables;
+    [SerializeField] WeightedRandomList<Rarity> rarityTiers;
     [SerializeField] List<GameObject> shopItems;
     [SerializeField] Transform itemHolder;
     [SerializeField] ItemData payment;
@@ -20,7 +21,17 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         //animator = GetComponent<Animator>();
-        
+        //lootTablePowerUps = FindObjectOfType<LootPoolManager>().GetPowerupPool();
+        //lootTableCollectables = FindObjectOfType<LootPoolManager>().GetCollectablePool();
+        //foreach (var pair in lootTableCollectables.list)
+        //{
+        //    if (pair.item.GetComponent<IBuyable>() == null)
+        //    {
+        //        pair.weight = 0;
+        //    }
+        //}
+
+        //rarityTiers = FindObjectOfType<LootPoolManager>().GetRarityList();
         PopulateShop();
     }
 
@@ -32,7 +43,6 @@ public class Shop : MonoBehaviour
         Debug.Log("Trying to buy");
         if (inventory)
         {
-            Debug.Log(shopItems[0]);
             if (shopItems.Count > 0 && inventory.HaveEnoughCurrency(payment, shopItems[index].GetComponent<IBuyable>().GetValue()))
             {
                 Debug.Log("Close");
@@ -61,6 +71,11 @@ public class Shop : MonoBehaviour
     void SpawnItem(int index)
     {
         spawnedObject = Instantiate(shopItems[index], itemHolder.position, itemHolder.rotation);
+        if (spawnedObject.GetComponent<InteractablePowerUp>())
+        {
+            spawnedObject.GetComponent<InteractablePowerUp>().SetProperties(shopItems[index].GetComponent<InteractablePowerUp>().GetRarity());
+        }
+        
         shopItems.RemoveAt(index);
         Debug.Log("Item should spawn...");
         spawnedObject.transform.parent = null;
@@ -71,18 +86,15 @@ public class Shop : MonoBehaviour
     {
         for (int i = 0; i < numberOfPowerUps; i++)
         {
-            shopItems.Add(lootTablePowerUps.GetRandom().GetItem());
-            shopItems[i].GetComponent<InteractablePowerUp>().SetProperties();
-            Debug.Log("Powerup " + i + " " + shopItems[i].GetComponent<InteractablePowerUp>().GetValue());
+            shopItems.Add(lootTablePowerUps.GetRandom());
+            shopItems[i].GetComponent<InteractablePowerUp>().SetProperties(rarityTiers.GetRandom());
+            //Debug.Log("Powerup " + i + ": value:" + shopItems[i].GetComponent<InteractablePowerUp>().GetValue() + ". amount: " + shopItems[i].GetComponent<InteractablePowerUp>().amount);
         }
 
         for (int i = 0; i < numberOfCollectableItems; i++)
         {
-            shopItems.Add(lootTableCollectables.GetRandom().GetItem());
+            shopItems.Add(lootTableCollectables.GetRandom());
         }
-        //Debug.Log(shopItems.Count);
-        //Debug.Log(shopItems[0]);
-
         totalNumberOfItems = numberOfPowerUps + numberOfCollectableItems;
     }
 

@@ -12,14 +12,4 @@ public class DamageReduction : PowerUpEffect
         Debug.Log("Reduction +" + amount);
         
     }
-
-    public void Awake()
-    {
-        //myRarity = rarityTiers.GetRandom();
-        //Debug.Log("Rarity +" + myRarity.rarity);
-        //amount = amount * myRarity.amountMultiplier;
-        //Debug.Log("Reduction +" + amount);
-        //value = value * myRarity.valueMultiplier;
-        description = "Increases your damage reduction by " + amount;
-    }
 }
