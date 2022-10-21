@@ -16,6 +16,11 @@ public class ExplosiveArrow : Projectile
 
     void Update()
     {
+
+    }
+
+    private void OnDrawGizmos()
+    {
         Gizmos.DrawSphere(transform.position, blastRadius);
         Gizmos.DrawSphere(transform.position, blastRadius / 2);
     }
@@ -42,6 +47,6 @@ public class ExplosiveArrow : Projectile
             }
         }
 
-        Destroy(gameObject);
+        Destroy(gameObject, 5);
     }
 }

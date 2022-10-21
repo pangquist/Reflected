@@ -26,7 +26,8 @@ public class Player : Character, ISavable
     DimensionManager dimensionManager;
     MusicManager musicManager;
 
-    [SerializeField] Ability basicAbility;
+    [SerializeField] Ability basicSwordAbility;
+    [SerializeField] Ability basicBowAbility;
     [SerializeField] Ability specialAbility;
     [SerializeField] Ability swapAbility;
 
@@ -71,16 +72,28 @@ public class Player : Character, ISavable
 
             currentWeapon = weapons[weaponIndex];
             currentWeapon.gameObject.SetActive(true);
+            currentWeapon.SetDamage(damage);
         }
 
     }
     public void Attack()
     {
-        if (basicAbility.IsOnCooldown())
-            return;
+        if(weaponIndex == 1)
+        {
+            if (basicBowAbility.IsOnCooldown())
+                return;
 
-        //anim.Play(basicAbility.GetAnimation().name);
-        basicAbility.DoEffect();
+            anim.Play(basicBowAbility.GetAnimation().name);
+            basicBowAbility.DoEffect();
+        }
+        else if(weaponIndex == 0)
+        {
+            if (basicBowAbility.IsOnCooldown())
+                return;
+
+            anim.Play(basicSwordAbility.GetAnimation().name);
+            basicSwordAbility.DoEffect();
+        }
     }
 
     public void SpecialAttack()

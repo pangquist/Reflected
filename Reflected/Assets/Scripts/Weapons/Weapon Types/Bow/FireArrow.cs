@@ -7,7 +7,6 @@ public class FireArrow : Projectile
     private void Start()
     {
         currentProjectile = projectileType.fire;
-        Destroy(gameObject, lifeTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -17,6 +16,5 @@ public class FireArrow : Projectile
             other.GetComponent<Enemy>().TakeDamage(damage);
             other.GetComponent<IEffectable>().ApplyEffect(data, damage * 2);
         }
-        Destroy(gameObject);
     }
 }

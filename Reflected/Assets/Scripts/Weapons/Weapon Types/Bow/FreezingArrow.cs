@@ -7,7 +7,6 @@ public class FreezingArrow : Projectile
     private void Start()
     {
         currentProjectile = projectileType.freeze;
-        Destroy(gameObject, lifeTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -17,6 +16,5 @@ public class FreezingArrow : Projectile
             other.GetComponent<Enemy>().TakeDamage(damage);
             other.GetComponent<IEffectable>().ApplyEffect(data, 1);
         }
-        Destroy(gameObject);
     }
 }

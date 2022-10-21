@@ -15,12 +15,11 @@ public abstract class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         Destroy(gameObject, lifeTime);
-        lifeTime = 4;
+        lifeTime = 5;
     }
 
     void Update()
     {
-        
     }
 
     public virtual void Fire(float firePower, float newDamage)
