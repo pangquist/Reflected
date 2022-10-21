@@ -37,7 +37,7 @@ public class Character : MonoBehaviour, IEffectable
         if (isDead)
             return;
 
-        currentHealth -= damage;
+        currentHealth -= Mathf.Clamp(damage, 0, currentHealth); 
 
         if (currentHealth <= 0)
         {
@@ -49,7 +49,7 @@ public class Character : MonoBehaviour, IEffectable
         }
     }
 
-    public virtual void Heal(int amount)
+    public virtual void Heal(float amount)
     {
         currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
     }
@@ -139,7 +139,10 @@ public class Character : MonoBehaviour, IEffectable
             if (statusEffects[i].effect.DOTAmount != 0 && statusEffects[i].currentEffectTime > statusEffects[i].nextTickTime)
             {
                 statusEffects[i].SetNextTickTime();
-                TakeDamage(statusEffects[i].effect.DOTAmount);
+                if (statusEffects[i].effect.DOTAmount > 0)
+                    TakeDamage(statusEffects[i].effect.DOTAmount);
+                else
+                    Heal(-1 * statusEffects[i].effect.DOTAmount);
             }
         }
     }

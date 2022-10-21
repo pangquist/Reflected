@@ -11,8 +11,4 @@ public class HealthBuff : PowerUpEffect
         Debug.Log("Health +" + amount);
     }
 
-    public void Awake()
-    {
-        description = "Increases your total max health by " + amount;
-    }
 }

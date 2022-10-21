@@ -9,6 +9,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
     [SerializeField] public Rarity myRarity;
     [SerializeField] public float amount;
     [SerializeField] public int value;
+    [SerializeField] public string description;
     bool hasProperties;
     public static event HandlePowerupCollected OnPowerUPCollected;
     public delegate void HandlePowerupCollected(PowerUpEffect powerupData);
@@ -21,6 +22,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
             myRarity = rarityTiers.GetRandom();
             amount = powerUpEffect.amount * myRarity.amountMultiplier;
             value = powerUpEffect.value * myRarity.valueMultiplier;
+            description = powerUpEffect.description + amount.ToString();
         }        
     }
 
@@ -30,6 +32,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
         myRarity = targetRarity;
         amount = powerUpEffect.amount * targetRarity.amountMultiplier;
         value = powerUpEffect.value * targetRarity.valueMultiplier;
+        description = powerUpEffect.description + amount.ToString();
         hasProperties = true;
     }
 
@@ -48,7 +51,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
 
     public string GetDescription()
     {
-        return powerUpEffect.description;
+        return description;
     }
 
     public Rarity GetRarity()

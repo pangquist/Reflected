@@ -10,10 +10,4 @@ public class AttackSpeed : PowerUpEffect
         target.GetComponent<StatSystem>().AddAttackSpeed(amount);
         Debug.Log("Attack speed +" + amount);
     }
-
-    public void Awake()
-    {
-        description = "Increases your attack speed by " + amount;
-    }
-
 }
