@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class MoveTowardsPlayerState : State
 {
-    public override void DoState(AiManager2 thisEnemy, Player player /*Transform target*/, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
     {
         //Seems to work as intended even with multiple different enemies, and multiple of the same enemy. Try to use this istead of thisEnemy.CloseCombat().
         switch (thisEnemy.currentCombatBehavior)
@@ -26,19 +26,19 @@ public class MoveTowardsPlayerState : State
                 break;
         }
         
-        if (thisEnemy.distanceTo(player.transform /*target*/) <= 2f && thisEnemy.CloseCombat())
+        if (thisEnemy.distanceTo(player.transform) <= 2f && thisEnemy.CloseCombat())
         {
             thisEnemy.SetMeleeAttackState();
             agent.isStopped = true;
             return;
         }
-        else if (thisEnemy.distanceTo(player.transform /*target*/) <=15f && thisEnemy.RangedCombat())
+        else if (thisEnemy.distanceTo(player.transform) <=15f && thisEnemy.RangedCombat())
         {
             thisEnemy.SetRangedAttackState();
             agent.isStopped = true;
             return;
         }
-        else if (thisEnemy.distanceTo(player.transform /*target*/) <= 15f && thisEnemy.AoeCombat())
+        else if (thisEnemy.distanceTo(player.transform) <= 15f && thisEnemy.AoeCombat())
         {
             thisEnemy.SetAoeAttackState();
             agent.isStopped = true;
@@ -46,7 +46,7 @@ public class MoveTowardsPlayerState : State
         }
 
 
-        DoMoveToward(player.transform /*target*/, agent);
+        DoMoveToward(player.transform, agent);
     }
 
     private void DoMoveToward(Transform target, NavMeshAgent agent)

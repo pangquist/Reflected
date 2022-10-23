@@ -10,17 +10,17 @@ public class RangedAttackState : State
 
     public GameObject projectileObject;
 
-    public override void DoState(AiManager2 thisEnemy, Player player /*Transform target*/, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
     {
         //If ranged and too close, move away from target.
-        if (thisEnemy.distanceTo(player.transform /*target*/) <= 7)
+        if (thisEnemy.distanceTo(player.transform) <= 7)
         {
             thisEnemy.SetMoveAwayState();
             agent.isStopped = false;
             return;
         }
         //If ranged and too far away, move towards target.
-        else if (thisEnemy.distanceTo(player.transform /*target*/) >= 20)
+        else if (thisEnemy.distanceTo(player.transform) >= 20)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
@@ -29,21 +29,21 @@ public class RangedAttackState : State
 
         attackTimer += Time.deltaTime;
 
-        FaceTarget(player.transform.position /*target.position*/);
+        FaceTarget(player.transform.position);
         agent.destination = thisEnemy.transform.position;
         if (attackTimer >= attackRate)
         {
-            FireProjectile(thisEnemy, player /*target*/);
+            FireProjectile(thisEnemy, player);
             attackTimer = 0f;
         }
     }
 
-    private void FireProjectile(AiManager2 thisEnemy, Player player /*Transform target*/)
+    private void FireProjectile(AiManager2 thisEnemy, Player player)
     {
         GameObject currentProjectile = Instantiate(projectileObject, thisEnemy.firePoint.position, Quaternion.identity);
         if (currentProjectile != null)
         {
-            currentProjectile.GetComponent<ProjectileScript>().SetUp(player.transform.position /*target.position*/ + offSet, thisEnemy.firePoint.position, 2f);
+            currentProjectile.GetComponent<ProjectileScript>().SetUp(player.transform.position + offSet, thisEnemy.firePoint.position, 2f);
         }
     }
 

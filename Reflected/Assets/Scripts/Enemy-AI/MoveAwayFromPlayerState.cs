@@ -7,25 +7,22 @@ public class MoveAwayFromPlayerState : State
 {
     private float fleeTimer = 0f;
     private float changeTime = 1f;
-    public override void DoState(AiManager2 thisEnemy, Player player /*Transform target*/, NavMeshAgent agent)
-    {
-        Debug.Log(thisEnemy.distanceTo(player.transform /*target*/));
-        Debug.Log(thisEnemy.RangedCombat());
-        
-        //If ranged attack set to ranged attack
-        if (thisEnemy.distanceTo(player.transform /*target*/) >= 15 && thisEnemy.RangedCombat())
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
+    {   
+        //If ranged attack set to ranged attack (Change to Switch Case)
+        if (thisEnemy.distanceTo(player.transform) >= 15 && thisEnemy.RangedCombat())
         {
             thisEnemy.SetRangedAttackState();
             return;
         }
         //Else if aoe attack set to aoe
-        else if (thisEnemy.distanceTo(player.transform /*target*/) >= 15 && thisEnemy.AoeCombat())
+        else if (thisEnemy.distanceTo(player.transform) >= 15 && thisEnemy.AoeCombat())
         {
             thisEnemy.SetAoeAttackState();
             return;
         }
 
-        DoMoveAway(player.transform /*target*/, agent);
+        DoMoveAway(player.transform, agent);
     }
 
     private void DoMoveAway(Transform target, NavMeshAgent agent)
