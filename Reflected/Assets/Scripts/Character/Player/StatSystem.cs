@@ -11,9 +11,10 @@ public class StatSystem : MonoBehaviour, ISavable
     [SerializeField] float damageIncrease;
     [SerializeField] float attackSpeed;
     [SerializeField] float areaOfEffect;
+    [SerializeField] float cooldownDecrease;
     [SerializeField] int chargesToSwapTrue;
     [SerializeField] int chargesToSwapMirror;
-
+    
     //List<string> statNames = new List<string> { "Health, Damage Reduction, Movement Speed, Damage, Attack Speed, AoE, Charges To Swap" };
 
     Player player;
@@ -69,6 +70,10 @@ public class StatSystem : MonoBehaviour, ISavable
             {
                 AddAreaOfEffect(pair.Value);
             }
+            else if (pair.Key == "Cooldown")
+            {
+                AddCooldownDecrease(pair.Value);
+            }
             else if(pair.Key == "True Charges")
             {
                 ChangeChargesToSwapTrue((int)pair.Value);
@@ -115,6 +120,10 @@ public class StatSystem : MonoBehaviour, ISavable
             {
                 AddAreaOfEffect(pair.Value);
             }
+            else if(pair.Key == "Cooldown")
+            {
+                AddCooldownDecrease(pair.Value);
+            }
             else if (pair.Key == "True Charges")
             {
                 ChangeChargesToSwapTrue((int)pair.Value);
@@ -129,12 +138,13 @@ public class StatSystem : MonoBehaviour, ISavable
     public void ResetStats()
     {
         //Should be called upon death
-        maxHealthIncrease = 1;
+        maxHealthIncrease = 0;
         damageReduction = 1;
         movementSpeed = 1;
         damageIncrease = 1;
         attackSpeed = 1;
         areaOfEffect = 1;
+        cooldownDecrease = 0;
         chargesToSwapTrue = 0;
         chargesToSwapMirror = 0;
         attackSpeed = 1;
@@ -146,6 +156,7 @@ public class StatSystem : MonoBehaviour, ISavable
     public float GetDamageIncrease() => damageIncrease;
     public float GetAttackSpeed() => attackSpeed;
     public float GetAreaOfEffect() => areaOfEffect;
+    public float GetCooldownDecrease() => cooldownDecrease;
     public int GetChargesToSwapTrue() => chargesToSwapTrue;
     public int GetChargesToSwapMirror() => chargesToSwapMirror;
 
@@ -179,6 +190,11 @@ public class StatSystem : MonoBehaviour, ISavable
         areaOfEffect += amount;
     }
 
+    public void AddCooldownDecrease(float amount)
+    {
+        cooldownDecrease += amount;
+    }
+
     public void ChangeChargesToSwapTrue(int amount)
     {
         chargesToSwapTrue += amount;
@@ -198,7 +214,8 @@ public class StatSystem : MonoBehaviour, ISavable
             movementSpeed = this.movementSpeed,
             damageReduction = this.damageReduction,
             attackSpeed = this.attackSpeed,
-            areaOfEffect = this.areaOfEffect
+            areaOfEffect = this.areaOfEffect,
+            cooldownDecrease = this.cooldownDecrease
         };
     }
 
@@ -211,6 +228,7 @@ public class StatSystem : MonoBehaviour, ISavable
         damageReduction = saveData.damageReduction;
         attackSpeed = saveData.attackSpeed;
         areaOfEffect = saveData.areaOfEffect;
+        cooldownDecrease = saveData.cooldownDecrease;
     }
 
     [Serializable]
@@ -222,5 +240,6 @@ public class StatSystem : MonoBehaviour, ISavable
         public float damageIncrease;
         public float attackSpeed;
         public float areaOfEffect;
+        public float cooldownDecrease;
     }
 }

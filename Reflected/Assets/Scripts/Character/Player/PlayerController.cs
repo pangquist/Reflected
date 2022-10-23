@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// PlayerController description
@@ -77,9 +78,34 @@ public class PlayerController : MonoBehaviour
             player.Interact();
     }
 
-    public void SetMovementLocked(bool state)
+    public void MovementLock()
     {
-        movementLocked = state;
+        movementLocked = true;
+        player.GetAnim().SetBool("movementLocked", true);
+    }
+
+    public void LockPlayer()
+    {
+        movementLocked = true;
+        player.GetAnim().SetBool("movementLocked", true);
+
+        actionLocked = true;
+        player.GetAnim().SetBool("actionLocked", true);
+    }
+
+    public void UnlockPlayer()
+    {
+        movementLocked = false;
+        player.GetAnim().SetBool("movementLocked", false);
+
+        actionLocked = false;
+        player.GetAnim().SetBool("actionLocked", false);
+    }
+
+    public void MovementUnlock()
+    {
+        movementLocked = false;
+        player.GetAnim().SetBool("movementLocked", false);
     }
 
     public bool GetMovementLocked()
@@ -116,5 +142,10 @@ public class PlayerController : MonoBehaviour
     public bool GetActionLock()
     {
         return actionLocked;
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

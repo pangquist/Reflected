@@ -54,7 +54,8 @@ public class PlayerEditorTemplate : Editor
 
     void DisplayAbilityInfo()
     {
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("basicAbility"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("basicSwordAbility"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("basicBowAbility"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("specialAbility"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("swapAbility"));
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Health : MonoBehaviour, IMagnetic
+public class Health : MonoBehaviour, IMagnetic, IBuyable
 {
     public PowerUpEffect powerUpEffect;
   
@@ -22,7 +22,7 @@ public class Health : MonoBehaviour, IMagnetic
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            powerUpEffect.Apply(other.gameObject);
+            powerUpEffect.Apply(other.gameObject, powerUpEffect.amount); //Should be changed from
         }
     }
 
@@ -39,5 +39,15 @@ public class Health : MonoBehaviour, IMagnetic
     {
         targetPosition = position;
         hasTarget = true;
+    }
+
+    public int GetValue()
+    {
+        return powerUpEffect.value;
+    }
+
+    public string GetDescription()
+    {
+        return powerUpEffect.description;
     }
 }

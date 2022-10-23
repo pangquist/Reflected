@@ -6,7 +6,7 @@ public class Bow : Weapon
 {
     [Header("Bow Properties")]
     [SerializeField] float firePower;
-    [SerializeField] GameObject projectile;
+    GameObject projectile;
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject body;
 
@@ -14,34 +14,38 @@ public class Bow : Weapon
     [SerializeField] LayerMask hitableLayers;
     Transform targetTransform = null;
 
+    [SerializeField] List<Projectile> projectiles = new List<Projectile>();
+    [SerializeField] int arrowIndex;
+
     private void Start()
     {
         if (!cam) cam = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
-    public override void AttackWithoutAnimation()
-    {
-        base.AttackWithoutAnimation();
-        Projectile arrow = Instantiate(projectile, firePoint.position, cam.transform.localRotation).GetComponent<Projectile>();
-        arrow.Fire(firePower, damage);
-    }
-
     public override void WeaponEffect()
     {
-        Projectile arrow = Instantiate(projectile, firePoint.position, body.transform.localRotation).GetComponent<Projectile>();
+        projectile = projectiles[arrowIndex].gameObject;
+
+        Projectile arrow = Instantiate(projectile, firePoint.position, firePoint.parent.rotation).GetComponent<Projectile>();
         arrow.Fire(firePower, damage);
     }
 
     protected override void Update()
     {
-        RaycastHit hit;
-        Ray ray = cam.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
+        //RaycastHit hit;
+        //Ray ray = cam.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitableLayers))
-        {
-            targetTransform = hit.transform;
-        }
+        //if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitableLayers))
+        //{
+        //    targetTransform = hit.transform;
+        //}
 
         transform.parent.rotation = cam.transform.rotation;
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (++arrowIndex >= projectiles.Count)
+                arrowIndex = 0;
+        }
     }
 }

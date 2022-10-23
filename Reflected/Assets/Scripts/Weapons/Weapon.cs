@@ -18,7 +18,8 @@ public abstract class Weapon : MonoBehaviour
 
     private AbilityCooldowns cooldownstarter;
 
-
+    [SerializeField] protected int powerUpIndex;
+    //[SerializeField] List<Weapons> projectiles = new List<Weapons>();
 
     public virtual void Awake()
     {
@@ -31,11 +32,6 @@ public abstract class Weapon : MonoBehaviour
     }
 
     protected virtual void Update()
-    {
-
-    }
-
-    public virtual void AttackWithoutAnimation()
     {
 
     }
@@ -58,5 +54,10 @@ public abstract class Weapon : MonoBehaviour
     public float GetDamage()
     {
         return damage * player.GetStats().GetDamageIncrease();
+    }
+
+    public void SetWeaponIndex(int index)
+    {
+        powerUpIndex = index;        
     }
 }

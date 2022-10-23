@@ -16,6 +16,11 @@ public class WeightedRandomList<T>
             this.item = item;
             this.weight = weight;
         }
+
+        public void SetWeight(float weight)
+        {
+            this.weight = weight;
+        }
     }
 
     public List<Pair> list = new List<Pair>();
@@ -28,6 +33,11 @@ public class WeightedRandomList<T>
     public void Add(T item, float weight)
     {
         list.Add(new Pair(item, weight));
+    }
+
+    public void Remove(int index)
+    {
+        list.RemoveAt(index);
     }
 
     public T GetRandom()
@@ -54,5 +64,10 @@ public class WeightedRandomList<T>
         }
 
         return default(T);
+    }
+
+    public void SetWeight(int index, float weight)
+    {
+        list[index].SetWeight(weight);
     }
 }

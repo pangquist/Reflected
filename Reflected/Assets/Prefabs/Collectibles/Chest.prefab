@@ -144,14 +144,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61dca4b4c1eb1e438d88596cc03f8aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootTable:
+  powerups:
     list:
-    - item: {fileID: 11400000, guid: 892b28201fa865044b1e5f2b3d437230, type: 2}
+    - item: {fileID: 4811609501389817639, guid: e90aa5bb20c784a419a7efd74780727f,
+        type: 3}
       weight: 1
-    - item: {fileID: 11400000, guid: d536d9397f02d90498550c649d9f99b4, type: 2}
-      weight: 2
-    - item: {fileID: 11400000, guid: 4fbd9c3ffae248d44b962fe3f7fa05c0, type: 2}
-      weight: 4
+    - item: {fileID: 526024567778351285, guid: b359378d71250304fa73386fc1b9238e, type: 3}
+      weight: 1
+    - item: {fileID: 1491449522285018658, guid: 1ed094479c8944542867015952245fc2,
+        type: 3}
+      weight: 1
+  rarityTiers:
+    list:
+    - item: {fileID: 11400000, guid: c07b740bade056f49ab423a8045669bf, type: 2}
+      weight: 1
+    - item: {fileID: 11400000, guid: 30a205678ae99124a9002b2072e248b4, type: 2}
+      weight: 1
+    - item: {fileID: 11400000, guid: 1c84b4c9ccd0a6a4d87d3ee63c907f75, type: 2}
+      weight: 1
   pickablePowerUps: []
   itemHolder: {fileID: 3314845807802948852}
   isOpen: 0

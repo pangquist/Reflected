@@ -6,17 +6,30 @@ public class ExplosiveArrow : Projectile
 {
     [SerializeField] float colleteralDamage;
     [SerializeField] float blastRadius;
-    [SerializeField] float explosionforce = 10;
+    [SerializeField] float explosionforce;
 
-    private void Update()
+    private void Start()
+    {
+        currentProjectile = projectileType.fire;
+        Destroy(gameObject, lifeTime);
+    }
+
+    void Update()
     {
 
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, blastRadius);
+        Gizmos.DrawSphere(transform.position, blastRadius / 2);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        var surrondingObjects = Physics.OverlapSphere(transform.position, blastRadius);
-
-        foreach (var obj in surrondingObjects)
+        var outerSphere = Physics.OverlapSphere(transform.position, blastRadius);
+        var innerSphere = Physics.OverlapSphere(transform.position, blastRadius/2);
+        foreach (var obj in outerSphere)
         {
             if (obj.GetComponent<Enemy>())
             {
@@ -24,5 +37,16 @@ public class ExplosiveArrow : Projectile
                 obj.GetComponent<Enemy>().TakeDamage(colleteralDamage);
             }
         }
+
+        foreach (var obj in innerSphere)
+        {
+            if (obj.GetComponent<Enemy>())
+            {
+                obj.GetComponent<Rigidbody>().AddExplosionForce(explosionforce * 3, transform.position, blastRadius / 2);
+                obj.GetComponent<Enemy>().TakeDamage(colleteralDamage * 2);
+            }
+        }
+
+        Destroy(gameObject, 5);
     }
 }

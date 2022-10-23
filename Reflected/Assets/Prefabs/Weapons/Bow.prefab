@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9110556978354828655
 Transform:
   m_ObjectHideFlags: 0
@@ -144,11 +144,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEnemies: []
   firePower: 500
-  projectile: {fileID: 6041024079821305079, guid: c232a2adf6328be43bd44e6b95afdbb2,
-    type: 3}
   firePoint: {fileID: 3715314175662455756}
   body: {fileID: 0}
   cam: {fileID: 0}
   hitableLayers:
     serializedVersion: 2
     m_Bits: 0
+  projectiles:
+  - {fileID: 3939338163698569271, guid: c232a2adf6328be43bd44e6b95afdbb2, type: 3}
+  - {fileID: -5002592794489599901, guid: e2cac81004ff9b343b6176c1f91b51b2, type: 3}
+  - {fileID: 5175566854545040523, guid: 3b401793b6bab3d438c5327235d7f5b7, type: 3}
+  - {fileID: 5486551620839375624, guid: 94eed4084b4ba03479e84a117142f27e, type: 3}
+  powerUpIndex: 0
