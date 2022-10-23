@@ -7,44 +7,41 @@ public class MoveTowardsPlayerState : State
 {
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
     {
-        //Seems to work as intended even with multiple different enemies, and multiple of the same enemy. Try to use this istead of thisEnemy.CloseCombat().
         switch (thisEnemy.currentCombatBehavior)
         {
             case AiManager2.CombatBehavior.CloseCombat:
-                //Debug.Log("Switch case: CloseCombat entered at position: " + transform.position);
+                Debug.Log("Switch case: CloseCombat entered at position: " + transform.position);
+                if (thisEnemy.distanceTo(player.transform) <= 2f && thisEnemy.CloseCombat())
+                {
+                    thisEnemy.SetMeleeAttackState();
+                    agent.isStopped = true;
+                    return;
+                }
                 break;
 
             case AiManager2.CombatBehavior.RangedCombat:
-                //Debug.Log("Switch case: RangedCombat entered at position: " + transform.position);
+                Debug.Log("Switch case: RangedCombat entered at position: " + transform.position);
+                if (thisEnemy.distanceTo(player.transform) <= 15f && thisEnemy.RangedCombat())
+                {
+                    thisEnemy.SetRangedAttackState();
+                    agent.isStopped = true;
+                    return;
+                }
                 break;
 
             case AiManager2.CombatBehavior.AoeCombat:
-                //Debug.Log("Switch case: AoeCombat entered at position: " + transform.position);
+                Debug.Log("Switch case: AoeCombat entered at position: " + transform.position);
+                if (thisEnemy.distanceTo(player.transform) <= 15f && thisEnemy.AoeCombat())
+                {
+                    thisEnemy.SetAoeAttackState();
+                    agent.isStopped = true;
+                    return;
+                }
                 break;
 
             default:
                 break;
         }
-        
-        if (thisEnemy.distanceTo(player.transform) <= 2f && thisEnemy.CloseCombat())
-        {
-            thisEnemy.SetMeleeAttackState();
-            agent.isStopped = true;
-            return;
-        }
-        else if (thisEnemy.distanceTo(player.transform) <=15f && thisEnemy.RangedCombat())
-        {
-            thisEnemy.SetRangedAttackState();
-            agent.isStopped = true;
-            return;
-        }
-        else if (thisEnemy.distanceTo(player.transform) <= 15f && thisEnemy.AoeCombat())
-        {
-            thisEnemy.SetAoeAttackState();
-            agent.isStopped = true;
-            return;
-        }
-
 
         DoMoveToward(player.transform, agent);
     }

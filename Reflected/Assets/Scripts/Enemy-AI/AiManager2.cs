@@ -6,13 +6,17 @@ using UnityEngine.AI;
 
 public class AiManager2 : MonoBehaviour
 {
+    public enum CombatBehavior { CloseCombat, RangedCombat, AoeCombat, };
+    public CombatBehavior currentCombatBehavior;
+
     //Initialize movement states
     private State activeState;
     private StartState startState; //Redundant
     private MoveTowardsPlayerState moveTowardsPlayerState;
     private MoveAwayFromPlayerState moveAwayFromPlayerState;
 
-    //Initialize attack states (use switch to only initialize needed scripts)
+    //Initialize attack states (use switch to only initialize needed scripts)'
+
     private MeleeAttackState meleeAttackState;
     private RangedAttackState rangedAttackState;
     private AoeAttackState aoeAttackState;
@@ -27,8 +31,7 @@ public class AiManager2 : MonoBehaviour
 
     public Transform firePoint; //Find a better solution
 
-    public enum CombatBehavior { CloseCombat, RangedCombat, AoeCombat, };
-    public CombatBehavior currentCombatBehavior;
+
 
     void Start()
     {
@@ -47,15 +50,29 @@ public class AiManager2 : MonoBehaviour
         //    firePoint = gameObject.transform.GetChild(0).GetChild(0).transform;
         //}
 
-        //Instansiate state scripts
-        startState = gameObject.AddComponent<StartState>();
+        //Set combat behavior depending on tag
+        if (gameObject.tag == "Melee") currentCombatBehavior = CombatBehavior.CloseCombat;
+        else if (gameObject.tag == "Ranged") currentCombatBehavior = CombatBehavior.RangedCombat;
+        else if (gameObject.tag == "AOE") currentCombatBehavior = CombatBehavior.AoeCombat;
+
+        //Instansiate movement state scripts
+        startState = gameObject.AddComponent<StartState>(); //Redundant
         moveTowardsPlayerState = gameObject.AddComponent<MoveTowardsPlayerState>();
         moveAwayFromPlayerState = gameObject.AddComponent<MoveAwayFromPlayerState>();
 
-        //Make an if depending on type of enemy so it does not try to get all components
-        meleeAttackState = gameObject.GetComponent<MeleeAttackState>();
-        rangedAttackState = gameObject.GetComponent<RangedAttackState>();
-        aoeAttackState = gameObject.GetComponent<AoeAttackState>();
+        //Instansiate attack stripts depending on combat behavior.
+        switch (currentCombatBehavior)
+        {
+            case CombatBehavior.CloseCombat:
+                meleeAttackState = gameObject.GetComponent<MeleeAttackState>();
+                break;
+            case CombatBehavior.RangedCombat:
+                rangedAttackState = gameObject.GetComponent<RangedAttackState>();
+                break;
+            case CombatBehavior.AoeCombat:
+                aoeAttackState = gameObject.GetComponent<AoeAttackState>();
+                break;
+        }
 
         //Set active player state
         activeState = moveTowardsPlayerState;
@@ -63,14 +80,10 @@ public class AiManager2 : MonoBehaviour
         //AI Navmesh setup
         agent = GetComponent<NavMeshAgent>();
 
-        //Old. Here if nessecary, but I want to use enum instead.
+        //Old. Here if nessecary. Remove when fully converted to switch cases.
         if (gameObject.tag == "Melee") closeCombat = true;
         else if (gameObject.tag == "AOE") aoeCombat = true;
         else if (gameObject.tag == "Ranged") rangedCombat = true;
-
-        if (gameObject.tag == "Melee") currentCombatBehavior = CombatBehavior.CloseCombat;
-        else if (gameObject.tag == "Ranged") currentCombatBehavior = CombatBehavior.RangedCombat;
-        else if (gameObject.tag == "AOE") currentCombatBehavior = CombatBehavior.AoeCombat;
 
     }
     private void Update()
@@ -84,7 +97,7 @@ public class AiManager2 : MonoBehaviour
     public void SetRangedAttackState() => activeState = rangedAttackState;
     public void SetAoeAttackState() => activeState = aoeAttackState;
 
-    //I plan to have an enum for better stucture for this part.
+    //I plan to have an enum for better stucture for this part. Remove when fully converted to switch cases.
     public bool CloseCombat() => closeCombat;
     public bool AoeCombat() => aoeCombat;
     public bool RangedCombat() => rangedCombat;
