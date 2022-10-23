@@ -299,7 +299,6 @@ GameObject:
   - component: {fileID: 6866964282756938313}
   - component: {fileID: 1099865400733728881}
   - component: {fileID: 2030773547744398053}
-  - component: {fileID: 2030773547744398052}
   m_Layer: 0
   m_Name: Enemy Melee (new)
   m_TagString: Melee
@@ -411,33 +410,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &2030773547744398052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9211019161338975208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f8ec940f670973459ddf18f039565fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 5
-  movementSpeed: 0
-  damage: 0
-  attackSpeed: 0
-  currentHealth: 0
-  anim: {fileID: 0}
-  healthBar: {fileID: 431372851682227795}
-  combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
-    type: 3}
-  aggroRange: 20
-  LootDropList:
-    list:
-    - item: {fileID: 8697999268558127635, guid: 131ff454e72154344ab839b4333a8156,
-        type: 3}
-      weight: 1
 --- !u!1001 &5029673218080466891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -527,6 +499,33 @@ CapsuleCollider:
   m_Height: 0.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.32, z: 0}
+--- !u!114 &4795976967968609003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4782358844942642561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8ec940f670973459ddf18f039565fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  movementSpeed: 0
+  damage: 0
+  attackSpeed: 0
+  currentHealth: 0
+  anim: {fileID: 0}
+  healthBar: {fileID: 431372851682227795}
+  combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
+    type: 3}
+  aggroRange: 20
+  LootDropList:
+    list:
+    - item: {fileID: 8697999268558127635, guid: 131ff454e72154344ab839b4333a8156,
+        type: 3}
+      weight: 1
 --- !u!4 &4782358844943069601 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 545682315351430762, guid: 59a51997eb082e449b7eff675857e1ff,
