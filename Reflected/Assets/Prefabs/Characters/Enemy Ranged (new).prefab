@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2782843695289958566}
   - component: {fileID: 6177676377247655693}
   - component: {fileID: 6177676377712805770}
-  - component: {fileID: 6177676377712805765}
   m_Layer: 0
   m_Name: Enemy Ranged (new)
   m_TagString: Ranged
@@ -108,33 +107,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &6177676377712805765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756528810924743122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f8ec940f670973459ddf18f039565fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 4
-  movementSpeed: 0
-  damage: 0
-  attackSpeed: 0
-  currentHealth: 0
-  anim: {fileID: 0}
-  healthBar: {fileID: 3717601143962972397}
-  combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
-    type: 3}
-  aggroRange: 20
-  LootDropList:
-    list:
-    - item: {fileID: 8697999268558127635, guid: 131ff454e72154344ab839b4333a8156,
-        type: 3}
-      weight: 1
 --- !u!1001 &756528810511293925
 PrefabInstance:
   m_ObjectHideFlags: 0
