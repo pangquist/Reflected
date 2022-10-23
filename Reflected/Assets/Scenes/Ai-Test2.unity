@@ -968,7 +968,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d97dff8a4437e94dbd947d6de5d2f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeState: {fileID: 0}
+  startState: {fileID: 0}
+  moveTowardsPlayerState: {fileID: 0}
+  moveAwayFromPlayerState: {fileID: 0}
+  attackPlayerState: {fileID: 0}
   GOplayer: {fileID: 0}
+  player: {fileID: 0}
+  me: {fileID: 0}
+  agent: {fileID: 0}
+  target: {fileID: 0}
+  closeCombat: 0
+  areaOfEffect: 0
   firePoint: {fileID: 0}
 --- !u!65 &915605490
 BoxCollider:
@@ -1841,7 +1852,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d97dff8a4437e94dbd947d6de5d2f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeState: {fileID: 0}
+  startState: {fileID: 0}
+  moveTowardsPlayerState: {fileID: 0}
+  moveAwayFromPlayerState: {fileID: 0}
+  attackPlayerState: {fileID: 0}
   GOplayer: {fileID: 0}
+  player: {fileID: 0}
+  me: {fileID: 0}
+  agent: {fileID: 0}
+  target: {fileID: 0}
+  closeCombat: 0
+  areaOfEffect: 0
   firePoint: {fileID: 1768556808}
 --- !u!65 &1539349713
 BoxCollider:
@@ -2044,7 +2066,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d97dff8a4437e94dbd947d6de5d2f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeState: {fileID: 0}
+  startState: {fileID: 0}
+  moveTowardsPlayerState: {fileID: 0}
+  moveAwayFromPlayerState: {fileID: 0}
+  attackPlayerState: {fileID: 0}
   GOplayer: {fileID: 0}
+  player: {fileID: 0}
+  me: {fileID: 0}
+  agent: {fileID: 0}
+  target: {fileID: 0}
+  closeCombat: 0
+  areaOfEffect: 0
   firePoint: {fileID: 699567826}
 --- !u!65 &1685142296
 BoxCollider:
@@ -2795,11 +2828,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Melee (new)
       objectReference: {fileID: 0}
-    - target: {fileID: 9211019161338975208, guid: 673512fa5909aba4d8c105984efbe7ba,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673512fa5909aba4d8c105984efbe7ba, type: 3}
 --- !u!1001 &5375543267704917721
@@ -2942,11 +2970,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Ranged (new)
-      objectReference: {fileID: 0}
-    - target: {fileID: 756528810924743122, guid: 7075d0cbf30e27442ae91d8acc34e196,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7075d0cbf30e27442ae91d8acc34e196, type: 3}
