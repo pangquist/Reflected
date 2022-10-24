@@ -42,7 +42,7 @@ public class AiDirector : MonoBehaviour
 
     void Start()
     {
-        if (!player) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if (!player) player = FindObjectOfType<Player>();
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
 
         difficulty = difficultyLevel.superEasy;
