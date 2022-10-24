@@ -59,7 +59,7 @@ public class MovementEditorTemplate : Editor
 
 	void DisplayJumpingInfo()
 	{
-		EditorGUILayout.PropertyField(serializedObject.FindProperty("gravity"));
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("gravityEffect"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("jumpHeight"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("groundCheck"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("groundDistance"));

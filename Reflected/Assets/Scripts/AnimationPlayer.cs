@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// AnimationPlayer description
@@ -14,6 +15,8 @@ using UnityEngine;
 public class AnimationPlayer : MonoBehaviour
 {
     [SerializeField] List<AnimationClip> clipList;
+    [SerializeField] DimensionManager dimManager;
+    [SerializeField] Button button;
 
     int index;
 
@@ -35,16 +38,22 @@ public class AnimationPlayer : MonoBehaviour
                 index = 0;
 
             anim.Play(clipList[index].name);
+            if (dimManager)
+                dimManager.ForcedSwap();
         }
     }
 
     public void LockAnimation()
     {
         animationLock = true;
+        if (button)
+            button.interactable = false;
     }
 
     public void UnlockAnimation()
     {
         animationLock = false;
+        if (button)
+            button.interactable = true;
     }
 }

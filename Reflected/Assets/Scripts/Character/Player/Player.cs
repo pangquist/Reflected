@@ -21,7 +21,7 @@ public class Player : Character, ISavable
     [SerializeField] List<Weapon> weapons = new List<Weapon>();
     int weaponIndex = 0;
 
-    [SerializeField] List<Enemy> aggroedEnemies = new List<Enemy>();
+    //[SerializeField] List<Enemy> aggroedEnemies = new List<Enemy>();
 
     DimensionManager dimensionManager;
     MusicManager musicManager;
@@ -163,37 +163,37 @@ public class Player : Character, ISavable
         return specialAbility;
     }
 
-    public void AddEnemy(Enemy enemy)
-    {
-        if (aggroedEnemies.Contains(enemy))
-            return;
+    //public void AddEnemy(Enemy enemy)
+    //{
+    //    if (aggroedEnemies.Contains(enemy))
+    //        return;
 
-        if (aggroedEnemies.Count == 0)
-        {
-            musicManager.ChangeMusicIntensity(1);
-        }
+    //    if (aggroedEnemies.Count == 0)
+    //    {
+    //        musicManager.ChangeMusicIntensity(1);
+    //    }
 
-        aggroedEnemies.Add(enemy);
-    }
+    //    aggroedEnemies.Add(enemy);
+    //}
 
-    public void RemoveEnemy(Enemy enemy)
-    {
-        if (!aggroedEnemies.Contains(enemy))
-            return;
+    //public void RemoveEnemy(Enemy enemy)
+    //{
+    //    if (!aggroedEnemies.Contains(enemy))
+    //        return;
 
 
-        aggroedEnemies.Remove(enemy);
+    //    aggroedEnemies.Remove(enemy);
 
-        if (aggroedEnemies.Count == 0)
-        {
-            musicManager.ChangeMusicIntensity(-1);
-        }
-    }
+    //    if (aggroedEnemies.Count == 0)
+    //    {
+    //        musicManager.ChangeMusicIntensity(-1);
+    //    }
+    //}
 
-    public List<Enemy> GetEnemies()
-    {
-        return aggroedEnemies;
-    }
+    //public List<Enemy> GetEnemies()
+    //{
+    //    return aggroedEnemies;
+    //}
 
     #region SaveLoad
     [Serializable]
