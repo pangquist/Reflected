@@ -43,7 +43,7 @@ public class Chamber : MonoBehaviour
     public static void StaticInitialize(Map map)
     {
         Chamber.map = map;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = FindObjectOfType<Player>();
     }
 
     public Chamber Initialize(Room room1, Room room2, Rect rect, Orientation orientation)
