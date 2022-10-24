@@ -42,13 +42,14 @@ public class AiDirectorEditor : Editor
     void DisplayStatisticInfo()
     {
         EditorGUILayout.TextField("DifficultyLevel");
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("difficultyLevel"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("difficulty"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("spawntime"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("amountOfEnemiesToSpawn"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("waveAmount"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("avergaeTimeToClearRoom"));
         EditorGUILayout.Space();
         EditorGUILayout.TextField("Room Statistics");
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("enemiesInRoom"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("aliveEnemiesInRoom"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("timeToClearRoom"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("activeRoom"));
         EditorGUILayout.Space();
