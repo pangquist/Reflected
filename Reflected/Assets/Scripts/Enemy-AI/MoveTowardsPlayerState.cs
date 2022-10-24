@@ -5,35 +5,49 @@ using UnityEngine.AI;
 
 public class MoveTowardsPlayerState : State
 {
-    public override void DoState(AIManager thisEnemy, Transform target, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
     {
-        //if (thisEnemy.distanceTo(player) >= 3)
-        //{
-        //    thisEnemy.SetAttackPlayerState();
-        //    return;
-        //}
-
-        if (thisEnemy.distanceTo(target) <= 2f && thisEnemy.CloseCombat())
+        switch (thisEnemy.currentCombatBehavior)
         {
-            thisEnemy.SetAttackPlayerState();
-            agent.isStopped = true;
-            return;
-        }
-        else if (thisEnemy.distanceTo(target)<=15 && !thisEnemy.CloseCombat())
-        {
-            thisEnemy.SetAttackPlayerState();
-            agent.isStopped = true;
-            return;
+            case AiManager2.CombatBehavior.CloseCombat:
+                Debug.Log("Switch case: CloseCombat entered at position: " + transform.position);
+                if (thisEnemy.distanceTo(player.transform) <= 2f && thisEnemy.CloseCombat())
+                {
+                    thisEnemy.SetMeleeAttackState();
+                    agent.isStopped = true;
+                    return;
+                }
+                break;
+
+            case AiManager2.CombatBehavior.RangedCombat:
+                Debug.Log("Switch case: RangedCombat entered at position: " + transform.position);
+                if (thisEnemy.distanceTo(player.transform) <= 15f && thisEnemy.RangedCombat())
+                {
+                    thisEnemy.SetRangedAttackState();
+                    agent.isStopped = true;
+                    return;
+                }
+                break;
+
+            case AiManager2.CombatBehavior.AoeCombat:
+                Debug.Log("Switch case: AoeCombat entered at position: " + transform.position);
+                if (thisEnemy.distanceTo(player.transform) <= 15f && thisEnemy.AoeCombat())
+                {
+                    thisEnemy.SetAoeAttackState();
+                    agent.isStopped = true;
+                    return;
+                }
+                break;
+
+            default:
+                break;
         }
 
-
-        DoMoveToward(target, agent);
+        DoMoveToward(player.transform, agent);
     }
 
     private void DoMoveToward(Transform target, NavMeshAgent agent)
     {
-        //Debug.Log("MoveTowardsPlayer");
-        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = target.gameObject.transform.position;
+        agent.destination = target.position;
     }
 }
