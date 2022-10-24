@@ -18,7 +18,7 @@ public class Player : Character, ISavable
     [Header("Stat Properties")]
     [SerializeField] float jumpForce;
 
-    [SerializeField] List<Weapon> weapons = new List<Weapon>();
+    [SerializeField] List<Weapon> weapons;
     int weaponIndex = 0;
 
     //[SerializeField] List<Enemy> aggroedEnemies = new List<Enemy>();
@@ -26,6 +26,7 @@ public class Player : Character, ISavable
     DimensionManager dimensionManager;
     MusicManager musicManager;
 
+    Ability currentAbility;
     [SerializeField] Ability basicSwordAbility;
     [SerializeField] Ability basicBowAbility;
     [SerializeField] Ability specialAbility;
@@ -38,20 +39,21 @@ public class Player : Character, ISavable
 
     protected override void Awake()
     {
-        base.Awake();
-        currentWeapon = weapons[weaponIndex];
-        currentWeapon.gameObject.SetActive(true);
-        currentWeapon.SetDamage(damage);
-
         Cursor.lockState = CursorLockMode.Locked;
-
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
         musicManager = dimensionManager.GetComponentInChildren<MusicManager>();
 
+        base.Awake();
+
         dimensionManager.SetStatSystem(stats);
+    }
 
+    private void Start()
+    {
+        currentWeapon = weapons[weaponIndex];
+        currentWeapon.gameObject.SetActive(true);
+        currentWeapon.SetDamage(damage);
         ChangeStats();
-
         anim.Play("GetUp");
     }
 
@@ -79,22 +81,16 @@ public class Player : Character, ISavable
 
     public void Attack()
     {
-        if(weaponIndex == 1)
-        {
-            if (basicBowAbility.IsOnCooldown())
-                return;
+        if(weaponIndex == 0)
+            currentAbility = basicSwordAbility;
+        else
+            currentAbility = basicBowAbility;
 
-            anim.Play(basicBowAbility.GetAnimation().name);
-            basicBowAbility.DoEffect();
-        }
-        else if(weaponIndex == 0)
-        {
-            if (basicBowAbility.IsOnCooldown())
-                return;
+        if (currentAbility.IsOnCooldown())
+            return;
 
-            anim.Play(basicSwordAbility.GetAnimation().name);
-            basicSwordAbility.DoEffect();
-        }
+        anim.Play(currentAbility.GetAnimation().name);
+        currentAbility.DoEffect();
     }
 
     public void SpecialAttack()
@@ -102,6 +98,7 @@ public class Player : Character, ISavable
         if (specialAbility.IsOnCooldown())
             return;
 
+        currentAbility = specialAbility;
         anim.Play(specialAbility.GetAnimation().name);
     }
 
@@ -121,15 +118,21 @@ public class Player : Character, ISavable
 
     public void ChangeStats()
     {
-        if (DimensionManager.True)
+        try
         {
-            stats.GetLightStats();
+            if (DimensionManager.True)
+            {
+                stats.GetLightStats();
+            }
+            else
+            {
+                stats.GetDarkStats();
+            }
         }
-        else
+        catch
         {
-            stats.GetDarkStats();
-        }
 
+        }
         currentWeapon.SetDamage(damage);
     }
 
@@ -194,6 +197,11 @@ public class Player : Character, ISavable
     //{
     //    return aggroedEnemies;
     //}
+
+    public void PlayCurrentAbilityVFX()
+    {
+        currentAbility.PlayVFX();
+    }
 
     #region SaveLoad
     [Serializable]

@@ -22,6 +22,8 @@ public abstract class Ability : MonoBehaviour
     [SerializeField] protected float damage;
     [SerializeField] protected bool debug;
     [SerializeField] AnimationClip abilityAnimation;
+    [SerializeField] GameObject vfxObject;
+    [SerializeField] float vfxDuration;
     protected Player player;
 
     protected AbilityCooldowns cooldownstarter;
@@ -78,5 +80,19 @@ public abstract class Ability : MonoBehaviour
     public string GetName()
     {
         return abilityName;
+    }
+
+    public void PlayVFX()
+    {
+        StartCoroutine(DoVFX());
+    }
+
+    IEnumerator DoVFX()
+    {
+        vfxObject.SetActive(true);
+
+        yield return new WaitForSeconds(vfxDuration);
+
+        vfxObject.SetActive(false);
     }
 }

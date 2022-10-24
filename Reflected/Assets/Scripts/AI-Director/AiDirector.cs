@@ -51,7 +51,7 @@ public class AiDirector : MonoBehaviour
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
-        if (player.GetCurrentWeapon().GetType() == typeof(Sword)) enemySpawner.SetMeleePlayer();
+        //if (player.GetCurrentWeapon().GetType() == typeof(Sword)) enemySpawner.SetMeleePlayer();
     }
 
     void Update()

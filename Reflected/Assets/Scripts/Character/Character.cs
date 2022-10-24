@@ -15,7 +15,7 @@ public class Character : MonoBehaviour, IEffectable
     [SerializeField] protected Animator anim;
     bool isDead;
 
-    protected Weapon currentWeapon;
+    [SerializeField] protected Weapon currentWeapon;
 
     protected virtual void Awake()
     {
