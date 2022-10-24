@@ -107,14 +107,14 @@ public class AIManager : MonoBehaviour
     public float distanceTo(Transform target)
     {
         //TEMPORARY MUSIC FIX ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        if(Vector3.Distance(this.gameObject.transform.position, target.position) < 15)
-        {
-            player.AddEnemy(me);
-        }
-        else if(Vector3.Distance(this.gameObject.transform.position, target.position) > 25 && player.GetEnemies().Contains(me))
-        {
-            //player.RemoveEnemy(me);
-        }
+        //if(Vector3.Distance(this.gameObject.transform.position, target.position) < 15)
+        //{
+        //    player.AddEnemy(me);
+        //}
+        //else if(Vector3.Distance(this.gameObject.transform.position, target.position) > 25 && player.GetEnemies().Contains(me))
+        //{
+        //    //player.RemoveEnemy(me);
+        //}
         //TEMPORARY MUSIC FIX ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 

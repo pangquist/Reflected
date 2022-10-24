@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] ThirdPersonMovement movement;
 
     [SerializeField] Player player;
-    //[SerializeField] Rigidbody rb;
 
     [SerializeField] bool movementLocked;
     [SerializeField] bool actionLocked;
@@ -147,5 +146,15 @@ public class PlayerController : MonoBehaviour
     public void GoToMainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void GravityOn()
+    {
+        movement.TurnOnGravity();
+    }
+
+    public void GravityOff()
+    {
+        movement.TurnOffGravity();
     }
 }
