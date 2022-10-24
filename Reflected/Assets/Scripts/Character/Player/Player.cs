@@ -12,7 +12,7 @@ using UnityEngine;
 /// </summary>
 public class Player : Character, ISavable
 {
-    [SerializeField] StatSystem stats;
+    [SerializeField] PlayerStatSystem stats;
     [SerializeField] GameObject chargeBar;
 
     [Header("Stat Properties")]
@@ -148,7 +148,7 @@ public class Player : Character, ISavable
         OnObjectInteraction.Invoke();
     }
 
-    public StatSystem GetStats()
+    public StatSystem GetStats() //May have to be PlayerStatSystem??
     {
         return stats;
     }

@@ -15,7 +15,7 @@ public class Bow : Weapon
     Transform targetTransform = null;
 
     [SerializeField] List<Projectile> projectiles = new List<Projectile>();
-    [SerializeField] int arrowIndex;
+    [SerializeField] int arrowIndex; //Obsolete
 
     private void Start()
     {
@@ -24,7 +24,7 @@ public class Bow : Weapon
 
     public override void WeaponEffect()
     {
-        projectile = projectiles[arrowIndex].gameObject;
+        projectile = projectiles[powerUpIndex].gameObject;
 
         Projectile arrow = Instantiate(projectile, firePoint.position, firePoint.parent.rotation).GetComponent<Projectile>();
         arrow.Fire(firePower, damage);
@@ -44,8 +44,8 @@ public class Bow : Weapon
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (++arrowIndex >= projectiles.Count)
-                arrowIndex = 0;
+            if (++powerUpIndex >= projectiles.Count)
+                powerUpIndex = 0;
         }
     }
 }
