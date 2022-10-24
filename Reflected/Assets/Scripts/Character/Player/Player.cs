@@ -39,22 +39,27 @@ public class Player : Character, ISavable
 
     protected override void Awake()
     {
+        base.Awake();
         Cursor.lockState = CursorLockMode.Locked;
+
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
         musicManager = dimensionManager.GetComponentInChildren<MusicManager>();
 
-        base.Awake();
+        currentWeapon = weapons[weaponIndex];
+        currentWeapon.gameObject.SetActive(true);
+        currentWeapon.SetDamage(damage);
+
 
         dimensionManager.SetStatSystem(stats);
+
+        ChangeStats();
+
+        anim.Play("GetUp");
     }
 
     private void Start()
     {
-        currentWeapon = weapons[weaponIndex];
-        currentWeapon.gameObject.SetActive(true);
-        currentWeapon.SetDamage(damage);
-        ChangeStats();
-        anim.Play("GetUp");
+
     }
 
     // Update is called once per frame
@@ -77,11 +82,11 @@ public class Player : Character, ISavable
             currentWeapon.SetDamage(damage);
         }
 
-    }    
+    }
 
     public void Attack()
     {
-        if(weaponIndex == 0)
+        if (weaponIndex == 0)
             currentAbility = basicSwordAbility;
         else
             currentAbility = basicBowAbility;
