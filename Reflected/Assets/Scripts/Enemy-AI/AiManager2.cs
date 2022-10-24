@@ -41,7 +41,7 @@ public class AiManager2 : MonoBehaviour
         }
         if (player == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            player = FindObjectOfType<Player>();
         }
 
         //if (firePoint == null)

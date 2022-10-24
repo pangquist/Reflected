@@ -26,7 +26,7 @@ public abstract class Weapon : MonoBehaviour
         anim = GetComponent<Animator>();
         playerController = GameObject.Find("Playerbody").GetComponent<PlayerController>();
 
-        player = GameObject.Find("Player").GetComponent<Player>();
+        player = FindObjectOfType<Player>();
 
         hitEnemies = new List<Enemy>();
     }
