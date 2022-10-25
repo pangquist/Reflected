@@ -21,7 +21,7 @@ public class Enemy : Character
     protected override void Awake()
     {
         base.Awake();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = FindObjectOfType<Player>();
         parent = gameObject.transform.parent.gameObject;
     }
 

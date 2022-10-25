@@ -27,7 +27,7 @@ public class UiPanel : MonoBehaviour
     {
         inventory = FindObjectOfType<Inventory>();
 
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame

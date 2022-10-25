@@ -42,14 +42,14 @@ public class AiDirector : MonoBehaviour
 
     void Start()
     {
-        if (!player) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if (!player) player = FindObjectOfType<Player>();
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
 
         difficulty = difficultyLevel.superEasy;
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
-        if (player.GetCurrentWeapon().GetType() == typeof(Sword)) enemySpawner.SetMeleePlayer();
+        //if (player.GetCurrentWeapon().GetType() == typeof(Sword)) enemySpawner.SetMeleePlayer();
     }
 
     void Update()
