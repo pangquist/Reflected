@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Chamber : MonoBehaviour
 {
+    [Header("References")]
+
+    [SerializeField] private Transform terrainChild;
+
     [Header("Values")]
 
     [Range(0f, 3f)]
@@ -30,6 +34,8 @@ public class Chamber : MonoBehaviour
     private float cooldownTimer;
 
     // Properties
+
+    public Transform TerrainChild => terrainChild;
 
     public Orientation Orientation => orientation;
     public List<Wall> Walls => walls;
