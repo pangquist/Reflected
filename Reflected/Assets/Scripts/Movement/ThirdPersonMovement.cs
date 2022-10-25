@@ -7,7 +7,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] CharacterController controller;
     [SerializeField] Transform cam;
-    [SerializeField] StatSystem stats;
+    [SerializeField] PlayerStatSystem stats;
     [SerializeField] Animator animator;
 
     [Header("Stat Properties")]

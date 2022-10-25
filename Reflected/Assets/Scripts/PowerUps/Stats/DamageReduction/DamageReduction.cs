@@ -8,7 +8,7 @@ public class DamageReduction : PowerUpEffect
     
     public override void Apply(GameObject target, float amount)
     {
-        target.GetComponent<StatSystem>().AddDamageReduction(amount);
+        target.GetComponent<PlayerStatSystem>().AddDamageReduction(amount);
         Debug.Log("Reduction +" + amount);
         
     }
