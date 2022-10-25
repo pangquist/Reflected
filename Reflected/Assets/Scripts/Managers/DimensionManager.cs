@@ -61,7 +61,7 @@ public class DimensionManager : MonoBehaviour
     private void Awake()
     {
         musicManager = GameObject.Find("Music Manager").GetComponent<MusicManager>();
-
+        currentDimension = Dimension.True;
         //SetDimension(Dimension.True);
         UpdateChargeBar();
     }

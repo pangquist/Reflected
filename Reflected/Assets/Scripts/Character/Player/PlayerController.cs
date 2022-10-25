@@ -67,8 +67,8 @@ public class PlayerController : MonoBehaviour
 
     public void SwapDimension(InputAction.CallbackContext context)
     {
-        if (context.performed && !dead)
-            player.SwapDimension();
+        if (context.performed && !dead && !actionLocked)
+            player.TryDimensionSwap();
     }
 
     public void Interact(InputAction.CallbackContext context)

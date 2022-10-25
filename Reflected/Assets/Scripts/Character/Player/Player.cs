@@ -31,6 +31,8 @@ public class Player : Character, ISavable
     [SerializeField] Ability basicBowAbility;
     [SerializeField] Ability specialAbility;
     [SerializeField] Ability swapAbility;
+    [Range(0f, 1f)]
+    [SerializeField] float TimeFlowWhileSwapping;
 
     public delegate void InteractWithObject();
     public static event InteractWithObject OnObjectInteraction;
@@ -141,7 +143,16 @@ public class Player : Character, ISavable
         currentWeapon.SetDamage(damage);
     }
 
-    public void SwapDimension()
+    public void TryDimensionSwap()
+    {
+        if (dimensionManager.CanSwap())
+        {
+            Time.timeScale = TimeFlowWhileSwapping;
+            anim.Play("DimensionSwap");
+        }
+    }
+
+    public void DoDimensionSwap()
     {
         if (dimensionManager.TrySwap())
         {
@@ -206,6 +217,11 @@ public class Player : Character, ISavable
     public void PlayCurrentAbilityVFX()
     {
         currentAbility.PlayVFX();
+    }
+
+    public void SetTimeToNormalFlow()
+    {
+        Time.timeScale = 1;
     }
 
     #region SaveLoad

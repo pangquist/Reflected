@@ -373,12 +373,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dadd66639242df4b80408ea6a617fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCombatBehavior: 0
   player: {fileID: 0}
   me: {fileID: 0}
   agent: {fileID: 0}
-  target: {fileID: 0}
   firePoint: {fileID: 3512800261662137758}
-  currentCombatBehavior: 0
 --- !u!114 &1099865400733728881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,6 +420,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shell
+      objectReference: {fileID: 0}
+    - target: {fileID: 545682315351394890, guid: 59a51997eb082e449b7eff675857e1ff,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 545682315351430762, guid: 59a51997eb082e449b7eff675857e1ff,
         type: 3}
@@ -517,6 +521,7 @@ MonoBehaviour:
   attackSpeed: 0
   currentHealth: 0
   anim: {fileID: 0}
+  currentWeapon: {fileID: 0}
   healthBar: {fileID: 431372851682227795}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}

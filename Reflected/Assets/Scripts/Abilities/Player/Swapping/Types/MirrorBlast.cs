@@ -16,12 +16,15 @@ public class MirrorBlast : SwappingAbility
 
         foreach (Collider collider in colliders)
         {
-            if(collider.tag == "Enemy")
+            if(collider.tag == "Enemy" || collider.tag == "Melee" || collider.tag == "AoE" || collider.tag == "Ranged")
             {
                 Enemy enemy = collider.GetComponent<Enemy>();
                 enemy.TakeDamage(damage);
-                Rigidbody rb = enemy.gameObject.GetComponent<Rigidbody>();
-                rb.AddExplosionForce(100, transform.position, range);
+                if(enemy.gameObject.GetComponent<Rigidbody>())
+                {
+                    Rigidbody rb = enemy.gameObject.GetComponent<Rigidbody>();
+                    rb.AddExplosionForce(100, transform.position, range);
+                }
             }
         }
 
