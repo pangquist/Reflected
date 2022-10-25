@@ -11,17 +11,22 @@ public class MeleeAttackState : State
     private float attackTimer = 0f;
 
     //Base values of the attack stats
-    [SerializeField] private float attackRate = 1f;
-    [SerializeField] private int attackDamage = 5;
+    [SerializeField] private float baseAttackRate = 1f;
+    [SerializeField] private float baseAttackDamage = 5;
+
+    //Current values of the attack stats
+    [SerializeField] private float attackRate;
+    [SerializeField] private float attackDamage;
 
     //Range to player in which the enemy will chase the player. (Reposition to attack)
     [SerializeField] private float chaseRange = 2.5f;
 
-
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        //Set attack rate, chase range?
-        
+        //Set relevant stat
+        attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed(); //Right now the attack speed increases but decreases the attack rate. High attack rate = low attack speed.
+        //Attack size?
+
         if (thisEnemy.distanceTo(player.transform) >= chaseRange)
         {
             thisEnemy.SetMoveTowardState();
@@ -36,14 +41,14 @@ public class MeleeAttackState : State
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackRate)
         {
-            DoAttack(thisEnemy);
+            DoAttack(thisEnemy, enemyStatSystem);
             attackTimer = 0f;
         }
     }
 
-    private void DoAttack(AiManager2 thisEnemy)
+    private void DoAttack(AiManager2 thisEnemy, EnemyStatSystem enemyStatSystem)
     {
-        //Set attack damage (attack size?)
+        attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
 
         GameObject currentMeleeAttack = Instantiate(meleeObject, thisEnemy.firePoint.position, gameObject.transform.rotation);
         if (currentMeleeAttack != null)

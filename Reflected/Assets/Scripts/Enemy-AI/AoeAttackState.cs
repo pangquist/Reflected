@@ -11,8 +11,12 @@ public class AoeAttackState : State
     private float attackTimer = 0f;
 
     //Base values of the attack stats
-    [SerializeField] private float attackRate = 5f;
-    [SerializeField] private int attackDamage = 1;
+    [SerializeField] private float baseAttackRate = 5f;
+    [SerializeField] private float baseAttackDamage = 1f;
+
+    //Current values of the attack stats
+    [SerializeField] private float attackRate;
+    [SerializeField] private float attackDamage;
 
     //Range to player in which the enemy will flee or chase. (Reposition to attack)
     [SerializeField] private float fleeRange = 7f;
@@ -20,8 +24,10 @@ public class AoeAttackState : State
 
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        //Set attack rate
-        
+        //Set relevant stats
+        attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed(); //Right now the attack speed increases but decreases the attack rate. High attack rate = low attack speed.
+        //Attack range?
+
         //If ranged and too close, move away from target.
         if (thisEnemy.distanceTo(player.transform) <= fleeRange)
         {
@@ -44,14 +50,16 @@ public class AoeAttackState : State
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackRate)
         {
-            DoAttack(thisEnemy, player);
+            DoAttack(thisEnemy, player, enemyStatSystem);
             attackTimer = 0f;
         }
     }
 
-    private void DoAttack(AiManager2 thisEnemy, Player player)
+    private void DoAttack(AiManager2 thisEnemy, Player player, EnemyStatSystem enemyStatSystem)
     {
-        //Set damage
+        //Set relevant stats (damage, projectile speed, )
+        attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
+
         GameObject currentAOE = Instantiate(aoeObject, new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z), Quaternion.identity);
         if (currentAOE != null)
         {

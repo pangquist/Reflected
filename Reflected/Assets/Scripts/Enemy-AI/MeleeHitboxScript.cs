@@ -10,7 +10,7 @@ public class MeleeHitboxScript : MonoBehaviour
 
     private Rigidbody rb;
 
-    [SerializeField] int damageAmount = 5; //Base damage
+    [SerializeField] float damageAmount = 5f; //Base damage
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class MeleeHitboxScript : MonoBehaviour
         }
     }
 
-    public void SetUp(int damageAmount)
+    public void SetUp(float damageAmount)
     {
         this.damageAmount = damageAmount;
     }

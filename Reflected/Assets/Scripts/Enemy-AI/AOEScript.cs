@@ -10,7 +10,7 @@ public class AOEScript : MonoBehaviour
     private float damageTimer;
 
     private Rigidbody rb;
-    public int damageAmount = 1; //Base damage 
+    public float damageAmount = 1; //Base damage 
 
     void Start()
     {
@@ -30,7 +30,7 @@ public class AOEScript : MonoBehaviour
         }
     }
 
-    public void SetUp(int damageAmount)
+    public void SetUp(float damageAmount)
     {
         this.damageAmount = damageAmount;
     }
