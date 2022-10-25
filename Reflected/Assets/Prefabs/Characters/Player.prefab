@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4853948256094235931}
   - component: {fileID: 5353099378352378149}
   - component: {fileID: 5444201463126724936}
+  - component: {fileID: 424353048}
+  - component: {fileID: 424353049}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -148,6 +150,32 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.79, z: 0}
+--- !u!114 &424353048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853948256094235928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958bb1aa10194a94b81a303c25b6b784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uppgrade: {fileID: 11400000, guid: d7568af26a1bce9498dea782c40ca37e, type: 2}
+  key: 112
+--- !u!114 &424353049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853948256094235928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1266193b27454da4999423e8734818d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2539094748840900825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -240,7 +268,8 @@ PrefabInstance:
       propertyPath: abilitySource
       value: 
       objectReference: {fileID: 5353099378352378149}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3889720436798291523, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
 --- !u!4 &792695146709739173 stripped
 Transform:
