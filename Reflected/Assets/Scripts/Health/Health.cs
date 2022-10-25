@@ -8,13 +8,27 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
     public PowerUpEffect powerUpEffect;
   
     Rigidbody rb;
-    bool hasTarget;
+    bool hasTarget, hasProperties;
     Vector3 targetPosition;
     float moveSpeed = 5f;
+    float totalplayerhealth;
+    int amount;
+    Rarity myRarity;
+    string description;
+    int value;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        if (!hasProperties)
+        {
+            myRarity = FindObjectOfType<LootPoolManager>().GetRandomRarity();
+            totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
+            amount = (int)((totalplayerhealth / 4f) * myRarity.amountMultiplier);
+            value = powerUpEffect.value * myRarity.valueMultiplier;
+            description = powerUpEffect.description + " " + amount.ToString();
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,7 +36,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            powerUpEffect.Apply(other.gameObject, powerUpEffect.amount); //Should be changed from
+            powerUpEffect.Apply(other.gameObject, amount); 
         }
     }
 
@@ -41,13 +55,29 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         hasTarget = true;
     }
 
+    public void SetProperties(Rarity targetRarity)
+    {
+        //Debug.Log("Set properties " + targetRarity);
+        myRarity = targetRarity;
+        totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
+        amount = (int)((totalplayerhealth / 4f) * myRarity.amountMultiplier);
+        value = powerUpEffect.value * targetRarity.valueMultiplier;
+        description = powerUpEffect.description + " " + amount.ToString();
+        hasProperties = true;
+    }
+
     public int GetValue()
     {
-        return powerUpEffect.value;
+        return value;
     }
 
     public string GetDescription()
     {
-        return powerUpEffect.description;
+        return description;
+    }
+
+    public Rarity GetRarity()
+    {
+        return myRarity;
     }
 }
