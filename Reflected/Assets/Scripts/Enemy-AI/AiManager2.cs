@@ -29,6 +29,7 @@ public class AiManager2 : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private Enemy me;
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private EnemyStatSystem enemyStatSystem;
 
     public Transform firePoint; //Find a better solution
 
@@ -79,12 +80,15 @@ public class AiManager2 : MonoBehaviour
 
         //AI Navmesh setup
         agent = GetComponent<NavMeshAgent>();
+
+        //Enemy stat system set up
+        enemyStatSystem = GameObject.FindGameObjectWithTag("EnemyStatSystem").GetComponent<EnemyStatSystem>();
     }
 
     private void Update()
     {
         //Run the currently active state
-        activeState.DoState(this, player, agent);
+        activeState.DoState(this, player, agent, enemyStatSystem);
     }
 
     //Setters for behavior states.

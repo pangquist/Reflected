@@ -10,7 +10,7 @@ public class MoveTowardsPlayerState : State
     [SerializeField] private float rangedAttackRange = 15f;
     [SerializeField] private float aoeAttackRange = 15;
 
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         switch (thisEnemy.currentCombatBehavior)
         {

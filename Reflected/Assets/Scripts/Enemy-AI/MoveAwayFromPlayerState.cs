@@ -13,7 +13,7 @@ public class MoveAwayFromPlayerState : State
     private float fleeTimer = 0f;
     private float changeTime = 1f;
 
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         switch (thisEnemy.currentCombatBehavior)
         {

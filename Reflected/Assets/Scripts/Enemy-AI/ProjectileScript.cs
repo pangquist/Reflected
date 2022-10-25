@@ -10,7 +10,7 @@ public class ProjectileScript : MonoBehaviour
     public float upTime = 1f;
     private float despawnTimer;
 
-    [SerializeField] private int damageAmount = 3; //Base damage
+    [SerializeField] private float damageAmount = 3f; //Base damage
 
     void Start()
     {
@@ -30,7 +30,7 @@ public class ProjectileScript : MonoBehaviour
         }
     }
 
-    public void SetUp(Vector3 target, Vector3 spawnPoint, float projectileForce, int damageAmount)
+    public void SetUp(Vector3 target, Vector3 spawnPoint, float projectileForce, float damageAmount)
     {
         direction = target - spawnPoint;
         this.damageAmount = damageAmount;

@@ -18,7 +18,7 @@ public class AoeAttackState : State
     [SerializeField] private float fleeRange = 7f;
     [SerializeField] private float chaseRange = 20f;
 
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set attack rate
         

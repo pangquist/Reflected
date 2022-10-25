@@ -13,20 +13,28 @@ public class RangedAttackState : State
     private float attackTimer = 0f;
 
     //Base values of the attack stats
-    [SerializeField] private float attackRate = 1f;
-    [SerializeField] private int attackDamage = 3;
-    [SerializeField] private float projectileForce = 2f; //Projectile speed
+    [SerializeField] private float baseAttackRate = 1f;
+    [SerializeField] private float baseAttackDamage = 3;
+    [SerializeField] private float baseProjectileForce = 2f; //Projectile speed
+
+    //Current value of the attack stats
+    [SerializeField] private float attackRate;
+    [SerializeField] private float attackDamage;
+    [SerializeField] private float projectileForce; //Projectile speed
 
     //Range to player in which the enemy will flee or chase. (Reposition to attack)
-    [SerializeField] private float fleeRange = 7f;
-    [SerializeField] private float chaseRange = 20f;
+    [SerializeField] private float baseFleeRange = 7f;
+    [SerializeField] private float baseChaseRange = 20f;
 
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        //Set relevant stats (attackrate, attack range?,)
+        //Set relevant stat
+        attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed(); //Right now the attack speed increases but decreases the attack rate. High attack rate = low attack speed.
+        //Attack range?
+
 
         //If too close, move away from target.
-        if (thisEnemy.distanceTo(player.transform) <= fleeRange)
+        if (thisEnemy.distanceTo(player.transform) <= baseFleeRange)
         {
             thisEnemy.SetMoveAwayState();
             agent.isStopped = false;
@@ -34,7 +42,7 @@ public class RangedAttackState : State
         }
 
         //If too far away, move towards target.
-        else if (thisEnemy.distanceTo(player.transform) >= chaseRange)
+        else if (thisEnemy.distanceTo(player.transform) >= baseChaseRange)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
@@ -48,14 +56,16 @@ public class RangedAttackState : State
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackRate)
         {
-            FireProjectile(thisEnemy, player);
+            FireProjectile(thisEnemy, player, enemyStatSystem);
             attackTimer = 0f;
         }
     }
 
-    private void FireProjectile(AiManager2 thisEnemy, Player player)
+    private void FireProjectile(AiManager2 thisEnemy, Player player, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stats (damage, projectile speed, )
+        attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
+        projectileForce = baseProjectileForce;
         
         //Instantiate the projectile and set up it variables.
         GameObject currentProjectile = Instantiate(projectileObject, thisEnemy.firePoint.position, Quaternion.identity);

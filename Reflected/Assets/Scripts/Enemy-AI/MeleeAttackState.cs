@@ -18,7 +18,7 @@ public class MeleeAttackState : State
     [SerializeField] private float chaseRange = 2.5f;
 
 
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set attack rate, chase range?
         
