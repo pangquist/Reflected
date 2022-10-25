@@ -5,13 +5,17 @@ using UnityEngine.AI;
 
 public class MoveTowardsPlayerState : State
 {
+    //Range to player in which the enemy will attack
+    [SerializeField] private float meleeAttackRange = 2f;
+    [SerializeField] private float rangedAttackRange = 15f;
+    [SerializeField] private float aoeAttackRange = 15;
+
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
     {
         switch (thisEnemy.currentCombatBehavior)
         {
             case AiManager2.CombatBehavior.CloseCombat:
-                Debug.Log("Switch case: CloseCombat entered at position: " + transform.position);
-                if (thisEnemy.distanceTo(player.transform) <= 2f && thisEnemy.CloseCombat())
+                if (thisEnemy.distanceTo(player.transform) <= meleeAttackRange)
                 {
                     thisEnemy.SetMeleeAttackState();
                     agent.isStopped = true;
@@ -20,8 +24,7 @@ public class MoveTowardsPlayerState : State
                 break;
 
             case AiManager2.CombatBehavior.RangedCombat:
-                Debug.Log("Switch case: RangedCombat entered at position: " + transform.position);
-                if (thisEnemy.distanceTo(player.transform) <= 15f && thisEnemy.RangedCombat())
+                if (thisEnemy.distanceTo(player.transform) <= rangedAttackRange)
                 {
                     thisEnemy.SetRangedAttackState();
                     agent.isStopped = true;
@@ -30,8 +33,7 @@ public class MoveTowardsPlayerState : State
                 break;
 
             case AiManager2.CombatBehavior.AoeCombat:
-                Debug.Log("Switch case: AoeCombat entered at position: " + transform.position);
-                if (thisEnemy.distanceTo(player.transform) <= 15f && thisEnemy.AoeCombat())
+                if (thisEnemy.distanceTo(player.transform) <= aoeAttackRange)
                 {
                     thisEnemy.SetAoeAttackState();
                     agent.isStopped = true;

@@ -5,26 +5,37 @@ using UnityEngine.AI;
 
 public class MeleeAttackState : State
 {
-    private float attackTimer = 0f;
-    public float attackRate = 1f;
-
     public GameObject meleeObject;
+
+    //Timer for attack rate
+    private float attackTimer = 0f;
+
+    //Base values of the attack stats
+    [SerializeField] private float attackRate = 1f;
+    [SerializeField] private int attackDamage = 5;
+
+    //Range to player in which the enemy will chase the player. (Reposition to attack)
+    [SerializeField] private float chaseRange = 2.5f;
+
+
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
     {
-        if (thisEnemy.distanceTo(player.transform) >= 2.5f)
+        //Set attack rate, chase range?
+        
+        if (thisEnemy.distanceTo(player.transform) >= chaseRange)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
             return;
         }
 
-        attackTimer += Time.deltaTime;
-
+        //Make enemy face player and stand still
         FaceTarget(player.transform.position);
         agent.destination = thisEnemy.transform.position;
+
+        attackTimer += Time.deltaTime;
         if (attackTimer >= attackRate)
         {
-            Debug.Log("About to attack");
             DoAttack(thisEnemy);
             attackTimer = 0f;
         }
@@ -32,7 +43,13 @@ public class MeleeAttackState : State
 
     private void DoAttack(AiManager2 thisEnemy)
     {
-        Instantiate(meleeObject, thisEnemy.firePoint.position, gameObject.transform.rotation);
+        //Set attack damage (attack size?)
+
+        GameObject currentMeleeAttack = Instantiate(meleeObject, thisEnemy.firePoint.position, gameObject.transform.rotation);
+        if (currentMeleeAttack != null)
+        {
+            currentMeleeAttack.GetComponent<MeleeHitboxScript>().SetUp(attackDamage);
+        }
     }
 
     private void FaceTarget(Vector3 target)
