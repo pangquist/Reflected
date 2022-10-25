@@ -59,12 +59,17 @@ public class RoomTypeGenerator : MonoBehaviour
     {
         Rect mapRect = new Rect(0, 0, map.SizeX, map.SizeZ);
 
-        Dictionary<Room, float> bossRooms = new Dictionary<Room, float>();
+        Dictionary<Room, float> roomFitness = new Dictionary<Room, float>();
         KeyValuePair<Room, float>[] orderedArray;
 
-        // Find potential boss rooms by locating the outer rooms
+        // Give all rooms a score of 0
 
-        for (int i = 1; bossRooms.Count == 0; ++i)
+        foreach (Room room in map.Rooms)
+            roomFitness.Add(room, 0);
+
+        // Test 1: Outer edge rooms (outer edge is better)
+
+        for (int i = 1; i > 0; ++i)
         {
             Rect inflatedMapRect = mapRect.Inflated(-i, -i);
 
@@ -72,24 +77,25 @@ public class RoomTypeGenerator : MonoBehaviour
             {
                 if (inflatedMapRect.Contains(room.Rect) == false)
                 {
-                    bossRooms.Add(room, 0);
+                    roomFitness[room] += 1f;
+                    i = -1;
                 }
             }       
         }
 
-        // Test 1: Distance to start room (more is better)
+        // Test 2: Distance to start room (more is better)
 
-        orderedArray = bossRooms.OrderBy(pair => Vector2.Distance(pair.Key.Rect.center, map.StartRoom.Rect.center)).ToArray();
+        orderedArray = roomFitness.OrderBy(pair => Vector2.Distance(pair.Key.Rect.center, map.StartRoom.Rect.center)).ToArray();
         OrderToFitness(1f);
 
-        // Test 2: Area (more is better)
+        // Test 3: Area (more is better)
 
-        orderedArray = bossRooms.OrderBy(pair => pair.Key.Rect.Area()).ToArray();
+        orderedArray = roomFitness.OrderBy(pair => pair.Key.Rect.Area()).ToArray();
         OrderToFitness(1f);
 
-        // Test 3: Graph reachability (more is better)
+        // Test 4: Graph reachability (more is better)
 
-        orderedArray = bossRooms.OrderBy(pair => map.Graph.TraverseGraph(map.StartRoom, pair.Key)).ToArray();
+        orderedArray = roomFitness.OrderBy(pair => map.Graph.TraverseGraph(map.StartRoom, pair.Key)).ToArray();
         OrderToFitness(1f);
 
         // Adds fitness to potential boss rooms based of the order orderedArray (higher index = more fitness)
@@ -97,13 +103,13 @@ public class RoomTypeGenerator : MonoBehaviour
         {
             for (int i = 0; i < orderedArray.Length; ++i)
             {
-                bossRooms[orderedArray[i].Key] += (float)i / (orderedArray.Length - 1) * weight;
+                roomFitness[orderedArray[i].Key] += (float)i / (orderedArray.Length - 1) * weight;
             }
         }
 
         // Find room with highest fitness score
 
-        orderedArray = bossRooms.OrderBy(pair => -pair.Value).ToArray();
+        orderedArray = roomFitness.OrderBy(pair => -pair.Value).ToArray();
 
         map.BossRoom = orderedArray.ElementAt(0).Key;
         map.BossRoom.SetType(RoomType.Boss);

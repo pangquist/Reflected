@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using PathCreation;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 [System.Serializable]
 public class TerrainType
@@ -14,6 +16,7 @@ public class TerrainGenerator : MonoBehaviour
 {
     [Header("References")]
 
+    [SerializeField] private MapGenerator mapGenerator;
     [SerializeField] private GameObject terrainChunkPrefab;
 
     [SerializeField] NoiseMapGenerator noiseMapGenerator;
@@ -61,7 +64,7 @@ public class TerrainGenerator : MonoBehaviour
                     if (room.Rect.Inflated(1, 1).Overlaps(terrainRect))
                     {
                         // Instantiate a new TerrainChunk
-                        GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.transform.Find("Terrain"));
+                        GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.TerrainChild);
                         GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
                         //BakeNavMesh(terrainChunk.GetComponentInChildren<NavMeshSurface>());
                         objectPlacer.PlaceDecorations(terrainChunk.GetComponent<TerrainChunk>(), room);
@@ -81,7 +84,7 @@ public class TerrainGenerator : MonoBehaviour
                     if (chamberRect.Overlaps(terrainRect))
                     {
                         // Instantiate a new TerrainChunk
-                        GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), chamber.transform);
+                        GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), chamber.TerrainChild);
                         GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
                         break;
                     }
@@ -94,7 +97,7 @@ public class TerrainGenerator : MonoBehaviour
     {
         float[,] heightMap = GenerateHeightMap(terrainChunk);
 
-        Texture2D chunkTexture = BuildTexture(heightMap);
+        Texture2D chunkTexture = BuildTexture(heightMap, terrainChunk);
         terrainChunk.MeshRenderer().material.mainTexture = chunkTexture;
         UpdateMeshVertices(heightMap, terrainChunk);
     }
@@ -143,30 +146,72 @@ public class TerrainGenerator : MonoBehaviour
         surface.BuildNavMesh();
     }
 
-    private Texture2D BuildTexture(float[,] heightMap)
+    private Texture2D BuildTexture(float[,] heightMap, TerrainChunk terrainChunk)
     {
         int chunkDepth = heightMap.GetLength(0);
         int chunkWidth = heightMap.GetLength(1);
         Color[] colorMap = new Color[chunkDepth * chunkWidth];
+
+        float worldPixelSize = (float)MapGenerator.ChunkSize / chunkDepth;
+
+        // Get List of relevant paths
+
+        List<PathCreator> paths;
+
+        Room room;
+        if (room = terrainChunk.transform.parent.parent.GetComponent<Room>())
+                paths = room.Paths;
+
+        else
+        {
+            Chamber chamber = terrainChunk.transform.parent.parent.GetComponent<Chamber>();
+            paths = chamber.Room1.Paths.And(chamber.Room2.Paths);
+        }
+
+        // Determine color of each pixel
+
         for (int zIndex = 0; zIndex < chunkDepth; zIndex++)
         {
             for (int xIndex = 0; xIndex < chunkWidth; xIndex++)
             {
-                // transform the 2D map index is an Array index
+                // Transform the 2D map index is an Array index
                 int colorIndex = zIndex * chunkWidth + xIndex;
-                float height = heightMap[zIndex, xIndex];
 
-                TerrainType terrain = PickTerrainType(height);
+                // Returns whether or not this pixel should be a path
+                bool CheckPaths()
+                {
+                    // Calculate world position of pixel
+                    Vector3 pixelPosition = new Vector3(
+                        terrainChunk.transform.position.x - (xIndex + 0.5f) * worldPixelSize,
+                        mapGenerator.PathGenerator.Level,
+                        terrainChunk.transform.position.z - (zIndex + 0.5f) * worldPixelSize);
 
-                colorMap[colorIndex] = terrain.color;
+                    // Check paths
+                    foreach (PathCreator path in paths)
+                        if (Vector3.Distance(pixelPosition, path.path.GetClosestPointOnPath(pixelPosition)) < mapGenerator.PathGenerator.Radius)
+                            return true;
+                    return false;
+                }
+
+                // Check for paths
+                if (CheckPaths())
+                    colorMap[colorIndex] = mapGenerator.PathGenerator.Color;
+
+                // Or check height
+                else
+                {
+                    float height = heightMap[zIndex, xIndex];
+                    TerrainType terrain = PickTerrainType(height);
+                    colorMap[colorIndex] = terrain.color;
+                }
             }
         }
-        // create a new texture and set its pixel colors
+
+        // Create a new texture and set its pixel colors
         Texture2D chunkTexture = new Texture2D(chunkWidth, chunkDepth);
         chunkTexture.wrapMode = TextureWrapMode.Clamp;
         chunkTexture.SetPixels(colorMap);
         chunkTexture.Apply();
-
         return chunkTexture;
     }
 

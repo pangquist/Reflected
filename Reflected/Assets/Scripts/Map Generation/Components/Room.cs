@@ -5,6 +5,11 @@ using PathCreation;
 
 public class Room : MonoBehaviour
 {
+    [Header("References")]
+
+    [SerializeField] private Transform pathsChild;
+    [SerializeField] private Transform terrainChild;
+
     [Header("Read Only")]
 
     [ReadOnly][SerializeField] private Rect rect;
@@ -17,6 +22,9 @@ public class Room : MonoBehaviour
     private static Map map;
 
     // Properties
+
+    public Transform PathsChild => pathsChild;
+    public Transform TerrainChild => terrainChild;
 
     public Rect Rect => rect;
     public List<Wall> Walls => walls;

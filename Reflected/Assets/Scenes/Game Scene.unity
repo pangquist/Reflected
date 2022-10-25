@@ -195,27 +195,27 @@ PrefabInstance:
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13202259
+      value: 0.13202256
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.22164114
+      value: -0.22164115
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.030301753
+      value: 0.030301765
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487349488125, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.080560714
+      value: 0.0805607
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487349488125, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.018490251
+      value: 0.018490262
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487970045864, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
@@ -260,12 +260,12 @@ PrefabInstance:
     - target: {fileID: 7509292488307742550, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0043157334
+      value: 0.004315726
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488307742550, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0020224426
+      value: 0.0020224464
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 208b911f792bd8d40991cc24ecabd06b, type: 3}
@@ -339,12 +339,12 @@ PrefabInstance:
     - target: {fileID: 3434030415582317932, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -692.70984
+      value: -692.70996
       objectReference: {fileID: 0}
     - target: {fileID: 3466060085952198480, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 425.48294
+      value: 425.48297
       objectReference: {fileID: 0}
     - target: {fileID: 3466060085952198480, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -694,7 +694,7 @@ PrefabInstance:
     - target: {fileID: 4763105907550617729, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -59.347595
+      value: -59.347626
       objectReference: {fileID: 0}
     - target: {fileID: 5821881590750259855, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -714,7 +714,7 @@ PrefabInstance:
     - target: {fileID: 7015028412430424291, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 425.48294
+      value: 425.48297
       objectReference: {fileID: 0}
     - target: {fileID: 7806777676189186301, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -749,7 +749,7 @@ PrefabInstance:
     - target: {fileID: 7970068262492351453, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 425.48294
+      value: 425.48297
       objectReference: {fileID: 0}
     - target: {fileID: 8215079499412126164, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -1059,11 +1059,11 @@ MonoBehaviour:
   pillarGenerator: {fileID: 2131914268}
   waterGenerator: {fileID: 2131914264}
   terrainGenerator: {fileID: 2131914263}
-  deactivateRooms: 1
-  minMapSizeX: 70
-  maxMapSizeX: 80
-  minMapSizeZ: 70
-  maxMapSizeZ: 80
+  deactivateRooms: 0
+  minMapSizeX: 60
+  maxMapSizeX: 70
+  minMapSizeZ: 60
+  maxMapSizeZ: 70
   chunkSize: 8
   trials: 1
   interval: 0
@@ -1102,6 +1102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e4a15bc1748d74e80b53d876355a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapGenerator: {fileID: 2131914261}
   terrainChunkPrefab: {fileID: 2332618423109250269, guid: 5754e2c27e53f47ccb8aa4da3a242f20,
     type: 3}
   noiseMapGenerator: {fileID: 2131914266}
@@ -1299,3 +1300,5 @@ MonoBehaviour:
   pathPrefab: {fileID: 316618593525123048, guid: b844475432cdd470db621627f176749f,
     type: 3}
   level: 10
+  radius: 5
+  color: {r: 0.3773585, g: 0.35550454, b: 0.33641866, a: 1}
