@@ -588,8 +588,8 @@ GameObject:
   - component: {fileID: 1234138811770308852}
   - component: {fileID: 4853853438342385038}
   - component: {fileID: 1271279110}
+  - component: {fileID: 402017961197159410}
   - component: {fileID: 1271279111}
-  - component: {fileID: 5090684218042434484}
   - component: {fileID: 3437984074462982373}
   - component: {fileID: 5483573931334699441}
   - component: {fileID: 6738516131019372579}
@@ -597,7 +597,8 @@ GameObject:
   - component: {fileID: 1344186847949550753}
   - component: {fileID: 1906820218832174845}
   - component: {fileID: 381700860351149846}
-  - component: {fileID: 3889720436798291523}
+  - component: {fileID: 1035034413369039081}
+  - component: {fileID: 534314698605461993}
   m_Layer: 0
   m_Name: Playerbody1
   m_TagString: Player
@@ -645,7 +646,7 @@ MonoBehaviour:
   currentHealth: 0
   anim: {fileID: 3437984074462982373}
   currentWeapon: {fileID: 0}
-  stats: {fileID: 5090684218042434484}
+  stats: {fileID: 0}
   chargeBar: {fileID: 0}
   jumpForce: 20
   weapons:
@@ -669,7 +670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   cam: {fileID: 0}
-  stats: {fileID: 5090684218042434484}
+  stats: {fileID: 0}
   animator: {fileID: 3437984074462982373}
   speed: 12
   turnSmoothTime: 0.05
@@ -699,6 +700,27 @@ MonoBehaviour:
   movementLocked: 0
   actionLocked: 0
   dead: 0
+--- !u!114 &402017961197159410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555587854365852870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43901d84509027c4c84f9192bb2ad11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthIncrease: 0
+  damageReduction: 1
+  movementSpeed: 1
+  damageIncrease: 1
+  attackSpeed: 1
+  areaOfEffect: 1
+  cooldownDecrease: 0
+  chargesToSwapTrue: 0
+  chargesToSwapMirror: 0
 --- !u!114 &1271279111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,27 +856,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5090684218042434484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2555587854365852870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ea501e0d374ec4f82416575d95fa72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealthIncrease: 0
-  damageReduction: 1
-  movementSpeed: 1
-  damageIncrease: 1
-  attackSpeed: 1
-  areaOfEffect: 1
-  cooldownDecrease: 0
-  chargesToSwapTrue: 0
-  chargesToSwapMirror: 0
 --- !u!95 &3437984074462982373
 Animator:
   serializedVersion: 4
@@ -1021,7 +1022,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 4d785bf7-9520-4a9c-8376-ff3fe878717f
---- !u!114 &3889720436798291523
+--- !u!136 &1035034413369039081
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555587854365852870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &534314698605461993
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
