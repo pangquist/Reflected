@@ -15,7 +15,7 @@ public class StatusEffect : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        var effectable = collider.GetComponent<IEffectable>();
+        var effectable = collider.GetComponentInChildren<IEffectable>();
         if (effectable != null)
         {
             effectable.ApplyEffect(data, 1);

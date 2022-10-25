@@ -12,7 +12,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] Color healthBarColor;
     [SerializeField] Color healthBarBGColor;
     [SerializeField] TextMeshProUGUI healthText;
-    Player player;
+    [SerializeField] Player player;
     
 
 
@@ -22,7 +22,7 @@ public class HealthBar : MonoBehaviour
     {
         fillImage.color = healthBarColor;
         bgImage.color = healthBarBGColor;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = FindObjectOfType <Player>();
         healthBar.maxValue = player.GetMaxHealth();
     }
         // Update is called once per frame

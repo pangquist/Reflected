@@ -38,7 +38,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
 
     public void ApplyOnInteraction()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Player player = FindObjectOfType<Player>();
         Destroy(gameObject);
         powerUpEffect.Apply(player.gameObject, amount);
         OnPowerUPCollected?.Invoke(powerUpEffect);

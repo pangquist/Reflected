@@ -5,6 +5,11 @@ using PathCreation;
 
 public class Room : MonoBehaviour
 {
+    [Header("References")]
+
+    [SerializeField] private Transform pathsChild;
+    [SerializeField] private Transform terrainChild;
+
     [Header("Read Only")]
 
     [ReadOnly][SerializeField] private Rect rect;
@@ -17,6 +22,9 @@ public class Room : MonoBehaviour
     private static Map map;
 
     // Properties
+
+    public Transform PathsChild => pathsChild;
+    public Transform TerrainChild => terrainChild;
 
     public Rect Rect => rect;
     public List<Wall> Walls => walls;
@@ -88,6 +96,12 @@ public class Room : MonoBehaviour
                 chamber.gameObject.SetActive(false);
         }
 
+        //THIS WILL BE MOVED
+        //if (type == RoomType.Monster)
+        //    GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(-1);
+        //else if (type == RoomType.Boss)
+        //    GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(-2);
+
         map.ActiveRoom = null;
         gameObject.SetActive(false);
     }
@@ -105,7 +119,14 @@ public class Room : MonoBehaviour
         if (!cleared)
         {
             if (type == RoomType.Monster || type == RoomType.Boss)
+            {
                 GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>().EnterRoom();
+                GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(1);
+                if (type == RoomType.Boss)
+                {
+                    GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(2);
+                }
+            }
 
             else
                 SetCleared(true);
@@ -124,11 +145,11 @@ public class Room : MonoBehaviour
             if (type == RoomType.Monster || type == RoomType.Boss)
                 map.DimensionManager.GainCharges(1);
         }
-          
+
         else
         {
             foreach (Chamber chamber in chambers)
                 chamber.Close(this);
-        } 
+        }
     }
 }

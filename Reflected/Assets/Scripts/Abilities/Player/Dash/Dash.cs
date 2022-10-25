@@ -7,6 +7,7 @@ public class Dash : Ability
     [Header("Dash Specific")]
     [SerializeField] float dashDuration;
     [SerializeField] float dashSpeed;
+    [SerializeField] GameObject parent;
     bool isDashing;
 
     public override bool DoEffect()
@@ -28,7 +29,7 @@ public class Dash : Ability
         float progress = 0;
         while (progress < dashDuration)
         {
-            transform.position += transform.forward * dashSpeed;
+            parent.transform.position += transform.forward * dashSpeed;
             progress += Time.deltaTime;
             yield return null;
         }

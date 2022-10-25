@@ -21,7 +21,7 @@ public class Enemy : Character
     protected override void Awake()
     {
         base.Awake();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = FindObjectOfType<Player>();
         parent = gameObject.transform.parent.gameObject;
     }
 
@@ -56,7 +56,7 @@ public class Enemy : Character
         AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
         aiDirector.killEnemyInRoom();
         LootDrop(transform);
-        player.RemoveEnemy(this);
+        //player.RemoveEnemy(this);
         anim.Play("Death");
         base.Die();
     }

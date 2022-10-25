@@ -41,7 +41,7 @@ public class AiManager2 : MonoBehaviour
         }
         if (player == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            player = FindObjectOfType<Player>();
         }
 
         //Should have a way to assign firePoint without the inspector. But I don't have one atm.

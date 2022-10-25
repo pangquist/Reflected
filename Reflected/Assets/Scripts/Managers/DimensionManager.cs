@@ -40,7 +40,7 @@ public class DimensionManager : MonoBehaviour
     [SerializeField] private int currentCharges;
 
     [Header("Read Only")]
-    [ReadOnly][SerializeField] private StatSystem statSystem;
+    [ReadOnly][SerializeField] private PlayerStatSystem statSystem;
 
     private static Dimension currentDimension;
 
@@ -145,7 +145,7 @@ public class DimensionManager : MonoBehaviour
         UpdateChargeBar();
     }
 
-    public void SetStatSystem(StatSystem newStatSystem)
+    public void SetStatSystem(PlayerStatSystem newStatSystem)
     {
         statSystem = newStatSystem;
     }

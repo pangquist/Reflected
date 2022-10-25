@@ -12,20 +12,21 @@ using UnityEngine;
 /// </summary>
 public class Player : Character, ISavable
 {
-    [SerializeField] StatSystem stats;
+    [SerializeField] PlayerStatSystem stats;
     [SerializeField] GameObject chargeBar;
 
     [Header("Stat Properties")]
     [SerializeField] float jumpForce;
 
-    [SerializeField] List<Weapon> weapons = new List<Weapon>();
+    [SerializeField] List<Weapon> weapons;
     int weaponIndex = 0;
 
-    [SerializeField] List<Enemy> aggroedEnemies = new List<Enemy>();
+    //[SerializeField] List<Enemy> aggroedEnemies = new List<Enemy>();
 
     DimensionManager dimensionManager;
     MusicManager musicManager;
 
+    Ability currentAbility;
     [SerializeField] Ability basicSwordAbility;
     [SerializeField] Ability basicBowAbility;
     [SerializeField] Ability specialAbility;
@@ -39,20 +40,26 @@ public class Player : Character, ISavable
     protected override void Awake()
     {
         base.Awake();
-        currentWeapon = weapons[weaponIndex];
-        currentWeapon.gameObject.SetActive(true);
-        currentWeapon.SetDamage(damage);
-
         Cursor.lockState = CursorLockMode.Locked;
 
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
         musicManager = dimensionManager.GetComponentInChildren<MusicManager>();
+
+        currentWeapon = weapons[weaponIndex];
+        currentWeapon.gameObject.SetActive(true);
+        currentWeapon.SetDamage(damage);
+
 
         dimensionManager.SetStatSystem(stats);
 
         ChangeStats();
 
         anim.Play("GetUp");
+    }
+
+    private void Start()
+    {
+
     }
 
     // Update is called once per frame
@@ -75,26 +82,20 @@ public class Player : Character, ISavable
             currentWeapon.SetDamage(damage);
         }
 
-    }    
+    }
 
     public void Attack()
     {
-        if(weaponIndex == 1)
-        {
-            if (basicBowAbility.IsOnCooldown())
-                return;
+        if (weaponIndex == 0)
+            currentAbility = basicSwordAbility;
+        else
+            currentAbility = basicBowAbility;
 
-            anim.Play(basicBowAbility.GetAnimation().name);
-            basicBowAbility.DoEffect();
-        }
-        else if(weaponIndex == 0)
-        {
-            if (basicBowAbility.IsOnCooldown())
-                return;
+        if (currentAbility.IsOnCooldown())
+            return;
 
-            anim.Play(basicSwordAbility.GetAnimation().name);
-            basicSwordAbility.DoEffect();
-        }
+        anim.Play(currentAbility.GetAnimation().name);
+        currentAbility.DoEffect();
     }
 
     public void SpecialAttack()
@@ -102,6 +103,7 @@ public class Player : Character, ISavable
         if (specialAbility.IsOnCooldown())
             return;
 
+        currentAbility = specialAbility;
         anim.Play(specialAbility.GetAnimation().name);
     }
 
@@ -121,15 +123,21 @@ public class Player : Character, ISavable
 
     public void ChangeStats()
     {
-        if (DimensionManager.True)
+        try
         {
-            stats.GetLightStats();
+            if (DimensionManager.True)
+            {
+                stats.GetLightStats();
+            }
+            else
+            {
+                stats.GetDarkStats();
+            }
         }
-        else
+        catch
         {
-            stats.GetDarkStats();
-        }
 
+        }
         currentWeapon.SetDamage(damage);
     }
 
@@ -148,7 +156,7 @@ public class Player : Character, ISavable
         OnObjectInteraction.Invoke();
     }
 
-    public StatSystem GetStats()
+    public StatSystem GetStats() //May have to be PlayerStatSystem??
     {
         return stats;
     }
@@ -163,36 +171,41 @@ public class Player : Character, ISavable
         return specialAbility;
     }
 
-    public void AddEnemy(Enemy enemy)
+    //public void AddEnemy(Enemy enemy)
+    //{
+    //    if (aggroedEnemies.Contains(enemy))
+    //        return;
+
+    //    if (aggroedEnemies.Count == 0)
+    //    {
+    //        musicManager.ChangeMusicIntensity(1);
+    //    }
+
+    //    aggroedEnemies.Add(enemy);
+    //}
+
+    //public void RemoveEnemy(Enemy enemy)
+    //{
+    //    if (!aggroedEnemies.Contains(enemy))
+    //        return;
+
+
+    //    aggroedEnemies.Remove(enemy);
+
+    //    if (aggroedEnemies.Count == 0)
+    //    {
+    //        musicManager.ChangeMusicIntensity(-1);
+    //    }
+    //}
+
+    //public List<Enemy> GetEnemies()
+    //{
+    //    return aggroedEnemies;
+    //}
+
+    public void PlayCurrentAbilityVFX()
     {
-        if (aggroedEnemies.Contains(enemy))
-            return;
-
-        if (aggroedEnemies.Count == 0)
-        {
-            musicManager.ChangeMusicIntensity(1);
-        }
-
-        aggroedEnemies.Add(enemy);
-    }
-
-    public void RemoveEnemy(Enemy enemy)
-    {
-        if (!aggroedEnemies.Contains(enemy))
-            return;
-
-
-        aggroedEnemies.Remove(enemy);
-
-        if (aggroedEnemies.Count == 0)
-        {
-            musicManager.ChangeMusicIntensity(-1);
-        }
-    }
-
-    public List<Enemy> GetEnemies()
-    {
-        return aggroedEnemies;
+        currentAbility.PlayVFX();
     }
 
     #region SaveLoad
