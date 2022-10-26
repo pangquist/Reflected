@@ -49,14 +49,22 @@ public class EnemySpawner : MonoBehaviour
 
     private void spawnFunction(int amount, float adaptiveDifficulty)
     {
-        for (int i = 0; i < amount; i++)
+        try
         {
-            GetRandomEnemy();
-            if (spawnTransforms.Count <= 0) GetSpawnlocations();
-            spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-            Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponentInChildren<Enemy>();
-            enemy.AdaptiveDifficulty(adaptiveDifficulty);
-            spawnTransforms.Remove(spawnLocation);
+            for (int i = 0; i < amount; i++)
+            {
+                GetRandomEnemy();
+                if (spawnTransforms.Count <= 0) GetSpawnlocations();
+                spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+                Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponentInChildren<Enemy>();
+                enemy.AdaptiveDifficulty(adaptiveDifficulty);
+                spawnTransforms.Remove(spawnLocation);
+            }
+        }
+        catch
+        {
+            if(spawnTransforms.Count == 0)
+            Debug.Log("No spawn locations");
         }
     }
 
