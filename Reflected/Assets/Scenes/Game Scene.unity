@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.8
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.077268176, g: 0.17427145, b: 0.2950537, a: 0.8}
+  m_IndirectSpecularColor: {r: 0.07737239, g: 0.1742914, b: 0.29488918, a: 0.8}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -195,22 +195,22 @@ PrefabInstance:
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.96567446
+      value: 0.9656744
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13202262
+      value: 0.1320226
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.22164106
+      value: -0.22164115
       objectReference: {fileID: 0}
     - target: {fileID: 7509292486608017015, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.030301753
+      value: 0.030301768
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487349488125, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
@@ -270,12 +270,12 @@ PrefabInstance:
     - target: {fileID: 7509292488307742550, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.004315756
+      value: 0.0043157856
       objectReference: {fileID: 0}
     - target: {fileID: 7509292488307742550, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.002022452
+      value: 0.0020224538
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 208b911f792bd8d40991cc24ecabd06b, type: 3}
@@ -354,7 +354,7 @@ PrefabInstance:
     - target: {fileID: 3466060085952198480, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 425.48294
+      value: 425.48297
       objectReference: {fileID: 0}
     - target: {fileID: 3466060085952198480, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -704,7 +704,7 @@ PrefabInstance:
     - target: {fileID: 4763105907550617729, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -59.347595
+      value: -59.34761
       objectReference: {fileID: 0}
     - target: {fileID: 5821881590750259855, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -724,7 +724,7 @@ PrefabInstance:
     - target: {fileID: 7015028412430424291, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 425.48294
+      value: 425.48297
       objectReference: {fileID: 0}
     - target: {fileID: 7806777676189186301, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -759,7 +759,7 @@ PrefabInstance:
     - target: {fileID: 7970068262492351453, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 425.48294
+      value: 425.48297
       objectReference: {fileID: 0}
     - target: {fileID: 8215079499412126164, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -1245,6 +1245,8 @@ MonoBehaviour:
   wallPadding: 2
   obstacleDistance: 5
   avoidCenter: 1
+  enemySpawnPoint: {fileID: 2572951519100550845, guid: b6f5ecbc5fd265a49b724a958a79623b,
+    type: 3}
   objects:
   - terrain: Underwater
     terrainObjects:
@@ -1260,10 +1262,7 @@ MonoBehaviour:
         weight: 1
   - terrain: Sand
     terrainObjects:
-      list:
-      - item: {fileID: 2572951519100550845, guid: b6f5ecbc5fd265a49b724a958a79623b,
-          type: 3}
-        weight: 1
+      list: []
   - terrain: Grass
     terrainObjects:
       list:

@@ -24,7 +24,9 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] float obstacleDistance;
     [SerializeField] bool avoidCenter;
 
-    [Header("Decorations")]
+    [SerializeField] GameObject enemySpawnPoint;
+
+    [Header("Objects")]
     [SerializeField] ObjectList[] objects;
 
     public void Place(Map map)
@@ -47,7 +49,7 @@ public class ObjectPlacer : MonoBehaviour
             int terrainNr = 0;
             foreach (TerrainType terrain in terrainTypes)
             {
-                if (objectList.terrain == terrain.name)
+                if (objectList.terrain == terrain.name && objectList.terrainObjects.Count > 0)
                 {
                     float height = terrainGenerator.HeightCurve().Evaluate(terrainTypes[terrainNr].height) * terrainGenerator.HeightMultiplier();
 
@@ -59,7 +61,6 @@ public class ObjectPlacer : MonoBehaviour
                     {
                         for (int i = 0; i < pair.weight * objectMultiplier * 10; i++)
                         {
-                            Debug.Log(pair.item + " " + i);
                             Ray ray = new Ray(new Vector3(Random.Range(start.x + wallPadding, end.x - wallPadding), 20, Random.Range(start.z + wallPadding, end.z - wallPadding)), -transform.up);
                             RaycastHit hit;
                             if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
@@ -99,6 +100,28 @@ public class ObjectPlacer : MonoBehaviour
                     }
                 }
                 terrainNr++;
+            }
+        }
+        PlaceEnemySpawnPoints(start, end, room);
+    }
+
+    private void PlaceEnemySpawnPoints(Vector3 start, Vector3 end, Room room)
+    {
+        for (int i = 0; i < objectMultiplier * 10; i++)
+        {
+            Ray ray = new Ray(new Vector3(Random.Range(start.x + wallPadding, end.x - wallPadding), 20, Random.Range(start.z + wallPadding, end.z - wallPadding)), -transform.up);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
+            {
+                Collider[] closeObjects = Physics.OverlapSphere(hit.point, obstacleDistance);
+
+                foreach (Collider collider in closeObjects)
+                {
+                    if (!collider.gameObject.GetComponent<NavMeshObstacle>())
+                    {
+                        Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.transform);
+                    }
+                }
             }
         }
     }
