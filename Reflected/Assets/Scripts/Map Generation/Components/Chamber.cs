@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Chamber : MonoBehaviour
 {
+    [Header("References")]
+
+    [SerializeField] private Transform terrainChild;
+
     [Header("Values")]
 
     [Range(0f, 3f)]
@@ -31,6 +35,8 @@ public class Chamber : MonoBehaviour
 
     // Properties
 
+    public Transform TerrainChild => terrainChild;
+
     public Orientation Orientation => orientation;
     public List<Wall> Walls => walls;
     public List<Pillar> Pillars => pillars;
@@ -43,7 +49,7 @@ public class Chamber : MonoBehaviour
     public static void StaticInitialize(Map map)
     {
         Chamber.map = map;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = FindObjectOfType<Player>();
     }
 
     public Chamber Initialize(Room room1, Room room2, Rect rect, Orientation orientation)

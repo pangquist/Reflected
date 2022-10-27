@@ -6,8 +6,8 @@ using UnityEngine;
 public class ItemDatabaseData : ScriptableObject
 {
     public ItemData[] items;
-    public Dictionary<ItemData, int> GetId = new Dictionary<ItemData, int>();
-    public Dictionary<int, ItemData> GetItem = new Dictionary<int, ItemData>();
+    //public Dictionary<ItemData, int> GetId = new Dictionary<ItemData, int>();
+    //public Dictionary<int, ItemData> GetItem = new Dictionary<int, ItemData>();
 
     //public void OnAfterDeserialize()
     //{

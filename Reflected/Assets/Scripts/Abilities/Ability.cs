@@ -9,6 +9,7 @@ using UnityEngine;
 /// <summary>
 /// Ability description
 /// </summary>
+[RequireComponent(typeof(Player))]
 public abstract class Ability : MonoBehaviour
 {
     [Header("Ability Stats")]
@@ -21,13 +22,16 @@ public abstract class Ability : MonoBehaviour
     [SerializeField] protected float damage;
     [SerializeField] protected bool debug;
     [SerializeField] AnimationClip abilityAnimation;
-    [SerializeField] protected Player player;
+    [SerializeField] GameObject vfxObject;
+    [SerializeField] float vfxDuration;
+    protected Player player;
 
     protected AbilityCooldowns cooldownstarter;
 
     private void Start()
     {
         cooldownstarter = FindObjectOfType<AbilityCooldowns>();
+        player = GetComponent<Player>();
     }
 
     public virtual bool DoEffect()
@@ -76,5 +80,19 @@ public abstract class Ability : MonoBehaviour
     public string GetName()
     {
         return abilityName;
+    }
+
+    public void PlayVFX()
+    {
+        StartCoroutine(DoVFX());
+    }
+
+    IEnumerator DoVFX()
+    {
+        vfxObject.SetActive(true);
+
+        yield return new WaitForSeconds(vfxDuration);
+
+        vfxObject.SetActive(false);
     }
 }

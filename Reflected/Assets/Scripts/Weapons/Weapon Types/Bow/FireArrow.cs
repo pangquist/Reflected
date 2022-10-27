@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class FireArrow : Projectile
 {
-    [SerializeField] float damageOverTime;
-    [SerializeField] float time;
+    private void Start()
+    {
+        currentProjectile = projectileType.fire;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Enemy>())
+        if (other.GetComponent<Enemy>())
         {
             other.GetComponent<Enemy>().TakeDamage(damage);
-            other.gameObject.GetComponent<Enemy>().TakeDamageOverTime(damageOverTime, time);
+            other.GetComponent<IEffectable>().ApplyEffect(data, damage * 2);
         }
     }
 }

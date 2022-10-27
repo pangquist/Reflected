@@ -6,7 +6,7 @@ public class Bow : Weapon
 {
     [Header("Bow Properties")]
     [SerializeField] float firePower;
-    [SerializeField] GameObject projectile;
+    GameObject projectile;
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject body;
 
@@ -14,40 +14,38 @@ public class Bow : Weapon
     [SerializeField] LayerMask hitableLayers;
     Transform targetTransform = null;
 
-    //public override void DoAttack()
-    //{
-    //    base.DoAttack();
-    //    anim.Play(comboClips[currentComboIndex].name);
-    //}
+    [SerializeField] List<Projectile> projectiles = new List<Projectile>();
+    [SerializeField] int arrowIndex; //Obsolete
 
     private void Start()
     {
         if (!cam) cam = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
-    public override void AttackWithoutAnimation()
-    {
-        base.AttackWithoutAnimation();
-        Projectile arrow = Instantiate(projectile, firePoint.position, cam.transform.localRotation).GetComponent<Projectile>();
-        arrow.Fire(firePower, damage);
-    }
-
     public override void WeaponEffect()
     {
-        Projectile arrow = Instantiate(projectile, firePoint.position, body.transform.localRotation).GetComponent<Projectile>();
+        projectile = projectiles[powerUpIndex].gameObject;
+
+        Projectile arrow = Instantiate(projectile, firePoint.position, firePoint.parent.rotation).GetComponent<Projectile>();
         arrow.Fire(firePower, damage);
     }
 
     protected override void Update()
     {
-        RaycastHit hit;
-        Ray ray = cam.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
+        //RaycastHit hit;
+        //Ray ray = cam.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitableLayers))
+        //if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitableLayers))
+        //{
+        //    targetTransform = hit.transform;
+        //}
+
+        transform.parent.rotation = cam.transform.rotation;
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            targetTransform = hit.transform;
+            if (++powerUpIndex >= projectiles.Count)
+                powerUpIndex = 0;
         }
-
-        transform.rotation = cam.transform.rotation;
     }
 }

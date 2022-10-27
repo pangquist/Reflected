@@ -290,4 +290,35 @@ public static class Extensions
         return rect.width * rect.height;
     }
 
+    /// <summary>
+    /// Adds the content of the provided List to this List
+    /// </summary>
+    public static List<T> Add<T>(this List<T> list, List<T> other)
+    {
+        foreach (T item in other)
+            list.Add(item);
+
+        return list;
+    }
+
+    /// <summary>
+    /// Returns a new List containing the content of this and the provided List
+    /// </summary>
+    public static List<T> And<T>(this List<T> list, List<T> other)
+    {
+        List<T> joinedList = new List<T>(list);
+
+        foreach (T item in other)
+            joinedList.Add(item);
+
+        return joinedList;
+    }
+
+    /// <summary>
+    /// Returns the X and Z components of this Vector3 as a Vector2
+    /// </summary>
+    public static Vector2 XZ(this Vector3 vector)
+    {
+        return new Vector2(vector.x, vector.z);
+    }
 }

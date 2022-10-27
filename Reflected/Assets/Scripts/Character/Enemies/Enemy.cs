@@ -21,7 +21,7 @@ public class Enemy : Character
     protected override void Awake()
     {
         base.Awake();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = FindObjectOfType<Player>();
         parent = gameObject.transform.parent.gameObject;
     }
 
@@ -56,27 +56,9 @@ public class Enemy : Character
         AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
         aiDirector.killEnemyInRoom();
         LootDrop(transform);
-        player.RemoveEnemy(this);
+        //player.RemoveEnemy(this);
         anim.Play("Death");
         base.Die();
-    }
-
-    public IEnumerator Freeze(float slowedMovementSpeed ,float timeFrozen)
-    {
-        float oldMovmentSpeed = movementSpeed;
-        movementSpeed *= slowedMovementSpeed;
-
-        yield return new WaitForSeconds(timeFrozen);
-
-        movementSpeed = oldMovmentSpeed;
-    }
-    public IEnumerator TakeDamageOverTime(float damageOverTime, float time)
-    {
-        for (int i = 0; i < time; i++)
-        {
-            currentHealth -= damageOverTime / time;
-            yield return new WaitForSeconds(1);
-        }
     }
 
     public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instaintiated (from the EnemySpanwer-script)

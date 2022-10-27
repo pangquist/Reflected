@@ -12,6 +12,14 @@ public class UpgradeManager : MonoBehaviour
     Dictionary<string, float> trueVariables;
     Dictionary<string, float> mirrorVariables;
 
+    private void Awake()
+    {
+        UpgradeManager[] array = FindObjectsOfType<UpgradeManager>();
+
+        if (array.Length > 1)
+            Destroy(gameObject);
+    }
+
     void Start()
     {
         trueVariables = new Dictionary<string, float>();
@@ -39,6 +47,16 @@ public class UpgradeManager : MonoBehaviour
             else
                 mirrorVariables[node.GetVariable()] += node.GetValue();
         }
+
+        Destroy(gameObject);
+    }
+
+    public void AddTree(TechTree tree, Dimension dimension)
+    {
+        if (dimension == Dimension.True)
+            trueTechTree = tree;
+        else
+            mirrorTechTree = tree;
     }
 
     public Dictionary<string, float> GetTrueNodes()

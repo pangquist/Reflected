@@ -67,3 +67,15 @@ public enum RoomType
     Monster,
     Boss
 }
+/// <summary>
+/// Starts that effect the enemy
+/// </summary>
+public enum Stats
+{
+    Health,
+    DamageReduction,
+    MovementSpeed,
+    Damage,
+    AttackSpeed,
+    AoE   
+}

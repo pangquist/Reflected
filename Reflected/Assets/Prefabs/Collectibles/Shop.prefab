@@ -114,15 +114,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootTablePowerUps:
     list:
-    - item: {fileID: 11400000, guid: 892b28201fa865044b1e5f2b3d437230, type: 2}
+    - item: {fileID: 4811609501389817639, guid: e90aa5bb20c784a419a7efd74780727f,
+        type: 3}
       weight: 1
-    - item: {fileID: 11400000, guid: d536d9397f02d90498550c649d9f99b4, type: 2}
-      weight: 2
-    - item: {fileID: 11400000, guid: 4fbd9c3ffae248d44b962fe3f7fa05c0, type: 2}
-      weight: 4
+    - item: {fileID: 526024567778351285, guid: b359378d71250304fa73386fc1b9238e, type: 3}
+      weight: 1
+    - item: {fileID: 1491449522285018658, guid: 1ed094479c8944542867015952245fc2,
+        type: 3}
+      weight: 1
   lootTableCollectables:
     list:
-    - item: {fileID: 11400000, guid: 8f258e08f82e407409161d4c8a39c908, type: 2}
+    - item: {fileID: 2114209293717154565, guid: 2566ba70c6c9c7047a264a8234dfb7ab,
+        type: 3}
+      weight: 1
+    - item: {fileID: 2146492496958938027, guid: 28695414eab1d454e9acd1b9721bbb90,
+        type: 3}
+      weight: 1
+    - item: {fileID: 2626944597636507086, guid: d30e27c8011a1544aa6401629351b369,
+        type: 3}
+      weight: 1
+  rarityTiers:
+    list:
+    - item: {fileID: 11400000, guid: c07b740bade056f49ab423a8045669bf, type: 2}
+      weight: 6
+    - item: {fileID: 11400000, guid: 30a205678ae99124a9002b2072e248b4, type: 2}
+      weight: 3
+    - item: {fileID: 11400000, guid: 1c84b4c9ccd0a6a4d87d3ee63c907f75, type: 2}
       weight: 1
   shopItems: []
   itemHolder: {fileID: 8049254640363195081}
@@ -255,13 +272,25 @@ PrefabInstance:
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8049254639379775926}
+      objectReference: {fileID: 672465699005169734, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4703789953061880391, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -269,23 +298,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BuyItem
+      value: CreateButtons
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Shop, Assembly-CSharp
+      value: ShopUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Shop, Assembly-CSharp
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
@@ -295,12 +334,12 @@ PrefabInstance:
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6060d950f2d1cae4ab62215ea368fb4c, type: 3}

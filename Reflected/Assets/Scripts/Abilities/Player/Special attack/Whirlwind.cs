@@ -11,10 +11,11 @@ using UnityEngine;
 /// </summary>
 public class Whirlwind : Ability
 {
+    [SerializeField] Sword sword;
     public override AnimationClip GetAnimation()
     {
         cooldownstarter.Ability1Use();
-
+        sword.ClearEnemies();
         return base.GetAnimation();
     }
 }

@@ -220,6 +220,9 @@ GameObject:
   - component: {fileID: 3270762023016562209}
   - component: {fileID: 5509394995416260729}
   - component: {fileID: 7971695286065205912}
+  - component: {fileID: 4069102877837833177}
+  - component: {fileID: 5769069757825373679}
+  - component: {fileID: 937357271}
   m_Layer: 0
   m_Name: Enemy Melee
   m_TagString: Melee
@@ -250,7 +253,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8113125744219651150}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d97dff8a4437e94dbd947d6de5d2f65, type: 3}
   m_Name: 
@@ -279,6 +282,56 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!1818360608 &4069102877837833177
+PositionConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113125744219651150}
+  m_Enabled: 1
+  m_Weight: 1
+  m_TranslationAtRest: {x: 1.69, y: -0, z: 3.42}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_IsContraintActive: 0
+  m_IsLocked: 0
+  m_Sources: []
+--- !u!114 &5769069757825373679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113125744219651150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dadd66639242df4b80408ea6a617fc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  me: {fileID: 0}
+  agent: {fileID: 0}
+  target: {fileID: 0}
+  firePoint: {fileID: 4610693129025204792}
+  currentCombatBehavior: 0
+--- !u!114 &937357271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113125744219651150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a2daf4b288b8084fa5f94873b68134d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRate: 1
+  meleeObject: {fileID: 7872967660243970808, guid: 870d93194abef424383246f2a80137ba,
+    type: 3}
 --- !u!1 &9076815794942254098
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,10 +531,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8ec940f670973459ddf18f039565fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 5
   movementSpeed: 0
   damage: 0
   attackSpeed: 0
+  anim: {fileID: 0}
   healthBar: {fileID: 774349290341456373}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}

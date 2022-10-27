@@ -44,14 +44,13 @@ GameObject:
   - component: {fileID: 3396703871350839528}
   - component: {fileID: 7838265330423071699}
   - component: {fileID: 4491102440787741439}
-  - component: {fileID: 8678534819681267452}
   m_Layer: 0
   m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9110556978354828655
 Transform:
   m_ObjectHideFlags: 0
@@ -143,38 +142,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6838a92f7e77c5408f63a9d85cfe7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comboClips: []
-  maxTimeBetweenCombo: 0
-  specialAttackClip: {fileID: 0}
-  specialAttackCooldown: 0
-  timeSinceLastSpecialAttack: 0
   hitEnemies: []
   firePower: 500
-  projectile: {fileID: 6041024079821305079, guid: 34bcccf8ecffce14ebfe5457138ca181,
-    type: 3}
   firePoint: {fileID: 3715314175662455756}
   body: {fileID: 0}
   cam: {fileID: 0}
   hitableLayers:
     serializedVersion: 2
     m_Bits: 0
---- !u!95 &8678534819681267452
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8357193135869404768}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  projectiles:
+  - {fileID: 3939338163698569271, guid: c232a2adf6328be43bd44e6b95afdbb2, type: 3}
+  - {fileID: -5002592794489599901, guid: e2cac81004ff9b343b6176c1f91b51b2, type: 3}
+  - {fileID: 5175566854545040523, guid: 3b401793b6bab3d438c5327235d7f5b7, type: 3}
+  - {fileID: 5486551620839375624, guid: 94eed4084b4ba03479e84a117142f27e, type: 3}
+  powerUpIndex: 0

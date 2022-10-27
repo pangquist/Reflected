@@ -33,8 +33,6 @@ public class Slash : Ability
 
     public override AnimationClip GetAnimation()
     {
-
-
         sword.ClearEnemies();
         base.GetAnimation();
 

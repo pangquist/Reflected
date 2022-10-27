@@ -31,38 +31,33 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    public void SpawnEnemy(float spawnTime, int enemyAmount, float enemyadaptiveDifficulty)
+    public void SpawnEnemy(float spawnTime, int enemyAmount, int waveAmount, float enemyadaptiveDifficulty)
     {
-        StartCoroutine(SpawnWave(spawnTime, enemyAmount, enemyadaptiveDifficulty));
+        StartCoroutine(SpawnWave(spawnTime, enemyAmount, waveAmount, enemyadaptiveDifficulty));
     }
 
-    private IEnumerator SpawnWave(float spawnTime, int enemyAmount, float enemyAdaptiveDifficulty)
+    private IEnumerator SpawnWave(float spawnTime, int enemyAmount, int waveAmount, float enemyAdaptiveDifficulty)
     {
+        GetSpawnlocations();
+
+        for (int i = 0; i < waveAmount; i++)
+        {
             yield return new WaitForSeconds(spawnTime);
+            spawnFunction(enemyAmount, enemyAdaptiveDifficulty);
+        }
+    }
 
-            GetSpawnlocations();
-
-            for (int i = 0; i < enemyAmount; i++)
-            {
-                GetRandomEnemy();
-                if (spawnTransforms.Count <= 0) GetSpawnlocations();
-                spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-                Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponentInChildren<Enemy>();
-                enemy.AdaptiveDifficulty(enemyAdaptiveDifficulty);
-                spawnTransforms.Remove(spawnLocation);
-            }
-
-            yield return new WaitForSeconds(spawnTime);
-
-            for (int i = 0; i < enemyAmount; i++)
-            {
-                GetBiasedEnemy();
-                if (spawnTransforms.Count <= 0) GetSpawnlocations();
-                spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-                Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponentInChildren<Enemy>();
-                enemy.AdaptiveDifficulty(enemyAdaptiveDifficulty);
-                spawnTransforms.Remove(spawnLocation);
-            }
+    private void spawnFunction(int amount, float adaptiveDifficulty)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            GetRandomEnemy();
+            if (spawnTransforms.Count <= 0) GetSpawnlocations();
+            spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+            Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponentInChildren<Enemy>();
+            enemy.AdaptiveDifficulty(adaptiveDifficulty);
+            spawnTransforms.Remove(spawnLocation);
+        }
     }
 
     private void GetSpawnlocations()
@@ -74,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
 
         foreach (GameObject spawnPoint in spawns)
         {
-            if(spawnPoint.activeInHierarchy) spawnTransforms.Add(spawnPoint.transform);
+            if (spawnPoint.activeInHierarchy) spawnTransforms.Add(spawnPoint.transform);
         }
     }
 
@@ -97,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                if(percentage % 2 == 0)
+                if (percentage % 2 == 0)
                 {
                     enemyToSpawn = enemyClose;
                 }

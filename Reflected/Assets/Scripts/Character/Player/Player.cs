@@ -12,23 +12,27 @@ using UnityEngine;
 /// </summary>
 public class Player : Character, ISavable
 {
-    [SerializeField] StatSystem stats;
+    [SerializeField] PlayerStatSystem stats;
     [SerializeField] GameObject chargeBar;
 
     [Header("Stat Properties")]
     [SerializeField] float jumpForce;
 
-    [SerializeField] List<Weapon> weapons = new List<Weapon>();
+    [SerializeField] List<Weapon> weapons;
     int weaponIndex = 0;
 
-    [SerializeField] List<Enemy> aggroedEnemies = new List<Enemy>();
+    //[SerializeField] List<Enemy> aggroedEnemies = new List<Enemy>();
 
     DimensionManager dimensionManager;
     MusicManager musicManager;
 
-    [SerializeField] Ability basicAbility;
+    Ability currentAbility;
+    [SerializeField] Ability basicSwordAbility;
+    [SerializeField] Ability basicBowAbility;
     [SerializeField] Ability specialAbility;
     [SerializeField] Ability swapAbility;
+    [Range(0f, 1f)]
+    [SerializeField] float TimeFlowWhileSwapping;
 
     public delegate void InteractWithObject();
     public static event InteractWithObject OnObjectInteraction;
@@ -38,18 +42,26 @@ public class Player : Character, ISavable
     protected override void Awake()
     {
         base.Awake();
-        currentWeapon = weapons[weaponIndex];
-        currentWeapon.gameObject.SetActive(true);
-        currentWeapon.SetDamage(damage);
-
         Cursor.lockState = CursorLockMode.Locked;
 
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
         musicManager = dimensionManager.GetComponentInChildren<MusicManager>();
 
+        currentWeapon = weapons[weaponIndex];
+        currentWeapon.gameObject.SetActive(true);
+        currentWeapon.SetDamage(damage);
+
+
         dimensionManager.SetStatSystem(stats);
 
         ChangeStats();
+
+        anim.Play("GetUp");
+    }
+
+    private void Start()
+    {
+
     }
 
     // Update is called once per frame
@@ -69,15 +81,23 @@ public class Player : Character, ISavable
 
             currentWeapon = weapons[weaponIndex];
             currentWeapon.gameObject.SetActive(true);
+            currentWeapon.SetDamage(damage);
         }
 
     }
+
     public void Attack()
     {
-        if (basicAbility.IsOnCooldown())
+        if (weaponIndex == 0)
+            currentAbility = basicSwordAbility;
+        else
+            currentAbility = basicBowAbility;
+
+        if (currentAbility.IsOnCooldown())
             return;
 
-        anim.Play(basicAbility.GetAnimation().name);
+        anim.Play(currentAbility.GetAnimation().name);
+        currentAbility.DoEffect();
     }
 
     public void SpecialAttack()
@@ -85,6 +105,7 @@ public class Player : Character, ISavable
         if (specialAbility.IsOnCooldown())
             return;
 
+        currentAbility = specialAbility;
         anim.Play(specialAbility.GetAnimation().name);
     }
 
@@ -104,19 +125,34 @@ public class Player : Character, ISavable
 
     public void ChangeStats()
     {
-        if (DimensionManager.True)
+        try
         {
-            stats.GetLightStats();
+            if (DimensionManager.True)
+            {
+                stats.GetLightStats();
+            }
+            else
+            {
+                stats.GetDarkStats();
+            }
         }
-        else
+        catch
         {
-            stats.GetDarkStats();
-        }
 
+        }
         currentWeapon.SetDamage(damage);
     }
 
-    public void SwapDimension()
+    public void TryDimensionSwap()
+    {
+        if (dimensionManager.CanSwap())
+        {
+            Time.timeScale = TimeFlowWhileSwapping;
+            anim.Play("DimensionSwap");
+        }
+    }
+
+    public void DoDimensionSwap()
     {
         if (dimensionManager.TrySwap())
         {
@@ -131,7 +167,7 @@ public class Player : Character, ISavable
         OnObjectInteraction.Invoke();
     }
 
-    public StatSystem GetStats()
+    public StatSystem GetStats() //May have to be PlayerStatSystem??
     {
         return stats;
     }
@@ -146,43 +182,46 @@ public class Player : Character, ISavable
         return specialAbility;
     }
 
-    public override void TakeDamage(float damage)
-    {
-        base.TakeDamage(damage);
+    //public void AddEnemy(Enemy enemy)
+    //{
+    //    if (aggroedEnemies.Contains(enemy))
+    //        return;
 
-        anim.Play("TakeDamage");
+    //    if (aggroedEnemies.Count == 0)
+    //    {
+    //        musicManager.ChangeMusicIntensity(1);
+    //    }
+
+    //    aggroedEnemies.Add(enemy);
+    //}
+
+    //public void RemoveEnemy(Enemy enemy)
+    //{
+    //    if (!aggroedEnemies.Contains(enemy))
+    //        return;
+
+
+    //    aggroedEnemies.Remove(enemy);
+
+    //    if (aggroedEnemies.Count == 0)
+    //    {
+    //        musicManager.ChangeMusicIntensity(-1);
+    //    }
+    //}
+
+    //public List<Enemy> GetEnemies()
+    //{
+    //    return aggroedEnemies;
+    //}
+
+    public void PlayCurrentAbilityVFX()
+    {
+        currentAbility.PlayVFX();
     }
 
-    public void AddEnemy(Enemy enemy)
+    public void SetTimeToNormalFlow()
     {
-        if (aggroedEnemies.Contains(enemy))
-            return;
-
-        if (aggroedEnemies.Count == 0)
-        {
-            musicManager.ChangeMusicIntensity(1);
-        }
-
-        aggroedEnemies.Add(enemy);
-    }
-
-    public void RemoveEnemy(Enemy enemy)
-    {
-        if (!aggroedEnemies.Contains(enemy))
-            return;
-
-
-        aggroedEnemies.Remove(enemy);
-
-        if (aggroedEnemies.Count == 0)
-        {
-            musicManager.ChangeMusicIntensity(-1);
-        }
-    }
-
-    public List<Enemy> GetEnemies()
-    {
-        return aggroedEnemies;
+        Time.timeScale = 1;
     }
 
     #region SaveLoad

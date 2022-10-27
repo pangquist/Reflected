@@ -27,7 +27,6 @@ public class MusicManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
         intensityLevel = 0;
 
         currentTrack = trueMusic[intensityLevel];
@@ -86,21 +85,20 @@ public class MusicManager : MonoBehaviour
     {
         float progress = 0;
         float rate = 1 / swapDuration;
+        intensityLevel = Mathf.Clamp(intensityLevel += intensityChange, 0, trueMusic.Count);
 
         while(progress < swapDuration)
         {
             currentTrack.volume = Mathf.Lerp(activeVolume, 0, progress);
 
             if (currentDimension == Dimension.True)
-                trueMusic[intensityLevel + intensityChange].volume = Mathf.Lerp(0, activeVolume, progress);
+                trueMusic[intensityLevel].volume = Mathf.Lerp(0, activeVolume, progress);
             else
-                mirrorMusic[intensityLevel + intensityChange].volume = Mathf.Lerp(0, activeVolume, progress);
+                mirrorMusic[intensityLevel].volume = Mathf.Lerp(0, activeVolume, progress);
 
             progress += rate * Time.deltaTime;
             yield return null;
         }
-
-        intensityLevel += intensityChange;
 
         if (currentDimension == Dimension.True)
             currentTrack = trueMusic[intensityLevel];

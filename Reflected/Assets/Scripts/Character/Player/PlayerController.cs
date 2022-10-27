@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// PlayerController description
@@ -16,10 +17,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] ThirdPersonMovement movement;
 
     [SerializeField] Player player;
-    //[SerializeField] Rigidbody rb;
 
     [SerializeField] bool movementLocked;
     [SerializeField] bool actionLocked;
+    [SerializeField] bool dead;
 
     void Awake()
     {
@@ -35,50 +36,75 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && !movementLocked && !actionLocked)
+        if (context.performed && !movementLocked && !actionLocked && !dead)
             movement.Jump();
     }
 
     public void Move(Vector2 movementVector)
     {
-        if (!movementLocked)
+        if (!movementLocked && !dead)
             movement.Move(new Vector3(movementVector.x, 0, movementVector.y).normalized);
 
     }
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed && !actionLocked)
+        if (context.performed && !actionLocked && !dead)
             player.Attack();
     }
 
     public void SpecialAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && !actionLocked)
+        if (context.performed && !actionLocked && !dead)
             player.SpecialAttack();
     }
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && !movementLocked && !actionLocked)
+        if (context.performed && !movementLocked && !actionLocked && !dead)
             movement.Dash();
     }
 
     public void SwapDimension(InputAction.CallbackContext context)
     {
-        if (context.performed)
-            player.SwapDimension();
+        if (context.performed && !dead && !actionLocked)
+            player.TryDimensionSwap();
     }
 
     public void Interact(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !dead)
             player.Interact();
     }
 
-    public void SetMovementLocked(bool state)
+    public void MovementLock()
     {
-        movementLocked = state;
+        movementLocked = true;
+        player.GetAnim().SetBool("movementLocked", true);
+    }
+
+    public void LockPlayer()
+    {
+        movementLocked = true;
+        player.GetAnim().SetBool("movementLocked", true);
+
+        actionLocked = true;
+        player.GetAnim().SetBool("actionLocked", true);
+    }
+
+    public void UnlockPlayer()
+    {
+        movementLocked = false;
+        player.GetAnim().SetBool("movementLocked", false);
+
+        actionLocked = false;
+        player.GetAnim().SetBool("actionLocked", false);
+    }
+
+    public void MovementUnlock()
+    {
+        movementLocked = false;
+        player.GetAnim().SetBool("movementLocked", false);
     }
 
     public bool GetMovementLocked()
@@ -95,6 +121,10 @@ public class PlayerController : MonoBehaviour
         actionLocked = state;
     }
 
+    public void SetDead()
+    {
+        dead = true;
+    }
 
     public void ActionLock()
     {
@@ -111,5 +141,20 @@ public class PlayerController : MonoBehaviour
     public bool GetActionLock()
     {
         return actionLocked;
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void GravityOn()
+    {
+        movement.TurnOnGravity();
+    }
+
+    public void GravityOff()
+    {
+        movement.TurnOffGravity();
     }
 }

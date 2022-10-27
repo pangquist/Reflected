@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6949068395117669922}
+  - {fileID: 4476179103456871897}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -77,11 +77,11 @@ MonoBehaviour:
     bezierHandleScale: 1
     globalDisplaySettingsFoldout: 1
     keepConstantHandleSize: 1
-    showNormalsInVertexMode: 0
+    showNormalsInVertexMode: 1
     showBezierPathInVertexMode: 0
     showDisplayOptions: 1
     showPathOptions: 1
-    showVertexPathDisplayOptions: 0
+    showVertexPathDisplayOptions: 1
     showVertexPathOptions: 1
     showNormals: 1
     showNormalsHelpInfo: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
   roadMaterial: {fileID: 2100000, guid: b5df4735192845740bd11076dc9cdc99, type: 2}
   undersideMaterial: {fileID: 2100000, guid: c1d8d882244c5344fa86a8fd23246f81, type: 2}
   textureTiling: 1
-  meshHolder: {fileID: 7179263208552471059}
---- !u!1 &7179263208552471059
+  meshHolder: {fileID: 9146006678094800439}
+--- !u!1 &9146006678094800439
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,9 +116,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6949068395117669922}
-  - component: {fileID: 6288067083736987339}
-  - component: {fileID: 1229266110128998398}
+  - component: {fileID: 4476179103456871897}
+  - component: {fileID: 6038438808422419722}
+  - component: {fileID: 2850438149134380865}
   m_Layer: 0
   m_Name: Road Mesh Holder
   m_TagString: Untagged
@@ -126,13 +126,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6949068395117669922
+--- !u!4 &4476179103456871897
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7179263208552471059}
+  m_GameObject: {fileID: 9146006678094800439}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.3406994, y: -2.39, z: 0.18438591}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -141,21 +141,21 @@ Transform:
   m_Father: {fileID: 4283508603791249638}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6288067083736987339
+--- !u!33 &6038438808422419722
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7179263208552471059}
+  m_GameObject: {fileID: 9146006678094800439}
   m_Mesh: {fileID: 0}
---- !u!23 &1229266110128998398
+--- !u!23 &2850438149134380865
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7179263208552471059}
+  m_GameObject: {fileID: 9146006678094800439}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1

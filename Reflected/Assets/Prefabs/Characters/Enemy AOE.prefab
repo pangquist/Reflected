@@ -162,15 +162,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8412068556988583807}
-  - component: {fileID: 4597646825561696991}
   - component: {fileID: 4851435470690753942}
+  - component: {fileID: 2201581570867640493}
+  - component: {fileID: 1411333607}
   m_Layer: 0
   m_Name: Enemy AOE
   m_TagString: AOE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8412068556988583807
 Transform:
   m_ObjectHideFlags: 0
@@ -187,20 +188,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4597646825561696991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7351243042550154464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d97dff8a4437e94dbd947d6de5d2f65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GOplayer: {fileID: 0}
-  firePoint: {fileID: 4369864792932929646}
 --- !u!195 &4851435470690753942
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -223,6 +210,39 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2201581570867640493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7351243042550154464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dadd66639242df4b80408ea6a617fc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  me: {fileID: 0}
+  agent: {fileID: 0}
+  target: {fileID: 0}
+  firePoint: {fileID: 4369864792932929646}
+  currentCombatBehavior: 2
+--- !u!114 &1411333607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7351243042550154464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0a434650e4deb40a17caa23ac49c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRate: 1
+  aoeObject: {fileID: 2969946773842160217, guid: c5a1fefb79ae9e34a87e0b57c73ba6ef,
+    type: 3}
 --- !u!1 &8383799391707578751
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,10 +473,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8ec940f670973459ddf18f039565fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 3
   movementSpeed: 0
   damage: 0
   attackSpeed: 0
+  currentHealth: 0
+  anim: {fileID: 0}
   healthBar: {fileID: 7570516733172581778}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}

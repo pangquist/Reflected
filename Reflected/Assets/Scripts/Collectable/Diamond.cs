@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Diamond : MonoBehaviour, ICollectable
+public class Diamond : MonoBehaviour, ICollectable, IBuyable
 {
     public static event HandleDiamondCollected OnDiamondCollected;
     public delegate void HandleDiamondCollected(ItemData itemData);
@@ -16,5 +16,15 @@ public class Diamond : MonoBehaviour, ICollectable
         Debug.Log("You collected a Diamond");
         Destroy(gameObject);
         OnDiamondCollected?.Invoke(diamondData);
+    }
+
+    public int GetValue()
+    {
+        return diamondData.value;
+    }
+
+    public string GetDescription()
+    {
+        return diamondData.description;
     }
 }
