@@ -14,7 +14,7 @@ public class PathGenerator : MonoBehaviour
 
     [SerializeField] private float level;
     [SerializeField] private float radius;
-    [SerializeField] private float hitboxPointsFrequency;
+    [SerializeField] private float pathPointsFrequency;
     [SerializeField] private Color color;
 
     private const int anchorPoint1  = 0;
@@ -36,7 +36,7 @@ public class PathGenerator : MonoBehaviour
         {
             if (room.Chambers.Count == 1)
             {
-                CreatePath(room, room.Chambers[0]);
+                CreatePoints(room, CreatePath(room, room.Chambers[0]));
                 continue;
             }
 
@@ -47,15 +47,15 @@ public class PathGenerator : MonoBehaviour
                 for (int j = i + 1; j < room.Chambers.Count; ++j)
                 {
                     chamber2 = room.Chambers[j];
-                    CreatePath(room, chamber1, chamber2);
+                    CreatePoints(room, CreatePath(room, chamber1, chamber2));
                 }
             }
         }
     }
 
-    private void CreatePath(Room room, Chamber chamber1, Chamber chamber2)
+    private PathCreator CreatePath(Room room, Chamber chamber1, Chamber chamber2)
     {
-        PathCreator path = GameObject.Instantiate(pathPrefab, room.PathsChild).GetComponent<PathCreator>();
+        PathCreator path = Instantiate(pathPrefab, room.PathsChild).GetComponent<PathCreator>();
         path.name = "Path " + room.Paths.Count;
         room.Paths.Add(path);
 
@@ -72,11 +72,13 @@ public class PathGenerator : MonoBehaviour
             else
                 return new Vector3(chamber.Rect.center.x, level, room.Rect.center.y);
         }
+
+        return path;
     }
 
-    private void CreatePath(Room room, Chamber chamber)
+    private PathCreator CreatePath(Room room, Chamber chamber)
     {
-        PathCreator path = GameObject.Instantiate(pathPrefab, room.PathsChild).GetComponent<PathCreator>();
+        PathCreator path = Instantiate(pathPrefab, room.PathsChild).GetComponent<PathCreator>();
         path.name = "Path " + room.Paths.Count;
         room.Paths.Add(path);
 
@@ -93,11 +95,18 @@ public class PathGenerator : MonoBehaviour
             else
                 return new Vector3(chamber.Rect.center.x, level, room.Rect.center.y + (chamber.Rect.center.y - room.Rect.center.y) * 0.5f);
         }
+
+        return path;
     }
 
     private void CreatePoints(Room room, PathCreator path)
     {
+        float nrOfPoints = path.path.length * pathPointsFrequency;
 
+        for (float percentage = 0f; percentage <= 1f; percentage += 1f / nrOfPoints)
+        {
+            room.PathPoints.Add(path.path.GetPointAtDistance(path.path.length * percentage));
+        }
     }
 
 }
