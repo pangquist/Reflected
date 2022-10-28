@@ -13,10 +13,12 @@ public class AoeAttackState : State
     //Base values of the attack stats
     [SerializeField] private float baseAttackRate = 5f;
     [SerializeField] private float baseAttackDamage = 1f;
+    [SerializeField] private Vector3 baseAoeSize = new Vector3(5f, 3f, 5f);
 
     //Current values of the attack stats
     [SerializeField] private float attackRate;
     [SerializeField] private float attackDamage;
+    [SerializeField] private Vector3 aoeSize;
 
     //Range to player in which the enemy will flee or chase. (Reposition to attack)
     [SerializeField] private float fleeRange = 7f;
@@ -59,11 +61,12 @@ public class AoeAttackState : State
     {
         //Set relevant stats (damage, projectile speed, )
         attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
+        aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
 
         GameObject currentAOE = Instantiate(aoeObject, new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z), Quaternion.identity);
         if (currentAOE != null)
         {
-            currentAOE.GetComponent<AOEScript>().SetUp(attackDamage);
+            currentAOE.GetComponent<AOEScript>().SetUp(attackDamage, aoeSize);
         }
     }
 

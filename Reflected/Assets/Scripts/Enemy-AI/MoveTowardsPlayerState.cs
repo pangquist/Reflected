@@ -10,6 +10,12 @@ public class MoveTowardsPlayerState : State
     [SerializeField] private float rangedAttackRange = 15f;
     [SerializeField] private float aoeAttackRange = 15;
 
+    //Base values of the movement speed stat
+    [SerializeField] private float baseMovementSpeed = 3.5f;
+
+    //Current value of movement speed
+    [SerializeField] private float movementSpeed;
+
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         switch (thisEnemy.currentCombatBehavior)
@@ -44,6 +50,10 @@ public class MoveTowardsPlayerState : State
             default:
                 break;
         }
+
+        //Set movement speed
+        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed();
+        agent.speed = movementSpeed;
 
         DoMoveToward(player.transform, agent);
     }

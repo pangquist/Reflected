@@ -10,7 +10,7 @@ public class AOEScript : MonoBehaviour
     private float damageTimer;
 
     private Rigidbody rb;
-    public float damageAmount = 1; //Base damage 
+    [SerializeField] private float damageAmount = 1; //Base damage 
 
     void Start()
     {
@@ -30,9 +30,11 @@ public class AOEScript : MonoBehaviour
         }
     }
 
-    public void SetUp(float damageAmount)
+    public void SetUp(float damageAmount, Vector3 aoeSize)
     {
         this.damageAmount = damageAmount;
+
+        transform.localScale = aoeSize;
     }
 
     private void OnTriggerStay(Collider other)
