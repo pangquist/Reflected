@@ -42,15 +42,20 @@ public class ShopButton : MonoBehaviour
         return index;
     }
 
-   
+
 
     public void CreateBuyOrder()
     {
-        if(shop.BuyItem(index))
+        if (shop.BuyItem(index))
         {
-            buttonList.Remove(button);
+
+
             if (gameObject != null)
+            {
+                shopUi.RemoveButtonFromList(gameObject);
                 Destroy(gameObject);
+
+            }
 
             for (int i = 0; i < buttonList.Count; i++)
             {
@@ -60,7 +65,7 @@ public class ShopButton : MonoBehaviour
                 }
             }
         }
-        
+
     }
     public void SetButton(GameObject powerUp, int buttonIndex)
     {

@@ -58,8 +58,9 @@ public class ShopUi : MonoBehaviour
     {
         shopObject = GameObject.FindGameObjectWithTag("Shop").GetComponent<GameObject>();
         shopList = shop.GetShopItems();
-        Debug.Log(shopList.Count);
-        if (buttonList.Count == shopList.Count)
+        Debug.Log("shoplist Count " + shopList.Count);
+        Debug.Log("buttonlist Count "+ buttonList.Count);
+        if (buttonList.Count >= shopList.Count)
             return;
         for (int i = 0; i < shopList.Count; i++)
         {
@@ -82,6 +83,11 @@ public class ShopUi : MonoBehaviour
     public List<GameObject> GetButtonList()
     {
         return buttonList;
+    }
+
+    public void RemoveButtonFromList(GameObject button)
+    {
+        buttonList.Remove(button);
     }
 
 
