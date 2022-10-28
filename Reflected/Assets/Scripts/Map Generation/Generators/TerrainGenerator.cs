@@ -145,11 +145,6 @@ public class TerrainGenerator : MonoBehaviour
         terrainChunk.MeshCollider().sharedMesh = terrainChunk.MeshFilter().mesh;
     }
 
-    private void BakeNavMesh(NavMeshSurface surface)
-    {
-        surface.BuildNavMesh();
-    }
-
     private Texture2D BuildTexture(float[,] heightMap, TerrainChunk terrainChunk)
     {
         int chunkDepth = heightMap.GetLength(0);
