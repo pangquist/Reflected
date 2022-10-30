@@ -622,17 +622,17 @@ PrefabInstance:
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9672235
+      value: 0.96722347
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.017536417
+      value: 0.01753638
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.2532176
+      value: -0.25321758
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -687,12 +687,12 @@ PrefabInstance:
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9656744
+      value: 0.96567446
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1320226
+      value: 0.13202262
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487829504210, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
@@ -918,8 +918,8 @@ MonoBehaviour:
   chamberSize: 2
   chamberMargin: 2
   addRandomChambers: 1
-  minChambers: 0.5
-  maxChambers: 0.7
+  minChambers: 0.7
+  maxChambers: 0.8
 --- !u!114 &2131914261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,11 +944,11 @@ MonoBehaviour:
   waterGenerator: {fileID: 2131914264}
   terrainGenerator: {fileID: 2131914263}
   objectPlacer: {fileID: 2131914267}
-  deactivateRooms: 1
-  minMapSizeX: 70
-  maxMapSizeX: 80
-  minMapSizeZ: 70
-  maxMapSizeZ: 80
+  deactivateRooms: 0
+  minMapSizeX: 60
+  maxMapSizeX: 70
+  minMapSizeZ: 60
+  maxMapSizeZ: 70
   chunkSize: 8
   trials: 1
   interval: 0
@@ -992,14 +992,14 @@ MonoBehaviour:
     type: 3}
   noiseMapGenerator: {fileID: 2131914266}
   startY: 0
-  mapScale: 14
-  heightMultiplier: 6
+  mapScale: 18
+  heightMultiplier: 7
   terrainTypes:
   - name: Underwater
     height: 0.2
     color: {r: 0.6509804, g: 0.58431375, b: 0.3529412, a: 1}
   - name: Sand
-    height: 0.3
+    height: 0.33
     color: {r: 0.6509434, g: 0.58589846, b: 0.35310608, a: 1}
   - name: Grass
     height: 1
@@ -1017,32 +1017,32 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.45530614
     - serializedVersion: 3
-      time: 0.25143746
-      value: 0.390176
-      inSlope: 1.1430753
-      outSlope: 1.1430753
+      time: 0.23967272
+      value: 0.33892587
+      inSlope: 1.028983
+      outSlope: 1.028983
       tangentMode: 0
       weightedMode: 3
       inWeight: 0.2661503
-      outWeight: 0.14730963
+      outWeight: 0.2282875
     - serializedVersion: 3
-      time: 0.4902078
-      value: 0.45880124
-      inSlope: 0.8897923
-      outSlope: 0.8897923
+      time: 0.45047712
+      value: 0.4835899
+      inSlope: 0.8506231
+      outSlope: 0.8506231
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.30100933
-      outWeight: 0.46178788
+      inWeight: 0.4768149
+      outWeight: 0.28296617
     - serializedVersion: 3
-      time: 0.7218784
-      value: 0.9537931
-      inSlope: 0.5385164
-      outSlope: 0.5385164
+      time: 0.79838026
+      value: 0.93064016
+      inSlope: 0.82253116
+      outSlope: 0.82253116
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.26991832
-      outWeight: 0.19913422
+      inWeight: 0.2720134
+      outWeight: 0.24749866
     - serializedVersion: 3
       time: 1
       value: 1.0002189
@@ -1062,6 +1062,56 @@ MonoBehaviour:
   - seed: 500
     frequency: 0.5
     amplitude: 10
+  pathY: 3
+  pathAdaptionRange: 10
+  pathAdaptionAmount:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0000038
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pathHeightAdaption:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.45770487
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.88208205
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &2131914264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1076,7 +1126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterPrefab: {fileID: 6428712266764001271, guid: 58d55d0ea3b8c4c37b748771affd912a,
     type: 3}
-  waterLevel: 2
+  waterY: 2
 --- !u!114 &2131914265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1188,4 +1238,28 @@ MonoBehaviour:
   level: 6
   radius: 5
   pathPointsFrequency: 0.3
-  color: {r: 0.3207547, g: 0.27729157, b: 0.25266996, a: 1}
+  color: {r: 0.3490566, g: 0.3078028, b: 0.28155038, a: 1}
+  amountBias:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.3315702
+      outSlope: 0.3315702
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.5882353
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 4.8
+      outSlope: 4.8
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.125
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
