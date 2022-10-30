@@ -106,6 +106,8 @@ public class PillarGenerator : MonoBehaviour
 
         } // foreach room
 
+        /*
+        // Places pillars as walls to chambers
         foreach (Chamber chamber in map.Chambers)
         {
             if (chamber.Orientation == Orientation.Horizontal)
@@ -119,11 +121,13 @@ public class PillarGenerator : MonoBehaviour
                 InstantiateChamberPillar(chamber, new Vector2(chamber.Rect.xMax, chamber.Rect.center.y));
             }
         }
-
+        */
     }
 
     private void InstantiatePillar(Room room, Wall wall, bool edgePillars, Vector2 position)
     {
+        Transform parent = wall.transform;
+
         // If this is an edge pillar and this wall has multiple portions
         if (edgePillars && wall.Portions.Count > 1)
         {
@@ -131,11 +135,18 @@ public class PillarGenerator : MonoBehaviour
             foreach (Chamber chamber in room.Chambers)
             {
                 if (chamber.Rect.Inflated(0.01f, 0.01f).Contains(position))
-                    return;
+                {
+                    // Alt 1: Skip if chambers generate their own pillars
+                    //return;
+
+                    // Alt 2: Instantiate to pillar
+                    parent = chamber.transform;
+                    break;
+                }
             }
         }
 
-        Pillar pillar = GameObject.Instantiate(pillarPrefab, wall.transform).GetComponent<Pillar>().Initialize();
+        Pillar pillar = GameObject.Instantiate(pillarPrefab, parent).GetComponent<Pillar>().Initialize();
         pillar.transform.position = new Vector3(position.x, 0f, position.y);
         pillar.transform.localScale = wallPillarScale;
         wall.Pillars.Add(pillar);
