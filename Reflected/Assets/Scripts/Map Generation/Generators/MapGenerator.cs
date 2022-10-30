@@ -116,7 +116,9 @@ public class MapGenerator : MonoBehaviour
         chamberGenerator .Generate(map);
 
         map.GenerateGraph();
+
         roomTypeGenerator.Generate(map);
+
         map.ScaleUpData();
 
         pathGenerator    .Generate(map);

@@ -4,6 +4,7 @@ using PathCreation;
 using UnityEngine;
 using UnityEngine.AI;
 using System;
+using Unity.Mathematics;
 
 [System.Serializable]
 public class TerrainType
@@ -12,6 +13,7 @@ public class TerrainType
     public float height;
     public Color color;
 }
+
 public class TerrainGenerator : MonoBehaviour
 {
     [Header("References")]
@@ -24,18 +26,24 @@ public class TerrainGenerator : MonoBehaviour
     [Header("Terrain")]
 
     [SerializeField] private float startY;
-
     [SerializeField] private float mapScale;
     [SerializeField] private float heightMultiplier;
     [SerializeField] private TerrainType[] terrainTypes;
     [SerializeField] private AnimationCurve heightCurve;
     [SerializeField] private Wave[] waves;
 
+    [Header("Path adaption")]
+
+    [SerializeField] private float pathY;
+    [SerializeField] private float pathAdaptionRange;
+    [SerializeField] private AnimationCurve pathAdaptionAmount;
+    [SerializeField] private AnimationCurve pathHeightAdaption;
+
     private float randomSeed = 0;
 
-    public TerrainType[] TerrainTypes() { return terrainTypes; }
-    public float HeightMultiplier() { return heightMultiplier; }
-    public AnimationCurve HeightCurve() { return heightCurve; }
+    public TerrainType[] TerrainTypes() => terrainTypes;
+    public float HeightMultiplier() => heightMultiplier;
+    public AnimationCurve HeightCurve() => heightCurve;
 
     public void SetRandomSeed(float seed)
     {
@@ -71,7 +79,7 @@ public class TerrainGenerator : MonoBehaviour
                     {
                         // Instantiate a new TerrainChunk
                         GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.TerrainChild);
-                        GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
+                        GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>(), room);
                         break;
                     }
                 }
@@ -89,7 +97,7 @@ public class TerrainGenerator : MonoBehaviour
                     {
                         // Instantiate a new TerrainChunk
                         GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), chamber.TerrainChild);
-                        GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>());
+                        GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>(), chamber.Room1, chamber.Room2);
                         break;
                     }
                 }
@@ -97,33 +105,36 @@ public class TerrainGenerator : MonoBehaviour
         }
     }
 
-    private void GenerateTerrainChunk(TerrainChunk terrainChunk)
+    private void GenerateTerrainChunk(TerrainChunk terrainChunk, Room room1, Room room2 = null)
     {
-        float[,] heightMap = GenerateHeightMap(terrainChunk);
+        float[,] heightMap = GenerateHeightMap(terrainChunk, room1, room2);
 
         Texture2D chunkTexture = BuildTexture(heightMap, terrainChunk);
         terrainChunk.MeshRenderer().material.mainTexture = chunkTexture;
-        UpdateMeshVertices(heightMap, terrainChunk);
+        UpdateMeshVertices(heightMap, terrainChunk, room1, room2);
     }
 
-    public float[,] GenerateHeightMap(TerrainChunk terrainChunk)
+    public float[,] GenerateHeightMap(TerrainChunk terrainChunk, Room room1, Room room2)
     {
         // calculate chunk depth and width based on the mesh vertices
         Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;
         int chunkDepth = (int)Mathf.Sqrt(meshVertices.Length);
         int chunkWidth = chunkDepth;
+
         // calculate the offsets based on the tile position
         float offsetX = -terrainChunk.transform.position.x;
         float offsetZ = -terrainChunk.transform.position.z;
-        // generate a heightMap using noise
-        return this.noiseMapGenerator.GenerateNoiseMap(chunkDepth, chunkWidth, this.mapScale, offsetX, offsetZ, waves, randomSeed);
+
+        // generate a height map using noise
+        return noiseMapGenerator.GenerateNoiseMap(chunkDepth, chunkWidth, mapScale, offsetX, offsetZ, waves, randomSeed);
     }
 
-    private void UpdateMeshVertices(float[,] heightMap, TerrainChunk terrainChunk)
+    private void UpdateMeshVertices(float[,] heightMap, TerrainChunk terrainChunk, Room room1, Room room2)
     {
         int chunkDepth = heightMap.GetLength(0);
         int chunkWidth = heightMap.GetLength(1);
         Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;
+
         // iterate through all the heightMap coordinates, updating the vertex index
         int vertexIndex = 0;
         for (int zIndex = 0; zIndex < chunkDepth; zIndex++)
@@ -132,17 +143,70 @@ public class TerrainGenerator : MonoBehaviour
             {
                 float height = heightMap[zIndex, xIndex];
                 Vector3 vertex = meshVertices[vertexIndex];
+
                 // change the vertex Y coordinate, proportional to the height value
-                meshVertices[vertexIndex] = new Vector3(vertex.x, this.heightCurve.Evaluate(height) * this.heightMultiplier, vertex.z);
+                meshVertices[vertexIndex] = new Vector3(vertex.x, heightCurve.Evaluate(height) * heightMultiplier, vertex.z);
                 vertexIndex++;
             }
         }
+
+        // modify vertices based of paths
+        ModifyVerticesUsingPaths(terrainChunk, ref meshVertices, room1, room2);
+
         // update the vertices in the mesh and update its properties
         terrainChunk.MeshFilter().mesh.vertices = meshVertices;
         terrainChunk.MeshFilter().mesh.RecalculateBounds();
         terrainChunk.MeshFilter().mesh.RecalculateNormals();
+
         // update the mesh collider
         terrainChunk.MeshCollider().sharedMesh = terrainChunk.MeshFilter().mesh;
+    }
+
+    private void ModifyVerticesUsingPaths(TerrainChunk terrainChunk, ref Vector3[] meshVertices, Room room1, Room room2)
+    {
+        int verticesSquared = (int)Mathf.Sqrt(meshVertices.Length);
+        Vector3 offset = new Vector3(MapGenerator.ChunkSize * 0.5f, 0, MapGenerator.ChunkSize * 0.5f);
+        Matrix4x4 matrix = terrainChunk.transform.localToWorldMatrix;
+
+        Vector3 vertexWorldPos;
+        float distance, adaption, adaptionAmount;
+        int i;
+
+        for (int y = 0; y < verticesSquared; ++y)
+        {
+            for (int x = 0; x < verticesSquared; ++x)
+            {
+                i = y * verticesSquared + x;
+                vertexWorldPos = matrix.MultiplyPoint3x4(meshVertices[i]) - offset;
+
+                ModifyVertexHeight(ref meshVertices, room1);
+
+                if (room2 != null)
+                    ModifyVertexHeight(ref meshVertices, room2);
+
+                void ModifyVertexHeight(ref Vector3[] meshVertices, Room room)
+                {
+                    foreach (Vector3 pathPoint in room.PathPoints)
+                    {
+                        distance = Vector2.Distance(vertexWorldPos.XZ(), pathPoint.XZ());
+
+                        if (distance < pathAdaptionRange)
+                        {
+                            // how much to affect the vertex based of the distance to the path
+                            adaptionAmount = pathAdaptionAmount.Evaluate(distance / pathAdaptionRange);
+                            
+                            // how much to affect the vertex based of its current height
+                            adaptionAmount *= pathHeightAdaption.Evaluate((meshVertices[i].y - startY) / heightMultiplier);
+
+                            // the final height adaption
+                            adaption = (pathY - meshVertices[i].y) * adaptionAmount;
+
+                            meshVertices[i].y += adaption;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void BakeNavMesh(NavMeshSurface surface)

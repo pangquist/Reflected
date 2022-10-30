@@ -59,7 +59,7 @@ public class ObjectPlacer : MonoBehaviour
                     {
                         for (int i = 0; i < pair.weight * objectMultiplier * 10; i++)
                         {
-                            Debug.Log(pair.item + " " + i);
+                            //Debug.Log(pair.item + " " + i);
                             Ray ray = new Ray(new Vector3(Random.Range(start.x + wallPadding, end.x - wallPadding), 20, Random.Range(start.z + wallPadding, end.z - wallPadding)), -transform.up);
                             RaycastHit hit;
                             if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
@@ -84,7 +84,7 @@ public class ObjectPlacer : MonoBehaviour
                                         {
                                             if (center.Contains(new Vector2(hit.point.x, hit.point.z)))
                                             {
-                                                Debug.Log("Blocked placement center");
+                                                //Debug.Log("Blocked placement center");
                                                 canPlace = false;
                                             }
                                         }

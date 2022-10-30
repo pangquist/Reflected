@@ -267,6 +267,17 @@ public static class Extensions
     }
 
     /// <summary>
+    /// Removes and returns a random item from the list.
+    /// </summary>
+    public static T RemoveRandom<T>(this List<T> list)
+    {
+        int i = Random.Range(0, list.Count);
+        T item = list[i];
+        list.RemoveAt(i);
+        return item;
+    }
+
+    /// <summary>
     /// Returns a Rect representing the XZ plane (bottom and top) of this Bounds
     /// </summary>
     public static Rect XZPlane(this Bounds bounds)

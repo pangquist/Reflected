@@ -124,6 +124,7 @@ public class Room : MonoBehaviour
             {
                 GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>().EnterRoom();
                 GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(1);
+
                 if (type == RoomType.Boss)
                 {
                     GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(2);
