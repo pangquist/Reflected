@@ -15,8 +15,6 @@ public class EnemySpawner : MonoBehaviour
     List<Transform> spawnTransforms = new List<Transform>();
     Transform spawnLocation;
 
-    bool meleePlayer;
-
     [SerializeField] int spawnBias = 60;
 
     void Start()
@@ -24,11 +22,6 @@ public class EnemySpawner : MonoBehaviour
         GetSpawnlocations();
         enemyList.Add(enemyClose);
         enemyList.Add(enemyRange);
-    }
-
-    void Update()
-    {
-
     }
 
     public void SpawnEnemy(float spawnTime, int enemyAmount, int waveAmount, float enemyadaptiveDifficulty)
@@ -43,17 +36,17 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < waveAmount; i++)
         {
             yield return new WaitForSeconds(spawnTime);
-            spawnFunction(enemyAmount, enemyAdaptiveDifficulty);
+            SpawnFunction(enemyAmount, enemyAdaptiveDifficulty);
         }
     }
-    
-    private void spawnFunction(int amount, float adaptiveDifficulty)
+
+    private void SpawnFunction(int amount, float adaptiveDifficulty)
     {
         try
         {
             for (int i = 0; i < amount; i++)
             {
-                GetRandomEnemy();
+                GetBiasedEnemy();
                 if (spawnTransforms.Count <= 0) GetSpawnlocations();
                 spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
                 Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponentInChildren<Enemy>();
@@ -63,8 +56,8 @@ public class EnemySpawner : MonoBehaviour
         }
         catch
         {
-            if(spawnTransforms.Count == 0)
-            Debug.Log("No spawn locations");
+            if (spawnTransforms.Count == 0)
+                Debug.Log("No spawn locations");
         }
     }
 
@@ -92,46 +85,21 @@ public class EnemySpawner : MonoBehaviour
     {
         int percentage = Random.Range(1, 101);
 
-        if (meleePlayer)
+        if (percentage <= spawnBias)
         {
-            if (percentage <= spawnBias)
-            {
-                enemyToSpawn = enemyRange;
-            }
-            else
-            {
-                if (percentage % 2 == 0)
-                {
-                    enemyToSpawn = enemyClose;
-                }
-                else
-                {
-                    enemyToSpawn = enemyAOE;
-                }
-            }
+            enemyToSpawn = enemyRange;
         }
-        else if (!meleePlayer)
+        else
         {
-            if (percentage <= spawnBias)
+            if (percentage % 2 == 0)
             {
                 enemyToSpawn = enemyClose;
             }
             else
             {
-                if (percentage % 2 == 0)
-                {
-                    enemyToSpawn = enemyRange;
-                }
-                else
-                {
-                    enemyToSpawn = enemyAOE;
-                }
+                enemyToSpawn = enemyAOE;
             }
         }
     }
 
-    public void SetMeleePlayer()
-    {
-        meleePlayer = true;
-    }
 }

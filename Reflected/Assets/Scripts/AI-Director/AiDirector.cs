@@ -42,28 +42,34 @@ public class AiDirector : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(DelayedStart(0.2f));
+    }
+
+    private IEnumerator DelayedStart(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         if (!player) player = FindObjectOfType<Player>();
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
+        if (!map) map = GameObject.Find("Map").GetComponent<Map>();
 
-        difficulty = difficultyLevel.superEasy;
+        difficulty = difficultyLevel.easy;
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
-        //if (player.GetCurrentWeapon().GetType() == typeof(Sword)) enemySpawner.SetMeleePlayer();
+        numberOfRoomsLeftOnMap = map.Rooms.Count;
     }
 
     void Update()
     {
         CheckRoomActivity();
     }
-
     private void ResetMap()
     {
         numberOfRoomsCleared = 0;
         numberOfRoomsLeftOnMap = 0;
         clearTimesList.Clear();
     }
-
     private void checkDifficulty()
     {
         if(difficulty == difficultyLevel.superEasy)
@@ -138,16 +144,15 @@ public class AiDirector : MonoBehaviour
     private float calculateAverageTime() => avergaeTimeToClearRoom = clearTimesList.Sum() / clearTimesList.Count();
     private float EnemyStatModifier()
     {
-        float extraStats = numberOfRoomsCleared * 0.02f;
+        float extraStats = numberOfRoomsCleared * 0.05f;
 
-        if(avergaeTimeToClearRoom < 0) extraStats += 10f / calculateAverageTime();
+        if(avergaeTimeToClearRoom > 0) extraStats += 10f / calculateAverageTime();
         
         return extraStats;
     }
-
     private void SpawnChest()
     {
-        Vector3 spawnPosition = player.transform.position + new Vector3(5, 5, 0);
+        Vector3 spawnPosition = player.transform.position + new Vector3(5, 3, 0);
         Instantiate(chest, spawnPosition, Quaternion.Euler(0, 0, 0));
     }
 }
