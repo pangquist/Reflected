@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
             spawnFunction(enemyAmount, enemyAdaptiveDifficulty);
         }
     }
-
+    
     private void spawnFunction(int amount, float adaptiveDifficulty)
     {
         try

@@ -64,26 +64,26 @@ public class Player : Character, ISavable
 
     }
 
-    // Update is called once per frame
     protected override void Update()
     {
         base.Update();
         if (Cursor.visible)
             Cursor.visible = false;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            currentWeapon.gameObject.SetActive(false);
-            if (++weaponIndex >= weapons.Count)
-                weaponIndex = 0;
+        //If we add more weapons just de-comment the code below
 
-            Debug.Log(weaponIndex);
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    currentWeapon.gameObject.SetActive(false);
+        //    if (++weaponIndex >= weapons.Count)
+        //        weaponIndex = 0;
 
-            currentWeapon = weapons[weaponIndex];
-            currentWeapon.gameObject.SetActive(true);
-            currentWeapon.SetDamage(damage);
-        }
+        //    Debug.Log(weaponIndex);
 
+        //    currentWeapon = weapons[weaponIndex];
+        //    currentWeapon.gameObject.SetActive(true);
+        //    currentWeapon.SetDamage(damage);
+        //}
     }
 
     public void Attack()
