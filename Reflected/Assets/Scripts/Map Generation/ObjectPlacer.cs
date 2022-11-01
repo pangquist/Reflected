@@ -16,7 +16,7 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] TerrainGenerator terrainGenerator;
 
     [Header("Values")]
-    [Range(1, 5)]
+    [Range(1, 20)]
     [SerializeField] int objectMultiplier;
     [Range(2f, 8f)]
     [SerializeField] float wallPadding;
