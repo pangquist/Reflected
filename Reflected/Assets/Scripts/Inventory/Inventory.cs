@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour, ISavable
     //[SerializeField]
     public Dictionary<ItemData, InventoryItem> itemDictionary = new Dictionary<ItemData, InventoryItem>();
 
-    public void Awake()
+    private void Awake()
     {
         DontDestroyOnLoad(this);
 
