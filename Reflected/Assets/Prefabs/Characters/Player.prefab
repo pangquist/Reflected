@@ -177,9 +177,14 @@ PrefabInstance:
       objectReference: {fileID: 5353099378352378149}
     - target: {fileID: 1234138811770308852, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
-      propertyPath: stats
+      propertyPath: basicBowAbility
       value: 
-      objectReference: {fileID: 2785735905842002731}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234138811770308852, guid: fe7f1329d7c296d4b93c79f860f7991e,
+        type: 3}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1344186847949550753, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
       propertyPath: parent
@@ -247,27 +252,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
-      propertyPath: stats
-      value: 
-      objectReference: {fileID: 2785735905842002731}
-    - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
-        type: 3}
       propertyPath: controller
       value: 
       objectReference: {fileID: 5444201463126724936}
-    - target: {fileID: 5483573931334699441, guid: fe7f1329d7c296d4b93c79f860f7991e,
-        type: 3}
-      propertyPath: abilitySource
-      value: 
-      objectReference: {fileID: 5353099378352378149}
     - target: {fileID: 6738516131019372579, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
       propertyPath: abilitySource
       value: 
       objectReference: {fileID: 5353099378352378149}
-    m_RemovedComponents:
-    - {fileID: 3889720436798291523, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
-    - {fileID: 5090684218042434484, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
+    - target: {fileID: 8513157165599481038, guid: fe7f1329d7c296d4b93c79f860f7991e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982188774252356128, guid: fe7f1329d7c296d4b93c79f860f7991e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
 --- !u!4 &792695146709739173 stripped
 Transform:
@@ -275,15 +278,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2539094748840900825}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2785735905842002731 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 402017961197159410, guid: fe7f1329d7c296d4b93c79f860f7991e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2539094748840900825}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43901d84509027c4c84f9192bb2ad11b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
