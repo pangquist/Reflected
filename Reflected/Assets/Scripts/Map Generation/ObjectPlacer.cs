@@ -16,7 +16,7 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] TerrainGenerator terrainGenerator;
 
     [Header("Values")]
-    [Range(1, 5)]
+    [Range(1, 20)]
     [SerializeField] int objectMultiplier;
     [Range(2f, 8f)]
     [SerializeField] float wallPadding;
@@ -24,21 +24,22 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] float obstacleDistance;
     [SerializeField] bool avoidCenter;
 
-    [Header("Decorations")]
+    [SerializeField] GameObject enemySpawnPoint;
+
+    [Header("Objects")]
     [SerializeField] ObjectList[] objects;
 
-    public void Place(Map map)
+    public void Place(Map map, float pathRadius)
     {
         foreach(Room room in map.Rooms)
         {
-            PlaceDecorations(room);
+            PlaceDecorations(room, pathRadius);
         }
     }
 
-    private void PlaceDecorations(Room room)
+    private void PlaceDecorations(Room room, float pathRadius)
     {
-        Vector3 start = new Vector3(room.Rect.position.x, 0, room.Rect.position.y);
-        Vector3 end = new Vector3(room.Rect.position.x + room.Rect.width, 0, room.Rect.position.y + room.Rect.height);
+        List<Vector3> raycastOrigins = CreateRayCastPoints(room, pathRadius);
         Rect center = new Rect(room.Rect.position + room.Rect.size / 4, room.Rect.size / 2);
         TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
 
@@ -47,7 +48,7 @@ public class ObjectPlacer : MonoBehaviour
             int terrainNr = 0;
             foreach (TerrainType terrain in terrainTypes)
             {
-                if (objectList.terrain == terrain.name)
+                if (objectList.terrain == terrain.name && objectList.terrainObjects.Count > 0)
                 {
                     float height = terrainGenerator.HeightCurve().Evaluate(terrainTypes[terrainNr].height) * terrainGenerator.HeightMultiplier();
 
@@ -59,8 +60,8 @@ public class ObjectPlacer : MonoBehaviour
                     {
                         for (int i = 0; i < pair.weight * objectMultiplier * 10; i++)
                         {
-                            Debug.Log(pair.item + " " + i);
-                            Ray ray = new Ray(new Vector3(Random.Range(start.x + wallPadding, end.x - wallPadding), 20, Random.Range(start.z + wallPadding, end.z - wallPadding)), -transform.up);
+                            Ray ray = new Ray(raycastOrigins[(int)Random.Range(0, raycastOrigins.Count)], -transform.up);
+
                             RaycastHit hit;
                             if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
                             {
@@ -84,13 +85,11 @@ public class ObjectPlacer : MonoBehaviour
                                         {
                                             if (center.Contains(new Vector2(hit.point.x, hit.point.z)))
                                             {
-                                                Debug.Log("Blocked placement center");
+                                                //Debug.Log("Blocked placement center");
                                                 canPlace = false;
                                             }
                                         }
                                     }
-                                    
-
                                     if (canPlace)
                                         Instantiate(pair.item, hit.point, Quaternion.identity, room.transform);
                                 }
@@ -99,6 +98,55 @@ public class ObjectPlacer : MonoBehaviour
                     }
                 }
                 terrainNr++;
+            }
+        }
+        PlaceEnemySpawnPoints(raycastOrigins, room);
+    }
+
+    private List<Vector3> CreateRayCastPoints(Room room, float pathRadius)
+    {
+        Vector3 start = new Vector3(room.Rect.position.x + wallPadding, 0, room.Rect.position.y + wallPadding);
+        Vector3 end = new Vector3(room.Rect.position.x + room.Rect.width - wallPadding, 0, room.Rect.position.y + room.Rect.height - wallPadding);
+
+        List<Vector3> raycastOrigins = new List<Vector3>();
+
+        for (float i = start.x; i < end.x; i++)
+        {
+            for (float j = start.z; j < end.z; j++)
+            {
+                bool canPlace = true;
+                Vector3 coordinate = new Vector3(i, room.PathPoints[0].y, j);
+                foreach (Vector3 pathPoint in room.PathPoints)
+                {
+                    if (Vector3.Distance(pathPoint, coordinate) < pathRadius)
+                    {
+                        canPlace = false;
+                    }
+                }
+                if (canPlace)
+                    raycastOrigins.Add(coordinate);
+            }
+        }
+        return raycastOrigins;
+    }
+
+    private void PlaceEnemySpawnPoints(List<Vector3> raycastOrigins, Room room)
+    {
+        for (int i = 0; i < objectMultiplier * 10; i++)
+        {
+            Ray ray = new Ray(raycastOrigins[(int)Random.Range(0, raycastOrigins.Count)], -transform.up);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
+            {
+                Collider[] closeObjects = Physics.OverlapSphere(hit.point, obstacleDistance);
+
+                foreach (Collider collider in closeObjects)
+                {
+                    if (!collider.gameObject.GetComponent<NavMeshObstacle>())
+                    {
+                        Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.transform);
+                    }
+                }
             }
         }
     }

@@ -116,7 +116,9 @@ public class MapGenerator : MonoBehaviour
         chamberGenerator .Generate(map);
 
         map.GenerateGraph();
+
         roomTypeGenerator.Generate(map);
+
         map.ScaleUpData();
 
         pathGenerator    .Generate(map);
@@ -129,8 +131,8 @@ public class MapGenerator : MonoBehaviour
         player.SetActive(false);
         BakeNavMesh(map.GetComponent<NavMeshSurface>());
         player.SetActive(true);
-
-        objectPlacer.Place(map);
+         
+        objectPlacer.Place(map, pathGenerator.Radius);
 
         // Log
 

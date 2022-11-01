@@ -18,7 +18,8 @@ public class Room : MonoBehaviour
     [ReadOnly][SerializeField] private List<Wall> walls;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private List<PathCreator> paths;
-
+    [ReadOnly][SerializeField] private List<Vector3> pathPoints;
+     
     private static Map map;
 
     // Properties
@@ -27,11 +28,12 @@ public class Room : MonoBehaviour
     public Transform TerrainChild => terrainChild;
 
     public Rect Rect => rect;
-    public List<Wall> Walls => walls;
-    public List<Chamber> Chambers => chambers;
     public bool Cleared => cleared;
     public RoomType Type => type;
+    public List<Wall> Walls => walls;
+    public List<Chamber> Chambers => chambers;
     public List<PathCreator> Paths => paths;
+    public List<Vector3> PathPoints => pathPoints;
 
     private void Start()
     {
@@ -122,6 +124,7 @@ public class Room : MonoBehaviour
             {
                 GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>().EnterRoom();
                 GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(1);
+
                 if (type == RoomType.Boss)
                 {
                     GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(2);
@@ -152,4 +155,11 @@ public class Room : MonoBehaviour
                 chamber.Close(this);
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        foreach (Vector3 point in pathPoints)
+            Gizmos.DrawSphere(point, 0.25f);
+    }
+
 }

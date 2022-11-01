@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using PathCreation;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using Random = UnityEngine.Random;
 
 public class PathGenerator : MonoBehaviour
 {
@@ -14,8 +16,9 @@ public class PathGenerator : MonoBehaviour
 
     [SerializeField] private float level;
     [SerializeField] private float radius;
-    [SerializeField] private float hitboxPointsFrequency;
+    [SerializeField] private float pathPointsFrequency;
     [SerializeField] private Color color;
+    [SerializeField] private AnimationCurve amountBias;
 
     private const int anchorPoint1  = 0;
     private const int anchorPoint2  = 3;
@@ -30,32 +33,40 @@ public class PathGenerator : MonoBehaviour
 
     public void Generate(Map map)
     {
-        Chamber chamber1, chamber2;
+        Chamber chamber1 = null;
+        Chamber chamber2 = null;
 
         foreach (Room room in map.Rooms)
         {
             if (room.Chambers.Count == 1)
             {
-                CreatePath(room, room.Chambers[0]);
+                CreatePoints(room, CreatePath(room, room.Chambers[0]));
                 continue;
             }
 
-            for (int i = 0; i < room.Chambers.Count; ++i)
-            {
-                chamber1 = room.Chambers[i];
+            PairList<Chamber> chamberPairs = new PairList<Chamber>();
+            int min = room.Chambers.Count - 1;
+            int max = room.Chambers.Count * (room.Chambers.Count - 1) / 2;
+            int pathsToCreate = (int)(min + (max + 0.9999f - min) * amountBias.Evaluate(Random.Range(0f, 1f)));
 
-                for (int j = i + 1; j < room.Chambers.Count; ++j)
+            while (chamberPairs.Count < pathsToCreate)
+            {
+                do
                 {
-                    chamber2 = room.Chambers[j];
-                    CreatePath(room, chamber1, chamber2);
+                    chamber1 = room.Chambers.GetRandom();
+                    chamber2 = room.Chambers.GetRandom();
                 }
+                while (chamber1 == chamber2 || chamberPairs.Contains(chamber1, chamber2));
+                
+                chamberPairs.Add(chamber1, chamber2);
+                CreatePoints(room, CreatePath(room, chamber1, chamber2));
             }
         }
     }
 
-    private void CreatePath(Room room, Chamber chamber1, Chamber chamber2)
+    private PathCreator CreatePath(Room room, Chamber chamber1, Chamber chamber2)
     {
-        PathCreator path = GameObject.Instantiate(pathPrefab, room.PathsChild).GetComponent<PathCreator>();
+        PathCreator path = Instantiate(pathPrefab, room.PathsChild).GetComponent<PathCreator>();
         path.name = "Path " + room.Paths.Count;
         room.Paths.Add(path);
 
@@ -72,11 +83,13 @@ public class PathGenerator : MonoBehaviour
             else
                 return new Vector3(chamber.Rect.center.x, level, room.Rect.center.y);
         }
+
+        return path;
     }
 
-    private void CreatePath(Room room, Chamber chamber)
+    private PathCreator CreatePath(Room room, Chamber chamber)
     {
-        PathCreator path = GameObject.Instantiate(pathPrefab, room.PathsChild).GetComponent<PathCreator>();
+        PathCreator path = Instantiate(pathPrefab, room.PathsChild).GetComponent<PathCreator>();
         path.name = "Path " + room.Paths.Count;
         room.Paths.Add(path);
 
@@ -93,11 +106,18 @@ public class PathGenerator : MonoBehaviour
             else
                 return new Vector3(chamber.Rect.center.x, level, room.Rect.center.y + (chamber.Rect.center.y - room.Rect.center.y) * 0.5f);
         }
+
+        return path;
     }
 
     private void CreatePoints(Room room, PathCreator path)
     {
+        float nrOfPoints = path.path.length * pathPointsFrequency;
 
+        for (float percentage = 0f; percentage <= 1f; percentage += 1f / nrOfPoints)
+        {
+            room.PathPoints.Add(path.path.GetPointAtDistance(path.path.length * percentage));
+        }
     }
 
 }

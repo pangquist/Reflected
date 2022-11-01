@@ -5,13 +5,12 @@ using UnityEngine;
 public class ProjectileScript : MonoBehaviour
 {
     private Vector3 direction;
-    private float projectileForce;
+    private Rigidbody rb;
 
     public float upTime = 1f;
     private float despawnTimer;
 
-    private Rigidbody rb;
-    public int damageAmount = 3;
+    [SerializeField] private float damageAmount = 3f; //Base damage
 
     void Start()
     {
@@ -29,38 +28,29 @@ public class ProjectileScript : MonoBehaviour
             Destroy(this.gameObject);
             despawnTimer = 0f;
         }
-
-        //If collision with player then do damage and destroy this object.
-
-
     }
 
-    public void SetUp(Vector3 target, Vector3 spawnPoint, float projectileForce)
+    public void SetUp(Vector3 target, Vector3 spawnPoint, float projectileForce, float damageAmount)
     {
         direction = target - spawnPoint;
-        //Debug.Log("Direction " + direction);
-        this.projectileForce = projectileForce;
+        this.damageAmount = damageAmount;
         GetComponent<Rigidbody>().AddForce(direction.normalized * projectileForce, ForceMode.Impulse);
-        //Debug.Log("Projectile SetUp entered");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Projectile collision triggered");
         if (other.tag == "Player")
         {
+            Debug.Log("Projectile collision activated. Potential damage: " + damageAmount);
             var healthComponent = other.GetComponent<Player>();
             if (healthComponent != null)
             {
-                Debug.Log("damaged by projectile");
                 Destroy(this.gameObject);
                 healthComponent.TakeDamage(damageAmount);
-                
+                Debug.Log("Player took this amount of damage: " + damageAmount + " from a projectile.");
             }
 
             Destroy(this.gameObject);
         }
-
-        //Destroy(this.gameObject);
     }
 }

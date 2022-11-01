@@ -111,24 +111,22 @@ public class WallGenerator : MonoBehaviour
             // Move on to the next Room
         }
 
-        /*
         foreach (Chamber chamber in map.Chambers)
         {
             if (chamber.Orientation == Orientation.Horizontal)
             {
-                roomRect = chamber.Rect.Inflated(-wallThickness, 0);
+                roomRect = chamber.Rect.Inflated(-wallThickness * 1.5f, 0);
                 chamber.Walls.Add(InstantiateSinglePortionWall(CardinalDirection.North, chamber.transform, roomRect));
                 chamber.Walls.Add(InstantiateSinglePortionWall(CardinalDirection.South, chamber.transform, roomRect));
             }
 
             else
             {
-                roomRect = chamber.Rect.Inflated(0, -wallThickness);
+                roomRect = chamber.Rect.Inflated(0, -wallThickness * 1.5f);
                 chamber.Walls.Add(InstantiateSinglePortionWall(CardinalDirection.West, chamber.transform, roomRect));
                 chamber.Walls.Add(InstantiateSinglePortionWall(CardinalDirection.East, chamber.transform, roomRect));
             }
         }
-        */
     }
 
     /// <summary>

@@ -5,34 +5,56 @@ using UnityEngine.AI;
 
 public class MeleeAttackState : State
 {
-    private float attackTimer = 0f;
-    public float attackRate = 1f;
-
     public GameObject meleeObject;
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent)
+
+    //Timer for attack rate
+    private float attackTimer = 0f;
+
+    //Base values of the attack stats
+    [SerializeField] private float baseAttackRate = 1f;
+    [SerializeField] private float baseAttackDamage = 5;
+
+    //Current values of the attack stats
+    [SerializeField] private float attackRate;
+    [SerializeField] private float attackDamage;
+
+    //Range to player in which the enemy will chase the player. (Reposition to attack)
+    [SerializeField] private float chaseRange = 2.5f;
+
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        if (thisEnemy.distanceTo(player.transform) >= 2.5f)
+        //Set relevant stat
+        attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed(); //Right now the attack speed increases but decreases the attack rate. High attack rate = low attack speed.
+        //Attack size?
+
+        if (thisEnemy.distanceTo(player.transform) >= chaseRange)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
             return;
         }
 
-        attackTimer += Time.deltaTime;
-
+        //Make enemy face player and stand still
         FaceTarget(player.transform.position);
         agent.destination = thisEnemy.transform.position;
+
+        attackTimer += Time.deltaTime;
         if (attackTimer >= attackRate)
         {
-            Debug.Log("About to attack");
-            DoAttack(thisEnemy);
+            DoAttack(thisEnemy, enemyStatSystem);
             attackTimer = 0f;
         }
     }
 
-    private void DoAttack(AiManager2 thisEnemy)
+    private void DoAttack(AiManager2 thisEnemy, EnemyStatSystem enemyStatSystem)
     {
-        Instantiate(meleeObject, thisEnemy.firePoint.position, gameObject.transform.rotation);
+        attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
+
+        GameObject currentMeleeAttack = Instantiate(meleeObject, thisEnemy.firePoint.position, gameObject.transform.rotation);
+        if (currentMeleeAttack != null)
+        {
+            currentMeleeAttack.GetComponent<MeleeHitboxScript>().SetUp(attackDamage);
+        }
     }
 
     private void FaceTarget(Vector3 target)

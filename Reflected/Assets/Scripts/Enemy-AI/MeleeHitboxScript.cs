@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class MeleeHitboxScript : MonoBehaviour
 {
-    public float upTime = 0.5f;
+    [SerializeField] private float upTime = 0.5f;
     private float despawnTimer;
     private bool damageDone;
 
     private Rigidbody rb;
-    public int damageAmount = 5;
+
+    [SerializeField] float damageAmount = 5f; //Base damage
 
     void Start()
     {
@@ -27,19 +28,24 @@ public class MeleeHitboxScript : MonoBehaviour
         }
     }
 
+    public void SetUp(float damageAmount)
+    {
+        this.damageAmount = damageAmount;
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        //Debug.Log("AOE collision triggered");
         if (!damageDone)
         {
             if (other.tag == "Player")
             {
+                Debug.Log("Melee collision activated. Potential damage: " + damageAmount);
                 var healthComponent = other.GetComponent<Player>();
                 if (healthComponent != null)
                 {
-                    Debug.Log("damaged by Melee");
                     damageDone = true;
                     healthComponent.TakeDamage(damageAmount);
+                    Debug.Log("Player took this amount of damage: " + damageAmount + " from a melee attack.");
                 }
             }
         }

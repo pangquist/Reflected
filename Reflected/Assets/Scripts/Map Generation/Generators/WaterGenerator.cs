@@ -10,7 +10,9 @@ public class WaterGenerator : MonoBehaviour
 
     [Header("Water")]
 
-    [SerializeField] private float waterLevel;
+    [SerializeField] private float waterY;
+
+    public float WaterY => waterY;
 
     public void Generate(Map map)
     {
@@ -20,7 +22,7 @@ public class WaterGenerator : MonoBehaviour
         {
             waterRect = room.Rect.Inflated(Wall.Thickness, Wall.Thickness);
 
-            GameObject.Instantiate(waterPrefab, room.transform).GetComponent<Water>().Initialize(waterRect, waterLevel);
+            GameObject.Instantiate(waterPrefab, room.transform).GetComponent<Water>().Initialize(waterRect, waterY);
         }
 
         foreach (Chamber chamber in map.Chambers)
@@ -30,7 +32,7 @@ public class WaterGenerator : MonoBehaviour
             else
                 waterRect = chamber.Rect.Inflated(Wall.Thickness, 0);
 
-            GameObject.Instantiate(waterPrefab, chamber.transform).GetComponent<Water>().Initialize(waterRect, waterLevel);
+            GameObject.Instantiate(waterPrefab, chamber.transform).GetComponent<Water>().Initialize(waterRect, waterY);
         }
     }
 }
