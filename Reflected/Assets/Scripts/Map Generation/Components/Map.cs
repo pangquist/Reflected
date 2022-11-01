@@ -71,6 +71,25 @@ public class Map : MonoBehaviour
         startRoom.gameObject.SetActive(true);
         startRoom.Activate();
         
-        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(startRoom.Rect.center.x, 10, startRoom.Rect.center.y);
+        Transform player = GameObject.Find("Player").transform;
+
+        Debug.Log("Player " + (player == null ? "not " : "") + "found.");
+
+        Debug.Log("Player position before: "
+            + "\nx = " + player.position.x.ToString("0.0")
+            + "\ny = " + player.position.y.ToString("0.0")
+            + "\nz = " + player.position.z.ToString("0.0"));
+
+        Debug.Log("Moving player to center of start room (" + startRoom + ")"
+            + "\nx = " + startRoom.Rect.center.x.ToString("0.0")
+            + "\ny = 10.0"
+            + "\nz = " + startRoom.Rect.center.y.ToString("0.0"));
+
+        player.position = new Vector3(startRoom.Rect.center.x, 10, startRoom.Rect.center.y);
+
+        Debug.Log("Player position after: "
+            + "\nx = " + player.position.x.ToString("0.0")
+            + "\ny = " + player.position.y.ToString("0.0")
+            + "\nz = " + player.position.z.ToString("0.0"));
     }
 }
