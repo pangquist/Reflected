@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 756528810924743122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.44, y: 0, z: 2.42}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3507614303673962834}
@@ -74,6 +74,7 @@ MonoBehaviour:
   player: {fileID: 0}
   me: {fileID: 0}
   agent: {fileID: 0}
+  enemyStatSystem: {fileID: 0}
   firePoint: {fileID: 3507614303673962696}
 --- !u!114 &6177676377247655693
 MonoBehaviour:
@@ -87,9 +88,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2e88e8fb26a5841a0efb68b0e0ff2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 1
   projectileObject: {fileID: 3454243261011872517, guid: c603512b7c4feeb4d9911fef3debfe50,
     type: 3}
+  baseAttackRate: 1
+  baseAttackDamage: 3
+  baseProjectileForce: 2
+  attackRate: 1
+  attackDamage: 0
+  projectileForce: 0
+  baseFleeRange: 7
+  baseChaseRange: 20
 --- !u!54 &6177676377712805770
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -248,6 +256,7 @@ MonoBehaviour:
   attackSpeed: 0
   currentHealth: 0
   anim: {fileID: 0}
+  currentWeapon: {fileID: 0}
   healthBar: {fileID: 3717601143962972397}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}

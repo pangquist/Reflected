@@ -315,7 +315,7 @@ Transform:
   m_GameObject: {fileID: 9211019161338975208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.69, y: -0, z: 3.42}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4782358844943069601}
@@ -377,6 +377,7 @@ MonoBehaviour:
   player: {fileID: 0}
   me: {fileID: 0}
   agent: {fileID: 0}
+  enemyStatSystem: {fileID: 0}
   firePoint: {fileID: 3512800261662137758}
 --- !u!114 &1099865400733728881
 MonoBehaviour:
@@ -390,9 +391,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2daf4b288b8084fa5f94873b68134d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 1
   meleeObject: {fileID: 7872967660243970808, guid: 870d93194abef424383246f2a80137ba,
     type: 3}
+  baseAttackRate: 1
+  baseAttackDamage: 5
+  attackRate: 1
+  attackDamage: 0
+  chaseRange: 2.5
 --- !u!54 &2030773547744398053
 Rigidbody:
   m_ObjectHideFlags: 0
