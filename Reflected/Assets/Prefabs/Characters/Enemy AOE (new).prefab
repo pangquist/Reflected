@@ -175,6 +175,7 @@ MonoBehaviour:
   player: {fileID: 0}
   me: {fileID: 0}
   agent: {fileID: 0}
+  enemyStatSystem: {fileID: 0}
   firePoint: {fileID: 4924673680484388586}
 --- !u!114 &8715332239327699811
 MonoBehaviour:
@@ -188,9 +189,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a0a434650e4deb40a17caa23ac49c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 5
   aoeObject: {fileID: 2969946773842160217, guid: c5a1fefb79ae9e34a87e0b57c73ba6ef,
     type: 3}
+  baseAttackRate: 5
+  baseAttackDamage: 1
+  baseAoeSize: {x: 5, y: 3, z: 5}
+  attackRate: 5
+  attackDamage: 0
+  aoeSize: {x: 0, y: 0, z: 0}
+  fleeRange: 7
+  chaseRange: 20
 --- !u!54 &8715332238812438654
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -205,7 +213,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!1 &5158535374235590867
 GameObject:
@@ -446,9 +454,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 0.5
+  m_Height: 2.016704
   m_Direction: 1
-  m_Center: {x: 0, y: 0.3, z: 0}
+  m_Center: {x: 0, y: 0.808352, z: 0}
 --- !u!114 &2877503049787357053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,6 +475,7 @@ MonoBehaviour:
   attackSpeed: 0
   currentHealth: 0
   anim: {fileID: 0}
+  currentWeapon: {fileID: 0}
   healthBar: {fileID: 1296179783932779286}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}

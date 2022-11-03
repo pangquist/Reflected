@@ -74,6 +74,7 @@ MonoBehaviour:
   player: {fileID: 0}
   me: {fileID: 0}
   agent: {fileID: 0}
+  enemyStatSystem: {fileID: 0}
   firePoint: {fileID: 3507614303673962696}
 --- !u!114 &6177676377247655693
 MonoBehaviour:
@@ -87,9 +88,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2e88e8fb26a5841a0efb68b0e0ff2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 1
   projectileObject: {fileID: 3454243261011872517, guid: c603512b7c4feeb4d9911fef3debfe50,
     type: 3}
+  baseAttackRate: 1
+  baseAttackDamage: 3
+  baseProjectileForce: 2
+  attackRate: 1
+  attackDamage: 0
+  projectileForce: 0
+  baseFleeRange: 7
+  baseChaseRange: 20
 --- !u!54 &6177676377712805770
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -104,7 +112,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!1001 &756528810511293925
 PrefabInstance:
@@ -113,6 +121,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 756528810924742956}
     m_Modifications:
+    - target: {fileID: 1144169009, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
+      propertyPath: m_Height
+      value: 2.5709293
+      objectReference: {fileID: 0}
+    - target: {fileID: 1144169009, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
+      propertyPath: m_Center.y
+      value: 1.2838906
+      objectReference: {fileID: 0}
     - target: {fileID: 1144169010, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
       propertyPath: healthBar
       value: 
@@ -248,6 +264,7 @@ MonoBehaviour:
   attackSpeed: 0
   currentHealth: 0
   anim: {fileID: 0}
+  currentWeapon: {fileID: 0}
   healthBar: {fileID: 3717601143962972397}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}

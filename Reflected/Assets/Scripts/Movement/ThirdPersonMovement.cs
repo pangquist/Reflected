@@ -76,7 +76,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (dashAbility.IsDashing())
             return;
 
-        if (isGrounded)
+        if (isGrounded && velocity.y <= 0)
         {
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravityEffect);
 

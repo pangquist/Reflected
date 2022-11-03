@@ -111,6 +111,8 @@ public class AiDirector : MonoBehaviour
         {
             activeRoom = false;
             inbetweenRooms = true;
+            MusicManager musicManager = FindObjectOfType<MusicManager>();
+            musicManager.ChangeMusicIntensity(-1);
         }
         if (inbetweenRooms) //All enemies are killed but player is still in same room
         {
