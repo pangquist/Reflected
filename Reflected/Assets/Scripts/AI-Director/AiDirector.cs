@@ -39,6 +39,9 @@ public class AiDirector : MonoBehaviour
     EnemySpawner enemySpawner;
     [SerializeField] GameObject chest;
 
+    // Properties
+
+    public bool AllEnemiesKilled => aliveEnemiesInRoom <= 0;
 
     void Start()
     {

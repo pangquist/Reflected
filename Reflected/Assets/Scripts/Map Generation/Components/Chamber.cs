@@ -119,8 +119,7 @@ public class Chamber : MonoBehaviour
         openDoor.Close();
 
         // Wait til closed
-        for (float timer = 0; timer < openDoor.AnimationDuration; timer += Time.deltaTime)
-            yield return null;
+        yield return new WaitForSeconds(openDoor.ClosingDuration);
 
         // Move player if necessary
         if (triggerBounds.Contains(player.transform.position) == false)
@@ -138,15 +137,13 @@ public class Chamber : MonoBehaviour
         closedDoor.Room.Activate();
 
         // Pause
-        for (float timer = 0; timer < pause; timer += Time.deltaTime)
-            yield return null;
+        yield return new WaitForSeconds(pause);
 
         // Start opening the closed door
         closedDoor.Open();
 
         // Wait til opened
-        for (float timer = 0; timer < closedDoor.AnimationDuration; timer += Time.deltaTime)
-            yield return null;
+        yield return new WaitForSeconds(closedDoor.OpeningDuration);
 
         // End transition
         StartCoroutine(Coroutine_Cooldown());
