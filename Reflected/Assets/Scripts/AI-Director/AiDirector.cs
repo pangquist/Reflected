@@ -131,15 +131,16 @@ public class AiDirector : MonoBehaviour
 
         timeToClearRoom = 0;
     }
-    public void EnterRoom() //is called when a new room activates (from Room-script)
+    public void EnterRoom() //called when a new room activates (from Room-script)
     {
         activeRoom = true;
+        aliveEnemiesInRoom = 0;
         checkDifficulty();
         aliveEnemiesInRoom = amountOfEnemiesToSpawn * waveAmount;
 
         enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn, waveAmount, EnemyStatModifier());
     }
-    public void killEnemyInRoom() //is called when enemy dies (from enemy-script)
+    public void killEnemyInRoom() //called when enemy dies (from enemy-script)
     {
         aliveEnemiesInRoom--;
         numberOfEnemiesKilled++;
@@ -147,7 +148,7 @@ public class AiDirector : MonoBehaviour
     private float calculateAverageTime() => avergaeTimeToClearRoom = clearTimesList.Sum() / clearTimesList.Count();
     private float EnemyStatModifier()
     {
-        float extraStats = numberOfRoomsCleared * 0.05f;
+        float extraStats = numberOfRoomsCleared * 0.1f;
 
         if(avergaeTimeToClearRoom > 0) extraStats += 10f / calculateAverageTime();
         
