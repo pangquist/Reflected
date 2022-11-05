@@ -1,5 +1,102 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &251084821897712512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2554316354960088267}
+  - component: {fileID: 7386020731483442555}
+  - component: {fileID: 5112677891093808869}
+  - component: {fileID: 5229730591835448895}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2554316354960088267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251084821897712512}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.003, z: 0.967}
+  m_LocalScale: {x: 1, y: 0.06506776, z: 0.65866}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2230425391244510514}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7386020731483442555
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251084821897712512}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &5112677891093808869
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251084821897712512}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a7b1df79eb0d5c0479881c8d06b8d5da, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5229730591835448895
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251084821897712512}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 28.147335, z: 1}
+  m_Center: {x: 0, y: 13.573676, z: 0}
 --- !u!1 &470035483582790873
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,8 +210,10 @@ GameObject:
   - component: {fileID: 2230425391253875392}
   - component: {fileID: 2230425391244510512}
   - component: {fileID: 2230425391244510513}
+  - component: {fileID: 6332391808890081501}
   - component: {fileID: 2492063382352424833}
   - component: {fileID: 2492063382352424832}
+  - component: {fileID: 1704566787086995860}
   m_Layer: 0
   m_Name: Target Dummy
   m_TagString: Enemy
@@ -145,6 +244,7 @@ Transform:
   - {fileID: 2230425391244510480}
   - {fileID: 2230425391244510484}
   - {fileID: 2230425391244510488}
+  - {fileID: 2554316354960088267}
   m_Father: {fileID: 4350906471113656657}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -184,6 +284,9 @@ MonoBehaviour:
   movementSpeed: 0
   damage: 5
   attackSpeed: 0
+  currentHealth: 0
+  anim: {fileID: 0}
+  currentWeapon: {fileID: 0}
   healthBar: {fileID: 6763893110553264938}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}
@@ -194,8 +297,8 @@ MonoBehaviour:
         type: 3}
       weight: 1
   abilities:
-  - {fileID: 2230425391244510513}
-  timeBetweenAbilities: 5
+  - {fileID: 6332391808890081501}
+  timeBetweenAbilities: 10
   abilityTimer: 0
 --- !u!114 &2230425391244510513
 MonoBehaviour:
@@ -210,11 +313,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityIcon: {fileID: 0}
+  abilitySounds: []
+  abilitySource: {fileID: 0}
   cooldown: 4
   remainingCooldown: 0
   abilityName: Dimension Pull
   damage: 0
   debug: 0
+  abilityAnimation: {fileID: 0}
+  vfxObject: {fileID: 0}
+  vfxDuration: 0
+--- !u!114 &6332391808890081501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2230425391244482834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4812237e5edd51f47887efecab949ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityIcon: {fileID: 0}
+  abilitySounds: []
+  abilitySource: {fileID: 0}
+  cooldown: 5
+  remainingCooldown: 0
+  abilityName: Slam
+  damage: 6
+  debug: 0
+  abilityAnimation: {fileID: 0}
+  vfxObject: {fileID: 0}
+  vfxDuration: 0
+  hitboxObject: {fileID: 251084821897712512}
+  duration: 2
 --- !u!54 &2492063382352424833
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -245,6 +378,34 @@ CapsuleCollider:
   m_Height: 1.466546
   m_Direction: 1
   m_Center: {x: 0, y: 0.70850706, z: 0}
+--- !u!114 &1704566787086995860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2230425391244482834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2253763db99494c4e9e3bf8bf774f269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  movementSpeed: 0
+  damage: 0
+  attackSpeed: 0
+  currentHealth: 0
+  anim: {fileID: 0}
+  currentWeapon: {fileID: 0}
+  stats: {fileID: 0}
+  chargeBar: {fileID: 0}
+  jumpForce: 0
+  weapons: []
+  basicSwordAbility: {fileID: 0}
+  basicBowAbility: {fileID: 0}
+  specialAbility: {fileID: 0}
+  swapAbility: {fileID: 0}
+  TimeFlowWhileSwapping: 0
 --- !u!1 &2230425391244482836
 GameObject:
   m_ObjectHideFlags: 0

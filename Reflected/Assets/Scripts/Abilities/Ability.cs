@@ -9,7 +9,6 @@ using UnityEngine;
 /// <summary>
 /// Ability description
 /// </summary>
-[RequireComponent(typeof(Player))]
 public abstract class Ability : MonoBehaviour
 {
     [Header("Ability Stats")]
@@ -31,7 +30,7 @@ public abstract class Ability : MonoBehaviour
     private void Start()
     {
         cooldownstarter = FindObjectOfType<AbilityCooldowns>();
-        player = GetComponent<Player>();
+        player = FindObjectOfType<Player>();
     }
 
     public virtual bool DoEffect()
@@ -70,6 +69,11 @@ public abstract class Ability : MonoBehaviour
     public float GetCooldownPercentage()
     {
         return remainingCooldown / cooldown;
+    }
+
+    public float Cooldown()
+    {
+        return cooldown;
     }
 
     public Sprite GetIcon()

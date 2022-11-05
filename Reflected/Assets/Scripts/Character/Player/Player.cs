@@ -59,31 +59,11 @@ public class Player : Character, ISavable
         anim.Play("GetUp");
     }
 
-    private void Start()
-    {
-
-    }
-
     protected override void Update()
     {
         base.Update();
         if (Cursor.visible)
             Cursor.visible = false;
-
-        //If we add more weapons just de-comment the code below
-
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    currentWeapon.gameObject.SetActive(false);
-        //    if (++weaponIndex >= weapons.Count)
-        //        weaponIndex = 0;
-
-        //    Debug.Log(weaponIndex);
-
-        //    currentWeapon = weapons[weaponIndex];
-        //    currentWeapon.gameObject.SetActive(true);
-        //    currentWeapon.SetDamage(damage);
-        //}
     }
 
     public void Attack()
@@ -182,38 +162,6 @@ public class Player : Character, ISavable
         return specialAbility;
     }
 
-    //public void AddEnemy(Enemy enemy)
-    //{
-    //    if (aggroedEnemies.Contains(enemy))
-    //        return;
-
-    //    if (aggroedEnemies.Count == 0)
-    //    {
-    //        musicManager.ChangeMusicIntensity(1);
-    //    }
-
-    //    aggroedEnemies.Add(enemy);
-    //}
-
-    //public void RemoveEnemy(Enemy enemy)
-    //{
-    //    if (!aggroedEnemies.Contains(enemy))
-    //        return;
-
-
-    //    aggroedEnemies.Remove(enemy);
-
-    //    if (aggroedEnemies.Count == 0)
-    //    {
-    //        musicManager.ChangeMusicIntensity(-1);
-    //    }
-    //}
-
-    //public List<Enemy> GetEnemies()
-    //{
-    //    return aggroedEnemies;
-    //}
-
     public void PlayCurrentAbilityVFX()
     {
         currentAbility.PlayVFX();
@@ -222,6 +170,25 @@ public class Player : Character, ISavable
     public void SetTimeToNormalFlow()
     {
         Time.timeScale = 1;
+    }
+
+    public Collider Hitbox()
+    {
+        return GetComponent<Collider>();
+    }
+
+    public void Stun(float duration)
+    {
+        StartCoroutine(_Stun(duration));
+    }
+
+    IEnumerator _Stun(float duration)
+    {
+        GetComponent<PlayerController>().LockPlayer();
+
+        yield return new WaitForSeconds(duration);
+
+        GetComponent<PlayerController>().UnlockPlayer();
     }
 
     #region SaveLoad
