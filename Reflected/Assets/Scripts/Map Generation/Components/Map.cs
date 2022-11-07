@@ -89,7 +89,7 @@ public class Map : MonoBehaviour
             + " y = 10.0"
             + " z = " + startRoom.Rect.center.y.ToString("0.0"));
 
-        player.position = new Vector3(startRoom.Rect.center.x, 10, startRoom.Rect.center.y);
+        player.localPosition = new Vector3(startRoom.Rect.center.x, 10, startRoom.Rect.center.y);
 
         Debug.Log("Player position after: \n"
             + " x = " + player.position.x.ToString("0.0")
