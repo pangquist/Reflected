@@ -8,11 +8,10 @@ using UnityEngine.UIElements;
 public class AiDirector : MonoBehaviour
 {
     //Difficulty
-    [SerializeField] enum difficultyLevel {superEasy, easy, medium, hard }
-    [SerializeField] difficultyLevel difficulty;
     [SerializeField] float spawntime;
     [SerializeField] int amountOfEnemiesToSpawn;
     [SerializeField] int waveAmount;
+    int minSpawnAmount, maxSpawnAmount;
 
     //Room-stats
     bool inbetweenRooms;
@@ -28,7 +27,6 @@ public class AiDirector : MonoBehaviour
     [SerializeField] int NumberOfRoomsSinceShop;
     [SerializeField] int numberOfEnemiesKilled;
     Map map;
-
 
     //Player-stats
     Player player;
@@ -56,7 +54,7 @@ public class AiDirector : MonoBehaviour
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
         if (!map) map = GameObject.Find("Map").GetComponent<Map>();
 
-        difficulty = difficultyLevel.easy;
+        waveAmount = 1;
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
@@ -75,31 +73,30 @@ public class AiDirector : MonoBehaviour
     }
     private void checkDifficulty()
     {
-        if(difficulty == difficultyLevel.superEasy)
+        startDiffuculty();
+        int difficultySteps = numberOfEnemiesKilled / 20;
+
+        for (int i = 0; i < difficultySteps; i++)
         {
-            spawntime = 2;
-            amountOfEnemiesToSpawn = Random.Range(1, 3);
-            waveAmount = 1;
+            minSpawnAmount++;
+            maxSpawnAmount++;
+            spawntime -= 0.1f;
         }
-        if (difficulty == difficultyLevel.easy)
+        if(numberOfRoomsCleared % 4 == 0 && numberOfRoomsCleared > 0)
         {
-            spawntime = 2;
-            amountOfEnemiesToSpawn = Random.Range(4,6);
-            waveAmount = 2;
+            waveAmount++;
         }
-        else if (difficulty == difficultyLevel.medium)
-        {
-            spawntime = 1;
-            amountOfEnemiesToSpawn = Random.Range(6, 9);
-            waveAmount = 3;
-        }
-        else if (difficulty == difficultyLevel.hard)
-        {
-            spawntime = 0.5f;
-            amountOfEnemiesToSpawn = Random.Range(8, 11);
-            waveAmount = 4;
-        }
+
+        amountOfEnemiesToSpawn = Random.Range(minSpawnAmount, maxSpawnAmount);
     }
+
+    private void startDiffuculty()
+    {
+        spawntime = 2;
+        minSpawnAmount = 3;
+        maxSpawnAmount = 6;
+    }
+
     private void CheckRoomActivity()
     {
         if (activeRoom) // Player is in a room with enemies
