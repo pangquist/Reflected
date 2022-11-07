@@ -11,6 +11,7 @@ public class AiDirector : MonoBehaviour
     [SerializeField] float spawntime;
     [SerializeField] int amountOfEnemiesToSpawn;
     [SerializeField] int waveAmount;
+    [SerializeField] int difficultySteps;
     int minSpawnAmount, maxSpawnAmount;
 
     //Room-stats
@@ -74,7 +75,7 @@ public class AiDirector : MonoBehaviour
     private void checkDifficulty()
     {
         startDiffuculty();
-        int difficultySteps = numberOfEnemiesKilled / 20;
+        difficultySteps = numberOfEnemiesKilled / 20;
 
         for (int i = 0; i < difficultySteps; i++)
         {
