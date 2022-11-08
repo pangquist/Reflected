@@ -23,13 +23,14 @@ public class Boss : Enemy
 
     public void AbilityTimer()
     {
-        abilityTimer -= Time.deltaTime;
+        if (!invurnable)
+            abilityTimer -= Time.deltaTime;
 
         while (abilityTimer <= 0)
         {
             //Do Random Ability
             Ability chosenAbility = abilities[Random.Range(0, abilities.Count)];
-            if(!chosenAbility.IsOnCooldown())
+            if (!chosenAbility.IsOnCooldown())
             {
                 chosenAbility.DoEffect();
                 abilityTimer = timeBetweenAbilities;
