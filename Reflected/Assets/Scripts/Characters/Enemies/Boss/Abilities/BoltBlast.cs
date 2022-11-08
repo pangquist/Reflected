@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class BoltBlast : Ability
 {
-    [SerializeField] Transform spawnPosition;
-    [SerializeField] float abilityDuration;
-    [SerializeField] int amountOfBolts;
-    [SerializeField] GameObject bolt;
+    [Header("Bolt Blast Specifics")]
 
-    [SerializeField] List<GameObject> bolts;
+    [SerializeField] GameObject bolt;
+    [SerializeField] Transform spawnPosition;
+    [Range(0, 10)]
+    [SerializeField] float offsetRange;
+    [Range(0, 5)]
+    [SerializeField] float abilityDuration;
+    [Range (0, 20)]
+    [SerializeField] int amountOfBolts;
+    [Range(0, 4)]
+    [SerializeField] float airTime;
+
+    //List<GameObject> bolts;
     public override bool DoEffect()
     {
         SpawnBolts();
@@ -29,7 +37,20 @@ public class BoltBlast : Ability
         while(spawnedBolts < amountOfBolts)
         {
             Debug.Log("Spawn bolt nr: " + (spawnedBolts+1));
-            Instantiate(bolt, spawnPosition.position, Quaternion.identity);
+            Bolt newBolt = Instantiate(bolt, spawnPosition.position, Quaternion.identity).GetComponent<Bolt>();
+
+            player = GameObject.FindWithTag("Player").GetComponent<Player>();
+
+            float randomOffset = Random.Range(-offsetRange, offsetRange + 1);
+
+            Vector3 diff = new Vector3(
+                player.transform.position.x + randomOffset,
+                player.transform.position.y,
+                player.transform.position.z + randomOffset
+                ) - spawnPosition.position;
+
+            newBolt.SetVelocity(diff / airTime);
+
             spawnedBolts++;
             yield return new WaitForSeconds(abilityDuration / amountOfBolts);
         }

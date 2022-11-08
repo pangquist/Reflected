@@ -12,7 +12,7 @@ public class Enemy : Character
     [SerializeField] float aggroRange;
 
     [SerializeField] WeightedRandomList<GameObject> LootDropList;
-
+    protected bool invurnable;
     GameObject parent;
     protected Player player;
 
@@ -32,6 +32,9 @@ public class Enemy : Character
 
     public override void TakeDamage(float damage)
     {
+        if (invurnable)
+            return;
+
         if (currentHealth == maxHealth)
             healthBar.gameObject.SetActive(true);
         else if (currentHealth <= 0)
@@ -76,5 +79,10 @@ public class Enemy : Character
     {
         Vector3 spawnPosition = lootDropPosition.position + new Vector3(0, 1, 0);
         Instantiate(LootDropList.GetRandom(), spawnPosition, Quaternion.Euler(0,0,0));
+    }
+
+    public void ToggleInvurnable()
+    {
+        invurnable = !invurnable;
     }
 }

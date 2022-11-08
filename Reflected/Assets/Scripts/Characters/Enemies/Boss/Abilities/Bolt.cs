@@ -4,33 +4,23 @@ using UnityEngine;
 
 public class Bolt : MonoBehaviour
 {
+    [SerializeField] bool useGravity;
     [SerializeField] Vector3 velocity;
     [SerializeField] float gravity;
     [SerializeField] float damage;
     [SerializeField] Player player;
-    [SerializeField] float airTime;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
-
-        Vector3 diff = player.transform.position - transform.position;
-        diff.y = 10;
-
-        velocity = diff / 2;
     }
-
     // Update is called once per frame
     void Update()
     {
-        velocity.y += gravity * Time.deltaTime;
+        if (useGravity)
+            velocity.y += gravity * Time.deltaTime;
 
         transform.position += velocity * Time.deltaTime;
-    }
-
-    public void SetVelocity(Vector3 newVelocity)
-    {
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,5 +33,10 @@ public class Bolt : MonoBehaviour
 
         if (other.tag == "Ground" || other.tag == "Player")
             Destroy(gameObject);
+    }
+
+    public void SetVelocity(Vector3 newVelocity)
+    {
+        velocity = newVelocity;
     }
 }
