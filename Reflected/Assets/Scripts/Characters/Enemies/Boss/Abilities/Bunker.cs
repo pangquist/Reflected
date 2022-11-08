@@ -43,16 +43,21 @@ public class Bunker : Ability
         while (spawnedBolts < amountOfBolts)
         {
             Debug.Log("Spawn bolt nr: " + (spawnedBolts + 1));
-            Bolt newBolt = Instantiate(bolt, spawnPosition.position, Quaternion.identity).GetComponent<Bolt>();
 
-            Vector2 randomPosition = Random.insideUnitCircle * radius;
-            Vector3 targetPosition = new Vector3(randomPosition.x, player.transform.position.y, randomPosition.y);
+            for (int i = 0; i < 2; i++)
+            {
+                Bolt newBolt = Instantiate(bolt, spawnPosition.position, Quaternion.identity).GetComponent<Bolt>();
 
-            Vector3 diff = targetPosition - spawnPosition.position;
+                Vector2 randomPosition = Random.insideUnitCircle * radius;
+                Vector3 targetPosition = new Vector3(randomPosition.x, player.transform.position.y, randomPosition.y);
 
-            diff.y = upwardsForce;
+                Vector3 diff = targetPosition - spawnPosition.position;
 
-            newBolt.SetVelocity(diff / airTime);
+                diff.y = upwardsForce;
+
+                newBolt.SetVelocity(diff / airTime);
+
+            }
 
             spawnedBolts++;
             yield return new WaitForSeconds(abilityDuration / amountOfBolts);

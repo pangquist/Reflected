@@ -299,8 +299,8 @@ MonoBehaviour:
         type: 3}
       weight: 1
   abilities:
-  - {fileID: 736628128}
   - {fileID: 6332391808890081501}
+  - {fileID: 736628128}
   - {fileID: 2230425391244510513}
   - {fileID: 8643426094619911380}
   timeBetweenAbilities: 5
@@ -400,9 +400,9 @@ MonoBehaviour:
   abilityIcon: {fileID: 0}
   abilitySounds: []
   abilitySource: {fileID: 0}
-  cooldown: 0
+  cooldown: 15
   remainingCooldown: 0
-  abilityName: 
+  abilityName: Bunker
   damage: 0
   debug: 0
   abilityAnimation: {fileID: 0}
@@ -410,11 +410,11 @@ MonoBehaviour:
   vfxDuration: 0
   bolt: {fileID: 7525248497902684143, guid: fd9a86b8bff5bb548abf6c93b4727e41, type: 3}
   spawnPosition: {fileID: 3759926444017275288}
-  radius: 20
-  upwardsForce: 10
-  abilityDuration: 5
-  amountOfBolts: 20
-  airTime: 4
+  radius: 50
+  upwardsForce: 60
+  abilityDuration: 10
+  amountOfBolts: 60
+  airTime: 5
 --- !u!54 &2492063382352424833
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1161,7 +1161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4549841024073504703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.805, y: 0.857, z: 0.246}
+  m_LocalPosition: {x: 0.039, y: 0.881, z: 0.499}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
