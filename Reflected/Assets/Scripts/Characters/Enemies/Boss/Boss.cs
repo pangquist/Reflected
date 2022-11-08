@@ -12,7 +12,7 @@ using UnityEngine;
 public class Boss : Enemy
 {
     [SerializeField] List<Ability> abilities;
-    //[SerializeField] float timeBetweenAbilities;
+    [SerializeField] float timeBetweenAbilities;
     [SerializeField] float abilityTimer;
 
     protected override void Update()
@@ -32,7 +32,7 @@ public class Boss : Enemy
             if(!chosenAbility.IsOnCooldown())
             {
                 chosenAbility.DoEffect();
-                abilityTimer = chosenAbility.Cooldown();
+                abilityTimer = timeBetweenAbilities;
             }
         }
     }

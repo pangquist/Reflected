@@ -179,16 +179,21 @@ public class Player : Character, ISavable
 
     public void Stun(float duration)
     {
-        StartCoroutine(_Stun(duration));
+        if (currentHealth > 0)
+            StartCoroutine(_Stun(duration));
     }
 
     IEnumerator _Stun(float duration)
     {
         GetComponent<PlayerController>().LockPlayer();
 
+        anim.Play("Knocked Down");
+
         yield return new WaitForSeconds(duration);
 
         GetComponent<PlayerController>().UnlockPlayer();
+
+        anim.Play("GetUp");
     }
 
     #region SaveLoad

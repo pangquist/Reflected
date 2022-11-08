@@ -40,9 +40,13 @@ public class Enemy : Character
             return;
         }
 
-        Vector3 direction = (transform.position - player.transform.position).normalized;
-        direction.y = 0;
-        parent.transform.rotation = Quaternion.LookRotation(direction);
+        if(!GetComponent<Boss>())
+        {
+            Vector3 direction = (transform.position - player.transform.position).normalized;
+            direction.y = 0;
+            parent.transform.rotation = Quaternion.LookRotation(direction);
+        }
+
 
         CombatText text = Instantiate(combatTextCanvas.gameObject, transform.position + new Vector3(0, 2, 0), Quaternion.identity).GetComponent<CombatText>();
         text.SetDamageText(damage);

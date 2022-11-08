@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251084821897712512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.003, z: 0.967}
-  m_LocalScale: {x: 1, y: 0.06506776, z: 0.65866}
+  m_LocalPosition: {x: 0, y: 0, z: 1.563}
+  m_LocalScale: {x: 3.0203314, y: 0.06506776, z: 1.4850794}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2230425391244510514}
@@ -95,8 +95,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 28.147335, z: 1}
-  m_Center: {x: 0, y: 13.573676, z: 0}
+  m_Size: {x: 1, y: 16.213518, z: 1}
+  m_Center: {x: 0, y: 7.606772, z: 0}
 --- !u!1 &470035483582790873
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 6332391808890081501}
   - component: {fileID: 2492063382352424833}
   - component: {fileID: 2492063382352424832}
-  - component: {fileID: 1704566787086995860}
+  - component: {fileID: 736628128}
   m_Layer: 0
   m_Name: Target Dummy
   m_TagString: Enemy
@@ -245,6 +245,7 @@ Transform:
   - {fileID: 2230425391244510484}
   - {fileID: 2230425391244510488}
   - {fileID: 2554316354960088267}
+  - {fileID: 3759926444017275288}
   m_Father: {fileID: 4350906471113656657}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -297,8 +298,8 @@ MonoBehaviour:
         type: 3}
       weight: 1
   abilities:
-  - {fileID: 6332391808890081501}
-  timeBetweenAbilities: 10
+  - {fileID: 736628128}
+  timeBetweenAbilities: 5
   abilityTimer: 0
 --- !u!114 &2230425391244510513
 MonoBehaviour:
@@ -315,7 +316,7 @@ MonoBehaviour:
   abilityIcon: {fileID: 0}
   abilitySounds: []
   abilitySource: {fileID: 0}
-  cooldown: 4
+  cooldown: 15
   remainingCooldown: 0
   abilityName: Dimension Pull
   damage: 0
@@ -347,7 +348,8 @@ MonoBehaviour:
   vfxObject: {fileID: 0}
   vfxDuration: 0
   hitboxObject: {fileID: 251084821897712512}
-  duration: 2
+  duration: 1
+  stunDuration: 2
 --- !u!54 &2492063382352424833
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -362,7 +364,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!136 &2492063382352424832
 CapsuleCollider:
@@ -378,7 +380,7 @@ CapsuleCollider:
   m_Height: 1.466546
   m_Direction: 1
   m_Center: {x: 0, y: 0.70850706, z: 0}
---- !u!114 &1704566787086995860
+--- !u!114 &736628128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -387,25 +389,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 2230425391244482834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2253763db99494c4e9e3bf8bf774f269, type: 3}
+  m_Script: {fileID: 11500000, guid: 6cea627de8d32304793604b4144491ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  movementSpeed: 0
+  abilityIcon: {fileID: 0}
+  abilitySounds: []
+  abilitySource: {fileID: 0}
+  cooldown: 4.9
+  remainingCooldown: 0
+  abilityName: 
   damage: 0
-  attackSpeed: 0
-  currentHealth: 0
-  anim: {fileID: 0}
-  currentWeapon: {fileID: 0}
-  stats: {fileID: 0}
-  chargeBar: {fileID: 0}
-  jumpForce: 0
-  weapons: []
-  basicSwordAbility: {fileID: 0}
-  basicBowAbility: {fileID: 0}
-  specialAbility: {fileID: 0}
-  swapAbility: {fileID: 0}
-  TimeFlowWhileSwapping: 0
+  debug: 0
+  abilityAnimation: {fileID: 0}
+  vfxObject: {fileID: 0}
+  vfxDuration: 0
+  spawnPosition: {fileID: 3759926444017275288}
+  abilityDuration: 2.5
+  amountOfBolts: 5
+  bolt: {fileID: 7525248497902684143, guid: dad1ca5cf5f484140b1cb99dd6e2f8c9, type: 3}
+  bolts: []
 --- !u!1 &2230425391244482836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,6 +1099,37 @@ Transform:
   - {fileID: 5026144390181663062}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4549841024073504703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3759926444017275288}
+  m_Layer: 0
+  m_Name: SpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3759926444017275288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4549841024073504703}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.805, y: 0.857, z: 0.246}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2230425391244510514}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5676038942111991135
 GameObject:
