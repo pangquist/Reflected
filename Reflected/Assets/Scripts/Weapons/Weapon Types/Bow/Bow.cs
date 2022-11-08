@@ -42,10 +42,10 @@ public class Bow : Weapon
 
         transform.parent.rotation = cam.transform.rotation;
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (++powerUpIndex >= projectiles.Count)
-                powerUpIndex = 0;
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    if (++powerUpIndex >= projectiles.Count)
+        //        powerUpIndex = 0;
+        //}
     }
 }

@@ -9,6 +9,10 @@ public class LootPoolManager : MonoBehaviour
     [SerializeField] WeightedRandomList<Rarity> rarityTiers;
     [SerializeField] Dictionary<PowerUpEffect, int> powerupPickAmount;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
     private void Start()
     {
         powerupPickAmount = new Dictionary<PowerUpEffect, int>();

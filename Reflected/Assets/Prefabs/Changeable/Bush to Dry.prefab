@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4366562023085999569}
   - component: {fileID: 4366562023087130385}
   - component: {fileID: 5790842667485573576}
+  - component: {fileID: -166519219270965991}
   m_Layer: 0
   m_Name: Bush to Dry
   m_TagString: Untagged
@@ -105,3 +106,22 @@ MonoBehaviour:
   - {fileID: 4300000, guid: b4faa2141c16dce4ca0958f3035745cd, type: 3}
   - {fileID: 4300000, guid: 00a37b87e52db3540b99b75644004f08, type: 3}
   hasChildren: 0
+--- !u!114 &-166519219270965991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4366562023089330641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ffc1699600a540708047a2873447209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomizeRotationX: 0
+  randomizeRotationY: 1
+  randomizeRotationZ: 0
+  randomizeScale: 1
+  minScale: 0.8
+  maxScale: 2
+  scaleBias: -0.4

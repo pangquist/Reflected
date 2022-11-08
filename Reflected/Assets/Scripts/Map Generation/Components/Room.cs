@@ -83,7 +83,7 @@ public class Room : MonoBehaviour
         if (map.ActiveRoom != this)
             return;
 
-        if (!cleared)
+        if (!cleared && map.GameManager.AiDirector.AllEnemiesKilled)
             SetCleared(true);
     }
 
@@ -122,7 +122,7 @@ public class Room : MonoBehaviour
         {
             if (type == RoomType.Monster || type == RoomType.Boss)
             {
-                GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>().EnterRoom();
+                map.GameManager.AiDirector.EnterRoom();
                 GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(1);
 
                 if (type == RoomType.Boss)

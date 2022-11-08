@@ -11,6 +11,11 @@ public class EnemyStatSystem : StatSystem
     Dictionary<Stats, float> lightBuffs, darkBuffs, baseBuffs;
     List<Stats> statList;
     List<float> baseIncrease;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
     public void Start()
     {
         baseIncrease = new List<float>() { 2f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};

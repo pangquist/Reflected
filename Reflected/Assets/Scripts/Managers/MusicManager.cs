@@ -47,7 +47,7 @@ public class MusicManager : MonoBehaviour
     {
         currentTrack.volume = 0;
 
-        if(dimension == Dimension.True)
+        if (dimension == Dimension.True)
             trueMusic[intensityLevel].volume = activeVolume;
         else
             mirrorMusic[intensityLevel].volume = activeVolume;
@@ -60,7 +60,7 @@ public class MusicManager : MonoBehaviour
 
         currentDimension = dimension;
 
-        while(progress < swapDuration)
+        while (progress < swapDuration)
         {
             currentTrack.volume = Mathf.Lerp(activeVolume, 0, progress);
 
@@ -85,9 +85,11 @@ public class MusicManager : MonoBehaviour
     {
         float progress = 0;
         float rate = 1 / swapDuration;
-        intensityLevel = Mathf.Clamp(intensityLevel += intensityChange, 0, trueMusic.Count);
 
-        while(progress < swapDuration)
+        intensityLevel = Mathf.Clamp(intensityLevel += intensityChange, 0, trueMusic.Count-1);
+
+
+        while (progress < swapDuration)
         {
             currentTrack.volume = Mathf.Lerp(activeVolume, 0, progress);
 
@@ -100,11 +102,24 @@ public class MusicManager : MonoBehaviour
             yield return null;
         }
 
-        if (currentDimension == Dimension.True)
-            currentTrack = trueMusic[intensityLevel];
-        else
-            currentTrack = mirrorMusic[intensityLevel];
+        try
+        {
+            if (currentDimension == Dimension.True)
+                currentTrack = trueMusic[intensityLevel];
+            else
+                currentTrack = mirrorMusic[intensityLevel];
+        }
+        catch
+        {
+            intensityLevel--;
+
+            if (currentDimension == Dimension.True)
+                currentTrack = trueMusic[intensityLevel];
+            else
+                currentTrack = mirrorMusic[intensityLevel];
+        }
 
         yield return 0;
+
     }
 }

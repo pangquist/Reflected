@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private AiDirector aiDirector;
+    [SerializeField] private EnemySpawner enemySpawner;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public AiDirector AiDirector => aiDirector;
+    public EnemySpawner EnemySpawner => enemySpawner;
 }

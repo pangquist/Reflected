@@ -39,31 +39,40 @@ public class AiDirector : MonoBehaviour
     EnemySpawner enemySpawner;
     [SerializeField] GameObject chest;
 
+    // Properties
+
+    public bool AllEnemiesKilled => aliveEnemiesInRoom <= 0;
 
     void Start()
     {
+        StartCoroutine(DelayedStart(0.2f));
+    }
+
+    private IEnumerator DelayedStart(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         if (!player) player = FindObjectOfType<Player>();
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
+        if (!map) map = GameObject.Find("Map").GetComponent<Map>();
 
-        difficulty = difficultyLevel.superEasy;
+        difficulty = difficultyLevel.easy;
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
-        //if (player.GetCurrentWeapon().GetType() == typeof(Sword)) enemySpawner.SetMeleePlayer();
+        numberOfRoomsLeftOnMap = map.Rooms.Count;
     }
 
     void Update()
     {
         CheckRoomActivity();
     }
-
     private void ResetMap()
     {
         numberOfRoomsCleared = 0;
         numberOfRoomsLeftOnMap = 0;
         clearTimesList.Clear();
     }
-
     private void checkDifficulty()
     {
         if(difficulty == difficultyLevel.superEasy)
@@ -102,6 +111,8 @@ public class AiDirector : MonoBehaviour
         {
             activeRoom = false;
             inbetweenRooms = true;
+            MusicManager musicManager = FindObjectOfType<MusicManager>();
+            musicManager.ChangeMusicIntensity(-1);
         }
         if (inbetweenRooms) //All enemies are killed but player is still in same room
         {
@@ -122,15 +133,16 @@ public class AiDirector : MonoBehaviour
 
         timeToClearRoom = 0;
     }
-    public void EnterRoom() //is called when a new room activates (from Room-script)
+    public void EnterRoom() //called when a new room activates (from Room-script)
     {
         activeRoom = true;
+        aliveEnemiesInRoom = 0;
         checkDifficulty();
         aliveEnemiesInRoom = amountOfEnemiesToSpawn * waveAmount;
 
         enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn, waveAmount, EnemyStatModifier());
     }
-    public void killEnemyInRoom() //is called when enemy dies (from enemy-script)
+    public void killEnemyInRoom() //called when enemy dies (from enemy-script)
     {
         aliveEnemiesInRoom--;
         numberOfEnemiesKilled++;
@@ -138,16 +150,15 @@ public class AiDirector : MonoBehaviour
     private float calculateAverageTime() => avergaeTimeToClearRoom = clearTimesList.Sum() / clearTimesList.Count();
     private float EnemyStatModifier()
     {
-        float extraStats = numberOfRoomsCleared * 0.02f;
+        float extraStats = numberOfRoomsCleared * 0.1f;
 
-        if(avergaeTimeToClearRoom < 0) extraStats += 10f / calculateAverageTime();
+        if(avergaeTimeToClearRoom > 0) extraStats += 10f / calculateAverageTime();
         
         return extraStats;
     }
-
     private void SpawnChest()
     {
-        Vector3 spawnPosition = player.transform.position + new Vector3(5, 5, 0);
+        Vector3 spawnPosition = player.transform.position + new Vector3(5, 3, 0);
         Instantiate(chest, spawnPosition, Quaternion.Euler(0, 0, 0));
     }
 }

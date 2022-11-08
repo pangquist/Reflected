@@ -377,6 +377,7 @@ MonoBehaviour:
   player: {fileID: 0}
   me: {fileID: 0}
   agent: {fileID: 0}
+  enemyStatSystem: {fileID: 0}
   firePoint: {fileID: 3512800261662137758}
 --- !u!114 &1099865400733728881
 MonoBehaviour:
@@ -390,9 +391,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2daf4b288b8084fa5f94873b68134d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 1
   meleeObject: {fileID: 7872967660243970808, guid: 870d93194abef424383246f2a80137ba,
     type: 3}
+  baseAttackRate: 1
+  baseAttackDamage: 5
+  attackRate: 1
+  attackDamage: 0
+  chaseRange: 2.5
 --- !u!54 &2030773547744398053
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -407,7 +412,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!1001 &5029673218080466891
 PrefabInstance:
@@ -500,9 +505,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 0.5
+  m_Height: 2.5572784
   m_Direction: 1
-  m_Center: {x: 0, y: 0.32, z: 0}
+  m_Center: {x: 0, y: 1.0986391, z: 0}
 --- !u!114 &4795976967968609003
 MonoBehaviour:
   m_ObjectHideFlags: 0

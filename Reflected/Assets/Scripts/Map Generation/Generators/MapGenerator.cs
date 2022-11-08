@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using PathCreation;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,6 +27,8 @@ public class MapGenerator : MonoBehaviour
     [Header("Map")]
 
     [SerializeField] private bool deactivateRooms;
+
+    [SerializeField] private bool autoFocusCamera;
 
     [Range(10, 500)]
     [Tooltip("In chunks")]
@@ -145,6 +148,18 @@ public class MapGenerator : MonoBehaviour
             map.DeactivateAll();
 
         map.Begin();
+
+        // Move scene view camera
+
+#if UNITY_EDITOR
+
+        if (autoFocusCamera)
+        {
+            SceneView.lastActiveSceneView.LookAt(player.transform.position, Quaternion.Euler(70, 0, 0), 40, false, false);
+        }
+
+#endif
+
     }
 
     private IEnumerator Coroutine_BulkGenerate()
