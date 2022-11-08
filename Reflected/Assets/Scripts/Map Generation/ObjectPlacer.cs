@@ -39,76 +39,76 @@ public class ObjectPlacer : MonoBehaviour
 
     private void PlaceDecorations(Room room, float pathRadius)
     {
-        List<Vector3> raycastOrigins = CreateRayCastPoints(room, pathRadius);
+        List<List<Vector3>> terrainObjectPoints = CreateRayCastPoints(room, pathRadius);
         Rect center = new Rect(room.Rect.position + room.Rect.size / 4, room.Rect.size / 2);
-        TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
+
+        int terrainNr = 0;
 
         foreach (ObjectList objectList in objects)
         {
-            int terrainNr = 0;
-            foreach (TerrainType terrain in terrainTypes)
+            List<Vector3> pointList = terrainObjectPoints[terrainNr];
+
+            if(pointList.Count > 0)
             {
-                if (objectList.terrain == terrain.name && objectList.terrainObjects.Count > 0)
+                foreach (WeightedRandomList<UnityEngine.GameObject>.Pair pair in objectList.terrainObjects.list)
                 {
-                    float height = terrainGenerator.HeightCurve().Evaluate(terrainTypes[terrainNr].height) * terrainGenerator.HeightMultiplier();
-
-                    float otherHeight = 0;
-                    if (terrainNr > 0)
-                        otherHeight = terrainGenerator.HeightCurve().Evaluate(terrainTypes[terrainNr - 1].height) * terrainGenerator.HeightMultiplier();
-
-                    foreach (WeightedRandomList<UnityEngine.GameObject>.Pair pair in objectList.terrainObjects.list)
+                    for (int i = 0; i < pair.weight * objectMultiplier * 10; i++)
                     {
-                        for (int i = 0; i < pair.weight * objectMultiplier * 10; i++)
+                        Vector3 point = pointList[Random.Range(0, pointList.Count)];
+
+                        bool canPlace = true;
+
+                        if (pair.item.gameObject.GetComponent<NavMeshObstacle>())
                         {
-                            Ray ray = new Ray(raycastOrigins[(int)Random.Range(0, raycastOrigins.Count)], -transform.up);
+                            Collider[] closeObjects = Physics.OverlapSphere(point, obstacleDistance);
 
-                            RaycastHit hit;
-                            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
+                            foreach (Collider collider in closeObjects)
                             {
-                                if (otherHeight < hit.point.y && hit.point.y <= height)
+                                if (collider.gameObject.GetComponent<NavMeshObstacle>())
                                 {
-                                    bool canPlace = true;
-
-                                    if (pair.item.gameObject.GetComponent<NavMeshObstacle>())
-                                    {
-                                        Collider[] closeObjects = Physics.OverlapSphere(hit.point, obstacleDistance);
-
-                                        foreach (Collider collider in closeObjects)
-                                        {
-                                            if (collider.gameObject.GetComponent<NavMeshObstacle>())
-                                            {
-                                                canPlace = false;
-                                            }
-                                        }
-
-                                        if (avoidCenter)
-                                        {
-                                            if (center.Contains(new Vector2(hit.point.x, hit.point.z)))
-                                            {
-                                                //Debug.Log("Blocked placement center");
-                                                canPlace = false;
-                                            }
-                                        }
-                                    }
-                                    if (canPlace)
-                                        Instantiate(pair.item, hit.point, Quaternion.identity, room.transform);
+                                    canPlace = false;
+                                }
+                            }
+                            if (avoidCenter)
+                            {
+                                if (center.Contains(new Vector2(point.x, point.z)))
+                                {
+                                    //Debug.Log("Blocked placement center");
+                                    canPlace = false;
                                 }
                             }
                         }
+                        if (canPlace)
+                            Instantiate(pair.item, point, Quaternion.identity, room.transform);
                     }
                 }
-                terrainNr++;
             }
+            terrainNr++;
         }
-        PlaceEnemySpawnPoints(raycastOrigins, room);
+        for (int i = 1; i < terrainObjectPoints.Count; i++)
+        {
+            terrainObjectPoints[0].AddRange(terrainObjectPoints[i]);
+        }
+        PlaceEnemySpawnPoints(terrainObjectPoints[0], room);
     }
 
-    private List<Vector3> CreateRayCastPoints(Room room, float pathRadius)
+    private List<List<Vector3>> CreateRayCastPoints(Room room, float pathRadius)
     {
         Vector3 start = new Vector3(room.Rect.position.x + wallPadding, 0, room.Rect.position.y + wallPadding);
         Vector3 end = new Vector3(room.Rect.position.x + room.Rect.width - wallPadding, 0, room.Rect.position.y + room.Rect.height - wallPadding);
+        TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
 
-        List<Vector3> raycastOrigins = new List<Vector3>();
+        List<float> terrainHeights = new List<float>();
+        List<List<Vector3>> terrainObjectPoints = new List<List<Vector3>>();
+        foreach(ObjectList objectList in objects)
+        {
+            terrainObjectPoints.Add(new List<Vector3>());
+        }
+        foreach (TerrainType terrain in terrainTypes)
+        {
+            terrainHeights.Add(terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier());
+            Debug.Log(terrainHeights[terrainHeights.Count - 1]);
+        }
 
         for (float i = start.x; i < end.x; i++)
         {
@@ -124,10 +124,28 @@ public class ObjectPlacer : MonoBehaviour
                     }
                 }
                 if (canPlace)
-                    raycastOrigins.Add(coordinate);
+                {
+                    Ray ray = new Ray(coordinate, -transform.up);
+
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
+                    {
+                        float otherHeight = 0;
+                        for (int k = 0; k < terrainHeights.Count; k++)
+                        {
+                            if (otherHeight < hit.point.y && hit.point.y <= terrainHeights[k])
+                            {
+                                terrainObjectPoints[k].Add(hit.point);
+                                Debug.Log("Point found: " + terrainHeights[k]);
+                                break;
+                            }
+                            otherHeight = terrainHeights[k];
+                        }
+                    }
+                }
             }
         }
-        return raycastOrigins;
+        return terrainObjectPoints;
     }
 
     private void PlaceEnemySpawnPoints(List<Vector3> raycastOrigins, Room room)
@@ -149,47 +167,5 @@ public class ObjectPlacer : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void OldPlaceDecorations(TerrainChunk terrainChunk, Room room)
-    {
-        Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;
-        Vector3[] visitedVertices = new Vector3[meshVertices.Length];
-
-        float offsetX = -terrainChunk.transform.position.x + MapGenerator.ChunkSize * 0.5f;
-        float offsetZ = -terrainChunk.transform.position.z + MapGenerator.ChunkSize * 0.5f;
-        TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
-
-        if (room.Rect.Contains(new Vector2(terrainChunk.transform.position.x - MapGenerator.ChunkSize, terrainChunk.transform.position.z - MapGenerator.ChunkSize)))
-        {
-            for (int i = 0; i < meshVertices.Length; i++)
-            {
-                foreach (TerrainType terrain in terrainTypes)
-                {
-                    if (meshVertices[i].y <= terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier())
-                    {
-                        if (meshVertices[i] != visitedVertices[i])
-                        {
-                            foreach (ObjectList objectList in objects)
-                            {
-                                if (objectList.terrain == terrain.name)
-                                {
-                                    //if (Random.Range(0f, 1f) < chancePerVertex)
-                                    //{
-                                    //    Matrix4x4 localToWorld = transform.localToWorldMatrix;
-                                    //    Vector3 position = terrainChunk.transform.rotation * localToWorld.MultiplyPoint3x4(meshVertices[i]);
-                                    //    position = new Vector3(position.x - offsetX, position.y, position.z - offsetZ);
-                                    //    Instantiate(objectList.terrainObjects.GetRandom(), position, Quaternion.identity, terrainChunk.transform);
-                                    //}
-                                }
-                            }
-                            visitedVertices[i] = meshVertices[i];
-                        }
-
-                    }
-                }
-            }
-        }
-       
     }
 }
