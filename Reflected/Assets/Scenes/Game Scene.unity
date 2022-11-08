@@ -599,6 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 1666943489}
+  mapGenerator: {fileID: 1666943497}
   objectMultiplier: 12
   wallPadding: 2
   obstacleDistance: 3
@@ -876,20 +877,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.1487603
-      outSlope: 0.1487603
+      inSlope: 0.08526876
+      outSlope: 0.08526876
       tangentMode: 0
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.3
+      outWeight: 0.41617647
     - serializedVersion: 3
       time: 1
-      value: 0.6925621
-      inSlope: 6.762229
-      outSlope: 6.762229
+      value: 0.6101426
+      inSlope: 40.131836
+      outSlope: 40.131836
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.089705884
+      inWeight: 0.013235271
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -986,6 +987,7 @@ MonoBehaviour:
   trials: 1
   interval: 0
   log: 
+  timerLog: 
 --- !u!4 &1666943498
 Transform:
   m_ObjectHideFlags: 0
@@ -1125,17 +1127,17 @@ PrefabInstance:
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.025168218
+      value: 0.025168188
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.24171926
+      value: -0.24171925
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487119602163, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.007874002
+      value: 0.00787399
       objectReference: {fileID: 0}
     - target: {fileID: 7509292487351524866, guid: 2333b69884c50d54eac2de350810c1e6,
         type: 3}
