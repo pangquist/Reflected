@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class ExplosionAttackState : State
 {
     public GameObject explosionObject;
+    public Enemy myStats;
 
     private bool attackStarted = false;
 
@@ -17,6 +18,10 @@ public class ExplosionAttackState : State
 
     //Range to player in which the enemy will chase the player. (Reposition to attack)
     [SerializeField] private float chaseRange = 2.5f;
+
+    //Status effects that will be applied on the player when they are hit by the explosion
+    [SerializeField] private StatusEffectData dotData;
+    [SerializeField] private StatusEffectData slowData;
 
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
@@ -49,8 +54,8 @@ public class ExplosionAttackState : State
         GameObject currentExplosion = Instantiate(explosionObject, transform.position, Quaternion.identity);
         if (currentExplosion != null)
         {
-            //currentExplosion.GetComponent<AOEScript>().SetUp(aoeSize);
-            //Destroy this enemy as they explode.
+            currentExplosion.GetComponent<ExplosionScript>().SetUp(aoeSize, dotData, slowData);
+            myStats.TakeDamage(4);
         }
     }
 

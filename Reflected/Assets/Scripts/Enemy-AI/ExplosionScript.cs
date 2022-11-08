@@ -5,6 +5,8 @@ using UnityEngine;
 public class ExplosionScript : MonoBehaviour
 {
     [SerializeField] private float upTime = 0.5f;
+    [SerializeField] private StatusEffectData dotData;
+    [SerializeField] private StatusEffectData slowData;
     private float despawnTimer;
     private bool playerHit;
 
@@ -26,20 +28,29 @@ public class ExplosionScript : MonoBehaviour
         }
     }
 
-    public void SetUp(Vector3 aoeSize)
+    public void SetUp(Vector3 aoeSize, StatusEffectData dotData, StatusEffectData slowData)
     {
         transform.localScale = aoeSize;
+        this.dotData = dotData;
+        this.slowData = slowData;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!playerHit)
         {
             if (other.tag == "Player")
             {
-                Debug.Log("Explosion collision entered");
-                //Attach slowing debuf
-                //Attach damage over time debuf
+                Debug.Log("Explosion collider entered");
+
+                var healthComponent = other.GetComponent<Player>();
+                if (healthComponent != null)
+                {
+                    Debug.Log("Test");
+                    healthComponent.ApplyEffect(dotData, 1);
+                    healthComponent.ApplyEffect(slowData, 1);
+                    Debug.Log("Effects applied");
+                }
 
                 playerHit = true;
             }
