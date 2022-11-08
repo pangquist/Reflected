@@ -37,6 +37,7 @@ public class AiDirector : MonoBehaviour
 
     EnemySpawner enemySpawner;
     [SerializeField] GameObject chest;
+    LootPoolManager lootPool;
 
     // Properties
 
@@ -54,6 +55,7 @@ public class AiDirector : MonoBehaviour
         if (!player) player = FindObjectOfType<Player>();
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
         if (!map) map = GameObject.Find("Map").GetComponent<Map>();
+        if (!lootPool) lootPool = GameObject.Find("LootPoolManager").GetComponent<LootPoolManager>();
 
         waveAmount = 1;
         checkDifficulty();
@@ -86,6 +88,10 @@ public class AiDirector : MonoBehaviour
         if(numberOfRoomsCleared % 4 == 0 && numberOfRoomsCleared > 0)
         {
             waveAmount++;
+        }
+        if (numberOfRoomsCleared % 2 == 0 && numberOfRoomsCleared > 0)
+        {
+            lootPool.IncreaseRarity();
         }
 
         amountOfEnemiesToSpawn = Random.Range(minSpawnAmount, maxSpawnAmount);
