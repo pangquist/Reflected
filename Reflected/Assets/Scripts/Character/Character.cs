@@ -19,8 +19,6 @@ public class Character : MonoBehaviour, IEffectable
 
     protected virtual void Awake()
     {
-        currentHealth = maxHealth;
-
         if (this.GetType() != typeof(Player))
             anim = GetComponent<Animator>();
         statusEffects = new List<Effect>();
@@ -68,12 +66,12 @@ public class Character : MonoBehaviour, IEffectable
             Destroy(gameObject);
     }
 
-    public float GetHealthPercentage()
+    public virtual float GetHealthPercentage()
     {
         return currentHealth / maxHealth;
     }
 
-    public float GetMaxHealth()
+    public virtual float GetMaxHealth()
     {
         return maxHealth;
     }

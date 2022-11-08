@@ -41,6 +41,7 @@ public class Player : Character, ISavable
 
     protected override void Awake()
     {
+        currentHealth = maxHealth + stats.GetMaxHealthIncrease();
         base.Awake();
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -100,6 +101,16 @@ public class Player : Character, ISavable
         currentAbility.DoEffect();
     }
 
+    public override float GetHealthPercentage()
+    {
+        return currentHealth / (maxHealth + stats.GetMaxHealthIncrease());
+    }
+
+    public override float GetMaxHealth()
+    {
+        return maxHealth + stats.GetMaxHealthIncrease();
+    }
+
     public void SpecialAttack()
     {
         if (specialAbility.IsOnCooldown())
@@ -141,6 +152,11 @@ public class Player : Character, ISavable
 
         }
         currentWeapon.SetDamage(damage);
+    }
+
+    public override void Heal(float amount)
+    {
+        currentHealth += Mathf.Clamp(amount, 0, maxHealth + stats.GetMaxHealthIncrease() - currentHealth);
     }
 
     public void TryDimensionSwap()

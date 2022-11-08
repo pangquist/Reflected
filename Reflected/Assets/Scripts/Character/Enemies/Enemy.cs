@@ -20,6 +20,7 @@ public class Enemy : Character
 
     protected override void Awake()
     {
+        currentHealth = maxHealth;
         base.Awake();
         player = FindObjectOfType<Player>();
         parent = gameObject.transform.parent.gameObject;
