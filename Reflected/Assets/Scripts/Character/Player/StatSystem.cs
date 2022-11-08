@@ -71,10 +71,11 @@ public class StatSystem : MonoBehaviour
         damageIncrease = 1;
         attackSpeed = 1;
         areaOfEffect = 1;
+        attackSpeed = 1;
         cooldownDecrease = 0;
         chargesToSwapTrue = 0;
         chargesToSwapMirror = 0;
-        attackSpeed = 1;
+        
     }
 
     public float GetMaxHealthIncrease() => maxHealthIncrease;

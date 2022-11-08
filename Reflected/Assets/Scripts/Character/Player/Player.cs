@@ -178,6 +178,23 @@ public class Player : Character, ISavable
         }
     }
 
+    public override void TakeDamage(float damage)
+    {
+        if (isDead)
+            return;
+        
+        currentHealth -= Mathf.Clamp(Mathf.CeilToInt(damage * stats.GetDamageReduction()), 0, currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            anim.Play("Damaged");
+        }
+    }
+
     public void Interact()
     {
         OnObjectInteraction.Invoke();

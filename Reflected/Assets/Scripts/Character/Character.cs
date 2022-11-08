@@ -13,7 +13,7 @@ public class Character : MonoBehaviour, IEffectable
     protected List<Effect> statusEffects;
     protected List<GameObject> effectParticles;
     [SerializeField] protected Animator anim;
-    bool isDead;
+    protected bool isDead;
 
     [SerializeField] protected Weapon currentWeapon;
 
