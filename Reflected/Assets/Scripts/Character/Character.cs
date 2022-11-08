@@ -146,6 +146,11 @@ public class Character : MonoBehaviour, IEffectable
             }
         }
     }
+
+    public void PlayAnimation(string animName)
+    {
+        anim.Play(animName);
+    }
 }
 
 [System.Serializable]

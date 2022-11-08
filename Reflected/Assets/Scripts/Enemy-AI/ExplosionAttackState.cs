@@ -55,7 +55,9 @@ public class ExplosionAttackState : State
         if (currentExplosion != null)
         {
             currentExplosion.GetComponent<ExplosionScript>().SetUp(aoeSize, dotData, slowData);
-            myStats.TakeDamage(999f);
+            //myStats.TakeDamage(999f);
+            //myStats.Die();
+            myStats.PlayAnimation("Death");
         }
     }
 
