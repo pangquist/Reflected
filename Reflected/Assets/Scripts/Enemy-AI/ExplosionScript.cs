@@ -48,7 +48,7 @@ public class ExplosionScript : MonoBehaviour
                 {
                     Debug.Log("Test");
                     healthComponent.ApplyEffect(dotData, 1);
-                    healthComponent.ApplyEffect(slowData, 1);
+                    healthComponent.ApplyEffect(slowData, 10);
                     Debug.Log("Effects applied");
                 }
 
