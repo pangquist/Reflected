@@ -38,6 +38,12 @@ public class LootPoolManager : MonoBehaviour
         rarityTiers.SetWeight(2, epicWeight);
     }
 
+    public void IncreaseRarity()
+    {
+        rarityTiers.IncreaseWeight(1);
+        rarityTiers.IncreaseWeight(2);
+    }
+
     private void OnEnable()
     {
         InteractablePowerUp.OnPowerUPCollected += AddPowerupPickRate;
