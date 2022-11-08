@@ -92,15 +92,20 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            if (percentage % 2 == 0)
+            int percent = Random.Range(1, 101);
+
+            if (percent < 33)
             {
                 enemyToSpawn = enemyRange;
             }
-            else
+            else if (percent > 66)
             {
                 enemyToSpawn = enemyAOE;
             }
+            else
+            {
+                enemyToSpawn = enemyDOT;
+            }
         }
     }
-
 }

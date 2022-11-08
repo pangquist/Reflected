@@ -17,10 +17,13 @@ public abstract class Chest : MonoBehaviour
     public bool isOpen;
     //public Animator animator;
 
+    bool trueDimension;
+
     protected virtual void Start()
     {
+        trueDimension = DimensionManager.True;
         //animator = GetComponent<Animator>();
-        powerups = FindObjectOfType<LootPoolManager>().GetPowerupPool();
+        powerups = FindObjectOfType<LootPoolManager>().GetPowerupPool(trueDimension);
         myRarity = FindObjectOfType<LootPoolManager>().GetRandomRarity();
         SetItems();
         //itemToSpawn = lootTable.GetRandom().GetItem();
