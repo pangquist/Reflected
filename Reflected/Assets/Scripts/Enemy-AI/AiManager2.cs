@@ -49,7 +49,6 @@ public class AiManager2 : MonoBehaviour
         //Should have a way to assign firePoint without the inspector. But I don't have one atm.
         //if (firePoint == null)
         //{
-        //    //Debug. Will be better when rewritten into different scripts.
         //    firePoint = gameObject.transform.GetChild(0).GetChild(0).transform;
         //}
 

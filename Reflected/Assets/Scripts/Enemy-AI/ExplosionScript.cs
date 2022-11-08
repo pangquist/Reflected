@@ -41,15 +41,12 @@ public class ExplosionScript : MonoBehaviour
         {
             if (other.tag == "Player")
             {
-                Debug.Log("Explosion collider entered");
-
-                var healthComponent = other.GetComponent<Player>();
-                if (healthComponent != null)
+                var effectable = other.GetComponentInChildren<IEffectable>();
+                if (effectable != null)
                 {
-                    Debug.Log("Test");
-                    healthComponent.ApplyEffect(dotData, 1);
-                    healthComponent.ApplyEffect(slowData, 10);
-                    Debug.Log("Effects applied");
+                    effectable.ApplyEffect(dotData, 1);
+                    effectable.ApplyEffect(slowData, 1);
+                    Debug.Log("Effects applied to player");
                 }
 
                 playerHit = true;
