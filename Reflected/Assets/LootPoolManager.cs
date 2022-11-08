@@ -5,6 +5,8 @@ using UnityEngine;
 public class LootPoolManager : MonoBehaviour
 {
     [SerializeField] WeightedRandomList<GameObject> powerupPool;
+    [SerializeField] WeightedRandomList<GameObject> truePowerupPool;
+    [SerializeField] WeightedRandomList<GameObject> mirrorPowerupPool;
     [SerializeField] WeightedRandomList<GameObject> collectablePool;
     [SerializeField] WeightedRandomList<Rarity> rarityTiers;
     [SerializeField] Dictionary<PowerUpEffect, int> powerupPickAmount;
@@ -38,6 +40,12 @@ public class LootPoolManager : MonoBehaviour
         rarityTiers.SetWeight(2, epicWeight);
     }
 
+    public void IncreaseRarity()
+    {
+        rarityTiers.IncreaseWeight(1);
+        rarityTiers.IncreaseWeight(2);
+    }
+
     private void OnEnable()
     {
         InteractablePowerUp.OnPowerUPCollected += AddPowerupPickRate;
@@ -52,6 +60,12 @@ public class LootPoolManager : MonoBehaviour
     {
         powerupPickAmount[powerupEffectData] += 1;
         Debug.Log(powerupPickAmount[powerupEffectData]);
+    }
+
+    public WeightedRandomList<GameObject> GetPowerupPool(bool dimension)
+    {
+        if (dimension) return truePowerupPool;
+        else return mirrorPowerupPool;
     }
 
     public WeightedRandomList<GameObject> GetPowerupPool()

@@ -44,13 +44,11 @@ public class AOEScript : MonoBehaviour
         {
             if (other.tag == "Player")
             {
-                Debug.Log("AOE collision activated. Potential damage: "+ damageAmount);
                 var healthComponent = other.GetComponent<Player>();
                 if (healthComponent != null)
                 {
                     damageTimer = 0f;
                     healthComponent.TakeDamage(damageAmount);
-                    Debug.Log("Player took this amount of damage: " + damageAmount + " from aoe.");
                 }
             }
             damageTimer = 0f;

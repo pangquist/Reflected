@@ -14,6 +14,7 @@ public class ObjectPlacer : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] TerrainGenerator terrainGenerator;
+    [SerializeField] MapGenerator mapGenerator;
 
     [Header("Values")]
     [Range(1, 20)]
@@ -29,17 +30,17 @@ public class ObjectPlacer : MonoBehaviour
     [Header("Objects")]
     [SerializeField] ObjectList[] objects;
 
-    public void Place(Map map, float pathRadius)
+    public void Place(Map map)
     {
-        foreach(Room room in map.Rooms)
+        foreach (Room room in map.Rooms)
         {
-            PlaceDecorations(room, pathRadius);
+            PlaceDecorations(room);
         }
     }
 
-    private void PlaceDecorations(Room room, float pathRadius)
+    private void PlaceDecorations(Room room)
     {
-        List<Vector3> raycastOrigins = CreateRayCastPoints(room, pathRadius);
+        List<Vector3> raycastOrigins = CreateRayCastPoints(room, mapGenerator.PathGenerator.Radius);
         Rect center = new Rect(room.Rect.position + room.Rect.size / 4, room.Rect.size / 2);
         TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
 

@@ -26,6 +26,9 @@ public class MoveAwayFromPlayerState : State
             case AiManager2.CombatBehavior.CloseCombat: //This case SHOULD not be entered as there should be no reason for melee to run away.
                 thisEnemy.SetMoveTowardState(); //Here in case it does get entered by a melee enemy.
                 break;
+            case AiManager2.CombatBehavior.ExplosionCombat: //This case SHOULD not be entered as there should be no reason for explosion enemy to run away.
+                thisEnemy.SetMoveTowardState(); //Here in case it does get entered by an explosion enemy.
+                break;
 
             case AiManager2.CombatBehavior.RangedCombat:
                 if (thisEnemy.distanceTo(player.transform) >= rangedFleeRange)

@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using PathCreation;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using Debug = UnityEngine.Debug;
 
 public class MapGenerator : MonoBehaviour
 {
+    private delegate void Generator(Map map);
+
     [Header("Seed")]
 
     [SerializeField] private int seed;
@@ -62,6 +66,9 @@ public class MapGenerator : MonoBehaviour
     [TextArea()]
     [ReadOnly][SerializeField] private string log;
 
+    [TextArea()]
+    [ReadOnly][SerializeField] private string timerLog;
+
     // Properties
 
     public static int ChunkSize { get; private set; }
@@ -75,7 +82,6 @@ public class MapGenerator : MonoBehaviour
     public WaterGenerator    WaterGenerator    => waterGenerator;
     public TerrainGenerator  TerrainGenerator  => terrainGenerator;
     public ObjectPlacer      ObjectPlacer      => objectPlacer;
-
 
     private void Start()
     {
@@ -97,11 +103,16 @@ public class MapGenerator : MonoBehaviour
     {
         // Prepare
 
+        Stopwatch stopwatch = Stopwatch.StartNew();
+
         log = "Map generation log\n";
+        timerLog = "";
+
         int newSeed = seed != 0 ? seed : (int)System.DateTime.Now.Ticks;
         Random.InitState(newSeed);
         terrainGenerator.SetRandomSeed(newSeed);
         Log("Seed: " + newSeed);
+
         Destroy(GameObject.Find("Map"));
 
         // Initialize map
@@ -115,30 +126,24 @@ public class MapGenerator : MonoBehaviour
 
         // Generate map
 
-        roomGenerator    .Generate(map);
-        chamberGenerator .Generate(map);
-
+        Timed(roomGenerator    .Generate, map, "Room generator");
+        Timed(chamberGenerator .Generate, map, "Chamber generator");
         map.GenerateGraph();
-
-        roomTypeGenerator.Generate(map);
-
+        Timed(roomTypeGenerator.Generate, map, "Room type generator");
         map.ScaleUpData();
-
-        pathGenerator    .Generate(map);
-        wallGenerator    .Generate(map);
-        pillarGenerator  .Generate(map);
-        waterGenerator   .Generate(map);
-        terrainGenerator .Generate(map);
-
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.SetActive(false);
-        BakeNavMesh(map.GetComponent<NavMeshSurface>());
-        player.SetActive(true);
-         
-        objectPlacer.Place(map, pathGenerator.Radius);
-
+        Timed(pathGenerator    .Generate, map, "Path generator");
+        Timed(wallGenerator    .Generate, map, "Wall generator");
+        Timed(pillarGenerator  .Generate, map, "Pillar generator");
+        Timed(waterGenerator   .Generate, map, "Water generator");
+        Timed(terrainGenerator .Generate, map, "Terrain generator");
+        Timed(BakeNavMesh               , map, "NavMesh baker");
+        Timed(objectPlacer     .Place   , map, "Object placer");
+        
         // Log
 
+        stopwatch.Stop();
+        timerLog += "\nTotal: " + stopwatch.Elapsed.TotalSeconds.ToString("0.0") + " seconds";
+        Log(timerLog);
         Log("");
         Debug.Log(log);
 
@@ -155,7 +160,7 @@ public class MapGenerator : MonoBehaviour
 
         if (autoFocusCamera)
         {
-            SceneView.lastActiveSceneView.LookAt(player.transform.position, Quaternion.Euler(70, 0, 0), 40, false, false);
+            SceneView.lastActiveSceneView.LookAt(GameObject.Find("Player").transform.position, Quaternion.Euler(70, 0, 0), 40, false, false);
         }
 
 #endif
@@ -192,8 +197,19 @@ public class MapGenerator : MonoBehaviour
         log += "\n" + text;
     }
 
-    private void BakeNavMesh(NavMeshSurface surface)
+    private void BakeNavMesh(Map map)
     {
-        surface.BuildNavMesh();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.SetActive(false);
+        map.GetComponent<NavMeshSurface>().BuildNavMesh();
+        player.SetActive(true);
+    }
+
+    private void Timed(Generator generator, Map map, string generatorName)
+    {
+        Stopwatch stopwatch = Stopwatch.StartNew();
+        generator.Invoke(map);
+        stopwatch.Stop();
+        timerLog += "\n" + generatorName + ": \t" + stopwatch.ElapsedMilliseconds + " milliseconds";
     }
 }

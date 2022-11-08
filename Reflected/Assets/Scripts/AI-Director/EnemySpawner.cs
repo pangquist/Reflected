@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject enemyClose;
     [SerializeField] GameObject enemyRange;
     [SerializeField] GameObject enemyAOE;
+    [SerializeField] GameObject enemyDOT;
 
     GameObject enemyToSpawn;
     List<GameObject> enemyList = new List<GameObject>();
@@ -87,19 +88,24 @@ public class EnemySpawner : MonoBehaviour
 
         if (percentage <= spawnBias)
         {
-            enemyToSpawn = enemyRange;
+            enemyToSpawn = enemyClose;
         }
         else
         {
-            if (percentage % 2 == 0)
+            int percent = Random.Range(1, 100);
+
+            if (percent < 33)
             {
-                enemyToSpawn = enemyClose;
+                enemyToSpawn = enemyRange;
             }
-            else
+            else if (percent > 66)
             {
                 enemyToSpawn = enemyAOE;
             }
+            else
+            {
+                enemyToSpawn = enemyDOT;
+            }
         }
     }
-
 }

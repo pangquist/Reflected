@@ -8,11 +8,11 @@ using UnityEngine.UIElements;
 public class AiDirector : MonoBehaviour
 {
     //Difficulty
-    [SerializeField] enum difficultyLevel {superEasy, easy, medium, hard }
-    [SerializeField] difficultyLevel difficulty;
     [SerializeField] float spawntime;
     [SerializeField] int amountOfEnemiesToSpawn;
     [SerializeField] int waveAmount;
+    [SerializeField] int difficultySteps;
+    int minSpawnAmount, maxSpawnAmount;
 
     //Room-stats
     bool inbetweenRooms;
@@ -29,7 +29,6 @@ public class AiDirector : MonoBehaviour
     [SerializeField] int numberOfEnemiesKilled;
     Map map;
 
-
     //Player-stats
     Player player;
     [SerializeField] float playerCurrentHelathPercentage;
@@ -38,6 +37,7 @@ public class AiDirector : MonoBehaviour
 
     EnemySpawner enemySpawner;
     [SerializeField] GameObject chest;
+    LootPoolManager lootPool;
 
     // Properties
 
@@ -55,8 +55,9 @@ public class AiDirector : MonoBehaviour
         if (!player) player = FindObjectOfType<Player>();
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
         if (!map) map = GameObject.Find("Map").GetComponent<Map>();
+        if (!lootPool) lootPool = GameObject.Find("LootPoolManager").GetComponent<LootPoolManager>();
 
-        difficulty = difficultyLevel.easy;
+        waveAmount = 1;
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
@@ -75,31 +76,34 @@ public class AiDirector : MonoBehaviour
     }
     private void checkDifficulty()
     {
-        if(difficulty == difficultyLevel.superEasy)
+        startDiffuculty();
+        difficultySteps = numberOfEnemiesKilled / 20;
+
+        for (int i = 0; i < difficultySteps; i++)
         {
-            spawntime = 2;
-            amountOfEnemiesToSpawn = Random.Range(1, 3);
-            waveAmount = 1;
+            minSpawnAmount++;
+            maxSpawnAmount++;
+            spawntime -= 0.1f;
         }
-        if (difficulty == difficultyLevel.easy)
+        if(numberOfRoomsCleared % 4 == 0 && numberOfRoomsCleared > 0)
         {
-            spawntime = 2;
-            amountOfEnemiesToSpawn = Random.Range(4,6);
-            waveAmount = 2;
+            waveAmount++;
         }
-        else if (difficulty == difficultyLevel.medium)
+        if (numberOfRoomsCleared % 2 == 0 && numberOfRoomsCleared > 0)
         {
-            spawntime = 1;
-            amountOfEnemiesToSpawn = Random.Range(6, 9);
-            waveAmount = 3;
+            lootPool.IncreaseRarity();
         }
-        else if (difficulty == difficultyLevel.hard)
-        {
-            spawntime = 0.5f;
-            amountOfEnemiesToSpawn = Random.Range(8, 11);
-            waveAmount = 4;
-        }
+
+        amountOfEnemiesToSpawn = Random.Range(minSpawnAmount, maxSpawnAmount);
     }
+
+    private void startDiffuculty()
+    {
+        spawntime = 2;
+        minSpawnAmount = 3;
+        maxSpawnAmount = 6;
+    }
+
     private void CheckRoomActivity()
     {
         if (activeRoom) // Player is in a room with enemies

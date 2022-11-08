@@ -177,11 +177,6 @@ PrefabInstance:
       objectReference: {fileID: 5353099378352378149}
     - target: {fileID: 1234138811770308852, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
-      propertyPath: currentWeapon
-      value: 
-      objectReference: {fileID: 2539094749608838736}
-    - target: {fileID: 1234138811770308852, guid: fe7f1329d7c296d4b93c79f860f7991e,
-        type: 3}
       propertyPath: basicBowAbility
       value: 
       objectReference: {fileID: 0}
@@ -189,6 +184,11 @@ PrefabInstance:
         type: 3}
       propertyPath: weapons.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234138811770308852, guid: fe7f1329d7c296d4b93c79f860f7991e,
+        type: 3}
+      propertyPath: TimeFlowWhileSwapping
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1234138811770308852, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
@@ -200,6 +200,11 @@ PrefabInstance:
       propertyPath: parent
       value: 
       objectReference: {fileID: 4853948256094235928}
+    - target: {fileID: 1344186847949550753, guid: fe7f1329d7c296d4b93c79f860f7991e,
+        type: 3}
+      propertyPath: dashSpeed
+      value: 0.65
+      objectReference: {fileID: 0}
     - target: {fileID: 2555587854365852870, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
       propertyPath: m_Name
@@ -262,18 +267,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
+      propertyPath: speed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
+        type: 3}
       propertyPath: controller
       value: 
       objectReference: {fileID: 5444201463126724936}
     - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
       propertyPath: jumpHeight
-      value: 4
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
       propertyPath: gravityEffect
-      value: -18.62
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 6738516131019372579, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
@@ -298,15 +308,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2539094748840900825}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2539094749608838736 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1925594761, guid: fe7f1329d7c296d4b93c79f860f7991e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2539094748840900825}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aaea9a5699f20546a8c6155ec6bc735, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
