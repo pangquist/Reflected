@@ -92,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            int percent = Random.Range(1, 101);
+            int percent = Random.Range(1, 100);
 
             if (percent < 33)
             {

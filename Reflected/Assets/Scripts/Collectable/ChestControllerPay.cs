@@ -21,8 +21,9 @@ public class ChestControllerPay : Chest
                 Debug.Log("Chest is now open...");
                 if (spawnedObject == null)
                     SpawnItem(0);
+
+                Destroy(gameObject, 20);
             }
-        }
-        
+        } 
     }
 }
