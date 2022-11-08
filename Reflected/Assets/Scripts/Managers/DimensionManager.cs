@@ -43,6 +43,7 @@ public class DimensionManager : MonoBehaviour
     [ReadOnly][SerializeField] private PlayerStatSystem statSystem;
 
     private static Dimension currentDimension;
+    WeightedRandomList<GameObject> LootDropList;
 
     // Properties
 
@@ -61,6 +62,7 @@ public class DimensionManager : MonoBehaviour
     private void Awake()
     {
         musicManager = GameObject.Find("Music Manager").GetComponent<MusicManager>();
+        LootDropList = GameObject.Find("LootPoolManager").GetComponent<LootPoolManager>().GetCollectablePool();
         currentDimension = Dimension.True;
         //SetDimension(Dimension.True);
         UpdateChargeBar();
@@ -73,6 +75,17 @@ public class DimensionManager : MonoBehaviour
     {
         if (!CanSwap())
             return false;
+
+        if (True)
+        {
+            LootDropList.SetWeight(3, 0);
+            LootDropList.SetWeight(2, 1);
+        }
+        else if (Mirror)
+        {
+            LootDropList.SetWeight(2, 0);
+            LootDropList.SetWeight(3, 1);
+        }
 
         ForcedSwap();
         ResetCharges();
