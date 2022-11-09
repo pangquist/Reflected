@@ -34,7 +34,7 @@ public class RoomTypeGenerator : MonoBehaviour
 
     private void DetermineStartRoom(Map map)
     {
-        Rect mapRect = new Rect(0, 0, map.SizeX, map.SizeZ);
+        Rect mapRect = new Rect(0, 0, map.SizeX * MapGenerator.ChunkSize, map.SizeZ * MapGenerator.ChunkSize);
         Room startRoom = map.Rooms[0];
 
         foreach (Room room in map.Rooms)
@@ -57,7 +57,7 @@ public class RoomTypeGenerator : MonoBehaviour
 
     private void DetermineBossRoom(Map map)
     {
-        Rect mapRect = new Rect(0, 0, map.SizeX, map.SizeZ);
+        Rect mapRect = new Rect(0, 0, map.SizeX * MapGenerator.ChunkSize, map.SizeZ * MapGenerator.ChunkSize);
 
         Dictionary<Room, float> roomFitness = new Dictionary<Room, float>();
         KeyValuePair<Room, float>[] orderedArray;

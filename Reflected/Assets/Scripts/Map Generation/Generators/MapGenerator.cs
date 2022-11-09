@@ -119,9 +119,6 @@ public class MapGenerator : MonoBehaviour
         chamberGenerator .Generate(map);
 
         map.GenerateGraph();
-
-        roomTypeGenerator.Generate(map);
-
         map.ScaleUpData();
 
         pathGenerator    .Generate(map);
@@ -129,6 +126,7 @@ public class MapGenerator : MonoBehaviour
         pillarGenerator  .Generate(map);
         waterGenerator   .Generate(map);
         terrainGenerator .Generate(map);
+        roomTypeGenerator.Generate(map);
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.SetActive(false);
@@ -136,6 +134,8 @@ public class MapGenerator : MonoBehaviour
         player.SetActive(true);
          
         objectPlacer.Place(map, pathGenerator.Radius);
+
+        GameObject.Find("Minimap").GetComponent<Minimap>().InitialUpdate();
 
         // Log
 

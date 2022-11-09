@@ -73,6 +73,7 @@ public class TerrainGenerator : MonoBehaviour
                     MapGenerator.ChunkSize,
                     MapGenerator.ChunkSize);
 
+
                 foreach (Room room in map.Rooms)
                 {
                     if (room.Rect.Inflated(1, 1).Overlaps(terrainRect))
@@ -107,14 +108,14 @@ public class TerrainGenerator : MonoBehaviour
 
     private void GenerateTerrainChunk(TerrainChunk terrainChunk, Room room1, Room room2 = null)
     {
-        float[,] heightMap = GenerateHeightMap(terrainChunk, room1, room2);
+        float[,] heightMap = GenerateHeightMap(terrainChunk);
 
         Texture2D chunkTexture = BuildTexture(heightMap, terrainChunk);
         terrainChunk.MeshRenderer().material.mainTexture = chunkTexture;
         UpdateMeshVertices(heightMap, terrainChunk, room1, room2);
     }
 
-    public float[,] GenerateHeightMap(TerrainChunk terrainChunk, Room room1, Room room2)
+    public float[,] GenerateHeightMap(TerrainChunk terrainChunk)
     {
         // calculate chunk depth and width based on the mesh vertices
         Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;

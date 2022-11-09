@@ -67,6 +67,7 @@ public enum RoomType
     Monster,
     Boss
 }
+
 /// <summary>
 /// Starts that effect the enemy
 /// </summary>
@@ -78,4 +79,16 @@ public enum Stats
     Damage,
     AttackSpeed,
     AoE   
+}
+
+/// <summary>
+/// Minimap layers
+/// </summary>
+public enum MinimapLayer
+{
+    Ground,
+    Decorations,
+    Walls,
+    Objects,
+    Player
 }

@@ -111,9 +111,15 @@ public class PlayerController : MonoBehaviour
     {
         return movementLocked;
     }
+
     public bool Back()
     {
         return playerControls.Player.Back.triggered;
+    }
+
+    public bool ExpandInterface()
+    {
+        return playerControls.Player.ExpandInterface.IsPressed();
     }
 
     public void SetActionLocked(bool state)
@@ -157,4 +163,14 @@ public class PlayerController : MonoBehaviour
     {
         movement.TurnOffGravity();
     }
+
+    public float Zoom()
+    {
+        if (playerControls.Player.ZoomIn.IsPressed())
+            return 1f;
+        if (playerControls.Player.ZoomOut.IsPressed())
+            return -1f;
+        return 0f;
+    }
+
 }

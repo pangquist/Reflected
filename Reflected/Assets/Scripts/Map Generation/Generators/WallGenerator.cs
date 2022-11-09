@@ -18,19 +18,24 @@ public class WallGenerator : MonoBehaviour
 
     [Header("Walls")]
 
-    [Range(0, 100)][Tooltip("In tiles")]
+    [Range(0, 100)]
     [SerializeField] private int wallHeight;
 
-    [Range(0, 50)][Tooltip("In tiles")]
+    [Range(0, 50)]
     [SerializeField] private int wallThickness;
+
+    [Range(0, 1f)][Tooltip("How much to shorten walls adjacent to chambers in order to avoid visual bugs")]
+    [SerializeField] private float chamberOverlapInflation;
 
     [Header("Doors")]
 
-    [Range(0f, 5f)][Tooltip("In tiles")]
+    [Range(0f, 5f)]
     [SerializeField] private float doorThickness;
 
-    [Range(0f, 2f)][Tooltip("In tiles")]
+    [Range(0f, 2f)]
     [SerializeField] private float doorIndent;
+
+    public float ChamberOverlapInflation => chamberOverlapInflation;
 
     private void Awake()
     {
@@ -71,6 +76,8 @@ public class WallGenerator : MonoBehaviour
                         // If they overlap with the wall portion
                         if (wallPortion.Overlaps(chamber.Rect, out overlap))
                         {
+                            overlap = overlap.Inflated(chamberOverlapInflation, chamberOverlapInflation); // Inflate overlap to avoid visual bugs
+
                             // Calculate two new portions
 
                             if (chamber.Orientation == Orientation.Horizontal)
