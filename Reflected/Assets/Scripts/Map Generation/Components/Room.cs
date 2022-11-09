@@ -37,23 +37,7 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
-        if (type == RoomType.Boss)
-        {
-            foreach (Wall wall in walls)
-            {
-                foreach (GameObject portion in wall.Portions)
-                    portion.GetComponentInChildren<MeshRenderer>().material.color = new Color(0.3f, 0.3f, 0.3f);
-
-                foreach (Pillar pillar in wall.Pillars)
-                    pillar.GetComponentInChildren<MeshRenderer>().material.color = new Color(0.6f, 0.1f, 0.1f);
-            }
-
-            foreach (Chamber chamber in chambers)
-            {
-                foreach (Pillar pillar in chamber.Pillars)
-                    pillar.GetComponentInChildren<MeshRenderer>().material.color = new Color(0.6f, 0.1f, 0.1f);
-            }
-        }
+        
     }
 
     public static void StaticInitialize(Map map)
@@ -71,6 +55,24 @@ public class Room : MonoBehaviour
     public void SetType(RoomType type)
     {
         this.type = type;
+
+        if (type == RoomType.Boss)
+        {
+            foreach (Wall wall in walls)
+            {
+                foreach (GameObject portion in wall.Portions)
+                    portion.GetComponentInChildren<MeshRenderer>().material.color = new Color(0.3f, 0.3f, 0.3f);
+
+                foreach (Pillar pillar in wall.Pillars)
+                    pillar.GetComponentInChildren<MeshRenderer>().material.color = new Color(0.6f, 0.1f, 0.1f);
+            }
+
+            foreach (Chamber chamber in chambers)
+            {
+                foreach (Pillar pillar in chamber.Pillars)
+                    pillar.GetComponentInChildren<MeshRenderer>().material.color = new Color(0.6f, 0.1f, 0.1f);
+            }
+        }
     }
 
     public void ScaleUpData()

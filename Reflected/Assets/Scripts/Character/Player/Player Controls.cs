@@ -98,6 +98,33 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Expand Interface"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ccd1f53-5f77-4868-bf3b-4eb8cf8fa7e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom In"",
+                    ""type"": ""Button"",
+                    ""id"": ""c69e2dba-a2f7-4ac9-93a6-3aaf2679fef8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom Out"",
+                    ""type"": ""Button"",
+                    ""id"": ""05cf776d-dbee-405e-a0ec-d53142c5df8f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -232,6 +259,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b2c0d51-b29a-4b7e-aaf4-fe65b11a874c"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Expand Interface"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9bd7a81-868f-4e50-b17e-9bdf55d62687"",
+                    ""path"": ""<Keyboard>/#(+)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom In"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf23f37f-7a0e-4441-bca5-2451576c9c8c"",
+                    ""path"": ""<Keyboard>/#(-)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom Out"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -248,6 +308,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_SwapDimension = m_Player.FindAction("Swap Dimension", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Back = m_Player.FindAction("Back", throwIfNotFound: true);
+        m_Player_ExpandInterface = m_Player.FindAction("Expand Interface", throwIfNotFound: true);
+        m_Player_ZoomIn = m_Player.FindAction("Zoom In", throwIfNotFound: true);
+        m_Player_ZoomOut = m_Player.FindAction("Zoom Out", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +378,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SwapDimension;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Back;
+    private readonly InputAction m_Player_ExpandInterface;
+    private readonly InputAction m_Player_ZoomIn;
+    private readonly InputAction m_Player_ZoomOut;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -327,6 +393,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @SwapDimension => m_Wrapper.m_Player_SwapDimension;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Back => m_Wrapper.m_Player_Back;
+        public InputAction @ExpandInterface => m_Wrapper.m_Player_ExpandInterface;
+        public InputAction @ZoomIn => m_Wrapper.m_Player_ZoomIn;
+        public InputAction @ZoomOut => m_Wrapper.m_Player_ZoomOut;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -360,6 +429,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Back.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBack;
                 @Back.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBack;
                 @Back.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBack;
+                @ExpandInterface.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExpandInterface;
+                @ExpandInterface.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExpandInterface;
+                @ExpandInterface.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExpandInterface;
+                @ZoomIn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoomIn;
+                @ZoomIn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoomIn;
+                @ZoomIn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoomIn;
+                @ZoomOut.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoomOut;
+                @ZoomOut.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoomOut;
+                @ZoomOut.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoomOut;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -388,6 +466,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Back.started += instance.OnBack;
                 @Back.performed += instance.OnBack;
                 @Back.canceled += instance.OnBack;
+                @ExpandInterface.started += instance.OnExpandInterface;
+                @ExpandInterface.performed += instance.OnExpandInterface;
+                @ExpandInterface.canceled += instance.OnExpandInterface;
+                @ZoomIn.started += instance.OnZoomIn;
+                @ZoomIn.performed += instance.OnZoomIn;
+                @ZoomIn.canceled += instance.OnZoomIn;
+                @ZoomOut.started += instance.OnZoomOut;
+                @ZoomOut.performed += instance.OnZoomOut;
+                @ZoomOut.canceled += instance.OnZoomOut;
             }
         }
     }
@@ -402,5 +489,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnSwapDimension(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
+        void OnExpandInterface(InputAction.CallbackContext context);
+        void OnZoomIn(InputAction.CallbackContext context);
+        void OnZoomOut(InputAction.CallbackContext context);
     }
 }

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8664580039989621188}
   - component: {fileID: 2721101956150197671}
+  - component: {fileID: 498477477600089870}
+  - component: {fileID: 4212439133852023302}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -59,6 +61,53 @@ MonoBehaviour:
   walls: []
   chambers: []
   paths: []
+  pathPoints: []
+--- !u!114 &498477477600089870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527660496102937234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d1ac8794d6e44176ab1908d352a9458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customUpdate: 1
+  layer: 0
+  sprite: {fileID: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  constantScale: 0
+  automaticCustomUpdate: 0
+  automaticPosition: 0
+  automaticRotation: 0
+  predeterminedSize: 0
+  size: {x: 0, y: 0}
+  component: {fileID: 0}
+--- !u!114 &4212439133852023302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527660496102937234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d1ac8794d6e44176ab1908d352a9458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customUpdate: 4
+  layer: 3
+  sprite: {fileID: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  constantScale: 1
+  automaticCustomUpdate: 0
+  automaticPosition: 0
+  automaticRotation: 0
+  predeterminedSize: 1
+  size: {x: 32, y: 32}
+  component: {fileID: 0}
 --- !u!1 &5900774011200787374
 GameObject:
   m_ObjectHideFlags: 0

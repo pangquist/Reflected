@@ -128,17 +128,21 @@ public class MapGenerator : MonoBehaviour
 
         Timed(roomGenerator    .Generate, map, "Room generator");
         Timed(chamberGenerator .Generate, map, "Chamber generator");
+
         map.GenerateGraph();
-        Timed(roomTypeGenerator.Generate, map, "Room type generator");
         map.ScaleUpData();
+
         Timed(pathGenerator    .Generate, map, "Path generator");
         Timed(wallGenerator    .Generate, map, "Wall generator");
         Timed(pillarGenerator  .Generate, map, "Pillar generator");
         Timed(waterGenerator   .Generate, map, "Water generator");
         Timed(terrainGenerator .Generate, map, "Terrain generator");
+        Timed(roomTypeGenerator.Generate, map, "Room type generator");
         Timed(BakeNavMesh               , map, "NavMesh baker");
         Timed(objectPlacer     .Place   , map, "Object placer");
-        
+
+        GameObject.Find("Minimap").GetComponent<Minimap>().InitialUpdate();
+
         // Log
 
         stopwatch.Stop();
