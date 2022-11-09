@@ -40,6 +40,7 @@ public class ObjectPlacer : MonoBehaviour
     private void PlaceDecorations(Room room, float pathRadius)
     {
         List<List<Vector3>> terrainObjectPoints = CreateRayCastPoints(room, pathRadius);
+        List<Vector3> enemySpawns = new List<Vector3>();
         Rect center = new Rect(room.Rect.position + room.Rect.size / 4, room.Rect.size / 2);
 
         int terrainNr = 0;
@@ -50,6 +51,8 @@ public class ObjectPlacer : MonoBehaviour
 
             if(pointList.Count > 0)
             {
+                enemySpawns.AddRange(pointList);
+
                 foreach (WeightedRandomList<UnityEngine.GameObject>.Pair pair in objectList.terrainObjects.list)
                 {
                     for (int i = 0; i < pair.weight * objectMultiplier * 10; i++)
@@ -65,17 +68,12 @@ public class ObjectPlacer : MonoBehaviour
                             foreach (Collider collider in closeObjects)
                             {
                                 if (collider.gameObject.GetComponent<NavMeshObstacle>())
-                                {
                                     canPlace = false;
-                                }
                             }
                             if (avoidCenter)
                             {
                                 if (center.Contains(new Vector2(point.x, point.z)))
-                                {
-                                    //Debug.Log("Blocked placement center");
                                     canPlace = false;
-                                }
                             }
                         }
                         if (canPlace)
@@ -85,11 +83,7 @@ public class ObjectPlacer : MonoBehaviour
             }
             terrainNr++;
         }
-        for (int i = 1; i < terrainObjectPoints.Count; i++)
-        {
-            terrainObjectPoints[0].AddRange(terrainObjectPoints[i]);
-        }
-        PlaceEnemySpawnPoints(terrainObjectPoints[0], room);
+        PlaceEnemySpawnPoints(enemySpawns, room);
     }
 
     private List<List<Vector3>> CreateRayCastPoints(Room room, float pathRadius)
@@ -119,9 +113,7 @@ public class ObjectPlacer : MonoBehaviour
                 foreach (Vector3 pathPoint in room.PathPoints)
                 {
                     if (Vector3.Distance(pathPoint, coordinate) < pathRadius)
-                    {
                         canPlace = false;
-                    }
                 }
                 if (canPlace)
                 {
@@ -136,7 +128,6 @@ public class ObjectPlacer : MonoBehaviour
                             if (otherHeight < hit.point.y && hit.point.y <= terrainHeights[k])
                             {
                                 terrainObjectPoints[k].Add(hit.point);
-                                Debug.Log("Point found: " + terrainHeights[k]);
                                 break;
                             }
                             otherHeight = terrainHeights[k];
@@ -161,9 +152,7 @@ public class ObjectPlacer : MonoBehaviour
                 foreach (Collider collider in closeObjects)
                 {
                     if (!collider.gameObject.GetComponent<NavMeshObstacle>())
-                    {
                         Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.transform);
-                    }
                 }
             }
         }
