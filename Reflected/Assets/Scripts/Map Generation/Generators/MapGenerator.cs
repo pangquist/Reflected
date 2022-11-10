@@ -160,15 +160,25 @@ public class MapGenerator : MonoBehaviour
 
         // Move scene view camera
 
+        AutoFocusCamera();
+    }
+
+    private void AutoFocusCamera()
+    {
 #if UNITY_EDITOR
 
         if (autoFocusCamera)
         {
+            if (SceneView.lastActiveSceneView == null)
+            {
+                Debug.Log("Autommatic camera focus failed because no scene view was active.");
+                return;
+            }
+
             SceneView.lastActiveSceneView.LookAt(GameObject.Find("Player").transform.position, Quaternion.Euler(70, 0, 0), 40, false, false);
         }
 
 #endif
-
     }
 
     private IEnumerator Coroutine_BulkGenerate()
