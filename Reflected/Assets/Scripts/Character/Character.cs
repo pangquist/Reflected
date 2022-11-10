@@ -51,6 +51,7 @@ public class Character : MonoBehaviour, IEffectable
 
     public virtual void Heal(float amount)
     {
+        Debug.Log("Amount healed: " + amount);
         currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
     }
 

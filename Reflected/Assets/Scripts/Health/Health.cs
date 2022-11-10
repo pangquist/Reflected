@@ -33,7 +33,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.GetComponent<Player>())
         {
             Destroy(gameObject);
             powerUpEffect.Apply(other.gameObject, amount); 
