@@ -120,7 +120,13 @@ public class Room : MonoBehaviour
         foreach (Chamber chamber in chambers)
             chamber.gameObject.SetActive(true);
 
-        if (!cleared)
+        if (cleared)
+        {
+            foreach (Chamber chamber in chambers)
+                chamber.Open(this);
+        }
+
+        else
         {
             if (type == RoomType.Monster || type == RoomType.Boss)
             {
@@ -134,7 +140,9 @@ public class Room : MonoBehaviour
             }
 
             else
+            {
                 SetCleared(true);
+            } 
         }
     }
 

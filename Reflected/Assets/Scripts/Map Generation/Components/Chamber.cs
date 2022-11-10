@@ -157,10 +157,15 @@ public class Chamber : MonoBehaviour
     public void Open(Room caller)
     {
         if (door1.Room == caller)
+        {
             door1.Open();
-
+            door2.CloseInstantly();
+        }
         else if (door2.Room == caller)
+        {
             door2.Open();
+            door1.CloseInstantly();
+        }  
     }
 
     /// <summary>
@@ -169,10 +174,15 @@ public class Chamber : MonoBehaviour
     public void Close(Room caller)
     {
         if (door1.Room == caller)
+        {
             door1.Close();
-
+            door2.CloseInstantly();
+        }
         else if (door2.Room == caller)
+        {
             door2.Close();
+            door1.CloseInstantly();
+        } 
     }
 
     /// <summary>
