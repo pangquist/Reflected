@@ -19,6 +19,7 @@ public class MinimapComponent : MonoBehaviour
     [ReadOnly][SerializeField] private MinimapComponentController controller;
 
     private static Minimap minimap;
+    private bool removed;
 
     // Properties
 
@@ -76,24 +77,27 @@ public class MinimapComponent : MonoBehaviour
 
     public void Remove()
     {
-        Destroy(controller);
+        removed = true;
         Destroy(transform.parent.gameObject, hideClip.length);
         animator.SetTrigger("Hide");
     }
 
     private void Update()
     {
-        if (controller.AutomaticPosition)
-            SetPosition(controller.transform.position.XZ());
+        if (!removed)
+        {
+            if (controller.AutomaticPosition)
+                SetPosition(controller.transform.position.XZ());
 
-        if (controller.AutomaticRotation)
-            SetRotation(controller.transform.rotation.y);
+            if (controller.AutomaticRotation)
+                SetRotation(controller.transform.rotation.y);
+
+            if (controller.AutomaticCustomUpdate)
+                CustomUpdate_Central();
+        }
 
         if (controller.ConstantScale)
             SetScale(1f / minimap.WorldScale);
-
-        if (controller.AutomaticCustomUpdate)
-            CustomUpdate_Central();
     }
 
     public void CustomUpdate_Central()
@@ -195,7 +199,7 @@ public class MinimapComponent : MonoBehaviour
 
         else
         {
-            Remove();
+            Destroy(controller);
             return;
         }
 

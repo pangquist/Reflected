@@ -51,4 +51,9 @@ public class MinimapComponentController : MonoBehaviour
             component.SetSize(size);
     }
 
+    private void OnDestroy()
+    {
+        component.Remove();
+    }
+
 }
