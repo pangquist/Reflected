@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject enemyAOE;
     [SerializeField] GameObject enemyDOT;
 
-    [SerializeField]EnemyStatSystem enemyStatSystem;
+    EnemyStatSystem enemyStatSystem;
 
     GameObject enemyToSpawn;
     List<GameObject> enemyList = new List<GameObject>();

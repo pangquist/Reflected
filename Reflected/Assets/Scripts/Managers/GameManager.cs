@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public AiDirector AiDirector => aiDirector;
     public EnemySpawner EnemySpawner => enemySpawner;
 
+    private void Start()
+    {
+        GameObject.Find("Dimension Manager").GetComponent<DimensionManager>().FindSystems();
+    }
 
     private void Update()
     {
