@@ -16,7 +16,7 @@ public class Enemy : Character
     GameObject parent;
     protected Player player;
 
-    bool playerNoticed;
+    bool doOnce;
 
     protected override void Awake()
     {
@@ -54,7 +54,12 @@ public class Enemy : Character
     protected override void Die()
     {
         AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
-        aiDirector.killEnemyInRoom();
+        if (!doOnce)
+        {
+            aiDirector.killEnemyInRoom();
+            doOnce = true;
+        }
+        
         LootDrop(transform);
         //player.RemoveEnemy(this);
         anim.Play("Death");
