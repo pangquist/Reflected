@@ -47,7 +47,7 @@ public class Inventory : MonoBehaviour, ISavable
         if(itemDictionary.TryGetValue(itemData, out InventoryItem item))
         {
             item.AddMoreToStack(itemData.amount);
-            Debug.Log($"{item.itemData.displayName} total stack is now {item.stackSize}");
+            //Debug.Log($"{item.itemData.displayName} total stack is now {item.stackSize}");
         }
     }
 
