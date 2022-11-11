@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Map : MonoBehaviour
 {
@@ -19,11 +20,11 @@ public class Map : MonoBehaviour
     [ReadOnly][SerializeField] private int sizeZ;
     [ReadOnly][SerializeField] private List<Room> rooms;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
-    [ReadOnly][SerializeField] private Room activeRoom;
-    [ReadOnly][SerializeField] private Room startRoom;
-    [ReadOnly][SerializeField] private Room bossRoom;
     [ReadOnly][SerializeField] private DimensionManager dimensionManager;
     [ReadOnly][SerializeField] private GameManager gameManager;
+
+    public static UnityEvent RoomEntered = new UnityEvent();
+    public static UnityEvent RoomCleared = new UnityEvent();
 
     // Properties
 
@@ -36,9 +37,9 @@ public class Map : MonoBehaviour
     public GameManager GameManager => gameManager;
     public MapGraph Graph => graph;
 
-    public Room ActiveRoom { get { return activeRoom; } set { activeRoom = value; } }
-    public Room StartRoom  { get { return startRoom;  } set { startRoom  = value; } }
-    public Room BossRoom   { get { return bossRoom;   } set { bossRoom   = value; } }
+    public static Room ActiveRoom { get; set; }
+    public static Room StartRoom  { get; set; }
+    public static Room BossRoom   { get; set; }
 
     public void Initialize(int sizeX, int sizeZ)
     {
@@ -72,29 +73,9 @@ public class Map : MonoBehaviour
 
     public void Begin()
     {
-        startRoom.gameObject.SetActive(true);
-        startRoom.Activate();
-        
-        Transform player = GameObject.Find("Player").transform;
-
-        Debug.Log("Player " + (player == null ? "not " : "") + "found.");
-
-        Debug.Log("Player position before: \n"
-            + " x = " + player.position.x.ToString("0.0")
-            + " y = " + player.position.y.ToString("0.0")
-            + " z = " + player.position.z.ToString("0.0"));
-
-        Debug.Log("Moving player to center of start room (" + startRoom + ") \n"
-            + " x = " + startRoom.Rect.center.x.ToString("0.0")
-            + " y = 10.0"
-            + " z = " + startRoom.Rect.center.y.ToString("0.0"));
-
-        player.localPosition = new Vector3(startRoom.Rect.center.x, 10, startRoom.Rect.center.y);
-
-        Debug.Log("Player position after: \n"
-            + " x = " + player.position.x.ToString("0.0")
-            + " y = " + player.position.y.ToString("0.0")
-            + " z = " + player.position.z.ToString("0.0"));
+        StartRoom.gameObject.SetActive(true);
+        StartRoom.Activate();
+        GameObject.Find("Player").transform.position = new Vector3(StartRoom.Rect.center.x, 10, StartRoom.Rect.center.y);
     }
 
 }

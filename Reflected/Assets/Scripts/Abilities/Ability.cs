@@ -13,8 +13,8 @@ public abstract class Ability : MonoBehaviour
 {
     [Header("Ability Stats")]
     [SerializeField] protected Sprite abilityIcon;
-    [SerializeField] List<AudioClip> abilitySounds = new List<AudioClip>();
-    [SerializeField] AudioSource abilitySource;
+    [SerializeField] protected List<AudioClip> abilitySounds = new List<AudioClip>();
+    [SerializeField] protected AudioSource abilitySource;
     [SerializeField] protected float cooldown;
     [SerializeField] protected float remainingCooldown;
     [SerializeField] protected string abilityName;
@@ -35,7 +35,7 @@ public abstract class Ability : MonoBehaviour
 
     public virtual bool DoEffect()
     {
-        remainingCooldown = cooldown;
+        remainingCooldown = cooldown * player.GetStats().GetCooldownDecrease();
         if (abilitySounds.Count != 0 && abilitySource)
             abilitySource.PlayOneShot(abilitySounds[Random.Range(0,abilitySounds.Count)]);
         return true;
@@ -43,7 +43,7 @@ public abstract class Ability : MonoBehaviour
 
     public virtual AnimationClip GetAnimation()
     {
-        remainingCooldown = cooldown;
+        remainingCooldown = cooldown * player.GetStats().GetCooldownDecrease();
         if (abilitySounds.Count != 0 && abilitySource)
             abilitySource.PlayOneShot(abilitySounds[Random.Range(0, abilitySounds.Count)]);
 
@@ -66,9 +66,9 @@ public abstract class Ability : MonoBehaviour
         return remainingCooldown;
     }
 
-    public float GetCooldownPercentage()
+    public virtual float GetCooldownPercentage()
     {
-        return remainingCooldown / cooldown;
+        return remainingCooldown / (cooldown * player.GetStats().GetCooldownDecrease());
     }
 
     public float Cooldown()

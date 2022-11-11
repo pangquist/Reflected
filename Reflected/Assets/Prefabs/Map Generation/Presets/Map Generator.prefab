@@ -1,0 +1,461 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5090313322264181224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5090313322264181276}
+  - component: {fileID: 5090313322264181279}
+  - component: {fileID: 5090313322264181278}
+  - component: {fileID: 5090313322264181265}
+  - component: {fileID: 5090313322264181264}
+  - component: {fileID: 5090313322264181267}
+  - component: {fileID: 5090313322264181266}
+  - component: {fileID: 5090313322264181269}
+  - component: {fileID: 5090313322264181268}
+  - component: {fileID: 5090313322264181271}
+  - component: {fileID: 5090313322264181270}
+  - component: {fileID: 5090313322264181225}
+  m_Layer: 0
+  m_Name: Map Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5090313322264181276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5090313322264181279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de50f2f6ce164e709e0aa856b0c7f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seed: 0
+  mapPrefab: {fileID: 6645767010589061385, guid: b0f3362468123494eb359ebf7bd01687,
+    type: 3}
+  roomGenerator: {fileID: 5090313322264181278}
+  roomTypeGenerator: {fileID: 5090313322264181264}
+  chamberGenerator: {fileID: 5090313322264181265}
+  pathGenerator: {fileID: 5090313322264181267}
+  wallGenerator: {fileID: 5090313322264181266}
+  pillarGenerator: {fileID: 5090313322264181269}
+  waterGenerator: {fileID: 5090313322264181268}
+  terrainGenerator: {fileID: 5090313322264181271}
+  objectPlacer: {fileID: 5090313322264181270}
+  deactivateRooms: 1
+  autoFocusCamera: 1
+  minMapSizeX: 60
+  maxMapSizeX: 70
+  minMapSizeZ: 60
+  maxMapSizeZ: 70
+  chunkSize: 8
+  trials: 1
+  interval: 0
+  log: 
+  timerLog: 
+--- !u!114 &5090313322264181278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1bfc091be9de409190778b307bddcd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logWarnigns: 0
+  mapGenerator: {fileID: 5090313322264181279}
+  roomPrefab: {fileID: 3527660496102937234, guid: 62d6fab13445b435da4b703c6f53ddc2,
+    type: 3}
+  minRoomLength: 6
+  maxRoomLength: 18
+  minRoomArea: 48
+  roomPadding: 1
+  splitDirectionBias: 0.2
+  splitLocationBias: -0.1
+  splitChance: 0.1
+--- !u!114 &5090313322264181265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31265c5a2d54841c58a71de8df0ab000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logWarnigns: 1
+  mapGenerator: {fileID: 5090313322264181279}
+  chamberPrefab: {fileID: 5641552476762302183, guid: 4b53138cb48ed46cb9b6016113532ad8,
+    type: 3}
+  chamberSize: 2
+  chamberMargin: 2
+  addRandomChambers: 1
+  minChambers: 0.7
+  maxChambers: 0.8
+--- !u!114 &5090313322264181264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f06689369f4b4e91b59a16814d1ccd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerator: {fileID: 5090313322264181279}
+  peacefulChance: 0.1
+--- !u!114 &5090313322264181267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5041900523e0451f94623666ba503a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPrefab: {fileID: 316618593525123048, guid: b844475432cdd470db621627f176749f,
+    type: 3}
+  level: 6
+  radius: 4.5
+  pathPointsFrequency: 0.2
+  color: {r: 0.3490566, g: 0.3078028, b: 0.28155038, a: 1}
+  amountBias:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.1487603
+      outSlope: 0.1487603
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.3
+    - serializedVersion: 3
+      time: 1
+      value: 0.6925621
+      inSlope: 6.762229
+      outSlope: 6.762229
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.089705884
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5090313322264181266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341d2123541614e04b80a457d1535104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logWarnigns: 1
+  mapGenerator: {fileID: 5090313322264181279}
+  wallPrefab: {fileID: 8436335846310740216, guid: ebb1aec0dd2db4e868f323ad1c3ea8b3,
+    type: 3}
+  doorPrefab: {fileID: 5687791239041163175, guid: 4f9eca1e07a1b4683b683c70b5709bbe,
+    type: 3}
+  wallHeight: 22
+  wallThickness: 5
+  chamberOverlapInflation: 0.1
+  doorThickness: 2
+  doorIndent: 0.5
+--- !u!114 &5090313322264181269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8315c1d7713f643588828b0760f8c056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pillarPrefab: {fileID: 2509104792265355968, guid: c20cfcd7e8eea4288bf6273722672535,
+    type: 3}
+  mapGenerator: {fileID: 5090313322264181279}
+  width: 4
+  intrudingDepth: -0.5
+  protrudingDepth: 1.5
+  protrudingHeight: 1.5
+  distance: 20
+--- !u!114 &5090313322264181268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e186adf3b6641c5b315316baa655fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterPrefab: {fileID: 6428712266764001271, guid: 58d55d0ea3b8c4c37b748771affd912a,
+    type: 3}
+  waterY: 2
+--- !u!114 &5090313322264181271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e4a15bc1748d74e80b53d876355a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerator: {fileID: 5090313322264181279}
+  terrainChunkPrefab: {fileID: 2332618423109250269, guid: 5754e2c27e53f47ccb8aa4da3a242f20,
+    type: 3}
+  noiseMapGenerator: {fileID: 5090313322264181225}
+  startY: 0
+  mapScale: 18
+  heightMultiplier: 7
+  terrainTypes:
+  - name: Underwater
+    height: 0.2
+    color: {r: 0.6509804, g: 0.58431375, b: 0.3529412, a: 1}
+  - name: Sand
+    height: 0.32
+    color: {r: 0.6509434, g: 0.58589846, b: 0.35310608, a: 1}
+  - name: Grass 1
+    height: 0.42
+    color: {r: 0.26553044, g: 0.4811321, b: 0.37424803, a: 1}
+  - name: Grass 2
+    height: 0.6
+    color: {r: 0.26666668, g: 0.48235297, b: 0.37254903, a: 1}
+  - name: Grass 3
+    height: 1
+    color: {r: 0.26666668, g: 0.48235297, b: 0.37254903, a: 1}
+  heightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.000117194606
+      inSlope: -0.04240895
+      outSlope: -0.04240895
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.45530614
+    - serializedVersion: 3
+      time: 0.23967272
+      value: 0.33892587
+      inSlope: 1.028983
+      outSlope: 1.028983
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.2661503
+      outWeight: 0.2282875
+    - serializedVersion: 3
+      time: 0.45047712
+      value: 0.4835899
+      inSlope: 0.8506231
+      outSlope: 0.8506231
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.4768149
+      outWeight: 0.28296617
+    - serializedVersion: 3
+      time: 0.79838026
+      value: 0.93064016
+      inSlope: 0.82253116
+      outSlope: 0.82253116
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.2720134
+      outWeight: 0.24749866
+    - serializedVersion: 3
+      time: 1
+      value: 1.0002189
+      inSlope: 0.004363577
+      outSlope: 0.004363577
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.4279568
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  waves:
+  - seed: 15
+    frequency: 1
+    amplitude: 1
+  - seed: 500
+    frequency: 0.5
+    amplitude: 10
+  pathY: 3
+  pathAdaptionRange: 10
+  pathAdaptionAmount:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0000038
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pathHeightAdaption:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.45770487
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.88208205
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5090313322264181270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cf2e39d51b23448ac307bfa90f8b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 5090313322264181271}
+  mapGenerator: {fileID: 5090313322264181279}
+  objectMultiplier: 12
+  wallPadding: 2
+  obstacleDistance: 3
+  avoidCenter: 0
+  enemySpawnPoint: {fileID: 2572951519100550845, guid: b6f5ecbc5fd265a49b724a958a79623b,
+    type: 3}
+  objects:
+  - terrain: Underwater
+    terrainObjects:
+      list:
+      - item: {fileID: 8826354705480561022, guid: 31695ec91881c594ea4a93e4c7717d56,
+          type: 3}
+        weight: 1
+      - item: {fileID: 8826354705480561022, guid: 268f5c8d84e285f49ae0e85bdce5cbd0,
+          type: 3}
+        weight: 1
+      - item: {fileID: 8218204736594959539, guid: 8f5c6f6a700c6e045a97b08515ebf92a,
+          type: 3}
+        weight: 1
+  - terrain: Sand
+    terrainObjects:
+      list: []
+  - terrain: Grass 1
+    terrainObjects:
+      list:
+      - item: {fileID: 1249020213497638079, guid: 53aece54b4a973e4b9539ca60f21fc9e,
+          type: 3}
+        weight: 8
+      - item: {fileID: 1587186571227895905, guid: 6ff9ba4ffb95a5c4ba983080ffaf6832,
+          type: 3}
+        weight: 1
+      - item: {fileID: 7448233757750244883, guid: 3a387027a1e66664c8fd8e32550b2c9e,
+          type: 3}
+        weight: 1
+      - item: {fileID: 527581394202791689, guid: 4a7be64aa8953144d90bcc190968ea0e,
+          type: 3}
+        weight: 1
+  - terrain: Grass 2
+    terrainObjects:
+      list:
+      - item: {fileID: 1249020213497638079, guid: 53aece54b4a973e4b9539ca60f21fc9e,
+          type: 3}
+        weight: 10
+      - item: {fileID: 1587186571227895905, guid: 6ff9ba4ffb95a5c4ba983080ffaf6832,
+          type: 3}
+        weight: 1
+      - item: {fileID: 4366562023089330641, guid: 409c6a13501fd6845aefd26fd4b4148c,
+          type: 3}
+        weight: 0.2
+  - terrain: Grass 3
+    terrainObjects:
+      list:
+      - item: {fileID: 1249020213497638079, guid: 53aece54b4a973e4b9539ca60f21fc9e,
+          type: 3}
+        weight: 5
+--- !u!114 &5090313322264181225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9886ff0bc490e1d43aad013ea86adbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

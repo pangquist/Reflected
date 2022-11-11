@@ -23,7 +23,7 @@ public class StatSystem : MonoBehaviour
 
     public void AddDamageReduction(float amount)
     {
-        damageReduction += amount;
+        damageReduction *= (1 - amount);
     }
 
     public void AddMovementSpeed(float amount)
@@ -38,7 +38,7 @@ public class StatSystem : MonoBehaviour
 
     public void AddAttackSpeed(float amount)
     {
-        attackSpeed += amount;
+        attackSpeed *= (1 - amount);
     }
 
     public void AddAreaOfEffect(float amount)
@@ -48,7 +48,7 @@ public class StatSystem : MonoBehaviour
 
     public void AddCooldownDecrease(float amount)
     {
-        cooldownDecrease += amount;
+        cooldownDecrease *= (1 - amount);
     }
 
     public void ChangeChargesToSwapTrue(int amount)
@@ -71,10 +71,11 @@ public class StatSystem : MonoBehaviour
         damageIncrease = 1;
         attackSpeed = 1;
         areaOfEffect = 1;
+        attackSpeed = 1;
         cooldownDecrease = 0;
         chargesToSwapTrue = 0;
         chargesToSwapMirror = 0;
-        attackSpeed = 1;
+        
     }
 
     public float GetMaxHealthIncrease() => maxHealthIncrease;

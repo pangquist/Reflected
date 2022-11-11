@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1882137614351575191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1882137614351575189}
+  - component: {fileID: 1882137614351575188}
+  m_Layer: 0
+  m_Name: LootPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1882137614351575189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882137614351575191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.68, y: 1.02, z: 4.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1882137614351575188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882137614351575191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef330ac3041334e4f9decce1fd000c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerupPool:
+    list:
+    - item: {fileID: 4811609501389817639, guid: e90aa5bb20c784a419a7efd74780727f,
+        type: 3}
+      weight: 1
+    - item: {fileID: 2437244478785971424, guid: 246536d7df12dc2489d5fe11bab34fbc,
+        type: 3}
+      weight: 1
+    - item: {fileID: 6157711314520528350, guid: 4affed51ed6d19d41af4a3b22b850a7b,
+        type: 3}
+      weight: 1
+    - item: {fileID: 952819411186328807, guid: 373594b72530c4e40b42bfcc6a5c1715, type: 3}
+      weight: 1
+    - item: {fileID: 526024567778351285, guid: b359378d71250304fa73386fc1b9238e, type: 3}
+      weight: 1
+    - item: {fileID: 1491449522285018658, guid: 1ed094479c8944542867015952245fc2,
+        type: 3}
+      weight: 1
+  truePowerupPool:
+    list:
+    - item: {fileID: 4811609501389817639, guid: e90aa5bb20c784a419a7efd74780727f,
+        type: 3}
+      weight: 1
+    - item: {fileID: 6157711314520528350, guid: 4affed51ed6d19d41af4a3b22b850a7b,
+        type: 3}
+      weight: 1
+    - item: {fileID: 2437244478785971424, guid: 246536d7df12dc2489d5fe11bab34fbc,
+        type: 3}
+      weight: 1
+  mirrorPowerupPool:
+    list:
+    - item: {fileID: 952819411186328807, guid: 373594b72530c4e40b42bfcc6a5c1715, type: 3}
+      weight: 1
+    - item: {fileID: 526024567778351285, guid: b359378d71250304fa73386fc1b9238e, type: 3}
+      weight: 1
+    - item: {fileID: 1491449522285018658, guid: 1ed094479c8944542867015952245fc2,
+        type: 3}
+      weight: 1
+  collectablePool:
+    list:
+    - item: {fileID: 8697999268558127635, guid: 131ff454e72154344ab839b4333a8156,
+        type: 3}
+      weight: 10
+    - item: {fileID: 2114209293717154565, guid: 2566ba70c6c9c7047a264a8234dfb7ab,
+        type: 3}
+      weight: 3
+    - item: {fileID: 2146492496958938027, guid: 28695414eab1d454e9acd1b9721bbb90,
+        type: 3}
+      weight: 2
+    - item: {fileID: 2626944597636507086, guid: d30e27c8011a1544aa6401629351b369,
+        type: 3}
+      weight: 2
+  rarityTiers:
+    list:
+    - item: {fileID: 11400000, guid: c07b740bade056f49ab423a8045669bf, type: 2}
+      weight: 8
+    - item: {fileID: 11400000, guid: 30a205678ae99124a9002b2072e248b4, type: 2}
+      weight: 4
+    - item: {fileID: 11400000, guid: 1c84b4c9ccd0a6a4d87d3ee63c907f75, type: 2}
+      weight: 2

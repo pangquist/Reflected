@@ -10,12 +10,12 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
     [SerializeField] public float amount;
     [SerializeField] public int value;
     [SerializeField] public string description;
-    bool hasProperties;
+    protected bool hasProperties;
     public static event HandlePowerupCollected OnPowerUPCollected;
     public delegate void HandlePowerupCollected(PowerUpEffect powerupData);
     //public WeightedRandomList<PowerUpEffect> RarityPool;
 
-    private void Start() //Might not need this
+    protected virtual void Start() //Might not need this
     {
         if (!hasProperties)
         {
@@ -26,7 +26,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
         }        
     }
 
-    public void SetProperties(Rarity targetRarity)
+    public virtual void SetProperties(Rarity targetRarity)
     {
         //Debug.Log("Set properties " + targetRarity);
         myRarity = targetRarity;

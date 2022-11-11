@@ -42,4 +42,17 @@ public class Slash : Ability
         return comboClips[currentComboIndex++];
 
     }
+
+    public override bool DoEffect()
+    {
+        remainingCooldown = cooldown * player.GetStats().GetAttackSpeed();
+        if (abilitySounds.Count != 0 && abilitySource)
+            abilitySource.PlayOneShot(abilitySounds[Random.Range(0, abilitySounds.Count)]);
+        return true;
+    }
+
+    public override float GetCooldownPercentage()
+    {
+        return remainingCooldown / (cooldown * player.GetStats().GetAttackSpeed());
+    }
 }

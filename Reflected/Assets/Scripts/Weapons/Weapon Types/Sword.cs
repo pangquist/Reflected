@@ -12,7 +12,7 @@ using UnityEngine;
 public class Sword : Weapon
 {
     [Header("Sword Properties")]
-    [SerializeField] List<StatusEffectData> statusEffectDatas;
+    [SerializeField] Collider hitBox;
 
     private void OnTriggerStay(Collider other)
     {
@@ -30,9 +30,16 @@ public class Sword : Weapon
         {
             target.TakeDamage(GetDamage());
             hitEnemies.Add(target);
-            for (int i = 0; i < statusEffectDatas.Capacity; i++)
+            
+            if(powerUpIndex > -1 && powerUpIndex < 2)
             {
-                GetComponent<WeaponStatusEffect>().ApplyEffectToTarget(target.GetComponent<Collider>(), statusEffectDatas[i]);
+                target.GetComponent<IEffectable>().ApplyEffect(statusEffectDatas[powerUpIndex], damage);
+                Debug.Log(statusEffectDatas[powerUpIndex]);
+            }
+            else if (powerUpIndex == 2)
+            {
+                player.GetComponent<IEffectable>().ApplyEffect(statusEffectDatas[powerUpIndex], damage / 2);
+                Debug.Log(statusEffectDatas[powerUpIndex]);
             }
         }
     }

@@ -71,6 +71,11 @@ public class WeightedRandomList<T>
         return default(T);
     }
 
+    public T GetItem(int index)
+    {
+        return list[index].item;
+    }
+
     public void SetWeight(int index, float weight)
     {
         list[index].SetWeight(weight);

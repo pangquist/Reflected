@@ -42,6 +42,7 @@ public class Player : Character, ISavable
 
     protected override void Awake()
     {
+        currentHealth = maxHealth + stats.GetMaxHealthIncrease();
         base.Awake();
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -79,6 +80,16 @@ public class Player : Character, ISavable
 
         anim.Play(currentAbility.GetAnimation().name);
         currentAbility.DoEffect();
+    }
+
+    public override float GetHealthPercentage()
+    {
+        return currentHealth / (maxHealth + stats.GetMaxHealthIncrease());
+    }
+
+    public override float GetMaxHealth()
+    {
+        return maxHealth + stats.GetMaxHealthIncrease();
     }
 
     public void SpecialAttack()
@@ -124,6 +135,11 @@ public class Player : Character, ISavable
         currentWeapon.SetDamage(damage);
     }
 
+    public override void Heal(float amount)
+    {
+        currentHealth += Mathf.Clamp(amount, 0, maxHealth + stats.GetMaxHealthIncrease() - currentHealth);
+    }
+
     public void TryDimensionSwap()
     {
         if (dimensionManager.CanSwap())
@@ -143,9 +159,26 @@ public class Player : Character, ISavable
         }
     }
 
+    public override void TakeDamage(float damage)
+    {
+        if (isDead)
+            return;
+        
+        currentHealth -= Mathf.Clamp(Mathf.CeilToInt(damage * stats.GetDamageReduction()), 0, currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            anim.Play("Damaged");
+        }
+    }
+
     public void Interact()
     {
-        OnObjectInteraction.Invoke();
+        OnObjectInteraction?.Invoke();
     }
 
     public StatSystem GetStats() //May have to be PlayerStatSystem??
