@@ -10,7 +10,7 @@ public class MinimapComponentController : MonoBehaviour
     [Header("Values")]
 
     [SerializeField] private MinimapComponent.CustomUpdate customUpdate = MinimapComponent.CustomUpdate.None;
-    [SerializeField] private MinimapLayer layer = MinimapLayer.Ground;
+    [SerializeField] private MinimapLayer layer = MinimapLayer.Objects;
     [SerializeField] private Sprite sprite = null;
     [SerializeField] private Color color = Color.white;
     [SerializeField] private bool constantScale = false;

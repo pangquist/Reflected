@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class Minimap : MonoBehaviour
 {
+#pragma warning disable 0108
+
+    public enum RoomReveal { Entered, Adjacent, All }
+
     [Header("References")]
 
     [SerializeField] private GameObject componentPrefab;
@@ -29,6 +34,7 @@ public class Minimap : MonoBehaviour
 
     [Header("World")]
 
+    [SerializeField] private RoomReveal roomReveal;
     [SerializeField] private bool clampWorldToMask;
 
     [Range(0.1f, 2f)]
@@ -56,8 +62,37 @@ public class Minimap : MonoBehaviour
     public Camera Camera => camera;
     public float WorldScale => worldScale;
 
-    public void Start()
+    private void Awake()
     {
+        MapGenerator.Finished.AddListener(Initialize);
+        Map.RoomEntered.AddListener(RevealRoom);
+        Map.RoomCleared.AddListener(RevealChambers);
+    }
+
+    public void Initialize()
+    {
+        Map map = GameObject.Find("Map").GetComponent<Map>();
+        worldTransform.sizeDelta = new Vector2(map.SizeX, map.SizeZ) * MapGenerator.ChunkSize;
+
+        foreach (MinimapComponent component in components)
+        {
+            if (component.Controller.HasCustomUpdate)
+                component.CustomUpdate_Central();
+        }
+
+        if (roomReveal != RoomReveal.All)
+        {
+            foreach (MinimapComponent component in components)
+            {
+                if (component.Controller.CustomUpdate == MinimapComponent.CustomUpdate.Room ||
+                    component.Controller.CustomUpdate == MinimapComponent.CustomUpdate.Chamber ||
+                    component.Controller.CustomUpdate == MinimapComponent.CustomUpdate.RoomType)
+                {
+                    component.Hide();
+                }
+            }
+        }
+
         playerComponent = components.Find(component => component.Controller.Layer == MinimapLayer.Player);
         StartCoroutine(Coroutine_Show());
     }
@@ -75,20 +110,6 @@ public class Minimap : MonoBehaviour
 
         rectTransform.localScale = Vector3.one;
         yield return 0;
-    }
-
-    [ContextMenu("Initial Update")]
-    public void InitialUpdate()
-    {
-        Map map = GameObject.Find("Map").GetComponent<Map>();
-
-        worldTransform.sizeDelta = new Vector2(map.SizeX, map.SizeZ) * MapGenerator.ChunkSize;
-
-        foreach (MinimapComponent component in components)
-        {
-            if (component.Controller.HasCustomUpdate)
-                component.CustomUpdate_Central();
-        }
     }
 
     private void Update()
@@ -150,6 +171,38 @@ public class Minimap : MonoBehaviour
                 return icon;
 
         return null;
+    }
+
+    private void RevealRoom()
+    {
+        RevealRoom(Map.ActiveRoom, true);
+    }
+
+    private void RevealRoom(Room room, bool entered)
+    {
+        foreach (MinimapComponentController controller in room.GetComponents<MinimapComponentController>())
+        {
+            controller.Component.Show();
+
+            if (entered && controller.CustomUpdate == MinimapComponent.CustomUpdate.Room)
+                controller.Component.SetColor(Color.white);
+        }
+    }
+
+    private void RevealChambers()
+    {
+        foreach (Chamber chamber in Map.ActiveRoom.Chambers)
+        {
+            MinimapComponent component = chamber.GetComponent<MinimapComponentController>().Component;
+            component.Show();
+            component.SetColor(Color.white);
+
+            if (roomReveal == RoomReveal.Adjacent)
+            {
+                RevealRoom(chamber.Room1, false);
+                RevealRoom(chamber.Room2, false);
+            }
+        }
     }
 
 }

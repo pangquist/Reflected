@@ -56,8 +56,15 @@ public class Room : MonoBehaviour
     {
         this.type = type;
 
-        if (type == RoomType.Boss)
+        if (type == RoomType.Start)
         {
+            Map.StartRoom = this;
+        }
+
+        else if (type == RoomType.Boss)
+        {
+            Map.BossRoom = this;
+
             foreach (Wall wall in walls)
             {
                 foreach (GameObject portion in wall.Portions)
@@ -82,7 +89,7 @@ public class Room : MonoBehaviour
 
     private void Update()
     {
-        if (map.ActiveRoom != this)
+        if (Map.ActiveRoom != this)
             return;
 
         if (!cleared && map.GameManager.AiDirector.AllEnemiesKilled)
@@ -106,7 +113,7 @@ public class Room : MonoBehaviour
         //else if (type == RoomType.Boss)
         //    GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(-2);
 
-        map.ActiveRoom = null;
+        Map.ActiveRoom = null;
         gameObject.SetActive(false);
     }
 
@@ -115,7 +122,8 @@ public class Room : MonoBehaviour
     /// </summary>
     public void Activate()
     {
-        map.ActiveRoom = this;
+        Map.ActiveRoom = this;
+        Map.RoomEntered.Invoke();
 
         foreach (Chamber chamber in chambers)
             chamber.gameObject.SetActive(true);
@@ -157,6 +165,8 @@ public class Room : MonoBehaviour
 
             if (type == RoomType.Monster || type == RoomType.Boss)
                 map.DimensionManager.GainCharges(1);
+
+            Map.RoomCleared.Invoke();
         }
 
         else

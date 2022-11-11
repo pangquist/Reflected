@@ -88,7 +88,7 @@ public class Chamber : MonoBehaviour
     private void Update()
     {
         // Ensure there is no active transition, no cooldown, there is an active room, and the active room is cleared
-        if (inTransition || cooldownTimer > 0f || map.ActiveRoom == null || !map.ActiveRoom.Cleared)
+        if (inTransition || cooldownTimer > 0f || Map.ActiveRoom == null || !Map.ActiveRoom.Cleared)
             return;
 
         // Ensure the player is inside the chamber

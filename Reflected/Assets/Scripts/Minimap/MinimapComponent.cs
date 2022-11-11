@@ -40,6 +40,16 @@ public class MinimapComponent : MonoBehaviour
         parentRectTransform.name = controller.gameObject.name.Replace("(Clone)", "");
     }
 
+    public void Hide()
+    {
+        animator.SetTrigger("Hide");
+    }
+
+    public void Show()
+    {
+        animator.SetTrigger("Show");
+    }
+
     public void SetPosition(Vector2 position)
     {
         parentRectTransform.localPosition = new Vector3(position.x, position.y, parentRectTransform.localPosition.z);
@@ -79,7 +89,7 @@ public class MinimapComponent : MonoBehaviour
     {
         removed = true;
         Destroy(transform.parent.gameObject, hideClip.length);
-        animator.SetTrigger("Hide");
+        Hide();
     }
 
     private void Update()

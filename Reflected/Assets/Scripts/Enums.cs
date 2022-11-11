@@ -86,9 +86,8 @@ public enum Stats
 /// </summary>
 public enum MinimapLayer
 {
-    Ground,
-    Decorations,
-    Walls,
+    Chambers,
+    Rooms,
     Objects,
     Player
 }

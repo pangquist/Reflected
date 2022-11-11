@@ -5,6 +5,7 @@ using PathCreation;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using Debug = UnityEngine.Debug;
 
 public class MapGenerator : MonoBehaviour
@@ -68,6 +69,8 @@ public class MapGenerator : MonoBehaviour
 
     [TextArea()]
     [ReadOnly][SerializeField] private string timerLog;
+
+    public static UnityEvent Finished = new UnityEvent();
 
     // Properties
 
@@ -141,7 +144,7 @@ public class MapGenerator : MonoBehaviour
         Timed(BakeNavMesh               , map, "NavMesh baker");
         Timed(objectPlacer     .Place   , map, "Object placer");
 
-        GameObject.Find("Minimap").GetComponent<Minimap>().InitialUpdate();
+        Finished.Invoke();
 
         // Log
 

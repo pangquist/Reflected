@@ -49,10 +49,8 @@ public class RoomTypeGenerator : MonoBehaviour
                 startRoom = room;
         }
 
-        map.StartRoom = startRoom;
-        map.StartRoom.SetType(RoomType.Start);
-
-        mapGenerator.Log("Start room: " + map.StartRoom.name);
+        startRoom.SetType(RoomType.Start);
+        mapGenerator.Log("Start room: " + Map.StartRoom.name);
     }
 
     private void DetermineBossRoom(Map map)
@@ -85,7 +83,7 @@ public class RoomTypeGenerator : MonoBehaviour
 
         // Test 2: Distance to start room (more is better)
 
-        orderedArray = roomFitness.OrderBy(pair => Vector2.Distance(pair.Key.Rect.center, map.StartRoom.Rect.center)).ToArray();
+        orderedArray = roomFitness.OrderBy(pair => Vector2.Distance(pair.Key.Rect.center, Map.StartRoom.Rect.center)).ToArray();
         OrderToFitness(1f);
 
         // Test 3: Area (more is better)
@@ -95,7 +93,7 @@ public class RoomTypeGenerator : MonoBehaviour
 
         // Test 4: Graph reachability (more is better)
 
-        orderedArray = roomFitness.OrderBy(pair => map.Graph.TraverseGraph(map.StartRoom, pair.Key)).ToArray();
+        orderedArray = roomFitness.OrderBy(pair => map.Graph.TraverseGraph(Map.StartRoom, pair.Key)).ToArray();
         OrderToFitness(1f);
 
         // Adds fitness to potential boss rooms based of the order orderedArray (higher index = more fitness)
@@ -110,11 +108,9 @@ public class RoomTypeGenerator : MonoBehaviour
         // Find room with highest fitness score
 
         orderedArray = roomFitness.OrderBy(pair => -pair.Value).ToArray();
+        orderedArray.ElementAt(0).Key.SetType(RoomType.Boss);
 
-        map.BossRoom = orderedArray.ElementAt(0).Key;
-        map.BossRoom.SetType(RoomType.Boss);
-
-        mapGenerator.Log("Boss room: " + map.BossRoom.name);
+        mapGenerator.Log("Boss room: " + Map.BossRoom.name);
         mapGenerator.Log("Boss room fittness: " + orderedArray.ElementAt(0).Value.ToString("0.00") + " / 4");
     }
 
