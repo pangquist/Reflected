@@ -16,9 +16,9 @@ public class AoeAttackState : State
     [SerializeField] private Vector3 baseAoeSize = new Vector3(5f, 3f, 5f);
 
     //Current values of the attack stats
-    [SerializeField] private float attackRate;
-    [SerializeField] private float attackDamage;
-    [SerializeField] private Vector3 aoeSize;
+    private float attackRate;
+    private float attackDamage;
+    private Vector3 aoeSize;
 
     //Range to player in which the enemy will flee or chase. (Reposition to attack)
     [SerializeField] private float fleeRange = 7f;

@@ -332,4 +332,24 @@ public static class Extensions
     {
         return new Vector2(vector.x, vector.z);
     }
+
+    public static void SetR(this Color color, float r)
+    {
+        color = new Color(r, color.g, color.b, color.a);
+    }
+
+    public static void SetG(this Color color, float g)
+    {
+        color = new Color(color.r, g, color.b, color.a);
+    }
+
+    public static void SetB(this Color color, float b)
+    {
+        color = new Color(color.r, color.g, b, color.a);
+    }
+
+    public static void SetA(this Color color, float a)
+    {
+        color = new Color(color.r, color.g, color.b, a);
+    }
 }

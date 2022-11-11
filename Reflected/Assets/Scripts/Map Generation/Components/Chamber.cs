@@ -88,7 +88,7 @@ public class Chamber : MonoBehaviour
     private void Update()
     {
         // Ensure there is no active transition, no cooldown, there is an active room, and the active room is cleared
-        if (inTransition || cooldownTimer > 0f || map.ActiveRoom == null || !map.ActiveRoom.Cleared)
+        if (inTransition || cooldownTimer > 0f || Map.ActiveRoom == null || !Map.ActiveRoom.Cleared)
             return;
 
         // Ensure the player is inside the chamber
@@ -157,10 +157,15 @@ public class Chamber : MonoBehaviour
     public void Open(Room caller)
     {
         if (door1.Room == caller)
+        {
             door1.Open();
-
+            door2.CloseInstantly();
+        }
         else if (door2.Room == caller)
+        {
             door2.Open();
+            door1.CloseInstantly();
+        }  
     }
 
     /// <summary>
@@ -169,10 +174,15 @@ public class Chamber : MonoBehaviour
     public void Close(Room caller)
     {
         if (door1.Room == caller)
+        {
             door1.Close();
-
+            door2.CloseInstantly();
+        }
         else if (door2.Room == caller)
+        {
             door2.Close();
+            door1.CloseInstantly();
+        } 
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ public abstract class Chest : MonoBehaviour
     public bool isOpen;
     public Animator animator;
 
-    bool trueDimension;
+    [SerializeField] bool trueDimension;
 
     protected virtual void Start()
     {

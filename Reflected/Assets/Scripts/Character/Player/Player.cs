@@ -197,7 +197,7 @@ public class Player : Character, ISavable
 
     public void Interact()
     {
-        OnObjectInteraction.Invoke();
+        OnObjectInteraction?.Invoke();
     }
 
     public StatSystem GetStats() //May have to be PlayerStatSystem??

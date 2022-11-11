@@ -49,6 +49,7 @@ public class Character : MonoBehaviour, IEffectable
 
     public virtual void Heal(float amount)
     {
+        Debug.Log("Amount healed: " + amount);
         currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
     }
 
@@ -102,7 +103,7 @@ public class Character : MonoBehaviour, IEffectable
         {
             foreach (Effect status in statusEffects)
             {
-                movementPenalty *= (1 - status.effect.MovementPenalty);
+                movementPenalty *= (1 - status.totalSlow);
             }
 
         }
@@ -144,6 +145,11 @@ public class Character : MonoBehaviour, IEffectable
             }
         }
     }
+
+    public void PlayAnimation(string animName)
+    {
+        anim.Play(animName);
+    }
 }
 
 [System.Serializable]
@@ -153,6 +159,7 @@ public class Effect
     public float currentEffectTime;
     public float nextTickTime;
     public float totalDamage;
+    public float totalSlow;
 
 
     public Effect(StatusEffectData effect, float scale)
@@ -161,6 +168,11 @@ public class Effect
         currentEffectTime = 0f;
         nextTickTime = 0f;
         totalDamage = effect.DOTAmount * scale;
+        totalSlow = effect.MovementPenalty * scale;
+        if(totalSlow > 1)
+        {
+            totalSlow = 1;
+        }
     }
 
     public void SetCurrentEffectTime(float time)

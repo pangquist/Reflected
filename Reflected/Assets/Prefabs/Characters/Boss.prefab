@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 2230425391244510513}
   - component: {fileID: 2492063382352424833}
   - component: {fileID: 2492063382352424832}
+  - component: {fileID: 1704566787086995860}
   m_Layer: 0
   m_Name: Target Dummy
   m_TagString: Enemy
@@ -184,6 +185,9 @@ MonoBehaviour:
   movementSpeed: 0
   damage: 5
   attackSpeed: 0
+  currentHealth: 0
+  anim: {fileID: 0}
+  currentWeapon: {fileID: 0}
   healthBar: {fileID: 6763893110553264938}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}
@@ -210,11 +214,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityIcon: {fileID: 0}
+  abilitySounds: []
+  abilitySource: {fileID: 0}
   cooldown: 4
   remainingCooldown: 0
   abilityName: Dimension Pull
   damage: 0
   debug: 0
+  abilityAnimation: {fileID: 0}
+  vfxObject: {fileID: 0}
+  vfxDuration: 0
 --- !u!54 &2492063382352424833
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -245,6 +254,34 @@ CapsuleCollider:
   m_Height: 1.466546
   m_Direction: 1
   m_Center: {x: 0, y: 0.70850706, z: 0}
+--- !u!114 &1704566787086995860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2230425391244482834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2253763db99494c4e9e3bf8bf774f269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  movementSpeed: 0
+  damage: 0
+  attackSpeed: 0
+  currentHealth: 0
+  anim: {fileID: 0}
+  currentWeapon: {fileID: 0}
+  stats: {fileID: 0}
+  chargeBar: {fileID: 0}
+  jumpForce: 0
+  weapons: []
+  basicSwordAbility: {fileID: 0}
+  basicBowAbility: {fileID: 0}
+  specialAbility: {fileID: 0}
+  swapAbility: {fileID: 0}
+  TimeFlowWhileSwapping: 0
 --- !u!1 &2230425391244482836
 GameObject:
   m_ObjectHideFlags: 0

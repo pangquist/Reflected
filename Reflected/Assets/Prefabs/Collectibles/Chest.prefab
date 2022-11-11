@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: -7711180848281303578}
   - component: {fileID: 3314845808925759546}
   - component: {fileID: 3314845808925759547}
+  - component: {fileID: 737111796812216124}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -105,6 +106,7 @@ MonoBehaviour:
   myRarity: {fileID: 0}
   isOpen: 0
   animator: {fileID: 0}
+  trueDimension: 0
 --- !u!54 &-7711180848281303578
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -137,6 +139,8 @@ BoxCollider:
 --- !u!95 &3314845808925759547
 Animator:
   serializedVersion: 4
+--- !u!114 &737111796812216124
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -154,6 +158,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d1ac8794d6e44176ab1908d352a9458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customUpdate: 0
+  layer: 2
+  sprite: {fileID: 21300000, guid: e6f6e1d647353466ba6fe1e45b2b69c6, type: 3}
+  color: {r: 1, g: 0.71486974, b: 0.18396229, a: 1}
+  constantScale: 1
+  automaticCustomUpdate: 0
+  automaticPosition: 1
+  automaticRotation: 0
+  predeterminedSize: 1
+  size: {x: 32, y: 32}
+  component: {fileID: 0}
 --- !u!1001 &2374889692540464953
 PrefabInstance:
   m_ObjectHideFlags: 0

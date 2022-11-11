@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject enemyAOE;
     [SerializeField] GameObject enemyDOT;
 
+    EnemyStatSystem enemyStatSystem;
+
     GameObject enemyToSpawn;
     List<GameObject> enemyList = new List<GameObject>();
 
@@ -23,10 +25,13 @@ public class EnemySpawner : MonoBehaviour
         GetSpawnlocations();
         enemyList.Add(enemyClose);
         enemyList.Add(enemyRange);
+        enemyStatSystem = GameObject.Find("EnemyStatSystem").GetComponent<EnemyStatSystem>();
     }
 
     public void SpawnEnemy(float spawnTime, int enemyAmount, int waveAmount, float enemyadaptiveDifficulty)
     {
+        enemyStatSystem.SetNewStats(1, 1, true); //might change values in future for more fun gameplay. Needs to be balanced with enemyAdaptiveDiffuculty.
+        enemyStatSystem.ApplyNewStats(DimensionManager.True);
         StartCoroutine(SpawnWave(spawnTime, enemyAmount, waveAmount, enemyadaptiveDifficulty));
     }
 
@@ -92,7 +97,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            int percent = Random.Range(1, 101);
+            int percent = Random.Range(1, 100);
 
             if (percent < 33)
             {

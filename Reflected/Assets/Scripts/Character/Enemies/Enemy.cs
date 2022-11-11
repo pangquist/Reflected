@@ -16,7 +16,7 @@ public class Enemy : Character
     GameObject parent;
     protected Player player;
 
-    bool playerNoticed;
+    bool doOnce;
 
     protected override void Awake()
     {
@@ -55,7 +55,12 @@ public class Enemy : Character
     protected override void Die()
     {
         AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
-        aiDirector.killEnemyInRoom();
+        if (!doOnce)
+        {
+            aiDirector.killEnemyInRoom();
+            doOnce = true;
+        }
+        
         LootDrop(transform);
         //player.RemoveEnemy(this);
         anim.Play("Death");
@@ -71,6 +76,8 @@ public class Enemy : Character
 
     public void LootDrop(Transform lootDropPosition)
     {
+        LootDropList = GameObject.Find("LootPoolManager").GetComponent<LootPoolManager>().GetCollectablePool();
+
         Vector3 spawnPosition = lootDropPosition.position + new Vector3(0, 1, 0);
         Instantiate(LootDropList.GetRandom(), spawnPosition, Quaternion.Euler(0,0,0));
     }
