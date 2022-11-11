@@ -83,10 +83,19 @@ public abstract class Chest : MonoBehaviour
 
     protected void SetItems()
     {
+        
         for (int i = 0; i < numberOfPickablePowerups; i++)
         {
-            pickablePowerUps.Add(powerups.GetRandom());
-            pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties(myRarity);            
+            if (myRarity.rarity == "Legendary")
+            {
+                //pickablePowerUps.Add(powerups[]);
+            }
+            else
+            {
+                pickablePowerUps.Add(powerups.GetRandom());
+                pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties(myRarity);
+            }
+                       
         }
     }
 }
