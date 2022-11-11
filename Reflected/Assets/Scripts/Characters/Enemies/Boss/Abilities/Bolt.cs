@@ -20,11 +20,13 @@ public class Bolt : MonoBehaviour
     void Update()
     {
         if (useGravity)
+        {
             velocity.y += gravity * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(velocity);
+        }
 
         transform.position += velocity * Time.deltaTime;
 
-        transform.rotation = Quaternion.LookRotation(velocity);
     }
 
     public void ShowLandPlacement(Vector3 spawnPosition)
@@ -69,7 +71,7 @@ public class Bolt : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponentInChildren<Player>())
+        if (other.gameObject.GetComponent<Player>())
         {
             player.TakeDamage(damage);
             Destroy(gameObject);

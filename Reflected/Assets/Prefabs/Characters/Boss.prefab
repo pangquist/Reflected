@@ -110,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929905284}
   m_LocalRotation: {x: -0.006035532, y: -0.0054493467, z: -0.7070811, w: 0.7070858}
-  m_LocalPosition: {x: -0.025131729, y: 0.016141012, z: -0.8074288}
+  m_LocalPosition: {x: -0.025131729, y: 0.01614101, z: -0.8074288}
   m_LocalScale: {x: 2.069202, y: 2.055067, z: 0.70084137}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -323,8 +323,11 @@ MonoBehaviour:
   rotateBody: {fileID: 4350906471026547974}
   abilities:
   - {fileID: 1320225154}
-  timeBetweenAbilities: 7
-  abilityTimer: 5
+  - {fileID: 1320225153}
+  - {fileID: 1320225152}
+  - {fileID: 1320225151}
+  timeBetweenAbilities: 10
+  abilityTimer: 1
 --- !u!114 &1320225154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,8 +837,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 18.538954, z: 1}
+  m_Center: {x: 0, y: 8.769481, z: 0}
 --- !u!1 &107056625068203474
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,7 +863,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107056625068203474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: -1.53}
+  m_LocalPosition: {x: 0, y: -0, z: -0.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

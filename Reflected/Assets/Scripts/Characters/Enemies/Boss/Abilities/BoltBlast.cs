@@ -45,7 +45,7 @@ public class BoltBlast : Ability
 
             Bolt newBolt = Instantiate(bolt, spawnPosition, Quaternion.identity).GetComponent<Bolt>();
 
-            player = GameObject.FindWithTag("Player").GetComponent<Player>();
+            player = FindObjectOfType<Player>().GetComponent<Player>();
 
             float randomOffset = Random.Range(-offsetRange, offsetRange + 1);
 
