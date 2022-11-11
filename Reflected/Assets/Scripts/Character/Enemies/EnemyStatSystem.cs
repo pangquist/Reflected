@@ -12,10 +12,6 @@ public class EnemyStatSystem : StatSystem
     List<Stats> statList;
     List<float> baseIncrease;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(this);
-    }
     public void Start()
     {
         baseIncrease = new List<float>() { 2f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
@@ -77,6 +73,7 @@ public class EnemyStatSystem : StatSystem
 
     public void ApplyNewStats(bool trueDimention)
     {
+        ResetStats();
         Dictionary<Stats, float> activeStats;
         if (trueDimention)
         {
@@ -86,6 +83,7 @@ public class EnemyStatSystem : StatSystem
         {
             activeStats = darkBuffs;
         }
+        
 
         foreach (var item in activeStats)
         {
