@@ -12,7 +12,6 @@ using UnityEngine;
 public class Sword : Weapon
 {
     [Header("Sword Properties")]
-    [SerializeField] Collider hitBox;
     [SerializeField] List<StatusEffectData> statusEffectDatas;
 
     private void OnTriggerStay(Collider other)

@@ -8,6 +8,7 @@ public class Enemy : Character
 {
     [SerializeField] Image healthBar;
 
+    [SerializeField] Vector3 combatTextOffset;
     [SerializeField] Canvas combatTextCanvas;
     [SerializeField] float aggroRange;
 
@@ -51,9 +52,10 @@ public class Enemy : Character
         }
 
 
-        CombatText text = Instantiate(combatTextCanvas.gameObject, transform.position + new Vector3(0, 2, 0), Quaternion.identity).GetComponent<CombatText>();
+        CombatText text = Instantiate(combatTextCanvas.gameObject, transform.position + combatTextOffset, Quaternion.identity).GetComponent<CombatText>();
         text.SetDamageText(damage);
 
+        Debug.Log("ENEMY TOOK DAMAGE: " + damage);
         base.TakeDamage(damage);
         healthBar.fillAmount = GetHealthPercentage();
     }

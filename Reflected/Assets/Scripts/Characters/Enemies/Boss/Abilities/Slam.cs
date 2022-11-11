@@ -23,9 +23,14 @@ public class Slam : Ability
     {
         base.DoEffect();
 
-        StartCoroutine(Ability());
+        GetComponent<Animator>().Play("Slam");
 
         return true;
+    }
+
+    public void StartSlamAttack()
+    {
+        StartCoroutine(Ability());
     }
 
     IEnumerator Ability()
@@ -45,7 +50,11 @@ public class Slam : Ability
             yield return null;
         }
 
+        yield return null;
+    }
 
+    public void SlamAttack()
+    {
         if (hitboxObject.GetComponent<Collider>().bounds.Intersects(player.Hitbox().bounds))
         {
             Debug.Log("Slam Hit! Damage: " + damage);
@@ -55,7 +64,5 @@ public class Slam : Ability
         }
 
         hitboxObject.SetActive(false);
-
-        yield return null;
     }
 }

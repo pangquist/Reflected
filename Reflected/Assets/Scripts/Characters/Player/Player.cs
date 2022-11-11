@@ -14,6 +14,7 @@ public class Player : Character, ISavable
 {
     [SerializeField] PlayerStatSystem stats;
     [SerializeField] GameObject chargeBar;
+    [SerializeField] Collider hitbox;
 
     [Header("Stat Properties")]
     [SerializeField] float jumpForce;
@@ -174,7 +175,7 @@ public class Player : Character, ISavable
 
     public Collider Hitbox()
     {
-        return GetComponent<Collider>();
+        return hitbox;
     }
 
     public void Stun(float duration)

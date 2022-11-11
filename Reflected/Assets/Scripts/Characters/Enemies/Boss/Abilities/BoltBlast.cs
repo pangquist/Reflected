@@ -7,7 +7,7 @@ public class BoltBlast : Ability
     [Header("Bolt Blast Specifics")]
 
     [SerializeField] GameObject bolt;
-    [SerializeField] Transform spawnPosition;
+    [SerializeField] List<Transform> spawnPositions;
     [Range(0, 10)]
     [SerializeField] float offsetRange;
     [Range(0, 5)]
@@ -20,7 +20,7 @@ public class BoltBlast : Ability
     //List<GameObject> bolts;
     public override bool DoEffect()
     {
-        SpawnBolts();
+        GetComponent<Animator>().Play("Bolt Blaster");
 
         return base.DoEffect();
     }
@@ -33,27 +33,36 @@ public class BoltBlast : Ability
     IEnumerator _SpawnBolts()
     {
         int spawnedBolts = 0;
+        int spawnPositionIndex = 0;
 
         while(spawnedBolts < amountOfBolts)
         {
             Debug.Log("Spawn bolt nr: " + (spawnedBolts+1));
-            Bolt newBolt = Instantiate(bolt, spawnPosition.position, Quaternion.identity).GetComponent<Bolt>();
+
+            Vector3 spawnPosition = spawnPositions[spawnPositionIndex++].position;
+            if (spawnPositionIndex == spawnPositions.Count)
+                spawnPositionIndex = 0;
+
+            Bolt newBolt = Instantiate(bolt, spawnPosition, Quaternion.identity).GetComponent<Bolt>();
 
             player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
             float randomOffset = Random.Range(-offsetRange, offsetRange + 1);
 
-            Vector3 diff = new Vector3(
-                player.transform.position.x + randomOffset,
-                player.transform.position.y,
-                player.transform.position.z + randomOffset
-                ) - spawnPosition.position;
+            Vector3 landPosition = new Vector3(
+                player.transform.position.x + randomOffset, 
+                player.transform.position.y, 
+                player.transform.position.z + randomOffset);
+
+            Vector3 diff = landPosition - spawnPosition;
 
             newBolt.SetVelocity(diff / airTime);
 
             spawnedBolts++;
             yield return new WaitForSeconds(abilityDuration / amountOfBolts);
         }
+
+        GetComponent<Animator>().Play("Bolt Past");
 
         yield return 0;
     }

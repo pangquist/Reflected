@@ -21,7 +21,7 @@ public class Bunker : Ability
 
     public override bool DoEffect()
     {
-        BunkerDown();
+        GetComponent<Animator>().Play("Bunker Down");
 
         return base.DoEffect();
     }
@@ -33,12 +33,9 @@ public class Bunker : Ability
 
     IEnumerator _BunkerDown()
     {
-        //anim.Play("BunkerDown");
         int spawnedBolts = 0;
 
         Boss boss = GetComponent<Boss>();
-
-        boss.ToggleInvurnable();
 
         while (spawnedBolts < amountOfBolts)
         {
@@ -57,14 +54,16 @@ public class Bunker : Ability
 
                 newBolt.SetVelocity(diff / airTime);
 
+                //if (newBolt.UseGravity())
+                //    newBolt.ShowLandPlacement(targetPosition);
+
             }
 
             spawnedBolts++;
             yield return new WaitForSeconds(abilityDuration / amountOfBolts);
         }
 
-        //anim.Play("BunkerUp");
-        boss.ToggleInvurnable();
+        GetComponent<Animator>().Play("Bunker Up");
 
         yield return null;
     }
