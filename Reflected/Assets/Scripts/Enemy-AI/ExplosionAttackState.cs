@@ -40,17 +40,19 @@ public class ExplosionAttackState : State
 
         if (!attackStarted)
         {
-            DoAttack(thisEnemy, enemyStatSystem);
+            //Set relevant stats (damage, projectile speed, )
+            aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
+
+            //DoAttack(enemyStatSystem); //Replaced with animation below instead. The animation will call the attack method.
+            Debug.Log("Pre anim");
+            thisEnemy.SendAnimation("Explosion Attack");
+            Debug.Log("Post anim");
+            attackStarted = true;
         }
     }
 
-    private void DoAttack(AiManager2 thisEnemy, EnemyStatSystem enemyStatSystem)
+    public void DoAttack()
     {
-        attackStarted = true;
-
-        //Set relevant stats (damage, projectile speed, )
-        aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
-
         GameObject currentExplosion = Instantiate(explosionObject, transform.position, Quaternion.identity);
         if (currentExplosion != null)
         {

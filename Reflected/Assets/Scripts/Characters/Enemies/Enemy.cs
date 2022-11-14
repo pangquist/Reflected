@@ -19,12 +19,35 @@ public class Enemy : Character
 
     bool doOnce;
 
+    [SerializeField] MeleeAttackState meleeAttackState;
+    [SerializeField] RangedAttackState rangedAttackState;
+    [SerializeField] AoeAttackState aoeAttackState;
+    [SerializeField] ExplosionAttackState explosionAttackState;
+
     protected override void Awake()
     {
         currentHealth = maxHealth;
         base.Awake();
         player = FindObjectOfType<Player>();
         parent = gameObject.transform.parent.gameObject;
+
+        if (parent.tag == "Melee")
+        {
+            meleeAttackState = this.GetComponentInParent<MeleeAttackState>();
+        }
+        else if (parent.tag == "Ranged")
+        {
+            rangedAttackState = this.GetComponentInParent<RangedAttackState>();
+        }
+        else if (parent.tag == "AOE")
+        {
+            aoeAttackState = this.GetComponentInParent<AoeAttackState>();
+        }
+        else if (parent.tag == "Explosion")
+        {
+            explosionAttackState = this.GetComponentInParent<ExplosionAttackState>();
+        }
+
     }
 
     protected override void Update()
@@ -94,5 +117,25 @@ public class Enemy : Character
     public void ToggleInvurnable()
     {
         invurnable = !invurnable;
+    }
+
+    public void DoAttack()
+    {
+        if (parent.tag == "Melee")
+        {
+            
+        }
+        else if (parent.tag == "Ranged")
+        {
+
+        }
+        else if (parent.tag == "AOE")
+        {
+
+        }
+        else if (parent.tag == "Explosion")
+        {
+            explosionAttackState.DoAttack();
+        }
     }
 }

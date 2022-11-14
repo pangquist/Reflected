@@ -112,4 +112,10 @@ public class AiManager2 : MonoBehaviour
     {
         return Vector3.Distance(transform.position, target.position);
     }
+
+    public void SendAnimation(string animName)
+    {
+        Debug.Log("SendAnim");
+        me.PlayAnimation(animName);
+    }
 }
