@@ -135,12 +135,13 @@ public class MapGenerator : MonoBehaviour
         map.GenerateGraph();
         map.ScaleUpData();
 
-        Timed(pathGenerator    .Generate, map, "Path generator");
         Timed(wallGenerator    .Generate, map, "Wall generator");
         Timed(pillarGenerator  .Generate, map, "Pillar generator");
-        Timed(waterGenerator   .Generate, map, "Water generator");
-        Timed(terrainGenerator .Generate, map, "Terrain generator");
         Timed(roomTypeGenerator.Generate, map, "Room type generator");
+        Timed(waterGenerator   .Generate, map, "Water generator");
+        Timed(pathGenerator    .Generate, map, "Path generator");
+        Timed(terrainGenerator .Generate, map, "Terrain generator");
+        
         Timed(BakeNavMesh               , map, "NavMesh baker");
         Timed(objectPlacer     .Place   , map, "Object placer");
 

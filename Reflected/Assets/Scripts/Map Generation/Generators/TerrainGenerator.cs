@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 using Unity.Mathematics;
+using UnityEngine.Events;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class TerrainType
@@ -45,6 +47,8 @@ public class TerrainGenerator : MonoBehaviour
     public float HeightMultiplier() => heightMultiplier;
     public AnimationCurve HeightCurve() => heightCurve;
 
+    public static UnityEvent Finished = new UnityEvent();
+
     public void SetRandomSeed(float seed)
     {
         randomSeed = seed / 10000;
@@ -72,7 +76,6 @@ public class TerrainGenerator : MonoBehaviour
                     tilePosition.z - MapGenerator.ChunkSize,
                     MapGenerator.ChunkSize,
                     MapGenerator.ChunkSize);
-
 
                 foreach (Room room in map.Rooms)
                 {
@@ -104,6 +107,8 @@ public class TerrainGenerator : MonoBehaviour
                 }
             }
         }
+
+        Finished.Invoke();
     }
 
     private void GenerateTerrainChunk(TerrainChunk terrainChunk, Room room1, Room room2 = null)
@@ -165,47 +170,80 @@ public class TerrainGenerator : MonoBehaviour
 
     private void ModifyVerticesUsingPaths(TerrainChunk terrainChunk, ref Vector3[] meshVertices, Room room1, Room room2)
     {
+        Debug.Log("Flattening");
         int verticesSquared = (int)Mathf.Sqrt(meshVertices.Length);
         Vector3 offset = new Vector3(MapGenerator.ChunkSize * 0.5f, 0, MapGenerator.ChunkSize * 0.5f);
         Matrix4x4 matrix = terrainChunk.transform.localToWorldMatrix;
 
         Vector3 vertexWorldPos;
         float distance, adaption, adaptionAmount;
-        int i;
 
-        for (int y = 0; y < verticesSquared; ++y)
+        for (int i = 0; i < meshVertices.Length; ++i)
         {
-            for (int x = 0; x < verticesSquared; ++x)
+            vertexWorldPos = matrix.MultiplyPoint3x4(meshVertices[i]) - offset;
+
+            ModifyVertexHeight(ref meshVertices, room1);
+
+            if (room2 != null)
+                ModifyVertexHeight(ref meshVertices, room2);
+
+            void ModifyVertexHeight(ref Vector3[] meshVertices, Room room)
             {
-                i = y * verticesSquared + x;
-                vertexWorldPos = matrix.MultiplyPoint3x4(meshVertices[i]) - offset;
-
-                ModifyVertexHeight(ref meshVertices, room1);
-
-                if (room2 != null)
-                    ModifyVertexHeight(ref meshVertices, room2);
-
-                void ModifyVertexHeight(ref Vector3[] meshVertices, Room room)
+                foreach (Vector3 pathPoint in room.PathPoints)
                 {
-                    foreach (Vector3 pathPoint in room.PathPoints)
+                    distance = Vector2.Distance(vertexWorldPos.XZ(), pathPoint.XZ());
+
+                    if (distance < pathAdaptionRange)
                     {
-                        distance = Vector2.Distance(vertexWorldPos.XZ(), pathPoint.XZ());
+                        // how much to affect the vertex based of the distance to the path
+                        adaptionAmount = pathAdaptionAmount.Evaluate(distance / pathAdaptionRange);
 
-                        if (distance < pathAdaptionRange)
-                        {
-                            // how much to affect the vertex based of the distance to the path
-                            adaptionAmount = pathAdaptionAmount.Evaluate(distance / pathAdaptionRange);
-                            
-                            // how much to affect the vertex based of its current height
-                            adaptionAmount *= pathHeightAdaption.Evaluate((meshVertices[i].y - startY) / heightMultiplier);
+                        // how much to affect the vertex based of its current height
+                        adaptionAmount *= pathHeightAdaption.Evaluate((meshVertices[i].y - startY) / heightMultiplier);
 
-                            // the final height adaption
-                            adaption = (pathY - meshVertices[i].y) * adaptionAmount;
+                        // the final height adaption
+                        adaption = (pathY - meshVertices[i].y) * adaptionAmount;
 
-                            meshVertices[i].y += adaption;
-                        }
+                        // apply adaption
+                        meshVertices[i].y += adaption;
                     }
                 }
+            }
+        }
+    }
+
+    private void FlattenTerrain(TerrainChunk terrainChunk, ref Vector3[] meshVertices, Vector2 origin, float innerRadius, float outerRadius)
+    {
+        Vector3 offset = new Vector3(MapGenerator.ChunkSize * 0.5f, 0, MapGenerator.ChunkSize * 0.5f);
+        Matrix4x4 matrix = terrainChunk.transform.localToWorldMatrix;
+        Vector3 vertexWorldPos;
+        float distance, adaption, adaptionAmount;
+
+        // determine level
+
+        RaycastHit raycastHit;
+        Physics.Raycast(new Vector3(origin.x, 100f, origin.y), Vector3.down, out raycastHit);
+        float level = raycastHit.point.y;
+
+        // flatten vertices
+
+        for (int i = 0; i < meshVertices.Length; ++i)
+        {
+            vertexWorldPos = matrix.MultiplyPoint3x4(meshVertices[i]) - offset;
+            distance = Vector2.Distance(vertexWorldPos.XZ(), origin);
+
+            if (distance < outerRadius)
+            {
+                // how much to affect the vertex based of its distance to origin
+                adaptionAmount = (distance - innerRadius) / (outerRadius - innerRadius);
+                adaptionAmount = -Mathf.Clamp01(adaptionAmount) + 1f;
+                Debug.Log(adaptionAmount.ToString("0.00"));
+
+                // the final height adaption
+                adaption = (level - meshVertices[i].y) * adaptionAmount;
+
+                // apply adaption
+                meshVertices[i].y += adaption;
             }
         }
     }
@@ -247,12 +285,12 @@ public class TerrainGenerator : MonoBehaviour
                     // Calculate world position of pixel
                     Vector3 pixelPosition = new Vector3(
                         terrainChunk.transform.position.x - (xIndex + 0.5f) * worldPixelSize,
-                        mapGenerator.PathGenerator.Level,
+                        0f,
                         terrainChunk.transform.position.z - (zIndex + 0.5f) * worldPixelSize);
 
                     // Check paths
                     foreach (PathCreator path in paths)
-                        if (Vector3.Distance(pixelPosition, path.path.GetClosestPointOnPath(pixelPosition)) < mapGenerator.PathGenerator.Radius)
+                        if (Vector2.Distance(pixelPosition.XZ(), path.path.GetClosestPointOnPath(pixelPosition).XZ()) < mapGenerator.PathGenerator.Radius)
                             return true;
                     return false;
                 }

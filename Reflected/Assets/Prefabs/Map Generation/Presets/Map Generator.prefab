@@ -134,7 +134,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapGenerator: {fileID: 5090313322264181279}
-  peacefulChance: 0.1
+  testWeightBoss1: 1
+  testWeightBoss2: 1
+  testWeightBoss3: 1
+  testWeightBoss4: 1
+  shopStructurePrefab: {fileID: 3926862181858318578, guid: afdf4ae891925499a92819dd1d2ac867,
+    type: 3}
+  nrOfShopRooms: 30
+  shopRoomFitnessThreshold: 0.6
+  testWeightShop1: 1
+  testWeightShop2: 1
+  testWeightShop3: 1
 --- !u!114 &5090313322264181267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,7 +383,7 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.88208205
+      inWeight: 0.60294116
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

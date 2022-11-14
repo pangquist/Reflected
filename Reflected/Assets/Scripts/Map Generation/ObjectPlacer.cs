@@ -92,7 +92,7 @@ public class ObjectPlacer : MonoBehaviour
                                         }
                                     }
                                     if (canPlace)
-                                        Instantiate(pair.item, hit.point, Quaternion.identity, room.transform);
+                                        Instantiate(pair.item, hit.point, Quaternion.identity, room.ObjectsChild);
                                 }
                             }
                         }
@@ -145,7 +145,7 @@ public class ObjectPlacer : MonoBehaviour
                 {
                     if (!collider.gameObject.GetComponent<NavMeshObstacle>())
                     {
-                        Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.transform);
+                        Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.ObjectsChild);
                     }
                 }
             }

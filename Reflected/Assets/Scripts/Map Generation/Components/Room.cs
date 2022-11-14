@@ -9,6 +9,7 @@ public class Room : MonoBehaviour
 
     [SerializeField] private Transform pathsChild;
     [SerializeField] private Transform terrainChild;
+    [SerializeField] private Transform objectsChild;
 
     [Header("Read Only")]
 
@@ -26,6 +27,7 @@ public class Room : MonoBehaviour
 
     public Transform PathsChild => pathsChild;
     public Transform TerrainChild => terrainChild;
+    public Transform ObjectsChild => objectsChild;
 
     public Rect Rect => rect;
     public bool Cleared => cleared;
@@ -35,9 +37,21 @@ public class Room : MonoBehaviour
     public List<PathCreator> Paths => paths;
     public List<Vector3> PathPoints => pathPoints;
 
-    private void Start()
+    private void Awake()
     {
-        
+        TerrainGenerator.Finished.AddListener(MoveShopStructure);
+    }
+
+    private void MoveShopStructure()
+    {
+        if (type == RoomType.Shop)
+        {
+            Vector3 shopPosition = new Vector3(rect.center.x, 100f, rect.center.y);
+            RaycastHit raycastHit;
+            Physics.Raycast(shopPosition, Vector3.down, out raycastHit);
+            shopPosition.y = raycastHit.point.y;
+            transform.GetComponentInChildren<Shop>().transform.position = shopPosition;
+        }
     }
 
     public static void StaticInitialize(Map map)
@@ -136,7 +150,7 @@ public class Room : MonoBehaviour
 
         else
         {
-            if (type == RoomType.Monster || type == RoomType.Boss)
+            if (type == RoomType.Monster || type == RoomType.Boss || type == RoomType.Shop)
             {
                 map.GameManager.AiDirector.EnterRoom();
                 GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(1);

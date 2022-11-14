@@ -62,7 +62,6 @@ public enum Dimension
 public enum RoomType
 {
     Start,
-    Peaceful,
     Shop,
     Monster,
     Boss
