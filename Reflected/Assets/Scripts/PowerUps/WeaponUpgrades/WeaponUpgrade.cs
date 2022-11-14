@@ -7,7 +7,6 @@ public class WeaponUpgrade : PowerUpEffect
 {
     public override void Apply(GameObject target, float amount)
     {
-        target.GetComponent<Weapon>().SetWeaponIndex((int)amount);
-        Debug.Log("Attack speed +" + amount);
+        target.GetComponent<Sword>().SetWeaponIndex((int)amount);
     }
 }

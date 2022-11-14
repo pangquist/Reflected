@@ -50,6 +50,7 @@ public class PlayerEditorTemplate : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("movementSpeed"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("jumpForce"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("anim"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("hitbox"));
     }
 
     void DisplayAbilityInfo()

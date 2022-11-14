@@ -14,7 +14,7 @@ public class FireArrow : Projectile
         if (other.GetComponent<Enemy>())
         {
             other.GetComponent<Enemy>().TakeDamage(damage);
-            other.GetComponent<IEffectable>().ApplyEffect(data, damage * 2);
+            other.GetComponent<IEffectable>().ApplyEffect(data, 2);
         }
     }
 }
