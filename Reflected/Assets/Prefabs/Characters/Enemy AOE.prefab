@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 7385484168255284777}
   - component: {fileID: 8715332239327699811}
   - component: {fileID: 8715332238812438654}
+  - component: {fileID: 2610253150410453602}
   m_Layer: 0
   m_Name: Enemy AOE
   m_TagString: AOE
@@ -194,9 +195,6 @@ MonoBehaviour:
   baseAttackRate: 5
   baseAttackDamage: 1
   baseAoeSize: {x: 5, y: 3, z: 5}
-  attackRate: 5
-  attackDamage: 0
-  aoeSize: {x: 0, y: 0, z: 0}
   fleeRange: 7
   chaseRange: 20
 --- !u!54 &8715332238812438654
@@ -215,6 +213,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &2610253150410453602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231473038681938532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d1ac8794d6e44176ab1908d352a9458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customUpdate: 0
+  layer: 2
+  sprite: {fileID: 21300000, guid: 92a6f443d025e483682b6510fa3af913, type: 3}
+  color: {r: 1, g: 0, b: 0, a: 1}
+  constantScale: 1
+  automaticCustomUpdate: 0
+  automaticPosition: 1
+  automaticRotation: 0
+  predeterminedSize: 1
+  size: {x: 24, y: 24}
+  component: {fileID: 0}
 --- !u!1 &5158535374235590867
 GameObject:
   m_ObjectHideFlags: 0

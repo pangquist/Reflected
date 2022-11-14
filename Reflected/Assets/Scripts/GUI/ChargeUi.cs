@@ -35,7 +35,7 @@ public class ChargeUi : MonoBehaviour
     {
         for (int i = 0; i < dimensionManager.GetMaxCharges(); i++)
         {
-            Debug.Log(i.ToString());
+            //Debug.Log(i.ToString());
             if (dimensionManager.GetCurrentCharges() > i)
             {
                 chargeList[i].GetComponent<Image>().color = chargeColor;

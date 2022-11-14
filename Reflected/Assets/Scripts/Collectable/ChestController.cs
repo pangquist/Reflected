@@ -10,7 +10,7 @@ public class ChestController : Chest
         if (!isOpen )
         {
             isOpen = true;
-            Debug.Log("Chest is now open...");
+            //Debug.Log("Chest is now open...");
             if (spawnedObject == null)
                 SpawnItem(0);
 

@@ -5,6 +5,7 @@ using PathCreation;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using Debug = UnityEngine.Debug;
 
 public class MapGenerator : MonoBehaviour
@@ -69,6 +70,8 @@ public class MapGenerator : MonoBehaviour
     [TextArea()]
     [ReadOnly][SerializeField] private string timerLog;
 
+    public static UnityEvent Finished = new UnityEvent();
+
     // Properties
 
     public static int ChunkSize { get; private set; }
@@ -128,17 +131,21 @@ public class MapGenerator : MonoBehaviour
 
         Timed(roomGenerator    .Generate, map, "Room generator");
         Timed(chamberGenerator .Generate, map, "Chamber generator");
+
         map.GenerateGraph();
-        Timed(roomTypeGenerator.Generate, map, "Room type generator");
         map.ScaleUpData();
+
         Timed(pathGenerator    .Generate, map, "Path generator");
         Timed(wallGenerator    .Generate, map, "Wall generator");
         Timed(pillarGenerator  .Generate, map, "Pillar generator");
         Timed(waterGenerator   .Generate, map, "Water generator");
         Timed(terrainGenerator .Generate, map, "Terrain generator");
+        Timed(roomTypeGenerator.Generate, map, "Room type generator");
         Timed(BakeNavMesh               , map, "NavMesh baker");
         Timed(objectPlacer     .Place   , map, "Object placer");
-        
+
+        Finished.Invoke();
+
         // Log
 
         stopwatch.Stop();
@@ -156,15 +163,25 @@ public class MapGenerator : MonoBehaviour
 
         // Move scene view camera
 
+        AutoFocusCamera();
+    }
+
+    private void AutoFocusCamera()
+    {
 #if UNITY_EDITOR
 
         if (autoFocusCamera)
         {
+            if (SceneView.lastActiveSceneView == null)
+            {
+                Debug.Log("Autommatic camera focus failed because no scene view was active.");
+                return;
+            }
+
             SceneView.lastActiveSceneView.LookAt(GameObject.Find("Player").transform.position, Quaternion.Euler(70, 0, 0), 40, false, false);
         }
 
 #endif
-
     }
 
     private IEnumerator Coroutine_BulkGenerate()

@@ -8,19 +8,14 @@ public class PillarGenerator : MonoBehaviour
     [Header("References")]
 
     [SerializeField] private GameObject pillarPrefab;
+    [SerializeField] private MapGenerator mapGenerator;
 
     [Header("Pillars")]
 
-    [Range(0f, 10f)]
     [SerializeField] private float width;
-
-    [Range(0f, 5f)]
+    [SerializeField] private float intrudingDepth;
     [SerializeField] private float protrudingDepth;
-
-    [Range(0f, 5f)]
     [SerializeField] private float protrudingHeight;
-
-    [Min(1)]
     [SerializeField] private int distance;
 
     private Vector3 wallPillarScale;
@@ -35,12 +30,12 @@ public class PillarGenerator : MonoBehaviour
         wallPillarScale = new Vector3(
             width,
             Wall.Height + protrudingHeight,
-            Wall.Thickness + protrudingDepth * 2f);
+            Wall.Thickness - intrudingDepth + protrudingDepth);
 
         chamberPillarScale = new Vector3(
             width,
             Wall.Height + protrudingHeight,
-            Mathf.Max(map.Chambers[0].Rect.width, map.Chambers[0].Rect.height) + protrudingDepth * 2f);
+            Mathf.Max(map.Chambers[0].Rect.width, map.Chambers[0].Rect.height) - intrudingDepth + protrudingDepth);
 
         float halfWallThickness = Wall.Thickness * 0.5f;
 
@@ -66,11 +61,17 @@ public class PillarGenerator : MonoBehaviour
                     {
                         portionRect.xMin = Mathf.Clamp(portionRect.xMin, room.Rect.xMin, room.Rect.xMax);
                         portionRect.xMax = Mathf.Clamp(portionRect.xMax, room.Rect.xMin, room.Rect.xMax);
+
+                        portionRect.yMin += wall.Direction == CardinalDirection.South ? intrudingDepth : -protrudingDepth;
+                        portionRect.yMax += wall.Direction == CardinalDirection.South ? protrudingDepth : -intrudingDepth;
                     }
                     else
                     {
                         portionRect.yMin = Mathf.Clamp(portionRect.yMin, room.Rect.yMin, room.Rect.yMax);
                         portionRect.yMax = Mathf.Clamp(portionRect.yMax, room.Rect.yMin, room.Rect.yMax);
+
+                        portionRect.xMin += wall.Direction == CardinalDirection.West ? intrudingDepth : -protrudingDepth;
+                        portionRect.xMax += wall.Direction == CardinalDirection.West ? protrudingDepth : -intrudingDepth;
                     }
 
                     // Set marker
@@ -131,10 +132,12 @@ public class PillarGenerator : MonoBehaviour
         // If this is an edge pillar and this wall has multiple portions
         if (edgePillars && wall.Portions.Count > 1)
         {
+            float inflation = mapGenerator.WallGenerator.ChamberOverlapInflation + 0.001f;
+
             // Check if in chamber
             foreach (Chamber chamber in room.Chambers)
             {
-                if (chamber.Rect.Inflated(0.01f, 0.01f).Contains(position))
+                if (chamber.Rect.Inflated(inflation, inflation).Contains(position))
                 {
                     // Alt 1: Skip if chambers generate their own pillars
                     //return;

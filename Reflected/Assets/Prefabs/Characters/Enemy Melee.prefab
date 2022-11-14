@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 6866964282756938313}
   - component: {fileID: 1099865400733728881}
   - component: {fileID: 2030773547744398053}
+  - component: {fileID: 889303557729916751}
   m_Layer: 0
   m_Name: Enemy Melee
   m_TagString: Melee
@@ -414,6 +415,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &889303557729916751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211019161338975208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d1ac8794d6e44176ab1908d352a9458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customUpdate: 0
+  layer: 2
+  sprite: {fileID: 21300000, guid: 92a6f443d025e483682b6510fa3af913, type: 3}
+  color: {r: 1, g: 0, b: 0, a: 1}
+  constantScale: 1
+  automaticCustomUpdate: 0
+  automaticPosition: 1
+  automaticRotation: 0
+  predeterminedSize: 1
+  size: {x: 24, y: 24}
+  component: {fileID: 0}
 --- !u!1001 &5029673218080466891
 PrefabInstance:
   m_ObjectHideFlags: 0
