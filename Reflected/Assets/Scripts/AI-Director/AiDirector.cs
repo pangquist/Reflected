@@ -68,12 +68,7 @@ public class AiDirector : MonoBehaviour
     {
         CheckRoomActivity();
     }
-    private void ResetMap()
-    {
-        numberOfRoomsCleared = 0;
-        numberOfRoomsLeftOnMap = 0;
-        clearTimesList.Clear();
-    }
+
     private void checkDifficulty()
     {
         startDiffuculty();
@@ -99,7 +94,6 @@ public class AiDirector : MonoBehaviour
 
         amountOfEnemiesToSpawn = Random.Range(minSpawnAmount, maxSpawnAmount);
     }
-
     private void startDiffuculty()
     {
         spawntime = 2;
