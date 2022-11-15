@@ -18,7 +18,7 @@ public class UiPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI mirrorShard;
     [SerializeField] TextMeshProUGUI gems;
 
-
+    private StatSystem statSystem;
     
     private ItemData itemData;
     private Player player;
@@ -26,17 +26,17 @@ public class UiPanel : MonoBehaviour
     void Start()
     {
         inventory = FindObjectOfType<Inventory>();
-
+        statSystem = FindObjectOfType<StatSystem>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + player.GetCurrentHealth().ToString();
-        damageText.text = "Damage: " + player.GetDamage().ToString();
-        speedText.text = "Speed: " + player.GetMovementSpeed().ToString();
-        attackspeedText.text = "Attack Speed: " + player.GetAttackSpeed().ToString();
+        healthText.text = "Health: " + (player.GetMaxHealth() + statSystem.GetMaxHealthIncrease()).ToString();
+        damageText.text = "Damage: " + (player.GetDamage() * statSystem.GetDamageIncrease()).ToString();
+        speedText.text = "Movement Speed: " + (player.GetMovementSpeed() * statSystem.GetMovementSpeed()).ToString();
+        attackspeedText.text = "Attack Speed: " + (player.GetAttackSpeed() * statSystem.GetAttackSpeed()).ToString();
         coin.text = inventory.inventory[0].stackSize.ToString();
         gems.text = inventory.inventory[1].stackSize.ToString();
         mirrorShard.text = inventory.inventory[2].stackSize.ToString();

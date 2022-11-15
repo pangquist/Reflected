@@ -18,6 +18,7 @@ public class UiManager: MonoBehaviour
     [SerializeField] GameObject inGameMenu;
     [SerializeField] GameObject shopPanel;
     [SerializeField] GameObject upgradePanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,7 @@ public class UiManager: MonoBehaviour
 
     void CheckForTab()
     {
-        if (inGameMenu.active)
+        if (inGameMenu.activeSelf)
             return;
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -52,12 +53,13 @@ public class UiManager: MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (inGameMenu.active)
+            if (inGameMenu.activeSelf)
             {
                 inGameMenu.SetActive(false);
             }
-            else if (!inGameMenu.active)
+            else if (!inGameMenu.activeSelf)
             {
+                shopPanel.SetActive(false);
                 uiPanel.SetActive(false);
                 CurrencyPanel.SetActive(false);
                 inGameMenu.SetActive(true);
@@ -69,7 +71,7 @@ public class UiManager: MonoBehaviour
 
     void HandleMouse()
     {
-        if (inGameMenu.activeSelf == true || shopPanel.activeSelf == true || upgradePanel.activeSelf == true)
+        if (inGameMenu.activeSelf || shopPanel.activeSelf || upgradePanel.activeSelf)
         {
             state = UiState.Active;
         }
