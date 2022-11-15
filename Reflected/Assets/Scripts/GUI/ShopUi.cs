@@ -16,7 +16,7 @@ public class ShopUi : MonoBehaviour
     [SerializeField] List<GameObject> buttonList;
     private int buttonIndex;
     private GameObject shopObject;
-    public List<GameObject> shopList;
+    [SerializeField] List<GameObject> shopList;
 
     void Start()
     {
@@ -25,24 +25,6 @@ public class ShopUi : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        if(shopPanel.activeSelf== true)
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        
-        
-
-    }
 
     public void DeactiveShopWindow()
     {

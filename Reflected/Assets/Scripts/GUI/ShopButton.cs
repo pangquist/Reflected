@@ -30,13 +30,6 @@ public class ShopButton : MonoBehaviour
 
         buttonList = shopUi.GetButtonList();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public int GetIndex()
     {
         return index;
