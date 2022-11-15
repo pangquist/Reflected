@@ -88,7 +88,7 @@ public abstract class Chest : MonoBehaviour
         {
             if (myRarity.rarity == "Legendary")
             {
-                //pickablePowerUps.Add(powerups[]);
+                pickablePowerUps.Add(powerups.GetItem(powerups.Count - 1));
             }
             else
             {
