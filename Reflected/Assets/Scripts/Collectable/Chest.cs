@@ -11,7 +11,7 @@ public abstract class Chest : MonoBehaviour
     protected GameObject spawnedObject;
     //protected GameObject itemToSpawn;
     [SerializeField] protected Rarity myRarity;
-    protected int numberOfPickablePowerups = 3;
+    protected int numberOfPickablePowerups = 2;
 
     public bool isOpen;
     public Animator animator;
