@@ -44,7 +44,7 @@ public class AOEScript : MonoBehaviour
         {
             if (other.tag == "Player")
             {
-                var healthComponent = other.GetComponent<Player>();
+                var healthComponent = other.GetComponentInChildren<Player>();
                 if (healthComponent != null)
                 {
                     damageTimer = 0f;

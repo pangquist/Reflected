@@ -24,13 +24,13 @@ public class ExplosionAttackState : State
     [SerializeField] private StatusEffectData slowData;
 
     //Offset of explosion position
-    Vector3 offSet = new Vector3(0f, 1f, 0f);
+    private Vector3 offSet = new Vector3(0f, 1f, 0f);
 
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stats
 
-        if (thisEnemy.distanceTo(player.transform) >= chaseRange)
+        if (thisEnemy.distanceTo(player.transform) >= chaseRange && !attackStarted)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
@@ -47,9 +47,7 @@ public class ExplosionAttackState : State
             aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
 
             //DoAttack(enemyStatSystem); //Replaced with animation below instead. The animation will call the attack method.
-            Debug.Log("Pre anim");
             thisEnemy.SendAnimation("Explosion Attack");
-            Debug.Log("Post anim");
             attackStarted = true;
         }
     }
