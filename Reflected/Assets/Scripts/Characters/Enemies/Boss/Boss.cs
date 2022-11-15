@@ -15,13 +15,15 @@ public class Boss : Enemy
     bool aggroed = false;
     [SerializeField] GameObject rotateBody;
     [SerializeField] List<Ability> abilities;
-    //[SerializeField] float timeBetweenAbilities;
     [SerializeField] float abilityTimer;
 
     bool rotateLock;
 
     protected override void Update()
     {
+        if (isDead)
+            return;
+
         float distance = Vector3.Distance(player.transform.position, transform.position);
 
         if (distance < aggroRange && !aggroed)
