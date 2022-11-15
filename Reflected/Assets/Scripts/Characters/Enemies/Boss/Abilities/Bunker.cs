@@ -63,7 +63,7 @@ public class Bunker : Ability
             yield return new WaitForSeconds(abilityDuration / amountOfBolts);
         }
 
-        GetComponent<Animator>().Play("Bunker Up");
+        //GetComponent<Animator>().Play("Bunker Up");
 
         yield return null;
     }
