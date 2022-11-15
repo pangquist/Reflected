@@ -46,6 +46,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetAoeAttackState();
                     agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
                     return;
                 }
                 break;

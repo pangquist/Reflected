@@ -127,11 +127,11 @@ public class Enemy : Character
         }
         else if (parent.tag == "Ranged")
         {
-            rangedAttackState.FireProjectile();
+            rangedAttackState.DoAttack();
         }
         else if (parent.tag == "AOE")
         {
-
+            aoeAttackState.DoAttack();
         }
         else if (parent.tag == "Explosion")
         {

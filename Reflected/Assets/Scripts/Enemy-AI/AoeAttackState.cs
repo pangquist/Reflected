@@ -24,6 +24,10 @@ public class AoeAttackState : State
     [SerializeField] private float fleeRange = 7f;
     [SerializeField] private float chaseRange = 20f;
 
+    //Variables for setting up aoe
+    private Transform firePoint;
+    private Vector3 playerPos;
+
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stats
@@ -52,18 +56,29 @@ public class AoeAttackState : State
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackRate)
         {
-            DoAttack(thisEnemy, player, enemyStatSystem);
+            //Set relevant stats (damage, projectile speed, )
+            attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
+            aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
+
+            //Setup parameters for projectile to use
+            firePoint = thisEnemy.firePoint;
+            playerPos = player.transform.position;
+
+            //DoAttack(thisEnemy, player, enemyStatSystem);
+
+            thisEnemy.SendAnimation("Fire AOE");
+
             attackTimer = 0f;
         }
     }
 
-    private void DoAttack(AiManager2 thisEnemy, Player player, EnemyStatSystem enemyStatSystem)
+    public void DoAttack(/*AiManager2 thisEnemy, Player player, EnemyStatSystem enemyStatSystem*/)
     {
-        //Set relevant stats (damage, projectile speed, )
-        attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
-        aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
+        GameObject currentAOE = Instantiate(aoeObject, playerPos, Quaternion.identity);
 
-        GameObject currentAOE = Instantiate(aoeObject, new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z), Quaternion.identity);
+        //new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z)   ^^^^^ istedet for playerpos
+
+
         if (currentAOE != null)
         {
             currentAOE.GetComponent<AOEScript>().SetUp(attackDamage, aoeSize);

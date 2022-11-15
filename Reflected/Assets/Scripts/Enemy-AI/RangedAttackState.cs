@@ -26,6 +26,7 @@ public class RangedAttackState : State
     [SerializeField] private float baseFleeRange = 7f;
     [SerializeField] private float baseChaseRange = 20f;
 
+    //Variables for setting up projectile
     private Transform firePoint;
     private Vector3 playerPos;
 
@@ -58,7 +59,6 @@ public class RangedAttackState : State
         agent.destination = thisEnemy.transform.position;
 
         attackTimer += Time.deltaTime;
-
         if (attackTimer >= attackRate)
         {
             
@@ -77,7 +77,7 @@ public class RangedAttackState : State
         }
     }
 
-    public void FireProjectile(/*AiManager2 thisEnemy, Player player, EnemyStatSystem enemyStatSystem*/)
+    public void DoAttack(/*AiManager2 thisEnemy, Player player, EnemyStatSystem enemyStatSystem*/)
     {
         //Instantiate the projectile and set up it variables.
         GameObject currentProjectile = Instantiate(projectileObject, firePoint.position, Quaternion.identity);
