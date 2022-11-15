@@ -67,6 +67,7 @@ public class AiManager2 : MonoBehaviour
         {
             case CombatBehavior.CloseCombat:
                 meleeAttackState = gameObject.GetComponent<MeleeAttackState>();
+                //SendAnimation("");
                 break;
             case CombatBehavior.RangedCombat:
                 rangedAttackState = gameObject.GetComponent<RangedAttackState>();
@@ -76,6 +77,7 @@ public class AiManager2 : MonoBehaviour
                 break;
             case CombatBehavior.ExplosionCombat:
                 explosionAttackState = gameObject.GetComponent<ExplosionAttackState>();
+                SendAnimation("Spawn to Idle");
                 break;
                 
         }
