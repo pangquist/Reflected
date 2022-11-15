@@ -12,23 +12,47 @@ using UnityEngine;
 public class Boss : Enemy
 {
     [Header("Boss Specifics")]
+    bool aggroed = false;
     [SerializeField] GameObject rotateBody;
     [SerializeField] List<Ability> abilities;
-    [SerializeField] float timeBetweenAbilities;
+    //[SerializeField] float timeBetweenAbilities;
     [SerializeField] float abilityTimer;
+
+    bool rotateLock;
 
     protected override void Update()
     {
+        float distance = Vector3.Distance(player.transform.position, transform.position);
+
+        if (distance < aggroRange && !aggroed)
+        {
+            anim.Play("Activation");
+            aggroed = true;
+        }
+
+        if (!aggroed)
+            return;
+
         AbilityTimer();
-        RotateTowardsPlayer();
+        if (!rotateLock)
+            StartCoroutine(_RotateTowardsPlayer());
+
         base.Update();
     }
 
-    public void RotateTowardsPlayer()
+    IEnumerator _RotateTowardsPlayer()
     {
         Vector3 direction = (player.transform.position - rotateBody.transform.position).normalized;
         direction.y = 0;
-        rotateBody.transform.rotation = Quaternion.LookRotation(direction);
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        while(Quaternion.Angle(rotateBody.transform.rotation, targetRotation) > 0.01f)
+        {
+            //Quaternion nextRotation = Quaternion.Lerp(rotateBody.transform.rotation, targetRotation, Time.deltaTime);
+            rotateBody.transform.rotation = Quaternion.RotateTowards(rotateBody.transform.rotation, targetRotation, Time.deltaTime);
+            yield return null;
+        }
+
+        yield return null;
     }
 
     public void AbilityTimer()
@@ -43,7 +67,7 @@ public class Boss : Enemy
             if (!chosenAbility.IsOnCooldown())
             {
                 chosenAbility.DoEffect();
-                abilityTimer = timeBetweenAbilities;
+                abilityTimer = chosenAbility.GetCastTime();
             }
         }
     }
@@ -52,4 +76,6 @@ public class Boss : Enemy
     {
         base.Awake();
     }
+
+    public void ToggleRotationLock() => rotateLock = !rotateLock;
 }

@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] bool movementLocked;
     [SerializeField] bool actionLocked;
+    [SerializeField] bool damageLocked;
     [SerializeField] bool dead;
 
     void Awake()
@@ -90,6 +91,8 @@ public class PlayerController : MonoBehaviour
 
         actionLocked = true;
         player.GetAnim().SetBool("actionLocked", true);
+
+        damageLocked = true;
     }
 
     public void UnlockPlayer()
@@ -99,6 +102,8 @@ public class PlayerController : MonoBehaviour
 
         actionLocked = false;
         player.GetAnim().SetBool("actionLocked", false);
+
+        damageLocked = false;
     }
 
     public void MovementUnlock()
@@ -143,6 +148,18 @@ public class PlayerController : MonoBehaviour
         actionLocked = false;
         player.GetAnim().SetBool("actionLocked", false);
     }
+
+    public void DamageLock()
+    {
+        damageLocked = true;
+    }
+
+    public void DamageUnlock()
+    {
+        damageLocked = false;
+    }
+
+    public bool DamageLocked() => damageLocked;
 
     public bool GetActionLock()
     {

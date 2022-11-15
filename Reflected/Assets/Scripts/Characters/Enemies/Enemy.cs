@@ -10,7 +10,7 @@ public class Enemy : Character
 
     [SerializeField] Vector3 combatTextOffset;
     [SerializeField] Canvas combatTextCanvas;
-    [SerializeField] float aggroRange;
+    [SerializeField] protected float aggroRange;
 
     [SerializeField] WeightedRandomList<GameObject> LootDropList;
     protected bool invurnable;
