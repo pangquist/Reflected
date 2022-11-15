@@ -23,6 +23,9 @@ public class ExplosionAttackState : State
     [SerializeField] private StatusEffectData dotData;
     [SerializeField] private StatusEffectData slowData;
 
+    //Offset of explosion position
+    Vector3 offSet = new Vector3(0f, 1f, 0f);
+
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stats
@@ -53,7 +56,7 @@ public class ExplosionAttackState : State
 
     public void DoAttack()
     {
-        GameObject currentExplosion = Instantiate(explosionObject, transform.position, Quaternion.identity);
+        GameObject currentExplosion = Instantiate(explosionObject, transform.position+offSet, Quaternion.identity);
         if (currentExplosion != null)
         {
             currentExplosion.GetComponent<ExplosionScript>().SetUp(aoeSize, dotData, slowData);

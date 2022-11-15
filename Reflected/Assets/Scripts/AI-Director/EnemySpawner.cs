@@ -93,7 +93,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (percentage <= spawnBias)
         {
-            enemyToSpawn = enemyClose;
+            enemyToSpawn = enemyDOT;
         }
         else
         {
