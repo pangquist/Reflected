@@ -94,16 +94,18 @@ public class AiDirector : MonoBehaviour
             lootPool.IncreaseRarity();
         }
 
+        minSpawnAmount -= waveAmount;
+        maxSpawnAmount -= waveAmount;
+
         amountOfEnemiesToSpawn = Random.Range(minSpawnAmount, maxSpawnAmount);
     }
 
     private void startDiffuculty()
     {
         spawntime = 2;
-        minSpawnAmount = 3;
+        minSpawnAmount = 4;
         maxSpawnAmount = 6;
     }
-
     private void CheckRoomActivity()
     {
         if (activeRoom) // Player is in a room with enemies
@@ -138,13 +140,17 @@ public class AiDirector : MonoBehaviour
         timeToClearRoom = 0;
     }
     public void EnterRoom() //called when a new room activates (from Room-script)
-    {
+    {  
         activeRoom = true;
         aliveEnemiesInRoom = 0;
         checkDifficulty();
         aliveEnemiesInRoom = amountOfEnemiesToSpawn * waveAmount;
 
         enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn, waveAmount, EnemyStatModifier());
+    }
+    public void EnterBossRoom()
+    {
+        Debug.Log("Activate Boss");
     }
     public void killEnemyInRoom() //called when enemy dies (from enemy-script)
     {
