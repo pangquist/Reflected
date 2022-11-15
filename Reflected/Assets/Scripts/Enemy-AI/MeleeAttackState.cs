@@ -24,7 +24,7 @@ public class MeleeAttackState : State
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stat
-        attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed(); //Right now the attack speed increases but decreases the attack rate. High attack rate = low attack speed.
+        attackRate = baseAttackRate / enemyStatSystem.GetAttackSpeed();
         //Attack size?
 
         if (thisEnemy.distanceTo(player.transform) >= chaseRange)

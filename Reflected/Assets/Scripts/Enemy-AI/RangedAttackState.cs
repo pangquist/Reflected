@@ -29,7 +29,7 @@ public class RangedAttackState : State
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stats
-        attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed(); //Right now the attack speed increases but decreases the attack rate. High attack rate = low attack speed.
+        attackRate = baseAttackRate / enemyStatSystem.GetAttackSpeed();
         //Attack range?
 
 
