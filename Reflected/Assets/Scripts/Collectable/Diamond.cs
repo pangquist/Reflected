@@ -11,6 +11,11 @@ public class Diamond : MonoBehaviour, ICollectable, IBuyable
     //The lines above allows for the action to be handled adding the item to the inventory
     //using ascriptable object in the collectable folder
 
+    private void Start()
+    {
+        Destroy(gameObject, 30);
+    }
+
     public void Collect()
     {
         Debug.Log("You collected a Diamond");

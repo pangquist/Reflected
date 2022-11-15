@@ -55,7 +55,7 @@ public abstract class Chest : MonoBehaviour
         }
     }
 
-    protected bool IsOpen()
+    protected bool IsOpen() //Not used yet
     {
         return animator.GetCurrentAnimatorStateInfo(0).IsName("ChestOpen");
     }
