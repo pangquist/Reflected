@@ -77,7 +77,7 @@ public class ObjectPlacer : MonoBehaviour
                             }
                         }
                         if (canPlace)
-                            Instantiate(pair.item, point, Quaternion.identity, room.transform);
+                            Instantiate(pair.item, point, Quaternion.identity, room.DecorationsChild.transform);
                     }
                 }
             }
@@ -101,7 +101,7 @@ public class ObjectPlacer : MonoBehaviour
         foreach (TerrainType terrain in terrainTypes)
         {
             terrainHeights.Add(terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier());
-            Debug.Log(terrainHeights[terrainHeights.Count - 1]);
+            Debug.Log(terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier());
         }
 
         for (float i = start.x; i < end.x; i++)

@@ -9,6 +9,7 @@ public class Room : MonoBehaviour
 
     [SerializeField] private Transform pathsChild;
     [SerializeField] private Transform terrainChild;
+    [SerializeField] private Transform decorationsChild;
 
     [Header("Read Only")]
 
@@ -26,6 +27,7 @@ public class Room : MonoBehaviour
 
     public Transform PathsChild => pathsChild;
     public Transform TerrainChild => terrainChild;
+    public Transform DecorationsChild => decorationsChild;
 
     public Rect Rect => rect;
     public bool Cleared => cleared;
