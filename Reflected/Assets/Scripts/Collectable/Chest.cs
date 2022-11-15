@@ -7,6 +7,8 @@ public abstract class Chest : MonoBehaviour
     [SerializeField] protected WeightedRandomList<GameObject> powerups;
     [SerializeField] protected WeightedRandomList<Rarity> rarityTiers;
     [SerializeField] protected List<GameObject> pickablePowerUps;
+    [SerializeField] protected List<GameObject> chestPrefab;
+    [SerializeField] protected List<Animation> animations;
     [SerializeField] protected Transform itemHolder;
     protected GameObject spawnedObject;
     //protected GameObject itemToSpawn;
@@ -22,6 +24,7 @@ public abstract class Chest : MonoBehaviour
     {
         trueDimension = DimensionManager.True;
         animator = GetComponent<Animator>();
+        //animator.
         powerups = FindObjectOfType<LootPoolManager>().GetPowerupPool(trueDimension);
         myRarity = FindObjectOfType<LootPoolManager>().GetRandomRarity();
         SetItems();

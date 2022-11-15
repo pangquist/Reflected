@@ -78,4 +78,12 @@ public class Boss : Enemy
     }
 
     public void ToggleRotationLock() => rotateLock = !rotateLock;
+
+    public override void LootDrop(Transform lootDropPosition)
+    {
+        LootDropList = GameObject.Find("LootPoolManager").GetComponent<LootPoolManager>().GetCollectablePool();
+
+        Vector3 spawnPosition = lootDropPosition.position + new Vector3(0, 1, 0);
+        Instantiate(LootDropList.GetItem(LootDropList.Count - 1), spawnPosition, Quaternion.Euler(0, 0, 0));
+    }
 }

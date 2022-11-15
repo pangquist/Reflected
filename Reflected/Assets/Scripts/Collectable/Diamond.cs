@@ -13,7 +13,7 @@ public class Diamond : MonoBehaviour, ICollectable, IBuyable
 
     private void Start()
     {
-        Destroy(gameObject, 30);
+        //Destroy(gameObject, 30);
     }
 
     public void Collect()

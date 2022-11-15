@@ -12,7 +12,7 @@ public class Enemy : Character
     [SerializeField] Canvas combatTextCanvas;
     [SerializeField] protected float aggroRange;
 
-    [SerializeField] WeightedRandomList<GameObject> LootDropList;
+    [SerializeField] protected WeightedRandomList<GameObject> LootDropList;
     protected bool invurnable;
     GameObject parent;
     protected Player player;
@@ -106,7 +106,7 @@ public class Enemy : Character
         damage += damage * extraDifficultyPercentage;
     }
 
-    public void LootDrop(Transform lootDropPosition)
+    public virtual void LootDrop(Transform lootDropPosition)
     {
         LootDropList = GameObject.Find("LootPoolManager").GetComponent<LootPoolManager>().GetCollectablePool();
 
