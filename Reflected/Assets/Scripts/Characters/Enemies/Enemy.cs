@@ -127,7 +127,7 @@ public class Enemy : Character
         }
         else if (parent.tag == "Ranged")
         {
-
+            rangedAttackState.FireProjectile();
         }
         else if (parent.tag == "AOE")
         {

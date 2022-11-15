@@ -26,6 +26,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetMeleeAttackState();
                     agent.isStopped = true;
+
                     return;
                 }
                 break;
@@ -35,6 +36,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetRangedAttackState();
                     agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
                     return;
                 }
                 break;

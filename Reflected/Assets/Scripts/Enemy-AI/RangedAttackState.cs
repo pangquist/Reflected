@@ -26,18 +26,21 @@ public class RangedAttackState : State
     [SerializeField] private float baseFleeRange = 7f;
     [SerializeField] private float baseChaseRange = 20f;
 
+    private Transform firePoint;
+    private Vector3 playerPos;
+
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stats
         attackRate = baseAttackRate / enemyStatSystem.GetAttackSpeed();
         //Attack range?
 
-
         //If too close, move away from target.
         if (thisEnemy.distanceTo(player.transform) <= baseFleeRange)
         {
             thisEnemy.SetMoveAwayState();
             agent.isStopped = false;
+            thisEnemy.SendAnimation("Walk Forward In Place");
             return;
         }
 
@@ -46,6 +49,7 @@ public class RangedAttackState : State
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
+            thisEnemy.SendAnimation("Walk Forward In Place");
             return;
         }
 
@@ -54,24 +58,32 @@ public class RangedAttackState : State
         agent.destination = thisEnemy.transform.position;
 
         attackTimer += Time.deltaTime;
+
         if (attackTimer >= attackRate)
         {
-            FireProjectile(thisEnemy, player, enemyStatSystem);
+            
+            //Set relevant stats (damage, projectile speed, )
+            attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
+            projectileForce = baseProjectileForce;
+
+            //Setup parameters for projectile to use
+            firePoint = thisEnemy.firePoint;
+            playerPos = player.transform.position;
+
+            //FireProjectile(thisEnemy, player, enemyStatSystem);
+
+            thisEnemy.SendAnimation("Projectile Attack");
             attackTimer = 0f;
         }
     }
 
-    private void FireProjectile(AiManager2 thisEnemy, Player player, EnemyStatSystem enemyStatSystem)
+    public void FireProjectile(/*AiManager2 thisEnemy, Player player, EnemyStatSystem enemyStatSystem*/)
     {
-        //Set relevant stats (damage, projectile speed, )
-        attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
-        projectileForce = baseProjectileForce;
-        
         //Instantiate the projectile and set up it variables.
-        GameObject currentProjectile = Instantiate(projectileObject, thisEnemy.firePoint.position, Quaternion.identity);
+        GameObject currentProjectile = Instantiate(projectileObject, firePoint.position, Quaternion.identity);
         if (currentProjectile != null)
         {
-            currentProjectile.GetComponent<ProjectileScript>().SetUp(player.transform.position + offSet, thisEnemy.firePoint.position, projectileForce, attackDamage);
+            currentProjectile.GetComponent<ProjectileScript>().SetUp(playerPos + offSet, firePoint.position, projectileForce, attackDamage);
         }
     }
 

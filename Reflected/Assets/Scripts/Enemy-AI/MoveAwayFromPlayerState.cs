@@ -34,6 +34,8 @@ public class MoveAwayFromPlayerState : State
                 if (thisEnemy.distanceTo(player.transform) >= rangedFleeRange)
                 {
                     thisEnemy.SetRangedAttackState();
+                    agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
                     return;
                 }
                 break;
@@ -42,6 +44,8 @@ public class MoveAwayFromPlayerState : State
                 if (thisEnemy.distanceTo(player.transform) >= aoeFleeRange)
                 {
                     thisEnemy.SetAoeAttackState();
+                    agent.isStopped = true;
+                    //thisEnemy.SendAnimation("Idle");
                     return;
                 }
                 break;

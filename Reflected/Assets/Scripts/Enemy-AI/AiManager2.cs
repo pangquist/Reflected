@@ -77,7 +77,6 @@ public class AiManager2 : MonoBehaviour
                 break;
             case CombatBehavior.ExplosionCombat:
                 explosionAttackState = gameObject.GetComponent<ExplosionAttackState>();
-                SendAnimation("Spawn to Idle");
                 break;
                 
         }
@@ -117,7 +116,6 @@ public class AiManager2 : MonoBehaviour
 
     public void SendAnimation(string animName)
     {
-        Debug.Log("SendAnim");
         me.PlayAnimation(animName);
     }
 }
