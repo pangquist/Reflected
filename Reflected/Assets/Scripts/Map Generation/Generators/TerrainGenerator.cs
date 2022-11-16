@@ -57,6 +57,8 @@ public class TerrainGenerator : MonoBehaviour
         terrainChunkPrefab.GetComponentInChildren<MeshCollider>().sharedMesh = mesh;
         terrainChunkPrefab.transform.GetChild(0).position = new Vector3(MapGenerator.ChunkSize * 0.5f, 0, MapGenerator.ChunkSize * 0.5f);
 
+        List<GameObject> chunks = new List<GameObject>();
+
         for (int xChunkIndex = 0; xChunkIndex < map.SizeX; xChunkIndex++)
         {
             for (int zChunkIndex = 0; zChunkIndex < map.SizeZ; zChunkIndex++)
@@ -80,6 +82,7 @@ public class TerrainGenerator : MonoBehaviour
                         // Instantiate a new TerrainChunk
                         GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.TerrainChild);
                         GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>(), room);
+                        chunks.Add(terrainChunk);
                         break;
                     }
                 }
@@ -98,19 +101,23 @@ public class TerrainGenerator : MonoBehaviour
                         // Instantiate a new TerrainChunk
                         GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), chamber.TerrainChild);
                         GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>(), chamber.Room1, chamber.Room2);
+                        chunks.Add(terrainChunk);
                         break;
                     }
                 }
             }
         }
+
+        BuildFullTexture(map);
     }
 
     private void GenerateTerrainChunk(TerrainChunk terrainChunk, Room room1, Room room2 = null)
     {
         float[,] heightMap = GenerateHeightMap(terrainChunk, room1, room2);
 
-        Texture2D chunkTexture = BuildTexture(heightMap, terrainChunk);
-        terrainChunk.MeshRenderer().material.mainTexture = chunkTexture;
+        //Texture2D chunkTexture = BuildTexture(heightMap, terrainChunk);
+        //terrainChunk.MeshRenderer().material.mainTexture = chunkTexture;
+        //terrainChunk.MeshRenderer().material.SetTexture("_PathLayout_Texture", chunkTexture);
         UpdateMeshVertices(heightMap, terrainChunk, room1, room2);
     }
 
@@ -205,6 +212,81 @@ public class TerrainGenerator : MonoBehaviour
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private void BuildFullTexture(Map map)
+    {
+        //Color[] colorMapNew = new Color[map.SizeX * map.SizeZ * 10000];
+
+        foreach (Room room in map.Rooms)
+        {
+            TerrainChunk[] chunks = room.GetComponentsInChildren<TerrainChunk>();
+
+            int chunkSide = (int)Mathf.Sqrt(chunks[0].MeshFilter().mesh.vertices.Length);
+            int texSide = MapGenerator.ChunkSize * chunks.Length;
+            Color[] colorMap = new Color[texSide * texSide];
+
+            float worldPixelSize = (float)MapGenerator.ChunkSize / chunkSide;
+
+            // Get List of relevant paths
+
+            List<PathCreator> paths = room.Paths;
+            int zStart = 0;
+            int xStart = 0;
+            int zTemp = 0;
+            int xTemp = 0;
+
+            // Determine color of each pixel
+
+            foreach (TerrainChunk chunk in chunks)
+            {
+                for (int zIndex = zStart; zIndex < (zStart + chunkSide) ; zIndex++)
+                {
+                    for (int xIndex = xStart; xIndex < (xStart + chunkSide); xIndex++)
+                    {
+                        // Transform the 2D map index is an Array index
+                        int colorIndex = zIndex * chunkSide + xIndex;
+
+                        // Returns whether or not this pixel should be a path
+                        bool CheckPaths()
+                        {
+                            // Calculate world position of pixel
+                            Vector3 pixelPosition = new Vector3(
+                                chunk.transform.position.x - (xIndex - xStart + 0.5f) * worldPixelSize,
+                                mapGenerator.PathGenerator.Level,
+                                chunk.transform.position.z - (zIndex - zStart + 0.5f) * worldPixelSize);
+
+                            // Check paths
+                            foreach (PathCreator path in paths)
+                                if (Vector3.Distance(pixelPosition, path.path.GetClosestPointOnPath(pixelPosition)) < mapGenerator.PathGenerator.Radius)
+                                    return true;
+                            return false;
+                        }
+
+                        // Check for paths
+                        if (CheckPaths())
+                            colorMap[colorIndex] = Color.white;
+                        else
+                            colorMap[colorIndex] = Color.black;
+
+                        zTemp = zIndex;
+                        xTemp = xIndex;
+                    }
+                }
+                zStart = zTemp;
+                xStart = xTemp;
+            }
+            // Create a new texture and set its pixel colors
+            Texture2D chunkTexture = new Texture2D(texSide, texSide);
+            chunkTexture.wrapMode = TextureWrapMode.Clamp;
+            chunkTexture.SetPixels(colorMap);
+            chunkTexture.Apply();
+            foreach (TerrainChunk chunk in chunks)
+            {
+                chunk.MeshRenderer().material.SetTexture("_PathLayout_Texture", chunkTexture);
+                chunk.MeshRenderer().material.SetFloat("_PathTiles", 0.00001f * chunks.Length);
             }
         }
     }

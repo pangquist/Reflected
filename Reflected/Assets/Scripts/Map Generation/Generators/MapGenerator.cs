@@ -132,7 +132,7 @@ public class MapGenerator : MonoBehaviour
         BakeNavMesh(map.GetComponent<NavMeshSurface>());
         player.SetActive(true);
          
-        objectPlacer.Place(map, pathGenerator.Radius);
+        //objectPlacer.Place(map, pathGenerator.Radius);
 
         // Log
 

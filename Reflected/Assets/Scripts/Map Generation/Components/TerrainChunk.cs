@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,4 +12,9 @@ public class TerrainChunk : MonoBehaviour
     public MeshRenderer MeshRenderer() { return meshRenderer; }
     public MeshFilter MeshFilter() { return meshFilter; }
     public MeshCollider MeshCollider() { return meshCollider; }
+
+    public static explicit operator TerrainChunk(GameObject v)
+    {
+        throw new NotImplementedException();
+    }
 }
