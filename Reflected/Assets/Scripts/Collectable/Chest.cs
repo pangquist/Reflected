@@ -7,10 +7,11 @@ public abstract class Chest : MonoBehaviour
     [SerializeField] protected WeightedRandomList<GameObject> powerups;
     [SerializeField] protected WeightedRandomList<Rarity> rarityTiers;
     [SerializeField] protected List<GameObject> pickablePowerUps;
-    [SerializeField] protected List<GameObject> chestPrefab;
+    [SerializeField] protected List<GameObject> chestPrefabs;
     [SerializeField] protected List<Animation> animations;
     [SerializeField] protected Transform itemHolder;
     protected GameObject spawnedObject;
+    protected GameObject chestPrefab;
     //protected GameObject itemToSpawn;
     [SerializeField] protected Rarity myRarity;
     protected int numberOfPickablePowerups = 2;
@@ -22,11 +23,12 @@ public abstract class Chest : MonoBehaviour
 
     protected virtual void Start()
     {
-        trueDimension = DimensionManager.True;
-        animator = GetComponent<Animator>();
+        trueDimension = DimensionManager.True;        
         //animator.
         powerups = FindObjectOfType<LootPoolManager>().GetPowerupPool(trueDimension);
         myRarity = FindObjectOfType<LootPoolManager>().GetRandomRarity();
+        //SetChest();
+        animator = GetComponentInChildren<Animator>();
         SetItems();
         //itemToSpawn = lootTable.GetRandom().GetItem();
     }
@@ -39,8 +41,7 @@ public abstract class Chest : MonoBehaviour
         }
         else
         {
-            animator.SetTrigger("close");
-            
+            animator.SetTrigger("close");            
         }
     }
 
@@ -99,6 +100,25 @@ public abstract class Chest : MonoBehaviour
                 pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties(myRarity);
             }
                        
+        }
+    }
+
+    protected void SetChest()
+    {
+        switch (myRarity.rarity)
+        {
+            case "Epic":
+                chestPrefab = chestPrefabs[0];
+                break;
+            case "Rare":
+                chestPrefab = chestPrefabs[1];
+                break;
+            case "Common":
+                chestPrefab = chestPrefabs[2];
+                break;
+            default:
+                chestPrefab = chestPrefabs[0];
+                break;
         }
     }
 }

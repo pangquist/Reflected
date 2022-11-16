@@ -33,7 +33,7 @@ public class Shop : MonoBehaviour
 
         //rarityTiers = FindObjectOfType<LootPoolManager>().GetRarityList();
         PopulateShop();
-        Destroy(gameObject, 200);
+        //Destroy(gameObject, 200);
     }
 
     public bool BuyItem(int index) //Have to send in an index here for the shop to give you that item
