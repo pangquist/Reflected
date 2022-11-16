@@ -43,7 +43,8 @@ public class BoltBlast : Ability
             if (spawnPositionIndex == spawnPositions.Count)
                 spawnPositionIndex = 0;
 
-            Bolt newBolt = Instantiate(bolt, spawnPosition, Quaternion.identity).GetComponent<Bolt>();
+            Bolt newBolt = Instantiate(bolt, spawnPosition, Quaternion.identity).GetComponentInChildren<Bolt>();
+            Transform parent = newBolt.gameObject.transform.parent.transform;
 
             player = FindObjectOfType<Player>().GetComponent<Player>();
 
@@ -53,6 +54,8 @@ public class BoltBlast : Ability
                 player.transform.position.x + randomOffset, 
                 player.transform.position.y, 
                 player.transform.position.z + randomOffset);
+            
+            parent.rotation = Quaternion.LookRotation(landPosition);
 
             Vector3 diff = landPosition - spawnPosition;
 

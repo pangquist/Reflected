@@ -105,7 +105,6 @@ public class Character : MonoBehaviour, IEffectable
             {
                 movementPenalty *= (1 - status.totalSlow);
             }
-
         }
         //Debug.Log("Movement penalty total: " + movementPenalty);
         return movementPenalty;
