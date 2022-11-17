@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class Enemy : Character
 {
-    [SerializeField] Image healthBar;
+    [SerializeField] protected Image healthBar;
 
-    [SerializeField] Vector3 combatTextOffset;
-    [SerializeField] Canvas combatTextCanvas;
+    [SerializeField] protected Vector3 combatTextOffset;
+    [SerializeField] protected Canvas combatTextCanvas;
     [SerializeField] protected float aggroRange;
 
     [SerializeField] WeightedRandomList<GameObject> LootDropList;
@@ -95,7 +95,7 @@ public class Enemy : Character
         
         LootDrop(transform);
         //player.RemoveEnemy(this);
-        anim.Play("Death");
+        //anim.Play("Death");
         base.Die();
     }
 

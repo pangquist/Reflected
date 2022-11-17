@@ -16,6 +16,7 @@ public class Boss : Enemy
     [SerializeField] GameObject rotateBody;
     [SerializeField] List<Ability> abilities;
     [SerializeField] float abilityTimer;
+    [SerializeField] List<Root> roots;
 
     bool rotateLock;
 
@@ -80,4 +81,12 @@ public class Boss : Enemy
     }
 
     public void ToggleRotationLock() => rotateLock = !rotateLock;
+
+    public void RemoveRoot(Root root)
+    {
+        roots.Remove(root);
+
+        if (roots.Count == 0)
+            Die();
+    }
 }
