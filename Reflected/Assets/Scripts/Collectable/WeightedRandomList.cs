@@ -22,9 +22,9 @@ public class WeightedRandomList<T>
             this.weight = weight;
         }
 
-        public void IncreaseWeight()
+        public void IncreaseWeight(float weightIncrease)
         {
-            this.weight++;
+            this.weight += weightIncrease;
         }
     }
 
@@ -81,8 +81,8 @@ public class WeightedRandomList<T>
         list[index].SetWeight(weight);
     }
 
-    public void IncreaseWeight(int index)
+    public void IncreaseWeight(int index, float weightIncrease)
     {
-        list[index].IncreaseWeight();
+        list[index].IncreaseWeight(weightIncrease);
     }
 }

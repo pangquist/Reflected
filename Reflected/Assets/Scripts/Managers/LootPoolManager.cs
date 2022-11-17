@@ -18,15 +18,6 @@ public class LootPoolManager : MonoBehaviour
         {
             powerupPickAmount.Add(pair.item.GetComponent<InteractablePowerUp>().powerUpEffect, 0);
         }
-        //for (int i = 0; i < powerupPool.Count; i++)
-        //{
-        //    powerupPickAmount.Add(powerupPool.list[i].item.GetComponent<InteractablePowerUp>().powerUpEffect, 0);
-        //}
-    }
-
-    private void UpdateWeights()
-    {
-        
     }
 
     public void SetRarityTiers(int commonWeight, int rareWeight, int epicWeight)
@@ -38,8 +29,9 @@ public class LootPoolManager : MonoBehaviour
 
     public void IncreaseRarity()
     {
-        rarityTiers.IncreaseWeight(1);
-        rarityTiers.IncreaseWeight(2);
+        rarityTiers.IncreaseWeight(1, 1);
+        rarityTiers.IncreaseWeight(2, 2);
+        rarityTiers.IncreaseWeight(3, 2);
     }
 
     private void OnEnable()
@@ -55,7 +47,19 @@ public class LootPoolManager : MonoBehaviour
     private void AddPowerupPickRate(PowerUpEffect powerupEffectData)
     {
         powerupPickAmount[powerupEffectData] += 1;
-        //Debug.Log(powerupPickAmount[powerupEffectData]);
+        float average = AveragePickRate();
+        if(powerupPickAmount[powerupEffectData] >= average)
+        {
+            foreach (var pair in powerupPool.list)
+            {
+                if (powerupEffectData == pair.item.GetComponent<InteractablePowerUp>().powerUpEffect)
+                {
+                    pair.SetWeight(pair.weight / 2);
+                }
+
+            }
+        }
+
     }
 
     public WeightedRandomList<GameObject> GetPowerupPool(bool dimension)
@@ -87,5 +91,16 @@ public class LootPoolManager : MonoBehaviour
     public int GetAmountPicked(PowerUpEffect powerupEffectData)
     {
         return powerupPickAmount[powerupEffectData];
+    }
+
+    private float AveragePickRate()
+    {
+        float sum = 0;
+        foreach (var item in powerupPickAmount)
+        {
+            sum += item.Value;
+        }
+
+        return sum / powerupPickAmount.Count;        
     }
 }
