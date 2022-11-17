@@ -71,7 +71,7 @@ public class AiDirectorEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("temporaryCurrency"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("numberOfEnemiesKilled"));
         EditorGUILayout.Space();
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("chest"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("chests"));
     }
 
     void DisplayActiveRoomInfo()

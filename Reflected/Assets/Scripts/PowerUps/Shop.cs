@@ -21,15 +21,15 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         //animator = GetComponent<Animator>();
-        //lootTablePowerUps = FindObjectOfType<LootPoolManager>().GetPowerupPool();
-        //lootTableCollectables = FindObjectOfType<LootPoolManager>().GetCollectablePool();
-        //foreach (var pair in lootTableCollectables.list)
-        //{
-        //    if (pair.item.GetComponent<IBuyable>() == null)
-        //    {
-        //        pair.weight = 0;
-        //    }
-        //}
+        lootTablePowerUps = FindObjectOfType<LootPoolManager>().GetPowerupPool();
+        lootTableCollectables = FindObjectOfType<LootPoolManager>().GetCollectablePool();
+        foreach (var pair in lootTableCollectables.list)
+        {
+            if (pair.item.GetComponent<IBuyable>() == null)
+            {
+                pair.weight = 0;
+            }
+        }
 
         //rarityTiers = FindObjectOfType<LootPoolManager>().GetRarityList();
         PopulateShop();
@@ -40,7 +40,6 @@ public class Shop : MonoBehaviour
     {
         //The index you give should be put in on line 37 and 38
         inventory = FindObjectOfType<Inventory>();
-        //Inventory inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         Debug.Log("Trying to buy");
         if (inventory)
         {

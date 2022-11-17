@@ -21,6 +21,7 @@ public class AiDirector : MonoBehaviour
     [SerializeField] float timeToClearRoom;
     [SerializeField] float avergaeTimeToClearRoom;
     List<float> clearTimesList = new List<float>();
+    [SerializeField] List<GameObject> chests;
 
     //Map-stats
     [SerializeField] int numberOfRoomsCleared;
@@ -35,9 +36,9 @@ public class AiDirector : MonoBehaviour
     [SerializeField] int temporaryCurrency;
 
 
-    EnemySpawner enemySpawner;
-    [SerializeField] GameObject chest;
+    EnemySpawner enemySpawner;    
     LootPoolManager lootPool;
+    Rarity currentRarity;
 
     // Properties
 
@@ -162,7 +163,24 @@ public class AiDirector : MonoBehaviour
     }
     private void SpawnChest()
     {
+        currentRarity = lootPool.GetRandomRarity();
         Vector3 spawnPosition = player.transform.position + new Vector3(5, 3, 0);
-        Instantiate(chest, spawnPosition, Quaternion.Euler(0, 0, 0));
+        switch (currentRarity.rarity)
+        {
+            case "Common":
+                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;
+            case "Rare":
+                Instantiate(chests[1], spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;                
+            case "Epic":
+                Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;                      
+            default:
+                Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;
+        }
+        
+        
     }
 }
