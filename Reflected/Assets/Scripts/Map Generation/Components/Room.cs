@@ -20,6 +20,7 @@ public class Room : MonoBehaviour
     [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private List<PathCreator> paths;
     [ReadOnly][SerializeField] private List<Vector3> pathPoints;
+    [ReadOnly][SerializeField] private List<Structure> structures;
      
     private static Map map;
 
@@ -36,23 +37,7 @@ public class Room : MonoBehaviour
     public List<Chamber> Chambers => chambers;
     public List<PathCreator> Paths => paths;
     public List<Vector3> PathPoints => pathPoints;
-
-    private void Awake()
-    {
-        TerrainGenerator.Finished.AddListener(MoveShopStructure);
-    }
-
-    private void MoveShopStructure()
-    {
-        if (type == RoomType.Shop)
-        {
-            Vector3 shopPosition = new Vector3(rect.center.x, 100f, rect.center.y);
-            RaycastHit raycastHit;
-            Physics.Raycast(shopPosition, Vector3.down, out raycastHit);
-            shopPosition.y = raycastHit.point.y;
-            transform.GetComponentInChildren<Shop>().transform.position = shopPosition;
-        }
-    }
+    public List<Structure> Structures => structures;
 
     public static void StaticInitialize(Map map)
     {

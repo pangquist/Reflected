@@ -40,7 +40,7 @@ public class ObjectPlacer : MonoBehaviour
 
     private void PlaceDecorations(Room room)
     {
-        List<Vector3> raycastOrigins = CreateRayCastPoints(room, mapGenerator.PathGenerator.Radius);
+        List<Vector3> raycastOrigins = CreateRayCastPoints(room, PathGenerator.Radius);
         Rect center = new Rect(room.Rect.position + room.Rect.size / 4, room.Rect.size / 2);
         TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
 
@@ -76,7 +76,7 @@ public class ObjectPlacer : MonoBehaviour
 
                                         foreach (Collider collider in closeObjects)
                                         {
-                                            if (collider.gameObject.GetComponent<NavMeshObstacle>())
+                                            if (collider.gameObject.GetComponent<NavMeshObstacle>() || collider.transform.parent.parent.GetComponent<Structure>())
                                             {
                                                 canPlace = false;
                                             }

@@ -160,18 +160,11 @@ public class TerrainGenerator : MonoBehaviour
         ModifyVerticesUsingPaths(terrainChunk, ref meshVertices, room1, room2);
 
         // update the vertices in the mesh and update its properties
-        terrainChunk.MeshFilter().mesh.vertices = meshVertices;
-        terrainChunk.MeshFilter().mesh.RecalculateBounds();
-        terrainChunk.MeshFilter().mesh.RecalculateNormals();
-
-        // update the mesh collider
-        terrainChunk.MeshCollider().sharedMesh = terrainChunk.MeshFilter().mesh;
+        terrainChunk.UpdateMesh(ref meshVertices);
     }
 
     private void ModifyVerticesUsingPaths(TerrainChunk terrainChunk, ref Vector3[] meshVertices, Room room1, Room room2)
     {
-        Debug.Log("Flattening");
-        int verticesSquared = (int)Mathf.Sqrt(meshVertices.Length);
         Vector3 offset = new Vector3(MapGenerator.ChunkSize * 0.5f, 0, MapGenerator.ChunkSize * 0.5f);
         Matrix4x4 matrix = terrainChunk.transform.localToWorldMatrix;
 
@@ -208,42 +201,6 @@ public class TerrainGenerator : MonoBehaviour
                         meshVertices[i].y += adaption;
                     }
                 }
-            }
-        }
-    }
-
-    private void FlattenTerrain(TerrainChunk terrainChunk, ref Vector3[] meshVertices, Vector2 origin, float innerRadius, float outerRadius)
-    {
-        Vector3 offset = new Vector3(MapGenerator.ChunkSize * 0.5f, 0, MapGenerator.ChunkSize * 0.5f);
-        Matrix4x4 matrix = terrainChunk.transform.localToWorldMatrix;
-        Vector3 vertexWorldPos;
-        float distance, adaption, adaptionAmount;
-
-        // determine level
-
-        RaycastHit raycastHit;
-        Physics.Raycast(new Vector3(origin.x, 100f, origin.y), Vector3.down, out raycastHit);
-        float level = raycastHit.point.y;
-
-        // flatten vertices
-
-        for (int i = 0; i < meshVertices.Length; ++i)
-        {
-            vertexWorldPos = matrix.MultiplyPoint3x4(meshVertices[i]) - offset;
-            distance = Vector2.Distance(vertexWorldPos.XZ(), origin);
-
-            if (distance < outerRadius)
-            {
-                // how much to affect the vertex based of its distance to origin
-                adaptionAmount = (distance - innerRadius) / (outerRadius - innerRadius);
-                adaptionAmount = -Mathf.Clamp01(adaptionAmount) + 1f;
-                Debug.Log(adaptionAmount.ToString("0.00"));
-
-                // the final height adaption
-                adaption = (level - meshVertices[i].y) * adaptionAmount;
-
-                // apply adaption
-                meshVertices[i].y += adaption;
             }
         }
     }
@@ -290,14 +247,14 @@ public class TerrainGenerator : MonoBehaviour
 
                     // Check paths
                     foreach (PathCreator path in paths)
-                        if (Vector2.Distance(pixelPosition.XZ(), path.path.GetClosestPointOnPath(pixelPosition).XZ()) < mapGenerator.PathGenerator.Radius)
+                        if (Vector2.Distance(pixelPosition.XZ(), path.path.GetClosestPointOnPath(pixelPosition).XZ()) < PathGenerator.Radius)
                             return true;
                     return false;
                 }
 
                 // Check for paths
                 if (CheckPaths())
-                    colorMap[colorIndex] = mapGenerator.PathGenerator.Color;
+                    colorMap[colorIndex] = PathGenerator.Color;
 
                 // Or check height
                 else

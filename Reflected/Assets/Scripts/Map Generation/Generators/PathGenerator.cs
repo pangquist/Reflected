@@ -27,9 +27,16 @@ public class PathGenerator : MonoBehaviour
 
     // Properties
 
-    public float Level => level;
-    public float Radius => radius;
-    public Color Color => color;
+    public static float Level { get; private set; }
+    public static float Radius { get; private set; }
+    public static Color Color { get; private set; }
+
+    private void Awake()
+    {
+        Level = level;
+        Radius = radius;
+        Color = color;
+    }
 
     public void Generate(Map map)
     {

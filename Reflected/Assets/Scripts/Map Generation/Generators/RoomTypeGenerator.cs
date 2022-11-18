@@ -29,8 +29,6 @@ public class RoomTypeGenerator : MonoBehaviour
 
     [Header("Shop Room")]
 
-    [SerializeField] GameObject shopStructurePrefab;
-
     [SerializeField] private int nrOfShopRooms;
 
     [Range(0f, 1f)]
@@ -200,11 +198,6 @@ public class RoomTypeGenerator : MonoBehaviour
 
             shopRoom.Key.SetType(RoomType.Shop);
             shopRooms.Add(shopRoom.Key);
-
-            // Instantiate shop structure
-
-            Transform shop = Instantiate(shopStructurePrefab, shopRoom.Key.transform).transform;
-            shop.position = new Vector3(shopRoom.Key.Rect.center.x, 0, shopRoom.Key.Rect.center.y);
         }
     }
 }
