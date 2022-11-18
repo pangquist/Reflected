@@ -161,6 +161,8 @@ public class Character : MonoBehaviour, IEffectable
     {
         anim.Play(animName);
     }
+
+    public bool Dead() => isDead;
 }
 
 [System.Serializable]

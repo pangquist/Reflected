@@ -14,9 +14,14 @@ public class Boss : Enemy
     [Header("Boss Specifics")]
     bool aggroed = false;
     [SerializeField] GameObject rotateBody;
+
+    Ability lastAbility;
     [SerializeField] List<Ability> abilities;
     [SerializeField] float abilityTimer;
+    [SerializeField] List<Root> roots;
+    [SerializeField] Canvas healthBarCanvas;
 
+    bool abilityLock;
     bool rotateLock;
 
     protected override void Update()
@@ -30,6 +35,7 @@ public class Boss : Enemy
         {
             anim.Play("Activation");
             aggroed = true;
+            healthBarCanvas.gameObject.SetActive(true);
         }
 
         if (!aggroed)
@@ -47,7 +53,7 @@ public class Boss : Enemy
         Vector3 direction = (player.transform.position - rotateBody.transform.position).normalized;
         direction.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        while(Quaternion.Angle(rotateBody.transform.rotation, targetRotation) > 0.01f)
+        while(Quaternion.Angle(rotateBody.transform.rotation, targetRotation) > 0.01f && !isDead)
         {
             //Quaternion nextRotation = Quaternion.Lerp(rotateBody.transform.rotation, targetRotation, Time.deltaTime);
             rotateBody.transform.rotation = Quaternion.RotateTowards(rotateBody.transform.rotation, targetRotation, Time.deltaTime);
@@ -59,16 +65,17 @@ public class Boss : Enemy
 
     public void AbilityTimer()
     {
-        if (!invurnable)
+        if (!abilityLock)
             abilityTimer -= Time.deltaTime;
 
         while (abilityTimer <= 0)
         {
             //Do Random Ability
             Ability chosenAbility = abilities[Random.Range(0, abilities.Count)];
-            if (!chosenAbility.IsOnCooldown())
+            if (!chosenAbility.IsOnCooldown() && chosenAbility != lastAbility)
             {
                 chosenAbility.DoEffect();
+                //lastAbility = chosenAbility;
                 abilityTimer = chosenAbility.GetCastTime();
             }
         }
@@ -79,6 +86,11 @@ public class Boss : Enemy
         base.Awake();
     }
 
+    public override void TakeDamage(float damage)
+    {
+        
+    }
+
     public void ToggleRotationLock() => rotateLock = !rotateLock;
 
     public override void LootDrop(Transform lootDropPosition)
@@ -87,5 +99,26 @@ public class Boss : Enemy
 
         Vector3 spawnPosition = lootDropPosition.position + new Vector3(0, 1, 0);
         Instantiate(LootDropList.GetItem(LootDropList.Count - 1), spawnPosition, Quaternion.Euler(0, 0, 0));
+    }
+    
+    public void RemoveRoot(Root root)
+    {
+        roots.Remove(root);
+
+        if (roots.Count == 0)
+        {
+            Die();
+            healthBar.gameObject.SetActive(false);
+        }
+    }
+
+    public override void ToggleInvurnable()
+    {
+        abilityLock = !abilityLock;
+
+        foreach(Root root in roots)
+        {
+            root.ToggleInvurnable();
+        }
     }
 }

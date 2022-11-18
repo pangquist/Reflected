@@ -7,7 +7,6 @@ public class StatusEffect : MonoBehaviour
     [SerializeField] private StatusEffectData data;
     private Rigidbody rb;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -21,5 +20,4 @@ public class StatusEffect : MonoBehaviour
             effectable.ApplyEffect(data, 1);
         }
     }
-
 }

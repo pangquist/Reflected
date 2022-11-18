@@ -8,7 +8,7 @@ public class MeleeAttackState : State
     public GameObject meleeObject;
 
     //Timer for attack rate
-    private float attackTimer = 0f;
+    private float attackTimer = 100f;
 
     //Base values of the attack stats
     [SerializeField] private float baseAttackRate = 1f;
@@ -21,16 +21,19 @@ public class MeleeAttackState : State
     //Range to player in which the enemy will chase the player. (Reposition to attack)
     [SerializeField] private float chaseRange = 2.5f;
 
+    private Transform firePoint;
+
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stat
-        attackRate = baseAttackRate / enemyStatSystem.GetAttackSpeed();
+        attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed() / thisEnemy.me.MovementPenalty();
         //Attack size?
 
         if (thisEnemy.distanceTo(player.transform) >= chaseRange)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
+            thisEnemy.SendAnimation("Walk Forward In Place");
             return;
         }
 
@@ -41,16 +44,21 @@ public class MeleeAttackState : State
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackRate)
         {
-            DoAttack(thisEnemy, enemyStatSystem);
+            attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
+
+            firePoint = thisEnemy.firePoint;
+
+            //DoAttack();
+
+            thisEnemy.SendAnimation("Bite Attack");
             attackTimer = 0f;
         }
     }
 
-    private void DoAttack(AiManager2 thisEnemy, EnemyStatSystem enemyStatSystem)
+    public void DoAttack()
     {
-        attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
-
-        GameObject currentMeleeAttack = Instantiate(meleeObject, thisEnemy.firePoint.position, gameObject.transform.rotation);
+        //Instantiate the hitbox and set up its variables.
+        GameObject currentMeleeAttack = Instantiate(meleeObject, firePoint.position, gameObject.transform.rotation);
         if (currentMeleeAttack != null)
         {
             currentMeleeAttack.GetComponent<MeleeHitboxScript>().SetUp(attackDamage);
