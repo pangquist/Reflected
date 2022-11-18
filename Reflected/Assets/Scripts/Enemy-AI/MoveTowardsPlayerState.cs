@@ -26,7 +26,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetMeleeAttackState();
                     agent.isStopped = true;
-
+                    thisEnemy.SendAnimation("Idle");
                     return;
                 }
                 break;

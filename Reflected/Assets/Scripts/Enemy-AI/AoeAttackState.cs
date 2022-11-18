@@ -8,10 +8,10 @@ public class AoeAttackState : State
     public GameObject aoeObject;
 
     //Timer for attack rate
-    private float attackTimer = 0f;
+    private float attackTimer = 100f;
 
     //Base values of the attack stats
-    [SerializeField] private float baseAttackRate = 5f;
+    [SerializeField] private float baseAttackRate = 4f;
     [SerializeField] private float baseAttackDamage = 1f;
     [SerializeField] private Vector3 baseAoeSize = new Vector3(5f, 3f, 5f);
 

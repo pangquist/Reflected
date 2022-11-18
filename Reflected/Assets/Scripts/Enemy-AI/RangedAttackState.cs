@@ -10,7 +10,7 @@ public class RangedAttackState : State
     private Vector3 offSet = new Vector3(0, 0.5f, 0);
 
     //Timer for attack rate
-    private float attackTimer = 0f;
+    private float attackTimer = 100f;
 
     //Base values of the attack stats
     [SerializeField] private float baseAttackRate = 1f;
@@ -77,9 +77,9 @@ public class RangedAttackState : State
         }
     }
 
-    public void DoAttack(/*AiManager2 thisEnemy, Player player, EnemyStatSystem enemyStatSystem*/)
+    public void DoAttack()
     {
-        //Instantiate the projectile and set up it variables.
+        //Instantiate the projectile and set up its variables.
         GameObject currentProjectile = Instantiate(projectileObject, firePoint.position, Quaternion.identity);
         if (currentProjectile != null)
         {

@@ -123,7 +123,7 @@ public class Enemy : Character
     {
         if (parent.tag == "Melee")
         {
-            
+            meleeAttackState.DoAttack();
         }
         else if (parent.tag == "Ranged")
         {
