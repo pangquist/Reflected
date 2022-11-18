@@ -114,7 +114,7 @@ public class Enemy : Character
         Instantiate(LootDropList.GetRandom(), spawnPosition, Quaternion.Euler(0,0,0));
     }
 
-    public void ToggleInvurnable()
+    public virtual void ToggleInvurnable()
     {
         invurnable = !invurnable;
     }

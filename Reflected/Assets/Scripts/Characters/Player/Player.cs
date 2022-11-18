@@ -23,7 +23,7 @@ public class Player : Character, ISavable
     int weaponIndex = 0;
 
     //[SerializeField] List<Enemy> aggroedEnemies = new List<Enemy>();
-
+    [ReadOnly] Bounds hitBoxBounds;
     DimensionManager dimensionManager;
     MusicManager musicManager;
 
@@ -66,6 +66,9 @@ public class Player : Character, ISavable
         base.Update();
         if (Cursor.visible)
             Cursor.visible = false;
+
+        //hitBoxBounds = hitbox.bounds;
+        //Debug.Log("Bounds: " + hitBoxBounds);
     }
 
     public void Attack()

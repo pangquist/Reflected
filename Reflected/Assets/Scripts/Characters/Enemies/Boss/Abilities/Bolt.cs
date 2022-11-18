@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bolt : MonoBehaviour
 {
     [SerializeField] bool useGravity;
+
     [SerializeField] Vector3 velocity;
     [SerializeField] float gravity;
     [SerializeField] float damage;
@@ -14,7 +15,6 @@ public class Bolt : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponentInChildren<Player>();
-
     }
     // Update is called once per frame
     void Update()

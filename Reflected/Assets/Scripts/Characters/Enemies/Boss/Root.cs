@@ -9,7 +9,7 @@ public class Root : Enemy
         if (invurnable || isDead)
             return;
 
-        if (currentHealth == maxHealth)
+        if (currentHealth == maxHealth && healthBar)
             healthBar.gameObject.SetActive(true);
 
 
@@ -19,7 +19,8 @@ public class Root : Enemy
         currentHealth -= Mathf.Clamp(damage, 0, currentHealth);
 
         Debug.Log("ENEMY TOOK DAMAGE: " + damage + "Health left: " + currentHealth);
-        healthBar.fillAmount = GetHealthPercentage();
+        if (healthBar)
+            healthBar.fillAmount = GetHealthPercentage();
 
         if (currentHealth <= 0)
         {
