@@ -41,7 +41,7 @@ public class ProjectileScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            var healthComponent = other.GetComponent<Player>();
+            var healthComponent = other.GetComponentInChildren<Player>();
             if (healthComponent != null)
             {
                 Destroy(this.gameObject);

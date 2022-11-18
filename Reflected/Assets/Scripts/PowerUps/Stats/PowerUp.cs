@@ -18,11 +18,12 @@ public class PowerUp : MonoBehaviour, IBuyable
         amount = powerUpEffect.amount * myRarity.amountMultiplier;
         value = powerUpEffect.value * myRarity.valueMultiplier;
         description = powerUpEffect.description + amount.ToString();
+        Destroy(gameObject, 20);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.GetComponent<Player>())
         {
             Destroy(gameObject);
             powerUpEffect.Apply(other.gameObject, amount);

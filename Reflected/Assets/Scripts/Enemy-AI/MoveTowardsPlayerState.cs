@@ -26,6 +26,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetMeleeAttackState();
                     agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
                     return;
                 }
                 break;
@@ -35,6 +36,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetRangedAttackState();
                     agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
                     return;
                 }
                 break;
@@ -44,6 +46,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetAoeAttackState();
                     agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
                     return;
                 }
                 break;
@@ -62,7 +65,7 @@ public class MoveTowardsPlayerState : State
         }
 
         //Set movement speed
-        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed();
+        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed() * thisEnemy.me.MovementPenalty();
         agent.speed = movementSpeed;
 
         DoMoveToward(player.transform, agent);

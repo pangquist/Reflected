@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class Enemy : Character
 {
-    [SerializeField] Image healthBar;
+    [SerializeField] protected Image healthBar;
 
-    [SerializeField] Vector3 combatTextOffset;
-    [SerializeField] Canvas combatTextCanvas;
-    [SerializeField] float aggroRange;
+    [SerializeField] protected Vector3 combatTextOffset;
+    [SerializeField] protected Canvas combatTextCanvas;
+    [SerializeField] protected float aggroRange;
 
     [SerializeField] WeightedRandomList<GameObject> LootDropList;
     protected bool invurnable;
@@ -19,12 +19,35 @@ public class Enemy : Character
 
     bool doOnce;
 
+    [SerializeField] MeleeAttackState meleeAttackState;
+    [SerializeField] RangedAttackState rangedAttackState;
+    [SerializeField] AoeAttackState aoeAttackState;
+    [SerializeField] ExplosionAttackState explosionAttackState;
+
     protected override void Awake()
     {
         currentHealth = maxHealth;
         base.Awake();
         player = FindObjectOfType<Player>();
         parent = gameObject.transform.parent.gameObject;
+
+        if (parent.tag == "Melee")
+        {
+            meleeAttackState = this.GetComponentInParent<MeleeAttackState>();
+        }
+        else if (parent.tag == "Ranged")
+        {
+            rangedAttackState = this.GetComponentInParent<RangedAttackState>();
+        }
+        else if (parent.tag == "AOE")
+        {
+            aoeAttackState = this.GetComponentInParent<AoeAttackState>();
+        }
+        else if (parent.tag == "Explosion")
+        {
+            explosionAttackState = this.GetComponentInParent<ExplosionAttackState>();
+        }
+
     }
 
     protected override void Update()
@@ -72,7 +95,7 @@ public class Enemy : Character
         
         LootDrop(transform);
         //player.RemoveEnemy(this);
-        anim.Play("Death");
+        //anim.Play("Death");
         base.Die();
     }
 
@@ -91,8 +114,28 @@ public class Enemy : Character
         Instantiate(LootDropList.GetRandom(), spawnPosition, Quaternion.Euler(0,0,0));
     }
 
-    public void ToggleInvurnable()
+    public virtual void ToggleInvurnable()
     {
         invurnable = !invurnable;
+    }
+
+    public void DoAttack()
+    {
+        if (parent.tag == "Melee")
+        {
+            
+        }
+        else if (parent.tag == "Ranged")
+        {
+
+        }
+        else if (parent.tag == "AOE")
+        {
+
+        }
+        else if (parent.tag == "Explosion")
+        {
+            explosionAttackState.DoAttack();
+        }
     }
 }

@@ -23,11 +23,14 @@ public class ExplosionAttackState : State
     [SerializeField] private StatusEffectData dotData;
     [SerializeField] private StatusEffectData slowData;
 
+    //Offset of explosion position
+    private Vector3 offSet = new Vector3(0f, 1f, 0f);
+
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stats
 
-        if (thisEnemy.distanceTo(player.transform) >= chaseRange)
+        if (thisEnemy.distanceTo(player.transform) >= chaseRange && !attackStarted)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
@@ -40,18 +43,18 @@ public class ExplosionAttackState : State
 
         if (!attackStarted)
         {
-            DoAttack(thisEnemy, enemyStatSystem);
+            //Set relevant stats (damage, projectile speed, )
+            aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
+
+            //DoAttack(enemyStatSystem); //Replaced with animation below instead. The animation will call the attack method.
+            thisEnemy.SendAnimation("Explosion Attack");
+            attackStarted = true;
         }
     }
 
-    private void DoAttack(AiManager2 thisEnemy, EnemyStatSystem enemyStatSystem)
+    public void DoAttack()
     {
-        attackStarted = true;
-
-        //Set relevant stats (damage, projectile speed, )
-        aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
-
-        GameObject currentExplosion = Instantiate(explosionObject, transform.position, Quaternion.identity);
+        GameObject currentExplosion = Instantiate(explosionObject, transform.position+offSet, Quaternion.identity);
         if (currentExplosion != null)
         {
             currentExplosion.GetComponent<ExplosionScript>().SetUp(aoeSize, dotData, slowData);

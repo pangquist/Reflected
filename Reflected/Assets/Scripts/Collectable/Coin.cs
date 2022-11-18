@@ -26,6 +26,7 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
     {
         coinData.amount = UnityEngine.Random.Range(1, 10);
         coinData.value = coinData.amount;
+        Destroy(gameObject, 20);
     }
 
     public void Collect()
@@ -40,7 +41,7 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
         if (hasTarget)
         {
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
-            rb.velocity = new Vector3(targetDirection.x, 0, targetDirection.z) * moveSpeed;
+            rb.velocity = new Vector3(targetDirection.x, targetDirection.y, targetDirection.z) * moveSpeed;
         }
     }
 

@@ -12,7 +12,7 @@ public class BoltBlast : Ability
     [SerializeField] float offsetRange;
     [Range(0, 5)]
     [SerializeField] float abilityDuration;
-    [Range (0, 20)]
+    [Range(0, 20)]
     [SerializeField] int amountOfBolts;
     [Range(0, 4)]
     [SerializeField] float airTime;
@@ -35,24 +35,27 @@ public class BoltBlast : Ability
         int spawnedBolts = 0;
         int spawnPositionIndex = 0;
 
-        while(spawnedBolts < amountOfBolts)
+        while (spawnedBolts < amountOfBolts)
         {
-            Debug.Log("Spawn bolt nr: " + (spawnedBolts+1));
+            Debug.Log("Spawn bolt nr: " + (spawnedBolts + 1));
 
             Vector3 spawnPosition = spawnPositions[spawnPositionIndex++].position;
             if (spawnPositionIndex == spawnPositions.Count)
                 spawnPositionIndex = 0;
 
-            Bolt newBolt = Instantiate(bolt, spawnPosition, Quaternion.identity).GetComponent<Bolt>();
+            Bolt newBolt = Instantiate(bolt, spawnPosition, Quaternion.identity).GetComponentInChildren<Bolt>();
+            Transform parent = newBolt.gameObject.transform.parent.transform;
 
             player = FindObjectOfType<Player>().GetComponent<Player>();
 
             float randomOffset = Random.Range(-offsetRange, offsetRange + 1);
 
             Vector3 landPosition = new Vector3(
-                player.transform.position.x + randomOffset, 
-                player.transform.position.y, 
+                player.transform.position.x + randomOffset,
+                player.transform.position.y,
                 player.transform.position.z + randomOffset);
+
+            parent.rotation = Quaternion.LookRotation(landPosition);
 
             Vector3 diff = landPosition - spawnPosition;
 
@@ -62,7 +65,8 @@ public class BoltBlast : Ability
             yield return new WaitForSeconds(abilityDuration / amountOfBolts);
         }
 
-        GetComponent<Animator>().Play("Bolt Past");
+        if (!GetComponent<Boss>().Dead())
+            GetComponent<Animator>().Play("Bolt Past");
 
         yield return 0;
     }

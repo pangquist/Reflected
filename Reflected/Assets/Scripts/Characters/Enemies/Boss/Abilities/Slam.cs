@@ -12,12 +12,12 @@ using UnityEngine;
 public class Slam : Ability
 {
     [SerializeField] GameObject hitboxObject;
+    [SerializeField] Bounds bounds;
     [SerializeField] float duration;
     [SerializeField] float stunDuration;
 
     [SerializeField] Vector3 startScale;
     [SerializeField] Vector3 endScale;
-    //[SerializeField] Vector3 hitboxPosition;
 
     public override bool DoEffect()
     {
@@ -55,9 +55,11 @@ public class Slam : Ability
 
     public void SlamAttack()
     {
+        bounds = hitboxObject.GetComponent<Collider>().bounds;
+
         if (hitboxObject.GetComponent<Collider>().bounds.Intersects(player.Hitbox().bounds))
         {
-            Debug.Log("Slam Hit! Damage: " + damage);
+            Debug.Log("Slam Hit! Damage: " + damage + " Player Bounds: " + player.Hitbox().bounds + " Slam Bounds: " + hitboxObject.GetComponent<Collider>().bounds);
             player.TakeDamage(damage);
 
             player.Stun(stunDuration);

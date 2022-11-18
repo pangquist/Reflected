@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bolt : MonoBehaviour
 {
     [SerializeField] bool useGravity;
+
     [SerializeField] Vector3 velocity;
     [SerializeField] float gravity;
     [SerializeField] float damage;
@@ -13,8 +14,7 @@ public class Bolt : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<Player>();
-
+        player = GameObject.FindWithTag("Player").GetComponentInChildren<Player>();
     }
     // Update is called once per frame
     void Update()
@@ -54,14 +54,6 @@ public class Bolt : MonoBehaviour
 
             Vector3 tempPosition = new Vector3(xPosition, yPosition, zPosition);
             RaycastHit hit;
-
-            //if (Physics.SphereCast(tempPosition, 1, transform.forward, out hit, 3))
-            //{
-            //    if(hit.collider.tag == "Ground")
-            //    {
-            //        break;
-            //    }
-            //}
         }
 
         Vector3 landPosition = spawnPosition /*+ new Vector3(velocity.x * airTime, 0, velocity.z * airTime)*/;
@@ -71,13 +63,12 @@ public class Bolt : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Player>())
+        if (other.GetComponentInChildren<Player>())
         {
             player.TakeDamage(damage);
             Destroy(gameObject);
         }
-
-        if (other.tag == "Ground" || other.tag == "Player")
+        else if (other.gameObject.tag == "Ground")
             Destroy(gameObject);
     }
 

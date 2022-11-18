@@ -16,6 +16,7 @@ public class InteractableWeaponPowerup : InteractablePowerUp
             value = powerUpEffect.value;
             SetDescription((int)amount);
         }
+        Destroy(gameObject, 20);
     }
 
     public override void SetProperties(Rarity targetRarity)

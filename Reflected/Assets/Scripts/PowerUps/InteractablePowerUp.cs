@@ -23,7 +23,8 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
             amount = powerUpEffect.amount * myRarity.amountMultiplier;
             value = powerUpEffect.value * myRarity.valueMultiplier;
             description = powerUpEffect.description + " " + amount.ToString();
-        }        
+        }
+        Destroy(gameObject, 20);
     }
 
     public virtual void SetProperties(Rarity targetRarity)

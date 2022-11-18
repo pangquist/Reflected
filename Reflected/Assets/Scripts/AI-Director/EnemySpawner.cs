@@ -9,11 +9,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject enemyRange;
     [SerializeField] GameObject enemyAOE;
     [SerializeField] GameObject enemyDOT;
+    GameObject enemyToSpawn;
 
     EnemyStatSystem enemyStatSystem;
-
-    GameObject enemyToSpawn;
-    List<GameObject> enemyList = new List<GameObject>();
 
     List<Transform> spawnTransforms = new List<Transform>();
     Transform spawnLocation;
@@ -23,8 +21,6 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         GetSpawnlocations();
-        enemyList.Add(enemyClose);
-        enemyList.Add(enemyRange);
         enemyStatSystem = GameObject.Find("EnemyStatSystem").GetComponent<EnemyStatSystem>();
     }
 
@@ -78,13 +74,6 @@ public class EnemySpawner : MonoBehaviour
         {
             if (spawnPoint.activeInHierarchy) spawnTransforms.Add(spawnPoint.transform);
         }
-    }
-
-    private void GetRandomEnemy()
-    {
-        int i = Random.Range(0, enemyList.Count);
-
-        enemyToSpawn = enemyList[i];
     }
 
     private void GetBiasedEnemy()

@@ -11,7 +11,7 @@ public abstract class Chest : MonoBehaviour
     protected GameObject spawnedObject;
     //protected GameObject itemToSpawn;
     [SerializeField] protected Rarity myRarity;
-    protected int numberOfPickablePowerups = 3;
+    protected int numberOfPickablePowerups = 2;
 
     public bool isOpen;
     public Animator animator;
@@ -55,7 +55,7 @@ public abstract class Chest : MonoBehaviour
         }
     }
 
-    protected bool IsOpen()
+    protected bool IsOpen() //Not used yet
     {
         return animator.GetCurrentAnimatorStateInfo(0).IsName("ChestOpen");
     }
@@ -88,7 +88,7 @@ public abstract class Chest : MonoBehaviour
         {
             if (myRarity.rarity == "Legendary")
             {
-                //pickablePowerUps.Add(powerups[]);
+                pickablePowerUps.Add(powerups.GetItem(powerups.Count - 1));
             }
             else
             {

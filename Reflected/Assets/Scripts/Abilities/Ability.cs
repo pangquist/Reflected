@@ -15,6 +15,7 @@ public abstract class Ability : MonoBehaviour
     [SerializeField] protected Sprite abilityIcon;
     [SerializeField] protected List<AudioClip> abilitySounds = new List<AudioClip>();
     [SerializeField] protected AudioSource abilitySource;
+    [SerializeField] protected float castTime;
     [SerializeField] protected float cooldown;
     [SerializeField] protected float remainingCooldown;
     [SerializeField] protected string abilityName;
@@ -30,7 +31,7 @@ public abstract class Ability : MonoBehaviour
     private void Start()
     {
         cooldownstarter = FindObjectOfType<AbilityCooldowns>();
-        player = FindObjectOfType<Player>();
+        player = GameObject.FindWithTag("Player").GetComponentInChildren<Player>();
     }
 
     public virtual bool DoEffect()
@@ -56,35 +57,13 @@ public abstract class Ability : MonoBehaviour
             remainingCooldown -= Time.deltaTime;
     }
 
-    public bool IsOnCooldown()
-    {
-        return remainingCooldown > 0;
-    }
-
-    public float GetRemainingCooldown()
-    {
-        return remainingCooldown;
-    }
-
-    public virtual float GetCooldownPercentage()
-    {
-        return remainingCooldown / (cooldown * player.GetStats().GetCooldownDecrease());
-    }
-
-    public float Cooldown()
-    {
-        return cooldown;
-    }
-
-    public Sprite GetIcon()
-    {
-        return abilityIcon;
-    }
-
-    public string GetName()
-    {
-        return abilityName;
-    }
+    public bool IsOnCooldown() => remainingCooldown > 0;
+    public float GetRemainingCooldown() => remainingCooldown;
+    public virtual float GetCooldownPercentage() => remainingCooldown / (cooldown * player.GetStats().GetCooldownDecrease());
+    public float Cooldown() => cooldown;
+    public Sprite GetIcon() => abilityIcon;
+    public string GetName() => abilityName;
+    public float GetCastTime() => castTime;
 
     public void PlayVFX()
     {
