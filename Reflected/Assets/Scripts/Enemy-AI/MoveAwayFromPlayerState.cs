@@ -55,7 +55,7 @@ public class MoveAwayFromPlayerState : State
         }
 
         //Set movement speed
-        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed();
+        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed() * thisEnemy.me.MovementPenalty();
         agent.speed = movementSpeed;
 
         DoMoveAway(player.transform, agent);

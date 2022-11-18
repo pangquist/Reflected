@@ -65,7 +65,7 @@ public class MoveTowardsPlayerState : State
         }
 
         //Set movement speed
-        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed();
+        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed() * thisEnemy.me.MovementPenalty();
         agent.speed = movementSpeed;
 
         DoMoveToward(player.transform, agent);

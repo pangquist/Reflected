@@ -33,7 +33,7 @@ public class RangedAttackState : State
     public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stats
-        attackRate = baseAttackRate / enemyStatSystem.GetAttackSpeed();
+        attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed() / thisEnemy.me.MovementPenalty();
         //Attack range?
 
         //If too close, move away from target.
