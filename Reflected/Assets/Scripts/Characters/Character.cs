@@ -11,7 +11,7 @@ public class Character : MonoBehaviour, IEffectable
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected float currentHealth;
     protected List<Effect> statusEffects;
-    protected List<GameObject> effectParticles;
+    protected Dictionary<StatusEffectData, GameObject> effectParticles;
     [SerializeField] protected Animator anim;
     protected bool isDead;
 
@@ -22,7 +22,7 @@ public class Character : MonoBehaviour, IEffectable
         if (this.GetType() != typeof(Player))
             anim = GetComponent<Animator>();
         statusEffects = new List<Effect>();
-        effectParticles = new List<GameObject>();
+        effectParticles = new Dictionary<StatusEffectData, GameObject>();
     }
 
     protected virtual void Update()
@@ -112,13 +112,25 @@ public class Character : MonoBehaviour, IEffectable
 
     public void ApplyEffect(StatusEffectData data, float scale)
     {
-        statusEffects.Add(new Effect(data, scale));
-        //effectParticles.Add(Instantiate(data.EffectParticles, transform));
+        if (!effectParticles.ContainsKey(data))
+        {
+            effectParticles.Add(data, Instantiate(data.EffectParticles, transform));
+        }       
+        statusEffects.Add(new Effect(data, scale));        
     }
 
     public void RemoveEffect(Effect status)
     {
         statusEffects.Remove(status);
+        for (int i = 0; i < statusEffects.Count; i++)
+        {
+            if (statusEffects[i].effect == status.effect)
+            {
+                return;
+            }
+        }
+        Destroy(effectParticles[status.effect]);
+        effectParticles.Remove(status.effect);
         //if (effectParticles != null) Destroy(effectParticles);
     }
 
