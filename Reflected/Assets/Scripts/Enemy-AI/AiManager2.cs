@@ -28,7 +28,7 @@ public class AiManager2 : MonoBehaviour
 
     //Initialize relevant stat/general scripts
     [SerializeField] private Player player;
-    [SerializeField] private Enemy me;
+    [SerializeField] public Enemy me;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private EnemyStatSystem enemyStatSystem;
 
