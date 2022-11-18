@@ -25,7 +25,7 @@ public class AOEScript : MonoBehaviour
         despawnTimer += Time.deltaTime;
         if (despawnTimer >= upTime)
         {
-            Destroy(this.gameObject);
+            Destroy(transform.parent.gameObject);
             despawnTimer = 0f;
         }
     }

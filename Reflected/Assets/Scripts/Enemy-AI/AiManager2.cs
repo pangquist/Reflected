@@ -28,7 +28,7 @@ public class AiManager2 : MonoBehaviour
 
     //Initialize relevant stat/general scripts
     [SerializeField] private Player player;
-    [SerializeField] private Enemy me;
+    [SerializeField] public Enemy me;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private EnemyStatSystem enemyStatSystem;
 
@@ -67,6 +67,7 @@ public class AiManager2 : MonoBehaviour
         {
             case CombatBehavior.CloseCombat:
                 meleeAttackState = gameObject.GetComponent<MeleeAttackState>();
+                //SendAnimation("");
                 break;
             case CombatBehavior.RangedCombat:
                 rangedAttackState = gameObject.GetComponent<RangedAttackState>();
@@ -92,8 +93,11 @@ public class AiManager2 : MonoBehaviour
 
     private void Update()
     {
-        //Run the currently active state
-        activeState.DoState(this, player, agent, enemyStatSystem);
+        //Run the currently active state if the enemy is alive. This way the AI will stop when the enemy dies.
+        if (!me.IsDead())
+        {
+            activeState.DoState(this, player, agent, enemyStatSystem);
+        }
     }
 
     //Setters for behavior states.
@@ -115,7 +119,6 @@ public class AiManager2 : MonoBehaviour
 
     public void SendAnimation(string animName)
     {
-        Debug.Log("SendAnim");
         me.PlayAnimation(animName);
     }
 }
