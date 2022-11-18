@@ -64,6 +64,7 @@ public class Enemy : Character
             healthBar.gameObject.SetActive(true);
         else if (currentHealth <= 0)
         {
+            isDead = true;
             Die();
             return;
         }
@@ -96,7 +97,7 @@ public class Enemy : Character
         LootDrop(transform);
         //player.RemoveEnemy(this);
         anim.Play("Death");
-        base.Die();
+        base.Die(); //There is currently also a play death animation call in the base. Will this not call the animation twice? Does it matter? -Kevin
     }
 
     public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instaintiated (from the EnemySpanwer-script)
@@ -137,5 +138,10 @@ public class Enemy : Character
         {
             explosionAttackState.DoAttack();
         }
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
 }
