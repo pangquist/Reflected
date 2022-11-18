@@ -12,6 +12,11 @@ public class MirrorShard : MonoBehaviour, ICollectable, IBuyable
     //The lines above allows for the action to be handled adding the item to the inventory
     //using ascriptable object in the collectable folder
 
+    private void Start()
+    {
+        Destroy(gameObject, 20);
+    }
+
     public void Collect()
     {
         Debug.Log("You collected a mirror shard");

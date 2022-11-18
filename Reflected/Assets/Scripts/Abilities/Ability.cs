@@ -31,7 +31,7 @@ public abstract class Ability : MonoBehaviour
     private void Start()
     {
         cooldownstarter = FindObjectOfType<AbilityCooldowns>();
-        player = FindObjectOfType<Player>();
+        player = GameObject.FindWithTag("Player").GetComponentInChildren<Player>();
     }
 
     public virtual bool DoEffect()

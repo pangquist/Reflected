@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3141,6 +3141,70 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: powerupPool.list.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: rarityTiers.list.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: truePowerupPool.list.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: mirrorPowerupPool.list.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: powerupPool.list.Array.data[6].item
+      value: 
+      objectReference: {fileID: 7459923138858069156, guid: b2bd5de46549cca45a2d84bf36775811,
+        type: 3}
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: rarityTiers.list.Array.data[3].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 70017cfc7a3f0a94fb1366e0b3113daa,
+        type: 2}
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: powerupPool.list.Array.data[6].weight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: rarityTiers.list.Array.data[3].weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: truePowerupPool.list.Array.data[3].item
+      value: 
+      objectReference: {fileID: 7459923138858069156, guid: b2bd5de46549cca45a2d84bf36775811,
+        type: 3}
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: mirrorPowerupPool.list.Array.data[3].item
+      value: 
+      objectReference: {fileID: 7459923138858069156, guid: b2bd5de46549cca45a2d84bf36775811,
+        type: 3}
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: truePowerupPool.list.Array.data[3].weight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: mirrorPowerupPool.list.Array.data[3].weight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1882137614351575189, guid: 47b1053ca0a8e40479dceecd8b06077f,
         type: 3}
       propertyPath: m_RootOrder
@@ -3486,6 +3550,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1537874509}
     m_Modifications:
+    - target: {fileID: 2504524084161930359, guid: bc072609323d4794298e5cf6997c81f8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3314845808279008683, guid: bc072609323d4794298e5cf6997c81f8,
         type: 3}
       propertyPath: m_RootOrder
@@ -4027,7 +4096,7 @@ PrefabInstance:
     - target: {fileID: 6671741807399722766, guid: 8270c8ed9e480224b855a6e7626b43d1,
         type: 3}
       propertyPath: damageAmount
-      value: 3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6671741807399722767, guid: 8270c8ed9e480224b855a6e7626b43d1,
         type: 3}

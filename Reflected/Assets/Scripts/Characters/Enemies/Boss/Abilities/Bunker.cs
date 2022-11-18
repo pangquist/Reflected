@@ -6,7 +6,7 @@ public class Bunker : Ability
 {
     [Header("Bunker Specifics")]
 
-    [SerializeField] GameObject bolt;
+    [SerializeField] List<GameObject> junk;
     [SerializeField] Transform spawnPosition;
     [Range(0, 60)]
     [SerializeField] float radius;
@@ -43,7 +43,9 @@ public class Bunker : Ability
 
             for (int i = 0; i < 2; i++)
             {
-                Bolt newBolt = Instantiate(bolt, spawnPosition.position, Quaternion.identity).GetComponent<Bolt>();
+                GameObject spawnedJunk = junk[Random.Range(0, junk.Count)];
+
+                Bolt newBolt = Instantiate(spawnedJunk, spawnPosition.position, Quaternion.identity).GetComponent<Bolt>();
 
                 Vector2 randomPosition = Random.insideUnitCircle * radius;
                 Vector3 targetPosition = new Vector3(randomPosition.x, player.transform.position.y, randomPosition.y);

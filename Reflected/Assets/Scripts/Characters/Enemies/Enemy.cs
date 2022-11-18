@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class Enemy : Character
 {
-    [SerializeField] Image healthBar;
+    [SerializeField] protected Image healthBar;
 
-    [SerializeField] Vector3 combatTextOffset;
-    [SerializeField] Canvas combatTextCanvas;
+    [SerializeField] protected Vector3 combatTextOffset;
+    [SerializeField] protected Canvas combatTextCanvas;
     [SerializeField] protected float aggroRange;
 
     [SerializeField] WeightedRandomList<GameObject> LootDropList;
@@ -64,7 +64,6 @@ public class Enemy : Character
             healthBar.gameObject.SetActive(true);
         else if (currentHealth <= 0)
         {
-            isDead = true;
             Die();
             return;
         }
@@ -96,8 +95,8 @@ public class Enemy : Character
         
         LootDrop(transform);
         //player.RemoveEnemy(this);
-        anim.Play("Death");
-        base.Die(); //There is currently also a play death animation call in the base. Will this not call the animation twice? Does it matter? -Kevin
+        //anim.Play("Death");
+        base.Die();
     }
 
     public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instaintiated (from the EnemySpanwer-script)
@@ -115,7 +114,7 @@ public class Enemy : Character
         Instantiate(LootDropList.GetRandom(), spawnPosition, Quaternion.Euler(0,0,0));
     }
 
-    public void ToggleInvurnable()
+    public virtual void ToggleInvurnable()
     {
         invurnable = !invurnable;
     }
@@ -124,24 +123,19 @@ public class Enemy : Character
     {
         if (parent.tag == "Melee")
         {
-            meleeAttackState.DoAttack();
+            
         }
         else if (parent.tag == "Ranged")
         {
-            rangedAttackState.DoAttack();
+
         }
         else if (parent.tag == "AOE")
         {
-            aoeAttackState.DoAttack();
+
         }
         else if (parent.tag == "Explosion")
         {
             explosionAttackState.DoAttack();
         }
-    }
-
-    public bool IsDead()
-    {
-        return isDead;
     }
 }

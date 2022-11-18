@@ -24,11 +24,11 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         {
             myRarity = FindObjectOfType<LootPoolManager>().GetRandomRarity();
             totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
-            amount = (int)((totalplayerhealth / 4f) * myRarity.amountMultiplier);
+            amount = (int)((totalplayerhealth * 0.15f) * myRarity.amountMultiplier);
             value = powerUpEffect.value * myRarity.valueMultiplier;
             description = powerUpEffect.description + " " + amount.ToString();
         }
-        
+        Destroy(gameObject, 20);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,7 +45,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         if (hasTarget)
         {
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
-            rb.velocity = new Vector3(targetDirection.x, 0, targetDirection.z) * moveSpeed;
+            rb.velocity = new Vector3(targetDirection.x, targetDirection.y, targetDirection.z) * moveSpeed;
         }
     }
 
