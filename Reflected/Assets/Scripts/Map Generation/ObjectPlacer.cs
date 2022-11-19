@@ -18,7 +18,6 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] MapGenerator mapGenerator;
 
     [Header("Values")]
-    [Range(0f, 20f)]
     [SerializeField] float objectMultiplier;
     [Range(2f, 8f)]
     [SerializeField] float wallPadding;
@@ -63,7 +62,7 @@ public class ObjectPlacer : MonoBehaviour
 
                 foreach (WeightedRandomList<UnityEngine.GameObject>.Pair pair in objectList.terrainObjects.list)
                 {
-                    for (int i = 0; i < pair.weight * objectMultiplier * room.Rect.Area() * 0.01f; i++)
+                    for (int i = 0; i < pair.weight * objectMultiplier * room.Rect.Area() * 0.001f; i++)
                     {
                         Vector3 point = pointList[Random.Range(0, pointList.Count)];
                         bool canPlace = true;
