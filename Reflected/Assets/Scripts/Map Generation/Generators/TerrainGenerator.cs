@@ -103,15 +103,15 @@ public class TerrainGenerator : MonoBehaviour
                 }
             }
         }
+        foreach(Room room in map.Rooms)
+        {
+            SetPathPoints(room);
+        }
     }
 
     private void GenerateTerrainChunk(TerrainChunk terrainChunk, Room room1, Room room2 = null)
     {
         float[,] heightMap = GenerateHeightMap(terrainChunk, room1, room2);
-
-        /*Texture2D chunkTexture = */BuildTexture(heightMap, terrainChunk);
-        //terrainChunk.MeshRenderer().material.mainTexture = chunkTexture;
-        //terrainChunk.MeshRenderer().material.SetTexture("_PathLayout_Texture", chunkTexture);
         UpdateMeshVertices(heightMap, terrainChunk, room1, room2);
     }
 
@@ -210,116 +210,51 @@ public class TerrainGenerator : MonoBehaviour
         }
     }
 
-    private void BuildTexture(float[,] heightMap, TerrainChunk terrainChunk)
+    private void SetPathPoints(Room room)
     {
-        int chunkDepth = heightMap.GetLength(0);
-        int chunkWidth = heightMap.GetLength(1);
-        Color[] colorMap = new Color[chunkDepth * chunkWidth];
-
-        float worldPixelSize = (float)MapGenerator.ChunkSize / chunkDepth;
-
-        // Get List of relevant paths
-
-        List<PathCreator> paths;
-        Vector3[] pathPoints = new Vector3[6];
-        int pathPointIndex = 0;
-
-        Room room;
-        if (room = terrainChunk.transform.parent.parent.GetComponent<Room>())
-                paths = room.Paths;
-
-        else
+        foreach (PathCreator path in room.Paths)
         {
-            Chamber chamber = terrainChunk.transform.parent.parent.GetComponent<Chamber>();
-            paths = chamber.Room1.Paths.And(chamber.Room2.Paths);
-        }
-
-        // Determine color of each pixel
-
-        for (int zIndex = 0; zIndex < chunkDepth; zIndex++)
-        {
-            for (int xIndex = 0; xIndex < chunkWidth; xIndex++)
+            float pathLength = path.path.length;
+            for (int i = 0; i < pathLength; i+=4)
             {
-                // Transform the 2D map index is an Array index
-                //int colorIndex = zIndex * chunkWidth + xIndex;
+                Vector3 point = path.path.GetPointAtDistance(i);
+                Ray ray = new Ray(point, -transform.up);
 
-                // Returns whether or not this pixel should be a path
-                //bool CheckPaths()
-                //{
-                    // Calculate world position of pixel
-                    Vector3 pixelPosition = new Vector3(
-                        terrainChunk.transform.position.x - (xIndex + 0.5f) * worldPixelSize,
-                        mapGenerator.PathGenerator.Level,
-                        terrainChunk.transform.position.z - (zIndex + 0.5f) * worldPixelSize);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
+                {
+                    Collider[] closeObjects = Physics.OverlapSphere(hit.point, mapGenerator.PathGenerator.Radius * 1.5f);
 
-                    // Check paths
-                    foreach (PathCreator path in paths)
+                    foreach (Collider collider in closeObjects)
                     {
-                        if (Vector3.Distance(pixelPosition, path.path.GetClosestPointOnPath(pixelPosition)) < mapGenerator.PathGenerator.Radius)
+                        if (collider.gameObject.GetComponentInParent<TerrainChunk>())
                         {
-                        //terrainChunk.MeshRenderer().material.SetFloat("_xMax", pixelPosition.x + mapGenerator.PathGenerator.Radius);
-                        //terrainChunk.MeshRenderer().material.SetFloat("_xMin", pixelPosition.x - mapGenerator.PathGenerator.Radius);
-                        //terrainChunk.MeshRenderer().material.SetFloat("_zMax", pixelPosition.z + mapGenerator.PathGenerator.Radius);
-                        //terrainChunk.MeshRenderer().material.SetFloat("_zMin", pixelPosition.z - mapGenerator.PathGenerator.Radius);
-
-                            if(pathPointIndex < 6)
-                            {
-                                if(pathPointIndex == 0 || Vector3.Distance(pathPoints[pathPointIndex - 1], path.path.GetClosestPointOnPath(pixelPosition)) > 9f)
-                                {
-                                    pathPoints[pathPointIndex] = path.path.GetClosestPointOnPath(pixelPosition);
-                                    pathPointIndex++;
-                                }
-                                
-                            }
-                            
+                            TerrainChunk chunk = collider.gameObject.GetComponentInParent<TerrainChunk>();
+                            chunk.PathPoints.Add(point);
                         }
                     }
-
-                //    return false;
-                //}
-
-                // Check for paths
-                //if (CheckPaths())
-                //colorMap[colorIndex] = mapGenerator.PathGenerator.Color;
-
-                // Or check height
-                //else
-                //{
-                //    float height = heightMap[zIndex, xIndex];
-                //    TerrainType terrain = PickTerrainType(height);
-                //    colorMap[colorIndex] = terrain.color;
-                //}
-
-                terrainChunk.MeshRenderer().material.SetFloat("_PathRadius", mapGenerator.PathGenerator.Radius);
-                terrainChunk.MeshRenderer().material.SetFloat("_PathPointHeight", mapGenerator.PathGenerator.Level);
-                terrainChunk.MeshRenderer().material.SetVector("_PathPoint1", pathPoints[0]);
-                terrainChunk.MeshRenderer().material.SetVector("_PathPoint2", pathPoints[1]);
-                terrainChunk.MeshRenderer().material.SetVector("_PathPoint3", pathPoints[2]);
-                terrainChunk.MeshRenderer().material.SetVector("_PathPoint4", pathPoints[3]);
-                terrainChunk.MeshRenderer().material.SetVector("_PathPoint5", pathPoints[4]);
-                terrainChunk.MeshRenderer().material.SetVector("_PathPoint6", pathPoints[5]);
+                }
             }
         }
 
-        //// Create a new texture and set its pixel colors
-        //Texture2D chunkTexture = new Texture2D(chunkWidth, chunkDepth);
-        //chunkTexture.wrapMode = TextureWrapMode.Clamp;
-        //chunkTexture.SetPixels(colorMap);
-        //chunkTexture.Apply();
-        //return chunkTexture;
-    }
+        TerrainChunk[] chunks = room.gameObject.GetComponentsInChildren<TerrainChunk>();
 
-    TerrainType PickTerrainType(float height)
-    {
-        // for each terrain type, check if the height is lower than the one for the terrain type
-        foreach (TerrainType terrainType in terrainTypes)
+        foreach(TerrainChunk chunk in chunks)
         {
-            // return the first terrain type whose height is higher than the generated one
-            if (height < terrainType.height)
+            chunk.MeshRenderer().material.SetFloat("_PathRadius", mapGenerator.PathGenerator.Radius);
+            chunk.MeshRenderer().material.SetFloat("_PathPointHeight", mapGenerator.PathGenerator.Level);
+            chunk.PassPointsToMaterial();
+        }
+
+        foreach (Chamber chamber in room.Chambers)
+        {
+            chunks = chamber.gameObject.GetComponentsInChildren<TerrainChunk>();
+            foreach (TerrainChunk chunk in chunks)
             {
-                return terrainType;
+                chunk.MeshRenderer().material.SetFloat("_PathRadius", mapGenerator.PathGenerator.Radius);
+                chunk.MeshRenderer().material.SetFloat("_PathPointHeight", mapGenerator.PathGenerator.Level);
+                chunk.PassPointsToMaterial();
             }
         }
-        return terrainTypes[terrainTypes.Length - 1];
     }
 }
