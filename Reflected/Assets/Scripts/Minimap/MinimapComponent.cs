@@ -88,8 +88,12 @@ public class MinimapComponent : MonoBehaviour
     public void Remove()
     {
         removed = true;
-        Destroy(transform.parent.gameObject, hideClip.length);
-        Hide();
+        
+        if (transform.parent.gameObject != null)
+        {
+            Hide();
+            Destroy(transform.parent.gameObject, hideClip.length);
+        }   
     }
 
     private void Update()

@@ -150,7 +150,7 @@ public class ObjectPlacer : MonoBehaviour
 
     private void PlaceEnemySpawnPoints(List<Vector3> raycastOrigins, Room room)
     {
-        for (int i = 0; i < objectMultiplier * 10; i++)
+        for (int i = 0; i < objectMultiplier * room.Rect.Area() * 0.01f; i++)
         {
             Ray ray = new Ray(raycastOrigins[(int)Random.Range(0, raycastOrigins.Count)], -transform.up);
             RaycastHit hit;
