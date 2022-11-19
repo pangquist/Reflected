@@ -44,20 +44,27 @@ public class PathGenerator : MonoBehaviour
                 continue;
             }
 
+            List<Chamber> unusedChambers = new List<Chamber>(room.Chambers);
             PairList<Chamber> chamberPairs = new PairList<Chamber>();
             int min = room.Chambers.Count - 1;
             int max = room.Chambers.Count * (room.Chambers.Count - 1) / 2;
             int pathsToCreate = (int)(min + (max + 0.9999f - min) * amountBias.Evaluate(Random.Range(0f, 1f)));
 
-            while (chamberPairs.Count < pathsToCreate)
+            while (chamberPairs.Count < pathsToCreate || unusedChambers.Count > 0)
             {
                 do
                 {
-                    chamber1 = room.Chambers.GetRandom();
+                    if (unusedChambers.Count > 0)
+                        chamber1 = unusedChambers.GetRandom();
+                    else
+                        chamber1 = room.Chambers.GetRandom();
+
                     chamber2 = room.Chambers.GetRandom();
                 }
                 while (chamber1 == chamber2 || chamberPairs.Contains(chamber1, chamber2));
-                
+
+                unusedChambers.Remove(chamber1);
+                unusedChambers.Remove(chamber2);
                 chamberPairs.Add(chamber1, chamber2);
                 CreatePoints(room, CreatePath(room, chamber1, chamber2));
             }

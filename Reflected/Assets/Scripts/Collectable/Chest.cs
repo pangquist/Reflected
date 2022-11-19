@@ -4,26 +4,38 @@ using UnityEngine;
 
 public abstract class Chest : MonoBehaviour
 {
-    //[SerializeField] protected WeightedRandomList<LootPool> lootTable;
     [SerializeField] protected WeightedRandomList<GameObject> powerups;
-    [SerializeField] protected WeightedRandomList<Rarity> rarityTiers;
+    //[SerializeField] protected WeightedRandomList<Rarity> rarityTiers;
     [SerializeField] protected List<GameObject> pickablePowerUps;
     [SerializeField] protected Transform itemHolder;
-    protected GameObject spawnedObject;
-    //protected GameObject itemToSpawn;
     [SerializeField] protected Rarity myRarity;
-    protected int numberOfPickablePowerups = 3;
+    [SerializeField] bool trueDimension;
+
+    protected GameObject spawnedObject;
+    protected GameObject chestPrefab;    
+    protected int numberOfPickablePowerups = 2;
 
     public bool isOpen;
-    //public Animator animator;
-
+    public Animator animator;
+ 
     protected virtual void Start()
     {
-        //animator = GetComponent<Animator>();
-        powerups = FindObjectOfType<LootPoolManager>().GetPowerupPool();
-        myRarity = FindObjectOfType<LootPoolManager>().GetRandomRarity();
+        trueDimension = DimensionManager.True;        
+        powerups = FindObjectOfType<LootPoolManager>().GetPowerupPool(trueDimension);
+        animator = GetComponentInChildren<Animator>();
         SetItems();
-        //itemToSpawn = lootTable.GetRandom().GetItem();
+    }
+
+    protected void Update()
+    {
+        if (isOpen)
+        {
+            animator.SetTrigger("open");
+        }
+        else
+        {
+            animator.SetTrigger("close");            
+        }
     }
 
     public abstract void OpenChest();
@@ -38,6 +50,11 @@ public abstract class Chest : MonoBehaviour
         {
             //PickItem();
         }
+    }
+
+    protected bool IsOpen() //Not used yet
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName("ChestOpen");
     }
 
     void HideItem()
@@ -56,22 +73,25 @@ public abstract class Chest : MonoBehaviour
     {
         spawnedObject = Instantiate(pickablePowerUps[index], itemHolder.position, itemHolder.rotation);
         spawnedObject.GetComponent<InteractablePowerUp>().SetProperties(myRarity);
-        //spawnedObject = Instantiate(itemToSpawn, itemHolder.position, itemHolder.rotation);
         spawnedObject.transform.parent = null;
         itemHolder.gameObject.SetActive(true);
     }
 
     protected void SetItems()
     {
-        //LootPool rarityOfPowerUps = lootTable.GetRandom();
+        
         for (int i = 0; i < numberOfPickablePowerups; i++)
         {
-            //pickablePowerUps.Add(rarityOfPowerUps.GetItem());
-            pickablePowerUps.Add(powerups.GetRandom());
-            pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties(myRarity);            
+            if (myRarity.rarity == "Legendary")
+            {
+                pickablePowerUps.Add(powerups.GetItem(powerups.Count - 1));
+            }
+            else
+            {
+                pickablePowerUps.Add(powerups.GetRandom());
+                pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties(myRarity);
+            }
+                       
         }
-        //Debug.Log("Chest" + pickablePowerUps[0].GetComponent<InteractablePowerUp>().myRarity);
-        //Debug.Log("Chest" + pickablePowerUps[0].GetComponent<InteractablePowerUp>().amount);
-        //Debug.Log("Number of powerups to choose from is " + pickablePowerUps.Count);
     }
 }

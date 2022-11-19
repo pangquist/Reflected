@@ -8,7 +8,8 @@ public class MoveTowardsPlayerState : State
     //Range to player in which the enemy will attack
     [SerializeField] private float meleeAttackRange = 2f;
     [SerializeField] private float rangedAttackRange = 15f;
-    [SerializeField] private float aoeAttackRange = 15;
+    [SerializeField] private float aoeAttackRange = 15f;
+    [SerializeField] private float explosionAttackRange = 2f; 
 
     //Base values of the movement speed stat
     [SerializeField] private float baseMovementSpeed = 3.5f;
@@ -25,6 +26,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetMeleeAttackState();
                     agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
                     return;
                 }
                 break;
@@ -34,6 +36,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetRangedAttackState();
                     agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
                     return;
                 }
                 break;
@@ -42,6 +45,16 @@ public class MoveTowardsPlayerState : State
                 if (thisEnemy.distanceTo(player.transform) <= aoeAttackRange)
                 {
                     thisEnemy.SetAoeAttackState();
+                    agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
+                    return;
+                }
+                break;
+
+            case AiManager2.CombatBehavior.ExplosionCombat:
+                if(thisEnemy.distanceTo(player.transform) <= explosionAttackRange)
+                {
+                    thisEnemy.SetExplosionAttackState();
                     agent.isStopped = true;
                     return;
                 }
@@ -52,7 +65,7 @@ public class MoveTowardsPlayerState : State
         }
 
         //Set movement speed
-        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed();
+        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed() * thisEnemy.me.MovementPenalty();
         agent.speed = movementSpeed;
 
         DoMoveToward(player.transform, agent);

@@ -25,7 +25,7 @@ public class Interactable : MonoBehaviour
         if (isInRange)
         {
             interactAction.Invoke();
-            Debug.Log("interact key down...");
+            //Debug.Log("interact key down...");
 
         }
     }
@@ -35,7 +35,7 @@ public class Interactable : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             isInRange = true;
-            Debug.Log("Player now in range");
+            //Debug.Log("Player now in range");
         }
 
     }
@@ -46,7 +46,7 @@ public class Interactable : MonoBehaviour
         {
             shopUi.DeactiveShopWindow();
             isInRange = false;
-            Debug.Log("Player now out of range");
+            //Debug.Log("Player now out of range");
         }
     }
 }

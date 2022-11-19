@@ -9,13 +9,13 @@ using UnityEngine;
 /// <summary>
 /// Ability description
 /// </summary>
-[RequireComponent(typeof(Player))]
 public abstract class Ability : MonoBehaviour
 {
     [Header("Ability Stats")]
     [SerializeField] protected Sprite abilityIcon;
-    [SerializeField] List<AudioClip> abilitySounds = new List<AudioClip>();
-    [SerializeField] AudioSource abilitySource;
+    [SerializeField] protected List<AudioClip> abilitySounds = new List<AudioClip>();
+    [SerializeField] protected AudioSource abilitySource;
+    [SerializeField] protected float castTime;
     [SerializeField] protected float cooldown;
     [SerializeField] protected float remainingCooldown;
     [SerializeField] protected string abilityName;
@@ -31,12 +31,12 @@ public abstract class Ability : MonoBehaviour
     private void Start()
     {
         cooldownstarter = FindObjectOfType<AbilityCooldowns>();
-        player = GetComponent<Player>();
+        player = GameObject.FindWithTag("Player").GetComponentInChildren<Player>();
     }
 
     public virtual bool DoEffect()
     {
-        remainingCooldown = cooldown;
+        remainingCooldown = cooldown * player.GetStats().GetCooldownDecrease();
         if (abilitySounds.Count != 0 && abilitySource)
             abilitySource.PlayOneShot(abilitySounds[Random.Range(0,abilitySounds.Count)]);
         return true;
@@ -44,7 +44,7 @@ public abstract class Ability : MonoBehaviour
 
     public virtual AnimationClip GetAnimation()
     {
-        remainingCooldown = cooldown;
+        remainingCooldown = cooldown * player.GetStats().GetCooldownDecrease();
         if (abilitySounds.Count != 0 && abilitySource)
             abilitySource.PlayOneShot(abilitySounds[Random.Range(0, abilitySounds.Count)]);
 
@@ -57,30 +57,13 @@ public abstract class Ability : MonoBehaviour
             remainingCooldown -= Time.deltaTime;
     }
 
-    public bool IsOnCooldown()
-    {
-        return remainingCooldown > 0;
-    }
-
-    public float GetRemainingCooldown()
-    {
-        return remainingCooldown;
-    }
-
-    public float GetCooldownPercentage()
-    {
-        return remainingCooldown / cooldown;
-    }
-
-    public Sprite GetIcon()
-    {
-        return abilityIcon;
-    }
-
-    public string GetName()
-    {
-        return abilityName;
-    }
+    public bool IsOnCooldown() => remainingCooldown > 0;
+    public float GetRemainingCooldown() => remainingCooldown;
+    public virtual float GetCooldownPercentage() => remainingCooldown / (cooldown * player.GetStats().GetCooldownDecrease());
+    public float Cooldown() => cooldown;
+    public Sprite GetIcon() => abilityIcon;
+    public string GetName() => abilityName;
+    public float GetCastTime() => castTime;
 
     public void PlayVFX()
     {

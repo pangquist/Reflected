@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private AiDirector aiDirector;
+    [SerializeField] private EnemySpawner enemySpawner;
+
+    public AiDirector AiDirector => aiDirector;
+    public EnemySpawner EnemySpawner => enemySpawner;
+
+    private void Start()
     {
-        
+        GameObject.Find("Dimension Manager").GetComponent<DimensionManager>().FindSystems();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }

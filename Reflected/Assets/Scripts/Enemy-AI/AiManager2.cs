@@ -10,7 +10,7 @@ using UnityEngine.AI;
 public class AiManager2 : MonoBehaviour
 {
     //Enum for enemy combat behavior.
-    public enum CombatBehavior { CloseCombat, RangedCombat, AoeCombat, };
+    public enum CombatBehavior { CloseCombat, RangedCombat, AoeCombat, ExplosionCombat };
     public CombatBehavior currentCombatBehavior;
 
     //Initialize the currently active state.
@@ -24,10 +24,11 @@ public class AiManager2 : MonoBehaviour
     private MeleeAttackState meleeAttackState;
     private RangedAttackState rangedAttackState;
     private AoeAttackState aoeAttackState;
+    private ExplosionAttackState explosionAttackState;
 
     //Initialize relevant stat/general scripts
     [SerializeField] private Player player;
-    [SerializeField] private Enemy me;
+    [SerializeField] public Enemy me;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private EnemyStatSystem enemyStatSystem;
 
@@ -48,7 +49,6 @@ public class AiManager2 : MonoBehaviour
         //Should have a way to assign firePoint without the inspector. But I don't have one atm.
         //if (firePoint == null)
         //{
-        //    //Debug. Will be better when rewritten into different scripts.
         //    firePoint = gameObject.transform.GetChild(0).GetChild(0).transform;
         //}
 
@@ -56,6 +56,7 @@ public class AiManager2 : MonoBehaviour
         if (gameObject.tag == "Melee") currentCombatBehavior = CombatBehavior.CloseCombat;
         else if (gameObject.tag == "Ranged") currentCombatBehavior = CombatBehavior.RangedCombat;
         else if (gameObject.tag == "AOE") currentCombatBehavior = CombatBehavior.AoeCombat;
+        else if (gameObject.tag == "Explosion") currentCombatBehavior = CombatBehavior.ExplosionCombat;
 
         //Instansiate movement state scripts
         moveTowardsPlayerState = gameObject.AddComponent<MoveTowardsPlayerState>();
@@ -66,6 +67,7 @@ public class AiManager2 : MonoBehaviour
         {
             case CombatBehavior.CloseCombat:
                 meleeAttackState = gameObject.GetComponent<MeleeAttackState>();
+                //SendAnimation("");
                 break;
             case CombatBehavior.RangedCombat:
                 rangedAttackState = gameObject.GetComponent<RangedAttackState>();
@@ -73,6 +75,10 @@ public class AiManager2 : MonoBehaviour
             case CombatBehavior.AoeCombat:
                 aoeAttackState = gameObject.GetComponent<AoeAttackState>();
                 break;
+            case CombatBehavior.ExplosionCombat:
+                explosionAttackState = gameObject.GetComponent<ExplosionAttackState>();
+                break;
+                
         }
 
         //Set active player state
@@ -87,8 +93,11 @@ public class AiManager2 : MonoBehaviour
 
     private void Update()
     {
-        //Run the currently active state
-        activeState.DoState(this, player, agent, enemyStatSystem);
+        //Run the currently active state if the enemy is alive. This way the AI will stop when the enemy dies.
+        if (!me.Dead())
+        {
+            activeState.DoState(this, player, agent, enemyStatSystem);
+        }
     }
 
     //Setters for behavior states.
@@ -97,6 +106,7 @@ public class AiManager2 : MonoBehaviour
     public void SetMeleeAttackState() => activeState = meleeAttackState;
     public void SetRangedAttackState() => activeState = rangedAttackState;
     public void SetAoeAttackState() => activeState = aoeAttackState;
+    public void SetExplosionAttackState() => activeState = explosionAttackState;
 
     //Get the currently active state
     public State GetActiveState() => activeState;
@@ -105,5 +115,10 @@ public class AiManager2 : MonoBehaviour
     public float distanceTo(Transform target)
     {
         return Vector3.Distance(transform.position, target.position);
+    }
+
+    public void SendAnimation(string animName)
+    {
+        me.PlayAnimation(animName);
     }
 }

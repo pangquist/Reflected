@@ -7,18 +7,19 @@ public abstract class Weapon : MonoBehaviour
     [Header("Weapon Properties")]
     protected Animator anim;
     protected float damage;
-
     protected float speed;
 
     [SerializeField] protected List<Enemy> hitEnemies;
 
     protected PlayerController playerController;
 
-    Player player;
+    protected Player player;
 
     private AbilityCooldowns cooldownstarter;
 
     [SerializeField] protected int powerUpIndex;
+    [SerializeField] protected List<StatusEffectData> statusEffectDatas;
+
     //[SerializeField] List<Weapons> projectiles = new List<Weapons>();
 
     public virtual void Awake()
@@ -29,6 +30,8 @@ public abstract class Weapon : MonoBehaviour
         player = FindObjectOfType<Player>();
 
         hitEnemies = new List<Enemy>();
+
+        powerUpIndex = -1;
     }
 
     protected virtual void Update()
@@ -58,6 +61,8 @@ public abstract class Weapon : MonoBehaviour
 
     public void SetWeaponIndex(int index)
     {
-        powerUpIndex = index;        
+        if (index > statusEffectDatas.Count) index = -1;
+
+        powerUpIndex = index;      
     }
 }

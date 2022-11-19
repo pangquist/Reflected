@@ -8,11 +8,11 @@ using UnityEngine.UIElements;
 public class AiDirector : MonoBehaviour
 {
     //Difficulty
-    [SerializeField] enum difficultyLevel {superEasy, easy, medium, hard }
-    [SerializeField] difficultyLevel difficulty;
     [SerializeField] float spawntime;
     [SerializeField] int amountOfEnemiesToSpawn;
     [SerializeField] int waveAmount;
+    [SerializeField] int difficultySteps;
+    int minSpawnAmount, maxSpawnAmount;
 
     //Room-stats
     bool inbetweenRooms;
@@ -21,6 +21,7 @@ public class AiDirector : MonoBehaviour
     [SerializeField] float timeToClearRoom;
     [SerializeField] float avergaeTimeToClearRoom;
     List<float> clearTimesList = new List<float>();
+    [SerializeField] List<GameObject> chests;
 
     //Map-stats
     [SerializeField] int numberOfRoomsCleared;
@@ -29,27 +30,39 @@ public class AiDirector : MonoBehaviour
     [SerializeField] int numberOfEnemiesKilled;
     Map map;
 
-
     //Player-stats
     Player player;
     [SerializeField] float playerCurrentHelathPercentage;
     [SerializeField] int temporaryCurrency;
 
 
-    EnemySpawner enemySpawner;
-    [SerializeField] GameObject chest;
+    EnemySpawner enemySpawner;    
+    LootPoolManager lootPool;
+    Rarity currentRarity;
 
+    // Properties
+
+    public bool AllEnemiesKilled => aliveEnemiesInRoom <= 0;
 
     void Start()
     {
+        StartCoroutine(DelayedStart(0.2f));
+    }
+
+    private IEnumerator DelayedStart(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         if (!player) player = FindObjectOfType<Player>();
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
+        if (!map) map = GameObject.Find("Map").GetComponent<Map>();
+        if (!lootPool) lootPool = GameObject.Find("LootPoolManager").GetComponent<LootPoolManager>();
 
-        difficulty = difficultyLevel.superEasy;
+        waveAmount = 1;
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
-        //if (player.GetCurrentWeapon().GetType() == typeof(Sword)) enemySpawner.SetMeleePlayer();
+        numberOfRoomsLeftOnMap = map.Rooms.Count;
     }
 
     void Update()
@@ -57,39 +70,36 @@ public class AiDirector : MonoBehaviour
         CheckRoomActivity();
     }
 
-    private void ResetMap()
-    {
-        numberOfRoomsCleared = 0;
-        numberOfRoomsLeftOnMap = 0;
-        clearTimesList.Clear();
-    }
-
     private void checkDifficulty()
     {
-        if(difficulty == difficultyLevel.superEasy)
+        startDiffuculty();
+        difficultySteps = numberOfEnemiesKilled / 20;
+
+        for (int i = 0; i < difficultySteps; i++)
         {
-            spawntime = 2;
-            amountOfEnemiesToSpawn = Random.Range(1, 3);
-            waveAmount = 1;
+            minSpawnAmount++;
+            maxSpawnAmount++;
+            spawntime -= 0.1f;
         }
-        if (difficulty == difficultyLevel.easy)
+        if(numberOfRoomsCleared % 4 == 0 && numberOfRoomsCleared > 0)
         {
-            spawntime = 2;
-            amountOfEnemiesToSpawn = Random.Range(4,6);
-            waveAmount = 2;
+            waveAmount++;
         }
-        else if (difficulty == difficultyLevel.medium)
+        if (numberOfRoomsCleared % 2 == 0 && numberOfRoomsCleared > 0)
         {
-            spawntime = 1;
-            amountOfEnemiesToSpawn = Random.Range(6, 9);
-            waveAmount = 3;
+            lootPool.IncreaseRarity();
         }
-        else if (difficulty == difficultyLevel.hard)
-        {
-            spawntime = 0.5f;
-            amountOfEnemiesToSpawn = Random.Range(8, 11);
-            waveAmount = 4;
-        }
+
+        minSpawnAmount -= waveAmount;
+        maxSpawnAmount -= waveAmount;
+
+        amountOfEnemiesToSpawn = Random.Range(minSpawnAmount, maxSpawnAmount);
+    }
+    private void startDiffuculty()
+    {
+        spawntime = 2;
+        minSpawnAmount = 4;
+        maxSpawnAmount = 6;
     }
     private void CheckRoomActivity()
     {
@@ -102,6 +112,8 @@ public class AiDirector : MonoBehaviour
         {
             activeRoom = false;
             inbetweenRooms = true;
+            MusicManager musicManager = FindObjectOfType<MusicManager>();
+            musicManager.ChangeMusicIntensity(-1);
         }
         if (inbetweenRooms) //All enemies are killed but player is still in same room
         {
@@ -122,15 +134,20 @@ public class AiDirector : MonoBehaviour
 
         timeToClearRoom = 0;
     }
-    public void EnterRoom() //is called when a new room activates (from Room-script)
-    {
+    public void EnterRoom() //called when a new room activates (from Room-script)
+    {  
         activeRoom = true;
+        aliveEnemiesInRoom = 0;
         checkDifficulty();
         aliveEnemiesInRoom = amountOfEnemiesToSpawn * waveAmount;
 
         enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn, waveAmount, EnemyStatModifier());
     }
-    public void killEnemyInRoom() //is called when enemy dies (from enemy-script)
+    public void EnterBossRoom()
+    {
+        Debug.Log("Activate Boss");
+    }
+    public void killEnemyInRoom() //called when enemy dies (from enemy-script)
     {
         aliveEnemiesInRoom--;
         numberOfEnemiesKilled++;
@@ -138,16 +155,32 @@ public class AiDirector : MonoBehaviour
     private float calculateAverageTime() => avergaeTimeToClearRoom = clearTimesList.Sum() / clearTimesList.Count();
     private float EnemyStatModifier()
     {
-        float extraStats = numberOfRoomsCleared * 0.02f;
+        float extraStats = numberOfRoomsCleared * 0.1f;
 
-        if(avergaeTimeToClearRoom < 0) extraStats += 10f / calculateAverageTime();
+        if(avergaeTimeToClearRoom > 0) extraStats += 10f / calculateAverageTime();
         
         return extraStats;
     }
-
     private void SpawnChest()
     {
-        Vector3 spawnPosition = player.transform.position + new Vector3(5, 5, 0);
-        Instantiate(chest, spawnPosition, Quaternion.Euler(0, 0, 0));
+        currentRarity = lootPool.GetRandomRarity();
+        Vector3 spawnPosition = player.transform.position + new Vector3(5, 3, 0);
+        switch (currentRarity.rarity)
+        {
+            case "Common":
+                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;
+            case "Rare":
+                Instantiate(chests[1], spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;                
+            case "Epic":
+                Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;                      
+            default:
+                Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;
+        }
+        
+        
     }
 }

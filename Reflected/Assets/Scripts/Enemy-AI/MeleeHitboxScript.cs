@@ -39,13 +39,11 @@ public class MeleeHitboxScript : MonoBehaviour
         {
             if (other.tag == "Player")
             {
-                Debug.Log("Melee collision activated. Potential damage: " + damageAmount);
-                var healthComponent = other.GetComponent<Player>();
+                var healthComponent = other.GetComponentInChildren<Player>();
                 if (healthComponent != null)
                 {
                     damageDone = true;
                     healthComponent.TakeDamage(damageAmount);
-                    Debug.Log("Player took this amount of damage: " + damageAmount + " from a melee attack.");
                 }
             }
         }

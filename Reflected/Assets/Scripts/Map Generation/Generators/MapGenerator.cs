@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using PathCreation;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
+using Debug = UnityEngine.Debug;
 
 public class MapGenerator : MonoBehaviour
 {
+    private delegate void Generator(Map map);
+
     [Header("Seed")]
 
     [SerializeField] private int seed;
@@ -26,6 +32,8 @@ public class MapGenerator : MonoBehaviour
     [Header("Map")]
 
     [SerializeField] private bool deactivateRooms;
+
+    [SerializeField] private bool autoFocusCamera;
 
     [Range(10, 500)]
     [Tooltip("In chunks")]
@@ -59,6 +67,11 @@ public class MapGenerator : MonoBehaviour
     [TextArea()]
     [ReadOnly][SerializeField] private string log;
 
+    [TextArea()]
+    [ReadOnly][SerializeField] private string timerLog;
+
+    public static UnityEvent Finished = new UnityEvent();
+
     // Properties
 
     public static int ChunkSize { get; private set; }
@@ -72,7 +85,6 @@ public class MapGenerator : MonoBehaviour
     public WaterGenerator    WaterGenerator    => waterGenerator;
     public TerrainGenerator  TerrainGenerator  => terrainGenerator;
     public ObjectPlacer      ObjectPlacer      => objectPlacer;
-
 
     private void Start()
     {
@@ -94,11 +106,16 @@ public class MapGenerator : MonoBehaviour
     {
         // Prepare
 
+        Stopwatch stopwatch = Stopwatch.StartNew();
+
         log = "Map generation log\n";
+        timerLog = "";
+
         int newSeed = seed != 0 ? seed : (int)System.DateTime.Now.Ticks;
         Random.InitState(newSeed);
         terrainGenerator.SetRandomSeed(newSeed);
         Log("Seed: " + newSeed);
+
         Destroy(GameObject.Find("Map"));
 
         // Initialize map
@@ -112,30 +129,28 @@ public class MapGenerator : MonoBehaviour
 
         // Generate map
 
-        roomGenerator    .Generate(map);
-        chamberGenerator .Generate(map);
+        Timed(roomGenerator    .Generate, map, "Room generator");
+        Timed(chamberGenerator .Generate, map, "Chamber generator");
 
         map.GenerateGraph();
-
-        roomTypeGenerator.Generate(map);
-
         map.ScaleUpData();
 
-        pathGenerator    .Generate(map);
-        wallGenerator    .Generate(map);
-        pillarGenerator  .Generate(map);
-        waterGenerator   .Generate(map);
-        terrainGenerator .Generate(map);
+        Timed(pathGenerator    .Generate, map, "Path generator");
+        Timed(wallGenerator    .Generate, map, "Wall generator");
+        Timed(pillarGenerator  .Generate, map, "Pillar generator");
+        Timed(waterGenerator   .Generate, map, "Water generator");
+        Timed(terrainGenerator .Generate, map, "Terrain generator");
+        Timed(roomTypeGenerator.Generate, map, "Room type generator");
+        Timed(BakeNavMesh               , map, "NavMesh baker");
+        Timed(objectPlacer     .Place   , map, "Object placer");
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.SetActive(false);
-        BakeNavMesh(map.GetComponent<NavMeshSurface>());
-        player.SetActive(true);
-
-        objectPlacer.Place(map, pathGenerator.Radius);
+        Finished.Invoke();
 
         // Log
 
+        stopwatch.Stop();
+        timerLog += "\nTotal: " + stopwatch.Elapsed.TotalSeconds.ToString("0.0") + " seconds";
+        Log(timerLog);
         Log("");
         Debug.Log(log);
 
@@ -145,6 +160,28 @@ public class MapGenerator : MonoBehaviour
             map.DeactivateAll();
 
         map.Begin();
+
+        // Move scene view camera
+
+        AutoFocusCamera();
+    }
+
+    private void AutoFocusCamera()
+    {
+#if UNITY_EDITOR
+
+        if (autoFocusCamera)
+        {
+            if (SceneView.lastActiveSceneView == null)
+            {
+                Debug.Log("Autommatic camera focus failed because no scene view was active.");
+                return;
+            }
+
+            SceneView.lastActiveSceneView.LookAt(GameObject.Find("Player").transform.position, Quaternion.Euler(70, 0, 0), 40, false, false);
+        }
+
+#endif
     }
 
     private IEnumerator Coroutine_BulkGenerate()
@@ -177,8 +214,19 @@ public class MapGenerator : MonoBehaviour
         log += "\n" + text;
     }
 
-    private void BakeNavMesh(NavMeshSurface surface)
+    private void BakeNavMesh(Map map)
     {
-        surface.BuildNavMesh();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.SetActive(false);
+        map.GetComponent<NavMeshSurface>().BuildNavMesh();
+        player.SetActive(true);
+    }
+
+    private void Timed(Generator generator, Map map, string generatorName)
+    {
+        Stopwatch stopwatch = Stopwatch.StartNew();
+        generator.Invoke(map);
+        stopwatch.Stop();
+        timerLog += "\n" + generatorName + ": \t" + stopwatch.ElapsedMilliseconds + " milliseconds";
     }
 }

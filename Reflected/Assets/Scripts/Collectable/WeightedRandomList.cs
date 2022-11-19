@@ -6,7 +6,7 @@ using UnityEngine;
 public class WeightedRandomList<T>
 {
     [System.Serializable]
-    public struct Pair
+    public class Pair
     {
         public T item;
         public float weight;
@@ -20,6 +20,11 @@ public class WeightedRandomList<T>
         public void SetWeight(float weight)
         {
             this.weight = weight;
+        }
+
+        public void IncreaseWeight(float weightIncrease)
+        {
+            this.weight += weightIncrease;
         }
     }
 
@@ -66,8 +71,18 @@ public class WeightedRandomList<T>
         return default(T);
     }
 
+    public T GetItem(int index)
+    {
+        return list[index].item;
+    }
+
     public void SetWeight(int index, float weight)
     {
         list[index].SetWeight(weight);
+    }
+
+    public void IncreaseWeight(int index, float weightIncrease)
+    {
+        list[index].IncreaseWeight(weightIncrease);
     }
 }

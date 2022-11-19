@@ -41,13 +41,11 @@ public class ProjectileScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Projectile collision activated. Potential damage: " + damageAmount);
-            var healthComponent = other.GetComponent<Player>();
+            var healthComponent = other.GetComponentInChildren<Player>();
             if (healthComponent != null)
             {
                 Destroy(this.gameObject);
                 healthComponent.TakeDamage(damageAmount);
-                Debug.Log("Player took this amount of damage: " + damageAmount + " from a projectile.");
             }
 
             Destroy(this.gameObject);

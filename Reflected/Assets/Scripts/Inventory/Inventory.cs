@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour, ISavable
     //[SerializeField]
     public Dictionary<ItemData, InventoryItem> itemDictionary = new Dictionary<ItemData, InventoryItem>();
 
-    public void Awake()
+    private void Awake()
     {
         DontDestroyOnLoad(this);
 
@@ -47,7 +47,7 @@ public class Inventory : MonoBehaviour, ISavable
         if(itemDictionary.TryGetValue(itemData, out InventoryItem item))
         {
             item.AddMoreToStack(itemData.amount);
-            Debug.Log($"{item.itemData.displayName} total stack is now {item.stackSize}");
+            //Debug.Log($"{item.itemData.displayName} total stack is now {item.stackSize}");
         }
     }
 

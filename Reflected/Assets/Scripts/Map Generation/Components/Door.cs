@@ -4,28 +4,38 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    private enum State { Closing, Closed, Opening, Open }
+
     [Header("References")]
 
-    [SerializeField] private GameObject blockPrefab;
-    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject portion1;
+    [SerializeField] private GameObject portion2;
 
     [Header("Values")]
 
-    [SerializeField] private float animationDuration;
+    [SerializeField] private float openingDuration;
+    [SerializeField] private float closingDuration;
 
     [Header("Read Only")]
 
     [ReadOnly][SerializeField] private Room room;
-    [ReadOnly][SerializeField] private bool isOpen;
-
+    [ReadOnly][SerializeField] private State state;
+    [ReadOnly][SerializeField] private float transition;
+    
     private static float thickness;
+
+    private Vector3 portion1ClosedPos;
+    private Vector3 portion2ClosedPos;
+    private Vector3 portion1OpenPos;
+    private Vector3 portion2OpenPos;
 
     // Properties
 
     public static float Thickness => thickness;
 
-    public float AnimationDuration => animationDuration;
-    public bool IsOpen => isOpen;
+    public float OpeningDuration => openingDuration;
+    public float ClosingDuration => closingDuration;
+    public bool IsOpen => state == State.Opening || state == State.Open;
     public Room Room => room;
 
     public static void StaticInitialize(float thickness)
@@ -37,7 +47,6 @@ public class Door : MonoBehaviour
     {
         this.room = room;
         name = "Door " + direction.ToString();
-        animator.speed = 1f / animationDuration;
 
         transform.position = new Vector3(position.x, 0, position.y);
         transform.localScale = new Vector3(width, Wall.Height, thickness);
@@ -45,25 +54,78 @@ public class Door : MonoBehaviour
         if (direction == CardinalDirection.West || direction == CardinalDirection.East)
             transform.Rotate(0f, 90f, 0f);
 
+        portion1ClosedPos = portion1.transform.localPosition;
+        portion2ClosedPos = portion2.transform.localPosition;
+
+        portion1OpenPos = portion1ClosedPos - new Vector3(0.45f, 0, 0);
+        portion2OpenPos = portion2ClosedPos + new Vector3(0.45f, 0, 0);
+
+        CloseInstantly();
+
         return this;
     }
 
-    public void Open()
+    private void Update()
     {
-        if (isOpen)
-            return;
+        if (state == State.Opening)
+        {
+            transition += 1f / openingDuration * Time.deltaTime;
 
-        animator.SetTrigger("Open");
-        isOpen = true;
+            if (transition >= 1f)
+            {
+                transition = 1f;
+                state = State.Open;
+            }
+
+            Animate();
+        }
+
+        else if (state == State.Closing)
+        {
+            transition -= 1f / closingDuration * Time.deltaTime;
+
+            if (transition <= 0f)
+            {
+                transition = 0f;
+                state = State.Closed;
+            }
+
+            Animate();
+        }
     }
 
+    private void Animate()
+    {
+        portion1.transform.localPosition = Vector3.Lerp(portion1ClosedPos, portion1OpenPos, transition.LerpValueSmoothstep());
+        portion2.transform.localPosition = Vector3.Lerp(portion2ClosedPos, portion2OpenPos, transition.LerpValueSmoothstep());
+    }
+
+    [ContextMenu("Open")]
+    public void Open()
+    {
+        state = State.Opening;
+    }
+
+    [ContextMenu("Close")]
     public void Close()
     {
-        if (!isOpen)
-            return;
+        state = State.Closing;
+    }
 
-        animator.SetTrigger("Close");
-        isOpen = false;
+    [ContextMenu("Open instantly")]
+    public void OpenInstantly()
+    {
+        state = State.Open;
+        transition = 1f;
+        Animate();
+    }
+
+    [ContextMenu("Close instantly")]
+    public void CloseInstantly()
+    {
+        state = State.Closed;
+        transition = 0f;
+        Animate();
     }
 
 }

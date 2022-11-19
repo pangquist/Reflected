@@ -11,5 +11,5 @@ public class StatusEffectData : ScriptableObject
     public float MovementPenalty;
     public float LifeTime;
 
-    //public GameObject EffectParticles;
+    public GameObject EffectParticles;
 }
