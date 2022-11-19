@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StructurePlacer : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class StructurePlacer : MonoBehaviour
     [SerializeField] private float wallPadding;
     [Range(0f, 1f)]
     [SerializeField] private float maxCoverage;
+
+    public static UnityEvent Finished = new UnityEvent();
 
     public void Place(Map map)
     {
@@ -35,6 +38,10 @@ public class StructurePlacer : MonoBehaviour
                 }
             }
         }
+
+        // Updates all colliders without having to wait for an automatic physics update
+        Physics.SyncTransforms();
+        Finished.Invoke();
     }
 
     private void PlaceStructures(Room room, int terrainTypeIndex, WeightedRandomList<GameObject> structures)
@@ -58,6 +65,7 @@ public class StructurePlacer : MonoBehaviour
         Rect rayRect = room.Rect.Inflated(-wallPadding, -wallPadding);
         Vector2 rayPosition;
         Structure structure;
+        List<GameObject> placedPrefabs = new List<GameObject>();
 
         for (int i = 0; i < nrOfRays; ++i)
         {
@@ -75,6 +83,10 @@ public class StructurePlacer : MonoBehaviour
             // Get random structure
             structure = structures.GetRandom().GetComponent<Structure>();
 
+            // Ensure structure has not been placed in this room already
+            if (placedPrefabs.Contains(structure.gameObject))
+                continue;
+
             // Ensure structure fits inside the room
             if (!FitsInsideRoom())
                 continue;
@@ -88,6 +100,7 @@ public class StructurePlacer : MonoBehaviour
                 continue;
 
             // Instantiate structure
+            placedPrefabs.Add(structure.gameObject);
             InstantiateStructure(structure.gameObject, room, raycastHit);
         }
 
@@ -135,9 +148,7 @@ public class StructurePlacer : MonoBehaviour
     private void InstantiateStructure(GameObject structurePrefab, Room room, RaycastHit raycastHit)
     {
         Structure structure = Instantiate(structurePrefab.gameObject, room.ObjectsChild).GetComponent<Structure>();
-        Debug.Log("RaycastHit.point: " + raycastHit.point);
         structure.transform.position = raycastHit.point;
-        Debug.Log("Position: " + structure.transform.position);
         structure.TerrainFlattener.Trigger();
         room.Structures.Add(structure);
     }

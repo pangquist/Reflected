@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class ObjectList
@@ -17,18 +18,21 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] MapGenerator mapGenerator;
 
     [Header("Values")]
-    [Range(1, 20)]
-    [SerializeField] int objectMultiplier;
+    [Range(0f, 20f)]
+    [SerializeField] float objectMultiplier;
     [Range(2f, 8f)]
     [SerializeField] float wallPadding;
     [Range(3f, 15f)]
     [SerializeField] float obstacleDistance;
     [SerializeField] bool avoidCenter;
+    [SerializeField] LayerMask layerMask;
 
     [SerializeField] GameObject enemySpawnPoint;
 
     [Header("Objects")]
     [SerializeField] ObjectList[] objects;
+
+    public static UnityEvent Finished = new UnityEvent();
 
     public void Place(Map map)
     {
@@ -36,6 +40,8 @@ public class ObjectPlacer : MonoBehaviour
         {
             PlaceDecorations(room);
         }
+
+        Finished.Invoke();
     }
 
     private void PlaceDecorations(Room room)
@@ -59,12 +65,12 @@ public class ObjectPlacer : MonoBehaviour
 
                     foreach (WeightedRandomList<UnityEngine.GameObject>.Pair pair in objectList.terrainObjects.list)
                     {
-                        for (int i = 0; i < pair.weight * objectMultiplier * 10; i++)
+                        for (int i = 0; i < pair.weight * objectMultiplier * room.Rect.Area() * 0.01f; i++)
                         {
                             Ray ray = new Ray(raycastOrigins[(int)Random.Range(0, raycastOrigins.Count)], -transform.up);
 
                             RaycastHit hit;
-                            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
+                            if (Physics.Raycast(ray, out hit, 150f, layerMask) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
                             {
                                 if (otherHeight < hit.point.y && hit.point.y <= height)
                                 {
@@ -116,10 +122,10 @@ public class ObjectPlacer : MonoBehaviour
             for (float j = start.z; j < end.z; j++)
             {
                 bool canPlace = true;
-                Vector3 coordinate = new Vector3(i, room.PathPoints[0].y, j);
+                Vector3 coordinate = new Vector3(i, 100f, j);
                 foreach (Vector3 pathPoint in room.PathPoints)
                 {
-                    if (Vector3.Distance(pathPoint, coordinate) < pathRadius)
+                    if (Vector2.Distance(pathPoint.XZ(), coordinate.XZ()) < pathRadius)
                     {
                         canPlace = false;
                     }

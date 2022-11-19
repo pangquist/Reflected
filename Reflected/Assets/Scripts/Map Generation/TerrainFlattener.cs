@@ -7,6 +7,7 @@ public class TerrainFlattener : MonoBehaviour
     [SerializeField] private bool drawGizmos = true;
     [SerializeField] private float innerRadius = 6;
     [SerializeField] private float fade = 5;
+    [SerializeField] private LayerMask layerMask;
 
     private float level;
     private Vector3 terrainChunkOffset;
@@ -15,7 +16,7 @@ public class TerrainFlattener : MonoBehaviour
 
     private void Awake()
     {
-        MapGenerator.Finished.AddListener(Trigger);
+        StructurePlacer.Finished.AddListener(Trigger);
     }
 
     [ContextMenu("Trigger")]
@@ -30,13 +31,13 @@ public class TerrainFlattener : MonoBehaviour
             Debug.LogWarning("Could not find parent room.");
             return;
         }
-
+        
         Transform terrainParent = room.TerrainChild;
 
         // Determine level
 
         RaycastHit raycastHit;
-        Physics.Raycast(new Vector3(transform.position.x, 100f, transform.position.z), Vector3.down, out raycastHit);
+        Physics.Raycast(new Vector3(transform.position.x, 100f, transform.position.z), Vector3.down, out raycastHit, 150f, layerMask);
         level = raycastHit.point.y;
 
         terrainChunkOffset = new Vector3(MapGenerator.ChunkSize * 0.5f, 0, MapGenerator.ChunkSize * 0.5f);

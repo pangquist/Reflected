@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
-    [Header("Read Only")]
+    [Header("References")]
+    [SerializeField] private MeshCollider meshCollider;
 
+    [Header("Read Only")]
     [ReadOnly][SerializeField] private Rect rect;
 
     // Properties
@@ -24,4 +26,13 @@ public class Water : MonoBehaviour
         return this;
     }
 
+    private void Awake()
+    {
+        MapGenerator.Finished.AddListener(DisableCollider);
+    }
+
+    private void DisableCollider()
+    {
+        meshCollider.enabled = false;
+    }
 }

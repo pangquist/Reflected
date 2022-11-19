@@ -7,25 +7,23 @@ public class Structure : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private TerrainFlattener terrainFlattener;
+    [SerializeField] private Transform navMeshObstacles;
+    [SerializeField] private Transform decorationObstructors;
 
     [Header("Values")]
     [SerializeField] private bool drawGizmos = true;
     [SerializeField] private float obstructiveRadius = 6;
     [SerializeField] private bool avoidPaths = true;
 
-    [Header("Read Only")]
-    [ReadOnly][SerializeField] private NavMeshObstacle[] navMeshObstacles;
-
     // Properties
 
     public TerrainFlattener TerrainFlattener => terrainFlattener;
-    public NavMeshObstacle[] NavMeshObstacles => navMeshObstacles;
     public float ObstructiveRadius => obstructiveRadius;
     public bool AvoidPaths => avoidPaths;
 
     private void Awake()
     {
-        navMeshObstacles = transform.Find("NavMeshObstacles").GetComponentsInChildren<NavMeshObstacle>();
+        MapGenerator.Finished.AddListener(DestroyDecorationObstructors);
     }
 
     public float ObstructiveArea()
@@ -38,6 +36,11 @@ public class Structure : MonoBehaviour
     {
         if (drawGizmos)
             Gizmos.DrawWireSphere(transform.position, obstructiveRadius);
+    }
+
+    private void DestroyDecorationObstructors()
+    {
+        Destroy(decorationObstructors.gameObject);
     }
 
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7676568954825789094}
   - component: {fileID: 3208491244342391238}
   - component: {fileID: 5153348668141941737}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Structure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,6 +33,7 @@ Transform:
   m_Children:
   - {fileID: 2181670421828702670}
   - {fileID: 7540090635949031675}
+  - {fileID: 4076281624093089180}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,10 +50,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainFlattener: {fileID: 3208491244342391238}
+  navMeshObstacles: {fileID: 7540090635949031675}
+  decorationObstructors: {fileID: 4076281624093089180}
   drawGizmos: 1
   obstructiveRadius: 4.5
   avoidPaths: 1
-  navMeshObstacles: []
 --- !u!114 &3208491244342391238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +69,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 1
   innerRadius: 4
-  outerRadius: 6.5
+  fade: 6
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &5153348668141941737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7540090635949031675}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NavMeshObstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,6 +123,37 @@ Transform:
   m_Father: {fileID: 7781731991769598659}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4907485359354504261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4076281624093089180}
+  m_Layer: 7
+  m_Name: Decoration Colliders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4076281624093089180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4907485359354504261}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7781731991769598659}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6499298307342422512
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2181670421828702670}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Models
   m_TagString: Untagged
   m_Icon: {fileID: 0}

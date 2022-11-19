@@ -175,10 +175,4 @@ public class Room : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        foreach (Vector3 point in pathPoints)
-            Gizmos.DrawSphere(point, 0.25f);
-    }
-
 }
