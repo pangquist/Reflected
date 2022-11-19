@@ -27,9 +27,16 @@ public class PathGenerator : MonoBehaviour
 
     // Properties
 
-    public float Level => level;
-    public float Radius => radius;
-    public Color Color => color;
+    public static float Level { get; private set; }
+    public static float Radius { get; private set; }
+    public static Color Color { get; private set; }
+
+    private void Awake()
+    {
+        Level = level;
+        Radius = radius;
+        Color = color;
+    }
 
     public void Generate(Map map)
     {
@@ -38,6 +45,12 @@ public class PathGenerator : MonoBehaviour
 
         foreach (Room room in map.Rooms)
         {
+            foreach (PathCreator path in room.GetComponentsInChildren<PathCreator>())
+            {
+                room.Paths.Add(path);
+                CreatePoints(room, path);
+            }
+
             if (room.Chambers.Count == 1)
             {
                 CreatePoints(room, CreatePath(room, room.Chambers[0]));
@@ -123,7 +136,8 @@ public class PathGenerator : MonoBehaviour
 
         for (float percentage = 0f; percentage <= 1f; percentage += 1f / nrOfPoints)
         {
-            room.PathPoints.Add(path.path.GetPointAtDistance(path.path.length * percentage));
+            Vector3 pathPoint = path.path.GetPointAtDistance(path.path.length * percentage);
+            room.PathPoints.Add(new Vector3(pathPoint.x, level, pathPoint.z));
         }
     }
 

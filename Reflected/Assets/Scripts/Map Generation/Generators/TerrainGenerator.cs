@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 using Unity.Mathematics;
+using UnityEngine.Events;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class TerrainType
@@ -45,6 +47,8 @@ public class TerrainGenerator : MonoBehaviour
     public float HeightMultiplier() => heightMultiplier;
     public AnimationCurve HeightCurve() => heightCurve;
 
+    public static UnityEvent Finished = new UnityEvent();
+
     public void SetRandomSeed(float seed)
     {
         randomSeed = seed / 10000;
@@ -72,7 +76,6 @@ public class TerrainGenerator : MonoBehaviour
                     tilePosition.z - MapGenerator.ChunkSize,
                     MapGenerator.ChunkSize,
                     MapGenerator.ChunkSize);
-
 
                 foreach (Room room in map.Rooms)
                 {
@@ -104,10 +107,13 @@ public class TerrainGenerator : MonoBehaviour
                 }
             }
         }
+
         foreach(Room room in map.Rooms)
         {
             SetPathPoints(room);
         }
+
+        Finished.Invoke();
     }
 
     private void GenerateTerrainChunk(TerrainChunk terrainChunk, Room room1, Room room2 = null)
@@ -156,55 +162,45 @@ public class TerrainGenerator : MonoBehaviour
         ModifyVerticesUsingPaths(terrainChunk, ref meshVertices, room1, room2);
 
         // update the vertices in the mesh and update its properties
-        terrainChunk.MeshFilter().mesh.vertices = meshVertices;
-        terrainChunk.MeshFilter().mesh.RecalculateBounds();
-        terrainChunk.MeshFilter().mesh.RecalculateNormals();
-
-        // update the mesh collider
-        terrainChunk.MeshCollider().sharedMesh = terrainChunk.MeshFilter().mesh;
+        terrainChunk.UpdateMesh(ref meshVertices);
     }
 
     private void ModifyVerticesUsingPaths(TerrainChunk terrainChunk, ref Vector3[] meshVertices, Room room1, Room room2)
     {
-        int verticesSquared = (int)Mathf.Sqrt(meshVertices.Length);
         Vector3 offset = new Vector3(MapGenerator.ChunkSize * 0.5f, 0, MapGenerator.ChunkSize * 0.5f);
         Matrix4x4 matrix = terrainChunk.transform.localToWorldMatrix;
 
         Vector3 vertexWorldPos;
         float distance, adaption, adaptionAmount;
-        int i;
 
-        for (int y = 0; y < verticesSquared; ++y)
+        for (int i = 0; i < meshVertices.Length; ++i)
         {
-            for (int x = 0; x < verticesSquared; ++x)
+            vertexWorldPos = matrix.MultiplyPoint3x4(meshVertices[i]) - offset;
+
+            ModifyVertexHeight(ref meshVertices, room1);
+
+            if (room2 != null)
+                ModifyVertexHeight(ref meshVertices, room2);
+
+            void ModifyVertexHeight(ref Vector3[] meshVertices, Room room)
             {
-                i = y * verticesSquared + x;
-                vertexWorldPos = matrix.MultiplyPoint3x4(meshVertices[i]) - offset;
-
-                ModifyVertexHeight(ref meshVertices, room1);
-
-                if (room2 != null)
-                    ModifyVertexHeight(ref meshVertices, room2);
-
-                void ModifyVertexHeight(ref Vector3[] meshVertices, Room room)
+                foreach (Vector3 pathPoint in room.PathPoints)
                 {
-                    foreach (Vector3 pathPoint in room.PathPoints)
+                    distance = Vector2.Distance(vertexWorldPos.XZ(), pathPoint.XZ());
+
+                    if (distance < pathAdaptionRange)
                     {
-                        distance = Vector2.Distance(vertexWorldPos.XZ(), pathPoint.XZ());
+                        // how much to affect the vertex based of the distance to the path
+                        adaptionAmount = pathAdaptionAmount.Evaluate(distance / pathAdaptionRange);
 
-                        if (distance < pathAdaptionRange)
-                        {
-                            // how much to affect the vertex based of the distance to the path
-                            adaptionAmount = pathAdaptionAmount.Evaluate(distance / pathAdaptionRange);
-                            
-                            // how much to affect the vertex based of its current height
-                            adaptionAmount *= pathHeightAdaption.Evaluate((meshVertices[i].y - startY) / heightMultiplier);
+                        // how much to affect the vertex based of its current height
+                        adaptionAmount *= pathHeightAdaption.Evaluate((meshVertices[i].y - startY) / heightMultiplier);
 
-                            // the final height adaption
-                            adaption = (pathY - meshVertices[i].y) * adaptionAmount;
+                        // the final height adaption
+                        adaption = (pathY - meshVertices[i].y) * adaptionAmount;
 
-                            meshVertices[i].y += adaption;
-                        }
+                        // apply adaption
+                        meshVertices[i].y += adaption;
                     }
                 }
             }
@@ -224,7 +220,7 @@ public class TerrainGenerator : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
                 {
-                    Collider[] closeObjects = Physics.OverlapSphere(hit.point, mapGenerator.PathGenerator.Radius * 1.5f);
+                    Collider[] closeObjects = Physics.OverlapSphere(hit.point, PathGenerator.Radius * 1.5f);
 
                     foreach (Collider collider in closeObjects)
                     {
@@ -240,10 +236,10 @@ public class TerrainGenerator : MonoBehaviour
 
         TerrainChunk[] chunks = room.gameObject.GetComponentsInChildren<TerrainChunk>();
 
-        foreach(TerrainChunk chunk in chunks)
+        foreach (TerrainChunk chunk in chunks)
         {
-            chunk.MeshRenderer().material.SetFloat("_PathRadius", mapGenerator.PathGenerator.Radius);
-            chunk.MeshRenderer().material.SetFloat("_PathPointHeight", mapGenerator.PathGenerator.Level);
+            chunk.MeshRenderer().material.SetFloat("_PathRadius", PathGenerator.Radius);
+            chunk.MeshRenderer().material.SetFloat("_PathPointHeight", PathGenerator.Level);
             chunk.PassPointsToMaterial();
         }
 
@@ -252,8 +248,8 @@ public class TerrainGenerator : MonoBehaviour
             chunks = chamber.gameObject.GetComponentsInChildren<TerrainChunk>();
             foreach (TerrainChunk chunk in chunks)
             {
-                chunk.MeshRenderer().material.SetFloat("_PathRadius", mapGenerator.PathGenerator.Radius);
-                chunk.MeshRenderer().material.SetFloat("_PathPointHeight", mapGenerator.PathGenerator.Level);
+                chunk.MeshRenderer().material.SetFloat("_PathRadius", PathGenerator.Radius);
+                chunk.MeshRenderer().material.SetFloat("_PathPointHeight", PathGenerator.Level);
                 chunk.PassPointsToMaterial();
             }
         }

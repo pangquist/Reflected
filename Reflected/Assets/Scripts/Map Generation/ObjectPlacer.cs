@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class ObjectList
@@ -17,18 +18,21 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] MapGenerator mapGenerator;
 
     [Header("Values")]
-    [Range(1, 20)]
-    [SerializeField] int objectMultiplier;
+    [Range(0f, 20f)]
+    [SerializeField] float objectMultiplier;
     [Range(2f, 8f)]
     [SerializeField] float wallPadding;
     [Range(3f, 15f)]
     [SerializeField] float obstacleDistance;
     [SerializeField] bool avoidCenter;
+    [SerializeField] LayerMask layerMask;
 
     [SerializeField] GameObject enemySpawnPoint;
 
     [Header("Objects")]
     [SerializeField] ObjectList[] objects;
+
+    public static UnityEvent Finished = new UnityEvent();
 
     public void Place(Map map)
     {
@@ -36,12 +40,15 @@ public class ObjectPlacer : MonoBehaviour
         {
             PlaceDecorations(room);
         }
+
+        Finished.Invoke();
     }
 
     private void PlaceDecorations(Room room)
     {
-        List<List<Vector3>> terrainObjectPoints = CreateRayCastPoints(room, mapGenerator.PathGenerator.Radius);
+        List<List<Vector3>> terrainObjectPoints = CreateRayCastPoints(room, PathGenerator.Radius);
         List<Vector3> enemySpawns = new List<Vector3>();
+
         Rect center = new Rect(room.Rect.position + room.Rect.size / 4, room.Rect.size / 2);
 
         int terrainNr = 0;
@@ -56,10 +63,9 @@ public class ObjectPlacer : MonoBehaviour
 
                 foreach (WeightedRandomList<UnityEngine.GameObject>.Pair pair in objectList.terrainObjects.list)
                 {
-                    for (int i = 0; i < pair.weight * objectMultiplier * 10; i++)
+                    for (int i = 0; i < pair.weight * objectMultiplier * room.Rect.Area() * 0.01f; i++)
                     {
                         Vector3 point = pointList[Random.Range(0, pointList.Count)];
-
                         bool canPlace = true;
 
                         if (pair.item.gameObject.GetComponent<NavMeshObstacle>())
@@ -68,7 +74,7 @@ public class ObjectPlacer : MonoBehaviour
 
                             foreach (Collider collider in closeObjects)
                             {
-                                if (collider.gameObject.GetComponent<NavMeshObstacle>())
+                                if (collider.gameObject.GetComponent<NavMeshObstacle>() || collider.transform.parent.parent.GetComponent<Structure>())
                                     canPlace = false;
                             }
                             if (avoidCenter)
@@ -78,7 +84,7 @@ public class ObjectPlacer : MonoBehaviour
                             }
                         }
                         if (canPlace)
-                            Instantiate(pair.item, point, Quaternion.identity, room.DecorationsChild.transform);
+                            Instantiate(pair.item, point, Quaternion.identity, room.ObjectsChild);
                     }
                 }
             }
@@ -109,16 +115,20 @@ public class ObjectPlacer : MonoBehaviour
             for (float j = start.z; j < end.z; j++)
             {
                 bool canPlace = true;
-                Vector3 coordinate = new Vector3(i, room.PathPoints[0].y, j);
+                Vector3 coordinate = new Vector3(i, 100f, j);
+
                 foreach (Vector3 pathPoint in room.PathPoints)
                 {
-                    if (Vector3.Distance(pathPoint, coordinate) < pathRadius)
+                    if (Vector2.Distance(pathPoint.XZ(), coordinate.XZ()) < pathRadius)
+                    {
                         canPlace = false;
+                        break;
+                    } 
                 }
+
                 if (canPlace)
                 {
                     Ray ray = new Ray(coordinate, -transform.up);
-
                     RaycastHit hit;
                     if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
                     {
@@ -152,7 +162,9 @@ public class ObjectPlacer : MonoBehaviour
                 foreach (Collider collider in closeObjects)
                 {
                     if (!collider.gameObject.GetComponent<NavMeshObstacle>())
-                        Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.transform);
+                    {
+                        Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.ObjectsChild);
+                    }
                 }
             }
         }

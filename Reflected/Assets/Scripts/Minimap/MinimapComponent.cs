@@ -201,12 +201,6 @@ public class MinimapComponent : MonoBehaviour
             SetColor(Color.yellow);
         }
 
-        else if (room.Type == RoomType.Peaceful)
-        {
-            SetSprite(minimap.GetSprite("Circle"));
-            SetColor(Color.green);
-        }
-
         else
         {
             Destroy(controller);

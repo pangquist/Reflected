@@ -333,23 +333,45 @@ public static class Extensions
         return new Vector2(vector.x, vector.z);
     }
 
+    /// <summary>
+    /// Sets the red component of this color
+    /// </summary>
     public static void SetR(this Color color, float r)
     {
         color = new Color(r, color.g, color.b, color.a);
     }
 
+    /// <summary>
+    /// Sets the green component of this color
+    /// </summary>
     public static void SetG(this Color color, float g)
     {
         color = new Color(color.r, g, color.b, color.a);
     }
 
+    /// <summary>
+    /// Sets the blue component of this color
+    /// </summary>
     public static void SetB(this Color color, float b)
     {
         color = new Color(color.r, color.g, b, color.a);
     }
 
+    /// <summary>
+    /// Sets the alpha component of this color
+    /// </summary>
     public static void SetA(this Color color, float a)
     {
         color = new Color(color.r, color.g, color.b, a);
+    }
+
+    /// <summary>
+    /// Returns a random point from within this rect
+    /// </summary>
+    public static Vector2 RandomPoint(this Rect rect)
+    {
+        return new Vector2(
+            Random.Range(rect.xMin, rect.xMax),
+            Random.Range(rect.yMin, rect.yMax));
     }
 }

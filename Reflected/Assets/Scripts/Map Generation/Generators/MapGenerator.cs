@@ -27,6 +27,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private PillarGenerator pillarGenerator;
     [SerializeField] private WaterGenerator waterGenerator;
     [SerializeField] private TerrainGenerator terrainGenerator;
+    [SerializeField] private StructurePlacer structurePlacer;
     [SerializeField] private ObjectPlacer objectPlacer;
 
     [Header("Map")]
@@ -84,6 +85,7 @@ public class MapGenerator : MonoBehaviour
     public PillarGenerator   PillarGenerator   => pillarGenerator;
     public WaterGenerator    WaterGenerator    => waterGenerator;
     public TerrainGenerator  TerrainGenerator  => terrainGenerator;
+    public StructurePlacer   StructurePlacer   => structurePlacer;
     public ObjectPlacer      ObjectPlacer      => objectPlacer;
 
     private void Start()
@@ -135,13 +137,15 @@ public class MapGenerator : MonoBehaviour
         map.GenerateGraph();
         map.ScaleUpData();
 
-        Timed(pathGenerator    .Generate, map, "Path generator");
         Timed(wallGenerator    .Generate, map, "Wall generator");
         Timed(pillarGenerator  .Generate, map, "Pillar generator");
-        Timed(waterGenerator   .Generate, map, "Water generator");
-        Timed(terrainGenerator .Generate, map, "Terrain generator");
         Timed(roomTypeGenerator.Generate, map, "Room type generator");
+        Timed(waterGenerator   .Generate, map, "Water generator");
+        Timed(pathGenerator    .Generate, map, "Path generator");
+        Timed(terrainGenerator .Generate, map, "Terrain generator");
+        
         Timed(BakeNavMesh               , map, "NavMesh baker");
+        Timed(structurePlacer  .Place   , map, "Structure placer");
         Timed(objectPlacer     .Place   , map, "Object placer");
 
         Finished.Invoke();

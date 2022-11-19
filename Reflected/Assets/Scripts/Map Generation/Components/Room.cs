@@ -9,7 +9,7 @@ public class Room : MonoBehaviour
 
     [SerializeField] private Transform pathsChild;
     [SerializeField] private Transform terrainChild;
-    [SerializeField] private Transform decorationsChild;
+    [SerializeField] private Transform objectsChild;
 
     [Header("Read Only")]
 
@@ -20,6 +20,7 @@ public class Room : MonoBehaviour
     [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private List<PathCreator> paths;
     [ReadOnly][SerializeField] private List<Vector3> pathPoints;
+    [ReadOnly][SerializeField] private List<Structure> structures;
      
     private static Map map;
 
@@ -27,7 +28,7 @@ public class Room : MonoBehaviour
 
     public Transform PathsChild => pathsChild;
     public Transform TerrainChild => terrainChild;
-    public Transform DecorationsChild => decorationsChild;
+    public Transform ObjectsChild => objectsChild;
 
     public Rect Rect => rect;
     public bool Cleared => cleared;
@@ -36,11 +37,7 @@ public class Room : MonoBehaviour
     public List<Chamber> Chambers => chambers;
     public List<PathCreator> Paths => paths;
     public List<Vector3> PathPoints => pathPoints;
-
-    private void Start()
-    {
-        
-    }
+    public List<Structure> Structures => structures;
 
     public static void StaticInitialize(Map map)
     {
@@ -138,7 +135,7 @@ public class Room : MonoBehaviour
 
         else
         {
-            if (type == RoomType.Monster)
+            if (type == RoomType.Monster || type == RoomType.Shop)
             {
                 map.GameManager.AiDirector.EnterRoom();
                 GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(1);
@@ -176,12 +173,6 @@ public class Room : MonoBehaviour
             foreach (Chamber chamber in chambers)
                 chamber.Close(this);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        foreach (Vector3 point in pathPoints)
-            Gizmos.DrawSphere(point, 0.25f);
     }
 
 }

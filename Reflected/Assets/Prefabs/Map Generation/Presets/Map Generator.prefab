@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5090313322264181269}
   - component: {fileID: 5090313322264181268}
   - component: {fileID: 5090313322264181271}
+  - component: {fileID: 5567422535345929959}
   - component: {fileID: 5090313322264181270}
   - component: {fileID: 5090313322264181225}
   m_Layer: 0
@@ -65,6 +66,7 @@ MonoBehaviour:
   pillarGenerator: {fileID: 5090313322264181269}
   waterGenerator: {fileID: 5090313322264181268}
   terrainGenerator: {fileID: 5090313322264181271}
+  structurePlacer: {fileID: 5567422535345929959}
   objectPlacer: {fileID: 5090313322264181270}
   deactivateRooms: 1
   autoFocusCamera: 1
@@ -134,7 +136,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapGenerator: {fileID: 5090313322264181279}
-  peacefulChance: 0.1
+  testWeightBoss1: 1
+  testWeightBoss2: 1
+  testWeightBoss3: 1
+  testWeightBoss4: 1
+  nrOfShopRooms: 6
+  shopRoomFitnessThreshold: 0.6
+  testWeightShop1: 1
+  testWeightShop2: 1
+  testWeightShop3: 1
 --- !u!114 &5090313322264181267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,11 +383,56 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.88208205
+      inWeight: 0.60294116
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5567422535345929959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090313322264181224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3272eeaf561c34188b28d4229d0966bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 5090313322264181271}
+  mapGenerator: {fileID: 5090313322264181279}
+  shopPrefab: {fileID: 3310822344113340726, guid: f5beaa7eca18a4e9aa7c94ee1df2ba0c,
+    type: 3}
+  objectLists:
+  - terrain: Grass
+    terrainObjects:
+      list:
+      - item: {fileID: 917641548282613144, guid: 20889e2f6166c4d2aaecd16332b84883,
+          type: 3}
+        weight: 1
+      - item: {fileID: 6929175015177143890, guid: 8e58b80b506094fb1ac0c15a5016fb29,
+          type: 3}
+        weight: 1
+      - item: {fileID: 4445117764683619853, guid: a6e0c0712a0e64e5aac0e4b9b6046b39,
+          type: 3}
+        weight: 0.5
+      - item: {fileID: 9120530364020061903, guid: c41df5d19a71e41958875926a18d2bc0,
+          type: 3}
+        weight: 1
+      - item: {fileID: 2744568960975944394, guid: e9ab220028f9c41e1b6676c77d8d54fa,
+          type: 3}
+        weight: 1
+      - item: {fileID: 6478274869538448016, guid: 212d5ddc22b304296a90fec2b4d6f5f6,
+          type: 3}
+        weight: 1
+      - item: {fileID: 7581729869721631578, guid: cb604ba8b405042a48186d59c65edbe8,
+          type: 3}
+        weight: 1
+  raysPerChunk: 1
+  wallPadding: 4
+  maxCoverage: 0.1
+  chamberRadius: 20
 --- !u!114 &5090313322264181270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,47 +447,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 5090313322264181271}
   mapGenerator: {fileID: 5090313322264181279}
-  objectMultiplier: 12
+  objectMultiplier: 1.8
   wallPadding: 2
-  obstacleDistance: 3
+  obstacleDistance: 4
   avoidCenter: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 137
   enemySpawnPoint: {fileID: 2572951519100550845, guid: b6f5ecbc5fd265a49b724a958a79623b,
     type: 3}
   objects:
   - terrain: Underwater
     terrainObjects:
       list:
-      - item: {fileID: 8826354705480561022, guid: 31695ec91881c594ea4a93e4c7717d56,
+      - item: {fileID: 3797905352803639417, guid: 612553ff3a17c4a3086411db836aea4b,
           type: 3}
         weight: 1
-      - item: {fileID: 8826354705480561022, guid: 268f5c8d84e285f49ae0e85bdce5cbd0,
+      - item: {fileID: 132036627710352328, guid: 28a1ac17dd936423a8081907d4b4e4fb,
           type: 3}
         weight: 1
-      - item: {fileID: 8218204736594959539, guid: 8f5c6f6a700c6e045a97b08515ebf92a,
+      - item: {fileID: 7772125742368962591, guid: ed1ff2e7a60e84cf28d1dc1e42186e0b,
           type: 3}
-        weight: 1
+        weight: 1.5
   - terrain: Sand
     terrainObjects:
       list: []
   - terrain: Grass 1
     terrainObjects:
       list:
-      - item: {fileID: 1249020213497638079, guid: 53aece54b4a973e4b9539ca60f21fc9e,
+      - item: {fileID: 989528347391502752, guid: ec3ca3698430e4d978c06876f2b665c6,
           type: 3}
-        weight: 8
+        weight: 10
       - item: {fileID: 1587186571227895905, guid: 6ff9ba4ffb95a5c4ba983080ffaf6832,
           type: 3}
         weight: 1
       - item: {fileID: 7448233757750244883, guid: 3a387027a1e66664c8fd8e32550b2c9e,
           type: 3}
-        weight: 1
+        weight: 4
       - item: {fileID: 527581394202791689, guid: 4a7be64aa8953144d90bcc190968ea0e,
           type: 3}
-        weight: 1
+        weight: 2
+      - item: {fileID: 6735598766905415452, guid: 00cfb07e14a084d998c4fd65dc390eb4,
+          type: 3}
+        weight: 0.6
+      - item: {fileID: 2691361745396747541, guid: 2f6b990605ce94426897267350f21a73,
+          type: 3}
+        weight: 0.3
   - terrain: Grass 2
     terrainObjects:
       list:
-      - item: {fileID: 1249020213497638079, guid: 53aece54b4a973e4b9539ca60f21fc9e,
+      - item: {fileID: 989528347391502752, guid: ec3ca3698430e4d978c06876f2b665c6,
           type: 3}
         weight: 10
       - item: {fileID: 1587186571227895905, guid: 6ff9ba4ffb95a5c4ba983080ffaf6832,
@@ -444,9 +508,15 @@ MonoBehaviour:
   - terrain: Grass 3
     terrainObjects:
       list:
-      - item: {fileID: 1249020213497638079, guid: 53aece54b4a973e4b9539ca60f21fc9e,
+      - item: {fileID: 989528347391502752, guid: ec3ca3698430e4d978c06876f2b665c6,
           type: 3}
-        weight: 5
+        weight: 12
+      - item: {fileID: 5502345215135690909, guid: 27731e760eddd406887ba434bfab35ef,
+          type: 3}
+        weight: 1
+      - item: {fileID: 6735598766905415452, guid: 00cfb07e14a084d998c4fd65dc390eb4,
+          type: 3}
+        weight: 1
 --- !u!114 &5090313322264181225
 MonoBehaviour:
   m_ObjectHideFlags: 0
