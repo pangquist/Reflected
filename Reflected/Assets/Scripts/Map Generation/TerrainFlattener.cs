@@ -6,7 +6,7 @@ public class TerrainFlattener : MonoBehaviour
 {
     [SerializeField] private bool drawGizmos = true;
     [SerializeField] private float innerRadius = 6;
-    [SerializeField] private float fade = 5;
+    [SerializeField] private float fade = 8;
     [SerializeField] private LayerMask layerMask;
 
     private float level;
@@ -17,34 +17,27 @@ public class TerrainFlattener : MonoBehaviour
     private void Awake()
     {
         StructurePlacer.Finished.AddListener(Trigger);
+        terrainChunkOffset = new Vector3(MapGenerator.ChunkSize * 0.5f, 0, MapGenerator.ChunkSize * 0.5f);
     }
 
     [ContextMenu("Trigger")]
     public void Trigger()
     {
-        // Find terrain parent
-
-        Room room = transform.parent.parent.GetComponent<Room>();
-
-        if (room == null)
-        {
-            Debug.LogWarning("Could not find parent room.");
-            return;
-        }
-        
-        Transform terrainParent = room.TerrainChild;
-
         // Determine level
 
         RaycastHit raycastHit;
         Physics.Raycast(new Vector3(transform.position.x, 100f, transform.position.z), Vector3.down, out raycastHit, 150f, layerMask);
         level = raycastHit.point.y;
 
-        terrainChunkOffset = new Vector3(MapGenerator.ChunkSize * 0.5f, 0, MapGenerator.ChunkSize * 0.5f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, outerRadius, layerMask);
+        TerrainChunk terrainChunk;
 
-        foreach (TerrainChunk terrainChunk in terrainParent.GetComponentsInChildren<TerrainChunk>())
+        foreach (Collider collider in colliders)
         {
-            Flatten(terrainChunk);
+            if (terrainChunk = collider.gameObject.GetComponent<TerrainChunk>())
+            {
+                Flatten(terrainChunk);
+            }
         }
     }
 

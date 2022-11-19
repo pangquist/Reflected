@@ -432,6 +432,7 @@ MonoBehaviour:
   raysPerChunk: 1
   wallPadding: 4
   maxCoverage: 0.1
+  chamberRadius: 20
 --- !u!114 &5090313322264181270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,7 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 5090313322264181271}
   mapGenerator: {fileID: 5090313322264181279}
-  objectMultiplier: 2
+  objectMultiplier: 1.8
   wallPadding: 2
   obstacleDistance: 4
   avoidCenter: 0
@@ -467,7 +468,7 @@ MonoBehaviour:
         weight: 1
       - item: {fileID: 7772125742368962591, guid: ed1ff2e7a60e84cf28d1dc1e42186e0b,
           type: 3}
-        weight: 1
+        weight: 1.5
   - terrain: Sand
     terrainObjects:
       list: []
@@ -476,16 +477,16 @@ MonoBehaviour:
       list:
       - item: {fileID: 989528347391502752, guid: ec3ca3698430e4d978c06876f2b665c6,
           type: 3}
-        weight: 8
+        weight: 10
       - item: {fileID: 1587186571227895905, guid: 6ff9ba4ffb95a5c4ba983080ffaf6832,
           type: 3}
         weight: 1
       - item: {fileID: 7448233757750244883, guid: 3a387027a1e66664c8fd8e32550b2c9e,
           type: 3}
-        weight: 1
+        weight: 4
       - item: {fileID: 527581394202791689, guid: 4a7be64aa8953144d90bcc190968ea0e,
           type: 3}
-        weight: 1
+        weight: 2
       - item: {fileID: 6735598766905415452, guid: 00cfb07e14a084d998c4fd65dc390eb4,
           type: 3}
         weight: 0.6
@@ -497,7 +498,7 @@ MonoBehaviour:
       list:
       - item: {fileID: 989528347391502752, guid: ec3ca3698430e4d978c06876f2b665c6,
           type: 3}
-        weight: 8
+        weight: 10
       - item: {fileID: 1587186571227895905, guid: 6ff9ba4ffb95a5c4ba983080ffaf6832,
           type: 3}
         weight: 1
@@ -509,10 +510,10 @@ MonoBehaviour:
       list:
       - item: {fileID: 989528347391502752, guid: ec3ca3698430e4d978c06876f2b665c6,
           type: 3}
-        weight: 7
+        weight: 12
       - item: {fileID: 5502345215135690909, guid: 27731e760eddd406887ba434bfab35ef,
           type: 3}
-        weight: 0.5
+        weight: 1
       - item: {fileID: 6735598766905415452, guid: 00cfb07e14a084d998c4fd65dc390eb4,
           type: 3}
         weight: 1

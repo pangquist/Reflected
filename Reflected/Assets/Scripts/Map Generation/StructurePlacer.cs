@@ -18,6 +18,7 @@ public class StructurePlacer : MonoBehaviour
     [SerializeField] private float wallPadding;
     [Range(0f, 1f)]
     [SerializeField] private float maxCoverage;
+    [SerializeField] private float chamberRadius;
 
     public static UnityEvent Finished = new UnityEvent();
 
@@ -87,16 +88,8 @@ public class StructurePlacer : MonoBehaviour
             if (placedPrefabs.Contains(structure.gameObject))
                 continue;
 
-            // Ensure structure fits inside the room
-            if (!FitsInsideRoom())
-                continue;
-
-            // Ensure structure doesn't overlap paths
-            if (structure.AvoidPaths && OverlapsPath())
-                continue;
-
-            // Ensure structure doesn't overlap other structures
-            if (OverlapsOtherStructures())
+            // Ensure structure can be placed
+            if (!FitsInsideRoom() || BlocksChamber() || OverlapsOtherStructures() || OverlapsPath())
                 continue;
 
             // Instantiate structure
@@ -109,11 +102,23 @@ public class StructurePlacer : MonoBehaviour
             return room.Rect.Inflated(-structure.ObstructiveRadius, -structure.ObstructiveRadius).Contains(raycastHit.point.XZ());
         }
 
+        bool BlocksChamber()
+        {
+            foreach (Chamber chamber in room.Chambers)
+                if (Vector2.Distance(raycastHit.point.XZ(), chamber.Rect.center) < structure.ObstructiveRadius + chamberRadius)
+                    return true;
+            return false;
+        }
+
         bool OverlapsPath()
         {
+            if (!structure.AvoidPaths)
+                return false;
+
             foreach (Vector3 pathPoint in room.PathPoints)
                 if (Vector2.Distance(raycastHit.point.XZ(), pathPoint.XZ()) < structure.ObstructiveRadius + PathGenerator.Radius)
                     return true;
+
             return false;
         }
 
