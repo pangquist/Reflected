@@ -102,7 +102,6 @@ public class ObjectPlacer : MonoBehaviour
         foreach (TerrainType terrain in terrainTypes)
         {
             terrainHeights.Add(terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier());
-            Debug.Log(terrainGenerator.HeightCurve().Evaluate(terrain.height) * terrainGenerator.HeightMultiplier());
         }
 
         for (float i = start.x; i < end.x; i++)
