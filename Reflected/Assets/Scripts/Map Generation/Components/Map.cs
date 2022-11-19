@@ -75,7 +75,23 @@ public class Map : MonoBehaviour
     {
         StartRoom.gameObject.SetActive(true);
         StartRoom.Activate();
-        GameObject.Find("Player").transform.position = new Vector3(StartRoom.Rect.center.x, 10, StartRoom.Rect.center.y);
+        Vector3 position = new Vector3(StartRoom.Rect.center.x, 10, StartRoom.Rect.center.y);
+        bool findingPlace = true;
+
+        while (findingPlace)
+        {
+            Ray ray = new Ray(position, -transform.up);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
+            {
+                GameObject.Find("Player").transform.position = hit.point;
+                findingPlace = false;
+            }
+            else
+            {
+                position.x += 10;
+            }
+        }
     }
 
 }
