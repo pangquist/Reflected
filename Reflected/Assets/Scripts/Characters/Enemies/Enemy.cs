@@ -33,19 +33,19 @@ public class Enemy : Character
 
         if (parent.tag == "Melee")
         {
-            meleeAttackState = this.GetComponentInParent<MeleeAttackState>();
+            meleeAttackState = GetComponentInParent<MeleeAttackState>();
         }
         else if (parent.tag == "Ranged")
         {
-            rangedAttackState = this.GetComponentInParent<RangedAttackState>();
+            rangedAttackState = GetComponentInParent<RangedAttackState>();
         }
         else if (parent.tag == "AOE")
         {
-            aoeAttackState = this.GetComponentInParent<AoeAttackState>();
+            aoeAttackState = GetComponentInParent<AoeAttackState>();
         }
         else if (parent.tag == "Explosion")
         {
-            explosionAttackState = this.GetComponentInParent<ExplosionAttackState>();
+            explosionAttackState = GetComponentInParent<ExplosionAttackState>();
         }
 
     }
@@ -123,15 +123,15 @@ public class Enemy : Character
     {
         if (parent.tag == "Melee")
         {
-            
+            meleeAttackState.DoAttack();
         }
         else if (parent.tag == "Ranged")
         {
-
+            rangedAttackState.DoAttack();
         }
         else if (parent.tag == "AOE")
         {
-
+            aoeAttackState.DoAttack();
         }
         else if (parent.tag == "Explosion")
         {
