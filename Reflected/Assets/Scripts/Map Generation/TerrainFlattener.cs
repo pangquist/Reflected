@@ -9,8 +9,7 @@ public class TerrainFlattener : MonoBehaviour
     [SerializeField] private float fade = 8;
     [SerializeField] private LayerMask layerMask;
 
-    private float level;
-    private Vector3 terrainChunkOffset;
+    private static Vector3 terrainChunkOffset;
 
     private float outerRadius => innerRadius + fade;
 
@@ -27,21 +26,22 @@ public class TerrainFlattener : MonoBehaviour
 
         RaycastHit raycastHit;
         Physics.Raycast(new Vector3(transform.position.x, 100f, transform.position.z), Vector3.down, out raycastHit, 150f, layerMask);
-        level = raycastHit.point.y;
+
+        // Find terrainChunks
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, outerRadius, layerMask);
         TerrainChunk terrainChunk;
 
         foreach (Collider collider in colliders)
         {
-            if (terrainChunk = collider.gameObject.GetComponent<TerrainChunk>())
+            if (terrainChunk = collider.transform.parent.GetComponent<TerrainChunk>())
             {
-                Flatten(terrainChunk);
+                Flatten(terrainChunk, raycastHit.point.y);
             }
         }
     }
 
-    private void Flatten(TerrainChunk terrainChunk)
+    private void Flatten(TerrainChunk terrainChunk, float level)
     {
         Vector3[] meshVertices = terrainChunk.MeshFilter().mesh.vertices;
         Matrix4x4 matrix = terrainChunk.transform.localToWorldMatrix;
