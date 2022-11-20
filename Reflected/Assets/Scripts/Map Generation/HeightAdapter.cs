@@ -18,6 +18,7 @@ public class HeightAdapter : MonoBehaviour
     {
         if (Physics.Raycast(new Vector3(transform.position.x, 100f, transform.position.z), Vector3.down, out raycastHit, 150f, layerMask) == false)
         {
+            Debug.Log("Destroying " + gameObject.name);
             Destroy(gameObject);
             return;
         }

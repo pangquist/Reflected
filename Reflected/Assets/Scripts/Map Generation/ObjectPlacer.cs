@@ -45,7 +45,7 @@ public class ObjectPlacer : MonoBehaviour
 
     private void PlaceDecorations(Room room)
     {
-        List<List<Vector3>> terrainObjectPoints = CreateRayCastPoints(room, PathGenerator.Radius);
+        List<List<Vector3>> terrainObjectPoints = CreateRayCastPoints(room);
         List<Vector3> enemySpawns = new List<Vector3>();
 
         Rect center = new Rect(room.Rect.position + room.Rect.size / 4, room.Rect.size / 2);
@@ -92,7 +92,7 @@ public class ObjectPlacer : MonoBehaviour
         PlaceEnemySpawnPoints(enemySpawns, room);
     }
 
-    private List<List<Vector3>> CreateRayCastPoints(Room room, float pathRadius)
+    private List<List<Vector3>> CreateRayCastPoints(Room room)
     {
         Vector3 start = new Vector3(room.Rect.position.x + wallPadding, 0, room.Rect.position.y + wallPadding);
         Vector3 end = new Vector3(room.Rect.position.x + room.Rect.width - wallPadding, 0, room.Rect.position.y + room.Rect.height - wallPadding);
@@ -118,7 +118,7 @@ public class ObjectPlacer : MonoBehaviour
 
                 foreach (Vector3 pathPoint in room.PathPoints)
                 {
-                    if (Vector2.Distance(pathPoint.XZ(), coordinate.XZ()) < pathRadius)
+                    if (Vector2.Distance(pathPoint.XZ(), coordinate.XZ()) < PathGenerator.Radius)
                     {
                         canPlace = false;
                         break;
@@ -129,7 +129,7 @@ public class ObjectPlacer : MonoBehaviour
                 {
                     Ray ray = new Ray(coordinate, -transform.up);
                     RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
+                    if (Physics.Raycast(ray, out hit, 150f, layerMask) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
                     {
                         float otherHeight = 0;
                         for (int k = 0; k < terrainHeights.Count; k++)
