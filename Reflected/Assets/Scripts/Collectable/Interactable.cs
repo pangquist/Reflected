@@ -8,7 +8,8 @@ public class Interactable : MonoBehaviour
     public bool isInRange;
     public KeyCode interactKey;
     public UnityEvent interactAction;
-    [SerializeField] ShopUi shopUi;
+    private ShopUi shopUi;
+    private UpgradeUi upgradeUI;
 
     Player player;
     // Start is called before the first frame update
@@ -16,6 +17,7 @@ public class Interactable : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         shopUi = FindObjectOfType<ShopUi>();
+        upgradeUI = FindObjectOfType<UpgradeUi>();
         Player.OnObjectInteraction += Interact;
     }
 
@@ -44,7 +46,8 @@ public class Interactable : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            shopUi.DeactiveShopWindow();
+            shopUi.DeactiveWindow();
+            upgradeUI.DeactiveWindow();
             isInRange = false;
             //Debug.Log("Player now out of range");
         }

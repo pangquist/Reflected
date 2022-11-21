@@ -13,14 +13,13 @@ public class ShopButton : MonoBehaviour
     [SerializeField] GameObject button;
     [SerializeField] int index;
     [SerializeField] Image costImage;
-    [SerializeField] Image itemImage;
     [SerializeField] TextMeshProUGUI itemText;
     [SerializeField] TextMeshProUGUI costText;
 
-    ShopUi shopUi;
-    List<GameObject> buttonList;
+    private ShopUi shopUi;
+    private List<GameObject> buttonList;
 
-    public List<GameObject> shopList;
+    private List<GameObject> shopList;
 
     void Start()
     {

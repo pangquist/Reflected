@@ -33,10 +33,10 @@ public class UiPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + (player.GetMaxHealth() + statSystem.GetMaxHealthIncrease()).ToString();
-        damageText.text = "Damage: " + (player.GetDamage() * statSystem.GetDamageIncrease()).ToString();
-        speedText.text = "Movement Speed: " + (player.GetMovementSpeed() * statSystem.GetMovementSpeed()).ToString();
-        attackspeedText.text = "Attack Speed: " + (player.GetAttackSpeed() * statSystem.GetAttackSpeed()).ToString();
+        //healthText.text = "Health: " + (player.GetMaxHealth() + statSystem.GetMaxHealthIncrease()).ToString();
+        //damageText.text = "Damage: " + (player.GetDamage() * statSystem.GetDamageIncrease()).ToString();
+        //speedText.text = "Movement Speed: " + (player.GetMovementSpeed() * statSystem.GetMovementSpeed()).ToString();
+        //attackspeedText.text = "Attack Speed: " + (player.GetAttackSpeed() * statSystem.GetAttackSpeed()).ToString();
         coin.text = inventory.inventory[0].stackSize.ToString();
         gems.text = inventory.inventory[1].stackSize.ToString();
         mirrorShard.text = inventory.inventory[2].stackSize.ToString();

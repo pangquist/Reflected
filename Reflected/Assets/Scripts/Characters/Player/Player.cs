@@ -64,8 +64,8 @@ public class Player : Character, ISavable
     protected override void Update()
     {
         base.Update();
-        if (Cursor.visible)
-            Cursor.visible = false;
+        //if (Cursor.visible)
+        //    Cursor.visible = false;
 
         //hitBoxBounds = hitbox.bounds;
         //Debug.Log("Bounds: " + hitBoxBounds);

@@ -6,7 +6,7 @@ public abstract class Chest : MonoBehaviour
 {
     [SerializeField] protected WeightedRandomList<GameObject> powerups;
     //[SerializeField] protected WeightedRandomList<Rarity> rarityTiers;
-    [SerializeField] protected List<GameObject> pickablePowerUps;
+    [SerializeField]  List<GameObject> pickablePowerUps;
     [SerializeField] protected Transform itemHolder;
     [SerializeField] protected Rarity myRarity;
     [SerializeField] bool trueDimension;
@@ -28,14 +28,14 @@ public abstract class Chest : MonoBehaviour
 
     protected void Update()
     {
-        if (isOpen)
-        {
-            animator.SetTrigger("open");
-        }
-        else
-        {
-            animator.SetTrigger("close");            
-        }
+        //if (isOpen)
+        //{
+        //    animator.SetTrigger("open");
+        //}
+        //else
+        //{
+        //    animator.SetTrigger("close");            
+        //}
     }
 
     public abstract void OpenChest();
@@ -69,7 +69,7 @@ public abstract class Chest : MonoBehaviour
         spawnedObject.gameObject.SetActive(true);
     }
 
-    protected void SpawnItem(int index)
+    public void SpawnItem(int index)
     {
         spawnedObject = Instantiate(pickablePowerUps[index], itemHolder.position, itemHolder.rotation);
         spawnedObject.GetComponent<InteractablePowerUp>().SetProperties(myRarity);
@@ -93,5 +93,10 @@ public abstract class Chest : MonoBehaviour
             }
                        
         }
+    }
+
+    public List<GameObject> GetUpgradeItems()
+    {
+        return pickablePowerUps;
     }
 }

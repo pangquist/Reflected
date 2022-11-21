@@ -26,7 +26,7 @@ public class UpgradeUi : MonoBehaviour
     }
     
 
-    public void DeactiveShopWindow()
+    public void DeactiveWindow()
     {
         upgradePanel.SetActive(false);
         for (int i = 0; i < buttonList.Count; i++)
@@ -38,9 +38,12 @@ public class UpgradeUi : MonoBehaviour
 
     public void CreateButtons()
     {
-        chestObject = GameObject.FindGameObjectWithTag("Shop").GetComponent<GameObject>();
+        chestObject = GameObject.FindGameObjectWithTag("Chest").GetComponent<GameObject>();
         //upgradeList = chest.GetChestItems();
+        upgradeList = chest.GetUpgradeItems();
 
+        Debug.Log("upgradeList Count " + upgradeList.Count);
+        Debug.Log("buttonlist Count " + buttonList.Count);
         if (buttonList.Count >= upgradeList.Count)
             return;
         for (int i = 0; i < upgradeList.Count; i++)
@@ -48,12 +51,16 @@ public class UpgradeUi : MonoBehaviour
             Debug.Log("Created 1 Button");
             buttonIndex = buttonList.Count;
             buttonList.Add(Instantiate(buttonObject, upgradePanel.transform));
-            buttonList[i].GetComponent<ShopButton>().SetButton(upgradeList[i], buttonIndex);
+            buttonList[i].GetComponent<UpgradeButton>().SetButton(upgradeList[i], buttonIndex);
             Debug.Log("it has index " + buttonIndex);
 
         }
     }
+    public List<GameObject> GetButtonList()
+    {
+        return buttonList;
+    }
 
     // Update is called once per frame
-    
+
 }

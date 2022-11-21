@@ -20,12 +20,12 @@ public class ShopUi : MonoBehaviour
     void Start()
     {
         
-        shop = FindObjectOfType<Shop>();
+        
         
     }
 
 
-    public void DeactiveShopWindow()
+    public void DeactiveWindow()
     {
         shopPanel.SetActive(false);
         for (int i = 0; i < buttonList.Count; i++)
@@ -37,6 +37,13 @@ public class ShopUi : MonoBehaviour
 
     public void CreateButtons()
     {
+
+        for (int i = 0; i < buttonList.Count; i++)
+        {
+            Destroy(buttonList[i]);
+        }
+        buttonList.Clear();
+        shop = FindObjectOfType<Shop>();
         shopObject = GameObject.FindGameObjectWithTag("Shop").GetComponent<GameObject>();
         shopList = shop.GetShopItems();
         Debug.Log("shoplist Count " + shopList.Count);

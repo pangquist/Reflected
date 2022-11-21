@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9013219966627771644}
   - component: {fileID: 983505268229595854}
   - component: {fileID: -6429768450012734279}
+  - component: {fileID: 7758077404477583752}
   m_Layer: 5
   m_Name: Upgrade Button
   m_TagString: Untagged
@@ -124,7 +125,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9013219966627771644}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -6429768450012734279}
+        m_TargetAssemblyTypeName: UpgradeButton, Assembly-CSharp
+        m_MethodName: GetUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-6429768450012734279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,11 +150,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6764650a28be5b409cae16c8b334c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chest: {fileID: 0}
   button: {fileID: 2464879411396263252}
   index: 0
   itemImage: {fileID: 1999127289432720806}
   titleText: {fileID: 7885915797414432950}
   descText: {fileID: 6294046568364574119}
+--- !u!95 &7758077404477583752
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464879411396263252}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0917ff068ada4aba9c577ca264b0103, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2642024860589410103
 GameObject:
   m_ObjectHideFlags: 0
