@@ -143,10 +143,9 @@ public class MapGenerator : MonoBehaviour
         Timed(waterGenerator   .Generate, map, "Water generator");
         Timed(pathGenerator    .Generate, map, "Path generator");
         Timed(terrainGenerator .Generate, map, "Terrain generator");
-        
-        Timed(BakeNavMesh               , map, "NavMesh baker");
         Timed(structurePlacer  .Place   , map, "Structure placer");
         Timed(objectPlacer     .Place   , map, "Object placer");
+        Timed(BakeNavMesh               , map, "NavMesh baker");
 
         Finished.Invoke();
 
