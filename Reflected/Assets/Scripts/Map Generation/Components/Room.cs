@@ -5,6 +5,12 @@ using PathCreation;
 
 public class Room : MonoBehaviour
 {
+    [Header("References")]
+
+    [SerializeField] private Transform pathsChild;
+    [SerializeField] private Transform terrainChild;
+    [SerializeField] private Transform objectsChild;
+
     [Header("Read Only")]
 
     [ReadOnly][SerializeField] private Rect rect;
@@ -13,22 +19,51 @@ public class Room : MonoBehaviour
     [ReadOnly][SerializeField] private List<Wall> walls;
     [ReadOnly][SerializeField] private List<Chamber> chambers;
     [ReadOnly][SerializeField] private List<PathCreator> paths;
-
+    [ReadOnly][SerializeField] private List<Vector3> pathPoints;
+    [ReadOnly][SerializeField] private List<Structure> structures;
+     
     private static Map map;
 
     // Properties
 
+    public Transform PathsChild => pathsChild;
+    public Transform TerrainChild => terrainChild;
+    public Transform ObjectsChild => objectsChild;
+
     public Rect Rect => rect;
-    public List<Wall> Walls => walls;
-    public List<Chamber> Chambers => chambers;
     public bool Cleared => cleared;
     public RoomType Type => type;
+    public List<Wall> Walls => walls;
+    public List<Chamber> Chambers => chambers;
     public List<PathCreator> Paths => paths;
+    public List<Vector3> PathPoints => pathPoints;
+    public List<Structure> Structures => structures;
 
-    private void Start()
+    public static void StaticInitialize(Map map)
     {
-        if (type == RoomType.Boss)
+        Room.map = map;
+    }
+
+    public Room Initialize(Rect rect, int index)
+    {
+        this.rect = rect;
+        name = "Room " + index;
+        return this;
+    }
+
+    public void SetType(RoomType type)
+    {
+        this.type = type;
+
+        if (type == RoomType.Start)
         {
+            Map.StartRoom = this;
+        }
+
+        else if (type == RoomType.Boss)
+        {
+            Map.BossRoom = this;
+
             foreach (Wall wall in walls)
             {
                 foreach (GameObject portion in wall.Portions)
@@ -46,23 +81,6 @@ public class Room : MonoBehaviour
         }
     }
 
-    public static void StaticInitialize(Map map)
-    {
-        Room.map = map;
-    }
-
-    public Room Initialize(Rect rect, int index)
-    {
-        this.rect = rect;
-        name = "Room " + index;
-        return this;
-    }
-
-    public void SetType(RoomType type)
-    {
-        this.type = type;
-    }
-
     public void ScaleUpData()
     {
         rect = new Rect(rect.position * MapGenerator.ChunkSize, rect.size * MapGenerator.ChunkSize);
@@ -70,10 +88,10 @@ public class Room : MonoBehaviour
 
     private void Update()
     {
-        if (map.ActiveRoom != this)
+        if (Map.ActiveRoom != this)
             return;
 
-        if (!cleared)
+        if (!cleared && map.GameManager.AiDirector.AllEnemiesKilled)
             SetCleared(true);
     }
 
@@ -88,7 +106,13 @@ public class Room : MonoBehaviour
                 chamber.gameObject.SetActive(false);
         }
 
-        map.ActiveRoom = null;
+        //THIS WILL BE MOVED
+        //if (type == RoomType.Monster)
+        //    GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(-1);
+        //else if (type == RoomType.Boss)
+        //    GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(-2);
+
+        Map.ActiveRoom = null;
         gameObject.SetActive(false);
     }
 
@@ -97,18 +121,35 @@ public class Room : MonoBehaviour
     /// </summary>
     public void Activate()
     {
-        map.ActiveRoom = this;
+        Map.ActiveRoom = this;
+        Map.RoomEntered.Invoke();
 
         foreach (Chamber chamber in chambers)
             chamber.gameObject.SetActive(true);
 
-        if (!cleared)
+        if (cleared)
         {
-            if (type == RoomType.Monster || type == RoomType.Boss)
-                GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>().EnterRoom();
+            foreach (Chamber chamber in chambers)
+                chamber.Open(this);
+        }
+
+        else
+        {
+            if (type == RoomType.Monster || type == RoomType.Shop)
+            {
+                map.GameManager.AiDirector.EnterRoom();
+                GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(1);
+            }
+            if (type == RoomType.Boss)
+            {
+                map.GameManager.AiDirector.EnterBossRoom();
+                GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(2);
+            }
 
             else
+            {
                 SetCleared(true);
+            } 
         }
     }
 
@@ -123,12 +164,15 @@ public class Room : MonoBehaviour
 
             if (type == RoomType.Monster || type == RoomType.Boss)
                 map.DimensionManager.GainCharges(1);
+
+            Map.RoomCleared.Invoke();
         }
-          
+
         else
         {
             foreach (Chamber chamber in chambers)
                 chamber.Close(this);
-        } 
+        }
     }
+
 }

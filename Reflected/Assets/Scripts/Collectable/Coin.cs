@@ -24,13 +24,14 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
 
     private void Start()
     {
-        coinData.amount = UnityEngine.Random.Range(1, 10);
-        coinData.value = coinData.amount;
+        //coinData.amount = UnityEngine.Random.Range(1, 5);
+        //coinData.value = coinData.amount;
+        Destroy(gameObject, 20);
     }
 
     public void Collect()
     {
-        Debug.Log("You collected a coin");
+        //Debug.Log("You collected a coin");
         Destroy(gameObject);
         OnCoinCollected?.Invoke(coinData);
     }
@@ -40,7 +41,7 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
         if (hasTarget)
         {
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
-            rb.velocity = new Vector3(targetDirection.x, 0, targetDirection.z) * moveSpeed;
+            rb.velocity = new Vector3(targetDirection.x, targetDirection.y, targetDirection.z) * moveSpeed;
         }
     }
 

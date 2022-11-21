@@ -18,19 +18,24 @@ public class WallGenerator : MonoBehaviour
 
     [Header("Walls")]
 
-    [Range(0, 100)][Tooltip("In tiles")]
+    [Range(0, 100)]
     [SerializeField] private int wallHeight;
 
-    [Range(0, 50)][Tooltip("In tiles")]
+    [Range(0, 50)]
     [SerializeField] private int wallThickness;
+
+    [Range(0, 1f)][Tooltip("How much to shorten walls adjacent to chambers in order to avoid visual bugs")]
+    [SerializeField] private float chamberOverlapInflation;
 
     [Header("Doors")]
 
-    [Range(0f, 5f)][Tooltip("In tiles")]
+    [Range(0f, 5f)]
     [SerializeField] private float doorThickness;
 
-    [Range(0f, 2f)][Tooltip("In tiles")]
+    [Range(0f, 2f)]
     [SerializeField] private float doorIndent;
+
+    public float ChamberOverlapInflation => chamberOverlapInflation;
 
     private void Awake()
     {
@@ -71,6 +76,8 @@ public class WallGenerator : MonoBehaviour
                         // If they overlap with the wall portion
                         if (wallPortion.Overlaps(chamber.Rect, out overlap))
                         {
+                            overlap = overlap.Inflated(chamberOverlapInflation, chamberOverlapInflation); // Inflate overlap to avoid visual bugs
+
                             // Calculate two new portions
 
                             if (chamber.Orientation == Orientation.Horizontal)
@@ -111,24 +118,22 @@ public class WallGenerator : MonoBehaviour
             // Move on to the next Room
         }
 
-        /*
         foreach (Chamber chamber in map.Chambers)
         {
             if (chamber.Orientation == Orientation.Horizontal)
             {
-                roomRect = chamber.Rect.Inflated(-wallThickness, 0);
+                roomRect = chamber.Rect.Inflated(-wallThickness * 1.5f, 0);
                 chamber.Walls.Add(InstantiateSinglePortionWall(CardinalDirection.North, chamber.transform, roomRect));
                 chamber.Walls.Add(InstantiateSinglePortionWall(CardinalDirection.South, chamber.transform, roomRect));
             }
 
             else
             {
-                roomRect = chamber.Rect.Inflated(0, -wallThickness);
+                roomRect = chamber.Rect.Inflated(0, -wallThickness * 1.5f);
                 chamber.Walls.Add(InstantiateSinglePortionWall(CardinalDirection.West, chamber.transform, roomRect));
                 chamber.Walls.Add(InstantiateSinglePortionWall(CardinalDirection.East, chamber.transform, roomRect));
             }
         }
-        */
     }
 
     /// <summary>

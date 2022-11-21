@@ -5,19 +5,68 @@ using UnityEngine.AI;
 
 public class MoveAwayFromPlayerState : State
 {
+    //Range to player in which the enemy will stop fleeing. (Reposition to attack)
+    [SerializeField] private float rangedFleeRange = 15f;
+    [SerializeField] private float aoeFleeRange = 15;
+
+    //Variables for the semi random fleeing behavior.
     private float fleeTimer = 0f;
     private float changeTime = 1f;
-    public override void DoState(AIManager thisEnemy, Transform target, NavMeshAgent agent)
+
+    //Base values of the movement speed stat
+    [SerializeField] private float baseMovementSpeed = 3.5f;
+
+    //Current value of movement speed
+    [SerializeField] private float movementSpeed;
+
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        if (thisEnemy.distanceTo(target) >= 15)
+        switch (thisEnemy.currentCombatBehavior)
         {
-            thisEnemy.SetAttackPlayerState();
-            return;
+            case AiManager2.CombatBehavior.CloseCombat: //This case SHOULD not be entered as there should be no reason for melee to run away.
+                thisEnemy.SetMoveTowardState(); //Here in case it does get entered by a melee enemy.
+                break;
+            case AiManager2.CombatBehavior.ExplosionCombat: //This case SHOULD not be entered as there should be no reason for explosion enemy to run away.
+                thisEnemy.SetMoveTowardState(); //Here in case it does get entered by an explosion enemy.
+                break;
+
+            case AiManager2.CombatBehavior.RangedCombat:
+                if (thisEnemy.distanceTo(player.transform) >= rangedFleeRange)
+                {
+                    thisEnemy.SetRangedAttackState();
+                    agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
+                    return;
+                }
+                break;
+
+            case AiManager2.CombatBehavior.AoeCombat:
+                if (thisEnemy.distanceTo(player.transform) >= aoeFleeRange)
+                {
+                    thisEnemy.SetAoeAttackState();
+                    agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
+                    return;
+                }
+                break;
+
+            default:
+                break;
         }
 
-        DoMoveAway(target, agent);
+        //Set movement speed
+        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed() * thisEnemy.me.MovementPenalty();
+        agent.speed = movementSpeed;
+
+        DoMoveAway(player.transform, agent);
     }
 
+    /// <summary>
+    /// Will make the enemy turn around at a semi random direction away from the player, and then move there for a second until it finds a new direction.
+    /// This will make the enemy seem like it "panics" and runs a wildly.
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="agent"></param>
     private void DoMoveAway(Transform target, NavMeshAgent agent)
     {
         int multiplier = 1;

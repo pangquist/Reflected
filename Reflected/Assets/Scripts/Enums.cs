@@ -62,8 +62,31 @@ public enum Dimension
 public enum RoomType
 {
     Start,
-    Peaceful,
     Shop,
     Monster,
     Boss
+}
+
+/// <summary>
+/// Starts that effect the enemy
+/// </summary>
+public enum Stats
+{
+    Health,
+    DamageReduction,
+    MovementSpeed,
+    Damage,
+    AttackSpeed,
+    AoE   
+}
+
+/// <summary>
+/// Minimap layers
+/// </summary>
+public enum MinimapLayer
+{
+    Chambers,
+    Rooms,
+    Objects,
+    Player
 }

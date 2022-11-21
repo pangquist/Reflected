@@ -5,35 +5,74 @@ using UnityEngine.AI;
 
 public class MoveTowardsPlayerState : State
 {
-    public override void DoState(AIManager thisEnemy, Transform target, NavMeshAgent agent)
+    //Range to player in which the enemy will attack
+    [SerializeField] private float meleeAttackRange = 2f;
+    [SerializeField] private float rangedAttackRange = 15f;
+    [SerializeField] private float aoeAttackRange = 15f;
+    [SerializeField] private float explosionAttackRange = 2f; 
+
+    //Base values of the movement speed stat
+    [SerializeField] private float baseMovementSpeed = 3.5f;
+
+    //Current value of movement speed
+    [SerializeField] private float movementSpeed;
+
+    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        //if (thisEnemy.distanceTo(player) >= 3)
-        //{
-        //    thisEnemy.SetAttackPlayerState();
-        //    return;
-        //}
-
-        if (thisEnemy.distanceTo(target) <= 2f && thisEnemy.CloseCombat())
+        switch (thisEnemy.currentCombatBehavior)
         {
-            thisEnemy.SetAttackPlayerState();
-            agent.isStopped = true;
-            return;
-        }
-        else if (thisEnemy.distanceTo(target)<=15 && !thisEnemy.CloseCombat())
-        {
-            thisEnemy.SetAttackPlayerState();
-            agent.isStopped = true;
-            return;
+            case AiManager2.CombatBehavior.CloseCombat:
+                if (thisEnemy.distanceTo(player.transform) <= meleeAttackRange)
+                {
+                    thisEnemy.SetMeleeAttackState();
+                    agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
+                    return;
+                }
+                break;
+
+            case AiManager2.CombatBehavior.RangedCombat:
+                if (thisEnemy.distanceTo(player.transform) <= rangedAttackRange)
+                {
+                    thisEnemy.SetRangedAttackState();
+                    agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
+                    return;
+                }
+                break;
+
+            case AiManager2.CombatBehavior.AoeCombat:
+                if (thisEnemy.distanceTo(player.transform) <= aoeAttackRange)
+                {
+                    thisEnemy.SetAoeAttackState();
+                    agent.isStopped = true;
+                    thisEnemy.SendAnimation("Idle");
+                    return;
+                }
+                break;
+
+            case AiManager2.CombatBehavior.ExplosionCombat:
+                if(thisEnemy.distanceTo(player.transform) <= explosionAttackRange)
+                {
+                    thisEnemy.SetExplosionAttackState();
+                    agent.isStopped = true;
+                    return;
+                }
+                break;
+
+            default:
+                break;
         }
 
+        //Set movement speed
+        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed() * thisEnemy.me.MovementPenalty();
+        agent.speed = movementSpeed;
 
-        DoMoveToward(target, agent);
+        DoMoveToward(player.transform, agent);
     }
 
     private void DoMoveToward(Transform target, NavMeshAgent agent)
     {
-        //Debug.Log("MoveTowardsPlayer");
-        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = target.gameObject.transform.position;
+        agent.destination = target.position;
     }
 }

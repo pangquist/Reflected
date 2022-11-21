@@ -7,13 +7,7 @@ public class AttackSpeed : PowerUpEffect
 {        
     public override void Apply(GameObject target, float amount)
     {
-        target.GetComponent<StatSystem>().AddAttackSpeed(amount);
-        Debug.Log("Attack speed +" + amount);
+        target.GetComponent<PlayerStatSystem>().AddAttackSpeed(amount);
+        Debug.Log("Attack speed -" + amount);
     }
-
-    public void Awake()
-    {
-        description = "Increases your attack speed by " + amount;
-    }
-
 }

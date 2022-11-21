@@ -7,7 +7,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] CharacterController controller;
     [SerializeField] Transform cam;
-    [SerializeField] StatSystem stats;
+    [SerializeField] PlayerStatSystem stats;
     [SerializeField] Animator animator;
 
     [Header("Stat Properties")]
@@ -17,12 +17,13 @@ public class ThirdPersonMovement : MonoBehaviour
     private float movementPenalty;
 
     [Header("Jump Properties")]
-    [SerializeField] float gravity = -9.81f;
+    [SerializeField] float gravityEffect = -9.81f;
     [SerializeField] float jumpHeight = 3f;
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance = 0.4f;
     [SerializeField] LayerMask groundMask;
     [SerializeField] bool isGrounded;
+    bool gravity = true;
 
     [Header("Dash Properties")]
     [SerializeField] Dash dashAbility;
@@ -32,8 +33,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!isGrounded)
-            velocity.y += gravity * Time.deltaTime;
+        if (!isGrounded && gravity)
+            velocity.y += gravityEffect * Time.deltaTime;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         animator.SetFloat("velY", velocity.y);
@@ -75,9 +76,9 @@ public class ThirdPersonMovement : MonoBehaviour
         if (dashAbility.IsDashing())
             return;
 
-        if (isGrounded)
+        if (isGrounded && velocity.y <= 0)
         {
-            velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravityEffect);
 
         }
     }
@@ -104,5 +105,16 @@ public class ThirdPersonMovement : MonoBehaviour
     private float CharacterMovementPenalty()
     {
         return GetComponent<Character>().MovementPenalty();
+    }
+
+    public void TurnOnGravity()
+    {
+        gravity = true;
+    }
+
+    public void TurnOffGravity()
+    {
+        velocity = new Vector3(velocity.x, 0, velocity.z);
+        gravity = false;
     }
 }

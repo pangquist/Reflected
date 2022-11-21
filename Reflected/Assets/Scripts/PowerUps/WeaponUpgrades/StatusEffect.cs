@@ -7,7 +7,6 @@ public class StatusEffect : MonoBehaviour
     [SerializeField] private StatusEffectData data;
     private Rigidbody rb;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -15,11 +14,10 @@ public class StatusEffect : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        var effectable = collider.GetComponent<IEffectable>();
+        var effectable = collider.GetComponentInChildren<IEffectable>();
         if (effectable != null)
         {
-            effectable.ApplyEffect(data);
+            effectable.ApplyEffect(data, 1);
         }
     }
-
 }

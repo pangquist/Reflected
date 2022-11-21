@@ -19,16 +19,12 @@ public class VaryingTransform : MonoBehaviour
 
     private void Awake()
     {
-        NewAll();
-    }
-
-    public void NewAll()
-    {
         NewRotation();
         NewScale();
+        Destroy(this);
     }
 
-    public void NewRotation()
+    private void NewRotation()
     {
         transform.Rotate(
             randomizeRotationX ? Random.Range(0f, 360f) : 0,
@@ -36,7 +32,7 @@ public class VaryingTransform : MonoBehaviour
             randomizeRotationZ ? Random.Range(0f, 360f) : 0);
     }
 
-    public void NewScale()
+    private void NewScale()
     {
         if (!randomizeScale)
             return;

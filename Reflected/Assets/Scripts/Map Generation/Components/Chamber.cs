@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Chamber : MonoBehaviour
 {
+    [Header("References")]
+
+    [SerializeField] private Transform terrainChild;
+
     [Header("Values")]
 
     [Range(0f, 3f)]
@@ -31,6 +35,8 @@ public class Chamber : MonoBehaviour
 
     // Properties
 
+    public Transform TerrainChild => terrainChild;
+
     public Orientation Orientation => orientation;
     public List<Wall> Walls => walls;
     public List<Pillar> Pillars => pillars;
@@ -43,7 +49,7 @@ public class Chamber : MonoBehaviour
     public static void StaticInitialize(Map map)
     {
         Chamber.map = map;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = FindObjectOfType<Player>();
     }
 
     public Chamber Initialize(Room room1, Room room2, Rect rect, Orientation orientation)
@@ -82,7 +88,7 @@ public class Chamber : MonoBehaviour
     private void Update()
     {
         // Ensure there is no active transition, no cooldown, there is an active room, and the active room is cleared
-        if (inTransition || cooldownTimer > 0f || map.ActiveRoom == null || !map.ActiveRoom.Cleared)
+        if (inTransition || cooldownTimer > 0f || Map.ActiveRoom == null || !Map.ActiveRoom.Cleared)
             return;
 
         // Ensure the player is inside the chamber
@@ -113,8 +119,7 @@ public class Chamber : MonoBehaviour
         openDoor.Close();
 
         // Wait til closed
-        for (float timer = 0; timer < openDoor.AnimationDuration; timer += Time.deltaTime)
-            yield return null;
+        yield return new WaitForSeconds(openDoor.ClosingDuration);
 
         // Move player if necessary
         if (triggerBounds.Contains(player.transform.position) == false)
@@ -132,15 +137,13 @@ public class Chamber : MonoBehaviour
         closedDoor.Room.Activate();
 
         // Pause
-        for (float timer = 0; timer < pause; timer += Time.deltaTime)
-            yield return null;
+        yield return new WaitForSeconds(pause);
 
         // Start opening the closed door
         closedDoor.Open();
 
         // Wait til opened
-        for (float timer = 0; timer < closedDoor.AnimationDuration; timer += Time.deltaTime)
-            yield return null;
+        yield return new WaitForSeconds(closedDoor.OpeningDuration);
 
         // End transition
         StartCoroutine(Coroutine_Cooldown());
@@ -154,10 +157,15 @@ public class Chamber : MonoBehaviour
     public void Open(Room caller)
     {
         if (door1.Room == caller)
+        {
             door1.Open();
-
+            door2.CloseInstantly();
+        }
         else if (door2.Room == caller)
+        {
             door2.Open();
+            door1.CloseInstantly();
+        }  
     }
 
     /// <summary>
@@ -166,10 +174,15 @@ public class Chamber : MonoBehaviour
     public void Close(Room caller)
     {
         if (door1.Room == caller)
+        {
             door1.Close();
-
+            door2.CloseInstantly();
+        }
         else if (door2.Room == caller)
+        {
             door2.Close();
+            door1.CloseInstantly();
+        } 
     }
 
     /// <summary>

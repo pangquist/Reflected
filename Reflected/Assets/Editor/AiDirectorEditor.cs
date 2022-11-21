@@ -42,13 +42,14 @@ public class AiDirectorEditor : Editor
     void DisplayStatisticInfo()
     {
         EditorGUILayout.TextField("DifficultyLevel");
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("difficultyLevel"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("spawntime"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("amountOfEnemiesToSpawn"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("waveAmount"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("difficultySteps"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("avergaeTimeToClearRoom"));
         EditorGUILayout.Space();
         EditorGUILayout.TextField("Room Statistics");
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("enemiesInRoom"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("aliveEnemiesInRoom"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("timeToClearRoom"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("activeRoom"));
         EditorGUILayout.Space();
@@ -70,7 +71,7 @@ public class AiDirectorEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("temporaryCurrency"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("numberOfEnemiesKilled"));
         EditorGUILayout.Space();
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("chest"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("chests"));
     }
 
     void DisplayActiveRoomInfo()

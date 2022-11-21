@@ -23,7 +23,7 @@ public class AbilityCooldowns : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = FindObjectOfType<Player>();
         thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
         weapon = player.GetCurrentWeapon();
         ability1FillImage.fillAmount = 0;

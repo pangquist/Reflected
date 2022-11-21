@@ -9,32 +9,40 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
     [SerializeField] public Rarity myRarity;
     [SerializeField] public float amount;
     [SerializeField] public int value;
+    [SerializeField] public string description;
+    protected bool hasProperties;
+    public static event HandlePowerupCollected OnPowerUPCollected;
+    public delegate void HandlePowerupCollected(PowerUpEffect powerupData);
     //public WeightedRandomList<PowerUpEffect> RarityPool;
 
-    private void Start()
+    protected virtual void Start() //Might not need this
     {
-        myRarity = rarityTiers.GetRandom();
-        amount = powerUpEffect.amount * myRarity.amountMultiplier;
-        value = powerUpEffect.value * myRarity.valueMultiplier;
-    }
-
-    public void SetProperties()
-    {
-        Debug.Log("Set properties " + myRarity);
-        if (myRarity == null)
+        if (!hasProperties)
         {
             myRarity = rarityTiers.GetRandom();
             amount = powerUpEffect.amount * myRarity.amountMultiplier;
             value = powerUpEffect.value * myRarity.valueMultiplier;
-            
-        }        
+            description = powerUpEffect.description + " " + amount.ToString();
+        }
+        Destroy(gameObject, 20);
+    }
+
+    public virtual void SetProperties(Rarity targetRarity)
+    {
+        //Debug.Log("Set properties " + targetRarity);
+        myRarity = targetRarity;
+        amount = powerUpEffect.amount * targetRarity.amountMultiplier;
+        value = powerUpEffect.value * targetRarity.valueMultiplier;
+        description = powerUpEffect.description + " " + amount.ToString();
+        hasProperties = true;
     }
 
     public void ApplyOnInteraction()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Player player = FindObjectOfType<Player>();
         Destroy(gameObject);
         powerUpEffect.Apply(player.gameObject, amount);
+        OnPowerUPCollected?.Invoke(powerUpEffect);
     }
 
     public int GetValue()
@@ -44,6 +52,11 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
 
     public string GetDescription()
     {
-        return powerUpEffect.description;
+        return description;
+    }
+
+    public Rarity GetRarity()
+    {
+        return myRarity;
     }
 }

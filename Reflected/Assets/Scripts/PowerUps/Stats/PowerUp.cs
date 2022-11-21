@@ -9,6 +9,7 @@ public class PowerUp : MonoBehaviour, IBuyable
     [SerializeField] public Rarity myRarity;
     [SerializeField] public float amount;
     [SerializeField] public int value;
+    [SerializeField] public string description;
     //public WeightedRandomList<PowerUpEffect> RarityPool;
 
     private void Start()
@@ -16,11 +17,13 @@ public class PowerUp : MonoBehaviour, IBuyable
         myRarity = rarityTiers.GetRandom();
         amount = powerUpEffect.amount * myRarity.amountMultiplier;
         value = powerUpEffect.value * myRarity.valueMultiplier;
+        description = powerUpEffect.description + amount.ToString();
+        Destroy(gameObject, 20);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.GetComponent<Player>())
         {
             Destroy(gameObject);
             powerUpEffect.Apply(other.gameObject, amount);
@@ -34,6 +37,11 @@ public class PowerUp : MonoBehaviour, IBuyable
 
     public string GetDescription()
     {
-        return powerUpEffect.description;
+        return description;
+    }
+
+    public Rarity GetRarity()
+    {
+        return myRarity;
     }
 }

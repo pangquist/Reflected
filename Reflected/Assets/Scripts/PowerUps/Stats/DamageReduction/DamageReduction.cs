@@ -8,18 +8,8 @@ public class DamageReduction : PowerUpEffect
     
     public override void Apply(GameObject target, float amount)
     {
-        target.GetComponent<StatSystem>().AddDamageReduction(amount);
+        target.GetComponent<PlayerStatSystem>().AddDamageReduction(amount);
         Debug.Log("Reduction +" + amount);
         
-    }
-
-    public void Awake()
-    {
-        //myRarity = rarityTiers.GetRandom();
-        //Debug.Log("Rarity +" + myRarity.rarity);
-        //amount = amount * myRarity.amountMultiplier;
-        //Debug.Log("Reduction +" + amount);
-        //value = value * myRarity.valueMultiplier;
-        description = "Increases your damage reduction by " + amount;
     }
 }

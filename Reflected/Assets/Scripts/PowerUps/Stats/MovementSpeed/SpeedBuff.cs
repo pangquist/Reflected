@@ -8,12 +8,7 @@ public class SpeedBuff : PowerUpEffect
 
     public override void Apply(GameObject target, float amount)
     {
-        target.GetComponent<StatSystem>().AddMovementSpeed(amount);
+        target.GetComponent<PlayerStatSystem>().AddMovementSpeed(amount);
         Debug.Log("Speed +" + amount);
-    }
-
-    public void Awake()
-    {
-        description = "Increases your movement speed by " + amount;
     }
 }

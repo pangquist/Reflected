@@ -50,11 +50,13 @@ public class PlayerEditorTemplate : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("movementSpeed"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("jumpForce"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("anim"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("hitbox"));
     }
 
     void DisplayAbilityInfo()
     {
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("basicAbility"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("basicSwordAbility"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("basicBowAbility"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("specialAbility"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("swapAbility"));
     }
@@ -64,11 +66,13 @@ public class PlayerEditorTemplate : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("attackSpeed"));
         EditorGUILayout.Space();
         EditorGUILayout.PropertyField(serializedObject.FindProperty("weapons"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("currentWeapon"));
     }
 
     void DisplayDimensionInfo()
     {
         EditorGUILayout.PropertyField(serializedObject.FindProperty("chargeBar"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("swapAbility"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("TimeFlowWhileSwapping"));
     }
 }

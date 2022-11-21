@@ -40,9 +40,11 @@ public class DimensionManager : MonoBehaviour
     [SerializeField] private int currentCharges;
 
     [Header("Read Only")]
-    [ReadOnly][SerializeField] private StatSystem statSystem;
+    [ReadOnly][SerializeField] private PlayerStatSystem statSystem;
 
     private static Dimension currentDimension;
+    WeightedRandomList<GameObject> LootDropList;
+    EnemyStatSystem enemyStatSystem;
 
     // Properties
 
@@ -61,7 +63,7 @@ public class DimensionManager : MonoBehaviour
     private void Awake()
     {
         musicManager = GameObject.Find("Music Manager").GetComponent<MusicManager>();
-
+        currentDimension = Dimension.True;
         //SetDimension(Dimension.True);
         UpdateChargeBar();
     }
@@ -73,6 +75,19 @@ public class DimensionManager : MonoBehaviour
     {
         if (!CanSwap())
             return false;
+
+        if (True)
+        {
+            LootDropList.SetWeight(3, 1);
+            LootDropList.SetWeight(2, 0);
+        }
+        else if (Mirror)
+        {
+            LootDropList.SetWeight(2, 1);
+            LootDropList.SetWeight(3, 0);
+        }
+
+        enemyStatSystem.ApplyNewStats(True);
 
         ForcedSwap();
         ResetCharges();
@@ -145,7 +160,7 @@ public class DimensionManager : MonoBehaviour
         UpdateChargeBar();
     }
 
-    public void SetStatSystem(StatSystem newStatSystem)
+    public void SetStatSystem(PlayerStatSystem newStatSystem)
     {
         statSystem = newStatSystem;
     }
@@ -162,4 +177,9 @@ public class DimensionManager : MonoBehaviour
         //sliderText.text = currentCharges + " / " + maximumCharges;
     }
 
+    public void FindSystems()
+    {
+        LootDropList = GameObject.Find("LootPoolManager").GetComponent<LootPoolManager>().GetCollectablePool();
+        enemyStatSystem = GameObject.Find("EnemyStatSystem").GetComponent<EnemyStatSystem>();
+    }
 }

@@ -10,7 +10,7 @@ public class AOEScript : MonoBehaviour
     private float damageTimer;
 
     private Rigidbody rb;
-    public int damageAmount = 3;
+    [SerializeField] private float damageAmount = 1; //Base damage 
 
     void Start()
     {
@@ -25,26 +25,30 @@ public class AOEScript : MonoBehaviour
         despawnTimer += Time.deltaTime;
         if (despawnTimer >= upTime)
         {
-            Destroy(this.gameObject);
+            Destroy(transform.parent.gameObject);
             despawnTimer = 0f;
         }
     }
 
+    public void SetUp(float damageAmount, Vector3 aoeSize)
+    {
+        this.damageAmount = damageAmount;
+
+        transform.localScale = aoeSize;
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        //Debug.Log("AOE collision triggered");
         damageTimer += Time.deltaTime;
         if (damageTimer >= iFrames)
         {
             if (other.tag == "Player")
             {
-                var healthComponent = other.GetComponent<Player>();
+                var healthComponent = other.GetComponentInChildren<Player>();
                 if (healthComponent != null)
                 {
-                    Debug.Log("damaged by AOE");
                     damageTimer = 0f;
                     healthComponent.TakeDamage(damageAmount);
-
                 }
             }
             damageTimer = 0f;

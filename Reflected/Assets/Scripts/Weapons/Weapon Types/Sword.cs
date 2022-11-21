@@ -13,11 +13,13 @@ public class Sword : Weapon
 {
     [Header("Sword Properties")]
     [SerializeField] Collider hitBox;
-    [SerializeField] List<StatusEffectData> statusEffectDatas;
 
     private void OnTriggerStay(Collider other)
     {
-        if (!playerController.GetActionLock())
+        //if (!playerController.GetActionLock())
+        //    return;
+
+        if (!playerController.DamageLocked())
             return;
 
         Enemy target;
@@ -31,9 +33,16 @@ public class Sword : Weapon
         {
             target.TakeDamage(GetDamage());
             hitEnemies.Add(target);
-            for (int i = 0; i < statusEffectDatas.Capacity; i++)
+            
+            if(powerUpIndex > -1 && powerUpIndex < 2)
             {
-                GetComponent<WeaponStatusEffect>().ApplyEffectToTarget(target.GetComponent<Collider>(), statusEffectDatas[i]);
+                target.GetComponent<IEffectable>().ApplyEffect(statusEffectDatas[powerUpIndex], damage);
+                Debug.Log(statusEffectDatas[powerUpIndex]);
+            }
+            else if (powerUpIndex == 2)
+            {
+                player.GetComponent<IEffectable>().ApplyEffect(statusEffectDatas[powerUpIndex], damage / 2);
+                Debug.Log(statusEffectDatas[powerUpIndex]);
             }
         }
     }

@@ -7,12 +7,7 @@ public class DamageBuff : PowerUpEffect
 {
     public override void Apply(GameObject target, float amount)
     {
-        target.GetComponent<StatSystem>().AddDamageIncrease(amount);
+        target.GetComponent<PlayerStatSystem>().AddDamageIncrease(amount);
         Debug.Log("Damage +" + amount);
-    }
-
-    public void Awake()
-    {
-        description = "Increases your damage by " + amount;
     }
 }

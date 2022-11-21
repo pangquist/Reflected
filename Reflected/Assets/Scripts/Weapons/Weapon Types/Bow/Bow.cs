@@ -15,7 +15,7 @@ public class Bow : Weapon
     Transform targetTransform = null;
 
     [SerializeField] List<Projectile> projectiles = new List<Projectile>();
-    [SerializeField] int powerUpIndex;
+    [SerializeField] int arrowIndex; //Obsolete
 
     private void Start()
     {
@@ -26,20 +26,26 @@ public class Bow : Weapon
     {
         projectile = projectiles[powerUpIndex].gameObject;
 
-        Projectile arrow = Instantiate(projectile, firePoint.position, body.transform.localRotation).GetComponent<Projectile>();
+        Projectile arrow = Instantiate(projectile, firePoint.position, firePoint.parent.rotation).GetComponent<Projectile>();
         arrow.Fire(firePower, damage);
     }
 
     protected override void Update()
     {
-        RaycastHit hit;
-        Ray ray = cam.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
+        //RaycastHit hit;
+        //Ray ray = cam.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitableLayers))
-        {
-            targetTransform = hit.transform;
-        }
+        //if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitableLayers))
+        //{
+        //    targetTransform = hit.transform;
+        //}
 
         transform.parent.rotation = cam.transform.rotation;
+
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    if (++powerUpIndex >= projectiles.Count)
+        //        powerUpIndex = 0;
+        //}
     }
 }
