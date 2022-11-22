@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class AiDirector : MonoBehaviour
@@ -39,6 +40,8 @@ public class AiDirector : MonoBehaviour
     EnemySpawner enemySpawner;    
     LootPoolManager lootPool;
     Rarity currentRarity;
+
+    public static UnityEvent RoomCleared = new UnityEvent();
 
     // Properties
 
@@ -119,6 +122,8 @@ public class AiDirector : MonoBehaviour
         {
             UpdateRoomStatistics();
             SpawnChest();
+
+            //RoomCleared.Invoke();
 
             inbetweenRooms = false;
         }

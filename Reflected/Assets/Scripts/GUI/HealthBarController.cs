@@ -16,10 +16,10 @@ public class HealthBarController : MonoBehaviour
     private void Awake()
     {
         if (inWorldLayer == null)
-            inWorldLayer = GameObject.Find("Canvas").transform.Find("Panel").Find("In-World Layer");
+            inWorldLayer = GameObject.Find("Canvas").transform.Find("In-World Layer");
 
         healthBar = Instantiate(healthBarPrefab, inWorldLayer).GetComponent<HoverHealthBar>();
-        healthBar.FollowInWorldObject.SetObjectToFollow(transform);
+        healthBar.FollowInWorldObject.ObjectToFollow = transform;
 
         character.HealthChanged.AddListener(UpdateHealthBar);
         character.Killed.AddListener(DestroyHealthBar);

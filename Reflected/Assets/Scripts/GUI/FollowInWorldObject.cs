@@ -8,9 +8,13 @@ public class FollowInWorldObject : MonoBehaviour
     [SerializeField] private Vector3 offset;
 
     private RectTransform rectTransform;
+    private CanvasGroup canvasGroup;
+    private bool hidden;
 
     private static Canvas canvas;
     private static Camera mainCamera;
+
+    public Transform ObjectToFollow { get { return objectToFollow; } set { objectToFollow = value; } }
 
     private void Awake()
     {
@@ -20,7 +24,11 @@ public class FollowInWorldObject : MonoBehaviour
             mainCamera = Camera.main;
         }
 
+        gameObject.AddComponent(typeof(CanvasGroup));
+        canvasGroup = GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
+
+        Show();
         Update();
     }
 
@@ -47,10 +55,25 @@ public class FollowInWorldObject : MonoBehaviour
                 rectTransform.anchorMax = viewpointPoint;
             }
         }
+
+        float dotProduct = Vector3.Dot(mainCamera.transform.forward, objectToFollow.position - mainCamera.transform.position);
+
+        if (hidden && dotProduct > 0f)
+            Show();
+        else if (!hidden && dotProduct < 0f)
+            Hide();
     }
 
-    public void SetObjectToFollow(Transform objectToFollow)
+    private void Hide()
     {
-        this.objectToFollow = objectToFollow;
+        hidden = true;
+        canvasGroup.alpha = 0f;
     }
+
+    private void Show()
+    {
+        hidden = false;
+        canvasGroup.alpha = 1f;
+    }
+
 }
