@@ -18,13 +18,13 @@ public class UpgradeUi : MonoBehaviour
     private GameObject chestObject;
     private int buttonIndex;
     [SerializeField] List<GameObject> upgradeList;
-    // Start is called before the first frame update
-    void Start()
-    {
-        chest = FindObjectOfType<Chest>();
 
+
+    public void SetPanelActive()
+    {
+        if (chest.isOpen) return;
+        upgradePanel.SetActive(true);
     }
-    
 
     public void DeactiveWindow()
     {
@@ -38,9 +38,10 @@ public class UpgradeUi : MonoBehaviour
 
     public void CreateButtons()
     {
-        chestObject = GameObject.FindGameObjectWithTag("Chest").GetComponent<GameObject>();
-        //upgradeList = chest.GetChestItems();
+        chest = FindObjectOfType<Chest>();
         upgradeList = chest.GetUpgradeItems();
+
+        if (chest.isOpen) return;
 
         Debug.Log("upgradeList Count " + upgradeList.Count);
         Debug.Log("buttonlist Count " + buttonList.Count);
@@ -51,16 +52,13 @@ public class UpgradeUi : MonoBehaviour
             Debug.Log("Created 1 Button");
             buttonIndex = buttonList.Count;
             buttonList.Add(Instantiate(buttonObject, upgradePanel.transform));
+            Debug.Log(upgradeList[i]);
             buttonList[i].GetComponent<UpgradeButton>().SetButton(upgradeList[i], buttonIndex);
             Debug.Log("it has index " + buttonIndex);
-
         }
     }
     public List<GameObject> GetButtonList()
     {
         return buttonList;
     }
-
-    // Update is called once per frame
-
 }

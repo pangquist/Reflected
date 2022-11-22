@@ -28,17 +28,17 @@ public abstract class Chest : MonoBehaviour
 
     protected void Update()
     {
-        //if (isOpen)
-        //{
-        //    animator.SetTrigger("open");
-        //}
-        //else
-        //{
-        //    animator.SetTrigger("close");            
-        //}
+        if (isOpen)
+        {
+            animator.SetTrigger("open");
+        }
+        else
+        {
+            animator.SetTrigger("close");
+        }
     }
 
-    public abstract void OpenChest();
+    public abstract void OpenChest(int index);
 
     public virtual void UseChest(GameObject gameObject)
     {

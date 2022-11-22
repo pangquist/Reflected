@@ -11,7 +11,6 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] Chest chest;
     [SerializeField] GameObject button;
     [SerializeField] int index;
-    [SerializeField] Image itemImage;
     [SerializeField] TextMeshProUGUI titleText;
     [SerializeField] TextMeshProUGUI descText;
     private UpgradeUi upgradeUi;
@@ -32,16 +31,14 @@ public class UpgradeButton : MonoBehaviour
 
     public void GetUpgrade()
     {
-        chest.SpawnItem(index);
-        chest.OpenChest();
+        chest.OpenChest(index);
         Debug.Log("trying to spawn item");
+        upgradeUi.DeactiveWindow();
     }
     public void SetButton(GameObject powerUp, int buttonIndex)
     {
         index = buttonIndex;
-        titleText.text = powerUp.GetComponent<IBuyable>().GetValue().ToString();
-        //titleText.text = powerUp.GetComponent<IBuyable>().
-        descText.text = powerUp.GetComponent<IBuyable>().GetDescription();
-
+        titleText.text = powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity;
+        descText.text = powerUp.GetComponent<InteractablePowerUp>().GetDescription();
     }
 }

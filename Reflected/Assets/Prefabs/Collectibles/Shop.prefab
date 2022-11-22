@@ -952,21 +952,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7228565035062304836, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7228565035062304836, guid: 6060d950f2d1cae4ab62215ea368fb4c,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7228565035062304836, guid: 6060d950f2d1cae4ab62215ea368fb4c,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7228565035062304836, guid: 6060d950f2d1cae4ab62215ea368fb4c,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.379
       objectReference: {fileID: 0}
@@ -1015,20 +1000,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7228565035062304836, guid: 6060d950f2d1cae4ab62215ea368fb4c,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7952073116535383583, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: m_Name
       value: InteractableCircle
-      objectReference: {fileID: 0}
-    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
-        type: 3}
-      propertyPath: interactKey
-      value: 101
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
@@ -1037,29 +1012,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
-      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
-        type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 672465699005169734, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+      objectReference: {fileID: 672465699005169734, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
-      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -1073,7 +1040,7 @@ PrefabInstance:
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: SetPanelActive
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
@@ -1083,22 +1050,7 @@ PrefabInstance:
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
-        type: 3}
-      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
-        type: 3}
-      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
-        type: 3}
-      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: ShopUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
@@ -1472,8 +1424,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7799038479567690022, guid: 373594b72530c4e40b42bfcc6a5c1715,
         type: 3}
+      propertyPath: value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799038479567690022, guid: 373594b72530c4e40b42bfcc6a5c1715,
+        type: 3}
+      propertyPath: amount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799038479567690022, guid: 373594b72530c4e40b42bfcc6a5c1715,
+        type: 3}
+      propertyPath: myRarity
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799038479567690022, guid: 373594b72530c4e40b42bfcc6a5c1715,
+        type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799038479567690022, guid: 373594b72530c4e40b42bfcc6a5c1715,
+        type: 3}
+      propertyPath: description
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7867018817267782846, guid: 373594b72530c4e40b42bfcc6a5c1715,
         type: 3}
