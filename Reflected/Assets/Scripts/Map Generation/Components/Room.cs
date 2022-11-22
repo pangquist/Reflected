@@ -91,7 +91,7 @@ public class Room : MonoBehaviour
         if (Map.ActiveRoom != this)
             return;
 
-        if (!cleared && map.GameManager.AiDirector.AllEnemiesKilled)
+        if (!cleared && map.GameManager.AiDirector.AllEnemiesKilled && map.GameManager.AiDirector.check)
             SetCleared(true);
     }
 

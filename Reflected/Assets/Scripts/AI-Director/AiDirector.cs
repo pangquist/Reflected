@@ -14,7 +14,7 @@ public class AiDirector : MonoBehaviour
     [SerializeField] int difficultySteps;
     int minSpawnAmount, maxSpawnAmount;
 
-    //Room-stats
+    //Room
     bool inbetweenRooms;
     [SerializeField] bool activeRoom;
     [SerializeField] int aliveEnemiesInRoom;
@@ -23,14 +23,14 @@ public class AiDirector : MonoBehaviour
     List<float> clearTimesList = new List<float>();
     [SerializeField] List<GameObject> chests;
 
-    //Map-stats
+    //Map
     [SerializeField] int numberOfRoomsCleared;
     [SerializeField] int numberOfRoomsLeftOnMap;
     [SerializeField] int NumberOfRoomsSinceShop;
     [SerializeField] int numberOfEnemiesKilled;
     Map map;
 
-    //Player-stats
+    //Player
     Player player;
     [SerializeField] float playerCurrentHelathPercentage;
     [SerializeField] int temporaryCurrency;
@@ -40,7 +40,9 @@ public class AiDirector : MonoBehaviour
     LootPoolManager lootPool;
     Rarity currentRarity;
 
-    // Properties
+    public bool check;
+
+    //Properties
 
     public bool AllEnemiesKilled => aliveEnemiesInRoom <= 0;
 
@@ -62,6 +64,7 @@ public class AiDirector : MonoBehaviour
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
+        check = false;
         numberOfRoomsLeftOnMap = map.Rooms.Count;
     }
 
@@ -108,7 +111,7 @@ public class AiDirector : MonoBehaviour
             timeToClearRoom += Time.deltaTime;
             playerCurrentHelathPercentage = player.GetHealthPercentage();
         }
-        if (activeRoom && aliveEnemiesInRoom == 0) // Player kills last enemy in a room
+        if (activeRoom && aliveEnemiesInRoom <= 0) // Player kills last enemy in a room
         {
             activeRoom = false;
             inbetweenRooms = true;
@@ -121,6 +124,7 @@ public class AiDirector : MonoBehaviour
             SpawnChest();
 
             inbetweenRooms = false;
+            check = false;
         }
     }
     private void UpdateRoomStatistics()
@@ -137,15 +141,16 @@ public class AiDirector : MonoBehaviour
     public void EnterRoom() //called when a new room activates (from Room-script)
     {  
         activeRoom = true;
-        aliveEnemiesInRoom = 0;
         checkDifficulty();
         aliveEnemiesInRoom = amountOfEnemiesToSpawn * waveAmount;
+        check = true;
 
         enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn, waveAmount, EnemyStatModifier());
     }
     public void EnterBossRoom()
     {
         Debug.Log("Activate Boss");
+        check = true;
     }
     public void killEnemyInRoom() //called when enemy dies (from enemy-script)
     {
