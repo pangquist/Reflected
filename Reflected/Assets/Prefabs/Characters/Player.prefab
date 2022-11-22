@@ -194,10 +194,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4853948256094235931}
     m_Modifications:
-    - target: {fileID: 402017961197159410, guid: fe7f1329d7c296d4b93c79f860f7991e,
-        type: 3}
-      propertyPath: cooldownDecrease
-      value: 1
+    - target: {fileID: 1271279111, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271279111, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: 0ccd1f53-5f77-4868-bf3b-4eb8cf8fa7e4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271279111, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionId
+      value: c69e2dba-a2f7-4ac9-93a6-3aaf2679fef8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271279111, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionId
+      value: 05cf776d-dbee-405e-a0ec-d53142c5df8f
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271279111, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: Player/Expand Interface[/Keyboard/tab]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271279111, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionName
+      value: Player/Zoom In[/Keyboard/numpadPlus]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271279111, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionName
+      value: Player/Zoom Out[/Keyboard/slash]
       objectReference: {fileID: 0}
     - target: {fileID: 1925594761, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
       propertyPath: statusEffectDatas.Array.size
@@ -218,6 +241,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 42d19c484248d444985fd617ac7c4141,
         type: 2}
+    - target: {fileID: 402017961197159410, guid: fe7f1329d7c296d4b93c79f860f7991e,
+        type: 3}
+      propertyPath: cooldownDecrease
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1059544865884427159, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
       propertyPath: abilitySource
@@ -333,6 +361,11 @@ PrefabInstance:
       propertyPath: gravityEffect
       value: -12
       objectReference: {fileID: 0}
+    - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
+        type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 392
+      objectReference: {fileID: 0}
     - target: {fileID: 6738516131019372579, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
       propertyPath: abilitySource
@@ -346,12 +379,12 @@ PrefabInstance:
     - target: {fileID: 8513157165599481038, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8982188774252356128, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
