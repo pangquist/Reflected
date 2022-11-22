@@ -81,7 +81,7 @@ public class AoeAttackState : State
 
         if (currentAOE != null)
         {
-            currentAOE.GetComponent<AOEScript>().SetUp(attackDamage, aoeSize);
+            currentAOE.GetComponentInChildren<AOEScript>().SetUp(attackDamage, aoeSize);
         }
     }
 
