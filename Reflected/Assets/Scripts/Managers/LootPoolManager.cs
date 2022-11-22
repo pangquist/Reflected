@@ -8,6 +8,7 @@ public class LootPoolManager : MonoBehaviour
     [SerializeField] WeightedRandomList<GameObject> truePowerupPool;
     [SerializeField] WeightedRandomList<GameObject> mirrorPowerupPool;
     [SerializeField] WeightedRandomList<GameObject> collectablePool;
+    [SerializeField] WeightedRandomList<GameObject> shopCollectables;
     [SerializeField] WeightedRandomList<Rarity> rarityTiers;
     [SerializeField] Dictionary<PowerUpEffect, int> powerupPickAmount;
 
@@ -76,6 +77,11 @@ public class LootPoolManager : MonoBehaviour
     public WeightedRandomList<GameObject> GetCollectablePool()
     {
         return collectablePool;
+    }
+
+    public WeightedRandomList<GameObject> GetShopCollectables()
+    {
+        return shopCollectables;
     }
 
     public WeightedRandomList<Rarity> GetRarityList()

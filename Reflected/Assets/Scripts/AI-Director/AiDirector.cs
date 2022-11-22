@@ -175,9 +175,12 @@ public class AiDirector : MonoBehaviour
                 break;                
             case "Epic":
                 Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
-                break;                      
+                break;
+            case "Legendary":
+                Instantiate(chests[3], spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;
             default:
-                Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0));
                 break;
         }
         

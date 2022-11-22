@@ -22,7 +22,7 @@ public class Shop : MonoBehaviour
     {
         //animator = GetComponent<Animator>();
         lootTablePowerUps = FindObjectOfType<LootPoolManager>().GetPowerupPool();
-        lootTableCollectables = FindObjectOfType<LootPoolManager>().GetCollectablePool();
+        lootTableCollectables = FindObjectOfType<LootPoolManager>().GetShopCollectables();
         rarityTiers = FindObjectOfType<LootPoolManager>().GetRarityList();
         foreach (var pair in lootTableCollectables.list)
         {
