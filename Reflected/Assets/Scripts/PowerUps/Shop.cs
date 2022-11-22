@@ -22,7 +22,8 @@ public class Shop : MonoBehaviour
     {
         //animator = GetComponent<Animator>();
         lootTablePowerUps = FindObjectOfType<LootPoolManager>().GetPowerupPool();
-        lootTableCollectables = FindObjectOfType<LootPoolManager>().GetCollectablePool();
+        lootTableCollectables = FindObjectOfType<LootPoolManager>().GetShopCollectables();
+        rarityTiers = FindObjectOfType<LootPoolManager>().GetRarityList();
         foreach (var pair in lootTableCollectables.list)
         {
             if (pair.item.GetComponent<IBuyable>() == null)
@@ -30,8 +31,6 @@ public class Shop : MonoBehaviour
                 pair.weight = 0;
             }
         }
-
-        //rarityTiers = FindObjectOfType<LootPoolManager>().GetRarityList();
         PopulateShop();
         //Destroy(gameObject, 200);
     }
@@ -94,6 +93,10 @@ public class Shop : MonoBehaviour
         for (int i = 0; i < numberOfCollectableItems; i++)
         {
             shopItems.Add(lootTableCollectables.GetRandom());
+            if (shopItems[i + numberOfPowerUps].GetComponent<Health>() != null)
+            {
+                shopItems[i + numberOfPowerUps].GetComponent<Health>().SetProperties(rarityTiers.GetRandom());
+            }
         }
         totalNumberOfItems = numberOfPowerUps + numberOfCollectableItems;
     }

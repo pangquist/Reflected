@@ -77,6 +77,11 @@ public abstract class Chest : MonoBehaviour
         itemHolder.gameObject.SetActive(true);
     }
 
+    public List<GameObject> GetPickablePowerups()
+    {
+        return pickablePowerUps;
+    }
+
     protected void SetItems()
     {
         
