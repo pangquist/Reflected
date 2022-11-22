@@ -23,7 +23,7 @@ public class Structure : MonoBehaviour
 
     private void Awake()
     {
-        MapGenerator.Finished.AddListener(DestroyDecorationObstructors);
+        ObjectPlacer.Finished.AddListener(DestroyDecorationObstructors);
     }
 
     public float ObstructiveArea()
@@ -40,6 +40,10 @@ public class Structure : MonoBehaviour
 
     private void DestroyDecorationObstructors()
     {
+        foreach(Collider collider in decorationObstructors.GetComponentsInChildren<Collider>())
+        {
+            collider.enabled = false;
+        }
         Destroy(decorationObstructors.gameObject);
     }
 

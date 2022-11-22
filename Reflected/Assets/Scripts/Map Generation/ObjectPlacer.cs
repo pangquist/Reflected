@@ -41,6 +41,7 @@ public class ObjectPlacer : MonoBehaviour
         }
 
         Finished.Invoke();
+        Physics.SyncTransforms();
     }
 
     private void PlaceDecorations(Room room)
