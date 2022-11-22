@@ -14,7 +14,6 @@ public class ShopUi : MonoBehaviour
     [SerializeField] GameObject buttonObject;
     [SerializeField] List<GameObject> buttonList;
     private int buttonIndex;
-    private GameObject shopObject;
     [SerializeField] List<GameObject> shopList;
 
 
@@ -30,14 +29,13 @@ public class ShopUi : MonoBehaviour
 
     public void CreateButtons()
     {
+        SetPanelActive();
 
         for (int i = 0; i < buttonList.Count; i++)
         {
             Destroy(buttonList[i]);
         }
         buttonList.Clear();
-        shop = FindObjectOfType<Shop>();
-        //shopObject = GameObject.FindGameObjectWithTag("Shop").GetComponent<GameObject>();
         shopList = shop.GetShopItems();
         Debug.Log("shoplist Count " + shopList.Count);
         Debug.Log("buttonlist Count "+ buttonList.Count);
@@ -50,12 +48,12 @@ public class ShopUi : MonoBehaviour
             buttonList.Add(Instantiate(buttonObject, shopPanel.transform));
             buttonList[i].GetComponent<ShopButton>().SetButton(shopList[i], buttonIndex);
             Debug.Log("it has index " + buttonIndex);
-
         }
     }
 
     public void SetPanelActive()
     {
+        shop = GameObject.FindGameObjectWithTag("Shop").GetComponent<Shop>();
         shopPanel.SetActive(true);
     }
 
@@ -73,11 +71,4 @@ public class ShopUi : MonoBehaviour
     {
         buttonList.Remove(button);
     }
-
-
-    
-
-
-    
-
 }

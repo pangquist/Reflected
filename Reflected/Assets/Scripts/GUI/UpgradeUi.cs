@@ -22,6 +22,10 @@ public class UpgradeUi : MonoBehaviour
 
     public void SetPanelActive()
     {
+        
+        chest = GameObject.FindGameObjectWithTag("Chest").GetComponent<Chest>();
+        
+        Debug.Log(upgradePanel);
         if (chest.isOpen) return;
         upgradePanel.SetActive(true);
     }
@@ -38,11 +42,16 @@ public class UpgradeUi : MonoBehaviour
 
     public void CreateButtons()
     {
-        chest = FindObjectOfType<Chest>();
+        SetPanelActive();
+
+        for (int i = 0; i < buttonList.Count; i++)
+        {
+            Destroy(buttonList[i]);
+        }
+        buttonList.Clear();
         upgradeList = chest.GetUpgradeItems();
 
         if (chest.isOpen) return;
-
         Debug.Log("upgradeList Count " + upgradeList.Count);
         Debug.Log("buttonlist Count " + buttonList.Count);
         if (buttonList.Count >= upgradeList.Count)
@@ -51,8 +60,8 @@ public class UpgradeUi : MonoBehaviour
         {
             Debug.Log("Created 1 Button");
             buttonIndex = buttonList.Count;
-            buttonList.Add(Instantiate(buttonObject, upgradePanel.transform));
-            Debug.Log(upgradeList[i]);
+            GameObject button = Instantiate(buttonObject, upgradePanel.transform);
+            buttonList.Add(button);
             buttonList[i].GetComponent<UpgradeButton>().SetButton(upgradeList[i], buttonIndex);
             Debug.Log("it has index " + buttonIndex);
         }

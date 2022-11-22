@@ -65,8 +65,6 @@ public class UiManager: MonoBehaviour
                 inGameMenu.SetActive(true);
             }
         }
-        
-
     }
 
     void HandleMouse()

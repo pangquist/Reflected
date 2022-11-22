@@ -13,6 +13,11 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] int index;
     [SerializeField] TextMeshProUGUI titleText;
     [SerializeField] TextMeshProUGUI descText;
+
+    [SerializeField] Color common;
+    [SerializeField] Color rare;
+    [SerializeField] Color epic;
+    [SerializeField] Color legendary;
     private UpgradeUi upgradeUi;
     private List<GameObject> buttonList;
     private List<GameObject> upgradeList;
@@ -39,6 +44,15 @@ public class UpgradeButton : MonoBehaviour
     {
         index = buttonIndex;
         titleText.text = powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity;
+
+        if (powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity == "Common")
+            titleText.color = common;
+        else if (powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity == "Rare")
+            titleText.color = rare;
+        else if (powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity == "Epic")
+            titleText.color = epic;
+        else if (powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity == "Legendary")
+            titleText.color = legendary;
         descText.text = powerUp.GetComponent<InteractablePowerUp>().GetDescription();
     }
 }
