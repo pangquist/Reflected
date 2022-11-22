@@ -16,6 +16,7 @@ public class ObjectPlacer : MonoBehaviour
     [Header("References")]
     [SerializeField] TerrainGenerator terrainGenerator;
     [SerializeField] MapGenerator mapGenerator;
+    [SerializeField] GameObject enemySpawnPoint;
 
     [Header("Values")]
     [SerializeField] float objectMultiplier;
@@ -25,8 +26,8 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] float obstacleDistance;
     [SerializeField] bool avoidCenter;
     [SerializeField] LayerMask layerMask;
-
-    [SerializeField] GameObject enemySpawnPoint;
+    [SerializeField] int enemySpawnPoints;
+    [SerializeField] int maxSpawnPointAttempts;
 
     [Header("Objects")]
     [SerializeField] ObjectList[] objects;
@@ -151,22 +152,36 @@ public class ObjectPlacer : MonoBehaviour
 
     private void PlaceEnemySpawnPoints(List<Vector3> raycastOrigins, Room room)
     {
-        for (int i = 0; i < objectMultiplier * room.Rect.Area() * 0.01f; i++)
+        int spawnPoints = 0;
+        int attempts = 0;
+
+        while (spawnPoints < enemySpawnPoints && attempts < maxSpawnPointAttempts)
         {
-            Ray ray = new Ray(raycastOrigins[(int)Random.Range(0, raycastOrigins.Count)], -transform.up);
+            ++attempts;
+            Ray ray = new Ray(raycastOrigins.GetRandom() + new Vector3(0, 1, 0), Vector3.down);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
             {
                 Collider[] closeObjects = Physics.OverlapSphere(hit.point, obstacleDistance);
 
-                foreach (Collider collider in closeObjects)
+                if (CanPlace())
                 {
-                    if (!collider.gameObject.GetComponent<NavMeshObstacle>())
-                    {
-                        Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.ObjectsChild);
-                    }
+                    Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.ObjectsChild);
+                    ++spawnPoints;
+                }
+
+                bool CanPlace()
+                {
+                    foreach (Collider collider in closeObjects)
+                        if (collider.gameObject.GetComponent<NavMeshObstacle>())
+                            return false;
+                    return true;   
                 }
             }
         }
+
+        if (spawnPoints < enemySpawnPoints)
+            Debug.LogWarning(room + " only got " + spawnPoints + "/" + enemySpawnPoints + " enemy spawn points after " + attempts + "/" + maxSpawnPointAttempts + " attempts.");
     }
+
 }

@@ -77,7 +77,7 @@ public enum Stats
     MovementSpeed,
     Damage,
     AttackSpeed,
-    AoE   
+    AoE
 }
 
 /// <summary>
