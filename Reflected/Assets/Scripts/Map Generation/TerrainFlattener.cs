@@ -61,7 +61,7 @@ public class TerrainFlattener : MonoBehaviour
                 // How much to affect the vertex based of its distance to origin
                 adaptionAmount = (distance - innerRadius) / (outerRadius - innerRadius);
                 adaptionAmount = -Mathf.Clamp01(adaptionAmount) + 1f;
-                adaptionAmount = adaptionAmount.LerpValueSmoothstep();
+                adaptionAmount = adaptionAmount.Smoothstep();
 
                 // The final height adaption
                 adaption = (level - meshVertices[i].y) * adaptionAmount;

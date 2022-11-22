@@ -47,7 +47,7 @@ public static class Extensions
     /// Returns a new float to be used, instead of this float, as argument t in any lerp function.
     /// Perfect accuracy. Subtle effect. See plotted function: https://www.desmos.com/calculator/ktcwf5obja
     /// </summary>
-    public static float LerpValueSmoothstep(this float x)
+    public static float Smoothstep(this float x)
     {
         // Classic smoothstep function
 
@@ -62,7 +62,7 @@ public static class Extensions
     /// <param name="x">Input value (0 to 1)</param>
     /// <param name="a">Function amplitude (-0.98 to 0.98)</param>
     /// <param name="p">Position of function separator (0 to 1)</param>
-    public static float LerpValueCustomSmoothstep(this float x, float a = 0.5f, float p = 0.5f)
+    public static float CustomSmoothstep(this float x, float a = 0.5f, float p = 0.5f)
     {
         x = Mathf.Clamp01(x);
         a = Mathf.Clamp(a, -0.98f, 0.98f);
@@ -373,5 +373,45 @@ public static class Extensions
         return new Vector2(
             Random.Range(rect.xMin, rect.xMax),
             Random.Range(rect.yMin, rect.yMax));
+    }
+
+    /// <summary>
+    /// Interprets this float as a percentage/decimal fraction and returns a value within the provided range (unclamped).
+    /// Formula: y = min + (max - min) * x.
+    /// See plotted function: https://www.desmos.com/calculator/mdcyvahxtz
+    /// </summary>
+    public static float PercentageToValue(this float x, float min, float max)
+    {
+        return min + (max - min) * x;
+    }
+
+    /// <summary>
+    /// Interprets this float as a value within the provided range and returns a percentage/decimal fraction (unclamped).
+    /// Formula: y = (x - min) / (max - min)
+    /// See plotted function https://www.desmos.com/calculator/mdcyvahxtz
+    /// </summary>
+    public static float ValueToPercentage(this float x, float min, float max)
+    {
+        return (x - min) / (max - min);
+    }
+
+    /// <summary>
+    /// Interprets this float as a percentage/decimal fraction and returns a value within the provided range (clamped).
+    /// Formula: y = min + (max - min) * x.
+    /// See plotted function: https://www.desmos.com/calculator/mdcyvahxtz
+    /// </summary>
+    public static float PercentageToValueClamped(this float x, float min, float max)
+    {
+        return min + (max - min) * Mathf.Clamp01(x);
+    }
+
+    /// <summary>
+    /// Interprets this float as a value within the provided range and returns a percentage/decimal fraction (clamped).
+    /// Formula: y = (x - min) / (max - min)
+    /// See plotted function https://www.desmos.com/calculator/mdcyvahxtz
+    /// </summary>
+    public static float ValueToPercentageClamped(this float x, float min, float max)
+    {
+        return Mathf.Clamp01((x - min) / (max - min));
     }
 }

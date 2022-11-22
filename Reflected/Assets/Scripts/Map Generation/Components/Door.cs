@@ -96,8 +96,8 @@ public class Door : MonoBehaviour
 
     private void Animate()
     {
-        portion1.transform.localPosition = Vector3.Lerp(portion1ClosedPos, portion1OpenPos, transition.LerpValueSmoothstep());
-        portion2.transform.localPosition = Vector3.Lerp(portion2ClosedPos, portion2OpenPos, transition.LerpValueSmoothstep());
+        portion1.transform.localPosition = Vector3.Lerp(portion1ClosedPos, portion1OpenPos, transition.Smoothstep());
+        portion2.transform.localPosition = Vector3.Lerp(portion2ClosedPos, portion2OpenPos, transition.Smoothstep());
     }
 
     [ContextMenu("Open")]

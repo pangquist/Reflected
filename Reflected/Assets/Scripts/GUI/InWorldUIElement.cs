@@ -2,10 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowInWorldObject : MonoBehaviour
+public class InWorldUIElement : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private Transform objectToFollow;
-    [SerializeField] private Vector3 offset;
+
+    [Header("Values")]
+    [SerializeField] private Vector3 screenOffset;
+
+    [Tooltip("The distance at which this UI element is fully visible")]
+    [SerializeField] private float minDistance;
+
+    [Tooltip("The distance at which this UI element is no longer visible")]
+    [SerializeField] private float maxDistance;
+
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -37,9 +47,23 @@ public class FollowInWorldObject : MonoBehaviour
         if (objectToFollow == null)
             return;
 
+        // Show or hide
+
+        float dotProduct = Vector3.Dot(mainCamera.transform.forward, objectToFollow.position - mainCamera.transform.position);
+
+        if (hidden && dotProduct > 0f)
+            Show();
+        else if (!hidden && dotProduct < 0f)
+            Hide();
+
+        if (hidden)
+            return;
+
+        // Set position
+
         if (canvas.renderMode == RenderMode.ScreenSpaceOverlay)
         {
-            Vector3 screenPoint = mainCamera.WorldToScreenPoint(objectToFollow.position + offset);
+            Vector3 screenPoint = mainCamera.WorldToScreenPoint(objectToFollow.position) + screenOffset;
 
             if (transform.position != screenPoint)
                 transform.position = screenPoint;
@@ -47,7 +71,7 @@ public class FollowInWorldObject : MonoBehaviour
 
         else if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
         {
-            Vector2 viewpointPoint = mainCamera.WorldToViewportPoint(objectToFollow.position + offset);
+            Vector2 viewpointPoint = mainCamera.WorldToViewportPoint(objectToFollow.position) + screenOffset;
 
             if (rectTransform.anchorMin != viewpointPoint)
             {
@@ -56,12 +80,13 @@ public class FollowInWorldObject : MonoBehaviour
             }
         }
 
-        float dotProduct = Vector3.Dot(mainCamera.transform.forward, objectToFollow.position - mainCamera.transform.position);
+        // Set distance visibility
 
-        if (hidden && dotProduct > 0f)
-            Show();
-        else if (!hidden && dotProduct < 0f)
-            Hide();
+        float distance = Vector3.Distance(mainCamera.transform.position, objectToFollow.position);
+        float childrenScale = 1f - distance.ValueToPercentageClamped(minDistance, maxDistance).CustomSmoothstep();
+
+        foreach (Transform child in transform)
+            child.localScale = Vector3.one * childrenScale;
     }
 
     private void Hide()

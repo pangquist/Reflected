@@ -12,7 +12,7 @@ public class InWorldUISorter : MonoBehaviour
 
         foreach (Transform child in transform)
         {
-            float distance = Vector3.Distance(Camera.main.transform.position, child.GetComponent<FollowInWorldObject>().ObjectToFollow.position);
+            float distance = Vector3.Distance(Camera.main.transform.position, child.GetComponent<InWorldUIElement>().ObjectToFollow.position);
             children.Add(distance, child);
             distances.Add(distance);
         }

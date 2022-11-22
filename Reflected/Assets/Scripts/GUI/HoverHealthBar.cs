@@ -7,12 +7,12 @@ public class HoverHealthBar : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Slider slider;
-    [SerializeField] private FollowInWorldObject followInWorldObject;
+    [SerializeField] private InWorldUIElement followInWorldObject;
     [SerializeField] private Animator animator;
     [SerializeField] private AnimationClip hideClip;
 
     public Slider Slider => slider;
-    public FollowInWorldObject FollowInWorldObject => followInWorldObject;
+    public InWorldUIElement FollowInWorldObject => followInWorldObject;
 
     private void Start()
     {
