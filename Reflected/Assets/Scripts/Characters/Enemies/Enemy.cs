@@ -69,11 +69,8 @@ public class Enemy : Character
             parent.transform.rotation = Quaternion.LookRotation(direction);
         }
 
-
         CombatText text = Instantiate(combatTextCanvas.gameObject, transform.position + combatTextOffset, Quaternion.identity).GetComponent<CombatText>();
         text.SetDamageText(damage);
-
-        Debug.Log("ENEMY TOOK DAMAGE: " + damage);
         base.TakeDamage(damage);
     }
 
