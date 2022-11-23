@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Root : Enemy
 {
+    [SerializeField] Slider healthBar;
     public override void TakeDamage(float damage)
     {
         if (invurnable || isDead)
@@ -14,7 +16,7 @@ public class Root : Enemy
 
         currentHealth -= Mathf.Clamp(damage, 0, currentHealth);
 
-        Debug.Log("ENEMY TOOK DAMAGE: " + damage + "Health left: " + currentHealth);
+        healthBar.value = GetHealthPercentage();
 
         if (currentHealth <= 0)
         {

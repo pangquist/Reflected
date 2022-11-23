@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5156680633539833564}
   - component: {fileID: 2899101103714127829}
+  - component: {fileID: -152334251702605937}
+  - component: {fileID: -5392206573217634170}
+  - component: {fileID: 2388448652523554153}
   m_Layer: 7
   m_Name: Fern
   m_TagString: Untagged
@@ -57,6 +60,51 @@ MonoBehaviour:
   minScale: 0.8
   maxScale: 1.2
   scaleBias: -0.4
+--- !u!114 &-152334251702605937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5502345215135690909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec2d0386f72ba4458173a2238d4f1e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &-5392206573217634170
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5502345215135690909}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &2388448652523554153
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5502345215135690909}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 45ca3ca52ae84f048b15fb4e198c2591, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1597957871526520844
 PrefabInstance:
   m_ObjectHideFlags: 0
