@@ -12,9 +12,6 @@ GameObject:
   - component: {fileID: 4366562023085999569}
   - component: {fileID: 4366562023087130385}
   - component: {fileID: 5790842667485573576}
-  - component: {fileID: -166519219270965991}
-  - component: {fileID: -2951755499525037355}
-  - component: {fileID: -8879915660693276517}
   m_Layer: 0
   m_Name: Bush to Dry
   m_TagString: Untagged
@@ -108,47 +105,3 @@ MonoBehaviour:
   - {fileID: 4300000, guid: b4faa2141c16dce4ca0958f3035745cd, type: 3}
   - {fileID: 4300000, guid: 00a37b87e52db3540b99b75644004f08, type: 3}
   hasChildren: 0
---- !u!114 &-166519219270965991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4366562023089330641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ffc1699600a540708047a2873447209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  randomizeRotationX: 0
-  randomizeRotationY: 1
-  randomizeRotationZ: 0
-  randomizeScale: 1
-  minScale: 0.8
-  maxScale: 2
-  scaleBias: -0.4
---- !u!114 &-2951755499525037355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4366562023089330641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ec2d0386f72ba4458173a2238d4f1e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &-8879915660693276517
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4366562023089330641}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.4941587, y: 2.0433881, z: 1.4912481}
-  m_Center: {x: -0.00066268444, y: 0.93839365, z: -0.04451573}
