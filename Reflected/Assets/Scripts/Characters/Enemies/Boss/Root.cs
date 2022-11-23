@@ -22,6 +22,8 @@ public class Root : Enemy
         {
             Die();
         }
+
+        HealthChanged.Invoke();
     }
 
     protected override void Die()
