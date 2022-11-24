@@ -74,5 +74,7 @@ public class PlayerEditorTemplate : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("chargeBar"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("swapAbility"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("TimeFlowWhileSwapping"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("trueSwapSound"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("mirrorSwapSound"));
     }
 }

@@ -9,6 +9,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] Transform cam;
     [SerializeField] PlayerStatSystem stats;
     [SerializeField] Animator animator;
+    [SerializeField] List<AudioClip> footstepSounds;
 
     [Header("Stat Properties")]
     [SerializeField] float speed = 12f;
@@ -127,5 +128,11 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         velocity = new Vector3(velocity.x, 0, velocity.z);
         gravity = false;
+    }
+
+    public void PlayRandomFootstepSound()
+    {
+        AudioClip footstepSound = footstepSounds[Random.Range(0, footstepSounds.Count)];
+        GetComponent<AudioSource>().PlayOneShot(footstepSound);
     }
 }

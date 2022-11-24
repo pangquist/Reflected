@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -173,6 +174,13 @@ public class Character : MonoBehaviour, IEffectable
     public void PlayAnimation(string animName)
     {
         anim.Play(animName);
+    }
+
+
+    public void FocusCamera()
+    {
+        CinemachineFreeLook freeLook = Object.FindObjectOfType<CinemachineFreeLook>();
+        freeLook.Follow = transform;
     }
 
     public bool Dead() => isDead;

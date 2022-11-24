@@ -84,8 +84,8 @@ public class Enemy : Character
         }
         
         LootDrop(transform);
-        //player.RemoveEnemy(this);
-        //anim.Play("Death");
+
+
         base.Die();
     }
 

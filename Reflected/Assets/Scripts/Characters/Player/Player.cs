@@ -34,6 +34,8 @@ public class Player : Character, ISavable
     [SerializeField] Ability swapAbility;
     [Range(0f, 1f)]
     [SerializeField] float TimeFlowWhileSwapping;
+    [SerializeField] AudioClip trueSwapSound;
+    [SerializeField] AudioClip mirrorSwapSound;
 
     public delegate void InteractWithObject();
     public static event InteractWithObject OnObjectInteraction;
@@ -157,9 +159,17 @@ public class Player : Character, ISavable
     {
         if (dimensionManager.TrySwap())
         {
+            SetTimeToNormalFlow();
             ChangeStats();
             if (swapAbility)
                 swapAbility.DoEffect();
+
+            if(DimensionManager.CurrentDimension == Dimension.True)
+            {
+                GetComponent<AudioSource>().PlayOneShot(trueSwapSound);
+            }
+            else
+                GetComponent<AudioSource>().PlayOneShot(mirrorSwapSound);
         }
     }
 
