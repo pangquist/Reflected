@@ -10,15 +10,34 @@ using System.Runtime.CompilerServices;
 
 public class UpgradeUi : MonoBehaviour
 {
+
     [SerializeField] Chest chest;
     [SerializeField] GameObject upgradePanel;
     [SerializeField] GameObject buttonObject;
     [SerializeField] List<GameObject> buttonList;
     [SerializeField] List<GameObject> upgradeList;
-
+    private GameObject[] chests;
+    private Player player;
     public void SetPanelActive()
     {
-        chest = GameObject.FindGameObjectWithTag("Chest").GetComponent<Chest>();
+        
+        chests = GameObject.FindGameObjectsWithTag("Chest");
+        for (int i = 0; i < chests.Length; i++)
+        {
+            if (i == 0)
+                chest = chests[i].gameObject.GetComponent<Chest>();
+            else if(Vector3.Distance(chests[i].gameObject.transform.position, player.transform.position) 
+                < Vector3.Distance(chest.transform.position, player.transform.position))
+                {
+                chest = chests[i].gameObject.GetComponent<Chest>();
+            }
+            
+        }
+
+
+        //chest = GameObject.FindGameObjectWithTag("Chest").GetComponent<Chest>();
+        
+        
         if (chest.isOpen) 
             return;
         upgradePanel.SetActive(true);
