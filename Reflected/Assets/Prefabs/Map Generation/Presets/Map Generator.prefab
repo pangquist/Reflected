@@ -462,15 +462,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 5090313322264181271}
   mapGenerator: {fileID: 5090313322264181279}
+  enemySpawnPoint: {fileID: 2572951519100550845, guid: b6f5ecbc5fd265a49b724a958a79623b,
+    type: 3}
   objectMultiplier: 2.6
   wallPadding: 2
-  obstacleDistance: 4
+  obstacleDistance: 3
   avoidCenter: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 137
-  enemySpawnPoint: {fileID: 2572951519100550845, guid: b6f5ecbc5fd265a49b724a958a79623b,
-    type: 3}
+  enemySpawnPoints: 25
+  maxSpawnPointAttempts: 500
   objects:
   - terrain: Underwater
     terrainObjects:

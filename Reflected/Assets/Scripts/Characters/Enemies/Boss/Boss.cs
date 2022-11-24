@@ -108,7 +108,6 @@ public class Boss : Enemy
         if (roots.Count == 0)
         {
             Die();
-            healthBar.gameObject.SetActive(false);
         }
     }
 

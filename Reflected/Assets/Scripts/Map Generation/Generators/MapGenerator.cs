@@ -98,12 +98,6 @@ public class MapGenerator : MonoBehaviour
             StartCoroutine(Coroutine_BulkGenerate());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-            Start();
-    }
-
     private void Generate()
     {
         // Prepare
