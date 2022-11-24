@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class AiDirector : MonoBehaviour
@@ -39,6 +40,8 @@ public class AiDirector : MonoBehaviour
     EnemySpawner enemySpawner;    
     LootPoolManager lootPool;
     Rarity currentRarity;
+
+    public static UnityEvent RoomCleared = new UnityEvent();
 
     // Properties
 
@@ -113,12 +116,14 @@ public class AiDirector : MonoBehaviour
             activeRoom = false;
             inbetweenRooms = true;
             MusicManager musicManager = FindObjectOfType<MusicManager>();
-            musicManager.ChangeMusicIntensity(-1);
+            musicManager.SetMusic(DimensionManager.CurrentDimension, 0);
         }
         if (inbetweenRooms) //All enemies are killed but player is still in same room
         {
             UpdateRoomStatistics();
             SpawnChest();
+
+            //RoomCleared.Invoke();
 
             inbetweenRooms = false;
         }

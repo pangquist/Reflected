@@ -77,7 +77,7 @@ public enum Stats
     MovementSpeed,
     Damage,
     AttackSpeed,
-    AoE   
+    AoE
 }
 
 /// <summary>
@@ -89,4 +89,14 @@ public enum MinimapLayer
     Rooms,
     Objects,
     Player
+}
+
+/// <summary>
+/// How to display the health of a character. None: "", Current: "3", Full: "3/5"
+/// </summary>
+public enum HealthTextMode
+{
+    None,
+    Current,
+    Full
 }

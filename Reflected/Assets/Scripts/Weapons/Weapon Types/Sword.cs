@@ -16,16 +16,20 @@ public class Sword : Weapon
 
     private void OnTriggerStay(Collider other)
     {
-        //if (!playerController.GetActionLock())
-        //    return;
-
         if (!playerController.DamageLocked())
             return;
+
+        Debug.Log("Collider: " + other.gameObject.name);
 
         Enemy target;
 
         if (other.GetComponent<Enemy>())
             target = other.GetComponent<Enemy>();
+        else if (other.GetComponent<Destructible>())
+        {
+            other.GetComponent<Destructible>().DestroyAnimation();
+            return;
+        }
         else
             return;
 
@@ -33,8 +37,8 @@ public class Sword : Weapon
         {
             target.TakeDamage(GetDamage());
             hitEnemies.Add(target);
-            
-            if(powerUpIndex > -1 && powerUpIndex < 2)
+
+            if (powerUpIndex > -1 && powerUpIndex < 2)
             {
                 target.GetComponent<IEffectable>().ApplyEffect(statusEffectDatas[powerUpIndex], damage);
                 Debug.Log(statusEffectDatas[powerUpIndex]);

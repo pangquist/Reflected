@@ -18,7 +18,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     [Header("Jump Properties")]
     [SerializeField] float gravityEffect = -9.81f;
-    [SerializeField] float jumpHeight = 3f;
+    [SerializeField] float jumpHeight;
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance = 0.4f;
     [SerializeField] LayerMask groundMask;
@@ -73,15 +73,26 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (dashAbility.IsDashing())
+        if (dashAbility.IsDashing() || !isGrounded)
             return;
 
+        //StartCoroutine(_Jump());
         if (isGrounded && velocity.y <= 0)
         {
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravityEffect);
-
         }
     }
+
+    //IEnumerator _Jump()
+    //{
+    //    float progress = 0;
+
+    //    while(progress < jumpDuration)
+    //    {
+
+    //        progress += Time.deltaTime;
+    //    }
+    //}
 
     public void Dash()
     {

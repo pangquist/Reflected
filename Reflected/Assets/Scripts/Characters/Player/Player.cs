@@ -141,6 +141,7 @@ public class Player : Character, ISavable
     public override void Heal(float amount)
     {
         currentHealth += Mathf.Clamp(amount, 0, maxHealth + stats.GetMaxHealthIncrease() - currentHealth);
+        HealthChanged.Invoke();
     }
 
     public void TryDimensionSwap()
@@ -177,6 +178,8 @@ public class Player : Character, ISavable
         {
             anim.Play("Damaged");
         }
+
+        HealthChanged.Invoke();
     }
 
     public void Interact()

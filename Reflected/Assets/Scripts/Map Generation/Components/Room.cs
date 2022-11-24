@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using System;
+using Random = UnityEngine.Random;
 
 public class Room : MonoBehaviour
 {
@@ -21,7 +23,9 @@ public class Room : MonoBehaviour
     [ReadOnly][SerializeField] private List<PathCreator> paths;
     [ReadOnly][SerializeField] private List<Vector3> pathPoints;
     [ReadOnly][SerializeField] private List<Structure> structures;
-     
+    [ReadOnly][SerializeField] private Stats trueStat;
+    [ReadOnly][SerializeField] private Stats mirrorStat;
+
     private static Map map;
 
     // Properties
@@ -38,6 +42,19 @@ public class Room : MonoBehaviour
     public List<PathCreator> Paths => paths;
     public List<Vector3> PathPoints => pathPoints;
     public List<Structure> Structures => structures;
+    public Stats TrueStat => trueStat;
+    public Stats MirrorStat => mirrorStat;
+
+    private void Awake()
+    {
+        //AiDirector.RoomCleared.AddListener(() => SetCleared(true));
+
+        Array stats = Enum.GetValues(typeof(Stats));
+        trueStat = (Stats)stats.GetValue(Random.Range(0, stats.Length));
+
+        do { mirrorStat = (Stats)stats.GetValue(Random.Range(0, stats.Length)); }
+        while (trueStat == mirrorStat);
+    }
 
     public static void StaticInitialize(Map map)
     {
@@ -132,15 +149,15 @@ public class Room : MonoBehaviour
             foreach (Chamber chamber in chambers)
                 chamber.Open(this);
         }
-
         else
         {
-            if (type == RoomType.Monster || type == RoomType.Shop)
+            if (type == RoomType.Monster/* || type == RoomType.Shop*/)
             {
                 map.GameManager.AiDirector.EnterRoom();
                 GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(1);
             }
-            if (type == RoomType.Boss)
+
+            else if (type == RoomType.Boss)
             {
                 map.GameManager.AiDirector.EnterBossRoom();
                 GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(2);

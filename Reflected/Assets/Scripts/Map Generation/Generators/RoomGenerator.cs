@@ -229,7 +229,7 @@ public class RoomGenerator : MonoBehaviour
     {
         float x = Random.Range(0f, 1f); // Random input
 
-        float y = x.LerpValueCustomSmoothstep(splitLocationBias); // Biased output
+        float y = x.CustomSmoothstep(splitLocationBias); // Biased output
 
         float floatingLocation = min + (max - min) * y; // Translate to floating point location
 

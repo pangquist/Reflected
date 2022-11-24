@@ -1,13 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-//using UnityEngine.UIElements;
 
 public class Enemy : Character
 {
-    [SerializeField] protected Image healthBar;
-
     [SerializeField] protected Vector3 combatTextOffset;
     [SerializeField] protected Canvas combatTextCanvas;
     [SerializeField] protected float aggroRange;
@@ -60,9 +56,7 @@ public class Enemy : Character
         if (invurnable)
             return;
 
-        if (currentHealth == maxHealth)
-            healthBar.gameObject.SetActive(true);
-        else if (currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
             return;
@@ -75,13 +69,9 @@ public class Enemy : Character
             parent.transform.rotation = Quaternion.LookRotation(direction);
         }
 
-
         CombatText text = Instantiate(combatTextCanvas.gameObject, transform.position + combatTextOffset, Quaternion.identity).GetComponent<CombatText>();
         text.SetDamageText(damage);
-
-        Debug.Log("ENEMY TOOK DAMAGE: " + damage);
         base.TakeDamage(damage);
-        healthBar.fillAmount = GetHealthPercentage();
     }
 
     protected override void Die()
