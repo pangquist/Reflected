@@ -1008,7 +1008,7 @@ PrefabInstance:
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
@@ -1035,7 +1035,7 @@ PrefabInstance:
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CreateButtons
+      value: SetPanelActive
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
@@ -1059,6 +1059,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6060d950f2d1cae4ab62215ea368fb4c, type: 3}
+--- !u!1 &139543609995237991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7952073116535383583, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8049254639188016248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7434666621477637907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139543609995237991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ab2bf2a1b5be479ecdac004e834e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInRange: 0
+  interactKey: 101
+  interactAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &857293525602393148 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7228565035062304836, guid: 6060d950f2d1cae4ab62215ea368fb4c,

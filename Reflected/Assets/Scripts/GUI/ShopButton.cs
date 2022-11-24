@@ -19,14 +19,10 @@ public class ShopButton : MonoBehaviour
     private ShopUi shopUi;
     private List<GameObject> buttonList;
 
-    private List<GameObject> shopList;
-
     void Start()
     {
-        shop = FindObjectOfType<Shop>();
-        shopList = shop.GetShopItems();
+        shop = GameObject.FindGameObjectWithTag("Shop").GetComponent<Shop>();
         shopUi = FindObjectOfType<ShopUi>();
-
         buttonList = shopUi.GetButtonList();
     }
     public int GetIndex()
@@ -40,22 +36,7 @@ public class ShopButton : MonoBehaviour
     {
         if (shop.BuyItem(index))
         {
-
-
-            if (gameObject != null)
-            {
-                shopUi.RemoveButtonFromList(gameObject);
-                Destroy(gameObject);
-
-            }
-
-            for (int i = 0; i < buttonList.Count; i++)
-            {
-                if (buttonList[i].GetComponent<ShopButton>().index > index)
-                {
-                    buttonList[i].GetComponent<ShopButton>().index--;
-                }
-            }
+            buttonList[index].SetActive(false); 
         }
 
     }
