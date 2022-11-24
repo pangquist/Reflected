@@ -5,7 +5,6 @@ using UnityEngine;
 public class InteractableShop : Interactable
 {
     private ShopUi shopUi;
-    Player player;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

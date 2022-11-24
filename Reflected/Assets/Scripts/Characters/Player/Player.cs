@@ -223,6 +223,11 @@ public class Player : Character, ISavable
             StartCoroutine(_Stun(duration));
     }
 
+    public StatSystem playerStats()
+    {
+        return stats;
+    }
+
     IEnumerator _Stun(float duration)
     {
         GetComponent<PlayerController>().LockPlayer();

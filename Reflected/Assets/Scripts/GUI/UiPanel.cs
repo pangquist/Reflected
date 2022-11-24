@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class UiPanel : MonoBehaviour
@@ -18,25 +19,21 @@ public class UiPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI mirrorShard;
     [SerializeField] TextMeshProUGUI gems;
 
-    private StatSystem statSystem;
-    
-    private ItemData itemData;
+    private PlayerStatSystem statSystem;
     private Player player;
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
-        statSystem = FindObjectOfType<StatSystem>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //healthText.text = "Health: " + (player.GetMaxHealth() + statSystem.GetMaxHealthIncrease()).ToString();
-        //damageText.text = "Damage: " + (player.GetDamage() * statSystem.GetDamageIncrease()).ToString();
-        //speedText.text = "Movement Speed: " + (player.GetMovementSpeed() * statSystem.GetMovementSpeed()).ToString();
-        //attackspeedText.text = "Attack Speed: " + (player.GetAttackSpeed() * statSystem.GetAttackSpeed()).ToString();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
+        statSystem = player.GetComponent<PlayerStatSystem>();
+        healthText.text = "Health: " + (player.GetMaxHealth() + player.playerStats().GetMaxHealthIncrease()).ToString();
+        damageText.text = "Damage: " + (player.GetDamage() * player.playerStats().GetDamageIncrease()).ToString();
+        speedText.text = "Movement Speed: " + (player.GetMovementSpeed() * player.playerStats().GetMovementSpeed()).ToString();
+        attackspeedText.text = "Attack Speed: " + (player.GetAttackSpeed() * player.playerStats().GetAttackSpeed()).ToString();
         coin.text = inventory.inventory[0].stackSize.ToString();
         gems.text = inventory.inventory[1].stackSize.ToString();
         mirrorShard.text = inventory.inventory[2].stackSize.ToString();

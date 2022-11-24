@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class InteractableChest : Interactable
 {
     private UpgradeUi upgradeUi;
-    Player player;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

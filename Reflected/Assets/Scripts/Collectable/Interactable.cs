@@ -9,7 +9,7 @@ public class Interactable : MonoBehaviour
     public KeyCode interactKey;
     public UnityEvent interactAction;
 
-    Player player;
+    protected Player player;
     // Start is called before the first frame update
     void Start()
     {
