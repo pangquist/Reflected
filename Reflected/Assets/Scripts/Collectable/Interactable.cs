@@ -8,11 +8,12 @@ public class Interactable : MonoBehaviour
     public bool isInRange;
     public KeyCode interactKey;
     public UnityEvent interactAction;
-
+    protected UiManager uiManager;
     protected Player player;
     // Start is called before the first frame update
     void Start()
     {
+        
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         Player.OnObjectInteraction += Interact;
     }
@@ -32,7 +33,9 @@ public class Interactable : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            uiManager = GameObject.FindGameObjectWithTag("Ui").GetComponent<UiManager>();
             isInRange = true;
+            uiManager.ShowInteractText(true);
             //Debug.Log("Player now in range");
         }
 
@@ -43,6 +46,7 @@ public class Interactable : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             isInRange = false;
+            uiManager.ShowInteractText(false);
             //Debug.Log("Player now out of range");
         }
     }

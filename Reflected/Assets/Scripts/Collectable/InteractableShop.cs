@@ -17,6 +17,7 @@ public class InteractableShop : Interactable
         if (isInRange)
         {
             shopUi.SetPanelActive();
+            uiManager.ShowInteractText(false);
         }
     }
 
@@ -24,6 +25,7 @@ public class InteractableShop : Interactable
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            uiManager.ShowInteractText(false);
             shopUi.DeactiveWindow();
             isInRange = false;
         }

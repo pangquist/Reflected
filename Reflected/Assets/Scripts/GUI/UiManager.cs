@@ -18,6 +18,8 @@ public class UiManager: MonoBehaviour
     [SerializeField] GameObject inGameMenu;
     [SerializeField] GameObject shopPanel;
     [SerializeField] GameObject upgradePanel;
+    [SerializeField] GameObject interactText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +64,7 @@ public class UiManager: MonoBehaviour
                 shopPanel.SetActive(false);
                 uiPanel.SetActive(false);
                 CurrencyPanel.SetActive(false);
+                interactText.SetActive(false);
                 inGameMenu.SetActive(true);
             }
         }
@@ -99,5 +102,10 @@ public class UiManager: MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void ShowInteractText(bool boolean)
+    {
+        interactText.SetActive(boolean);
     }
 }
