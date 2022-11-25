@@ -10,6 +10,9 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] PlayerStatSystem stats;
     [SerializeField] Animator animator;
     [SerializeField] List<AudioClip> footstepSounds;
+    [SerializeField] ParticleSystem footstepEffect;
+    [SerializeField] List<Transform> feetPositions;
+    int feetIndex;
 
     [Header("Stat Properties")]
     [SerializeField] float speed = 12f;
@@ -130,9 +133,27 @@ public class ThirdPersonMovement : MonoBehaviour
         gravity = false;
     }
 
-    public void PlayRandomFootstepSound()
+    public void TakeStep()
     {
         AudioClip footstepSound = footstepSounds[Random.Range(0, footstepSounds.Count)];
         GetComponent<AudioSource>().PlayOneShot(footstepSound);
+
+        Transform feetTransform = feetPositions[feetIndex++];
+        if(feetIndex >= feetPositions.Count)
+            feetIndex = 0;
+
+        ParticleSystem stepEffect = Instantiate(footstepEffect, feetTransform.position, footstepEffect.transform.rotation);
+        stepEffect.gameObject.transform.parent = null;
+
+        RaycastHit hit;
+
+        if(Physics.Raycast(feetTransform.position, Vector3.down, out hit, Mathf.Infinity, groundMask))
+        {
+            //Debug.Log("Found ground: " + hit.transform.name);
+            //ParticleSystem.MainModule settings = footstepEffect.main;
+            //settings.startColor = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+            ParticleSystemRenderer renderer = stepEffect.GetComponent<ParticleSystemRenderer>();
+            renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;
+        }
     }
 }

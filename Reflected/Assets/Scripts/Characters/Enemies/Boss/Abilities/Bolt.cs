@@ -68,7 +68,11 @@ public class Bolt : MonoBehaviour
             player.TakeDamage(damage);
             Destroy(gameObject);
         }
-        else if (other.gameObject.tag == "Ground")
+        else if(other.GetComponent<Destructible>())
+        {
+            other.GetComponent<Destructible>().DestroyAnimation();
+        }
+        else if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Decoration")
             Destroy(gameObject);
     }
 
