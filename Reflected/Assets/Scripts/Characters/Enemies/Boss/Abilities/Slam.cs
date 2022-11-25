@@ -19,6 +19,8 @@ public class Slam : Ability
     [SerializeField] Vector3 startScale;
     [SerializeField] Vector3 endScale;
 
+    [SerializeField] LayerMask groundMask;
+
     public override bool DoEffect()
     {
         base.DoEffect();
@@ -38,30 +40,15 @@ public class Slam : Ability
 
             player.Stun(stunDuration);
         }
+
+        ParticleSystem particleSystem = Instantiate(vfxObject, hitboxObject.transform.position, hitboxObject.transform.rotation).GetComponent<ParticleSystem>();
+        particleSystem.transform.parent = null;
+
+        RaycastHit hit;
+        if (Physics.Raycast(vfxObject.transform.position, Vector3.down, out hit, Mathf.Infinity, groundMask))
+        {
+            ParticleSystemRenderer renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
+            renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;
+        }
     }
-
-    //public void StartSlamAttack()
-    //{
-    //    StartCoroutine(Ability());
-    //}
-
-    //IEnumerator Ability()
-    //{
-    //    //hitboxObject.transform.localScale = startScale;
-
-    //    //hitboxObject.SetActive(true);
-    //    float progress = 0;
-
-    //    float rate = 1 / duration;
-
-    //    while(progress < 1)
-    //    {
-    //        hitboxObject.transform.localScale = Vector3.Lerp(startScale, endScale, progress);
-
-    //        progress += rate * Time.deltaTime;
-    //        yield return null;
-    //    }
-
-    //    yield return null;
-    //}
 }

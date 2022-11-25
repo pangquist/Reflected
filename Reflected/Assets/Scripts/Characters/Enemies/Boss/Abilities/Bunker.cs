@@ -55,6 +55,7 @@ public class Bunker : Ability
                 diff.y = upwardsForce;
 
                 newBolt.SetVelocity(diff / airTime);
+                newBolt.SetVfx(vfxObject);
 
                 //if (newBolt.UseGravity())
                 //    newBolt.ShowLandPlacement(targetPosition);

@@ -379,9 +379,10 @@ MonoBehaviour:
   damage: 6
   debug: 0
   abilityAnimation: {fileID: 0}
-  vfxObject: {fileID: 0}
+  vfxObject: {fileID: 4262331654096157993, guid: d1e32298891f79b47af1c02f65eef18d,
+    type: 3}
   vfxDuration: 0
-  hitboxObject: {fileID: 2114980472}
+  hitboxObject: {fileID: 3180098}
   bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -389,6 +390,9 @@ MonoBehaviour:
   stunDuration: 1.5
   startScale: {x: 0.4, y: 0.02, z: 0.4}
   endScale: {x: 1.5, y: 0.02, z: 1.5}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &1320225153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,7 +415,8 @@ MonoBehaviour:
   damage: 0
   debug: 0
   abilityAnimation: {fileID: 0}
-  vfxObject: {fileID: 0}
+  vfxObject: {fileID: 4262331654096157993, guid: 92d321f9ce5c885478f53c6801e90b18,
+    type: 3}
   vfxDuration: 0
   bolt: {fileID: 2924584636387319545, guid: dad1ca5cf5f484140b1cb99dd6e2f8c9, type: 3}
   spawnPositions:
@@ -467,7 +472,8 @@ MonoBehaviour:
   damage: 0
   debug: 0
   abilityAnimation: {fileID: 0}
-  vfxObject: {fileID: 0}
+  vfxObject: {fileID: 4262331654096157993, guid: 92d321f9ce5c885478f53c6801e90b18,
+    type: 3}
   vfxDuration: 0
   junk:
   - {fileID: 7525248497902684143, guid: fd9a86b8bff5bb548abf6c93b4727e41, type: 3}
@@ -781,103 +787,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &2114980472
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2114980473}
-  - component: {fileID: 2114980476}
-  - component: {fileID: 2114980475}
-  - component: {fileID: 6668396435504350231}
-  m_Layer: 0
-  m_Name: SlamHitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2114980473
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2114980472}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000000051367, y: -0.053, z: 1.078}
-  m_LocalScale: {x: 0.4, y: 0.02, z: 0.4}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4350906471026508070}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2114980476
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2114980472}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2114980475
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2114980472}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a7b1df79eb0d5c0479881c8d06b8d5da, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6668396435504350231
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2114980472}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.41331193
-  m_Center: {x: 0.000000082187654, y: 0.43472582, z: 0.00000016437531}
 --- !u!1 &107056625068203474
 GameObject:
   m_ObjectHideFlags: 0

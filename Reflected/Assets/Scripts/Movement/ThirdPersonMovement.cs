@@ -135,11 +135,22 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void TakeStep()
     {
+        if (!isGrounded)
+            return;
+
         AudioClip footstepSound = footstepSounds[Random.Range(0, footstepSounds.Count)];
         GetComponent<AudioSource>().PlayOneShot(footstepSound);
 
+        SpawnGoundParticle();
+    }
+
+    public void SpawnGoundParticle()
+    {
+        if (!isGrounded)
+            return;
+
         Transform feetTransform = feetPositions[feetIndex++];
-        if(feetIndex >= feetPositions.Count)
+        if (feetIndex >= feetPositions.Count)
             feetIndex = 0;
 
         ParticleSystem stepEffect = Instantiate(footstepEffect, feetTransform.position, footstepEffect.transform.rotation);
@@ -147,11 +158,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
         RaycastHit hit;
 
-        if(Physics.Raycast(feetTransform.position, Vector3.down, out hit, Mathf.Infinity, groundMask))
+        if (Physics.Raycast(feetTransform.position, Vector3.down, out hit, Mathf.Infinity, groundMask))
         {
-            //Debug.Log("Found ground: " + hit.transform.name);
-            //ParticleSystem.MainModule settings = footstepEffect.main;
-            //settings.startColor = hit.transform.gameObject.GetComponent<Renderer>().material.color;
             ParticleSystemRenderer renderer = stepEffect.GetComponent<ParticleSystemRenderer>();
             renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;
         }

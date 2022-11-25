@@ -60,6 +60,7 @@ public class BoltBlast : Ability
             Vector3 diff = landPosition - spawnPosition;
 
             newBolt.SetVelocity(diff / airTime);
+            newBolt.SetVfx(vfxObject);
 
             spawnedBolts++;
             yield return new WaitForSeconds(abilityDuration / amountOfBolts);
