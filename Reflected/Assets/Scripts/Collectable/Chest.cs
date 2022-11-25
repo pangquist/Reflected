@@ -20,8 +20,14 @@ public abstract class Chest : MonoBehaviour
  
     protected virtual void Start()
     {
-        trueDimension = DimensionManager.True;        
-        powerups = FindObjectOfType<LootPoolManager>().GetPowerupPool(trueDimension);
+        trueDimension = DimensionManager.True;
+        WeightedRandomList<GameObject> temp = FindObjectOfType<LootPoolManager>().GetPowerupPool(trueDimension);
+        powerups = new WeightedRandomList<GameObject>();
+        for (int i = 0; i < temp.list.Count; i++)
+        {
+            powerups.Add(temp.list[i].item, temp.list[i].weight);
+        }
+        
         animator = GetComponentInChildren<Animator>();
         SetItems();
     }
@@ -84,17 +90,23 @@ public abstract class Chest : MonoBehaviour
 
     protected void SetItems()
     {
-        
+        int oldindex = -1;
+        int weaponIndex = -1;
         for (int i = 0; i < numberOfPickablePowerups; i++)
-        {
+        {                     
             if (myRarity.rarity == "Legendary")
             {
+                do
+                {
+                    weaponIndex = Random.Range(0, 3); //Need a for loop here if there are suposed to be more than two powerups to pick from
+                } while (weaponIndex != oldindex);
                 pickablePowerUps.Add(powerups.GetItem(powerups.Count - 1));
-                pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties(myRarity);
+                pickablePowerUps[i].GetComponent<InteractableWeaponPowerup>().SetProperties(weaponIndex);
+                oldindex = weaponIndex;
             }
             else
             {
-                pickablePowerUps.Add(powerups.GetRandom());
+                pickablePowerUps.Add(powerups.GetRandomAndRemove());             
                 pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties(myRarity);
             }
                        

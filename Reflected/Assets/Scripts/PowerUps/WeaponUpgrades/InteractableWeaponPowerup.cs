@@ -19,10 +19,10 @@ public class InteractableWeaponPowerup : InteractablePowerUp
         Destroy(gameObject, 20);
     }
 
-    public override void SetProperties(Rarity targetRarity)
+    public void SetProperties(int index)
     {
         //Debug.Log("Set properties " + targetRarity);
-        amount = Random.Range(0, 3);
+        amount = index;
         value = powerUpEffect.value;
         SetDescription((int)amount);
         hasProperties = true;
