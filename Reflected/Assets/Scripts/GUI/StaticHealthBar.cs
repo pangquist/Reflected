@@ -36,7 +36,6 @@ public class StaticHealthBar : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        Debug.Log("Updating static health bar " + character.GetHealthPercentage().ToString("0.000"));
         slider.value = character.GetHealthPercentage();
         fill.color = gradient.Evaluate(slider.value / slider.maxValue);
 

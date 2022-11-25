@@ -19,8 +19,6 @@ public class Sword : Weapon
         if (!playerController.DamageLocked())
             return;
 
-        Debug.Log("Collider: " + other.gameObject.name);
-
         Enemy target;
 
         if (other.GetComponent<Enemy>())

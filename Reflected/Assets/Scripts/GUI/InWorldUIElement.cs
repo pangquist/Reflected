@@ -10,12 +10,14 @@ public class InWorldUIElement : MonoBehaviour
     [Header("Values")]
     [SerializeField] private Vector3 screenOffset;
 
+    [Tooltip("Scale children transforms when at a certain distance away from the camera")]
+    [SerializeField] private bool shrinkChildrenAtDistance;
+
     [Tooltip("The distance at which this UI element is fully visible")]
     [SerializeField] private float minDistance;
 
     [Tooltip("The distance at which this UI element is no longer visible")]
     [SerializeField] private float maxDistance;
-
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -25,6 +27,7 @@ public class InWorldUIElement : MonoBehaviour
     private static Camera mainCamera;
 
     public Transform ObjectToFollow { get { return objectToFollow; } set { objectToFollow = value; } }
+    public Vector3 ScreenOffset { get { return screenOffset; } set { screenOffset = value; } }
 
     private void Awake()
     {
@@ -82,11 +85,14 @@ public class InWorldUIElement : MonoBehaviour
 
         // Set distance visibility
 
-        float distance = Vector3.Distance(mainCamera.transform.position, objectToFollow.position);
-        float childrenScale = 1f - distance.ValueToPercentageClamped(minDistance, maxDistance).CustomSmoothstep();
+        if (shrinkChildrenAtDistance)
+        {
+            float distance = Vector3.Distance(mainCamera.transform.position, objectToFollow.position);
+            float childrenScale = 1f - distance.ValueToPercentageClamped(minDistance, maxDistance).CustomSmoothstep();
 
-        foreach (Transform child in transform)
-            child.localScale = Vector3.one * childrenScale;
+            foreach (Transform child in transform)
+                child.localScale = Vector3.one * childrenScale;
+        }
     }
 
     private void Hide()

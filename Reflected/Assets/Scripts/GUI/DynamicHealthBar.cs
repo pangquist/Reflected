@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.TextCore.Text;
 
-public class HoverHealthBar : MonoBehaviour
+public class DynamicHealthBar : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Slider slider;
@@ -13,7 +13,6 @@ public class HoverHealthBar : MonoBehaviour
     [SerializeField] private InWorldUIElement followInWorldObject;
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Animator animator;
-    [SerializeField] private AnimationClip hideClip;
 
     [Header("Values")]
     [SerializeField] private Gradient gradient;
@@ -24,15 +23,15 @@ public class HoverHealthBar : MonoBehaviour
     public InWorldUIElement FollowInWorldObject => followInWorldObject;
     public Gradient Gradient => gradient;
 
-    private void Start()
+    public void PlayDestroyAnimation()
     {
-        animator.SetTrigger("Show");
+        animator.SetTrigger("Destroy");
     }
 
-    public void Remove()
+    // Gets called by destory animation
+    public void Destroy()
     {
-        animator.SetTrigger("Hide");
-        Destroy(gameObject, hideClip.length);
+        Destroy(gameObject);
     }
 
 }

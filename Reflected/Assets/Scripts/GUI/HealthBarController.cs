@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class HealthBarController : MonoBehaviour
 {
-    
-
     [Header("References")]
     [SerializeField] private GameObject healthBarPrefab;
     [SerializeField] private Character character;
@@ -14,7 +12,7 @@ public class HealthBarController : MonoBehaviour
     [SerializeField] private HealthTextMode healthTextMode;
 
     [Header("Read Only")]
-    [ReadOnly][SerializeField] private HoverHealthBar healthBar;
+    [ReadOnly][SerializeField] private DynamicHealthBar healthBar;
 
     private static Transform inWorldLayer;
 
@@ -23,7 +21,7 @@ public class HealthBarController : MonoBehaviour
         if (inWorldLayer == null)
             inWorldLayer = GameObject.Find("Canvas").transform.Find("In-World Layer");
 
-        healthBar = Instantiate(healthBarPrefab, inWorldLayer).GetComponent<HoverHealthBar>();
+        healthBar = Instantiate(healthBarPrefab, inWorldLayer).GetComponent<DynamicHealthBar>();
         healthBar.FollowInWorldObject.ObjectToFollow = transform;
 
         if (healthTextMode == HealthTextMode.None)
@@ -52,7 +50,7 @@ public class HealthBarController : MonoBehaviour
 
     private void DestroyHealthBar()
     {
-        healthBar.Remove();
+        healthBar.PlayDestroyAnimation();
     }
 
     [ExecuteInEditMode]
