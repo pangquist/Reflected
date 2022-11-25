@@ -9,6 +9,7 @@ public class Bolt : MonoBehaviour
     [SerializeField] Vector3 velocity;
     [SerializeField] float gravity;
     [SerializeField] float damage;
+    [SerializeField] float explosionRange;
     [SerializeField] Player player;
     [SerializeField] GameObject landMarker;
     [SerializeField] LayerMask hitable;
@@ -30,6 +31,12 @@ public class Bolt : MonoBehaviour
 
         transform.position += velocity * Time.deltaTime;
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(transform.position, explosionRange);
     }
 
     public void ShowLandPlacement(Vector3 spawnPosition)
@@ -71,14 +78,13 @@ public class Bolt : MonoBehaviour
             player.TakeDamage(damage);
             Destroy(gameObject);
         }
-        else if(other.GetComponent<Destructible>())
+        else if (other.GetComponent<Destructible>())
         {
             other.GetComponent<Destructible>().DestroyAnimation();
         }
         else if (other.gameObject.layer == 3 || other.gameObject.layer == 7)
         {
-            SpawnEffect();
-            Destroy(gameObject);
+            Explode();
         }
     }
 
@@ -108,5 +114,23 @@ public class Bolt : MonoBehaviour
             ParticleSystemRenderer renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
             renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;
         }
+    }
+
+    public void Explode()
+    {
+        SpawnEffect();
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange);
+
+        foreach(Collider collider in colliders)
+        {
+            if(collider.tag == "Player")
+            {
+                collider.GetComponentInChildren<Player>().TakeDamage(damage);
+                break;
+            }
+        }
+
+        Destroy(gameObject);
     }
 }

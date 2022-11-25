@@ -230,7 +230,10 @@ public class Player : Character, ISavable
     public void Stun(float duration)
     {
         if (currentHealth > 0)
+        {
+            SetTimeToNormalFlow();
             StartCoroutine(_Stun(duration));
+        }
     }
 
     public StatSystem playerStats()
