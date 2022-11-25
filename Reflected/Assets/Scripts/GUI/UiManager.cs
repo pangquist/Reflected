@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,7 @@ public class UiManager: MonoBehaviour
     [SerializeField] GameObject shopPanel;
     [SerializeField] GameObject upgradePanel;
     [SerializeField] GameObject interactText;
+    [SerializeField] GameObject payChestText;
 
 
     // Start is called before the first frame update
@@ -107,5 +109,16 @@ public class UiManager: MonoBehaviour
     public void ShowInteractText(bool boolean)
     {
         interactText.SetActive(boolean);
+    }
+
+    public void ShowPayChestText(bool boolean, int value)
+    {
+        if (value == 0)
+            return;
+        payChestText.SetActive(boolean);
+        if (value == 1)
+            payChestText.GetComponent<TextMeshProUGUI>().text = "Pay " + value + " coin to open the chest";
+        else
+            payChestText.GetComponent<TextMeshProUGUI>().text = "Pay " + value + " coins to open the chest";
     }
 }

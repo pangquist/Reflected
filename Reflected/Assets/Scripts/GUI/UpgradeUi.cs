@@ -55,11 +55,20 @@ public class UpgradeUi : MonoBehaviour
         for (int i = 0; i < chests.Length; i++)
         {
             if (i == 0)
-                chest = chests[i].gameObject.GetComponent<Chest>();
+            {
+                if (chests[i].GetComponent<ChestControllerPay>())
+                    chest = chests[i].gameObject.GetComponent<ChestControllerPay>();
+                else
+                    chest = chests[i].gameObject.GetComponent<Chest>();
+            }
+                
             else if (Vector3.Distance(chests[i].gameObject.transform.position, player.transform.position)
                 < Vector3.Distance(chest.transform.position, player.transform.position))
             {
-                chest = chests[i].gameObject.GetComponent<Chest>();
+                if(chests[i].GetComponent<ChestControllerPay>())
+                    chest = chests[i].gameObject.GetComponent<ChestControllerPay>();
+                else
+                    chest = chests[i].gameObject.GetComponent<Chest>();
             }
 
         }

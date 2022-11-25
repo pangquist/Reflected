@@ -17,9 +17,11 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] Color epic;
     [SerializeField] Color legendary;
     private UpgradeUi upgradeUi;
+    private UiManager uiManager;
     void Start()
     {
         upgradeUi = FindObjectOfType<UpgradeUi>();
+        uiManager = FindObjectOfType<UiManager>();
     }
     public int GetIndex()
     {
@@ -29,6 +31,8 @@ public class UpgradeButton : MonoBehaviour
     public void GetUpgrade()
     {
         chest = upgradeUi.GetClosestChest();
+        if (chest.GetComponent<ChestControllerPay>())
+            uiManager.ShowPayChestText(false, chest.GetComponent<ChestControllerPay>().amountToPay);
         chest.OpenChest(index);
         Debug.Log("trying to spawn item");
         upgradeUi.DeactiveWindow();
@@ -39,7 +43,7 @@ public class UpgradeButton : MonoBehaviour
         titleText.text = powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity;
         descText.text = powerUp.GetComponent<InteractablePowerUp>().GetDescription();
 
-        if(powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity == "Common")
+        if (powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity == "Common")
             titleText.color = common;
         else if (powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity == "Rare")
             titleText.color = rare;
