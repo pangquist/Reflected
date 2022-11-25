@@ -21,6 +21,17 @@ public class InteractableShop : Interactable
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            uiManager = GameObject.FindGameObjectWithTag("Ui").GetComponent<UiManager>();
+            isInRange = true;
+            uiManager.ShowInteractText(true);
+            //Debug.Log("Player now in range");
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

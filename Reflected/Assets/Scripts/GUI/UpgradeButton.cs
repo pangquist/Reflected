@@ -19,9 +19,7 @@ public class UpgradeButton : MonoBehaviour
     private UpgradeUi upgradeUi;
     void Start()
     {
-        
         upgradeUi = FindObjectOfType<UpgradeUi>();
-
     }
     public int GetIndex()
     {
