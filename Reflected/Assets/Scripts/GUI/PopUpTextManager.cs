@@ -32,6 +32,7 @@ public class PopUpTextManager : MonoBehaviour
         PopUpText popUpText = NewBasic(position, damage.ToString("0"));
         popUpText.Swing = true;
         popUpText.Text.color = new Color(1f, 0.5f, 0f);
+        popUpText.Speed = 1.5f;
         return popUpText;
     }
 
@@ -40,15 +41,6 @@ public class PopUpTextManager : MonoBehaviour
         PopUpText popUpText = NewBasic(position, heal.ToString("0"));
         popUpText.Swing = true;
         popUpText.Text.color = new Color(0f, 0.9f, 0f);
-        return popUpText;
-    }
-
-    public static PopUpText NewUpgrade(Vector3 position, string text)
-    {
-        PopUpText popUpText = NewBasic(position, text);
-        popUpText.Text.color = new Color(0f, 0.2f, 0.2f);
-        popUpText.Duration = 3f;
-        popUpText.Speed = 0.5f;
         return popUpText;
     }
 
