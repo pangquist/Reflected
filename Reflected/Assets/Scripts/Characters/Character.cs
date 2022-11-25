@@ -57,6 +57,7 @@ public class Character : MonoBehaviour, IEffectable
     {
         currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
         HealthChanged.Invoke();
+        PopUpTextManager.NewHeal(transform.position + Vector3.up * 1.5f, amount);
     }
 
     protected virtual void Die()

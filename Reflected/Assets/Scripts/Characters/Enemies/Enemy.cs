@@ -62,15 +62,14 @@ public class Enemy : Character
             return;
         }
 
-        if(!GetComponent<Boss>())
+        if (!GetComponent<Boss>())
         {
             Vector3 direction = (transform.position - player.transform.position).normalized;
             direction.y = 0;
             parent.transform.rotation = Quaternion.LookRotation(direction);
         }
 
-        CombatText text = Instantiate(combatTextCanvas.gameObject, transform.position + combatTextOffset, Quaternion.identity).GetComponent<CombatText>();
-        text.SetDamageText(damage);
+        PopUpTextManager.NewDamage(transform.position + Vector3.up * 1.5f, damage);
         base.TakeDamage(damage);
     }
 

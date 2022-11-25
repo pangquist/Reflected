@@ -151,7 +151,7 @@ public class Room : MonoBehaviour
         }
         else
         {
-            if (type == RoomType.Monster/* || type == RoomType.Shop*/)
+            if (type == RoomType.Monster || type == RoomType.Shop)
             {
                 map.GameManager.AiDirector.EnterRoom();
                 GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(1);

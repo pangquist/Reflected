@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1723118554065350474}
   - component: {fileID: 1932094343175365839}
   m_Layer: 5
-  m_Name: Hover Health Bar
+  m_Name: Dynamic Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,6 @@ MonoBehaviour:
   followInWorldObject: {fileID: 1723118554065350474}
   text: {fileID: 6230003535644976273}
   animator: {fileID: 1932094343175365839}
-  hideClip: {fileID: 7400000, guid: 0a756545569e54922a7b53dcca2775c6, type: 2}
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}
@@ -156,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 0}
   screenOffset: {x: 0, y: 0, z: 0}
+  shrinkChildrenAtDistance: 1
   minDistance: 15
   maxDistance: 25
 --- !u!95 &1932094343175365839
