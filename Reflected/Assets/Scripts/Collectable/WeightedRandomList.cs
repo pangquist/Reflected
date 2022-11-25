@@ -45,6 +45,32 @@ public class WeightedRandomList<T>
         list.RemoveAt(index);
     }
 
+    public T GetRandomAndRemove()
+    {
+        float totalWeight = 0;
+
+        foreach (Pair p in list)
+        {
+            totalWeight += p.weight;
+        }
+
+        float value = Random.value * totalWeight;
+
+        float sumWeight = 0;
+        foreach (Pair p in list)
+        {
+            sumWeight += p.weight;
+
+            if (sumWeight >= value)
+            {
+                p.SetWeight(0);
+                return p.item;
+            }
+        }
+
+        return default(T);
+    }
+
     public T GetRandom()
     {
         float totalWeight = 0;

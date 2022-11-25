@@ -19,17 +19,18 @@ public class Interactable : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Interact()
+    protected virtual void Interact()
     {
         if (isInRange)
         {
             interactAction.Invoke();
+            uiManager.ShowInteractText(false);
             //Debug.Log("interact key down...");
 
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -41,7 +42,7 @@ public class Interactable : MonoBehaviour
 
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

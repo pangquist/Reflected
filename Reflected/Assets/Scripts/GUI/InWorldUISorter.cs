@@ -1,19 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class InWorldUISorter : MonoBehaviour
 {
+    private Dictionary<float, Transform> childrenAtDistance = new Dictionary<float, Transform>();
+    private List<float> distances = new List<float>();
+
     private void Update()
     {
-        Dictionary<float, Transform> children = new Dictionary<float, Transform>();
-        List<float> distances = new List<float>();
+        childrenAtDistance.Clear();
+        distances.Clear();
 
         foreach (Transform child in transform)
         {
             float distance = Vector3.Distance(Camera.main.transform.position, child.GetComponent<InWorldUIElement>().ObjectToFollow.position);
-            children.Add(distance, child);
+
+            while (childrenAtDistance.ContainsKey(distance))
+                distance += 0.0001f;
+
+            childrenAtDistance[distance] = child;
             distances.Add(distance);
         }
 
@@ -22,9 +27,8 @@ public class InWorldUISorter : MonoBehaviour
 
         for (int i = 0; i < distances.Count; ++i)
         {
-            children[distances[i]].SetSiblingIndex(i);
+            childrenAtDistance[distances[i]].SetSiblingIndex(i);
         }
-
-
     }
+
 }

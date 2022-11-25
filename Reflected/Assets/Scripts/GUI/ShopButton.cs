@@ -21,7 +21,6 @@ public class ShopButton : MonoBehaviour
 
     void Start()
     {
-        shop = GameObject.FindGameObjectWithTag("Shop").GetComponent<Shop>();
         shopUi = FindObjectOfType<ShopUi>();
         buttonList = shopUi.GetButtonList();
     }
@@ -34,6 +33,7 @@ public class ShopButton : MonoBehaviour
 
     public void CreateBuyOrder()
     {
+        shop = shopUi.GetClosestShop();
         if (shop.BuyItem(index))
         {
             buttonList[index].SetActive(false); 

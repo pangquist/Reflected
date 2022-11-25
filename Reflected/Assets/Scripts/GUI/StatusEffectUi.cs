@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class StatusEffectUi : MonoBehaviour
 {
-
     [Header("Freeze Effect")]
     [SerializeField] GameObject freezeUi;
     [SerializeField] Image freezeIcon;
@@ -36,6 +35,7 @@ public class StatusEffectUi : MonoBehaviour
     int numberOfBurn;
     int numberOfLifeRegen;
     List<Effect> statusEffects;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +55,7 @@ public class StatusEffectUi : MonoBehaviour
         numberOfBurn = 0;
         numberOfLifeRegen = 0;
         statusEffects = character.GetStatusEffectList();
+
         foreach (Effect effect in statusEffects)
         {
             if (effect.effect.MovementPenalty < 1)
@@ -78,30 +79,30 @@ public class StatusEffectUi : MonoBehaviour
             freezeUi.SetActive(true);
         else
             freezeUi.SetActive(false);
+
         if (numberOfBurn > 0)
             burnUi.SetActive(true);
         else
             burnUi.SetActive(false);
+
         if (numberOfLifeRegen > 0)
             lifeRegenUi.SetActive(true);
         else
             lifeRegenUi.SetActive(false);
-
-
     }
+
     void FreezeEffect(Effect effect)
     {
         freezeFillImage.fillAmount = effect.currentEffectTime / effect.effect.LifeTime;
-        freezeCountdowntext.text = Mathf.RoundToInt(effect.effect.LifeTime - effect.currentEffectTime).ToString();
+        freezeCountdowntext.text = Mathf.CeilToInt(effect.effect.LifeTime - effect.currentEffectTime).ToString();
         numberOfFreezetext.text = "x" + numberOfFreeze.ToString();
         //freezeAmountText.text = (character.MovementPenalty() * 100).ToString() + "%";
-
     }
 
     void BurnEffect(Effect effect)
     {
         burnFillImage.fillAmount = effect.currentEffectTime / effect.effect.LifeTime;
-        burnCountdowntext.text = Mathf.RoundToInt(effect.effect.LifeTime - effect.currentEffectTime).ToString();
+        burnCountdowntext.text = Mathf.CeilToInt(effect.effect.LifeTime - effect.currentEffectTime).ToString();
         numberOfBurntext.text = "x" + numberOfBurn.ToString();
         //burnAmountText.text = (effect.effect.DOTAmount * numberOfBurn * -1).ToString();
     }
@@ -109,7 +110,7 @@ public class StatusEffectUi : MonoBehaviour
     void LifeRegen(Effect effect)
     {
         lifeRegenFillImage.fillAmount = effect.currentEffectTime / effect.effect.LifeTime;
-        lifeRegenCountdowntext.text = Mathf.RoundToInt(effect.effect.LifeTime - effect.currentEffectTime).ToString();
+        lifeRegenCountdowntext.text = Mathf.CeilToInt(effect.effect.LifeTime - effect.currentEffectTime).ToString();
         numberOfLifeRegentext.text = "x" + numberOfLifeRegen.ToString();
         //lifeRegenAmountText.text = (effect.effect.DOTAmount * numberOfLifeRegen * -1).ToString();
     }
