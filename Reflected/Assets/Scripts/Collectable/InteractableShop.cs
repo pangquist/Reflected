@@ -7,7 +7,7 @@ public class InteractableShop : Interactable
     private ShopUi shopUi;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
         Player.OnObjectInteraction += Interact;
         shopUi = FindObjectOfType<ShopUi>();
     }
