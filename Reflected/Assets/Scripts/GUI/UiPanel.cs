@@ -34,6 +34,10 @@ public class UiPanel : MonoBehaviour
         damageText.text = "Damage: " + (player.GetDamage() * player.playerStats().GetDamageIncrease()).ToString();
         speedText.text = "Movement Speed: " + (player.GetMovementSpeed() * player.playerStats().GetMovementSpeed()).ToString();
         attackspeedText.text = "Attack Speed: " + (player.GetAttackSpeed() * player.playerStats().GetAttackSpeed()).ToString();
+
+        if (inventory == null)
+            return;
+
         coin.text = inventory.inventory[0].stackSize.ToString();
         gems.text = inventory.inventory[1].stackSize.ToString();
         mirrorShard.text = inventory.inventory[2].stackSize.ToString();
