@@ -19,9 +19,7 @@ public class UpgradeButton : MonoBehaviour
     private UpgradeUi upgradeUi;
     void Start()
     {
-        
         upgradeUi = FindObjectOfType<UpgradeUi>();
-
     }
     public int GetIndex()
     {
@@ -30,7 +28,7 @@ public class UpgradeButton : MonoBehaviour
 
     public void GetUpgrade()
     {
-        chest = GameObject.FindGameObjectWithTag("Chest").GetComponent<Chest>();
+        chest = upgradeUi.GetClosestChest();
         chest.OpenChest(index);
         Debug.Log("trying to spawn item");
         upgradeUi.DeactiveWindow();
