@@ -20,24 +20,8 @@ public class UpgradeUi : MonoBehaviour
     private Player player;
     public void SetPanelActive()
     {
-        
-        chests = GameObject.FindGameObjectsWithTag("Chest");
-        for (int i = 0; i < chests.Length; i++)
-        {
-            if (i == 0)
-                chest = chests[i].gameObject.GetComponent<Chest>();
-            else if(Vector3.Distance(chests[i].gameObject.transform.position, player.transform.position) 
-                < Vector3.Distance(chest.transform.position, player.transform.position))
-                {
-                chest = chests[i].gameObject.GetComponent<Chest>();
-            }
-            
-        }
+        GetClosestChest();
 
-
-        //chest = GameObject.FindGameObjectWithTag("Chest").GetComponent<Chest>();
-        
-        
         if (chest.isOpen) 
             return;
         upgradePanel.SetActive(true);
@@ -62,5 +46,23 @@ public class UpgradeUi : MonoBehaviour
     public List<GameObject> GetButtonList()
     {
         return buttonList;
+    }
+
+    public Chest GetClosestChest()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
+        chests = GameObject.FindGameObjectsWithTag("Chest");
+        for (int i = 0; i < chests.Length; i++)
+        {
+            if (i == 0)
+                chest = chests[i].gameObject.GetComponent<Chest>();
+            else if (Vector3.Distance(chests[i].gameObject.transform.position, player.transform.position)
+                < Vector3.Distance(chest.transform.position, player.transform.position))
+            {
+                chest = chests[i].gameObject.GetComponent<Chest>();
+            }
+
+        }
+        return chest;
     }
 }
