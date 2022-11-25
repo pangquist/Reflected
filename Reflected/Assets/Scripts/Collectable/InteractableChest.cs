@@ -13,18 +13,24 @@ public class InteractableChest : Interactable
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
         Player.OnObjectInteraction += Interact;
         upgradeUi = FindObjectOfType<UpgradeUi>();
-    }  
+    }
 
-    void Interact()
+    protected override void Interact()
     {
         if (isInRange)
         {
+            if (chest.GetComponent<ChestControllerPay>())
+            {
+
+                uiManager.ShowPayChestText(false, chest.GetComponent<ChestControllerPay>().amountToPay);
+            }
             upgradeUi.SetPanelActive();
+            
             uiManager.ShowInteractText(false);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         chest = upgradeUi.GetClosestChest();
         if (chest.isOpen)
@@ -42,13 +48,13 @@ public class InteractableChest : Interactable
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected override void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             if (chest.GetComponent<ChestControllerPay>())
             {
-                uiManager.ShowPayChestText(true, chest.GetComponent<ChestControllerPay>().amountToPay);
+                uiManager.ShowPayChestText(false, chest.GetComponent<ChestControllerPay>().amountToPay);
             }
             uiManager.ShowInteractText(false);
             upgradeUi.DeactiveWindow();

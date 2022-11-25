@@ -12,7 +12,7 @@ public class InteractableShop : Interactable
         shopUi = FindObjectOfType<ShopUi>();
     }
 
-    void Interact()
+    protected override void Interact()
     {
         if (isInRange)
         {
@@ -21,7 +21,7 @@ public class InteractableShop : Interactable
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -32,7 +32,7 @@ public class InteractableShop : Interactable
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected override void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

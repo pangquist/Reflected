@@ -113,7 +113,12 @@ public class UiManager: MonoBehaviour
 
     public void ShowPayChestText(bool boolean, int value)
     {
+        if (value == 0)
+            return;
         payChestText.SetActive(boolean);
-        payChestText.GetComponent<TextMeshProUGUI>().text = "Pay " + value + " coins to open the chest";
+        if (value == 1)
+            payChestText.GetComponent<TextMeshProUGUI>().text = "Pay " + value + " coin to open the chest";
+        else
+            payChestText.GetComponent<TextMeshProUGUI>().text = "Pay " + value + " coins to open the chest";
     }
 }
