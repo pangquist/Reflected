@@ -96,12 +96,27 @@ public abstract class Chest : MonoBehaviour
         {                     
             if (myRarity.rarity == "Legendary")
             {
-                do
+                if(i == 0)
                 {
-                    weaponIndex = Random.Range(0, 3); //Need a for loop here if there are suposed to be more than two powerups to pick from
-                } while (weaponIndex != oldindex);
-                pickablePowerUps.Add(powerups.GetItem(powerups.Count - 1));
+                    weaponIndex = 0;//Random.Range(0, 3);
+                    Debug.Log("0: " + weaponIndex);
+                }
+                else
+                {
+                    weaponIndex = 2; // (weaponIndex + 1) % powerups.list.Count;
+                    Debug.Log("!0: " + weaponIndex);
+                }
+                //do
+                //{
+                //    weaponIndex = Random.Range(0, 3); //Need a for loop here if there are suposed to be more than two powerups to pick from
+                //} while (weaponIndex != oldindex);
+                GameObject weaponPowerup = powerups.GetItem(powerups.Count - 1);
+                pickablePowerUps.Add(weaponPowerup);
                 pickablePowerUps[i].GetComponent<InteractableWeaponPowerup>().SetProperties(weaponIndex);
+                for (int j = 0; j < pickablePowerUps.Count; j++)
+                {
+                    Debug.Log("Iteration: " + i + " with desc: " + pickablePowerUps[j].GetComponent<InteractablePowerUp>().description);
+                }
                 oldindex = weaponIndex;
             }
             else

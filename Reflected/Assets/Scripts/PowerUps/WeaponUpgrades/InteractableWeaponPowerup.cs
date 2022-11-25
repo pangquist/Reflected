@@ -16,7 +16,7 @@ public class InteractableWeaponPowerup : InteractablePowerUp
             value = powerUpEffect.value;
             SetDescription((int)amount);
         }
-        Destroy(gameObject, 20);
+        //Destroy(gameObject, 20);
     }
 
     public void SetProperties(int index)
