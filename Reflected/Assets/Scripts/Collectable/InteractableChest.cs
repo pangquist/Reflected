@@ -33,6 +33,10 @@ public class InteractableChest : Interactable
         {
             uiManager = GameObject.FindGameObjectWithTag("Ui").GetComponent<UiManager>();
             isInRange = true;
+            if(chest.GetComponent<ChestControllerPay>())
+            {
+                uiManager.ShowPayChestText(true, chest.GetComponent<ChestControllerPay>().amountToPay);
+            }
             uiManager.ShowInteractText(true);
             //Debug.Log("Player now in range");
         }
@@ -42,6 +46,10 @@ public class InteractableChest : Interactable
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            if (chest.GetComponent<ChestControllerPay>())
+            {
+                uiManager.ShowPayChestText(true, chest.GetComponent<ChestControllerPay>().amountToPay);
+            }
             uiManager.ShowInteractText(false);
             upgradeUi.DeactiveWindow();
             isInRange = false;
