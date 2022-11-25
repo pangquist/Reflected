@@ -30,7 +30,7 @@ public class UpgradeButton : MonoBehaviour
 
     public void GetUpgrade()
     {
-        chest = GameObject.FindGameObjectWithTag("Chest").GetComponent<Chest>();
+        chest = upgradeUi.GetClosestChest();
         chest.OpenChest(index);
         Debug.Log("trying to spawn item");
         upgradeUi.DeactiveWindow();

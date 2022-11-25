@@ -10,7 +10,7 @@ public class InteractableChest : Interactable
     private Chest chest;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
         Player.OnObjectInteraction += Interact;
         upgradeUi = FindObjectOfType<UpgradeUi>();
     }  
@@ -26,7 +26,7 @@ public class InteractableChest : Interactable
 
     private void OnTriggerEnter(Collider other)
     {
-        chest = transform.root.GetComponent<Chest>();
+        chest = upgradeUi.GetClosestChest();
         if (chest.isOpen)
             return;
         if (other.gameObject.CompareTag("Player"))
@@ -36,7 +36,6 @@ public class InteractableChest : Interactable
             uiManager.ShowInteractText(true);
             //Debug.Log("Player now in range");
         }
-
     }
 
     private void OnTriggerExit(Collider other)
