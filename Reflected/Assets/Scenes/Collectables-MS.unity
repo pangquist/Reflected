@@ -2122,6 +2122,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 191205944599756645, guid: 6dc5441bcb2171e40b26528cf9fe30eb,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 191205944599756645, guid: 6dc5441bcb2171e40b26528cf9fe30eb,
+        type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 169617483}
@@ -2129,6 +2134,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'ChestPay '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578323351569314381, guid: 6dc5441bcb2171e40b26528cf9fe30eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578323351569314381, guid: 6dc5441bcb2171e40b26528cf9fe30eb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Chest
       objectReference: {fileID: 0}
     - target: {fileID: 8578323351569314385, guid: 6dc5441bcb2171e40b26528cf9fe30eb,
         type: 3}
@@ -2185,7 +2200,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8578323351569314386, guid: 6dc5441bcb2171e40b26528cf9fe30eb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2431395804755754030, guid: 6dc5441bcb2171e40b26528cf9fe30eb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6dc5441bcb2171e40b26528cf9fe30eb, type: 3}
 --- !u!1 &2105474038
 GameObject:
@@ -2676,6 +2697,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -59.348633
+      objectReference: {fileID: 0}
+    - target: {fileID: 5430307563875295281, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.7609863
+      objectReference: {fileID: 0}
+    - target: {fileID: 5430307563875295281, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 13.233032
       objectReference: {fileID: 0}
     - target: {fileID: 6411504369974475806, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
@@ -3991,6 +4022,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChestEpic
       objectReference: {fileID: 0}
+    - target: {fileID: 3314845808279008695, guid: bc072609323d4794298e5cf6997c81f8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc072609323d4794298e5cf6997c81f8, type: 3}
 --- !u!1001 &3568285962158985234
@@ -4059,6 +4095,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ChestLegendary
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041084861253439156, guid: 1a4436a6b38055b428b656585aecbb0f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a4436a6b38055b428b656585aecbb0f, type: 3}

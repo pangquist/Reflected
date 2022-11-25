@@ -13,10 +13,12 @@ public class ShopUi : MonoBehaviour
     [SerializeField] GameObject shopPanel;
     [SerializeField] List<GameObject> buttonList;
     [SerializeField] List<GameObject> shopList;
+    private GameObject[] shops;
+    private Player player;
 
     public void SetPanelActive()
     {
-        shop = FindObjectOfType<Shop>();
+        shop = GetClosestShop();
         shopPanel.SetActive(true);
         for (int i = 0; i < buttonList.Count; i++)
             buttonList[i].SetActive(true);
@@ -44,6 +46,24 @@ public class ShopUi : MonoBehaviour
     public List<GameObject> GetButtonList()
     {
         return buttonList;
+    }
+
+    public Shop GetClosestShop()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
+        shops = GameObject.FindGameObjectsWithTag("Shop");
+        for (int i = 0; i < shops.Length; i++)
+        {
+            if (i == 0)
+                shop = shops[i].gameObject.GetComponent<Shop>();
+            else if (Vector3.Distance(shops[i].gameObject.transform.position, player.transform.position)
+                < Vector3.Distance(shop.transform.position, player.transform.position))
+            {
+                shop = shops[i].gameObject.GetComponent<Shop>();
+            }
+
+        }
+        return shop;
     }
 
 
