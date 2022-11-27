@@ -34,20 +34,30 @@ public class UpgradeManager : MonoBehaviour
 
         foreach (TechTreeNode node in trueTechTree.GetActiveNodes())
         {
-            if (!trueVariables.ContainsKey(node.GetVariable()))
-                trueVariables.Add(node.GetVariable(), node.GetValue());
-            else
-                trueVariables[node.GetVariable()] += node.GetValue();
-        }
+            List<string> variables = node.GetVariables();
+            List<float> values = node.GetValues();
 
-        foreach (TechTreeNode node in mirrorTechTree.GetActiveNodes())
-        {
-            if (!mirrorVariables.ContainsKey(node.GetVariable()))
-                mirrorVariables.Add(node.GetVariable(), node.GetValue());
+            if (node.IsMirror())
+            {
+                for (int i = 0; i < variables.Count; i++)
+                {
+                    if (!mirrorVariables.ContainsKey(variables[i]))
+                        mirrorVariables.Add(variables[i], values[i]);
+                    else
+                        mirrorVariables[variables[i]] += values[i];
+                }
+            }
             else
-                mirrorVariables[node.GetVariable()] += node.GetValue();
+            {
+                for (int i = 0; i < variables.Count; i++)
+                {
+                    if (!trueVariables.ContainsKey(variables[i]))
+                        trueVariables.Add(variables[i], values[i]);
+                    else
+                        trueVariables[variables[i]] += values[i];
+                }
+            }
         }
-
         Destroy(gameObject);
     }
 

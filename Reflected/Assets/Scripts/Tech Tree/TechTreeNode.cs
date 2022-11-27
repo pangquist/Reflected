@@ -24,12 +24,13 @@ public class TechTreeNode : MonoBehaviour
     [SerializeField] bool hasGemCost;
     [SerializeField] ItemData gemResource;
     [SerializeField] int gemCost;
+    [SerializeField] bool isMirror;
     [SerializeField] bool isPlaceable;
     bool isActive;
 
     [Header("Stat Changes")]
-    [SerializeField] string modifiedValue;
-    [SerializeField] float value;
+    [SerializeField] List<string> modifiedValue;
+    [SerializeField] List<float> value;
 
     [SerializeField] TextMeshProUGUI nodeEffectText;
     [SerializeField] TextMeshProUGUI nodeCostText;
@@ -101,12 +102,17 @@ public class TechTreeNode : MonoBehaviour
         return isActive;
     }
 
-    public string GetVariable()
+    public bool IsMirror()
+    {
+        return isMirror;
+    }
+
+    public List<string> GetVariables()
     {
         return modifiedValue;
     }
 
-    public float GetValue()
+    public List<float> GetValues()
     {
         return value;
     }
