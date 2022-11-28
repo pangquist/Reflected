@@ -63,16 +63,6 @@ public class Player : Character, ISavable
         anim.Play("GetUp");
     }
 
-    protected override void Update()
-    {
-        base.Update();
-        //if (Cursor.visible)
-        //    Cursor.visible = false;
-
-        //hitBoxBounds = hitbox.bounds;
-        //Debug.Log("Bounds: " + hitBoxBounds);
-    }
-
     public void Attack()
     {
         if (weaponIndex == 0)
@@ -234,6 +224,11 @@ public class Player : Character, ISavable
             SetTimeToNormalFlow();
             StartCoroutine(_Stun(duration));
         }
+    }
+
+    public void Rotate(Vector2 direction)
+    {
+        Debug.Log("ROTATE: " + direction.normalized);
     }
 
     public StatSystem playerStats()

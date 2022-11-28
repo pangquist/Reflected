@@ -20,7 +20,6 @@ public class Bolt : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").GetComponentInChildren<Player>();
     }
-    // Update is called once per frame
     void Update()
     {
         if (useGravity)
@@ -39,37 +38,37 @@ public class Bolt : MonoBehaviour
         Gizmos.DrawSphere(transform.position, explosionRange);
     }
 
-    public void ShowLandPlacement(Vector3 spawnPosition)
-    {
-        float airTime = 0;
+    //public void ShowLandPlacement(Vector3 spawnPosition)
+    //{
+    //    float airTime = 0;
 
-        float xPosition = transform.position.x;
-        float yPosition = transform.position.y;
-        float zPosition = transform.position.z;
+    //    float xPosition = transform.position.x;
+    //    float yPosition = transform.position.y;
+    //    float zPosition = transform.position.z;
 
-        float tempVelocity = velocity.y;
-        GameObject ground = GameObject.FindGameObjectWithTag("Ground");
+    //    float tempVelocity = velocity.y;
+    //    GameObject ground = GameObject.FindGameObjectWithTag("Ground");
 
-        for (int i = 0; i < 200; i++)
-        {
-            tempVelocity += gravity * Time.fixedDeltaTime;
-            yPosition += tempVelocity * Time.fixedDeltaTime;
-            xPosition += velocity.x * Time.fixedDeltaTime;
-            zPosition += velocity.z * Time.fixedDeltaTime;
+    //    for (int i = 0; i < 200; i++)
+    //    {
+    //        tempVelocity += gravity * Time.fixedDeltaTime;
+    //        yPosition += tempVelocity * Time.fixedDeltaTime;
+    //        xPosition += velocity.x * Time.fixedDeltaTime;
+    //        zPosition += velocity.z * Time.fixedDeltaTime;
 
-            airTime += Time.fixedDeltaTime;
+    //        airTime += Time.fixedDeltaTime;
 
-            //if (yPosition <= spawnPosition.y)
-            //    break;
+    //        //if (yPosition <= spawnPosition.y)
+    //        //    break;
 
-            Vector3 tempPosition = new Vector3(xPosition, yPosition, zPosition);
-            RaycastHit hit;
-        }
+    //        Vector3 tempPosition = new Vector3(xPosition, yPosition, zPosition);
+    //        RaycastHit hit;
+    //    }
 
-        Vector3 landPosition = spawnPosition /*+ new Vector3(velocity.x * airTime, 0, velocity.z * airTime)*/;
+    //    Vector3 landPosition = spawnPosition /*+ new Vector3(velocity.x * airTime, 0, velocity.z * airTime)*/;
 
-        Instantiate(landMarker, landPosition, Quaternion.identity);
-    }
+    //    Instantiate(landMarker, landPosition, Quaternion.identity);
+    //}
 
     private void OnTriggerEnter(Collider other)
     {

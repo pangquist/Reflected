@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
@@ -26,14 +27,22 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance = 0.4f;
     [SerializeField] LayerMask groundMask;
+    [SerializeField] LayerMask effectMask;
     [SerializeField] bool isGrounded;
+    [SerializeField] bool canSpawnEffect;
     bool gravity = true;
 
     [Header("Dash Properties")]
     [SerializeField] Dash dashAbility;
 
     private Vector3 velocity;
+    //CinemachineFreeLook freeCam;
     // Start is called before the first frame update
+    //private void Awake()
+    //{
+    //    freeCam = GameObject.Find("CM FreeLook").GetComponent<CinemachineFreeLook>();
+    //}
+
 
     private void Update()
     {
@@ -41,6 +50,8 @@ public class ThirdPersonMovement : MonoBehaviour
             velocity.y += gravityEffect * Time.deltaTime;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        canSpawnEffect = Physics.CheckSphere(groundCheck.position, groundDistance, effectMask);
+
         animator.SetFloat("velY", velocity.y);
         animator.SetBool("isGrounded", isGrounded);
         controller.Move(velocity * Time.deltaTime);
@@ -57,11 +68,15 @@ public class ThirdPersonMovement : MonoBehaviour
         animator.SetFloat("velX", direction.x);
         animator.SetFloat("velZ", direction.z);
 
+        //Debug.Log("X-AXIS: " + freeCam.m_XAxis.m_InputAxisValue);
+        
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
         if (direction.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            //float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
             if (moveDir.x != 0 || moveDir.z != 0)
@@ -146,7 +161,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void SpawnGoundParticle()
     {
-        if (!isGrounded)
+        if (!canSpawnEffect)
             return;
 
         Transform feetTransform = feetPositions[feetIndex++];
@@ -158,7 +173,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(feetTransform.position, Vector3.down, out hit, Mathf.Infinity, groundMask))
+        if (Physics.Raycast(feetTransform.position, Vector3.down, out hit, 100f, groundMask))
         {
             ParticleSystemRenderer renderer = stepEffect.GetComponent<ParticleSystemRenderer>();
             renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;

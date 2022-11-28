@@ -7,6 +7,7 @@ public class TechTree : MonoBehaviour
     [SerializeField] List<TechTreeNode> activeNodes = new List<TechTreeNode>();
     List<TechTreeNode> allNodes = new List<TechTreeNode>();
     [SerializeField] bool isTrueTree;
+
     // Start is called before the first frame update
     private void OnEnable()
     {

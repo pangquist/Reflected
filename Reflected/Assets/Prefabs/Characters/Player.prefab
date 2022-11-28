@@ -194,6 +194,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4853948256094235931}
     m_Modifications:
+    - target: {fileID: 1271279111, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271279111, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
+      value: 2c4b8dcf-3e43-46a4-afe8-76d3975f442c
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271279111, guid: fe7f1329d7c296d4b93c79f860f7991e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
+      value: Player/Mouse[/Mouse/position]
+      objectReference: {fileID: 0}
     - target: {fileID: 355902984534043191, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -311,10 +323,25 @@ PrefabInstance:
       objectReference: {fileID: 5444201463126724936}
     - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
+      propertyPath: jumpHeight
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
+        type: 3}
+      propertyPath: gravityEffect
+      value: -22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
+        type: 3}
       propertyPath: footstepEffect
       value: 
       objectReference: {fileID: 5826317077212551495, guid: def3946b837996246ae63221768df3c3,
         type: 3}
+    - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
+        type: 3}
+      propertyPath: effectMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4853853438342385038, guid: fe7f1329d7c296d4b93c79f860f7991e,
         type: 3}
       propertyPath: feetPositions.Array.size
