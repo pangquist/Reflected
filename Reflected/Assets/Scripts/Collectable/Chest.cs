@@ -110,8 +110,8 @@ public abstract class Chest : MonoBehaviour
                 //{
                 //    weaponIndex = Random.Range(0, 3); //Need a for loop here if there are suposed to be more than two powerups to pick from
                 //} while (weaponIndex != oldindex);
-                GameObject weaponPowerup = powerups.GetItem(powerups.Count - 1);
-                pickablePowerUps.Add(weaponPowerup);
+                //GameObject weaponPowerup = powerups.GetItem(powerups.Count - 1);
+                pickablePowerUps.Add(powerups.GetItem(powerups.Count - 1));
                 pickablePowerUps[i].GetComponent<InteractableWeaponPowerup>().SetProperties(weaponIndex);
                 for (int j = 0; j < pickablePowerUps.Count; j++)
                 {

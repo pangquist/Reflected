@@ -28,7 +28,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
             value = powerUpEffect.value * myRarity.valueMultiplier;
             description = powerUpEffect.description + " " + amount.ToString();
         }
-        Destroy(gameObject, 20);
+        //Destroy(gameObject, 20);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,6 +36,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         if (other.GetComponent<Player>())
         {
             Destroy(gameObject);
+            Debug.Log(amount);
             powerUpEffect.Apply(other.gameObject, amount); 
         }
     }

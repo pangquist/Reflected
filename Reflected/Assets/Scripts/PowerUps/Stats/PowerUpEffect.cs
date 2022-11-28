@@ -9,6 +9,7 @@ public abstract class PowerUpEffect : ScriptableObject
     [SerializeField] public int value;
     [SerializeField] public float amount;   
     [SerializeField] public string type;
+    [SerializeField] public string powerupName;
 
     public abstract void Apply(GameObject target, float amount);
 }
