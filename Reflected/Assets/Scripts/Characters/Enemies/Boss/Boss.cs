@@ -24,8 +24,9 @@ public class Boss : Enemy
     bool abilityLock;
     bool rotateLock;
     CameraManager cameraManager;
-    [SerializeField]Transform cameraFocusPoint;
+    [SerializeField] Transform cameraFocusPoint;
     [SerializeField] AudioClip deathSFX;
+    [SerializeField] Transform lootDropTransform;
 
     protected override void Update()
     {
@@ -121,8 +122,11 @@ public class Boss : Enemy
     {
         base.Die();
         GetComponent<AudioSource>().PlayOneShot(deathSFX);
+        LootDrop(lootDropTransform);
         //cameraManager.FocusOnPlayer();
     }
+
+
 
     public override void ToggleInvurnable()
     {
