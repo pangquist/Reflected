@@ -9,6 +9,7 @@ public class Enemy : Character
     [SerializeField] protected float aggroRange;
 
     [SerializeField] protected WeightedRandomList<GameObject> LootDropList;
+    [SerializeField] protected List<AudioClip> hitSounds;
     protected bool invurnable;
     GameObject parent;
     protected Player player;

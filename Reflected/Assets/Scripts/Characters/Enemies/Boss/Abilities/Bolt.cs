@@ -36,14 +36,6 @@ public class Bolt : MonoBehaviour
 
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.position, explosionRange);
-    }
-
-   
-
     private void OnTriggerEnter(Collider other)
     {
         if (stopped)
@@ -85,7 +77,7 @@ public class Bolt : MonoBehaviour
         particleSystem.transform.parent = null;
 
         RaycastHit hit;
-        if (Physics.Raycast(vfxObject.transform.position, Vector3.down, out hit, Mathf.Infinity, hitable))
+        if (Physics.Raycast(particleSystem.transform.position + new Vector3(0,2,0), Vector3.down, out hit, Mathf.Infinity, hitable))
         {
             ParticleSystemRenderer renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
             renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;
@@ -118,10 +110,10 @@ public class Bolt : MonoBehaviour
 
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f, groundMask))
+            if (Physics.Raycast(transform.position + new Vector3(0,2,0), Vector3.down, out hit, 100f, groundMask))
             {
-                transform.rotation = hit.transform.rotation;
-                Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - explosionRange/2, transform.position.z);
+                transform.rotation = Quaternion.LookRotation(hit.normal, Vector3.up);
+                Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - GetComponent<Collider>().bounds.size.y/2, transform.position.z);
                 transform.position = newPosition;
             }
 

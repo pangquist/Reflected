@@ -341,6 +341,12 @@ MonoBehaviour:
     - item: {fileID: 3663983349818802338, guid: 2bdfe34f451d870469649a3199306873,
         type: 3}
       weight: 1
+  hitSounds:
+  - {fileID: 8300000, guid: de127248f397dc54f9eb5bd8e9d825e3, type: 3}
+  - {fileID: 8300000, guid: 5431e9bd8108a724389776b6c157abef, type: 3}
+  - {fileID: 8300000, guid: 6fb4e722ea3a3634abc5105186c20fab, type: 3}
+  - {fileID: 8300000, guid: 1899fdb9bfa352042b29f7e36ede0f6c, type: 3}
+  - {fileID: 8300000, guid: e6e608135f5bc2b4ea209599382ca308, type: 3}
   meleeAttackState: {fileID: 0}
   rangedAttackState: {fileID: 0}
   aoeAttackState: {fileID: 0}
@@ -349,6 +355,7 @@ MonoBehaviour:
   abilities:
   - {fileID: 1320225154}
   - {fileID: 1320225153}
+  - {fileID: 1320225151}
   abilityTimer: 1
   roots:
   - {fileID: 2147072442462625769}
@@ -357,6 +364,7 @@ MonoBehaviour:
   - {fileID: 6377533937562866226}
   healthBarCanvas: {fileID: 7562547720828675294}
   cameraFocusPoint: {fileID: 2333262652298985782}
+  deathSFX: {fileID: 8300000, guid: 0538cbeb1a1a3ce47af6bf9d90c6e64e, type: 3}
 --- !u!114 &1320225154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2421,6 +2429,11 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7268822106606681172, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
+        type: 3}
+      propertyPath: maxHealth
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7354222955857205400, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
         type: 3}
       propertyPath: m_Name
@@ -2810,6 +2823,11 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7268822106606681172, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
+        type: 3}
+      propertyPath: maxHealth
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7354222955857205400, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
         type: 3}
       propertyPath: m_Name
@@ -3096,6 +3114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: healthBar
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268822106606681172, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
+        type: 3}
+      propertyPath: maxHealth
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7354222955857205400, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
         type: 3}
@@ -4323,21 +4346,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2629822246557376178}
     m_Modifications:
-    - target: {fileID: 5135377484731459124, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ee74d29a72f9fa2419baac81c9db2eaa, type: 2}
-    - target: {fileID: 7268822106606681172, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7268822106606681172, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: combatTextOffset.y
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7354222955857205400, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
         type: 3}
       propertyPath: m_Name
@@ -4347,21 +4355,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7873596706176369186, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.05566594
-      objectReference: {fileID: 0}
-    - target: {fileID: 7873596706176369186, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.06434535
-      objectReference: {fileID: 0}
-    - target: {fileID: 7873596706176369186, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.05545696
       objectReference: {fileID: 0}
     - target: {fileID: 7873596706176369186, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
         type: 3}

@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         actionLocked = true;
         player.GetAnim().SetBool("actionLocked", true);
 
-        damageLocked = true;
+        //damageLocked = true;
     }
 
     public void UnlockPlayer()
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         actionLocked = false;
         player.GetAnim().SetBool("actionLocked", false);
 
-        damageLocked = false;
+        //damageLocked = false;
     }
 
     public void MovementUnlock()

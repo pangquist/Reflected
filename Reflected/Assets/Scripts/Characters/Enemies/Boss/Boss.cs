@@ -25,6 +25,7 @@ public class Boss : Enemy
     bool rotateLock;
     CameraManager cameraManager;
     [SerializeField]Transform cameraFocusPoint;
+    [SerializeField] AudioClip deathSFX;
 
     protected override void Update()
     {
@@ -110,9 +111,16 @@ public class Boss : Enemy
         }
     }
 
+    public override void TakeDamage(float damage)
+    {
+        GetComponent<AudioSource>().PlayOneShot(hitSounds[Random.Range(0, hitSounds.Count)]);
+        //Keep this
+    }
+
     protected override void Die()
     {
         base.Die();
+        GetComponent<AudioSource>().PlayOneShot(deathSFX);
         //cameraManager.FocusOnPlayer();
     }
 

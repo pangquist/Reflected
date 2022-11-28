@@ -68,11 +68,13 @@ public class ThirdPersonMovement : MonoBehaviour
         animator.SetFloat("velX", direction.x);
         animator.SetFloat("velZ", direction.z);
 
-        //Debug.Log("X-AXIS: " + freeCam.m_XAxis.m_InputAxisValue);
-        
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        if (!GetComponent<PlayerController>().GetActionLock())
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
 
         if (direction.magnitude >= 0.1f)
         {
@@ -101,17 +103,6 @@ public class ThirdPersonMovement : MonoBehaviour
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravityEffect);
         }
     }
-
-    //IEnumerator _Jump()
-    //{
-    //    float progress = 0;
-
-    //    while(progress < jumpDuration)
-    //    {
-
-    //        progress += Time.deltaTime;
-    //    }
-    //}
 
     public void Dash()
     {

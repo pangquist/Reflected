@@ -47,7 +47,7 @@ public class Slam : Ability
         GetComponent<AudioSource>().PlayOneShot(abilitySounds[Random.Range(0, abilitySounds.Count)]);
 
         RaycastHit hit;
-        if (Physics.Raycast(vfxObject.transform.position, Vector3.down, out hit, Mathf.Infinity, groundMask))
+        if (Physics.Raycast(particleSystem.transform.position + new Vector3(0, 2, 0), Vector3.down, out hit, Mathf.Infinity, groundMask))
         {
             ParticleSystemRenderer renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
             renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;
