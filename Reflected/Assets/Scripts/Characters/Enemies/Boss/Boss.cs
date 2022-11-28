@@ -90,11 +90,6 @@ public class Boss : Enemy
         cameraManager = FindObjectOfType<CameraManager>();
     }
 
-    public override void TakeDamage(float damage)
-    {
-        
-    }
-
     public void ToggleRotationLock() => rotateLock = !rotateLock;
 
     public override void LootDrop(Transform lootDropPosition)
@@ -136,6 +131,7 @@ public class Boss : Enemy
         anim.Play("Activation");
         aggroed = true;
         healthBarCanvas.gameObject.SetActive(true);
+        GetComponent<AudioSource>().Play();
         //cameraManager.NewFocus(cameraFocusPoint);
         //cameraManager.BossSettings();
     }

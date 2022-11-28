@@ -13,8 +13,12 @@ public class Bolt : MonoBehaviour
     [SerializeField] Player player;
     [SerializeField] GameObject landMarker;
     [SerializeField] LayerMask hitable;
+    [SerializeField] Mesh groundMesh;
+    [SerializeField] LayerMask groundMask;
+    [SerializeField] List<AudioClip> groundSFX;
 
     GameObject vfxObject;
+    bool stopped;
 
     private void Start()
     {
@@ -38,40 +42,13 @@ public class Bolt : MonoBehaviour
         Gizmos.DrawSphere(transform.position, explosionRange);
     }
 
-    //public void ShowLandPlacement(Vector3 spawnPosition)
-    //{
-    //    float airTime = 0;
-
-    //    float xPosition = transform.position.x;
-    //    float yPosition = transform.position.y;
-    //    float zPosition = transform.position.z;
-
-    //    float tempVelocity = velocity.y;
-    //    GameObject ground = GameObject.FindGameObjectWithTag("Ground");
-
-    //    for (int i = 0; i < 200; i++)
-    //    {
-    //        tempVelocity += gravity * Time.fixedDeltaTime;
-    //        yPosition += tempVelocity * Time.fixedDeltaTime;
-    //        xPosition += velocity.x * Time.fixedDeltaTime;
-    //        zPosition += velocity.z * Time.fixedDeltaTime;
-
-    //        airTime += Time.fixedDeltaTime;
-
-    //        //if (yPosition <= spawnPosition.y)
-    //        //    break;
-
-    //        Vector3 tempPosition = new Vector3(xPosition, yPosition, zPosition);
-    //        RaycastHit hit;
-    //    }
-
-    //    Vector3 landPosition = spawnPosition /*+ new Vector3(velocity.x * airTime, 0, velocity.z * airTime)*/;
-
-    //    Instantiate(landMarker, landPosition, Quaternion.identity);
-    //}
+   
 
     private void OnTriggerEnter(Collider other)
     {
+        if (stopped)
+            return;
+
         if (other.GetComponentInChildren<Player>())
         {
             player.TakeDamage(damage);
@@ -121,15 +98,68 @@ public class Bolt : MonoBehaviour
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange);
 
-        foreach(Collider collider in colliders)
+        foreach (Collider collider in colliders)
         {
-            if(collider.tag == "Player")
+            if (collider.tag == "Player")
             {
                 collider.GetComponentInChildren<Player>().TakeDamage(damage);
                 break;
             }
         }
 
-        Destroy(gameObject);
+        if (useGravity)
+            Destroy(gameObject);
+        else
+        {
+            GetComponent<MeshFilter>().mesh = groundMesh;
+            velocity = Vector3.zero;
+            stopped = true;
+            GetComponent<Animator>().SetBool("stopped", stopped);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f, groundMask))
+            {
+                transform.rotation = hit.transform.rotation;
+                Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - explosionRange/2, transform.position.z);
+                transform.position = newPosition;
+            }
+
+            AudioClip chosenSFX = groundSFX[Random.Range(0, groundSFX.Count)];
+            GetComponent<AudioSource>().PlayOneShot(chosenSFX);
+            Destroy(gameObject, 3);
+        }
     }
+
+    //public void ShowLandPlacement(Vector3 spawnPosition)
+    //{
+    //    float airTime = 0;
+
+    //    float xPosition = transform.position.x;
+    //    float yPosition = transform.position.y;
+    //    float zPosition = transform.position.z;
+
+    //    float tempVelocity = velocity.y;
+    //    GameObject ground = GameObject.FindGameObjectWithTag("Ground");
+
+    //    for (int i = 0; i < 200; i++)
+    //    {
+    //        tempVelocity += gravity * Time.fixedDeltaTime;
+    //        yPosition += tempVelocity * Time.fixedDeltaTime;
+    //        xPosition += velocity.x * Time.fixedDeltaTime;
+    //        zPosition += velocity.z * Time.fixedDeltaTime;
+
+    //        airTime += Time.fixedDeltaTime;
+
+    //        //if (yPosition <= spawnPosition.y)
+    //        //    break;
+
+    //        Vector3 tempPosition = new Vector3(xPosition, yPosition, zPosition);
+    //        RaycastHit hit;
+    //    }
+
+    //    Vector3 landPosition = spawnPosition /*+ new Vector3(velocity.x * airTime, 0, velocity.z * airTime)*/;
+
+    //    Instantiate(landMarker, landPosition, Quaternion.identity);
+    //}
 }
