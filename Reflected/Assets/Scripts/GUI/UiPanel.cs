@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class UiPanel : MonoBehaviour
@@ -18,25 +19,21 @@ public class UiPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI mirrorShard;
     [SerializeField] TextMeshProUGUI gems;
 
-
-    
-    private ItemData itemData;
+    private PlayerStatSystem statSystem;
     private Player player;
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
-
-        player = FindObjectOfType<Player>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + player.GetCurrentHealth().ToString();
-        damageText.text = "Damage: " + player.GetDamage().ToString();
-        speedText.text = "Speed: " + player.GetMovementSpeed().ToString();
-        attackspeedText.text = "Attack Speed: " + player.GetAttackSpeed().ToString();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
+        statSystem = player.GetComponent<PlayerStatSystem>();
+        healthText.text = "Health: " + (player.GetMaxHealth() + player.playerStats().GetMaxHealthIncrease()).ToString();
+        damageText.text = "Damage: " + (player.GetDamage() * player.playerStats().GetDamageIncrease()).ToString();
+        speedText.text = "Movement Speed: " + (player.GetMovementSpeed() * player.playerStats().GetMovementSpeed()).ToString();
+        attackspeedText.text = "Attack Speed: " + (player.GetAttackSpeed() * player.playerStats().GetAttackSpeed()).ToString();
 
         if (inventory == null)
             return;

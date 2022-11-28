@@ -6,7 +6,7 @@ public abstract class Chest : MonoBehaviour
 {
     [SerializeField] protected WeightedRandomList<GameObject> powerups;
     //[SerializeField] protected WeightedRandomList<Rarity> rarityTiers;
-    [SerializeField] protected List<GameObject> pickablePowerUps;
+    [SerializeField]  List<GameObject> pickablePowerUps;
     [SerializeField] protected Transform itemHolder;
     [SerializeField] protected Rarity myRarity;
     [SerializeField] bool trueDimension;
@@ -20,8 +20,14 @@ public abstract class Chest : MonoBehaviour
  
     protected virtual void Start()
     {
-        trueDimension = DimensionManager.True;        
-        powerups = FindObjectOfType<LootPoolManager>().GetPowerupPool(trueDimension);
+        trueDimension = DimensionManager.True;
+        WeightedRandomList<GameObject> temp = FindObjectOfType<LootPoolManager>().GetPowerupPool(trueDimension);
+        powerups = new WeightedRandomList<GameObject>();
+        for (int i = 0; i < temp.list.Count; i++)
+        {
+            powerups.Add(temp.list[i].item, temp.list[i].weight);
+        }
+        
         animator = GetComponentInChildren<Animator>();
         SetItems();
     }
@@ -34,11 +40,11 @@ public abstract class Chest : MonoBehaviour
         }
         else
         {
-            animator.SetTrigger("close");            
+            animator.SetTrigger("close");
         }
     }
 
-    public abstract void OpenChest();
+    public abstract void OpenChest(int index);
 
     public virtual void UseChest(GameObject gameObject)
     {
@@ -69,7 +75,7 @@ public abstract class Chest : MonoBehaviour
         spawnedObject.gameObject.SetActive(true);
     }
 
-    protected void SpawnItem(int index)
+    public void SpawnItem(int index)
     {
         spawnedObject = Instantiate(pickablePowerUps[index], itemHolder.position, itemHolder.rotation);
         spawnedObject.GetComponent<InteractablePowerUp>().SetProperties(myRarity);
@@ -84,19 +90,46 @@ public abstract class Chest : MonoBehaviour
 
     protected void SetItems()
     {
-        
+        int oldindex = -1;
+        int weaponIndex = -1;
         for (int i = 0; i < numberOfPickablePowerups; i++)
-        {
+        {                     
             if (myRarity.rarity == "Legendary")
             {
-                pickablePowerUps.Add(powerups.GetItem(powerups.Count - 1));
+                if(i == 0)
+                {
+                    weaponIndex = 0;//Random.Range(0, 3);
+                    Debug.Log("0: " + weaponIndex);
+                }
+                else
+                {
+                    weaponIndex = 2; // (weaponIndex + 1) % powerups.list.Count;
+                    Debug.Log("!0: " + weaponIndex);
+                }
+                //do
+                //{
+                //    weaponIndex = Random.Range(0, 3); //Need a for loop here if there are suposed to be more than two powerups to pick from
+                //} while (weaponIndex != oldindex);
+                GameObject weaponPowerup = powerups.GetItem(powerups.Count - 1);
+                pickablePowerUps.Add(weaponPowerup);
+                pickablePowerUps[i].GetComponent<InteractableWeaponPowerup>().SetProperties(weaponIndex);
+                for (int j = 0; j < pickablePowerUps.Count; j++)
+                {
+                    Debug.Log("Iteration: " + i + " with desc: " + pickablePowerUps[j].GetComponent<InteractablePowerUp>().description);
+                }
+                oldindex = weaponIndex;
             }
             else
             {
-                pickablePowerUps.Add(powerups.GetRandom());
+                pickablePowerUps.Add(powerups.GetRandomAndRemove());             
                 pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties(myRarity);
             }
                        
         }
+    }
+
+    public List<GameObject> GetUpgradeItems()
+    {
+        return pickablePowerUps;
     }
 }

@@ -34,6 +34,8 @@ public class Player : Character, ISavable
     [SerializeField] Ability swapAbility;
     [Range(0f, 1f)]
     [SerializeField] float TimeFlowWhileSwapping;
+    [SerializeField] AudioClip trueSwapSound;
+    [SerializeField] AudioClip mirrorSwapSound;
 
     public delegate void InteractWithObject();
     public static event InteractWithObject OnObjectInteraction;
@@ -64,8 +66,8 @@ public class Player : Character, ISavable
     protected override void Update()
     {
         base.Update();
-        if (Cursor.visible)
-            Cursor.visible = false;
+        //if (Cursor.visible)
+        //    Cursor.visible = false;
 
         //hitBoxBounds = hitbox.bounds;
         //Debug.Log("Bounds: " + hitBoxBounds);
@@ -141,6 +143,7 @@ public class Player : Character, ISavable
     public override void Heal(float amount)
     {
         currentHealth += Mathf.Clamp(amount, 0, maxHealth + stats.GetMaxHealthIncrease() - currentHealth);
+        HealthChanged.Invoke();
     }
 
     public void TryDimensionSwap()
@@ -156,9 +159,17 @@ public class Player : Character, ISavable
     {
         if (dimensionManager.TrySwap())
         {
+            SetTimeToNormalFlow();
             ChangeStats();
             if (swapAbility)
                 swapAbility.DoEffect();
+
+            if(DimensionManager.CurrentDimension == Dimension.True)
+            {
+                GetComponent<AudioSource>().PlayOneShot(trueSwapSound);
+            }
+            else
+                GetComponent<AudioSource>().PlayOneShot(mirrorSwapSound);
         }
     }
 
@@ -177,6 +188,8 @@ public class Player : Character, ISavable
         {
             anim.Play("Damaged");
         }
+
+        HealthChanged.Invoke();
     }
 
     public void Interact()
@@ -217,7 +230,15 @@ public class Player : Character, ISavable
     public void Stun(float duration)
     {
         if (currentHealth > 0)
+        {
+            SetTimeToNormalFlow();
             StartCoroutine(_Stun(duration));
+        }
+    }
+
+    public StatSystem playerStats()
+    {
+        return stats;
     }
 
     IEnumerator _Stun(float duration)

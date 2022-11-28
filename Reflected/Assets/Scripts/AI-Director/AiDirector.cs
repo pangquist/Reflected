@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class AiDirector : MonoBehaviour
@@ -14,7 +15,7 @@ public class AiDirector : MonoBehaviour
     [SerializeField] int difficultySteps;
     int minSpawnAmount, maxSpawnAmount;
 
-    //Room
+    //Room-stats
     bool inbetweenRooms;
     [SerializeField] bool activeRoom;
     [SerializeField] int aliveEnemiesInRoom;
@@ -23,14 +24,14 @@ public class AiDirector : MonoBehaviour
     List<float> clearTimesList = new List<float>();
     [SerializeField] List<GameObject> chests;
 
-    //Map
+    //Map-stats
     [SerializeField] int numberOfRoomsCleared;
     [SerializeField] int numberOfRoomsLeftOnMap;
     [SerializeField] int NumberOfRoomsSinceShop;
     [SerializeField] int numberOfEnemiesKilled;
     Map map;
 
-    //Player
+    //Player-stats
     Player player;
     [SerializeField] float playerCurrentHelathPercentage;
     [SerializeField] int temporaryCurrency;
@@ -40,9 +41,9 @@ public class AiDirector : MonoBehaviour
     LootPoolManager lootPool;
     Rarity currentRarity;
 
-    public bool check;
+    public static UnityEvent RoomCleared = new UnityEvent();
 
-    //Properties
+    // Properties
 
     public bool AllEnemiesKilled => aliveEnemiesInRoom <= 0;
 
@@ -64,7 +65,6 @@ public class AiDirector : MonoBehaviour
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
-        check = false;
         numberOfRoomsLeftOnMap = map.Rooms.Count;
     }
 
@@ -111,20 +111,21 @@ public class AiDirector : MonoBehaviour
             timeToClearRoom += Time.deltaTime;
             playerCurrentHelathPercentage = player.GetHealthPercentage();
         }
-        if (activeRoom && aliveEnemiesInRoom <= 0) // Player kills last enemy in a room
+        if (activeRoom && aliveEnemiesInRoom == 0) // Player kills last enemy in a room
         {
             activeRoom = false;
             inbetweenRooms = true;
             MusicManager musicManager = FindObjectOfType<MusicManager>();
-            musicManager.ChangeMusicIntensity(-1);
+            musicManager.SetMusic(DimensionManager.CurrentDimension, 0);
         }
         if (inbetweenRooms) //All enemies are killed but player is still in same room
         {
             UpdateRoomStatistics();
             SpawnChest();
 
+            //RoomCleared.Invoke();
+
             inbetweenRooms = false;
-            check = false;
         }
     }
     private void UpdateRoomStatistics()
@@ -141,16 +142,15 @@ public class AiDirector : MonoBehaviour
     public void EnterRoom() //called when a new room activates (from Room-script)
     {  
         activeRoom = true;
+        aliveEnemiesInRoom = 0;
         checkDifficulty();
         aliveEnemiesInRoom = amountOfEnemiesToSpawn * waveAmount;
-        check = true;
 
         enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn, waveAmount, EnemyStatModifier());
     }
     public void EnterBossRoom()
     {
         Debug.Log("Activate Boss");
-        check = true;
     }
     public void killEnemyInRoom() //called when enemy dies (from enemy-script)
     {
@@ -180,9 +180,12 @@ public class AiDirector : MonoBehaviour
                 break;                
             case "Epic":
                 Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
-                break;                      
+                break;
+            case "Legendary":
+                Instantiate(chests[3], spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;
             default:
-                Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0));
                 break;
         }
         

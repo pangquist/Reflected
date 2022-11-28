@@ -55,6 +55,9 @@ public class MovementEditorTemplate : Editor
 	{
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("speed"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("turnSmoothTime"));
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("footstepSounds"));
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("footstepEffect"));
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("feetPositions"));
 	}
 
 	void DisplayJumpingInfo()

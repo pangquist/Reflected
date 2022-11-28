@@ -10,7 +10,8 @@ public class StructurePlacer : MonoBehaviour
     [SerializeField] private MapGenerator mapGenerator;
 
     [Header("Predetermined structures")]
-    [SerializeField] private GameObject shopPrefab;
+    [SerializeField] private GameObject shopStructurePrefab;
+    [SerializeField] private GameObject bossStructurePrefab;
 
     [Header("Values")]
     [SerializeField] private ObjectList[] objectLists;
@@ -146,7 +147,11 @@ public class StructurePlacer : MonoBehaviour
     {
         if (room.Type == RoomType.Shop)
         {
-            InstantiateStructure(shopPrefab, room, room.Rect.center);
+            InstantiateStructure(shopStructurePrefab, room, room.Rect.center);
+        }
+        else if (room.Type == RoomType.Boss)
+        {
+            InstantiateStructure(bossStructurePrefab, room, room.Rect.center);
         }
     }
 

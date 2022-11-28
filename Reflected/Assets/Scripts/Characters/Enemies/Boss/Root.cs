@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Root : Enemy
 {
@@ -9,23 +10,17 @@ public class Root : Enemy
         if (invurnable || isDead)
             return;
 
-        if (currentHealth == maxHealth && healthBar)
-            healthBar.gameObject.SetActive(true);
-
-
         CombatText text = Instantiate(combatTextCanvas.gameObject, transform.position + combatTextOffset, Quaternion.identity).GetComponent<CombatText>();
         text.SetDamageText(damage);
 
         currentHealth -= Mathf.Clamp(damage, 0, currentHealth);
 
-        Debug.Log("ENEMY TOOK DAMAGE: " + damage + "Health left: " + currentHealth);
-        if (healthBar)
-            healthBar.fillAmount = GetHealthPercentage();
-
         if (currentHealth <= 0)
         {
             Die();
         }
+
+        HealthChanged.Invoke();
     }
 
     protected override void Die()

@@ -35,7 +35,7 @@ public class BoltBlast : Ability
         int spawnedBolts = 0;
         int spawnPositionIndex = 0;
 
-        while (spawnedBolts < amountOfBolts)
+        while (spawnedBolts < amountOfBolts && !GetComponent<Boss>().Dead())
         {
             Debug.Log("Spawn bolt nr: " + (spawnedBolts + 1));
 
@@ -60,6 +60,7 @@ public class BoltBlast : Ability
             Vector3 diff = landPosition - spawnPosition;
 
             newBolt.SetVelocity(diff / airTime);
+            newBolt.SetVfx(vfxObject);
 
             spawnedBolts++;
             yield return new WaitForSeconds(abilityDuration / amountOfBolts);

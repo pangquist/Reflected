@@ -5,14 +5,14 @@ using UnityEngine;
 public class ChestController : Chest
 {
 
-    public override void OpenChest()
+    public override void OpenChest(int index)
     {
         if (!isOpen )
         {
             isOpen = true;
             //Debug.Log("Chest is now open...");
             if (spawnedObject == null)
-                SpawnItem(0);
+                SpawnItem(index);
 
             Destroy(gameObject, 20);
         }

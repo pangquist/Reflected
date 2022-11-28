@@ -7,7 +7,7 @@ public class ChestControllerPay : Chest
     [SerializeField] ItemData payment;
     [SerializeField] public int amountToPay = 1;
 
-    public override void OpenChest()
+    public override void OpenChest(int index)
     {
         Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 
@@ -20,7 +20,7 @@ public class ChestControllerPay : Chest
                 inventory.Remove(payment, amountToPay);
                 Debug.Log("Chest is now open...");
                 if (spawnedObject == null)
-                    SpawnItem(0);
+                    SpawnItem(index);
 
                 Destroy(gameObject, 20);
             }

@@ -23,9 +23,13 @@ public class Boss : Enemy
 
     bool abilityLock;
     bool rotateLock;
+    CameraManager cameraManager;
+    [SerializeField]Transform cameraFocusPoint;
 
     protected override void Update()
     {
+        cameraFocusPoint.transform.position = (transform.position + player.transform.position) / 2;
+        
         if (isDead)
             return;
 
@@ -33,9 +37,7 @@ public class Boss : Enemy
 
         if (distance < aggroRange && !aggroed)
         {
-            anim.Play("Activation");
-            aggroed = true;
-            healthBarCanvas.gameObject.SetActive(true);
+            Activate();
         }
 
         if (!aggroed)
@@ -44,6 +46,7 @@ public class Boss : Enemy
         AbilityTimer();
         if (!rotateLock)
             StartCoroutine(_RotateTowardsPlayer());
+
 
         base.Update();
     }
@@ -84,6 +87,7 @@ public class Boss : Enemy
     protected override void Awake()
     {
         base.Awake();
+        cameraManager = FindObjectOfType<CameraManager>();
     }
 
     public override void TakeDamage(float damage)
@@ -108,8 +112,13 @@ public class Boss : Enemy
         if (roots.Count == 0)
         {
             Die();
-            healthBar.gameObject.SetActive(false);
         }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        //cameraManager.FocusOnPlayer();
     }
 
     public override void ToggleInvurnable()
@@ -120,5 +129,14 @@ public class Boss : Enemy
         {
             root.ToggleInvurnable();
         }
+    }
+
+    public void Activate()
+    {
+        anim.Play("Activation");
+        aggroed = true;
+        healthBarCanvas.gameObject.SetActive(true);
+        //cameraManager.NewFocus(cameraFocusPoint);
+        //cameraManager.BossSettings();
     }
 }

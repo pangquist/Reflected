@@ -9,8 +9,12 @@ public class Bolt : MonoBehaviour
     [SerializeField] Vector3 velocity;
     [SerializeField] float gravity;
     [SerializeField] float damage;
+    [SerializeField] float explosionRange;
     [SerializeField] Player player;
     [SerializeField] GameObject landMarker;
+    [SerializeField] LayerMask hitable;
+
+    GameObject vfxObject;
 
     private void Start()
     {
@@ -27,6 +31,12 @@ public class Bolt : MonoBehaviour
 
         transform.position += velocity * Time.deltaTime;
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(transform.position, explosionRange);
     }
 
     public void ShowLandPlacement(Vector3 spawnPosition)
@@ -68,8 +78,14 @@ public class Bolt : MonoBehaviour
             player.TakeDamage(damage);
             Destroy(gameObject);
         }
-        else if (other.gameObject.tag == "Ground")
-            Destroy(gameObject);
+        else if (other.GetComponent<Destructible>())
+        {
+            other.GetComponent<Destructible>().DestroyAnimation();
+        }
+        else if (other.gameObject.layer == 3 || other.gameObject.layer == 7)
+        {
+            Explode();
+        }
     }
 
     public void SetVelocity(Vector3 newVelocity)
@@ -80,5 +96,41 @@ public class Bolt : MonoBehaviour
     public bool UseGravity()
     {
         return useGravity;
+    }
+
+    public void SetVfx(GameObject newVfx)
+    {
+        vfxObject = newVfx;
+    }
+
+    public void SpawnEffect()
+    {
+        ParticleSystem particleSystem = Instantiate(vfxObject, transform.position, transform.rotation).GetComponent<ParticleSystem>();
+        particleSystem.transform.parent = null;
+
+        RaycastHit hit;
+        if (Physics.Raycast(vfxObject.transform.position, Vector3.down, out hit, Mathf.Infinity, hitable))
+        {
+            ParticleSystemRenderer renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
+            renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;
+        }
+    }
+
+    public void Explode()
+    {
+        SpawnEffect();
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange);
+
+        foreach(Collider collider in colliders)
+        {
+            if(collider.tag == "Player")
+            {
+                collider.GetComponentInChildren<Player>().TakeDamage(damage);
+                break;
+            }
+        }
+
+        Destroy(gameObject);
     }
 }

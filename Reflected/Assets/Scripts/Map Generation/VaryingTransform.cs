@@ -37,7 +37,7 @@ public class VaryingTransform : MonoBehaviour
         if (!randomizeScale)
             return;
 
-        float scale = minScale + (maxScale - minScale) * Random.Range(0f, 1f).LerpValueCustomSmoothstep(scaleBias);
+        float scale = minScale + (maxScale - minScale) * Random.Range(0f, 1f).CustomSmoothstep(scaleBias);
         transform.localScale = new Vector3(scale, scale, scale);
     }
 }

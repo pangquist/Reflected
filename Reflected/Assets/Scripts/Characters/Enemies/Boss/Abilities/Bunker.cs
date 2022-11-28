@@ -48,13 +48,14 @@ public class Bunker : Ability
                 Bolt newBolt = Instantiate(spawnedJunk, spawnPosition.position, Quaternion.identity).GetComponent<Bolt>();
 
                 Vector2 randomPosition = Random.insideUnitCircle * radius;
-                Vector3 targetPosition = new Vector3(randomPosition.x, player.transform.position.y, randomPosition.y);
+                Vector3 targetPosition = new Vector3(transform.position.x + randomPosition.x, player.transform.position.y, transform.position.z + randomPosition.y);
 
                 Vector3 diff = targetPosition - spawnPosition.position;
 
                 diff.y = upwardsForce;
 
                 newBolt.SetVelocity(diff / airTime);
+                newBolt.SetVfx(vfxObject);
 
                 //if (newBolt.UseGravity())
                 //    newBolt.ShowLandPlacement(targetPosition);

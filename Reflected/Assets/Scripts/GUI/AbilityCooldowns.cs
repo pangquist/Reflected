@@ -8,18 +8,19 @@ public class AbilityCooldowns : MonoBehaviour
 {
     [Header("Ability 1")]
     [SerializeField] Image ability1Icon;
-    [SerializeField] Image ability1FillImage;
-    [SerializeField] TextMeshProUGUI ability1text;
+    [SerializeField] Image ability1Overlay;
+    [SerializeField] TextMeshProUGUI ability1Text;
 
     [Header("Ability 2")]
     [SerializeField] Image ability2Icon;
-    [SerializeField] Image ability2FillImage;
-    [SerializeField] TextMeshProUGUI ability2text;
+    [SerializeField] Image ability2Overlay;
+    [SerializeField] TextMeshProUGUI ability2Text;
+
+    [Header("Other")]
+    [SerializeField] private ThirdPersonMovement thirdPersonMovement;
 
     private Weapon weapon;
     private Player player;
-    [SerializeField] private ThirdPersonMovement thirdPersonMovement;
-    PowerUp powerUp;
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +28,8 @@ public class AbilityCooldowns : MonoBehaviour
         player = FindObjectOfType<Player>();
         thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
         weapon = player.GetCurrentWeapon();
-        ability1FillImage.fillAmount = 0;
-        ability2FillImage.fillAmount = 0;
+        ability1Overlay.fillAmount = 0;
+        ability2Overlay.fillAmount = 0;
 
         ability1Icon.sprite = player.GetSpecialAbility().GetIcon();
         ability2Icon.sprite = thirdPersonMovement.GetDash().GetIcon();
@@ -44,14 +45,14 @@ public class AbilityCooldowns : MonoBehaviour
 
     public void Ability1Use()
     {
-        ability1FillImage.fillAmount = 1;
-        ability1text.gameObject.SetActive(true);
+        ability1Overlay.fillAmount = 1;
+        ability1Text.gameObject.SetActive(true);
     }
 
     public void Ability2Use()
     {
-        ability2FillImage.fillAmount = 1;
-        ability2text.gameObject.SetActive(true);
+        ability2Overlay.fillAmount = 1;
+        ability2Text.gameObject.SetActive(true);
     }
 
     private void Ability1()
@@ -60,38 +61,36 @@ public class AbilityCooldowns : MonoBehaviour
 
         if (ability.IsOnCooldown())
         {
-            ability1text.text = Mathf.RoundToInt(ability.GetRemainingCooldown()).ToString();
-            ability1FillImage.fillAmount = ability.GetCooldownPercentage();
+            ability1Text.text = Mathf.CeilToInt(ability.GetRemainingCooldown()).ToString();
+            ability1Overlay.fillAmount = ability.GetCooldownPercentage();
         }
         else
         {
-            ability1text.gameObject.SetActive(false);
-            ability1FillImage.fillAmount = 0;
+            ability1Text.gameObject.SetActive(false);
+            ability1Overlay.fillAmount = 0;
         }
 
-        if (ability1FillImage.fillAmount <= 0)
+        if (ability1Overlay.fillAmount <= 0)
         {
-            ability1FillImage.fillAmount = 0;
+            ability1Overlay.fillAmount = 0;
         }
-
-
     }
 
     private void Ability2()
     {
         if (thirdPersonMovement.GetDash().IsOnCooldown())
         {
-            ability2text.text = Mathf.RoundToInt(thirdPersonMovement.GetDash().GetRemainingCooldown()).ToString();
-            ability2FillImage.fillAmount = thirdPersonMovement.GetDash().GetCooldownPercentage();
+            ability2Text.text = Mathf.CeilToInt(thirdPersonMovement.GetDash().GetRemainingCooldown()).ToString();
+            ability2Overlay.fillAmount = thirdPersonMovement.GetDash().GetCooldownPercentage();
         }
         else if (!thirdPersonMovement.GetDash().IsOnCooldown())
         {
-            ability2text.gameObject.SetActive(false);
-            ability2FillImage.fillAmount = 0;
+            ability2Text.gameObject.SetActive(false);
+            ability2Overlay.fillAmount = 0;
         }
-        if (ability2FillImage.fillAmount <= 0)
+        if (ability2Overlay.fillAmount <= 0)
         {
-            ability2FillImage.fillAmount = 0;
+            ability2Overlay.fillAmount = 0;
         }
 
     }

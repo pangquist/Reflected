@@ -13,54 +13,32 @@ public class ShopButton : MonoBehaviour
     [SerializeField] GameObject button;
     [SerializeField] int index;
     [SerializeField] Image costImage;
-    [SerializeField] Image itemImage;
     [SerializeField] TextMeshProUGUI itemText;
     [SerializeField] TextMeshProUGUI costText;
 
-    ShopUi shopUi;
-    List<GameObject> buttonList;
-
-    public List<GameObject> shopList;
+    private ShopUi shopUi;
+    private List<GameObject> buttonList;
 
     void Start()
     {
-        shop = FindObjectOfType<Shop>();
-        shopList = shop.GetShopItems();
         shopUi = FindObjectOfType<ShopUi>();
-
         buttonList = shopUi.GetButtonList();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public int GetIndex()
     {
         return index;
     }
 
-   
+
 
     public void CreateBuyOrder()
     {
-        if(shop.BuyItem(index))
+        shop = shopUi.GetClosestShop();
+        if (shop.BuyItem(index))
         {
-            buttonList.Remove(button);
-            if (gameObject != null)
-                Destroy(gameObject);
-
-            for (int i = 0; i < buttonList.Count; i++)
-            {
-                if (buttonList[i].GetComponent<ShopButton>().index > index)
-                {
-                    buttonList[i].GetComponent<ShopButton>().index--;
-                }
-            }
+            buttonList[index].SetActive(false); 
         }
-        
+
     }
     public void SetButton(GameObject powerUp, int buttonIndex)
     {

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8144010172276114018}
   - component: {fileID: 3279785089125449040}
   - component: {fileID: 374060928966408828}
+  - component: {fileID: 1277662065758035083}
   m_Layer: 0
   m_Name: GravityPropeller
   m_TagString: Untagged
@@ -101,9 +102,13 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   gravity: -9.81
   damage: 3
+  explosionRange: 2
   player: {fileID: 0}
   landMarker: {fileID: 1676282448742711820, guid: 356bc50738d510448bd22e8ccdae508b,
     type: 3}
+  hitable:
+    serializedVersion: 2
+    m_Bits: 136
 --- !u!65 &374060928966408828
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -117,3 +122,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.1794856, y: 2.1964295, z: 0.38351664}
   m_Center: {x: 0.00070480164, y: 0.0067637824, z: 0.19261706}
+--- !u!54 &1277662065758035083
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648749985865639128}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

@@ -22,7 +22,7 @@ public abstract class Ability : MonoBehaviour
     [SerializeField] protected float damage;
     [SerializeField] protected bool debug;
     [SerializeField] AnimationClip abilityAnimation;
-    [SerializeField] GameObject vfxObject;
+    [SerializeField] protected GameObject vfxObject;
     [SerializeField] float vfxDuration;
     protected Player player;
 

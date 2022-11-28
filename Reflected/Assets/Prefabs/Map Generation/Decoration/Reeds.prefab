@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8482297312406732915}
   - component: {fileID: 7137786700904406417}
+  - component: {fileID: 7566477302263336740}
+  - component: {fileID: -1362622959766706667}
+  - component: {fileID: 5004297083141967261}
   m_Layer: 7
   m_Name: Reeds
   m_TagString: Untagged
@@ -56,6 +59,51 @@ MonoBehaviour:
   minScale: 0.8
   maxScale: 1.2
   scaleBias: -0.4
+--- !u!114 &7566477302263336740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7772125742368962591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec2d0386f72ba4458173a2238d4f1e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &-1362622959766706667
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7772125742368962591}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 2, z: 0.3}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!95 &5004297083141967261
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7772125742368962591}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 50710cdae5a9c2247b8a3ccf8604351f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &273549526625130136
 PrefabInstance:
   m_ObjectHideFlags: 0

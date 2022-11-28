@@ -2,6 +2,7 @@
 // Script created by Valter Lindecrantz at the Game Development Program, MAU, 2022.
 //
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,7 +55,8 @@ public class ChangeableObject : MonoBehaviour
         Debug.Log("CHANGING TO MIRROR MESH");
         for (int i = 0; i < objects.Length; i++)
         {
-            objects[i].GetComponent<MeshFilter>().mesh = mirrorMeshes[i];
+            if (objects[i])
+                objects[i].GetComponent<MeshFilter>().mesh = mirrorMeshes[i];
         }
     }
 

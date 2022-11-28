@@ -1,6 +1,8 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Character : MonoBehaviour, IEffectable
 {
@@ -16,6 +18,9 @@ public class Character : MonoBehaviour, IEffectable
     protected bool isDead;
 
     [SerializeField] protected Weapon currentWeapon;
+
+    public UnityEvent HealthChanged = new UnityEvent();
+    public UnityEvent Killed = new UnityEvent();
 
     protected virtual void Awake()
     {
@@ -45,18 +50,28 @@ public class Character : MonoBehaviour, IEffectable
         {
             anim.Play("Damaged");
         }
+
+        HealthChanged.Invoke();
     }
 
     public virtual void Heal(float amount)
     {
-        Debug.Log("Amount healed: " + amount);
         currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
+        HealthChanged.Invoke();
+        PopUpTextManager.NewHeal(transform.position + Vector3.up * 1.5f, amount);
     }
 
     protected virtual void Die()
     {
         anim.Play("Death");
         isDead = true;
+        Killed.Invoke();
+    }
+
+
+    public List<Effect> GetStatusEffectList()
+    {
+        return statusEffects;
     }
 
     protected void Destroy()
@@ -160,6 +175,13 @@ public class Character : MonoBehaviour, IEffectable
     public void PlayAnimation(string animName)
     {
         anim.Play(animName);
+    }
+
+
+    public void FocusCamera()
+    {
+        CinemachineFreeLook freeLook = Object.FindObjectOfType<CinemachineFreeLook>();
+        freeLook.Follow = transform;
     }
 
     public bool Dead() => isDead;

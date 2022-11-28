@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5219705788746869717}
   m_Layer: 0
   m_Name: ChestCommon
-  m_TagString: Untagged
+  m_TagString: Chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,22 +60,12 @@ MonoBehaviour:
     - item: {fileID: 1491449522285018658, guid: 1ed094479c8944542867015952245fc2,
         type: 3}
       weight: 1
-  rarityTiers:
-    list:
-    - item: {fileID: 11400000, guid: c07b740bade056f49ab423a8045669bf, type: 2}
-      weight: 1
-    - item: {fileID: 11400000, guid: 30a205678ae99124a9002b2072e248b4, type: 2}
-      weight: 1
-    - item: {fileID: 11400000, guid: 1c84b4c9ccd0a6a4d87d3ee63c907f75, type: 2}
-      weight: 1
   pickablePowerUps: []
-  chestPrefabs: []
-  animations: []
   itemHolder: {fileID: 7803070433090781213}
   myRarity: {fileID: 11400000, guid: c07b740bade056f49ab423a8045669bf, type: 2}
+  trueDimension: 0
   isOpen: 0
   animator: {fileID: 0}
-  trueDimension: 0
 --- !u!54 &6248393032808700175
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -329,15 +319,57 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7803070432480520517}
+      objectReference: {fileID: 6504898921400784846, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetPanelActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
         type: 3}
       propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ChestController, Assembly-CSharp
+      value: UpgradeUi, Assembly-CSharp
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UpgradeUi, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+        type: 3}
+      propertyPath: interactAction.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8889789335042283430, guid: 6060d950f2d1cae4ab62215ea368fb4c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6060d950f2d1cae4ab62215ea368fb4c, type: 3}
 --- !u!4 &499593387949527956 stripped
 Transform:
@@ -345,3 +377,23 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7115665506281927632}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &929039280916485583 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7952073116535383583, guid: 6060d950f2d1cae4ab62215ea368fb4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7115665506281927632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6397125513436768959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929039280916485583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04238ce6f33ef1446bbf78851000ad90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInRange: 0
+  interactKey: 101

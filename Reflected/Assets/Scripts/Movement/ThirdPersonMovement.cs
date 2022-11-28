@@ -9,6 +9,10 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] Transform cam;
     [SerializeField] PlayerStatSystem stats;
     [SerializeField] Animator animator;
+    [SerializeField] List<AudioClip> footstepSounds;
+    [SerializeField] ParticleSystem footstepEffect;
+    [SerializeField] List<Transform> feetPositions;
+    int feetIndex;
 
     [Header("Stat Properties")]
     [SerializeField] float speed = 12f;
@@ -18,7 +22,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     [Header("Jump Properties")]
     [SerializeField] float gravityEffect = -9.81f;
-    [SerializeField] float jumpHeight = 3f;
+    [SerializeField] float jumpHeight;
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance = 0.4f;
     [SerializeField] LayerMask groundMask;
@@ -73,15 +77,26 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (dashAbility.IsDashing())
+        if (dashAbility.IsDashing() || !isGrounded)
             return;
 
+        //StartCoroutine(_Jump());
         if (isGrounded && velocity.y <= 0)
         {
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravityEffect);
-
         }
     }
+
+    //IEnumerator _Jump()
+    //{
+    //    float progress = 0;
+
+    //    while(progress < jumpDuration)
+    //    {
+
+    //        progress += Time.deltaTime;
+    //    }
+    //}
 
     public void Dash()
     {
@@ -116,5 +131,37 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         velocity = new Vector3(velocity.x, 0, velocity.z);
         gravity = false;
+    }
+
+    public void TakeStep()
+    {
+        if (!isGrounded)
+            return;
+
+        AudioClip footstepSound = footstepSounds[Random.Range(0, footstepSounds.Count)];
+        GetComponent<AudioSource>().PlayOneShot(footstepSound);
+
+        SpawnGoundParticle();
+    }
+
+    public void SpawnGoundParticle()
+    {
+        if (!isGrounded)
+            return;
+
+        Transform feetTransform = feetPositions[feetIndex++];
+        if (feetIndex >= feetPositions.Count)
+            feetIndex = 0;
+
+        ParticleSystem stepEffect = Instantiate(footstepEffect, feetTransform.position, footstepEffect.transform.rotation);
+        stepEffect.gameObject.transform.parent = null;
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(feetTransform.position, Vector3.down, out hit, Mathf.Infinity, groundMask))
+        {
+            ParticleSystemRenderer renderer = stepEffect.GetComponent<ParticleSystemRenderer>();
+            renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;
+        }
     }
 }

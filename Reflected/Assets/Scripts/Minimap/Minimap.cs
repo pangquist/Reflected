@@ -104,7 +104,7 @@ public class Minimap : MonoBehaviour
 
         for (float t = 0f; t < startAnimationDuration; t += Time.deltaTime)
         {
-            rectTransform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, (t / startAnimationDuration).LerpValueSmoothstep());
+            rectTransform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, (t / startAnimationDuration).Smoothstep());
             yield return null;
         }
 
@@ -145,7 +145,7 @@ public class Minimap : MonoBehaviour
             sizeTransition -= Time.deltaTime * 1f / sizeTransitionDuration;
 
         sizeTransition = Mathf.Clamp01(sizeTransition);
-        rectTransform.sizeDelta = Vector2.Lerp(smallSize, largeSize, sizeTransition.LerpValueCustomSmoothstep(0.6f));
+        rectTransform.sizeDelta = Vector2.Lerp(smallSize, largeSize, sizeTransition.CustomSmoothstep(0.6f));
     }
 
     public MinimapComponent NewComponent(MinimapComponentController componentController)

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
@@ -12,71 +11,36 @@ public class ShopUi : MonoBehaviour
 {
     [SerializeField] Shop shop;
     [SerializeField] GameObject shopPanel;
-    [SerializeField] GameObject buttonObject;
     [SerializeField] List<GameObject> buttonList;
-    private int buttonIndex;
-    private GameObject shopObject;
-    public List<GameObject> shopList;
+    [SerializeField] List<GameObject> shopList;
+    private GameObject[] shops;
+    private Player player;
 
-    void Start()
+    public void SetPanelActive()
     {
-        
-        shop = FindObjectOfType<Shop>();
-        
+        shop = GetClosestShop();
+        shopPanel.SetActive(true);
+        for (int i = 0; i < buttonList.Count; i++)
+            buttonList[i].SetActive(true);
+        SetButtons();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        if(shopPanel.activeSelf== true)
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        
-        
-
-    }
-
-    public void DeactiveShopWindow()
+    public void DeactiveWindow()
     {
         shopPanel.SetActive(false);
+    }
+
+    private void SetButtons()
+    {
+        shopList = shop.GetShopItems();
+
         for (int i = 0; i < buttonList.Count; i++)
         {
-            Destroy(buttonList[i]);
+            if (i < shopList.Count)
+                buttonList[i].GetComponent<ShopButton>().SetButton(shopList[i], i);
+            else
+                buttonList[i].SetActive(false);
         }
-        buttonList.Clear();
-    }
-
-    public void CreateButtons()
-    {
-        shopObject = GameObject.FindGameObjectWithTag("Shop").GetComponent<GameObject>();
-        shopList = shop.GetShopItems();
-        Debug.Log(shopList.Count);
-        if (buttonList.Count == shopList.Count)
-            return;
-        for (int i = 0; i < shopList.Count; i++)
-        {
-            Debug.Log("Created 1 Button");
-            buttonIndex = buttonList.Count;
-            buttonList.Add(Instantiate(buttonObject, shopPanel.transform));
-            buttonList[i].GetComponent<ShopButton>().SetButton(shopList[i], buttonIndex);
-            Debug.Log("it has index " + buttonIndex);
-
-        }
-    }
-
-   
-
-    public int GetButtonIndex()
-    {
-        return buttonIndex;
     }
 
     public List<GameObject> GetButtonList()
@@ -84,10 +48,30 @@ public class ShopUi : MonoBehaviour
         return buttonList;
     }
 
+    public Shop GetClosestShop()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
+        shops = GameObject.FindGameObjectsWithTag("Shop");
+        for (int i = 0; i < shops.Length; i++)
+        {
+            if (i == 0)
+                shop = shops[i].gameObject.GetComponent<Shop>();
+            else if (Vector3.Distance(shops[i].gameObject.transform.position, player.transform.position)
+                < Vector3.Distance(shop.transform.position, player.transform.position))
+            {
+                shop = shops[i].gameObject.GetComponent<Shop>();
+            }
 
-    
+        }
+        return shop;
+    }
 
 
-    
+
+
+
+
+
+
 
 }
