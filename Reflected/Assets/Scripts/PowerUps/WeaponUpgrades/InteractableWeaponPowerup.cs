@@ -24,7 +24,7 @@ public class InteractableWeaponPowerup : InteractablePowerUp
         //Debug.Log("Set properties " + targetRarity);
         amount = index;
         value = powerUpEffect.value;
-        SetDescription((int)amount);
+        SetDescription((int)index);
         hasProperties = true;
     }
 

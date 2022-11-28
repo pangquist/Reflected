@@ -725,6 +725,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 688296094835278479, guid: 8913e296c288ecd4baea3cc071f5a107,
+        type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 1514044468}
     - target: {fileID: 2177557387394759400, guid: 8913e296c288ecd4baea3cc071f5a107,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1762,6 +1767,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.79, z: 0}
+--- !u!114 &1514044468 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3610804489074716717, guid: 208b911f792bd8d40991cc24ecabd06b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1427417582}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514044438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2253763db99494c4e9e3bf8bf774f269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1537874508
 GameObject:
   m_ObjectHideFlags: 0
@@ -3299,6 +3316,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1882137614351575188, guid: 47b1053ca0a8e40479dceecd8b06077f,
+        type: 3}
+      propertyPath: powerupPool.list.Array.data[4].weight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1882137614351575189, guid: 47b1053ca0a8e40479dceecd8b06077f,
         type: 3}
       propertyPath: m_RootOrder

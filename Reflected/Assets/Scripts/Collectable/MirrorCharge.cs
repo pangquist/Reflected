@@ -1,32 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public class Health : MonoBehaviour, IMagnetic, IBuyable
+public class MirrorCharge : MonoBehaviour, IBuyable
 {
     public PowerUpEffect powerUpEffect;
     //Check ui for health that the player gets back for the description and not the powerup effect
-  
+
     Rigidbody rb;
     bool hasTarget, hasProperties;
     Vector3 targetPosition;
     float moveSpeed = 5f;
-    float totalplayerhealth;
-    public int amount;
-    Rarity myRarity;
-    public string description;
+    int amount;
+    string description;
     int value;
+    Rarity myRarity;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         if (!hasProperties)
         {
-            myRarity = FindObjectOfType<LootPoolManager>().GetRandomRarity();
-            totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
-            amount = (int)((totalplayerhealth * 0.15f) * myRarity.amountMultiplier);
-            value = powerUpEffect.value * myRarity.valueMultiplier;
+            amount = (int)powerUpEffect.amount;
+            value = powerUpEffect.value;
             description = powerUpEffect.description + " " + amount.ToString();
         }
         //Destroy(gameObject, 20);
@@ -38,7 +34,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         {
             Destroy(gameObject);
             Debug.Log(amount);
-            powerUpEffect.Apply(other.gameObject, amount); 
+            powerUpEffect.Apply(other.gameObject, amount);
         }
     }
 
@@ -59,11 +55,8 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
 
     public void SetProperties(Rarity targetRarity)
     {
-        //Debug.Log("Set properties " + targetRarity);
-        myRarity = targetRarity;
-        totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
-        amount = (int)((totalplayerhealth * 0.15f) * myRarity.amountMultiplier);
-        value = powerUpEffect.value * targetRarity.valueMultiplier;
+        amount = (int)powerUpEffect.amount;
+        value = powerUpEffect.value;
         description = powerUpEffect.description + " " + amount.ToString();
         hasProperties = true;
     }

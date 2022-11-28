@@ -28,7 +28,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
             }
             else
             {
-                description = powerUpEffect.description + " " + (amount * 100).ToString() + "%";
+                description = powerUpEffect.description + " " + (amount * 100).ToString() + "%. (This effect deminishing returns)";
             }
             
         }
@@ -47,7 +47,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
         }
         else
         {
-            description = powerUpEffect.description + " " + (amount * 100).ToString() + "%";
+            description = powerUpEffect.description + " " + (amount * 100).ToString() + "%. (This effect deminishing returns)";
         }
         hasProperties = true;
     }
