@@ -12,6 +12,12 @@ public class EnemyStatSystem : StatSystem
     List<Stats> statList;
     List<float> baseIncrease;
 
+    private void Awake()
+    {
+        Map.RoomEntered.AddListener(ChangeRoomStat);
+        DimensionManager.DimensionChanged.AddListener(ChangeRoomStat);
+    }
+
     public void Start()
     {
         baseIncrease = new List<float>() { 2f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
@@ -71,9 +77,21 @@ public class EnemyStatSystem : StatSystem
         
     }
 
-    public void SetRoomStats(Stats statIncrease)
+    private void ChangeRoomStat()
     {
+        if (DimensionManager.CurrentDimension == Dimension.True)
+            SetRoomStats(Map.ActiveRoom.TrueStat);
+        else
+            SetRoomStats(Map.ActiveRoom.MirrorStat);
+    }
+
+    private void SetRoomStats(Stats statIncrease)
+    {
+        if (baseBuffs == null)
+            return;
+
         ResetStats();
+
         switch (statIncrease)
         {
             case Stats.Health:
@@ -95,9 +113,8 @@ public class EnemyStatSystem : StatSystem
                 AddAreaOfEffect(baseBuffs[statIncrease]);
                 break;
         }
-
-
     }
+
     public void ApplyNewStats(bool trueDimention)
     {
         ResetStats();

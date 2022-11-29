@@ -108,8 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionObject: {fileID: 2894051019213340170, guid: 6afea9cc1d046264483148a765d74781,
     type: 3}
-  myStats: {fileID: 7522623531136473033}
-  baseAoeSize: {x: 5, y: 3, z: 5}
+  aoeSize: {x: 0, y: 0, z: 0}
   chaseRange: 2.5
   dotData: {fileID: 11400000, guid: f34eef49374bf7f42be193c9abf84cda, type: 2}
   slowData: {fileID: 11400000, guid: 9f203df6c49767844be5d3d038e05301, type: 2}
@@ -2064,10 +2063,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 2
-  movementSpeed: 0
+  currentHealth: 2
+  movementSpeed: 4.5
   damage: 0
   attackSpeed: 0
-  currentHealth: 2
   anim: {fileID: 6437360911736979778}
   currentWeapon: {fileID: 0}
   HealthChanged:
@@ -2076,12 +2075,14 @@ MonoBehaviour:
   Killed:
     m_PersistentCalls:
       m_Calls: []
+  baseProjectileSpeed: 0
+  baseAoeSize: {x: 6, y: 4, z: 6}
   combatTextOffset: {x: 0, y: 2, z: 0}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}
-  aggroRange: 20
   LootDropList:
     list: []
+  hitSounds: []
   meleeAttackState: {fileID: 0}
   rangedAttackState: {fileID: 0}
   aoeAttackState: {fileID: 0}

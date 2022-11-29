@@ -32,7 +32,7 @@ public class AiManager2 : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private EnemyStatSystem enemyStatSystem;
 
-    public Transform firePoint; //Find a better solution
+    public Transform firePoint; //Find a better solution (Not gonna happen now, it is too late)
 
     void Start()
     {
@@ -45,12 +45,6 @@ public class AiManager2 : MonoBehaviour
         {
             player = FindObjectOfType<Player>();
         }
-
-        //Should have a way to assign firePoint without the inspector. But I don't have one atm.
-        //if (firePoint == null)
-        //{
-        //    firePoint = gameObject.transform.GetChild(0).GetChild(0).transform;
-        //}
 
         //Set combat behavior depending on tag
         if (gameObject.tag == "Melee") currentCombatBehavior = CombatBehavior.CloseCombat;
@@ -67,7 +61,6 @@ public class AiManager2 : MonoBehaviour
         {
             case CombatBehavior.CloseCombat:
                 meleeAttackState = gameObject.GetComponent<MeleeAttackState>();
-                //SendAnimation("");
                 break;
             case CombatBehavior.RangedCombat:
                 rangedAttackState = gameObject.GetComponent<RangedAttackState>();
@@ -78,7 +71,6 @@ public class AiManager2 : MonoBehaviour
             case CombatBehavior.ExplosionCombat:
                 explosionAttackState = gameObject.GetComponent<ExplosionAttackState>();
                 break;
-                
         }
 
         //Set active player state
@@ -96,7 +88,7 @@ public class AiManager2 : MonoBehaviour
         //Run the currently active state if the enemy is alive. This way the AI will stop when the enemy dies.
         if (!me.Dead())
         {
-            activeState.DoState(this, player, agent, enemyStatSystem);
+            activeState.DoState(this, me, player, agent, enemyStatSystem);
         }
     }
 
@@ -115,10 +107,5 @@ public class AiManager2 : MonoBehaviour
     public float distanceTo(Transform target)
     {
         return Vector3.Distance(transform.position, target.position);
-    }
-
-    public void SendAnimation(string animName)
-    {
-        me.PlayAnimation(animName);
     }
 }

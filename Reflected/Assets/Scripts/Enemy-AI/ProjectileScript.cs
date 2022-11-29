@@ -5,18 +5,16 @@ using UnityEngine;
 public class ProjectileScript : MonoBehaviour
 {
     private Vector3 direction;
-    private Rigidbody rb;
 
     public float upTime = 1f;
     private float despawnTimer;
 
-    [SerializeField] private float damageAmount = 3f; //Base damage
+    [SerializeField] private float damageAmount = 3f; //Default damage
 
     void Start()
     {
         upTime = 1f;
         despawnTimer = 0f;
-        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -25,7 +23,7 @@ public class ProjectileScript : MonoBehaviour
         despawnTimer += Time.deltaTime;
         if (despawnTimer >= upTime)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             despawnTimer = 0f;
         }
     }

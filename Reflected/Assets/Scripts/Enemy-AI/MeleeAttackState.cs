@@ -5,35 +5,34 @@ using UnityEngine.AI;
 
 public class MeleeAttackState : State
 {
+    //Object for melee hitbox.
     public GameObject meleeObject;
 
-    //Timer for attack rate
+    //Timer for attack rate.
     private float attackTimer = 100f;
 
-    //Base values of the attack stats
-    [SerializeField] private float baseAttackRate = 1f;
-    [SerializeField] private float baseAttackDamage = 5;
+    private float baseAttackRate = 1f;
 
-    //Current values of the attack stats
+    [Header("Current ATTACK Stats")]
     [SerializeField] private float attackRate;
     [SerializeField] private float attackDamage;
 
-    //Range to player in which the enemy will chase the player. (Reposition to attack)
+    [Header("Base POSITIONING Values")]
     [SerializeField] private float chaseRange = 2.5f;
 
     private Transform firePoint;
 
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
+    public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        //Set relevant stat
-        attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed() / thisEnemy.me.MovementPenalty();
-        //Attack size?
+        //Set attack rate, by using default, base, statsystem change as well as debuff.
+        attackRate = baseAttackRate / me.GetAttackSpeed() / enemyStatSystem.GetAttackSpeed() / me.MovementPenalty();
 
+        //If player is too far away, chase the player.
         if (thisEnemy.distanceTo(player.transform) >= chaseRange)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
-            thisEnemy.SendAnimation("Walk Forward In Place");
+            me.PlayAnimation("Walk Forward In Place");
             return;
         }
 
@@ -44,13 +43,13 @@ public class MeleeAttackState : State
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackRate)
         {
-            attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
+            //Set attack damage from base and statsystem
+            attackDamage = me.GetDamage() * enemyStatSystem.GetDamageIncrease();
 
             firePoint = thisEnemy.firePoint;
 
-            //DoAttack();
-
-            thisEnemy.SendAnimation("Bite Attack");
+            //Play attack animation that will trigger attack
+            me.PlayAnimation("Bite Attack");
             attackTimer = 0f;
         }
     }

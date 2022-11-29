@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class RangedAttackState : State
 {
+    //Object for projectile prefab.
     public GameObject projectileObject;
 
     //Offset so the enemy does not shoot at the players feet.
@@ -12,17 +13,14 @@ public class RangedAttackState : State
     //Timer for attack rate
     private float attackTimer = 100f;
 
-    //Base values of the attack stats
-    [SerializeField] private float baseAttackRate = 1f;
-    [SerializeField] private float baseAttackDamage = 3;
-    [SerializeField] private float baseProjectileForce = 2f; //Projectile speed
+    private float baseAttackRate = 1;
 
-    //Current value of the attack stats
+    [Header("Current ATTACK Stats")]
     [SerializeField] private float attackRate;
     [SerializeField] private float attackDamage;
     [SerializeField] private float projectileForce; //Projectile speed
 
-    //Range to player in which the enemy will flee or chase. (Reposition to attack)
+    [Header("Base POSITIONING Values")]
     [SerializeField] private float baseFleeRange = 7f;
     [SerializeField] private float baseChaseRange = 20f;
 
@@ -30,18 +28,17 @@ public class RangedAttackState : State
     private Transform firePoint;
     private Vector3 playerPos;
 
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
+    public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        //Set relevant stats
-        attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed() / thisEnemy.me.MovementPenalty();
-        //Attack range?
+        //Set attack rate, by using default, base, statsystem change as well as debuff.
+        attackRate = baseAttackRate / me.GetAttackSpeed() / enemyStatSystem.GetAttackSpeed() / me.MovementPenalty();
 
         //If too close, move away from target.
         if (thisEnemy.distanceTo(player.transform) <= baseFleeRange)
         {
             thisEnemy.SetMoveAwayState();
             agent.isStopped = false;
-            thisEnemy.SendAnimation("Walk Forward In Place");
+            me.PlayAnimation("Walk Forward In Place");
             return;
         }
 
@@ -50,7 +47,7 @@ public class RangedAttackState : State
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
-            thisEnemy.SendAnimation("Walk Forward In Place");
+            me.PlayAnimation("Walk Forward In Place");
             return;
         }
 
@@ -61,18 +58,20 @@ public class RangedAttackState : State
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackRate)
         {
-            
-            //Set relevant stats (damage, projectile speed, )
-            attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
-            projectileForce = baseProjectileForce;
+            //Set attack damage from base and statsystem
+            attackDamage = me.GetDamage() * enemyStatSystem.GetDamageIncrease();
+
+            //Set projectile speed from base
+            projectileForce = me.GetProjectileSpeed(); // * enemyStatSystem if we add that
 
             //Setup parameters for projectile to use
             firePoint = thisEnemy.firePoint;
             playerPos = player.transform.position;
 
-            //FireProjectile(thisEnemy, player, enemyStatSystem);
+            //Play attack animation that will trigger the attack
+            me.PlayAnimation("Projectile Attack");
 
-            thisEnemy.SendAnimation("Projectile Attack");
+            //Reset attack timer
             attackTimer = 0f;
         }
     }
