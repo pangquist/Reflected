@@ -115,6 +115,11 @@ public class Character : MonoBehaviour, IEffectable
         return currentWeapon;
     }
 
+    public float GetMovementSpeed()
+    {
+        return movementSpeed;
+    }
+
     public float MovementPenalty()
     {
         float movementPenalty = 1;
