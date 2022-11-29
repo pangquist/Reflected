@@ -5,21 +5,20 @@ using UnityEngine.AI;
 
 public class ExplosionAttackState : State
 {
+    //Object for explosion hitbox
     public GameObject explosionObject;
-    public Enemy myStats;
 
+    //Bool to check if attack has started
     private bool attackStarted = false;
 
-    //Base values of the attack stats
-    [SerializeField] private Vector3 baseAoeSize = new Vector3(6f, 4f, 6f);
+    [Header("Current ATTACK Stats")]
+    [SerializeField] private Vector3 aoeSize;
 
-    //Current values of the attack stats
-    private Vector3 aoeSize;
-
-    //Range to player in which the enemy will chase the player. (Reposition to attack)
+    [Header("Base POSITIONING Values")]
     [SerializeField] private float chaseRange = 2.5f;
 
     //Status effects that will be applied on the player when they are hit by the explosion
+    [Header("Status Effect Data")]
     [SerializeField] private StatusEffectData dotData;
     [SerializeField] private StatusEffectData slowData;
 
@@ -28,8 +27,6 @@ public class ExplosionAttackState : State
 
     public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        //Set relevant stats
-
         if (thisEnemy.distanceTo(player.transform) >= chaseRange && !attackStarted)
         {
             thisEnemy.SetMoveTowardState();
@@ -43,22 +40,24 @@ public class ExplosionAttackState : State
 
         if (!attackStarted)
         {
-            //Set relevant stats (damage, projectile speed, )
-            aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
+            //Set aoe size from base and statsystem
+            aoeSize = me.GetAoeSize() * enemyStatSystem.GetAreaOfEffect();
 
-            //DoAttack(enemyStatSystem); //Replaced with animation below instead. The animation will call the attack method.
+            //Play attack animation that will trigger the attack
             me.PlayAnimation("Explosion Attack");
+
+            //Reset attack timer
             attackStarted = true;
         }
     }
 
-    public void DoAttack()
+    public void DoAttack(Enemy me)
     {
         GameObject currentExplosion = Instantiate(explosionObject, transform.position+offSet, Quaternion.identity);
         if (currentExplosion != null)
         {
             currentExplosion.GetComponent<ExplosionScript>().SetUp(aoeSize, dotData, slowData);
-            myStats.TakeDamage(999f);
+            me.TakeDamage(999f);
         }
     }
 

@@ -5,22 +5,21 @@ using UnityEngine.AI;
 
 public class AoeAttackState : State
 {
+    //Object for aoe hitbox
     public GameObject aoeObject;
 
     //Timer for attack rate
     private float attackTimer = 100f;
 
     //Base values of the attack stats
-    [SerializeField] private float baseAttackRate = 4f;
-    [SerializeField] private float baseAttackDamage = 1f;
-    [SerializeField] private Vector3 baseAoeSize = new Vector3(5f, 3f, 5f);
+    private float baseAttackRate = 4f;
 
-    //Current values of the attack stats
-    private float attackRate;
-    private float attackDamage;
-    private Vector3 aoeSize;
+    [Header("Current ATTACK Stats")]
+    [SerializeField] private float attackRate;
+    [SerializeField] private float attackDamage;
+    [SerializeField] private Vector3 aoeSize;
 
-    //Range to player in which the enemy will flee or chase. (Reposition to attack)
+    [Header("Base POSITIONING Values")]
     [SerializeField] private float fleeRange = 7f;
     [SerializeField] private float chaseRange = 20f;
 
@@ -29,22 +28,24 @@ public class AoeAttackState : State
 
     public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        //Set relevant stats
-        attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed() / thisEnemy.me.MovementPenalty();
-        //Attack range?
+        //Set attack rate, by using default, base, statsystem change as well as debuff.
+        attackRate = baseAttackRate / me.GetAttackSpeed() / enemyStatSystem.GetAttackSpeed() / me.MovementPenalty();
 
         //If ranged and too close, move away from target.
         if (thisEnemy.distanceTo(player.transform) <= fleeRange)
         {
             thisEnemy.SetMoveAwayState();
             agent.isStopped = false;
+            me.PlayAnimation("Fly Forward In Place");
             return;
         }
+
         //If ranged and too far away, move towards target.
         else if (thisEnemy.distanceTo(player.transform) >= chaseRange)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
+            me.PlayAnimation("Fly Forward In Place");
             return;
         }
 
@@ -55,28 +56,27 @@ public class AoeAttackState : State
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackRate)
         {
-            //Set relevant stats (damage, projectile speed, )
-            attackDamage = baseAttackDamage * enemyStatSystem.GetDamageIncrease();
-            aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
+            //Set attack damage from base and statsystem
+            attackDamage = me.GetDamage() * enemyStatSystem.GetDamageIncrease();
+
+            //Set aoe size from base and statsystem
+            aoeSize = me.GetAoeSize() * enemyStatSystem.GetAreaOfEffect();
 
             //Setup parameters for projectile to use
             playerPos = player.transform.position;
 
-            //DoAttack(thisEnemy, player, enemyStatSystem);
-
+            //Play attack animation that will trigger the attack
             me.PlayAnimation("Fire AOE");
 
+            //Reset attack timer
             attackTimer = 0f;
         }
     }
 
-    public void DoAttack(/*AiManager2 thisEnemy, Player player, EnemyStatSystem enemyStatSystem*/)
+    public void DoAttack()
     {
+        //Instantiate the aoe hitbox and set up its variables.
         GameObject currentAOE = Instantiate(aoeObject, playerPos, Quaternion.identity);
-
-        //new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z)   ^^^^^ istedet for playerpos
-
-
         if (currentAOE != null)
         {
             currentAOE.GetComponentInChildren<AOEScript>().SetUp(attackDamage, aoeSize);

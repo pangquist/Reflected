@@ -9,10 +9,10 @@ public class Character : MonoBehaviour, IEffectable
     //Should these not be "base" properties? As they will be affected by the stat system increases/power-ups. OR are they the final calculation of said stats? -Kevin
     [Header("Character Properties")] 
     [SerializeField] protected float maxHealth;
+    [SerializeField] protected float currentHealth;
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected float damage;
     [SerializeField] protected float attackSpeed;
-    [SerializeField] protected float currentHealth;
 
     protected List<Effect> statusEffects;
     protected Dictionary<StatusEffectData, GameObject> effectParticles;

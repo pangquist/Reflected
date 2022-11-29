@@ -11,22 +11,20 @@ public class MeleeAttackState : State
     //Timer for attack rate.
     private float attackTimer = 100f;
 
-    //Base values of the attack stats
-    [SerializeField] private float baseAttackRate = 1f;
-    [SerializeField] private float baseAttackDamage = 5;
+    private float baseAttackRate = 1f;
 
-    //Current values of the attack stats
+    [Header("Current ATTACK Stats")]
     [SerializeField] private float attackRate;
     [SerializeField] private float attackDamage;
 
-    //Range to player in which the enemy will chase the player. (Reposition to attack)
+    [Header("Base POSITIONING Values")]
     [SerializeField] private float chaseRange = 2.5f;
 
     private Transform firePoint;
 
     public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        //Set attack rate, by using default, base, statsystem change as well as debuf.
+        //Set attack rate, by using default, base, statsystem change as well as debuff.
         attackRate = baseAttackRate / me.GetAttackSpeed() / enemyStatSystem.GetAttackSpeed() / me.MovementPenalty();
 
         //If player is too far away, chase the player.

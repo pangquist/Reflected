@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    [Header("Enemy Specific Properties")]
+    [Header("Enemy Specific Properties (If Relevant)")]
     [SerializeField] protected float baseProjectileSpeed;
     [SerializeField] protected Vector3 baseAoeSize;
     //[SerializeField] protected float fleeRange; //Not gonna be adabted
@@ -142,12 +142,16 @@ public class Enemy : Character
         }
         else if (parent.tag == "Explosion")
         {
-            explosionAttackState.DoAttack();
+            explosionAttackState.DoAttack(this);
         }
     }
 
-    public float getProjectileSpeed()
+    public float GetProjectileSpeed()
     {
         return baseProjectileSpeed;
+    }
+    public Vector3 GetAoeSize()
+    {
+        return baseAoeSize;
     }
 }

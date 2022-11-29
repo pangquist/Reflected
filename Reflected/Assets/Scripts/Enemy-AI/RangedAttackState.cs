@@ -13,10 +13,7 @@ public class RangedAttackState : State
     //Timer for attack rate
     private float attackTimer = 100f;
 
-    [Header("Base ATTACK Stats")]
     private float baseAttackRate = 1;
-    //private float baseAttackDamage = 3; //Redundant. Uses Enemy values instead.
-    //private float baseProjectileForce = 2f; //Redundant. Uses Enemy values instead.
 
     [Header("Current ATTACK Stats")]
     [SerializeField] private float attackRate;
@@ -33,7 +30,7 @@ public class RangedAttackState : State
 
     public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        //Set attack rate, by using default, base, statsystem change as well as debuf.
+        //Set attack rate, by using default, base, statsystem change as well as debuff.
         attackRate = baseAttackRate / me.GetAttackSpeed() / enemyStatSystem.GetAttackSpeed() / me.MovementPenalty();
 
         //If too close, move away from target.
@@ -65,13 +62,13 @@ public class RangedAttackState : State
             attackDamage = me.GetDamage() * enemyStatSystem.GetDamageIncrease();
 
             //Set projectile speed from base
-            projectileForce = me.getProjectileSpeed(); // * enemyStatSystem if we add that
+            projectileForce = me.GetProjectileSpeed(); // * enemyStatSystem if we add that
 
             //Setup parameters for projectile to use
             firePoint = thisEnemy.firePoint;
             playerPos = player.transform.position;
 
-            //Play animation that will trigger the attack
+            //Play attack animation that will trigger the attack
             me.PlayAnimation("Projectile Attack");
 
             //Reset attack timer

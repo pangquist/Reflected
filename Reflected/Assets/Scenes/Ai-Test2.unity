@@ -288,10 +288,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  currentHealth: 0
   movementSpeed: 1
   damage: 0
   attackSpeed: 0
-  currentHealth: 0
   anim: {fileID: 0}
   currentWeapon: {fileID: 0}
   HealthChanged:
@@ -336,7 +336,7 @@ PrefabInstance:
     - target: {fileID: 2461100072970588551, guid: 673512fa5909aba4d8c105984efbe7ba,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2461100072970588551, guid: 673512fa5909aba4d8c105984efbe7ba,
         type: 3}
@@ -396,7 +396,7 @@ PrefabInstance:
     - target: {fileID: 9211019161338975208, guid: 673512fa5909aba4d8c105984efbe7ba,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673512fa5909aba4d8c105984efbe7ba, type: 3}
@@ -688,7 +688,7 @@ PrefabInstance:
     - target: {fileID: 4853948256094235931, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4853948256094235931, guid: 208b911f792bd8d40991cc24ecabd06b,
         type: 3}
@@ -752,7 +752,7 @@ PrefabInstance:
     - target: {fileID: 756528810924742956, guid: 7075d0cbf30e27442ae91d8acc34e196,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 756528810924742956, guid: 7075d0cbf30e27442ae91d8acc34e196,
         type: 3}
@@ -809,30 +809,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ranged
       objectReference: {fileID: 0}
-    - target: {fileID: 4509077602305175178, guid: 7075d0cbf30e27442ae91d8acc34e196,
+    - target: {fileID: 756528810924743122, guid: 7075d0cbf30e27442ae91d8acc34e196,
         type: 3}
-      propertyPath: damage
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509077602305175178, guid: 7075d0cbf30e27442ae91d8acc34e196,
-        type: 3}
-      propertyPath: attackSpeed
+      propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509077602305175178, guid: 7075d0cbf30e27442ae91d8acc34e196,
-        type: 3}
-      propertyPath: currentHealth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509077602305175178, guid: 7075d0cbf30e27442ae91d8acc34e196,
-        type: 3}
-      propertyPath: movementSpeed
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509077602305175178, guid: 7075d0cbf30e27442ae91d8acc34e196,
-        type: 3}
-      propertyPath: baseProjectileSpeed
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7075d0cbf30e27442ae91d8acc34e196, type: 3}
@@ -906,7 +886,7 @@ PrefabInstance:
     - target: {fileID: 2231473038681938532, guid: 95f1f315310598740ad9b322d688501d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95f1f315310598740ad9b322d688501d, type: 3}
@@ -1006,7 +986,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7522623531179561247
 PrefabInstance:
@@ -1020,15 +1000,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Explosion
       objectReference: {fileID: 0}
-    - target: {fileID: 7522623531807832832, guid: 8bfdefbc262470845a81516bcad31d4c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7522623531807832895, guid: 8bfdefbc262470845a81516bcad31d4c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7522623531807832895, guid: 8bfdefbc262470845a81516bcad31d4c,
         type: 3}
