@@ -64,8 +64,5 @@ public class Dash : Ability
         }
     }
 
-    public bool IsDashing()
-    {
-        return isDashing;
-    }
+    public bool IsDashing() => isDashing;
 }

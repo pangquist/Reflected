@@ -56,6 +56,8 @@ public class MovementEditorTemplate : Editor
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("speed"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("turnSmoothTime"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("footstepSounds"));
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("footstepEffect"));
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("feetPositions"));
 	}
 
 	void DisplayJumpingInfo()
@@ -65,7 +67,9 @@ public class MovementEditorTemplate : Editor
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("groundCheck"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("groundDistance"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("groundMask"));
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("effectMask"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("isGrounded"));
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("canSpawnEffect"));
 	}
 
 	void DisplayDashingInfo()

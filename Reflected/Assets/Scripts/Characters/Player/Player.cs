@@ -19,17 +19,13 @@ public class Player : Character, ISavable
     [Header("Stat Properties")]
     [SerializeField] float jumpForce;
 
-    [SerializeField] List<Weapon> weapons;
-    int weaponIndex = 0;
-
-    //[SerializeField] List<Enemy> aggroedEnemies = new List<Enemy>();
     [ReadOnly] Bounds hitBoxBounds;
     DimensionManager dimensionManager;
     MusicManager musicManager;
 
     Ability currentAbility;
     [SerializeField] Ability basicSwordAbility;
-    [SerializeField] Ability basicBowAbility;
+    //[SerializeField] Ability basicBowAbility;
     [SerializeField] Ability specialAbility;
     [SerializeField] Ability swapAbility;
     [Range(0f, 1f)]
@@ -51,10 +47,9 @@ public class Player : Character, ISavable
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
         musicManager = dimensionManager.GetComponentInChildren<MusicManager>();
 
-        currentWeapon = weapons[weaponIndex];
         currentWeapon.gameObject.SetActive(true);
         currentWeapon.SetDamage(damage);
-
+        currentAbility = basicSwordAbility;
 
         dimensionManager.SetStatSystem(stats);
 
@@ -63,22 +58,9 @@ public class Player : Character, ISavable
         anim.Play("GetUp");
     }
 
-    protected override void Update()
-    {
-        base.Update();
-        //if (Cursor.visible)
-        //    Cursor.visible = false;
-
-        //hitBoxBounds = hitbox.bounds;
-        //Debug.Log("Bounds: " + hitBoxBounds);
-    }
-
     public void Attack()
     {
-        if (weaponIndex == 0)
-            currentAbility = basicSwordAbility;
-        else
-            currentAbility = basicBowAbility;
+        currentAbility = basicSwordAbility;
 
         if (currentAbility.IsOnCooldown())
             return;
@@ -230,7 +212,15 @@ public class Player : Character, ISavable
     public void Stun(float duration)
     {
         if (currentHealth > 0)
+        {
+            SetTimeToNormalFlow();
             StartCoroutine(_Stun(duration));
+        }
+    }
+
+    public void Rotate(Vector2 direction)
+    {
+        Debug.Log("ROTATE: " + direction.normalized);
     }
 
     public StatSystem playerStats()

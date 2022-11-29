@@ -5,6 +5,12 @@ using Cinemachine;
 
 public class CameraManager : MonoBehaviour
 {
+    Camera cam;
+    [SerializeField] float turnSmoothTime;
+    private float turnSmoothVelocity;
+
+
+    //---------------------------------------------
     CinemachineFreeLook freeLook;
     Transform playerTransform;
     Transform currentTransform;
@@ -33,6 +39,13 @@ public class CameraManager : MonoBehaviour
 
         freeLook.m_Orbits[2].m_Height = 5;
         freeLook.m_Orbits[2].m_Radius = 25;
+    }
+
+    public void Rotate(Vector2 mousePosition)
+    {
+        float targetAngle = Mathf.Atan2(mousePosition.x, mousePosition.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
     public Transform Focus() => currentTransform;
