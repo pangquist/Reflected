@@ -21,7 +21,16 @@ public abstract class Chest : MonoBehaviour
     protected virtual void Start()
     {
         trueDimension = DimensionManager.True;
-        WeightedRandomList<GameObject> temp = FindObjectOfType<LootPoolManager>().GetPowerupPool(trueDimension);
+        WeightedRandomList<GameObject> temp;
+        if(myRarity.name == "Legendary")
+        {
+            temp = FindObjectOfType<LootPoolManager>().GetWeaponPowerupPool();
+        }
+        else
+        {
+            temp = FindObjectOfType<LootPoolManager>().GetPowerupPool(trueDimension);
+        }
+        
         powerups = new WeightedRandomList<GameObject>();
         for (int i = 0; i < temp.list.Count; i++)
         {
@@ -90,41 +99,19 @@ public abstract class Chest : MonoBehaviour
 
     protected void SetItems()
     {
-        int oldindex = -1;
-        int weaponIndex = -1;
         for (int i = 0; i < numberOfPickablePowerups; i++)
-        {                     
-            if (myRarity.rarity == "Legendary")
+        {
+            pickablePowerUps.Add(powerups.GetRandomAndRemove());
+            if (myRarity.name == "Legendary")
             {
-                if(i == 0)
-                {
-                    weaponIndex = 0;//Random.Range(0, 3);
-                    Debug.Log("0: " + weaponIndex);
-                }
-                else
-                {
-                    weaponIndex = 2; // (weaponIndex + 1) % powerups.list.Count;
-                    Debug.Log("!0: " + weaponIndex);
-                }
-                //do
-                //{
-                //    weaponIndex = Random.Range(0, 3); //Need a for loop here if there are suposed to be more than two powerups to pick from
-                //} while (weaponIndex != oldindex);
-                GameObject weaponPowerup = powerups.GetItem(powerups.Count - 1);
-                pickablePowerUps.Add(weaponPowerup);
-                pickablePowerUps[i].GetComponent<InteractableWeaponPowerup>().SetProperties(weaponIndex);
-                for (int j = 0; j < pickablePowerUps.Count; j++)
-                {
-                    Debug.Log("Iteration: " + i + " with desc: " + pickablePowerUps[j].GetComponent<InteractablePowerUp>().description);
-                }
-                oldindex = weaponIndex;
+                pickablePowerUps[i].GetComponent<InteractableWeaponPowerup>().SetProperties();
             }
             else
             {
-                pickablePowerUps.Add(powerups.GetRandomAndRemove());             
                 pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties(myRarity);
             }
-                       
+            
+
         }
     }
 

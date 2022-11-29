@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aaba305c56556a4fb58b2db1668512d, type: 3}
-  m_Name: C-CooldownDecrease
+  m_Script: {fileID: 11500000, guid: 106e97ca9f6cfe9499422c86b261272e, type: 3}
+  m_Name: WeaponRegen
   m_EditorClassIdentifier: 
-  description: 'Decreases your cooldown by '
-  value: 1
-  amount: 0.3
-  type: offensive
-  powerupName: Cooldown
+  description: Upgrades your weapon to have a life regen effect that heals you over
+    time
+  value: 5
+  amount: 2
+  type: weapon
+  powerupName: Weapon_Regen

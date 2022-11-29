@@ -22,7 +22,15 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
             myRarity = rarityTiers.GetRandom();
             amount = powerUpEffect.amount * myRarity.amountMultiplier;
             value = powerUpEffect.value * myRarity.valueMultiplier;
-            description = powerUpEffect.description + " " + amount.ToString();
+            if(powerUpEffect.powerupName == "Max_Health" || powerUpEffect.powerupName == "Health")
+            {
+                description = powerUpEffect.description + " " + amount.ToString();
+            }
+            else
+            {
+                description = powerUpEffect.description + " " + (amount * 100).ToString() + "%. (This effect deminishing returns)";
+            }
+            
         }
         //Destroy(gameObject, 20);
     }
@@ -33,7 +41,14 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
         myRarity = targetRarity;
         amount = powerUpEffect.amount * targetRarity.amountMultiplier;
         value = powerUpEffect.value * targetRarity.valueMultiplier;
-        description = powerUpEffect.description + " " + amount.ToString();
+        if (powerUpEffect.powerupName == "Max_Health" || powerUpEffect.powerupName == "Health")
+        {
+            description = powerUpEffect.description + " " + amount.ToString();
+        }
+        else
+        {
+            description = powerUpEffect.description + " " + (amount * 100).ToString() + "%. (This effect deminishing returns)";
+        }
         hasProperties = true;
     }
 
