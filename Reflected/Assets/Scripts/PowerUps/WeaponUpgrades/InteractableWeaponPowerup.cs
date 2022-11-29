@@ -12,19 +12,19 @@ public class InteractableWeaponPowerup : InteractablePowerUp
     {
         if (!hasProperties)
         {
-            amount = Random.Range(0, 3);
+            amount = powerUpEffect.amount;
             value = powerUpEffect.value;
-            SetDescription((int)amount);
+            description = powerUpEffect.description;
         }
         //Destroy(gameObject, 20);
     }
 
-    public void SetProperties(int index)
+    public void SetProperties()
     {
         //Debug.Log("Set properties " + targetRarity);
-        amount = index;
+        amount = powerUpEffect.amount;
         value = powerUpEffect.value;
-        SetDescription((int)index);
+        description = powerUpEffect.description;
         hasProperties = true;
     }
 
