@@ -76,6 +76,7 @@ public class Map : MonoBehaviour
         StartRoom.gameObject.SetActive(true);
         StartRoom.Activate();
         Vector3 position = new Vector3(StartRoom.Rect.center.x, 10, StartRoom.Rect.center.y);
+
         bool findingPlace = true;
 
         while (findingPlace)

@@ -34,7 +34,7 @@ public class BoltBlast : Ability
     {
         int spawnedBolts = 0;
         int spawnPositionIndex = 0;
-
+        
         while (spawnedBolts < amountOfBolts && !GetComponent<Boss>().Dead())
         {
             Debug.Log("Spawn bolt nr: " + (spawnedBolts + 1));
@@ -62,6 +62,7 @@ public class BoltBlast : Ability
             newBolt.SetVelocity(diff / airTime);
             newBolt.SetVfx(vfxObject);
 
+            GetComponent<AudioSource>().PlayOneShot(abilitySounds[Random.Range(0, abilitySounds.Count)]);
             spawnedBolts++;
             yield return new WaitForSeconds(abilityDuration / amountOfBolts);
         }

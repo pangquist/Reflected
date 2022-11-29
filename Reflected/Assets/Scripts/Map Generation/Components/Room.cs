@@ -123,12 +123,6 @@ public class Room : MonoBehaviour
                 chamber.gameObject.SetActive(false);
         }
 
-        //THIS WILL BE MOVED
-        //if (type == RoomType.Monster)
-        //    GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(-1);
-        //else if (type == RoomType.Boss)
-        //    GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(-2);
-
         Map.ActiveRoom = null;
         gameObject.SetActive(false);
     }

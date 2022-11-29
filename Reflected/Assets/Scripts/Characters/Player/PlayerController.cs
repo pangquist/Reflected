@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (player)
-            Move(playerControls.Player.Movement.ReadValue<Vector2>());
+            Move(playerControls.Player.Movement.ReadValue<Vector2>(), playerControls.Player.Mouse.ReadValue<Vector2>());
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -41,10 +41,12 @@ public class PlayerController : MonoBehaviour
             movement.Jump();
     }
 
-    public void Move(Vector2 movementVector)
+    public void Move(Vector2 movementVector, Vector2 mousePosition)
     {
         if (!movementLocked && !dead)
+        {
             movement.Move(new Vector3(movementVector.x, 0, movementVector.y).normalized);
+        }
 
     }
 
@@ -92,7 +94,7 @@ public class PlayerController : MonoBehaviour
         actionLocked = true;
         player.GetAnim().SetBool("actionLocked", true);
 
-        damageLocked = true;
+        //damageLocked = true;
     }
 
     public void UnlockPlayer()
@@ -103,7 +105,7 @@ public class PlayerController : MonoBehaviour
         actionLocked = false;
         player.GetAnim().SetBool("actionLocked", false);
 
-        damageLocked = false;
+        //damageLocked = false;
     }
 
     public void MovementUnlock()

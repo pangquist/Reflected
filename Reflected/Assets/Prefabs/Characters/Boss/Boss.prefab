@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 1320225150}
   - component: {fileID: 1320225156}
   - component: {fileID: 1320225164}
+  - component: {fileID: 1691915558}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -340,6 +341,12 @@ MonoBehaviour:
     - item: {fileID: 3663983349818802338, guid: 2bdfe34f451d870469649a3199306873,
         type: 3}
       weight: 1
+  hitSounds:
+  - {fileID: 8300000, guid: de127248f397dc54f9eb5bd8e9d825e3, type: 3}
+  - {fileID: 8300000, guid: 5431e9bd8108a724389776b6c157abef, type: 3}
+  - {fileID: 8300000, guid: 6fb4e722ea3a3634abc5105186c20fab, type: 3}
+  - {fileID: 8300000, guid: 1899fdb9bfa352042b29f7e36ede0f6c, type: 3}
+  - {fileID: 8300000, guid: e6e608135f5bc2b4ea209599382ca308, type: 3}
   meleeAttackState: {fileID: 0}
   rangedAttackState: {fileID: 0}
   aoeAttackState: {fileID: 0}
@@ -347,6 +354,7 @@ MonoBehaviour:
   rotateBody: {fileID: 4350906471026547974}
   abilities:
   - {fileID: 1320225154}
+  - {fileID: 1320225153}
   - {fileID: 1320225151}
   abilityTimer: 1
   roots:
@@ -356,6 +364,8 @@ MonoBehaviour:
   - {fileID: 6377533937562866226}
   healthBarCanvas: {fileID: 7562547720828675294}
   cameraFocusPoint: {fileID: 2333262652298985782}
+  deathSFX: {fileID: 8300000, guid: 0538cbeb1a1a3ce47af6bf9d90c6e64e, type: 3}
+  lootDropTransform: {fileID: 6976209725148607582}
 --- !u!114 &1320225154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,7 +379,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityIcon: {fileID: 0}
-  abilitySounds: []
+  abilitySounds:
+  - {fileID: 8300000, guid: 750993ff3e0cc2e47b8f328196849c26, type: 3}
   abilitySource: {fileID: 0}
   castTime: 6
   cooldown: 5
@@ -405,7 +416,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityIcon: {fileID: 0}
-  abilitySounds: []
+  abilitySounds:
+  - {fileID: 8300000, guid: 6eeef77fde0904c43a1f0424d68e8bbf, type: 3}
   abilitySource: {fileID: 0}
   castTime: 9
   cooldown: 8
@@ -462,7 +474,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityIcon: {fileID: 0}
-  abilitySounds: []
+  abilitySounds:
+  - {fileID: 8300000, guid: 6eeef77fde0904c43a1f0424d68e8bbf, type: 3}
   abilitySource: {fileID: 0}
   castTime: 5
   cooldown: 60
@@ -534,6 +547,102 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &1691915558
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320225148}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d472835c161de504fa94454e3fbb43c0, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1348701338
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +1098,37 @@ Transform:
   - {fileID: 5847119405916810308}
   m_Father: {fileID: 1425331931130541374}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7353292262036888741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6976209725148607582}
+  m_Layer: 0
+  m_Name: LootDrop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6976209725148607582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353292262036888741}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.148, z: 1.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4350906471026508070}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7564674148696280408
 GameObject:
@@ -2321,6 +2461,11 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7268822106606681172, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
+        type: 3}
+      propertyPath: maxHealth
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7354222955857205400, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
         type: 3}
       propertyPath: m_Name
@@ -2710,6 +2855,11 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7268822106606681172, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
+        type: 3}
+      propertyPath: maxHealth
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7354222955857205400, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
         type: 3}
       propertyPath: m_Name
@@ -2996,6 +3146,11 @@ PrefabInstance:
         type: 3}
       propertyPath: healthBar
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268822106606681172, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
+        type: 3}
+      propertyPath: maxHealth
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7354222955857205400, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
         type: 3}
@@ -4223,21 +4378,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2629822246557376178}
     m_Modifications:
-    - target: {fileID: 5135377484731459124, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ee74d29a72f9fa2419baac81c9db2eaa, type: 2}
-    - target: {fileID: 7268822106606681172, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7268822106606681172, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: combatTextOffset.y
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7354222955857205400, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
         type: 3}
       propertyPath: m_Name
@@ -4247,21 +4387,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7873596706176369186, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.05566594
-      objectReference: {fileID: 0}
-    - target: {fileID: 7873596706176369186, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.06434535
-      objectReference: {fileID: 0}
-    - target: {fileID: 7873596706176369186, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.05545696
       objectReference: {fileID: 0}
     - target: {fileID: 7873596706176369186, guid: 5f7aef1433afe3647b0cd99f4e12fbe7,
         type: 3}

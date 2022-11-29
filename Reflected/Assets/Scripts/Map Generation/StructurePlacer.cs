@@ -147,11 +147,11 @@ public class StructurePlacer : MonoBehaviour
     {
         if (room.Type == RoomType.Shop)
         {
-            InstantiateStructure(shopStructurePrefab, room, room.Rect.center);
+            InstantiateStructure(shopStructurePrefab, room, room.Rect.center, true);
         }
         else if (room.Type == RoomType.Boss)
         {
-            InstantiateStructure(bossStructurePrefab, room, room.Rect.center);
+            InstantiateStructure(bossStructurePrefab, room, room.Rect.center, true);
         }
     }
 
@@ -163,10 +163,14 @@ public class StructurePlacer : MonoBehaviour
         room.Structures.Add(structure);
     }
 
-    private void InstantiateStructure(GameObject structurePrefab, Room room, Vector2 position)
+    private void InstantiateStructure(GameObject structurePrefab, Room room, Vector2 position, bool aboveWater)
     {
         RaycastHit raycastHit;
         Physics.Raycast(new Vector3(position.x, 100f, position.y), Vector3.down, out raycastHit);
+
+        if (aboveWater && raycastHit.point.y < mapGenerator.WaterGenerator.WaterY + 0.2f)
+            raycastHit.point = new Vector3(raycastHit.point.x, mapGenerator.WaterGenerator.WaterY + 0.2f, raycastHit.point.z);
+
         InstantiateStructure(structurePrefab, room, raycastHit);
     }
 
