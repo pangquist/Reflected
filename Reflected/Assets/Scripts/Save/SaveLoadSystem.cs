@@ -18,7 +18,7 @@ public class SaveLoadSystem : MonoBehaviour
     }
 
     [ContextMenu("Save")]
-    void Save()
+    public void Save()
     {
         Debug.Log(Application.persistentDataPath);
         var state = LoadFile();
@@ -27,7 +27,7 @@ public class SaveLoadSystem : MonoBehaviour
     }
 
     [ContextMenu("Load")]
-    void Load()
+    public void Load()
     {
         var state = LoadFile();
         LoadState(state);
