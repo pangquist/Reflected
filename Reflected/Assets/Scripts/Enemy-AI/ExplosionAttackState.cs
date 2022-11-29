@@ -26,7 +26,7 @@ public class ExplosionAttackState : State
     //Offset of explosion position
     private Vector3 offSet = new Vector3(0f, 1f, 0f);
 
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
+    public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stats
 
@@ -47,7 +47,7 @@ public class ExplosionAttackState : State
             aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
 
             //DoAttack(enemyStatSystem); //Replaced with animation below instead. The animation will call the attack method.
-            thisEnemy.SendAnimation("Explosion Attack");
+            me.PlayAnimation("Explosion Attack");
             attackStarted = true;
         }
     }

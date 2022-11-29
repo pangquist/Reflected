@@ -17,7 +17,7 @@ public class MoveTowardsPlayerState : State
     //Current value of movement speed
     [SerializeField] private float movementSpeed;
 
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
+    public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         switch (thisEnemy.currentCombatBehavior)
         {
@@ -26,7 +26,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetMeleeAttackState();
                     agent.isStopped = true;
-                    thisEnemy.SendAnimation("Idle");
+                    me.PlayAnimation("Idle");
                     return;
                 }
                 break;
@@ -36,7 +36,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetRangedAttackState();
                     agent.isStopped = true;
-                    thisEnemy.SendAnimation("Idle");
+                    me.PlayAnimation("Idle");
                     return;
                 }
                 break;
@@ -46,7 +46,7 @@ public class MoveTowardsPlayerState : State
                 {
                     thisEnemy.SetAoeAttackState();
                     agent.isStopped = true;
-                    thisEnemy.SendAnimation("Idle");
+                    me.PlayAnimation("Idle");
                     return;
                 }
                 break;

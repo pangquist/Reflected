@@ -25,10 +25,9 @@ public class AoeAttackState : State
     [SerializeField] private float chaseRange = 20f;
 
     //Variables for setting up aoe
-    private Transform firePoint;
     private Vector3 playerPos;
 
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
+    public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         //Set relevant stats
         attackRate = baseAttackRate * enemyStatSystem.GetAttackSpeed() / thisEnemy.me.MovementPenalty();
@@ -61,12 +60,11 @@ public class AoeAttackState : State
             aoeSize = baseAoeSize * enemyStatSystem.GetAreaOfEffect();
 
             //Setup parameters for projectile to use
-            firePoint = thisEnemy.firePoint;
             playerPos = player.transform.position;
 
             //DoAttack(thisEnemy, player, enemyStatSystem);
 
-            thisEnemy.SendAnimation("Fire AOE");
+            me.PlayAnimation("Fire AOE");
 
             attackTimer = 0f;
         }

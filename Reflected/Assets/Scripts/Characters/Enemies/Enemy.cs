@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Enemy : Character
 {
+    [Header("Enemy Specific Properties")]
+    [SerializeField] protected float baseProjectileSpeed;
+    [SerializeField] protected Vector3 baseAoeSize;
+    //[SerializeField] protected float fleeRange; //Not gonna be adabted
+    //[SerializeField] protected float chaseRange; //Not gonna be adabted
+    
+    //Are these still used? The manager should be taking care of these right? -Kevin
     [SerializeField] protected Vector3 combatTextOffset;
     [SerializeField] protected Canvas combatTextCanvas;
-    [SerializeField] protected float aggroRange;
 
     [SerializeField] protected WeightedRandomList<GameObject> LootDropList;
     [SerializeField] protected List<AudioClip> hitSounds;
     protected bool invurnable;
     GameObject parent;
     protected Player player;
+
+    protected float aggroRange;
 
     bool doOnce;
 
@@ -28,6 +36,7 @@ public class Enemy : Character
         player = FindObjectOfType<Player>();
         parent = gameObject.transform.parent.gameObject;
 
+        //Assign correct components depending on enemy type.
         if (parent.tag == "Melee")
         {
             meleeAttackState = GetComponentInParent<MeleeAttackState>();
@@ -44,7 +53,6 @@ public class Enemy : Character
         {
             explosionAttackState = GetComponentInParent<ExplosionAttackState>();
         }
-
     }
 
     protected override void Update()
@@ -63,19 +71,26 @@ public class Enemy : Character
             return;
         }
 
+        //Make the enemy look at the player when taking damage (Not needed? -Kevin)
+        /*
         if (!GetComponent<Boss>())
         {
             Vector3 direction = (transform.position - player.transform.position).normalized;
             direction.y = 0;
             parent.transform.rotation = Quaternion.LookRotation(direction);
         }
-
+        */
+        
+        //Damage PopUp text
         PopUpTextManager.NewDamage(transform.position + Vector3.up * 1.5f, damage);
+
+        //Call base take damage function
         base.TakeDamage(damage);
     }
 
     protected override void Die()
     {
+        //Let the director know an enemy in the room has died.
         AiDirector aiDirector = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AiDirector>();
         if (!doOnce)
         {
@@ -83,14 +98,15 @@ public class Enemy : Character
             doOnce = true;
         }
 
+        //Drop loot if not a boss
         if (!GetComponent<Boss>())
             LootDrop(transform);
 
-
+        //Call base die function
         base.Die();
     }
 
-    public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instaintiated (from the EnemySpanwer-script)
+    public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instantiated (from the EnemySpanwer-script)
     {
         currentHealth += maxHealth * extraDifficultyPercentage;
 
@@ -110,7 +126,7 @@ public class Enemy : Character
         invurnable = !invurnable;
     }
 
-    public void DoAttack()
+    public void DoAttack() //Called from the animation, that then calls the correct attack depending on enemy type.
     {
         if (parent.tag == "Melee")
         {
@@ -128,5 +144,10 @@ public class Enemy : Character
         {
             explosionAttackState.DoAttack();
         }
+    }
+
+    public float getProjectileSpeed()
+    {
+        return baseProjectileSpeed;
     }
 }

@@ -1977,9 +1977,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
-  movementSpeed: 0
-  damage: 0
-  attackSpeed: 0
+  movementSpeed: 3.5
+  damage: 5
+  attackSpeed: 1
   currentHealth: 0
   anim: {fileID: 0}
   currentWeapon: {fileID: 0}
@@ -1989,15 +1989,17 @@ MonoBehaviour:
   Killed:
     m_PersistentCalls:
       m_Calls: []
+  baseProjectileSpeed: 0
+  baseAoeSize: {x: 0, y: 0, z: 0}
   combatTextOffset: {x: 0, y: 0, z: 0}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}
-  aggroRange: 20
   LootDropList:
     list:
     - item: {fileID: 8697999268558127635, guid: 131ff454e72154344ab839b4333a8156,
         type: 3}
       weight: 1
+  hitSounds: []
   meleeAttackState: {fileID: 0}
   rangedAttackState: {fileID: 0}
   aoeAttackState: {fileID: 0}

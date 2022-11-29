@@ -294,16 +294,22 @@ MonoBehaviour:
   currentHealth: 0
   anim: {fileID: 0}
   currentWeapon: {fileID: 0}
+  HealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  Killed:
+    m_PersistentCalls:
+      m_Calls: []
   stats: {fileID: 0}
   chargeBar: {fileID: 0}
   hitbox: {fileID: 0}
   jumpForce: 0
-  weapons: []
   basicSwordAbility: {fileID: 0}
-  basicBowAbility: {fileID: 0}
   specialAbility: {fileID: 0}
   swapAbility: {fileID: 0}
   TimeFlowWhileSwapping: 0
+  trueSwapSound: {fileID: 0}
+  mirrorSwapSound: {fileID: 0}
 --- !u!54 &857505723
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -386,6 +392,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Melee
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211019161338975208, guid: 673512fa5909aba4d8c105984efbe7ba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673512fa5909aba4d8c105984efbe7ba, type: 3}
@@ -798,6 +809,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ranged
       objectReference: {fileID: 0}
+    - target: {fileID: 4509077602305175178, guid: 7075d0cbf30e27442ae91d8acc34e196,
+        type: 3}
+      propertyPath: damage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509077602305175178, guid: 7075d0cbf30e27442ae91d8acc34e196,
+        type: 3}
+      propertyPath: attackSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509077602305175178, guid: 7075d0cbf30e27442ae91d8acc34e196,
+        type: 3}
+      propertyPath: currentHealth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509077602305175178, guid: 7075d0cbf30e27442ae91d8acc34e196,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509077602305175178, guid: 7075d0cbf30e27442ae91d8acc34e196,
+        type: 3}
+      propertyPath: baseProjectileSpeed
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7075d0cbf30e27442ae91d8acc34e196, type: 3}
 --- !u!1001 &1895753731
@@ -866,6 +902,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy AOE
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231473038681938532, guid: 95f1f315310598740ad9b322d688501d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95f1f315310598740ad9b322d688501d, type: 3}
@@ -978,6 +1019,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 7522623531807832832, guid: 8bfdefbc262470845a81516bcad31d4c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7522623531807832895, guid: 8bfdefbc262470845a81516bcad31d4c,
         type: 3}
