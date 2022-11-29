@@ -19,6 +19,12 @@ public class StatSystem : MonoBehaviour
     public void AddMaxHealth(float amount)
     {
         maxHealthIncrease += amount;
+
+        Character character = GetComponent<Character>();
+        if (character)
+            character.HealthChanged.Invoke();
+        else
+            Debug.Log("StatSystem not on character. No HealthChanged event to invoke");
     }
 
     public void AddDamageReduction(float amount)
