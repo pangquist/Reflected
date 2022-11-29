@@ -26,8 +26,8 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy(float spawnTime, int enemyAmount, int waveAmount, float enemyadaptiveDifficulty)
     {
-        enemyStatSystem.SetNewStats(1, 1, true); //might change values in future for more fun gameplay. Needs to be balanced with enemyAdaptiveDiffuculty.
-        enemyStatSystem.ApplyNewStats(DimensionManager.True);
+        //enemyStatSystem.SetNewStats(1, 1, true); //might change values in future for more fun gameplay. Needs to be balanced with enemyAdaptiveDiffuculty.
+        //enemyStatSystem.ApplyNewStats(DimensionManager.True);
         StartCoroutine(SpawnWave(spawnTime, enemyAmount, waveAmount, enemyadaptiveDifficulty));
     }
 

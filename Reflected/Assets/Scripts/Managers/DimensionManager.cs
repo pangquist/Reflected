@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 /// <summary>
 /// DimensionManager description
@@ -45,6 +46,8 @@ public class DimensionManager : MonoBehaviour
     private static Dimension currentDimension;
     WeightedRandomList<GameObject> LootDropList;
     EnemyStatSystem enemyStatSystem;
+
+    public static UnityEvent DimensionChanged = new UnityEvent();
 
     // Properties
 
@@ -87,7 +90,7 @@ public class DimensionManager : MonoBehaviour
             LootDropList.SetWeight(3, 0);
         }
 
-        enemyStatSystem.ApplyNewStats(True);
+        //enemyStatSystem.ApplyNewStats(True);
 
         ForcedSwap();
         ResetCharges();
@@ -121,6 +124,8 @@ public class DimensionManager : MonoBehaviour
 
         foreach (ChangeableObject changeableObject in changeableObjects)
             changeableObject.UpdateMesh();
+
+        DimensionChanged.Invoke();
     }
 
     public void AddChangeableObject(ChangeableObject newObject)
