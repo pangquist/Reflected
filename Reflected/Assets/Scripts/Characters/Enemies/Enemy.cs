@@ -92,8 +92,10 @@ public class Enemy : Character
 
     public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instaintiated (from the EnemySpanwer-script)
     {
-        currentHealth += maxHealth * extraDifficultyPercentage;
-
+        maxHealth += maxHealth * extraDifficultyPercentage;
+        currentHealth = maxHealth;
+        attackSpeed += attackSpeed * (extraDifficultyPercentage * 0.3f);
+        movementSpeed += movementSpeed * (extraDifficultyPercentage * 0.1f);
         damage += damage * extraDifficultyPercentage;
     }
 
