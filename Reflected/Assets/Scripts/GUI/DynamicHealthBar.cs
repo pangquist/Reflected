@@ -25,6 +25,7 @@ public class DynamicHealthBar : MonoBehaviour
 
     public void PlayDestroyAnimation()
     {
+        if(this)
         animator.SetTrigger("Destroy");
     }
 

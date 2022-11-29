@@ -24,7 +24,9 @@ public class Boss : Enemy
     bool abilityLock;
     bool rotateLock;
     CameraManager cameraManager;
-    [SerializeField]Transform cameraFocusPoint;
+    [SerializeField] Transform cameraFocusPoint;
+    [SerializeField] AudioClip deathSFX;
+    [SerializeField] Transform lootDropTransform;
 
     protected override void Update()
     {
@@ -90,11 +92,6 @@ public class Boss : Enemy
         cameraManager = FindObjectOfType<CameraManager>();
     }
 
-    public override void TakeDamage(float damage)
-    {
-        
-    }
-
     public void ToggleRotationLock() => rotateLock = !rotateLock;
 
     public override void LootDrop(Transform lootDropPosition)
@@ -115,11 +112,21 @@ public class Boss : Enemy
         }
     }
 
+    public override void TakeDamage(float damage)
+    {
+        GetComponent<AudioSource>().PlayOneShot(hitSounds[Random.Range(0, hitSounds.Count)]);
+        //Keep this
+    }
+
     protected override void Die()
     {
         base.Die();
+        GetComponent<AudioSource>().PlayOneShot(deathSFX);
+        LootDrop(lootDropTransform);
         //cameraManager.FocusOnPlayer();
     }
+
+
 
     public override void ToggleInvurnable()
     {
@@ -136,6 +143,7 @@ public class Boss : Enemy
         anim.Play("Activation");
         aggroed = true;
         healthBarCanvas.gameObject.SetActive(true);
+        GetComponent<AudioSource>().Play();
         //cameraManager.NewFocus(cameraFocusPoint);
         //cameraManager.BossSettings();
     }

@@ -76,7 +76,7 @@ public class AiDirector : MonoBehaviour
     private void checkDifficulty()
     {
         startDiffuculty();
-        difficultySteps = numberOfEnemiesKilled / 20;
+        difficultySteps = numberOfEnemiesKilled / 15;
 
         for (int i = 0; i < difficultySteps; i++)
         {
@@ -84,7 +84,7 @@ public class AiDirector : MonoBehaviour
             maxSpawnAmount++;
             spawntime -= 0.1f;
         }
-        if(numberOfRoomsCleared % 4 == 0 && numberOfRoomsCleared > 0)
+        if(numberOfRoomsCleared % 3 == 0 && numberOfRoomsCleared > 0)
         {
             waveAmount++;
         }
@@ -160,9 +160,9 @@ public class AiDirector : MonoBehaviour
     private float calculateAverageTime() => avergaeTimeToClearRoom = clearTimesList.Sum() / clearTimesList.Count();
     private float EnemyStatModifier()
     {
-        float extraStats = numberOfRoomsCleared * 0.1f;
+        float extraStats = numberOfRoomsCleared * 0.3f;
 
-        if(avergaeTimeToClearRoom > 0) extraStats += 10f / calculateAverageTime();
+        if(avergaeTimeToClearRoom > 0) extraStats += 30f / calculateAverageTime();
         
         return extraStats;
     }

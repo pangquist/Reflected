@@ -71,6 +71,33 @@ public class EnemyStatSystem : StatSystem
         
     }
 
+    public void SetRoomStats(Stats statIncrease)
+    {
+        ResetStats();
+        switch (statIncrease)
+        {
+            case Stats.Health:
+                AddMaxHealth((int)baseBuffs[statIncrease]);
+                break;
+            case Stats.DamageReduction:
+                AddDamageReduction(baseBuffs[statIncrease]);
+                break;
+            case Stats.MovementSpeed:
+                AddMovementSpeed(baseBuffs[statIncrease]);
+                break;
+            case Stats.Damage:
+                AddDamageIncrease(baseBuffs[statIncrease]);
+                break;
+            case Stats.AttackSpeed:
+                AddAttackSpeed(baseBuffs[statIncrease]);
+                break;
+            case Stats.AoE:
+                AddAreaOfEffect(baseBuffs[statIncrease]);
+                break;
+        }
+
+
+    }
     public void ApplyNewStats(bool trueDimention)
     {
         ResetStats();
@@ -92,7 +119,7 @@ public class EnemyStatSystem : StatSystem
                 switch (item.Key)
                 {
                     case Stats.Health:
-                        AddMaxHealth((int)(item.Value));
+                        AddMaxHealth((int)item.Value);
                         break;
                     case Stats.DamageReduction:
                         AddDamageReduction(item.Value);
@@ -110,8 +137,7 @@ public class EnemyStatSystem : StatSystem
                         AddAreaOfEffect(item.Value);
                         break;
                 }
-            }
-            
+            }            
         }
     }
 }

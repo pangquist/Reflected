@@ -56,7 +56,7 @@ public class Bunker : Ability
 
                 newBolt.SetVelocity(diff / airTime);
                 newBolt.SetVfx(vfxObject);
-
+                GetComponent<AudioSource>().PlayOneShot(abilitySounds[Random.Range(0, abilitySounds.Count)]);
                 //if (newBolt.UseGravity())
                 //    newBolt.ShowLandPlacement(targetPosition);
 

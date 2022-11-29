@@ -25,6 +25,7 @@ public class InWorldUIElement : MonoBehaviour
 
     private static Canvas canvas;
     private static Camera mainCamera;
+    private static Transform player;
 
     public Transform ObjectToFollow { get { return objectToFollow; } set { objectToFollow = value; } }
     public Vector3 ScreenOffset { get { return screenOffset; } set { screenOffset = value; } }
@@ -35,6 +36,7 @@ public class InWorldUIElement : MonoBehaviour
         {
             canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
             mainCamera = Camera.main;
+            player = GameObject.Find("Player").transform;
         }
 
         gameObject.AddComponent(typeof(CanvasGroup));
@@ -87,7 +89,7 @@ public class InWorldUIElement : MonoBehaviour
 
         if (shrinkChildrenAtDistance)
         {
-            float distance = Vector3.Distance(mainCamera.transform.position, objectToFollow.position);
+            float distance = Vector3.Distance(player.position, objectToFollow.position);
             float childrenScale = 1f - distance.ValueToPercentageClamped(minDistance, maxDistance).CustomSmoothstep();
 
             foreach (Transform child in transform)

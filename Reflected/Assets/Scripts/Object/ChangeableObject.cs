@@ -43,7 +43,6 @@ public class ChangeableObject : MonoBehaviour
 
     public void ChangeToTrueMesh()
     {
-        Debug.Log("CHANGING TO TRUE MESH");
         for (int i = 0; i < objects.Length; i++)
         {
             objects[i].GetComponent<MeshFilter>().mesh = trueMeshes[i];
@@ -52,7 +51,6 @@ public class ChangeableObject : MonoBehaviour
 
     public void ChangeToMirrorMesh()
     {
-        Debug.Log("CHANGING TO MIRROR MESH");
         for (int i = 0; i < objects.Length; i++)
         {
             if (objects[i])

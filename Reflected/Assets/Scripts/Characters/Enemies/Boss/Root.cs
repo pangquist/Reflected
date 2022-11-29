@@ -13,6 +13,8 @@ public class Root : Enemy
         CombatText text = Instantiate(combatTextCanvas.gameObject, transform.position + combatTextOffset, Quaternion.identity).GetComponent<CombatText>();
         text.SetDamageText(damage);
 
+        GetComponent<AudioSource>().PlayOneShot(hitSounds[Random.Range(0, hitSounds.Count)]);
+
         currentHealth -= Mathf.Clamp(damage, 0, currentHealth);
 
         if (currentHealth <= 0)

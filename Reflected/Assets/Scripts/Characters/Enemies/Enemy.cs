@@ -9,6 +9,7 @@ public class Enemy : Character
     [SerializeField] protected float aggroRange;
 
     [SerializeField] protected WeightedRandomList<GameObject> LootDropList;
+    [SerializeField] protected List<AudioClip> hitSounds;
     protected bool invurnable;
     GameObject parent;
     protected Player player;
@@ -81,8 +82,9 @@ public class Enemy : Character
             aiDirector.killEnemyInRoom();
             doOnce = true;
         }
-        
-        LootDrop(transform);
+
+        if (!GetComponent<Boss>())
+            LootDrop(transform);
 
 
         base.Die();
@@ -90,8 +92,10 @@ public class Enemy : Character
 
     public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instaintiated (from the EnemySpanwer-script)
     {
-        currentHealth += maxHealth * extraDifficultyPercentage;
-
+        maxHealth += maxHealth * extraDifficultyPercentage;
+        currentHealth = maxHealth;
+        attackSpeed += attackSpeed * (extraDifficultyPercentage * 0.3f);
+        movementSpeed += movementSpeed * (extraDifficultyPercentage * 0.1f);
         damage += damage * extraDifficultyPercentage;
     }
 
@@ -100,7 +104,7 @@ public class Enemy : Character
         LootDropList = GameObject.Find("LootPoolManager").GetComponent<LootPoolManager>().GetCollectablePool();
 
         Vector3 spawnPosition = lootDropPosition.position + new Vector3(0, 1, 0);
-        Instantiate(LootDropList.GetRandom(), spawnPosition, Quaternion.Euler(0,0,0));
+        Instantiate(LootDropList.GetRandom(), spawnPosition, Quaternion.Euler(0, 0, 0));
     }
 
     public virtual void ToggleInvurnable()
