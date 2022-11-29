@@ -109,8 +109,12 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 1
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - True Charges
+  - Mirror Charges
+  value:
+  - -1
+  - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &1775156977
@@ -3425,9 +3429,9 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6002000361635193990}
+  - {fileID: 2548620773824865915}
+  - {fileID: 3161971782288946045}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -7261,7 +7265,7 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5585299130983735661}
   - {fileID: 8129330217812322673}
-  - {fileID: 0}
+  - {fileID: 7606717066356875660}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -8667,6 +8671,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Swap Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129893453708287468, guid: 991bd7bf55ba94db0a07179dc186ba32,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
         type: 3}
