@@ -6,15 +6,16 @@ using System;
 public class Health : MonoBehaviour, IMagnetic, IBuyable
 {
     public PowerUpEffect powerUpEffect;
+    //Check ui for health that the player gets back for the description and not the powerup effect
   
     Rigidbody rb;
     bool hasTarget, hasProperties;
     Vector3 targetPosition;
     float moveSpeed = 5f;
     float totalplayerhealth;
-    int amount;
+    public int amount;
     Rarity myRarity;
-    string description;
+    public string description;
     int value;
 
     private void Awake()
@@ -28,7 +29,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
             value = powerUpEffect.value * myRarity.valueMultiplier;
             description = powerUpEffect.description + " " + amount.ToString();
         }
-        Destroy(gameObject, 20);
+        //Destroy(gameObject, 20);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,6 +37,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         if (other.GetComponent<Player>())
         {
             Destroy(gameObject);
+            Debug.Log(amount);
             powerUpEffect.Apply(other.gameObject, amount); 
         }
     }
@@ -60,7 +62,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         //Debug.Log("Set properties " + targetRarity);
         myRarity = targetRarity;
         totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
-        amount = (int)((totalplayerhealth / 4f) * myRarity.amountMultiplier);
+        amount = (int)((totalplayerhealth * 0.15f) * myRarity.amountMultiplier);
         value = powerUpEffect.value * targetRarity.valueMultiplier;
         description = powerUpEffect.description + " " + amount.ToString();
         hasProperties = true;

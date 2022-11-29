@@ -12,6 +12,12 @@ public class EnemyStatSystem : StatSystem
     List<Stats> statList;
     List<float> baseIncrease;
 
+    private void Awake()
+    {
+        Map.RoomEntered.AddListener(ChangeRoomStat);
+        DimensionManager.DimensionChanged.AddListener(ChangeRoomStat);
+    }
+
     public void Start()
     {
         baseIncrease = new List<float>() { 2f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
@@ -71,6 +77,44 @@ public class EnemyStatSystem : StatSystem
         
     }
 
+    private void ChangeRoomStat()
+    {
+        if (DimensionManager.CurrentDimension == Dimension.True)
+            SetRoomStats(Map.ActiveRoom.TrueStat);
+        else
+            SetRoomStats(Map.ActiveRoom.MirrorStat);
+    }
+
+    private void SetRoomStats(Stats statIncrease)
+    {
+        if (baseBuffs == null)
+            return;
+
+        ResetStats();
+
+        switch (statIncrease)
+        {
+            case Stats.Health:
+                AddMaxHealth((int)baseBuffs[statIncrease]);
+                break;
+            case Stats.DamageReduction:
+                AddDamageReduction(baseBuffs[statIncrease]);
+                break;
+            case Stats.MovementSpeed:
+                AddMovementSpeed(baseBuffs[statIncrease]);
+                break;
+            case Stats.Damage:
+                AddDamageIncrease(baseBuffs[statIncrease]);
+                break;
+            case Stats.AttackSpeed:
+                AddAttackSpeed(baseBuffs[statIncrease]);
+                break;
+            case Stats.AoE:
+                AddAreaOfEffect(baseBuffs[statIncrease]);
+                break;
+        }
+    }
+
     public void ApplyNewStats(bool trueDimention)
     {
         ResetStats();
@@ -92,7 +136,7 @@ public class EnemyStatSystem : StatSystem
                 switch (item.Key)
                 {
                     case Stats.Health:
-                        AddMaxHealth((int)(item.Value));
+                        AddMaxHealth((int)item.Value);
                         break;
                     case Stats.DamageReduction:
                         AddDamageReduction(item.Value);
@@ -110,8 +154,7 @@ public class EnemyStatSystem : StatSystem
                         AddAreaOfEffect(item.Value);
                         break;
                 }
-            }
-            
+            }            
         }
     }
 }

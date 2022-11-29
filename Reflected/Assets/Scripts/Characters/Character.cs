@@ -174,9 +174,9 @@ public class Character : MonoBehaviour, IEffectable
             {
                 statusEffects[i].SetNextTickTime();
                 if (statusEffects[i].totalDamage > 0)
-                    TakeDamage(statusEffects[i].totalDamage);
+                    TakeDamage(statusEffects[i].effect.DOTAmount * maxHealth);
                 else
-                    Heal(-1 * statusEffects[i].totalDamage);
+                    Heal(-1 * statusEffects[i].effect.DOTAmount * maxHealth);
             }
         }
     }

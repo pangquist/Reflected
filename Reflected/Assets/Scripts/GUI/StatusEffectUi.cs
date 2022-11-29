@@ -58,7 +58,7 @@ public class StatusEffectUi : MonoBehaviour
 
         foreach (Effect effect in statusEffects)
         {
-            if (effect.effect.MovementPenalty < 1)
+            if (effect.effect.MovementPenalty > 0)
             {
                 numberOfFreeze++;
                 FreezeEffect(effect);

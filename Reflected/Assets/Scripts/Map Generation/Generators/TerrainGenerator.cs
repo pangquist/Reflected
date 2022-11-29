@@ -108,7 +108,7 @@ public class TerrainGenerator : MonoBehaviour
             }
         }
 
-        foreach(Room room in map.Rooms)
+        foreach (Room room in map.Rooms)
         {
             SetPathPoints(room);
         }
@@ -179,8 +179,19 @@ public class TerrainGenerator : MonoBehaviour
 
             ModifyVertexHeight(ref meshVertices, room1);
 
+            // If two rooms were provided, this TerrainChunk is part of a chamber. Check paths in both rooms
             if (room2 != null)
                 ModifyVertexHeight(ref meshVertices, room2);
+
+            // If only one room was provided, this TerrainChunk is part of that room. Check paths in all connecting rooms
+            else
+            {
+                foreach (Chamber chamber in room1.Chambers)
+                {
+                    Room otherRoom = chamber.Room1 == room1 ? chamber.Room2 : chamber.Room1;
+                    ModifyVertexHeight(ref meshVertices, otherRoom);
+                }  
+            }
 
             void ModifyVertexHeight(ref Vector3[] meshVertices, Room room)
             {
