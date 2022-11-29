@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TechTreeNode : MonoBehaviour
+public class TechTreeNode : MonoBehaviour, ISavable
 {
 
     [Header("Node Description")]
@@ -26,7 +27,7 @@ public class TechTreeNode : MonoBehaviour
     [SerializeField] int gemCost;
     [SerializeField] bool isMirror;
     [SerializeField] bool isPlaceable;
-    bool isActive;
+    [SerializeField] bool isActive;
 
     [Header("Stat Changes")]
     [SerializeField] List<string> modifiedValue;
@@ -58,13 +59,24 @@ public class TechTreeNode : MonoBehaviour
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
     }
 
+    void Update()
+    {
+        if (isActive)
+        {
+            currentImage.color = activatedColor;
+        }
+        else if (isPlaceable)
+        {
+            currentImage.color = canBeActivatedColor;
+        }
+    }
+
     public void PlaceInMirror()
     {
         if (!CanBePlaced())
             return;
 
         techTree.PlaceNode(this);
-        currentImage.color = activatedColor;
 
         foreach (TechTreeNode node in nextNode)
         {
@@ -130,5 +142,28 @@ public class TechTreeNode : MonoBehaviour
     {
         nodeEffectText.text = "";
         nodeCostText.text = "";
+    }
+
+    public object SaveState()
+    {
+        return new SaveData()
+        {
+            placeable = isPlaceable,
+            active = isActive
+        };
+    }
+
+    public void LoadState(object state)
+    {
+        var saveData = (SaveData)state;
+        isPlaceable = saveData.placeable;
+        isActive = saveData.active;
+    }
+
+    [Serializable]
+    private struct SaveData
+    {
+        public bool placeable;
+        public bool active;
     }
 }

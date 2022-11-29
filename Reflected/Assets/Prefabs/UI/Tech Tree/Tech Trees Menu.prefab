@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 257.2, y: -234}
+  m_AnchoredPosition: {x: 257.2, y: -236}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1775156980
@@ -104,11 +104,12 @@ MonoBehaviour:
   - {fileID: 2958878037048592787}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
-  hasGemCost: 1
+  hasGemCost: 0
   gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
   gemCost: 0
   isMirror: 0
   isPlaceable: 1
+  isActive: 0
   modifiedValue:
   - True Charges
   - Mirror Charges
@@ -256,7 +257,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -240}
+  m_AnchoredPosition: {x: 150, y: -237}
   m_SizeDelta: {x: 100, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4064310056046225339
@@ -316,9 +317,9 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4673772985315411791}
+  - {fileID: 4523969312854852955}
+  - {fileID: 6583572397303350118}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -326,6 +327,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -540,6 +542,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -684,7 +687,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 120, y: -446}
-  m_SizeDelta: {x: 30, y: 150}
+  m_SizeDelta: {x: 40, y: 150}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3018883511744874850
 CanvasRenderer:
@@ -743,10 +746,13 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 2073435897575035142}
+  - {fileID: 7503542232891154023}
   - {fileID: 2000516686591848417}
   - {fileID: 4673772985315411791}
-  - {fileID: 4833546419326189010}
+  - {fileID: 7110399015950753652}
+  - {fileID: 2073435897575035142}
+  - {fileID: 4523969312854852955}
+  - {fileID: 2554683838231738605}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -754,6 +760,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -959,8 +966,8 @@ MonoBehaviour:
   nextNode:
   - {fileID: 5786376671243386862}
   - {fileID: 2633290739023729539}
-  - {fileID: 8554960056134347234}
-  - {fileID: 4833546419326189010}
+  - {fileID: 842100925212992960}
+  - {fileID: 4673772985315411791}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -968,6 +975,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -1170,7 +1178,9 @@ MonoBehaviour:
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
-  nextNode: []
+  nextNode:
+  - {fileID: 2073435897575035142}
+  - {fileID: 6583572397303350118}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -1178,6 +1188,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -1381,9 +1392,9 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 593720869656895117}
-  - {fileID: 7310602429281827960}
-  - {fileID: 0}
+  - {fileID: 1817089581863810261}
+  - {fileID: 5786376671243386862}
+  - {fileID: 2633290739023729539}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -1391,6 +1402,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -1602,6 +1614,7 @@ MonoBehaviour:
   gemCost: 1
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -1812,6 +1825,7 @@ MonoBehaviour:
   gemCost: 1
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -2023,6 +2037,7 @@ MonoBehaviour:
   gemCost: 1
   isMirror: 0
   isPlaceable: 1
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -2362,8 +2377,10 @@ MonoBehaviour:
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 1817089581863810261}
-  - {fileID: 5786376671243386862}
-  - {fileID: 4833546419326189010}
+  - {fileID: 842100925212992960}
+  - {fileID: 2000516686591848417}
+  - {fileID: 7110399015950753652}
+  - {fileID: 4673772985315411791}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -2371,6 +2388,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -2514,8 +2532,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 158, y: -515}
-  m_SizeDelta: {x: 100, y: 20}
+  m_AnchoredPosition: {x: 170, y: -515}
+  m_SizeDelta: {x: 90, y: 20}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6217232134168223725
 CanvasRenderer:
@@ -2574,9 +2592,10 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 2073435897575035142}
-  - {fileID: 4523969312854852955}
-  - {fileID: 0}
+  - {fileID: 2633290739023729539}
+  - {fileID: 2000516686591848417}
+  - {fileID: 4673772985315411791}
+  - {fileID: 6583572397303350118}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -2584,6 +2603,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -2788,9 +2808,8 @@ MonoBehaviour:
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 5585299130983735661}
-  - {fileID: 8040092997483870721}
-  - {fileID: 3161971782288946045}
-  - {fileID: 4833546419326189010}
+  - {fileID: 8129330217812322673}
+  - {fileID: 7606717066356875660}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -2798,6 +2817,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -2941,7 +2961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157, y: -129}
+  m_AnchoredPosition: {x: 157, y: -132}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7027223954642235853
@@ -3012,6 +3032,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -3215,10 +3236,11 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 2548620773824865915}
-  - {fileID: 8129330217812322673}
-  - {fileID: 4878887813269588265}
-  - {fileID: 4833546419326189010}
+  - {fileID: 8040092997483870721}
+  - {fileID: 6002000361635193990}
+  - {fileID: 3161971782288946045}
+  - {fileID: 7310602429281827960}
+  - {fileID: 8554960056134347234}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -3226,6 +3248,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -3369,7 +3392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 362, y: -132}
+  m_AnchoredPosition: {x: 362, y: -134}
   m_SizeDelta: {x: 100, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &619267913071277183
@@ -3439,6 +3462,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -3583,7 +3607,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 4, y: -237}
-  m_SizeDelta: {x: 90, y: 120}
+  m_SizeDelta: {x: 110, y: 120}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8178149737207372673
 CanvasRenderer:
@@ -3642,9 +3666,9 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 2000516686591848417}
-  - {fileID: 4673772985315411791}
-  - {fileID: 0}
+  - {fileID: 2073435897575035142}
+  - {fileID: 4523969312854852955}
+  - {fileID: 1869105304471382692}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -3652,6 +3676,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -3855,9 +3880,9 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 5585299130983735661}
+  - {fileID: 9087844950784071298}
   - {fileID: 2548620773824865915}
-  - {fileID: 4833546419326189010}
+  - {fileID: 4878887813269588265}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -3865,6 +3890,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -4008,8 +4034,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 158, y: -543.7}
-  m_SizeDelta: {x: 100, y: 50}
+  m_AnchoredPosition: {x: 170, y: -543.7}
+  m_SizeDelta: {x: 90, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &601950847893507190
 CanvasRenderer:
@@ -4068,8 +4094,8 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 8234022312413031792}
-  - {fileID: 4673772985315411791}
+  - {fileID: 2633290739023729539}
+  - {fileID: 7110399015950753652}
   - {fileID: 6583572397303350118}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
@@ -4078,6 +4104,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -4221,7 +4248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 257, y: -339}
+  m_AnchoredPosition: {x: 257, y: -343}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5531375955327853608
@@ -4281,9 +4308,9 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1817089581863810261}
+  - {fileID: 5786376671243386862}
+  - {fileID: 7310602429281827960}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -4291,6 +4318,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -4504,6 +4532,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -4708,8 +4737,10 @@ MonoBehaviour:
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 593720869656895117}
-  - {fileID: 842100925212992960}
+  - {fileID: 5786376671243386862}
   - {fileID: 8554960056134347234}
+  - {fileID: 5585299130983735661}
+  - {fileID: 3161971782288946045}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -4717,6 +4748,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -4922,7 +4954,8 @@ MonoBehaviour:
   nextNode:
   - {fileID: 972815017597061298}
   - {fileID: 1088216025484818248}
-  - {fileID: 0}
+  - {fileID: 8234022312413031792}
+  - {fileID: 4523969312854852955}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -4930,6 +4963,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -5074,7 +5108,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 4, y: -366}
-  m_SizeDelta: {x: 90, y: 100}
+  m_SizeDelta: {x: 110, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1812002372877551913
 CanvasRenderer:
@@ -5133,10 +5167,10 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 7110399015950753652}
+  - {fileID: 8234022312413031792}
   - {fileID: 4523969312854852955}
   - {fileID: 6583572397303350118}
-  - {fileID: 4833546419326189010}
+  - {fileID: 2554683838231738605}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -5144,6 +5178,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -5358,6 +5393,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -5561,9 +5597,10 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 842100925212992960}
+  - {fileID: 5786376671243386862}
   - {fileID: 7310602429281827960}
   - {fileID: 8554960056134347234}
+  - {fileID: 1839161026264638703}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -5571,6 +5608,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -5774,9 +5812,9 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 8040092997483870721}
+  - {fileID: 5585299130983735661}
   - {fileID: 6002000361635193990}
-  - {fileID: 4878887813269588265}
+  - {fileID: 7310602429281827960}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -5784,6 +5822,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -5987,9 +6026,9 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
+  - {fileID: 7606717066356875660}
   - {fileID: 6002000361635193990}
-  - {fileID: 3161971782288946045}
-  - {fileID: 4878887813269588265}
+  - {fileID: 5585299130983735661}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -5997,6 +6036,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -6199,7 +6239,10 @@ MonoBehaviour:
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
-  nextNode: []
+  nextNode:
+  - {fileID: 593720869656895117}
+  - {fileID: 5786376671243386862}
+  - {fileID: 8554960056134347234}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -6207,6 +6250,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -6412,7 +6456,9 @@ MonoBehaviour:
   nextNode:
   - {fileID: 8040092997483870721}
   - {fileID: 3161971782288946045}
-  - {fileID: 0}
+  - {fileID: 7606717066356875660}
+  - {fileID: 5585299130983735661}
+  - {fileID: 2548620773824865915}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -6420,6 +6466,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -6625,7 +6672,8 @@ MonoBehaviour:
   nextNode:
   - {fileID: 7550279715545850774}
   - {fileID: 3134547261100236958}
-  - {fileID: 0}
+  - {fileID: 2548620773824865915}
+  - {fileID: 8129330217812322673}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -6633,6 +6681,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -6829,8 +6878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
-    by 1.
+  description: Damage all nearby enemies every time you swap dimension.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -6846,6 +6894,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -7049,10 +7098,10 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 1817089581863810261}
+  - {fileID: 5585299130983735661}
   - {fileID: 593720869656895117}
   - {fileID: 7310602429281827960}
-  - {fileID: 4833546419326189010}
+  - {fileID: 1839161026264638703}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -7060,6 +7109,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -7263,9 +7313,11 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 5585299130983735661}
+  - {fileID: 9087844950784071298}
   - {fileID: 8129330217812322673}
   - {fileID: 7606717066356875660}
+  - {fileID: 4878887813269588265}
+  - {fileID: 6002000361635193990}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -7273,6 +7325,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -7477,8 +7530,10 @@ MonoBehaviour:
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 1817089581863810261}
-  - {fileID: 2633290739023729539}
-  - {fileID: 0}
+  - {fileID: 593720869656895117}
+  - {fileID: 842100925212992960}
+  - {fileID: 7310602429281827960}
+  - {fileID: 1839161026264638703}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -7486,6 +7541,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -7699,6 +7755,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -7842,8 +7899,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 101, y: -237}
-  m_SizeDelta: {x: 40, y: 200}
+  m_AnchoredPosition: {x: 121, y: -237}
+  m_SizeDelta: {x: 20, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8543940318924495606
 CanvasRenderer:
@@ -7903,8 +7960,9 @@ MonoBehaviour:
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 2073435897575035142}
-  - {fileID: 7110399015950753652}
-  - {fileID: 4833546419326189010}
+  - {fileID: 8234022312413031792}
+  - {fileID: 6583572397303350118}
+  - {fileID: 1869105304471382692}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -7912,6 +7970,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -8055,8 +8114,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 158, y: -447}
-  m_SizeDelta: {x: 100, y: 60}
+  m_AnchoredPosition: {x: 168, y: -447}
+  m_SizeDelta: {x: 90, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4386730830219791420
 CanvasRenderer:
@@ -8115,8 +8174,9 @@ MonoBehaviour:
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
-  - {fileID: 2000516686591848417}
-  - {fileID: 8234022312413031792}
+  - {fileID: 1817089581863810261}
+  - {fileID: 2633290739023729539}
+  - {fileID: 7110399015950753652}
   - {fileID: 6583572397303350118}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
@@ -8125,6 +8185,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -8338,6 +8399,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -8534,13 +8596,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
-    by 1.
+  description: Dimension stat modifiers are doubled for a time after swapping.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
   techTree: {fileID: 3394559597376095408}
-  nextNode: []
+  nextNode:
+  - {fileID: 2548620773824865915}
+  - {fileID: 4878887813269588265}
+  - {fileID: 8040092997483870721}
+  - {fileID: 6002000361635193990}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
   resourceCost: 0
   hasGemCost: 1
@@ -8548,6 +8613,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
+  isActive: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -9677,6 +9743,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2722516577062555607}
     m_Modifications:
+    - target: {fileID: 495235586873435625, guid: 075afce88e27f4475b11e14151f8bc82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -19
+      objectReference: {fileID: 0}
     - target: {fileID: 3094626205515665551, guid: 075afce88e27f4475b11e14151f8bc82,
         type: 3}
       propertyPath: m_Pivot.x
