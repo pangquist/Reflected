@@ -30,7 +30,7 @@ public class MusicManager : MonoBehaviour
         intensityLevel = 0;
 
         currentTrack = trueMusic[intensityLevel];
-        SetMusic(Dimension.True, intensityLevel);
+        SetMusic(Dimension.True, 0);
     }
 
     public void SwapMusicScore(Dimension dimension)
@@ -38,19 +38,50 @@ public class MusicManager : MonoBehaviour
         StartCoroutine(MusicSwap(dimension));
     }
 
-    public void ChangeMusicIntensity(int intensityChange)
-    {
-        StartCoroutine(ChangeIntensity(intensityChange));
-    }
-
     public void SetMusic(Dimension dimension, int intensityLevel)
     {
-        currentTrack.volume = 0;
+        StartCoroutine(_SetMusic(dimension, intensityLevel));
+    }
+
+    IEnumerator _SetMusic(Dimension dimension, int newIntensityLevel)
+    {
+        float progress = 0;
+        float rate = 1 / swapDuration;
+
+        intensityLevel = newIntensityLevel;
+        currentDimension = dimension;
+
+        while (progress < swapDuration)
+        {
+            currentTrack.volume = Mathf.Lerp(activeVolume, 0, progress);
+
+            if (dimension == Dimension.True)
+                trueMusic[intensityLevel].volume = Mathf.Lerp(0, activeVolume, progress);
+            else
+                mirrorMusic[intensityLevel].volume = Mathf.Lerp(0, activeVolume, progress);
+
+            progress += rate * Time.deltaTime;
+
+            if (progress >= swapDuration - 0.05f)
+            {
+                progress = swapDuration;
+
+                currentTrack.volume = 0;
+
+                if (currentDimension == Dimension.True)
+                    trueMusic[intensityLevel].volume = activeVolume;
+                else
+                    mirrorMusic[intensityLevel].volume = activeVolume;
+            }
+            yield return null;
+        }
 
         if (dimension == Dimension.True)
-            trueMusic[intensityLevel].volume = activeVolume;
+            currentTrack = trueMusic[intensityLevel];
         else
-            mirrorMusic[intensityLevel].volume = activeVolume;
+            currentTrack = mirrorMusic[intensityLevel];
+
+        yield return 0;
     }
 
     IEnumerator MusicSwap(Dimension dimension)
@@ -70,6 +101,18 @@ public class MusicManager : MonoBehaviour
                 mirrorMusic[intensityLevel].volume = Mathf.Lerp(0, activeVolume, progress);
 
             progress += rate * Time.deltaTime;
+            if (progress >= swapDuration - 0.05f)
+            {
+                progress = swapDuration;
+
+                currentTrack.volume = 0;
+
+                if (currentDimension == Dimension.True)
+                    trueMusic[intensityLevel].volume = activeVolume;
+                else
+                    mirrorMusic[intensityLevel].volume = activeVolume;
+            }
+
             yield return null;
         }
 
@@ -79,47 +122,5 @@ public class MusicManager : MonoBehaviour
             currentTrack = mirrorMusic[intensityLevel];
 
         yield return 0;
-    }
-
-    IEnumerator ChangeIntensity(int intensityChange)
-    {
-        float progress = 0;
-        float rate = 1 / swapDuration;
-
-        intensityLevel = Mathf.Clamp(intensityLevel += intensityChange, 0, trueMusic.Count-1);
-
-
-        while (progress < swapDuration)
-        {
-            currentTrack.volume = Mathf.Lerp(activeVolume, 0, progress);
-
-            if (currentDimension == Dimension.True)
-                trueMusic[intensityLevel].volume = Mathf.Lerp(0, activeVolume, progress);
-            else
-                mirrorMusic[intensityLevel].volume = Mathf.Lerp(0, activeVolume, progress);
-
-            progress += rate * Time.deltaTime;
-            yield return null;
-        }
-
-        try
-        {
-            if (currentDimension == Dimension.True)
-                currentTrack = trueMusic[intensityLevel];
-            else
-                currentTrack = mirrorMusic[intensityLevel];
-        }
-        catch
-        {
-            intensityLevel--;
-
-            if (currentDimension == Dimension.True)
-                currentTrack = trueMusic[intensityLevel];
-            else
-                currentTrack = mirrorMusic[intensityLevel];
-        }
-
-        yield return 0;
-
     }
 }

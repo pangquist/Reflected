@@ -20,7 +20,7 @@ public class Enemy : Character
     GameObject parent;
     protected Player player;
 
-    protected float aggroRange;
+    //protected float aggroRange;
 
     bool doOnce;
 

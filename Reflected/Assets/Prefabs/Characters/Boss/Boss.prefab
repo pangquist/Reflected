@@ -320,10 +320,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 40
+  currentHealth: 0
   movementSpeed: 0
   damage: 5
   attackSpeed: 0
-  currentHealth: 0
   anim: {fileID: 0}
   currentWeapon: {fileID: 0}
   HealthChanged:
@@ -332,10 +332,11 @@ MonoBehaviour:
   Killed:
     m_PersistentCalls:
       m_Calls: []
+  baseProjectileSpeed: 0
+  baseAoeSize: {x: 0, y: 0, z: 0}
   combatTextOffset: {x: 0, y: 5, z: 0}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}
-  aggroRange: 25
   LootDropList:
     list:
     - item: {fileID: 3663983349818802338, guid: 2bdfe34f451d870469649a3199306873,
@@ -352,6 +353,7 @@ MonoBehaviour:
   aoeAttackState: {fileID: 0}
   explosionAttackState: {fileID: 0}
   rotateBody: {fileID: 4350906471026547974}
+  aggroRange: 25
   abilities:
   - {fileID: 1320225154}
   - {fileID: 1320225153}
@@ -559,7 +561,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d472835c161de504fa94454e3fbb43c0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.08
   m_Pitch: 1
   Loop: 0
   Mute: 0

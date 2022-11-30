@@ -148,13 +148,13 @@ public class Room : MonoBehaviour
             if (type == RoomType.Monster || type == RoomType.Shop)
             {
                 map.GameManager.AiDirector.EnterRoom();
-                GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(1);
+                GameObject.Find("Music Manager").GetComponent<MusicManager>().SetMusic(DimensionManager.CurrentDimension, 1);
             }
 
             else if (type == RoomType.Boss)
             {
                 map.GameManager.AiDirector.EnterBossRoom();
-                GameObject.Find("Music Manager").GetComponent<MusicManager>().ChangeMusicIntensity(2);
+                GameObject.Find("Music Manager").GetComponent<MusicManager>().SetMusic(DimensionManager.CurrentDimension, 2);
             }
 
             else

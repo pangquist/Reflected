@@ -14,6 +14,7 @@ public class Boss : Enemy
     [Header("Boss Specifics")]
     bool aggroed = false;
     [SerializeField] GameObject rotateBody;
+    [SerializeField] float aggroRange;
 
     Ability lastAbility;
     [SerializeField] List<Ability> abilities;
