@@ -8,6 +8,11 @@ public class MainMenu : Menu
 {
     string gameSceneName = "Game Scene";
 
+    private void Awake()
+    {
+        GameObject.Find("SaveLoadSystem").GetComponent<SaveLoadSystem>().Load();
+    }
+
     protected override void Start()
     {
         CheckForSavedRun();

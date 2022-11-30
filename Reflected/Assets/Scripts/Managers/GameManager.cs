@@ -15,9 +15,16 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         GameObject.Find("Dimension Manager").GetComponent<DimensionManager>().FindSystems();
+        
     }
 
-    private void Update()
+    public void Save()
     {
+        GameObject saveLoadSystem = GameObject.Find("SaveLoadSystem");
+
+        if (saveLoadSystem)
+            saveLoadSystem.GetComponent<SaveLoadSystem>().Save();
+        else
+            Debug.Log("No SaveLoadSystem found");
     }
 }

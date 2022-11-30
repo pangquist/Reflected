@@ -20,7 +20,7 @@ public class SaveLoadSystem : MonoBehaviour
     [ContextMenu("Save")]
     public void Save()
     {
-        Debug.Log(Application.persistentDataPath);
+        Debug.Log("Saving: " + SavePath);
         var state = LoadFile();
         SaveState(state);
         SaveFile(state);
@@ -29,6 +29,7 @@ public class SaveLoadSystem : MonoBehaviour
     [ContextMenu("Load")]
     public void Load()
     {
+        Debug.Log("Loading: " + SavePath);
         var state = LoadFile();
         LoadState(state);
     }
