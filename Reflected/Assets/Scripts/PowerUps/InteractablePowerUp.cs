@@ -26,9 +26,13 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
             {
                 description = powerUpEffect.description + " " + amount.ToString();
             }
+            else if(powerUpEffect.diminishingReturn == "false")
+            {
+                description = powerUpEffect.description + " " + (amount * 100).ToString() + "%.";
+            }
             else
             {
-                description = powerUpEffect.description + " " + (amount * 100).ToString() + "%. (This effect deminishing returns)";
+                description = powerUpEffect.description + " " + (amount * 100).ToString() + "%. (This effect has diminishing returns)";
             }
             
         }
@@ -44,6 +48,10 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
         if (powerUpEffect.powerupName == "Max_Health" || powerUpEffect.powerupName == "Health")
         {
             description = powerUpEffect.description + " " + amount.ToString();
+        }
+        else if (powerUpEffect.diminishingReturn == "false")
+        {
+            description = powerUpEffect.description + " " + (amount * 100).ToString() + "%.";
         }
         else
         {

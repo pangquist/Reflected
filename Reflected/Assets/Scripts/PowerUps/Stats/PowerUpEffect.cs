@@ -10,6 +10,7 @@ public abstract class PowerUpEffect : ScriptableObject
     [SerializeField] public float amount;   
     [SerializeField] public string type;
     [SerializeField] public string powerupName;
+    [SerializeField] public string diminishingReturn;
 
     public abstract void Apply(GameObject target, float amount);
 }
