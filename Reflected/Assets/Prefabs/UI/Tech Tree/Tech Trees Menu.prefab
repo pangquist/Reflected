@@ -3014,8 +3014,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
-    by 1.
+  description: Increases damage done and attack speed in the true dimension by 10%
+    each.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -3033,8 +3033,12 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - Damage
+  - Attack Speed
+  value:
+  - 0.1
+  - 0.1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &7430353864944711490
