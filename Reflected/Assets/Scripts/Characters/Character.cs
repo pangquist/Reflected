@@ -6,15 +6,19 @@ using UnityEngine.Events;
 
 public class Character : MonoBehaviour, IEffectable
 {
-    [Header("Character Properties")]
+    //Should these not be "base" properties? As they will be affected by the stat system increases/power-ups. OR are they the final calculation of said stats? -Kevin
+    [Header("Character Properties")] 
     [SerializeField] protected float maxHealth;
+    [SerializeField] protected float currentHealth;
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected float damage;
     [SerializeField] protected float attackSpeed;
-    [SerializeField] protected float currentHealth;
+
     protected List<Effect> statusEffects;
     protected Dictionary<StatusEffectData, GameObject> effectParticles;
+
     [SerializeField] protected Animator anim;
+
     protected bool isDead;
 
     [SerializeField] protected Weapon currentWeapon;
@@ -104,11 +108,16 @@ public class Character : MonoBehaviour, IEffectable
 
     public float GetAttackSpeed()
     {
-        return attackSpeed; //replace with attack speed
+        return attackSpeed;
     }
     public Weapon GetCurrentWeapon()
     {
         return currentWeapon;
+    }
+
+    public float GetMovementSpeed()
+    {
+        return movementSpeed;
     }
 
     public float MovementPenalty()

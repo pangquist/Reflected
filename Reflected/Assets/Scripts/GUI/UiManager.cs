@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UiManager: MonoBehaviour
@@ -100,6 +101,11 @@ public class UiManager: MonoBehaviour
     public void Continue()
     {
         inGameMenu.SetActive(false);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
     public void Quit()
     {

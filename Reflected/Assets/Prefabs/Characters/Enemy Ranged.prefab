@@ -92,9 +92,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileObject: {fileID: 3377277335452125525, guid: aa5a532537021b046b42ad38e790ae14,
     type: 3}
-  baseAttackRate: 1
-  baseAttackDamage: 3
-  baseProjectileForce: 2
   attackRate: 1
   attackDamage: 0
   projectileForce: 0
@@ -5039,10 +5036,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 4
-  movementSpeed: 0
-  damage: 0
-  attackSpeed: 0
   currentHealth: 0
+  movementSpeed: 4.5
+  damage: 3
+  attackSpeed: 1
   anim: {fileID: 0}
   currentWeapon: {fileID: 0}
   HealthChanged:
@@ -5051,15 +5048,17 @@ MonoBehaviour:
   Killed:
     m_PersistentCalls:
       m_Calls: []
+  baseProjectileSpeed: 2
+  baseAoeSize: {x: 0, y: 0, z: 0}
   combatTextOffset: {x: 0, y: 2, z: 0}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}
-  aggroRange: 20
   LootDropList:
     list:
     - item: {fileID: 8697999268558127635, guid: 131ff454e72154344ab839b4333a8156,
         type: 3}
       weight: 1
+  hitSounds: []
   meleeAttackState: {fileID: 0}
   rangedAttackState: {fileID: 0}
   aoeAttackState: {fileID: 0}

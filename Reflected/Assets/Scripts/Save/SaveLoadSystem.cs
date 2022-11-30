@@ -8,8 +8,17 @@ public class SaveLoadSystem : MonoBehaviour
 {
     public string SavePath => $"{Application.persistentDataPath}/save.txt";
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+
+        SaveLoadSystem[] array = FindObjectsOfType<SaveLoadSystem>();
+        if (array.Length > 1)
+            Destroy(gameObject);
+    }
+
     [ContextMenu("Save")]
-    void Save()
+    public void Save()
     {
         Debug.Log(Application.persistentDataPath);
         var state = LoadFile();
@@ -18,7 +27,7 @@ public class SaveLoadSystem : MonoBehaviour
     }
 
     [ContextMenu("Load")]
-    void Load()
+    public void Load()
     {
         var state = LoadFile();
         LoadState(state);

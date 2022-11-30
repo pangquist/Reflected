@@ -13,13 +13,10 @@ public class MoveAwayFromPlayerState : State
     private float fleeTimer = 0f;
     private float changeTime = 1f;
 
-    //Base values of the movement speed stat
-    [SerializeField] private float baseMovementSpeed = 3.5f;
-
-    //Current value of movement speed
+    [Header("Current Movement Speed")]
     [SerializeField] private float movementSpeed;
 
-    public override void DoState(AiManager2 thisEnemy, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
+    public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
         switch (thisEnemy.currentCombatBehavior)
         {
@@ -35,7 +32,7 @@ public class MoveAwayFromPlayerState : State
                 {
                     thisEnemy.SetRangedAttackState();
                     agent.isStopped = true;
-                    thisEnemy.SendAnimation("Idle");
+                    me.PlayAnimation("Idle");
                     return;
                 }
                 break;
@@ -45,7 +42,7 @@ public class MoveAwayFromPlayerState : State
                 {
                     thisEnemy.SetAoeAttackState();
                     agent.isStopped = true;
-                    thisEnemy.SendAnimation("Idle");
+                    me.PlayAnimation("Idle");
                     return;
                 }
                 break;
@@ -54,8 +51,8 @@ public class MoveAwayFromPlayerState : State
                 break;
         }
 
-        //Set movement speed
-        movementSpeed = baseMovementSpeed * enemyStatSystem.GetMovementSpeed() * thisEnemy.me.MovementPenalty();
+        //Set movement speed from base, statsystem and debuff.
+        movementSpeed = me.GetMovementSpeed() * enemyStatSystem.GetMovementSpeed() * thisEnemy.me.MovementPenalty();
         agent.speed = movementSpeed;
 
         DoMoveAway(player.transform, agent);
