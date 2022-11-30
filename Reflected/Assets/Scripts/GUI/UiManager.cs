@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,12 +24,14 @@ public class UiManager: MonoBehaviour
     [SerializeField] GameObject upgradePanel;
     [SerializeField] GameObject interactText;
     [SerializeField] GameObject payChestText;
+    private CinemachineFreeLook camera;
 
 
     // Start is called before the first frame update
     void Start()
     {
         //DontDestroyOnLoad(gameObject);
+        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponentInChildren<CinemachineFreeLook>();
     }
 
     // Update is called once per frame
@@ -94,11 +97,14 @@ public class UiManager: MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            camera.enabled = false;
+
         }
         else
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            camera.enabled = true;
         }
     }
 

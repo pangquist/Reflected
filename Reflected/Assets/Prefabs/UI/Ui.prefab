@@ -511,6 +511,109 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2179814225656910404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9103744188132957396}
+  - component: {fileID: 7486919328263258748}
+  - component: {fileID: 7405262134002589981}
+  - component: {fileID: 1644855295751671516}
+  m_Layer: 5
+  m_Name: ChargePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9103744188132957396
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2179814225656910404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3066182879520557836}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 173.50024, y: 65.842896}
+  m_SizeDelta: {x: 299.69995, y: 56.514038}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7486919328263258748
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2179814225656910404}
+  m_CullTransparentMesh: 1
+--- !u!114 &7405262134002589981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2179814225656910404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8996c338371d74355a32380ff85cd397, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1644855295751671516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2179814225656910404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 15
+    m_Right: 15
+    m_Top: 10
+    m_Bottom: 10
+  m_ChildAlignment: 0
+  m_Spacing: 15
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &2862029685722184020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,6 +2243,7 @@ GameObject:
   - component: {fileID: 672465699005169734}
   - component: {fileID: 6504898921400784846}
   - component: {fileID: 7359723153505796097}
+  - component: {fileID: 3324979756687282965}
   m_Layer: 5
   m_Name: Ui
   m_TagString: Ui
@@ -2307,6 +2411,23 @@ MonoBehaviour:
   upgradePanel: {fileID: 4515533508407700137}
   interactText: {fileID: 5277823802289631952}
   payChestText: {fileID: 5797193207180235220}
+--- !u!114 &3324979756687282965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4703789953061880391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e69ba1789450a3a43963f0eccc538aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeObject: {fileID: 956200268268428178, guid: 079770d50f979754cbc58213d1dd8176,
+    type: 3}
+  chargeParent: {fileID: 2179814225656910404}
+  chargeColor: {r: 1, g: 1, b: 1, a: 1}
+  alpha: 159
 --- !u!1 &4703789953176192078
 GameObject:
   m_ObjectHideFlags: 0
@@ -2864,6 +2985,7 @@ RectTransform:
   - {fileID: 7070342003148062738}
   - {fileID: 1531970000303284210}
   - {fileID: 5659673096790038356}
+  - {fileID: 9103744188132957396}
   m_Father: {fileID: 4703789953391855662}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
