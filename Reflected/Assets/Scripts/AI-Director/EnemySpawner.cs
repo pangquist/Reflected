@@ -48,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        //Debug.Log(Time.frameCount);
+        //Debug.Log("Enemy spawned at frame " + Time.frameCount);
 
         GetBiasedEnemy();
         if (spawnTransforms.Count <= 0) GetSpawnlocations();
