@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatSystem : StatSystem, ISavable
+public class PlayerStatSystem : StatSystem //, ISavable
 {
     Player player;
     UpgradeManager upgradeManager;
@@ -17,7 +17,7 @@ public class PlayerStatSystem : StatSystem, ISavable
         }
         catch (Exception e)
         {
-
+            
         }
 
         GetLightStats();
@@ -125,41 +125,41 @@ public class PlayerStatSystem : StatSystem, ISavable
 
     
 
-    public object SaveState()
-    {
-        return new SaveData()
-        {
-            maxHealthIncrease = this.maxHealthIncrease,
-            damageIncrease = this.damageIncrease,
-            movementSpeed = this.movementSpeed,
-            damageReduction = this.damageReduction,
-            attackSpeed = this.attackSpeed,
-            areaOfEffect = this.areaOfEffect,
-            cooldownDecrease = this.cooldownDecrease
-        };
-    }
+    //public object SaveState()
+    //{
+    //    return new SaveData()
+    //    {
+    //        maxHealthIncrease = this.maxHealthIncrease,
+    //        damageIncrease = this.damageIncrease,
+    //        movementSpeed = this.movementSpeed,
+    //        damageReduction = this.damageReduction,
+    //        attackSpeed = this.attackSpeed,
+    //        areaOfEffect = this.areaOfEffect,
+    //        cooldownDecrease = this.cooldownDecrease
+    //    };
+    //}
 
-    public void LoadState(object state)
-    {
-        var saveData = (SaveData)state;
-        maxHealthIncrease = saveData.maxHealthIncrease;
-        damageIncrease = saveData.damageIncrease;
-        movementSpeed = saveData.movementSpeed;
-        damageReduction = saveData.damageReduction;
-        attackSpeed = saveData.attackSpeed;
-        areaOfEffect = saveData.areaOfEffect;
-        cooldownDecrease = saveData.cooldownDecrease;
-    }
+    //public void LoadState(object state)
+    //{
+    //    var saveData = (SaveData)state;
+    //    maxHealthIncrease = saveData.maxHealthIncrease;
+    //    damageIncrease = saveData.damageIncrease;
+    //    movementSpeed = saveData.movementSpeed;
+    //    damageReduction = saveData.damageReduction;
+    //    attackSpeed = saveData.attackSpeed;
+    //    areaOfEffect = saveData.areaOfEffect;
+    //    cooldownDecrease = saveData.cooldownDecrease;
+    //}
 
-    [Serializable]
-    private struct SaveData
-    {
-        public float maxHealthIncrease;
-        public float damageReduction;
-        public float movementSpeed;
-        public float damageIncrease;
-        public float attackSpeed;
-        public float areaOfEffect;
-        public float cooldownDecrease;
-    }
+    //[Serializable]
+    //private struct SaveData
+    //{
+    //    public float maxHealthIncrease;
+    //    public float damageReduction;
+    //    public float movementSpeed;
+    //    public float damageIncrease;
+    //    public float attackSpeed;
+    //    public float areaOfEffect;
+    //    public float cooldownDecrease;
+    //}
 }

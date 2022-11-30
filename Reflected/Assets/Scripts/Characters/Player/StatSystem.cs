@@ -78,7 +78,7 @@ public class StatSystem : MonoBehaviour
         attackSpeed = 1;
         areaOfEffect = 1;
         attackSpeed = 1;
-        cooldownDecrease = 0;
+        cooldownDecrease = 1;
         chargesToSwapTrue = 0;
         chargesToSwapMirror = 0;
         

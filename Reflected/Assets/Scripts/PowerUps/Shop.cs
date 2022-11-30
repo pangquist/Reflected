@@ -97,6 +97,10 @@ public class Shop : MonoBehaviour
             {
                 shopItems[i + numberOfPowerUps].GetComponent<Health>().SetProperties(rarityTiers.GetRandom());
             }
+            else if(shopItems[i + numberOfPowerUps].GetComponent<MirrorCharge>() != null)
+            {
+                shopItems[i + numberOfPowerUps].GetComponent<MirrorCharge>().SetProperties(rarityTiers.GetRandom());
+            }
         }
         totalNumberOfItems = numberOfPowerUps + numberOfCollectableItems;
     }
