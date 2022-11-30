@@ -115,11 +115,13 @@ public class UiManager: MonoBehaviour
 
     public void BackToMenu()
     {
+        GameObject.Find("GameManager").GetComponent<GameManager>().Save();
         SceneManager.LoadScene(0);
     }
 
     public void Quit()
     {
+        GameObject.Find("GameManager").GetComponent<GameManager>().Save();
         Exit.ExitApplication();
     }
 
