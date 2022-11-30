@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -41,6 +42,22 @@ public class EnemySpawner : MonoBehaviour
             SpawnFunction(enemyAmount, enemyAdaptiveDifficulty);
         }
     }
+    private IEnumerator SpawnEnemy(float adaptiveDifficulty, int frameWait)
+    {
+        for (int i = 0; i <= frameWait; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        //Debug.Log(Time.frameCount);
+
+        GetBiasedEnemy();
+        if (spawnTransforms.Count <= 0) GetSpawnlocations();
+        spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+        Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponentInChildren<Enemy>();
+        enemy.AdaptiveDifficulty(adaptiveDifficulty);
+
+        spawnTransforms.Remove(spawnLocation);
+    }
 
     private void SpawnFunction(int amount, float adaptiveDifficulty)
     {
@@ -48,12 +65,7 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int i = 0; i < amount; i++)
             {
-                GetBiasedEnemy();
-                if (spawnTransforms.Count <= 0) GetSpawnlocations();
-                spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-                Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponentInChildren<Enemy>();
-                enemy.AdaptiveDifficulty(adaptiveDifficulty);
-                spawnTransforms.Remove(spawnLocation);
+                StartCoroutine(SpawnEnemy(adaptiveDifficulty, i));
             }
         }
         catch
