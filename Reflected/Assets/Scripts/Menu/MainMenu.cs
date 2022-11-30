@@ -71,4 +71,10 @@ public class MainMenu : Menu
         SceneManager.LoadScene(gameSceneName);
     }
 
+    private IEnumerator LoadGameScene()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(gameSceneName);
+    }
+
 }
