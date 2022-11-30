@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MainMenu : Menu
 {
+    string gameSceneName = "Game Scene";
+
     protected override void Start()
     {
         CheckForSavedRun();
@@ -62,6 +64,11 @@ public class MainMenu : Menu
     public void OnClick_Exit()
     {
         Exit.ExitApplication();
+    }
+
+    public void OnClick_Start()
+    {
+        SceneManager.LoadScene(gameSceneName);
     }
 
 }
