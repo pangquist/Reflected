@@ -17,6 +17,7 @@ public class UiManager: MonoBehaviour
     private UiState state;
     [SerializeField] GameObject uiPanel;
     [SerializeField] GameObject CurrencyPanel;
+    [SerializeField] GameObject roominfoPanel;
     [SerializeField] GameObject inGameMenu;
     [SerializeField] GameObject shopPanel;
     [SerializeField] GameObject upgradePanel;
@@ -46,11 +47,13 @@ public class UiManager: MonoBehaviour
         {
             CurrencyPanel.SetActive(true);
             uiPanel.SetActive(true);
+            roominfoPanel.SetActive(true);
         }
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             uiPanel.SetActive(false);
             CurrencyPanel.SetActive(false);
+            roominfoPanel.SetActive(false);
         }
     }
 
@@ -67,6 +70,7 @@ public class UiManager: MonoBehaviour
                 shopPanel.SetActive(false);
                 uiPanel.SetActive(false);
                 CurrencyPanel.SetActive(false);
+                roominfoPanel.SetActive(false);
                 interactText.SetActive(false);
                 inGameMenu.SetActive(true);
             }

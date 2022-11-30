@@ -19,11 +19,19 @@ public class UiPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI mirrorShard;
     [SerializeField] TextMeshProUGUI gems;
 
+    [Header("Room Info")]
+    [SerializeField] TextMeshProUGUI killCountText;
+    [SerializeField] TextMeshProUGUI clearedRoomsText;
+    [SerializeField] TextMeshProUGUI averageTimeText;
+
+
     private PlayerStatSystem statSystem;
     private Player player;
+    private AiDirector aiDirector;
     void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
+        aiDirector = FindObjectOfType<AiDirector>();
     }
 
     void Update()
@@ -42,5 +50,9 @@ public class UiPanel : MonoBehaviour
         gems.text = inventory.inventory[1].stackSize.ToString();
         mirrorShard.text = inventory.inventory[2].stackSize.ToString();
         trueShard.text = inventory.inventory[3].stackSize.ToString();
+
+        killCountText.text = "Kill Count: " + aiDirector.GetKillCount().ToString();
+        clearedRoomsText.text = "Cleared Rooms: " + aiDirector.GetClearedRooms().ToString();
+        averageTimeText.text = "Average Room Clear Time: " + aiDirector.GetAverageTime().ToString() + " s";
     }
 }

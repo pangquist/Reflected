@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class NewGameMenu : Menu
 {
-    TextMeshPro tipText;
+    TextMeshProUGUI tipText;
     string[] tipList = new string[] 
     { 
         "try not to die",
@@ -39,13 +39,13 @@ public class NewGameMenu : Menu
         "Marcus is mining bitcoin on your computer in the background while you play",
         "If you pirate the game, Valter will knock on your door. He is the danger",
         "If you play the sound of George in reverse, you will hear that it is actually Gustaf singing",
-        "During development the team consumed a collected amout of coffee weighing the same as a small elephant",
+        "During development the team consumed a collected amount of coffee weighing the same as a small elephant",
         "If you do not swap dimension every now and then, a flasher will start chasing you"
     };
 
     protected override void Start()
     {
-        tipText = GameObject.Find("Tip-text").GetComponent<TextMeshPro>();
+        tipText = GameObject.Find("Tip-text").GetComponent<TextMeshProUGUI>();
         tipText.text = "Usefull Tip: " + tipList[Random.Range(0, tipList.Length - 1)];
     }
 

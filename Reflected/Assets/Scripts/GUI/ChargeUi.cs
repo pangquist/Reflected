@@ -9,7 +9,6 @@ public class ChargeUi : MonoBehaviour
     [SerializeField] GameObject chargeParent;
     [SerializeField] Color chargeColor;
     [SerializeField] float alpha;
-    [SerializeField] Sprite chargeImage;
     private Color greyedChargeColor;
     private DimensionManager dimensionManager;
     List<GameObject> chargeList = new List<GameObject>();
