@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -53,6 +54,6 @@ public class UiPanel : MonoBehaviour
 
         killCountText.text = "Kill Count: " + aiDirector.GetKillCount().ToString();
         clearedRoomsText.text = "Cleared Rooms: " + aiDirector.GetClearedRooms().ToString();
-        averageTimeText.text = "Average Room Clear Time: " + aiDirector.GetAverageTime().ToString() + " s";
+        averageTimeText.text = "Average Room Clear Time: " + Math.Round(aiDirector.GetAverageTime()).ToString() + " s";
     }
 }
