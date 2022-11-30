@@ -67,6 +67,57 @@ public class StatSystem : MonoBehaviour
         chargesToSwapMirror += amount;
     }
 
+    public void SubtractMaxHealth(float amount)
+    {
+        maxHealthIncrease -= amount;
+
+        Character character = GetComponent<Character>();
+        if (character)
+            character.HealthChanged.Invoke();
+        else
+            Debug.Log("StatSystem not on character. No HealthChanged event to invoke");
+    }
+
+    public void SubtractDamageReduction(float amount)
+    {
+        damageReduction /= (1 - amount);
+    }
+
+    public void SubtractMovementSpeed(float amount)
+    {
+        movementSpeed -= amount;
+    }
+
+    public void SubtractDamageIncrease(float amount)
+    {
+        damageIncrease -= amount;
+    }
+
+    public void SubtractAttackSpeed(float amount)
+    {
+        attackSpeed /= (1 - amount);
+    }
+
+    public void SubtractAreaOfEffect(float amount)
+    {
+        areaOfEffect -= amount;
+    }
+
+    public void SubtractCooldownDecrease(float amount)
+    {
+        cooldownDecrease /= (1 - amount);
+    }
+
+    public void SubtractChangeChargesToSwapTrue(int amount)
+    {
+        chargesToSwapTrue -= amount;
+    }
+
+    public void SubtractChangeChargesToSwapMirror(int amount)
+    {
+        chargesToSwapMirror -= amount;
+    }
+
 
     public void ResetStats()
     {

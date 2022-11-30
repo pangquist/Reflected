@@ -31,11 +31,13 @@ public class PlayerStatSystem : StatSystem //, ISavable
         //ResetStats();
 
         Dictionary<string, float> stats = upgradeManager.GetTrueNodes();
+        SubtractStats(upgradeManager.GetMirrorNodes());
 
         foreach (KeyValuePair<string, float> pair in stats)
         {
             if (pair.Key == "Damage")
             {
+
                 AddDamageIncrease(pair.Value);
             }
             else if (pair.Key == "Damage Reduction")
@@ -73,6 +75,49 @@ public class PlayerStatSystem : StatSystem //, ISavable
         }
     }
 
+    public void SubtractStats(Dictionary<string, float> statsToRemove)
+    {
+        foreach (KeyValuePair<string, float> pair in statsToRemove)
+        {
+            if (pair.Key == "Damage")
+            {
+                SubtractDamageIncrease(pair.Value);
+            }
+            else if (pair.Key == "Damage Reduction")
+            {
+                SubtractDamageReduction(pair.Value);
+            }
+            else if (pair.Key == "Movement Speed")
+            {
+                SubtractMovementSpeed(pair.Value);
+            }
+            else if (pair.Key == "Health")
+            {
+                SubtractMaxHealth(pair.Value);
+            }
+            else if (pair.Key == "Attack Speed")
+            {
+                SubtractAttackSpeed(pair.Value);
+            }
+            else if (pair.Key == "AoE")
+            {
+                SubtractAreaOfEffect(pair.Value);
+            }
+            else if (pair.Key == "Cooldown")
+            {
+                SubtractCooldownDecrease(pair.Value);
+            }
+            else if (pair.Key == "True Charges")
+            {
+                SubtractChangeChargesToSwapTrue((int)pair.Value);
+            }
+            else if (pair.Key == "Mirror Charges")
+            {
+                SubtractChangeChargesToSwapMirror((int)pair.Value);
+            }
+        }
+    }
+
     public void GetDarkStats()
     {
         if (!upgradeManager)
@@ -81,6 +126,7 @@ public class PlayerStatSystem : StatSystem //, ISavable
         //ResetStats();
 
         Dictionary<string, float> stats = upgradeManager.GetMirrorNodes();
+        SubtractStats(upgradeManager.GetTrueNodes());
 
         foreach (KeyValuePair<string, float> pair in stats)
         {
