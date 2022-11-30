@@ -6,7 +6,7 @@ public class TerrainFlattener : MonoBehaviour
 {
     [SerializeField] private bool drawGizmos = true;
     [SerializeField] private float innerRadius = 6;
-    [SerializeField] private float fade = 8;
+    [SerializeField] private float fade = 10;
     [SerializeField] private LayerMask layerMask;
 
     private static Vector3 terrainChunkOffset;
