@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class Destructible : MonoBehaviour
 {
-    bool beingDestroyed;
+    private bool beingDestroyed;
+
+    private void Awake()
+    {
+        MapGenerator.Finished.AddListener(EnableCollider);
+    }
+
+    private void EnableCollider()
+    {
+        GetComponent<Collider>().enabled = true;
+    }
+
     public void DestroyAnimation()
     {
         if (beingDestroyed)
             return;
-        //Play animation that destroys the object instead of calling Destroy(gameObject).
+
+        // Play animation that destroys the object instead of calling Destroy(gameObject).
         if (GetComponent<Animator>())
         {
             GetComponent<Animator>().Play("Destroy");
@@ -17,7 +29,6 @@ public class Destructible : MonoBehaviour
         }
         else
             Destroy(gameObject);
-
     }
 
     public void DestroyObject()
