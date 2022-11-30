@@ -18,6 +18,4 @@ public class Whirlwind : Ability
         sword.ClearEnemies();
         return base.GetAnimation();
     }
-
-    
 }
