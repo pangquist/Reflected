@@ -29,6 +29,11 @@ public class TechTreeNode : MonoBehaviour, ISavable
     [SerializeField] bool isPlaceable;
     [SerializeField] bool isActive;
 
+    [SerializeField] bool specialOne;
+    [SerializeField] bool specialTwo;
+    [SerializeField] bool specialThree;
+    [SerializeField] bool specialFour;
+
     [Header("Stat Changes")]
     [SerializeField] List<string> modifiedValue;
     [SerializeField] List<float> value;
@@ -117,6 +122,26 @@ public class TechTreeNode : MonoBehaviour, ISavable
     public bool IsMirror()
     {
         return isMirror;
+    }
+
+    public bool SpecialOne()
+    {
+        return specialOne;
+    }
+
+    public bool SpecialTwo()
+    {
+        return specialTwo;
+    }
+
+    public bool SpecialThree()
+    {
+        return specialThree;
+    }
+
+    public bool SpecialFour()
+    {
+        return specialFour;
     }
 
     public List<string> GetVariables()

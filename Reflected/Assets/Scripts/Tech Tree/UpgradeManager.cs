@@ -36,8 +36,23 @@ public class UpgradeManager : MonoBehaviour
         {
             List<string> variables = node.GetVariables();
             List<float> values = node.GetValues();
+            if (node.SpecialOne())
+            {
 
-            if (node.IsMirror())
+            }
+            else if (node.SpecialTwo())
+            {
+
+            }
+            else if (node.SpecialThree())
+            {
+
+            }
+            else if (node.SpecialFour())
+            {
+                GameObject.FindObjectOfType<Player>().Heal(999);
+            }
+            else if (node.IsMirror())
             {
                 for (int i = 0; i < variables.Count; i++)
                 {
