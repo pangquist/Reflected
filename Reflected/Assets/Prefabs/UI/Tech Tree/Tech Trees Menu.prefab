@@ -109,7 +109,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 1
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -331,14 +331,16 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
   specialFour: 0
   modifiedValue:
   - Mirror Charges
+  - True Charges
   value:
+  - -1
   - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
@@ -551,7 +553,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -756,8 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
-    by 1.
+  description: 
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -777,7 +778,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -999,7 +1000,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -1202,8 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
-    by 1.
+  description: 
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -1218,7 +1218,7 @@ MonoBehaviour:
   gemCost: 1
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 1
@@ -1435,7 +1435,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -2420,8 +2420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
-    by 1.
+  description: Reduces the Cooldown of abilities in the Mirror Dimension by 10%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -2433,19 +2432,21 @@ MonoBehaviour:
   - {fileID: 7110399015950753652}
   - {fileID: 4673772985315411791}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
-  resourceCost: 0
+  resourceCost: 10
   hasGemCost: 0
   gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
   gemCost: 0
-  isMirror: 0
+  isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
   specialFour: 0
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - Cooldown
+  value:
+  - 0.1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &9167445076072618364
@@ -2640,8 +2641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
-    by 1.
+  description: 
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -2658,7 +2658,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -2859,8 +2859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
-    by 1.
+  description: Increases Attack Speed in the Mirror Dimension by 10%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -2870,19 +2869,21 @@ MonoBehaviour:
   - {fileID: 8129330217812322673}
   - {fileID: 7606717066356875660}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
-  resourceCost: 0
+  resourceCost: 10
   hasGemCost: 0
   gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
   gemCost: 0
-  isMirror: 0
+  isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
   specialFour: 0
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - Attack Speed
+  value:
+  - 0.1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &1362264989482311502
@@ -3094,7 +3095,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -3318,7 +3319,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -3535,7 +3536,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -3754,7 +3755,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -3973,7 +3974,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -4178,8 +4179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
-    by 1.
+  description: Reduces the Cooldown of abilities in the True Dimension by 10%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -4188,20 +4188,22 @@ MonoBehaviour:
   - {fileID: 2633290739023729539}
   - {fileID: 7110399015950753652}
   - {fileID: 6583572397303350118}
-  resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
-  resourceCost: 0
+  resource: {fileID: 11400000, guid: 45cf331588cc0a94c86deeb7792edb24, type: 2}
+  resourceCost: 10
   hasGemCost: 0
   gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
   specialFour: 0
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - Cooldown
+  value:
+  - 0.1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &785793325008652055
@@ -4413,7 +4415,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -4618,7 +4620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Increases Damage in the True Dimension by 10% each.
+  description: Increases Damage in the True Dimension by 10%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -4634,7 +4636,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -4855,7 +4857,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -5075,7 +5077,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -5278,7 +5280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
+  description: Decreases the amount of charges required to Swap to the Mirror Dimension
     by 1.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
@@ -5290,19 +5292,23 @@ MonoBehaviour:
   - {fileID: 6583572397303350118}
   - {fileID: 2554683838231738605}
   resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
-  resourceCost: 0
+  resourceCost: 10
   hasGemCost: 0
   gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
   gemCost: 0
-  isMirror: 0
+  isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
   specialFour: 0
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - True Charges
+  - Mirror Charges
+  value:
+  - -1
+  - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &7838153518683614610
@@ -5497,7 +5503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Increases Damage in the Mirror Dimension by 10% each.
+  description: Increases Damage in the Mirror Dimension by 10%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -5514,7 +5520,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -5734,7 +5740,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -5953,7 +5959,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -6172,7 +6178,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -6391,7 +6397,7 @@ MonoBehaviour:
   gemCost: 1
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -6610,7 +6616,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -6828,7 +6834,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -7049,7 +7055,7 @@ MonoBehaviour:
   gemCost: 1
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 1
   specialTwo: 0
   specialThree: 0
@@ -7268,7 +7274,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -7473,8 +7479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
-    by 1.
+  description: Increases Attack Speed in the True Dimension by 10%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -7485,20 +7490,22 @@ MonoBehaviour:
   - {fileID: 7606717066356875660}
   - {fileID: 4878887813269588265}
   - {fileID: 6002000361635193990}
-  resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
-  resourceCost: 0
+  resource: {fileID: 11400000, guid: 45cf331588cc0a94c86deeb7792edb24, type: 2}
+  resourceCost: 10
   hasGemCost: 0
   gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
   specialFour: 0
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - Attack Speed
+  value:
+  - 0.1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &5085153061879735174
@@ -7712,7 +7719,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -7917,7 +7924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Increases Attack Speed in the True Dimension by 10% each.
+  description: Increases Attack Speed in the True Dimension by 10%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -7933,7 +7940,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -8154,13 +8161,17 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
   specialFour: 0
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - True Charges
+  - Mirror Charges
+  value:
+  - -1
+  - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &9028805842903537096
@@ -8355,8 +8366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Decreases the amount of charges required to Swap to the True Dimension
-    by 1.
+  description: 
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -8373,7 +8383,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -8574,7 +8584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Increases Attack Speed in the Mirror Dimension by 10% each.
+  description: Increases Attack Speed in the Mirror Dimension by 10%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -8590,7 +8600,7 @@ MonoBehaviour:
   gemCost: 0
   isMirror: 1
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 0
   specialThree: 0
@@ -8810,7 +8820,7 @@ MonoBehaviour:
   gemCost: 1
   isMirror: 0
   isPlaceable: 0
-  isActive: 0
+  isActive: 1
   specialOne: 0
   specialTwo: 1
   specialThree: 0

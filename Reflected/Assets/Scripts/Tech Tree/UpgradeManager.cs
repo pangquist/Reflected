@@ -14,6 +14,8 @@ public class UpgradeManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
+
         UpgradeManager[] array = FindObjectsOfType<UpgradeManager>();
 
         if (array.Length > 1)
@@ -24,7 +26,7 @@ public class UpgradeManager : MonoBehaviour
     {
         trueVariables = new Dictionary<string, float>();
         mirrorVariables = new Dictionary<string, float>();
-        DontDestroyOnLoad(this);
+        GetActiveUpgrades();
     }
 
     public void GetActiveUpgrades()
@@ -50,7 +52,7 @@ public class UpgradeManager : MonoBehaviour
             }
             else if (node.SpecialFour())
             {
-                GameObject.FindObjectOfType<Player>().Heal(999);
+
             }
             else if (node.IsMirror())
             {
@@ -73,7 +75,6 @@ public class UpgradeManager : MonoBehaviour
                 }
             }
         }
-        Destroy(gameObject);
     }
 
     public void AddTree(TechTree tree, Dimension dimension)

@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerStatSystem : StatSystem, ISavable
 {
     Player player;
-    UpgradeManager upgradeManager;
+    [SerializeField] UpgradeManager upgradeManager;
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class PlayerStatSystem : StatSystem, ISavable
         if (!upgradeManager)
             return;
 
-        ResetStats();
+        //ResetStats();
 
         Dictionary<string, float> stats = upgradeManager.GetTrueNodes();
 
@@ -78,7 +78,7 @@ public class PlayerStatSystem : StatSystem, ISavable
         if (!upgradeManager)
             return;
 
-        ResetStats();
+        //ResetStats();
 
         Dictionary<string, float> stats = upgradeManager.GetMirrorNodes();
 
