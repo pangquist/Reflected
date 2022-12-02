@@ -87,11 +87,13 @@ public class UpgradeManager : MonoBehaviour
 
     public Dictionary<string, float> GetTrueNodes()
     {
+        Debug.Log(trueVariables.Count);
         return trueVariables;
     }
 
     public Dictionary<string, float> GetMirrorNodes()
     {
+        Debug.Log(mirrorVariables.Count);
         return mirrorVariables;
     }
 }

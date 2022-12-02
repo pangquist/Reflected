@@ -15,14 +15,6 @@ public class TechTree : MonoBehaviour
             GameObject.Find("Upgrade Manager").GetComponent<UpgradeManager>().AddTree(this, Dimension.True);
         else
             GameObject.Find("Upgrade Manager").GetComponent<UpgradeManager>().AddTree(this, Dimension.Mirror);
-
-        foreach(TechTreeNode node in allNodes)
-        {
-            if (node.IsActive())
-            {
-                activeNodes.Add(node);
-            }
-        }
     }
 
     // Update is called once per frame
@@ -39,6 +31,16 @@ public class TechTree : MonoBehaviour
 
     public List<TechTreeNode> GetActiveNodes()
     {
+        activeNodes.Clear();
+
+        foreach (TechTreeNode node in allNodes)
+        {
+            if (node.isActive)
+            {
+                activeNodes.Add(node);
+            }
+        }
+
         return activeNodes;
     }
 }

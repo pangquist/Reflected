@@ -27,7 +27,7 @@ public class TechTreeNode : MonoBehaviour, ISavable
     [SerializeField] int gemCost;
     [SerializeField] bool isMirror;
     [SerializeField] bool isPlaceable;
-    [SerializeField] bool isActive;
+    [SerializeField] public bool isActive;
 
     [SerializeField] bool specialOne;
     [SerializeField] bool specialTwo;
@@ -85,7 +85,7 @@ public class TechTreeNode : MonoBehaviour, ISavable
 
         foreach (TechTreeNode node in nextNode)
         {
-            if (!node.IsActive())
+            if (!node.isActive)
                 node.SetIsPlaceable(true);
         }
 
@@ -114,10 +114,10 @@ public class TechTreeNode : MonoBehaviour, ISavable
         currentImage.color = isPlaceable ? canBeActivatedColor : deactivatedColor;
     }
 
-    public bool IsActive()
-    {
-        return isActive;
-    }
+    //public bool IsActive()
+    //{
+    //    return isActive;
+    //}
 
     public bool IsMirror()
     {
