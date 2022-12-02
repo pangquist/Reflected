@@ -139,9 +139,10 @@ public class Player : Character, ISavable
 
     public void DoDimensionSwap()
     {
+        SetTimeToNormalFlow();
+        
         if (dimensionManager.TrySwap())
         {
-            SetTimeToNormalFlow();
             ChangeStats();
             if (swapAbility)
                 swapAbility.DoEffect();

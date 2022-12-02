@@ -115,7 +115,6 @@ public class Boss : Enemy
 
     public override void TakeDamage(float damage)
     {
-        GetComponent<AudioSource>().PlayOneShot(hitSounds[Random.Range(0, hitSounds.Count)]);
         //Keep this
     }
 

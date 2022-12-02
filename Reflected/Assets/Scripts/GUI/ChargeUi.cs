@@ -8,25 +8,19 @@ public class ChargeUi : MonoBehaviour
     [SerializeField] GameObject chargeObject;
     [SerializeField] GameObject chargeParent;
     [SerializeField] Color chargeColor;
-    [SerializeField] float alpha;
-    private Color greyedChargeColor;
+    [SerializeField] Color greyedChargeColor;
     private DimensionManager dimensionManager;
     List<GameObject> chargeList = new List<GameObject>();
 
     void Start()
     {
-        
-        greyedChargeColor = chargeColor;
-        greyedChargeColor.a = alpha;
         dimensionManager = FindObjectOfType<DimensionManager>();
         CreateCharges();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         UpdateCharges();
     }
 
@@ -34,13 +28,14 @@ public class ChargeUi : MonoBehaviour
     {
         for (int i = 0; i < dimensionManager.GetMaxCharges(); i++)
         {
-            //Debug.Log(i.ToString());
             if (dimensionManager.GetCurrentCharges() > i)
             {
                 chargeList[i].GetComponent<Image>().color = chargeColor;
             }
             else
+            {
                 chargeList[i].GetComponent<Image>().color = greyedChargeColor;
+            }
         }
     }
 
@@ -52,7 +47,6 @@ public class ChargeUi : MonoBehaviour
         }
         for (int i = 0; i < dimensionManager.GetMaxCharges(); i++)
         {
-            
             if (dimensionManager.GetCurrentCharges() > i)
             {
                 chargeList[i].GetComponent<Image>().color = chargeColor;
