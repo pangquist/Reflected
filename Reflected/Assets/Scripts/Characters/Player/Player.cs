@@ -36,7 +36,7 @@ public class Player : Character, ISavable
     public delegate void InteractWithObject();
     public static event InteractWithObject OnObjectInteraction;
 
-
+    bool specialOne;
 
     protected override void Awake()
     {
@@ -46,6 +46,7 @@ public class Player : Character, ISavable
 
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
         musicManager = dimensionManager.GetComponentInChildren<MusicManager>();
+        specialOne = false;
 
         currentWeapon.gameObject.SetActive(true);
         currentWeapon.SetDamage(damage);
@@ -144,7 +145,7 @@ public class Player : Character, ISavable
         if (dimensionManager.TrySwap())
         {
             ChangeStats();
-            if (swapAbility)
+            if (specialOne)
                 swapAbility.DoEffect();
 
             if(DimensionManager.CurrentDimension == Dimension.True)
@@ -184,6 +185,8 @@ public class Player : Character, ISavable
     {
         return stats;
     }
+
+    public bool SpecialOne { get { return specialOne; } set { specialOne = value; }  }
 
     public Animator GetAnim()
     {

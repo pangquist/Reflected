@@ -46,7 +46,6 @@ public class PlayerStatSystem : StatSystem //, ISavable
         {
             if (pair.Key == "Damage")
             {
-
                 AddDamageIncrease(pair.Value);
             }
             else if (pair.Key == "Damage Reduction")
@@ -80,6 +79,10 @@ public class PlayerStatSystem : StatSystem //, ISavable
             else if (pair.Key == "Mirror Charges")
             {
                 ChangeChargesToSwapMirror((int)pair.Value);
+            }
+            else if(pair.Key == "Special One")
+            {
+                player.SpecialOne = true;
             }
         }
     }

@@ -39,23 +39,7 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log("Active nodes");
             List<string> variables = node.GetVariables();
             List<float> values = node.GetValues();
-            if (node.SpecialOne())
-            {
-
-            }
-            else if (node.SpecialTwo())
-            {
-
-            }
-            else if (node.SpecialThree())
-            {
-
-            }
-            else if (node.SpecialFour())
-            {
-
-            }
-            else if (node.IsMirror())
+            if (node.IsMirror())
             {
                 for (int i = 0; i < variables.Count; i++)
                 {
@@ -88,13 +72,12 @@ public class UpgradeManager : MonoBehaviour
 
     public Dictionary<string, float> GetTrueNodes()
     {
-        Debug.Log(trueVariables.Count);
         return trueVariables;
     }
 
     public Dictionary<string, float> GetMirrorNodes()
     {
-        Debug.Log(mirrorVariables.Count);
+
         return mirrorVariables;
     }
 }
