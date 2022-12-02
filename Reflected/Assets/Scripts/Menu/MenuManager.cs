@@ -23,16 +23,37 @@ public class MenuManager : MonoBehaviour
             { Menu.Type.Credits, creditsMenu }
         };
 
-        foreach (KeyValuePair<Menu.Type, Menu> menu in menus)
-            menu.Value.gameObject.SetActive(false);
+        Vector2 pos = new Vector2();
 
-        startMenu.gameObject.SetActive(true);
+        foreach (KeyValuePair<Menu.Type, Menu> menu in menus)
+        {
+            pos = menu.Value.gameObject.GetComponent<RectTransform>().anchoredPosition;
+            pos.x += 10000;
+            menu.Value.gameObject.GetComponent<RectTransform>().anchoredPosition = pos;
+        }
+
+        //menu.Value.gameObject.SetActive(false);
+
+        //startMenu.gameObject.SetActive(true);
+
+        pos = startMenu.gameObject.GetComponent<RectTransform>().anchoredPosition;
+        pos.x -= 10000;
+        startMenu.gameObject.GetComponent<RectTransform>().anchoredPosition = pos;
     }
 
     public void SwapMenu(Menu callerMenu, Menu.Type menu)
     {
-        callerMenu.gameObject.SetActive(false);
-        menus[menu].gameObject.SetActive(true);
+        Vector2 pos = callerMenu.gameObject.GetComponent<RectTransform>().anchoredPosition;
+        pos.x += 10000;
+        callerMenu.gameObject.GetComponent<RectTransform>().anchoredPosition = pos;
+
+        pos = menus[menu].gameObject.GetComponent<RectTransform>().anchoredPosition;
+        pos.x -= 10000;
+        menus[menu].gameObject.GetComponent<RectTransform>().anchoredPosition = pos;
+
+
+        //callerMenu.gameObject.SetActive(false);
+        //menus[menu].gameObject.SetActive(true);
     }
 
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerStatSystem : StatSystem //, ISavable
 {
     Player player;
+    bool first;
     [SerializeField] UpgradeManager upgradeManager;
 
     private void Start()
@@ -19,7 +20,7 @@ public class PlayerStatSystem : StatSystem //, ISavable
         {
             
         }
-
+        first = true;
         GetLightStats();
     }
 
@@ -31,7 +32,15 @@ public class PlayerStatSystem : StatSystem //, ISavable
         //ResetStats();
 
         Dictionary<string, float> stats = upgradeManager.GetTrueNodes();
-        SubtractStats(upgradeManager.GetMirrorNodes());
+
+        if (first)
+        {
+            first = false;
+        }
+        else
+        {
+            SubtractStats(upgradeManager.GetMirrorNodes());
+        }
 
         foreach (KeyValuePair<string, float> pair in stats)
         {

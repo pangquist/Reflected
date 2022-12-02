@@ -15,7 +15,11 @@ public class StartMenu : Menu
             Exit.ExitApplication();
 
         else if (Input.anyKeyDown)
+        {
             menuManager.SwapMenu(this, Type.Main);
+            this.gameObject.SetActive(false);
+        }
+            
     }
 
     protected override void OnEnable()
