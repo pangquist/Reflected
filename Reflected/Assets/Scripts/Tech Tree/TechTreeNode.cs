@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TechTreeNode : MonoBehaviour
+public class TechTreeNode : MonoBehaviour, ISavable
 {
 
     [Header("Node Description")]
@@ -24,12 +25,18 @@ public class TechTreeNode : MonoBehaviour
     [SerializeField] bool hasGemCost;
     [SerializeField] ItemData gemResource;
     [SerializeField] int gemCost;
+    [SerializeField] bool isMirror;
     [SerializeField] bool isPlaceable;
-    bool isActive;
+    [SerializeField] public bool isActive;
+
+    [SerializeField] bool specialOne;
+    [SerializeField] bool specialTwo;
+    [SerializeField] bool specialThree;
+    [SerializeField] bool specialFour;
 
     [Header("Stat Changes")]
-    [SerializeField] string modifiedValue;
-    [SerializeField] float value;
+    [SerializeField] List<string> modifiedValue;
+    [SerializeField] List<float> value;
 
     [SerializeField] TextMeshProUGUI nodeEffectText;
     [SerializeField] TextMeshProUGUI nodeCostText;
@@ -57,17 +64,28 @@ public class TechTreeNode : MonoBehaviour
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
     }
 
+    void Update()
+    {
+        if (isActive)
+        {
+            currentImage.color = activatedColor;
+        }
+        else if (isPlaceable)
+        {
+            currentImage.color = canBeActivatedColor;
+        }
+    }
+
     public void PlaceInMirror()
     {
         if (!CanBePlaced())
             return;
 
         techTree.PlaceNode(this);
-        currentImage.color = activatedColor;
 
         foreach (TechTreeNode node in nextNode)
         {
-            if (!node.IsActive())
+            if (!node.isActive)
                 node.SetIsPlaceable(true);
         }
 
@@ -101,12 +119,37 @@ public class TechTreeNode : MonoBehaviour
         return isActive;
     }
 
-    public string GetVariable()
+    public bool IsMirror()
+    {
+        return isMirror;
+    }
+
+    public bool SpecialOne()
+    {
+        return specialOne;
+    }
+
+    public bool SpecialTwo()
+    {
+        return specialTwo;
+    }
+
+    public bool SpecialThree()
+    {
+        return specialThree;
+    }
+
+    public bool SpecialFour()
+    {
+        return specialFour;
+    }
+
+    public List<string> GetVariables()
     {
         return modifiedValue;
     }
 
-    public float GetValue()
+    public List<float> GetValues()
     {
         return value;
     }
@@ -124,5 +167,28 @@ public class TechTreeNode : MonoBehaviour
     {
         nodeEffectText.text = "";
         nodeCostText.text = "";
+    }
+
+    public object SaveState()
+    {
+        return new SaveData()
+        {
+            placeable = isPlaceable,
+            active = isActive
+        };
+    }
+
+    public void LoadState(object state)
+    {
+        var saveData = (SaveData)state;
+        SetIsPlaceable(saveData.placeable);
+        SetIsActive(saveData.active);
+    }
+
+    [Serializable]
+    private struct SaveData
+    {
+        public bool placeable;
+        public bool active;
     }
 }

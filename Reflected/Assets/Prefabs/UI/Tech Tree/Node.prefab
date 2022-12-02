@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3048423976050684655}
   - component: {fileID: 3048423976050684652}
   - component: {fileID: 3048423976050684653}
+  - component: {fileID: 8935581735082480969}
   m_Layer: 5
   m_Name: Node
   m_TagString: Untagged
@@ -38,7 +39,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 6.4596863, y: -4.999939}
+  m_AnchoredPosition: {x: 6.459717, y: -4.999939}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3048423976050684625
@@ -102,9 +103,10 @@ MonoBehaviour:
   hasGemCost: 0
   gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
   gemCost: 0
+  isMirror: 0
   isPlaceable: 0
-  modifiedValue: True Charges
-  value: -1
+  modifiedValue: []
+  value: []
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &3048423976050684652
@@ -208,3 +210,16 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8935581735082480969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3048423976050684651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4f5bed6ff913a4483b2d55da1fa3df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 

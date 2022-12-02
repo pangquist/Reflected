@@ -14,6 +14,8 @@ public class UpgradeManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
+
         UpgradeManager[] array = FindObjectsOfType<UpgradeManager>();
 
         if (array.Length > 1)
@@ -24,31 +26,56 @@ public class UpgradeManager : MonoBehaviour
     {
         trueVariables = new Dictionary<string, float>();
         mirrorVariables = new Dictionary<string, float>();
-        DontDestroyOnLoad(this);
     }
 
     public void GetActiveUpgrades()
     {
         trueVariables.Clear();
         mirrorVariables.Clear();
+        Debug.Log(trueTechTree.GetActiveNodes().Count);
 
         foreach (TechTreeNode node in trueTechTree.GetActiveNodes())
         {
-            if (!trueVariables.ContainsKey(node.GetVariable()))
-                trueVariables.Add(node.GetVariable(), node.GetValue());
-            else
-                trueVariables[node.GetVariable()] += node.GetValue();
-        }
+            Debug.Log("Active nodes");
+            List<string> variables = node.GetVariables();
+            List<float> values = node.GetValues();
+            if (node.SpecialOne())
+            {
 
-        foreach (TechTreeNode node in mirrorTechTree.GetActiveNodes())
-        {
-            if (!mirrorVariables.ContainsKey(node.GetVariable()))
-                mirrorVariables.Add(node.GetVariable(), node.GetValue());
-            else
-                mirrorVariables[node.GetVariable()] += node.GetValue();
-        }
+            }
+            else if (node.SpecialTwo())
+            {
 
-        Destroy(gameObject);
+            }
+            else if (node.SpecialThree())
+            {
+
+            }
+            else if (node.SpecialFour())
+            {
+
+            }
+            else if (node.IsMirror())
+            {
+                for (int i = 0; i < variables.Count; i++)
+                {
+                    if (!mirrorVariables.ContainsKey(variables[i]))
+                        mirrorVariables.Add(variables[i], values[i]);
+                    else
+                        mirrorVariables[variables[i]] += values[i];
+                }
+            }
+            else
+            {
+                for (int i = 0; i < variables.Count; i++)
+                {
+                    if (!trueVariables.ContainsKey(variables[i]))
+                        trueVariables.Add(variables[i], values[i]);
+                    else
+                        trueVariables[variables[i]] += values[i];
+                }
+            }
+        }
     }
 
     public void AddTree(TechTree tree, Dimension dimension)
@@ -61,11 +88,13 @@ public class UpgradeManager : MonoBehaviour
 
     public Dictionary<string, float> GetTrueNodes()
     {
+        Debug.Log(trueVariables.Count);
         return trueVariables;
     }
 
     public Dictionary<string, float> GetMirrorNodes()
     {
+        Debug.Log(mirrorVariables.Count);
         return mirrorVariables;
     }
 }

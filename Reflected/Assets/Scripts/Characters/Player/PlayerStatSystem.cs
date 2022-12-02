@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerStatSystem : StatSystem //, ISavable
 {
     Player player;
-    UpgradeManager upgradeManager;
+    [SerializeField] UpgradeManager upgradeManager;
 
     private void Start()
     {
