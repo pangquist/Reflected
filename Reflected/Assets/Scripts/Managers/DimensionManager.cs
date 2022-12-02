@@ -67,8 +67,6 @@ public class DimensionManager : MonoBehaviour
     {
         musicManager = GameObject.Find("Music Manager").GetComponent<MusicManager>();
         currentDimension = Dimension.True;
-        //SetDimension(Dimension.True);
-        UpdateChargeBar();
     }
 
     /// <summary>
@@ -141,7 +139,6 @@ public class DimensionManager : MonoBehaviour
     public void SetMaxCharges(int newCharges)
     {
         maximumCharges = newCharges;
-        UpdateChargeBar();
     }
 
     public int GetCurrentCharges()
@@ -156,30 +153,16 @@ public class DimensionManager : MonoBehaviour
     public void GainCharges(int addCharges)
     {
         currentCharges = Mathf.Clamp(currentCharges + addCharges, 0, maximumCharges);
-        UpdateChargeBar();
     }
 
     public void ResetCharges()
     {
         currentCharges = 0;
-        UpdateChargeBar();
     }
 
     public void SetStatSystem(PlayerStatSystem newStatSystem)
     {
         statSystem = newStatSystem;
-    }
-
-    private void UpdateChargeBar()
-    {
-        if (SceneManager.GetActiveScene().name == "Start Scene")
-            return;
-
-        //Slider chargeSlider = chargeBar.GetComponent<Slider>();
-        //TMP_Text sliderText = chargeBar.transform.Find("ChargeText").GetComponent<TMP_Text>();
-
-        //chargeSlider.value = maximumCharges == 0 ? 1f : (float)currentCharges / (float)maximumCharges;
-        //sliderText.text = currentCharges + " / " + maximumCharges;
     }
 
     public void FindSystems()

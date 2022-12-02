@@ -56,7 +56,6 @@ public class Dash : Ability
             //    return;
 
             isDashing = false;
-            playerController.UnlockPlayer();
             GetComponent<Animator>().Play("Headbutt");
 
             //Make a new dash that damages the enemy and remove this (can be a power up or upgrade?)
