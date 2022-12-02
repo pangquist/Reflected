@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.096585214, g: 0.2178393, b: 0.36881712, a: 1}
+  m_IndirectSpecularColor: {r: 0.09671548, g: 0.21786425, b: 0.36861145, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2902,12 +2902,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1027515175}
+      objectReference: {fileID: 911927663}
     - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 911927663}
+      objectReference: {fileID: 1027515175}
     - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -2916,22 +2916,22 @@ PrefabInstance:
     - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnClick_Start
-      objectReference: {fileID: 0}
-    - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: GetActiveUpgrades
       objectReference: {fileID: 0}
     - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnClick_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NewGameMenu, Assembly-CSharp
+      value: UpgradeManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UpgradeManager, Assembly-CSharp
+      value: NewGameMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2129893453708287470, guid: 991bd7bf55ba94db0a07179dc186ba32,
         type: 3}

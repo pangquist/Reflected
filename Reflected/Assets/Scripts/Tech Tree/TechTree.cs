@@ -31,16 +31,6 @@ public class TechTree : MonoBehaviour
 
     public List<TechTreeNode> GetActiveNodes()
     {
-        activeNodes.Clear();
-
-        foreach (TechTreeNode node in allNodes)
-        {
-            if (node.isActive)
-            {
-                activeNodes.Add(node);
-            }
-        }
-
         return activeNodes;
     }
 }

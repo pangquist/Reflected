@@ -26,16 +26,17 @@ public class UpgradeManager : MonoBehaviour
     {
         trueVariables = new Dictionary<string, float>();
         mirrorVariables = new Dictionary<string, float>();
-        GetActiveUpgrades();
     }
 
     public void GetActiveUpgrades()
     {
         trueVariables.Clear();
         mirrorVariables.Clear();
+        Debug.Log(trueTechTree.GetActiveNodes().Count);
 
         foreach (TechTreeNode node in trueTechTree.GetActiveNodes())
         {
+            Debug.Log("Active nodes");
             List<string> variables = node.GetVariables();
             List<float> values = node.GetValues();
             if (node.SpecialOne())

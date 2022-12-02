@@ -114,10 +114,10 @@ public class TechTreeNode : MonoBehaviour, ISavable
         currentImage.color = isPlaceable ? canBeActivatedColor : deactivatedColor;
     }
 
-    //public bool IsActive()
-    //{
-    //    return isActive;
-    //}
+    public bool IsActive()
+    {
+        return isActive;
+    }
 
     public bool IsMirror()
     {
@@ -181,8 +181,8 @@ public class TechTreeNode : MonoBehaviour, ISavable
     public void LoadState(object state)
     {
         var saveData = (SaveData)state;
-        isPlaceable = saveData.placeable;
-        isActive = saveData.active;
+        SetIsPlaceable(saveData.placeable);
+        SetIsActive(saveData.active);
     }
 
     [Serializable]
