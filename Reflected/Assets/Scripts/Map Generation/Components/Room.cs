@@ -173,7 +173,7 @@ public class Room : MonoBehaviour
             foreach (Chamber chamber in chambers)
                 chamber.Open(this);
 
-            if (type == RoomType.Monster || type == RoomType.Boss)
+            if (type != RoomType.Start)
                 map.DimensionManager.GainCharges(1);
 
             Map.RoomCleared.Invoke();
