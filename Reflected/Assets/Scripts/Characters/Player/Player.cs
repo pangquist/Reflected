@@ -167,6 +167,12 @@ public class Player : Character, ISavable
         if (currentHealth <= 0)
         {
             Die();
+            GameObject saveLoadSystem = GameObject.Find("SaveLoadSystem");
+
+            if (saveLoadSystem)
+                saveLoadSystem.GetComponent<SaveLoadSystem>().Save();
+            else
+                Debug.Log("No SaveLoadSystem found");
         }
         else
         {

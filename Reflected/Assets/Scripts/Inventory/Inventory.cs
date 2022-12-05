@@ -86,6 +86,11 @@ public class Inventory : MonoBehaviour, ISavable
             return 0;
     }
 
+    public void ResetTemporaryCollectables()
+    {
+        itemDictionary
+    }
+
     public object SaveState()
     {
         return new SaveData()

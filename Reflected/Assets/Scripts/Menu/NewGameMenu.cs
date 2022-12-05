@@ -40,6 +40,7 @@ public class NewGameMenu : Menu
         "If you pirate the game, Valter will knock on your door. He is the danger",
         "If you play the sound of George in reverse, you will hear that it is actually Gustaf singing",
         "During development the team consumed a collected amount of coffee weighing the same as a small elephant",
+        "If the chests have different tiers of loot it's just a way to trick you!",
         "If you do not swap dimension every now and then, a flasher will start chasing you"
     };
 
