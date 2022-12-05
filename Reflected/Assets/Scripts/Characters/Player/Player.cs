@@ -10,7 +10,7 @@ using UnityEngine;
 /// <summary>
 /// Player description
 /// </summary>
-public class Player : Character, ISavable
+public class Player : Character
 {
     [SerializeField] PlayerStatSystem stats;
     [SerializeField] GameObject chargeBar;
@@ -167,12 +167,7 @@ public class Player : Character, ISavable
         if (currentHealth <= 0)
         {
             Die();
-            GameObject saveLoadSystem = GameObject.Find("SaveLoadSystem");
-
-            if (saveLoadSystem)
-                saveLoadSystem.GetComponent<SaveLoadSystem>().Save();
-            else
-                Debug.Log("No SaveLoadSystem found");
+            SaveProgress();
         }
         else
         {
@@ -251,29 +246,20 @@ public class Player : Character, ISavable
         anim.Play("GetUp");
     }
 
-    #region SaveLoad
-    [Serializable]
-    private struct SaveData
+    private void SaveProgress()
     {
-        public float currentHealth;
-        public float maxHealth;
+        GameObject inventory = GameObject.Find("Inventory");
+        if (inventory)
+            inventory.GetComponent<Inventory>().ResetTemporaryCollectables();
+        else
+            Debug.Log("No Inventory found");
+
+        GameObject saveLoadSystem = GameObject.Find("SaveLoadSystem");
+
+        if (saveLoadSystem)
+            saveLoadSystem.GetComponent<SaveLoadSystem>().Save();
+        else
+            Debug.Log("No SaveLoadSystem found");
     }
 
-    public object SaveState()
-    {
-        return new SaveData()
-        {
-            currentHealth = this.currentHealth,
-            maxHealth = this.maxHealth
-        };
-    }
-
-    public void LoadState(object state)
-    {
-        var saveData = (SaveData)state;
-        currentHealth = saveData.currentHealth;
-        maxHealth = saveData.maxHealth;
-    }
-
-    #endregion
 }

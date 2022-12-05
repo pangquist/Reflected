@@ -20,12 +20,16 @@ public class Inventory : MonoBehaviour, ISavable
         if (array.Length > 1)
             Destroy(gameObject);
 
-        for (int i = 0; i < dataBase.items.Length; i++)
+        if(inventory.Count <= 0)
         {
-            InventoryItem newItem = new InventoryItem(dataBase.items[i]);
-            inventory.Add(newItem);
-            itemDictionary.Add(newItem.itemData, newItem);
+            for (int i = 0; i < dataBase.items.Length; i++)
+            {
+                InventoryItem newItem = new InventoryItem(dataBase.items[i]);
+                inventory.Add(newItem);
+                itemDictionary.Add(newItem.itemData, newItem);
+            }
         }
+        
     }
 
     private void OnEnable() //Subscribing to events
@@ -88,14 +92,14 @@ public class Inventory : MonoBehaviour, ISavable
 
     public void ResetTemporaryCollectables()
     {
-        itemDictionary
+        inventory[0].RemoveMoreFromStack(inventory[0].stackSize);
     }
 
     public object SaveState()
     {
         return new SaveData()
         {
-            coinAmount = inventory[0].stackSize,
+            //coinAmount = inventory[0].stackSize,
             diamondAmount = inventory[1].stackSize,
             mirrorShardAmount = inventory[2].stackSize,
             trueMirrorShardAmount = inventory[3].stackSize
@@ -105,7 +109,7 @@ public class Inventory : MonoBehaviour, ISavable
     public void LoadState(object state)
     {
         var saveData = (SaveData)state;
-        inventory[0].AddMoreToStack(saveData.coinAmount);
+        //inventory[0].AddMoreToStack(saveData.coinAmount);
         inventory[1].AddMoreToStack(saveData.diamondAmount);
         inventory[2].AddMoreToStack(saveData.mirrorShardAmount);
         inventory[3].AddMoreToStack(saveData.trueMirrorShardAmount);
@@ -114,7 +118,7 @@ public class Inventory : MonoBehaviour, ISavable
     [Serializable]
     private struct SaveData
     {
-        public int coinAmount;
+        //public int coinAmount;
         public int diamondAmount;
         public int mirrorShardAmount;
         public int trueMirrorShardAmount;
