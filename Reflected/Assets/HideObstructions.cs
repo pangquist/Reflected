@@ -79,10 +79,26 @@ public class HideObstructions : MonoBehaviour
             {
                 if (!currentlyInTheWay.Contains(alreadyHidden[i]))
                 {
-                    mesh.enabled = true;
                     alreadyHidden.Remove(alreadyHidden[i]);
+                    mesh.enabled = true;
+                    //StartCoroutine(HideTimer(alreadyHidden[i]));
                 }
             }
         }
+    }
+
+    IEnumerator HideTimer(GameObject gameObject)
+    {
+        alreadyHidden.Remove(gameObject);
+
+        yield return new WaitForSeconds(1f);
+
+        StopHide(gameObject);
+    }
+
+    public void StopHide(GameObject gameObject)
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        StopCoroutine(HideTimer(gameObject));
     }
 }
