@@ -12,10 +12,8 @@ public class Interactable : MonoBehaviour
     protected Player player;
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {       
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        //Player.OnObjectInteraction += Interact;
     }
 
     private void OnEnable()
