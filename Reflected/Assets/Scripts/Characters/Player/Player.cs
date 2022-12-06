@@ -95,11 +95,6 @@ public class Player : Character
         anim.Play(specialAbility.GetAnimation().name);
     }
 
-    public float GetMovementSpeed()
-    {
-        return movementSpeed;
-    }
-
     public float GetJumpForce()
     {
         return jumpForce;
