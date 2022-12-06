@@ -19,6 +19,7 @@ public class UiManager: MonoBehaviour
     [SerializeField] GameObject uiPanel;
     [SerializeField] GameObject CurrencyPanel;
     [SerializeField] GameObject roominfoPanel;
+    [SerializeField] GameObject timerPanel;
     [SerializeField] GameObject inGameMenu;
     [SerializeField] GameObject shopPanel;
     [SerializeField] GameObject upgradePanel;
@@ -32,6 +33,13 @@ public class UiManager: MonoBehaviour
     {
         //DontDestroyOnLoad(gameObject);
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponentInChildren<CinemachineFreeLook>();
+        shopPanel.SetActive(false);
+        uiPanel.SetActive(false);
+        CurrencyPanel.SetActive(false);
+        roominfoPanel.SetActive(false);
+        timerPanel.SetActive(false);
+        interactText.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -51,12 +59,14 @@ public class UiManager: MonoBehaviour
             CurrencyPanel.SetActive(true);
             uiPanel.SetActive(true);
             roominfoPanel.SetActive(true);
+            timerPanel.SetActive(true);
         }
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             uiPanel.SetActive(false);
             CurrencyPanel.SetActive(false);
             roominfoPanel.SetActive(false);
+            timerPanel.SetActive(false);
         }
     }
 
@@ -67,13 +77,16 @@ public class UiManager: MonoBehaviour
             if (inGameMenu.activeSelf)
             {
                 inGameMenu.SetActive(false);
+                
             }
             else if (!inGameMenu.activeSelf)
             {
+                Time.timeScale = 0;
                 shopPanel.SetActive(false);
                 uiPanel.SetActive(false);
                 CurrencyPanel.SetActive(false);
                 roominfoPanel.SetActive(false);
+                timerPanel.SetActive(false);
                 interactText.SetActive(false);
                 inGameMenu.SetActive(true);
             }
@@ -102,6 +115,7 @@ public class UiManager: MonoBehaviour
         }
         else
         {
+            Time.timeScale = 1;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             camera.enabled = true;

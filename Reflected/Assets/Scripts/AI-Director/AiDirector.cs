@@ -47,6 +47,8 @@ public class AiDirector : MonoBehaviour
 
     public bool AllEnemiesKilled => aliveEnemiesInRoom <= 0;
     public float GetAverageTime() => averageTimeToClearRoom;
+
+    public float GetRunTime() => clearTimesList.Sum();
     public int GetKillCount() => numberOfEnemiesKilled;
     public int GetClearedRooms() => numberOfRoomsCleared;
 
