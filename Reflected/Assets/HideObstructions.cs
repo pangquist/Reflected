@@ -35,7 +35,7 @@ public class HideObstructions : MonoBehaviour
 
         foreach(var hit in hitsForward)
         {
-            if(hit.collider.gameObject.TryGetComponent(out MeshRenderer mesh))
+            if(hit.collider.gameObject.TryGetComponent(out MeshRenderer mesh) && hit.collider.gameObject.tag == "Decoration")
             {
                 if (!currentlyInTheWay.Contains(hit.collider.gameObject))
                 {
@@ -46,7 +46,7 @@ public class HideObstructions : MonoBehaviour
 
         foreach (var hit in hitsBackward)
         {
-            if (hit.collider.gameObject.TryGetComponent(out MeshRenderer mesh))
+            if (hit.collider.gameObject.TryGetComponent(out MeshRenderer mesh) && hit.collider.gameObject.tag == "Decoration")
             {
                 if (!currentlyInTheWay.Contains(hit.collider.gameObject))
                 {
