@@ -22,7 +22,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
             myRarity = rarityTiers.GetRandom();
             amount = powerUpEffect.amount * myRarity.amountMultiplier;
             value = powerUpEffect.value * myRarity.valueMultiplier;
-            if(powerUpEffect.powerupName == "Max_Health" || powerUpEffect.powerupName == "Health")
+            if(powerUpEffect.powerupName == "Max_Health")
             {
                 description = powerUpEffect.description + " " + amount.ToString();
             }
@@ -45,7 +45,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
         myRarity = targetRarity;
         amount = powerUpEffect.amount * targetRarity.amountMultiplier;
         value = powerUpEffect.value * targetRarity.valueMultiplier;
-        if (powerUpEffect.powerupName == "Max_Health" || powerUpEffect.powerupName == "Health")
+        if (powerUpEffect.powerupName == "Max_Health")
         {
             description = powerUpEffect.description + " " + amount.ToString();
         }

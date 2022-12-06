@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChestControllerPay : Chest
 {
     [SerializeField] ItemData payment;
-    [SerializeField] public int amountToPay = 1;
+    [SerializeField] public int amountToPay = 5;
 
     public override void OpenChest(int index)
     {

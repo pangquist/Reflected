@@ -33,7 +33,8 @@ public class LootPoolManager : MonoBehaviour
     {
         rarityTiers.IncreaseWeight(1, 1);
         rarityTiers.IncreaseWeight(2, 2);
-        rarityTiers.IncreaseWeight(3, 2);
+        if(rarityTiers.list[3].weight <= 8)
+            rarityTiers.IncreaseWeight(3, 1);
     }
 
     private void OnEnable()

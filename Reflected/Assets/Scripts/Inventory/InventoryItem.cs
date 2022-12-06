@@ -35,4 +35,9 @@ public class InventoryItem
     {
         stackSize -= amount;
     }
+
+    public void SetStackSize(int amount)
+    {
+        stackSize = amount;
+    }
 }
