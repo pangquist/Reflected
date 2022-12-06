@@ -56,9 +56,8 @@ public class PlayerEditorTemplate : Editor
     void DisplayAbilityInfo()
     {
         EditorGUILayout.PropertyField(serializedObject.FindProperty("basicSwordAbility"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("basicBowAbility"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("specialAbility"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("swapAbility"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("swapAbilities"));
     }
     void DisplayCombatInfo()
     {
@@ -71,7 +70,7 @@ public class PlayerEditorTemplate : Editor
     void DisplayDimensionInfo()
     {
         EditorGUILayout.PropertyField(serializedObject.FindProperty("chargeBar"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("swapAbility"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("swapAbilities"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("TimeFlowWhileSwapping"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("trueSwapSound"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("mirrorSwapSound"));

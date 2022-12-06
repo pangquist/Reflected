@@ -595,6 +595,9 @@ GameObject:
   - component: {fileID: 1059544865884427159}
   - component: {fileID: 1344186847949550753}
   - component: {fileID: 1906820218832174845}
+  - component: {fileID: 183522958571588012}
+  - component: {fileID: 8879023221292094851}
+  - component: {fileID: 1197026072317704231}
   - component: {fileID: 381700860351149846}
   - component: {fileID: 1035034413369039081}
   - component: {fileID: 534314698605461993}
@@ -638,10 +641,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  currentHealth: 0
   movementSpeed: 0.25
   damage: 4
   attackSpeed: 1
-  currentHealth: 0
   anim: {fileID: 3437984074462982373}
   currentWeapon: {fileID: 0}
   HealthChanged:
@@ -654,12 +657,13 @@ MonoBehaviour:
   chargeBar: {fileID: 0}
   hitbox: {fileID: 1035034413369039081}
   jumpForce: 20
-  weapons:
-  - {fileID: 1925594761}
   basicSwordAbility: {fileID: 6738516131019372579}
-  basicBowAbility: {fileID: 0}
   specialAbility: {fileID: 1059544865884427159}
-  swapAbility: {fileID: 1906820218832174845}
+  swapAbilities:
+  - {fileID: 1906820218832174845}
+  - {fileID: 8879023221292094851}
+  - {fileID: 1197026072317704231}
+  - {fileID: 183522958571588012}
   TimeFlowWhileSwapping: 0.25
   trueSwapSound: {fileID: 8300000, guid: d8b123d22e5475e41a8cd47e91ccfa72, type: 3}
   mirrorSwapSound: {fileID: 8300000, guid: d4c1a1e9a5db06344975b9b638241e64, type: 3}
@@ -690,6 +694,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6948f2b007731c94c80b469b53825819, type: 3}
   - {fileID: 8300000, guid: d440733d6d8c8214ebd5a98832eb6dad, type: 3}
   - {fileID: 8300000, guid: f626fadffc80ee841a8f1c6faab1bee7, type: 3}
+  footstepEffect: {fileID: 0}
+  feetPositions: []
   speed: 9
   turnSmoothTime: 0.05
   gravityEffect: -12
@@ -699,7 +705,11 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 392
+  effectMask:
+    serializedVersion: 2
+    m_Bits: 0
   isGrounded: 0
+  canSpawnEffect: 0
   dashAbility: {fileID: 1344186847949550753}
 --- !u!114 &1271279110
 MonoBehaviour:
@@ -738,8 +748,8 @@ MonoBehaviour:
   attackSpeed: 1
   areaOfEffect: 1
   cooldownDecrease: 1
-  chargesToSwapTrue: 0
-  chargesToSwapMirror: 0
+  chargesToSwap: 0
+  upgradeManager: {fileID: 0}
 --- !u!114 &1271279111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -882,6 +892,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 05cf776d-dbee-405e-a0ec-d53142c5df8f
     m_ActionName: Player/Zoom Out[/Keyboard/slash]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2c4b8dcf-3e43-46a4-afe8-76d3975f442c
+    m_ActionName: Player/Mouse[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1019,6 +1033,81 @@ MonoBehaviour:
   vfxObject: {fileID: 0}
   vfxDuration: 0
   range: 20
+--- !u!114 &183522958571588012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555587854365852870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf356ca801d8f44cb035c154aae6fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityIcon: {fileID: 0}
+  abilitySounds: []
+  abilitySource: {fileID: 0}
+  castTime: 0
+  cooldown: 0
+  remainingCooldown: 0
+  abilityName: 
+  damage: 0
+  debug: 0
+  abilityAnimation: {fileID: 0}
+  vfxObject: {fileID: 0}
+  vfxDuration: 0
+--- !u!114 &8879023221292094851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555587854365852870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02deb7eceba082c4790a75e518702794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityIcon: {fileID: 0}
+  abilitySounds: []
+  abilitySource: {fileID: 0}
+  castTime: 0
+  cooldown: 0
+  remainingCooldown: 0
+  abilityName: 
+  damage: 0
+  debug: 0
+  abilityAnimation: {fileID: 0}
+  vfxObject: {fileID: 0}
+  vfxDuration: 0
+--- !u!114 &1197026072317704231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555587854365852870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f4755bdb5d92e4285e2d209a5c7bb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityIcon: {fileID: 0}
+  abilitySounds: []
+  abilitySource: {fileID: 0}
+  castTime: 0
+  cooldown: 0
+  remainingCooldown: 0
+  abilityName: 
+  damage: 0
+  debug: 0
+  abilityAnimation: {fileID: 0}
+  vfxObject: {fileID: 0}
+  vfxDuration: 0
+  effect: {fileID: 11400000, guid: 9f203df6c49767844be5d3d038e05301, type: 2}
+  scale: 3
+  range: 15
 --- !u!114 &381700860351149846
 MonoBehaviour:
   m_ObjectHideFlags: 0

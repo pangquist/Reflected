@@ -12,8 +12,7 @@ public class StatSystem : MonoBehaviour
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected float areaOfEffect;
     [SerializeField] protected float cooldownDecrease;
-    [SerializeField] protected int chargesToSwapTrue;
-    [SerializeField] protected int chargesToSwapMirror;
+    [SerializeField] protected int chargesToSwap;
 
     //List<string> statNames = new List<string> { "Health, Damage Reduction, Movement Speed, Damage, Attack Speed, AoE, Charges To Swap" };
     public void AddMaxHealth(float amount)
@@ -57,14 +56,9 @@ public class StatSystem : MonoBehaviour
         cooldownDecrease *= (1 - amount);
     }
 
-    public void ChangeChargesToSwapTrue(int amount)
+    public void ChangeChargesToSwap(int amount)
     {
-        chargesToSwapTrue += amount;
-    }
-
-    public void ChangeChargesToSwapMirror(int amount)
-    {
-        chargesToSwapMirror += amount;
+        chargesToSwap += amount;
     }
 
     public void SubtractMaxHealth(float amount)
@@ -108,16 +102,10 @@ public class StatSystem : MonoBehaviour
         cooldownDecrease /= (1 - amount);
     }
 
-    public void SubtractChangeChargesToSwapTrue(int amount)
+    public void SubtractChangeChargesToSwap(int amount)
     {
-        chargesToSwapTrue -= amount;
+        chargesToSwap -= amount;
     }
-
-    public void SubtractChangeChargesToSwapMirror(int amount)
-    {
-        chargesToSwapMirror -= amount;
-    }
-
 
     public void ResetStats()
     {
@@ -130,8 +118,7 @@ public class StatSystem : MonoBehaviour
         areaOfEffect = 1;
         attackSpeed = 1;
         cooldownDecrease = 1;
-        chargesToSwapTrue = 0;
-        chargesToSwapMirror = 0;
+        chargesToSwap = 0;
         
     }
 
@@ -142,8 +129,5 @@ public class StatSystem : MonoBehaviour
     public float GetAttackSpeed() => attackSpeed;
     public float GetAreaOfEffect() => areaOfEffect;
     public float GetCooldownDecrease() => cooldownDecrease;
-    public int GetChargesToSwapTrue() => chargesToSwapTrue;
-    public int GetChargesToSwapMirror() => chargesToSwapMirror;
-
-   
+    public int GetChargesToSwap() => chargesToSwap;
 }

@@ -110,15 +110,9 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 1
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
-  - True Charges
-  - Mirror Charges
+  - Charges
   value:
-  - -1
   - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
@@ -332,15 +326,9 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
-  - Mirror Charges
-  - True Charges
+  - Charges
   value:
-  - -1
   - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
@@ -554,10 +542,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Damage
   - Attack Speed
@@ -779,15 +763,9 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
-  - True Charges
-  - Mirror Charges
+  - Charges
   value:
-  - -1
   - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
@@ -1001,10 +979,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Health
   value:
@@ -1203,7 +1177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  description: Slow all nearby enemies every time you swap dimension.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -1219,10 +1193,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Special Three
   value:
@@ -1438,10 +1408,6 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Health
   value:
@@ -1656,10 +1622,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -1871,10 +1833,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -2087,10 +2045,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 1
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -2441,10 +2395,6 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Cooldown
   value:
@@ -2661,10 +2611,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -2878,10 +2824,6 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Attack Speed
   value:
@@ -3098,10 +3040,6 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Damage
   - Attack Speed
@@ -3322,12 +3260,12 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - Movement Speed
+  - Attack Speed
+  value:
+  - 0.1
+  - 0.1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &6260887222157814430
@@ -3539,10 +3477,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Movement Speed
   value:
@@ -3758,10 +3692,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Cooldown
   value:
@@ -3977,10 +3907,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Attack Speed
   - Movement Speed
@@ -4198,10 +4124,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Cooldown
   value:
@@ -4418,10 +4340,6 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Health
   - Damage Reduction
@@ -4639,10 +4557,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Damage
   value:
@@ -4860,10 +4774,6 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Damage Reduction
   value:
@@ -5080,10 +4990,6 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Cooldown
   value:
@@ -5301,15 +5207,9 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
-  - True Charges
-  - Mirror Charges
+  - Charges
   value:
-  - -1
   - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
@@ -5523,10 +5423,6 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Damage
   value:
@@ -5743,10 +5639,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Damage Reduction
   value:
@@ -5962,10 +5854,6 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Movement Speed
   value:
@@ -6181,10 +6069,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Movement Speed
   value:
@@ -6400,10 +6284,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Special Four
   value:
@@ -6621,12 +6501,10 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - Movement Speed
+  value:
+  - 0.1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &7770185765395166516
@@ -6839,10 +6717,6 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Attack Speed
   - Movement Speed
@@ -7060,10 +6934,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Special One
   value:
@@ -7281,10 +7151,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Movement Speed
   - Damage Reduction
@@ -7504,10 +7370,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Attack Speed
   value:
@@ -7726,10 +7588,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Health
   - Damage Reduction
@@ -7947,10 +7805,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Attack Speed
   value:
@@ -8168,15 +8022,9 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
-  - True Charges
-  - Mirror Charges
+  - Charges
   value:
-  - -1
   - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
@@ -8390,10 +8238,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue: []
   value: []
   nodeEffectText: {fileID: 0}
@@ -8607,10 +8451,6 @@ MonoBehaviour:
   isMirror: 1
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Attack Speed
   value:
@@ -8827,10 +8667,6 @@ MonoBehaviour:
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  specialOne: 0
-  specialTwo: 0
-  specialThree: 0
-  specialFour: 0
   modifiedValue:
   - Special Two
   value:
