@@ -15,7 +15,17 @@ public class Interactable : MonoBehaviour
     {
         
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //Player.OnObjectInteraction += Interact;
+    }
+
+    private void OnEnable()
+    {
         Player.OnObjectInteraction += Interact;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnObjectInteraction -= Interact;
     }
 
     // Update is called once per frame

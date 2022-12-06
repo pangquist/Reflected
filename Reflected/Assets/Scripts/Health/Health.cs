@@ -12,24 +12,19 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
     bool hasTarget, hasProperties;
     Vector3 targetPosition;
     float moveSpeed = 5f;
-    float totalplayerhealth;
     public int amount;
-    Rarity myRarity;
     public string description;
-    int value;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         if (!hasProperties)
         {
-            myRarity = FindObjectOfType<LootPoolManager>().GetRandomRarity();
-            totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
-            amount = (int)((totalplayerhealth * 0.15f) * myRarity.amountMultiplier);
-            value = powerUpEffect.value * myRarity.valueMultiplier;
-            description = powerUpEffect.description + " " + amount.ToString();
+            float totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
+            amount = (int)((totalplayerhealth * powerUpEffect.amount));
+            description = powerUpEffect.description + " " + (amount * 100).ToString() + "% of your current HP."; 
         }
-        //Destroy(gameObject, 20);
+        Destroy(gameObject, 20);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,29 +52,21 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         hasTarget = true;
     }
 
-    public void SetProperties(Rarity targetRarity)
+    public void SetProperties()
     {
-        //Debug.Log("Set properties " + targetRarity);
-        myRarity = targetRarity;
-        totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
-        amount = (int)((totalplayerhealth * 0.15f) * myRarity.amountMultiplier);
-        value = powerUpEffect.value * targetRarity.valueMultiplier;
-        description = powerUpEffect.description + " " + amount.ToString();
+        float totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
+        amount = (int)((totalplayerhealth * powerUpEffect.amount));
+        description = powerUpEffect.description + " " + (powerUpEffect.amount * 100).ToString() + "% of your current HP.";
         hasProperties = true;
     }
 
     public int GetValue()
     {
-        return value;
+        return powerUpEffect.value;
     }
 
     public string GetDescription()
     {
         return description;
-    }
-
-    public Rarity GetRarity()
-    {
-        return myRarity;
     }
 }

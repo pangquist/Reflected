@@ -11,8 +11,18 @@ public class InteractableChest : Interactable
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
-        Player.OnObjectInteraction += Interact;
+        //Player.OnObjectInteraction += Interact;
         upgradeUi = FindObjectOfType<UpgradeUi>();
+    }
+
+    private void OnEnable()
+    {
+        Player.OnObjectInteraction += Interact;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnObjectInteraction -= Interact;
     }
 
     protected override void Interact()

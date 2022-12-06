@@ -109,10 +109,10 @@ public class Inventory : MonoBehaviour, ISavable
     public void LoadState(object state)
     {
         var saveData = (SaveData)state;
-        //inventory[0].AddMoreToStack(saveData.coinAmount);
-        inventory[1].AddMoreToStack(saveData.diamondAmount);
-        inventory[2].AddMoreToStack(saveData.mirrorShardAmount);
-        inventory[3].AddMoreToStack(saveData.trueMirrorShardAmount);
+        //inventory[0].SetStackSize(saveData.coinAmount);
+        inventory[1].SetStackSize(saveData.diamondAmount);
+        inventory[2].SetStackSize(saveData.mirrorShardAmount);
+        inventory[3].SetStackSize(saveData.trueMirrorShardAmount);
     }
 
     [Serializable]
