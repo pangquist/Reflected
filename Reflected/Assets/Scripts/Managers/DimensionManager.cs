@@ -79,12 +79,12 @@ public class DimensionManager : MonoBehaviour
 
         if (True)
         {
-            LootDropList.SetWeight(3, 3);
+            LootDropList.SetWeight(3, 4);
             LootDropList.SetWeight(2, 0);
         }
         else if (Mirror)
         {
-            LootDropList.SetWeight(2, 3);
+            LootDropList.SetWeight(2, 4);
             LootDropList.SetWeight(3, 0);
         }
 
