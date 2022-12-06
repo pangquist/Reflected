@@ -14,7 +14,7 @@ public class MirrorShard : MonoBehaviour, ICollectable, IBuyable
 
     private void Start()
     {
-        //Destroy(gameObject, 20);
+        Destroy(gameObject, 45);
     }
 
     public void Collect()

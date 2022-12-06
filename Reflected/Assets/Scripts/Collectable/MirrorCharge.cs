@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MirrorCharge : MonoBehaviour, IBuyable
+public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
 {
     public PowerUpEffect powerUpEffect;
     //Check ui for health that the player gets back for the description and not the powerup effect
@@ -25,7 +25,7 @@ public class MirrorCharge : MonoBehaviour, IBuyable
             value = powerUpEffect.value;
             description = powerUpEffect.description + " " + amount.ToString();
         }
-        //Destroy(gameObject, 20);
+        Destroy(gameObject, 20);
     }
 
     private void OnTriggerEnter(Collider other)
