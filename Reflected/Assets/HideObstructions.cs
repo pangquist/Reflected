@@ -26,12 +26,13 @@ public class HideObstructions : MonoBehaviour
         currentlyInTheWay.Clear();
 
         float cameraPlayerDistance = Vector3.Magnitude(camera.position - player.position);
+        float radius = 2f;
 
         Ray rayForward = new Ray(camera.position, player.position - camera.position);
         Ray rayBackward = new Ray(player.position, camera.position - player.position);
 
-        var hitsForward = Physics.RaycastAll(rayForward, cameraPlayerDistance);
-        var hitsBackward = Physics.RaycastAll(rayBackward, cameraPlayerDistance);
+        var hitsForward = Physics.SphereCastAll(rayForward, radius, cameraPlayerDistance);
+        var hitsBackward = Physics.SphereCastAll(rayBackward, radius, cameraPlayerDistance);
 
         foreach(var hit in hitsForward)
         {
