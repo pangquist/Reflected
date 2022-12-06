@@ -75,24 +75,47 @@ public class Map : MonoBehaviour
     {
         StartRoom.gameObject.SetActive(true);
         StartRoom.Activate();
+
         Vector3 position = new Vector3(StartRoom.Rect.center.x, 10, StartRoom.Rect.center.y);
+        RaycastHit hit;
 
-        bool findingPlace = true;
-
-        while (findingPlace)
+        while (true)
         {
-            Ray ray = new Ray(position, -transform.up);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
+            if (Physics.Raycast(position, Vector3.down, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
             {
-                GameObject.Find("Player").transform.position = hit.point;
-                findingPlace = false;
+                StartCoroutine(Coroutine_MovePlayer(position));
+                break;
             }
             else
             {
                 position.x += 10;
             }
         }
+    }
+
+    private IEnumerator Coroutine_MovePlayer(Vector3 position)
+    {
+        Color fromColor = new Color(0f, 0f, 0f, 1f);
+        Color toColor = new Color(0f, 0f, 0f, 0f);
+
+        UiManager uiManager = GameObject.Find("Canvas").GetComponent<UiManager>();
+        uiManager.Tint.color = fromColor;
+
+        yield return null;
+        GameObject.Find("Player").transform.position = position;
+        yield return new WaitForSeconds(0.3f);
+
+        float duration = 3f;
+        float timer = 0f;
+
+        while ((timer += Time.deltaTime) < duration)
+        {
+            uiManager.Tint.color = Color.Lerp(fromColor, toColor, Mathf.Pow(timer / duration, 4f));
+            yield return null;
+        }
+
+        uiManager.Tint.color = toColor;
+        yield return 0;
     }
 
 }

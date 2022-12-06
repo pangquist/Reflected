@@ -24,8 +24,10 @@ public class UiManager: MonoBehaviour
     [SerializeField] GameObject upgradePanel;
     [SerializeField] GameObject interactText;
     [SerializeField] GameObject payChestText;
+    [SerializeField] Image tint;
     private CinemachineFreeLook camera;
 
+    public Image Tint => tint;
 
     // Start is called before the first frame update
     void Start()
