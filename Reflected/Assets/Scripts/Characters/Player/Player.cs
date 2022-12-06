@@ -27,7 +27,7 @@ public class Player : Character
     [SerializeField] Ability basicSwordAbility;
     //[SerializeField] Ability basicBowAbility;
     [SerializeField] Ability specialAbility;
-    [SerializeField] Ability swapAbility;
+    [SerializeField] Ability[] swapAbilities = new Ability[4];
     [Range(0f, 1f)]
     [SerializeField] float TimeFlowWhileSwapping;
     [SerializeField] AudioClip trueSwapSound;
@@ -36,7 +36,10 @@ public class Player : Character
     public delegate void InteractWithObject();
     public static event InteractWithObject OnObjectInteraction;
 
-    bool specialOne;
+    bool swapOne;
+    bool swapTwo;
+    bool swapThree;
+    bool swapFour;
 
     protected override void Awake()
     {
@@ -46,7 +49,10 @@ public class Player : Character
 
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();
         musicManager = dimensionManager.GetComponentInChildren<MusicManager>();
-        specialOne = false;
+        swapOne = false;
+        swapTwo = false;
+        swapThree = false;
+        swapFour = false;
 
         currentWeapon.gameObject.SetActive(true);
         currentWeapon.SetDamage(damage);
@@ -145,8 +151,14 @@ public class Player : Character
         if (dimensionManager.TrySwap())
         {
             ChangeStats();
-            if (specialOne)
-                swapAbility.DoEffect();
+            if (swapOne)
+                swapAbilities[0].DoEffect();
+            if (swapTwo)
+                swapAbilities[1].DoEffect();
+            if (swapThree)
+                swapAbilities[2].DoEffect();
+            if (swapFour)
+                swapAbilities[3].DoEffect();
 
             if(DimensionManager.CurrentDimension == Dimension.True)
             {
@@ -187,7 +199,13 @@ public class Player : Character
         return stats;
     }
 
-    public bool SpecialOne { get { return specialOne; } set { specialOne = value; }  }
+    public bool SwapOne { get { return swapOne; } set { swapOne = value; }  }
+
+    public bool SwapTwo { get { return swapTwo; } set { swapTwo = value; } }
+
+    public bool SwapThree { get { return swapThree; } set { swapThree = value; } }
+
+    public bool SwapFour { get { return swapFour; } set { swapFour = value; } }
 
     public Animator GetAnim()
     {

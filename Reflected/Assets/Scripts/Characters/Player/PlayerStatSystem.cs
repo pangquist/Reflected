@@ -42,49 +42,18 @@ public class PlayerStatSystem : StatSystem //, ISavable
             SubtractStats(upgradeManager.GetMirrorNodes());
         }
 
-        foreach (KeyValuePair<string, float> pair in stats)
-        {
-            if (pair.Key == "Damage")
-            {
-                AddDamageIncrease(pair.Value);
-            }
-            else if (pair.Key == "Damage Reduction")
-            {
-                AddDamageReduction(pair.Value);
-            }
-            else if (pair.Key == "Movement Speed")
-            {
-                AddMovementSpeed(pair.Value);
-            }
-            else if (pair.Key == "Health")
-            {
-                AddMaxHealth(pair.Value);
-            }
-            else if (pair.Key == "Attack Speed")
-            {
-                AddAttackSpeed(pair.Value);
-            }
-            else if (pair.Key == "AoE")
-            {
-                AddAreaOfEffect(pair.Value);
-            }
-            else if (pair.Key == "Cooldown")
-            {
-                AddCooldownDecrease(pair.Value);
-            }
-            else if (pair.Key == "True Charges")
-            {
-                ChangeChargesToSwapTrue((int)pair.Value);
-            }
-            else if (pair.Key == "Mirror Charges")
-            {
-                ChangeChargesToSwapMirror((int)pair.Value);
-            }
-            else if(pair.Key == "Special One")
-            {
-                player.SpecialOne = true;
-            }
-        }
+        AddStats(stats);
+    }
+
+    public void GetDarkStats()
+    {
+        if (!upgradeManager)
+            return;
+
+        Dictionary<string, float> stats = upgradeManager.GetMirrorNodes();
+        SubtractStats(upgradeManager.GetTrueNodes());
+
+        AddStats(stats);
     }
 
     public void SubtractStats(Dictionary<string, float> statsToRemove)
@@ -119,28 +88,16 @@ public class PlayerStatSystem : StatSystem //, ISavable
             {
                 SubtractCooldownDecrease(pair.Value);
             }
-            else if (pair.Key == "True Charges")
+            else if (pair.Key == "Charges")
             {
-                SubtractChangeChargesToSwapTrue((int)pair.Value);
-            }
-            else if (pair.Key == "Mirror Charges")
-            {
-                SubtractChangeChargesToSwapMirror((int)pair.Value);
+                SubtractChangeChargesToSwap((int)pair.Value);
             }
         }
     }
 
-    public void GetDarkStats()
+    public void AddStats(Dictionary<string, float> statsToAdd)
     {
-        if (!upgradeManager)
-            return;
-
-        //ResetStats();
-
-        Dictionary<string, float> stats = upgradeManager.GetMirrorNodes();
-        SubtractStats(upgradeManager.GetTrueNodes());
-
-        foreach (KeyValuePair<string, float> pair in stats)
+        foreach (KeyValuePair<string, float> pair in statsToAdd)
         {
             if (pair.Key == "Damage")
             {
@@ -170,18 +127,28 @@ public class PlayerStatSystem : StatSystem //, ISavable
             {
                 AddCooldownDecrease(pair.Value);
             }
-            else if (pair.Key == "True Charges")
+            else if (pair.Key == "Charges")
             {
-                ChangeChargesToSwapTrue((int)pair.Value);
+                ChangeChargesToSwap((int)pair.Value);
             }
-            else if (pair.Key == "Mirror Charges")
+            else if (pair.Key == "Special One")
             {
-                ChangeChargesToSwapMirror((int)pair.Value);
+                player.SwapOne = true;
+            }
+            else if (pair.Key == "Special Two")
+            {
+                player.SwapTwo = true;
+            }
+            else if (pair.Key == "Special Three")
+            {
+                player.SwapThree = true;
+            }
+            else if (pair.Key == "Special Four")
+            {
+                player.SwapFour = true;
             }
         }
     }
-
-    
 
     //public object SaveState()
     //{
