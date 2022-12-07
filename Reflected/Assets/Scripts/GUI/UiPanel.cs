@@ -31,8 +31,10 @@ public class UiPanel : MonoBehaviour
     private PlayerStatSystem statSystem;
     private Player player;
     private AiDirector aiDirector;
+    private GameManager gameManager;
     void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();
         inventory = FindObjectOfType<Inventory>();
         aiDirector = FindObjectOfType<AiDirector>();
     }
@@ -59,6 +61,8 @@ public class UiPanel : MonoBehaviour
         clearedRoomsText.text = "Cleared Rooms: " + aiDirector.GetClearedRooms().ToString();
         averageTimeText.text = "Average Room Clear Time: " + Math.Round(aiDirector.GetAverageTime()).ToString() + " s";
 
-        timerText.text = "Run Timer: " + Math.Round(aiDirector.GetRunTime()).ToString() + " s";
+        timerText.text = "Run Timer: " + gameManager.GetRunTimer().ToString("0.0") + " s";
+
+        
     }
 }

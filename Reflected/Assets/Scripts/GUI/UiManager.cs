@@ -9,13 +9,20 @@ using UnityEngine.UI;
 public class UiManager: MonoBehaviour
 {
 
-    enum UiState
+    public enum UiState
     {
         Active,
         Inactive,
     }
 
-    private UiState state;
+    public enum MenuState
+    {
+        Active,
+        Inactive,
+    }
+
+    public MenuState menuState;
+    public UiState state;
     [SerializeField] GameObject uiPanel;
     [SerializeField] GameObject CurrencyPanel;
     [SerializeField] GameObject roominfoPanel;
@@ -97,12 +104,17 @@ public class UiManager: MonoBehaviour
 
     void HandleMouse()
     {
+        if(inGameMenu.activeSelf)
+        {
+            menuState = MenuState.Active;
+        }    
         if (inGameMenu.activeSelf || shopPanel.activeSelf || upgradePanel.activeSelf)
         {
             state = UiState.Active;
         }
         else
         {
+            menuState = MenuState.Inactive;
             state = UiState.Inactive;
         }
           
@@ -153,5 +165,10 @@ public class UiManager: MonoBehaviour
             payChestText.GetComponent<TextMeshProUGUI>().text = "Pay " + value + " coin to open the chest";
         else
             payChestText.GetComponent<TextMeshProUGUI>().text = "Pay " + value + " coins to open the chest";
+    }
+
+    public MenuState GetMenuState()
+    {
+        return menuState;
     }
 }
