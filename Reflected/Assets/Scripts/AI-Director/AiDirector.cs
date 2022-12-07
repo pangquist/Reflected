@@ -5,7 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
-using static UiManager;
 
 public class AiDirector : MonoBehaviour
 {
@@ -38,19 +37,16 @@ public class AiDirector : MonoBehaviour
     [SerializeField] int temporaryCurrency;
 
 
-    EnemySpawner enemySpawner;
+    EnemySpawner enemySpawner;    
     LootPoolManager lootPool;
     Rarity currentRarity;
 
     public static UnityEvent RoomCleared = new UnityEvent();
-    private UiManager uiManager;
 
     // Properties
 
     public bool AllEnemiesKilled => aliveEnemiesInRoom <= 0;
     public float GetAverageTime() => averageTimeToClearRoom;
-
-    public float GetRunTime() => clearTimesList.Sum();
     public int GetKillCount() => numberOfEnemiesKilled;
     public int GetClearedRooms() => numberOfRoomsCleared;
 
@@ -73,7 +69,6 @@ public class AiDirector : MonoBehaviour
         activeRoom = false;
         inbetweenRooms = false;
         numberOfRoomsLeftOnMap = map.Rooms.Count;
-        uiManager = FindObjectOfType<UiManager>();
     }
 
     void Update()
@@ -92,7 +87,7 @@ public class AiDirector : MonoBehaviour
             maxSpawnAmount++;
             spawntime -= 0.1f;
         }
-        if (numberOfRoomsCleared % 3 == 0 && numberOfRoomsCleared > 0)
+        if(numberOfRoomsCleared % 3 == 0 && numberOfRoomsCleared > 0)
         {
             waveAmount++;
         }
@@ -116,8 +111,7 @@ public class AiDirector : MonoBehaviour
     {
         if (activeRoom) // Player is in a room with enemies
         {
-            if (uiManager.GetMenuState() != MenuState.Active)
-                timeToClearRoom += Time.deltaTime;
+            timeToClearRoom += Time.deltaTime;
             playerCurrentHelathPercentage = player.GetHealthPercentage();
         }
         if (activeRoom && aliveEnemiesInRoom == 0) // Player kills last enemy in a room
@@ -149,7 +143,7 @@ public class AiDirector : MonoBehaviour
         timeToClearRoom = 0;
     }
     public void EnterRoom() //called when a new room activates (from Room-script)
-    {
+    {  
         activeRoom = true;
         aliveEnemiesInRoom = 0;
         checkDifficulty();
@@ -172,8 +166,8 @@ public class AiDirector : MonoBehaviour
     {
         float extraStats = numberOfRoomsCleared * 0.3f;
 
-        if (averageTimeToClearRoom > 0) extraStats += 30f / calculateAverageTime();
-
+        if(averageTimeToClearRoom > 0) extraStats += 30f / calculateAverageTime();
+        
         return extraStats;
     }
     private void SpawnChest()
@@ -187,7 +181,7 @@ public class AiDirector : MonoBehaviour
                 break;
             case "Rare":
                 Instantiate(chests[1], spawnPosition, Quaternion.Euler(0, 0, 0));
-                break;
+                break;                
             case "Epic":
                 Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
                 break;
@@ -198,7 +192,7 @@ public class AiDirector : MonoBehaviour
                 Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0));
                 break;
         }
-
-
+        
+        
     }
 }
