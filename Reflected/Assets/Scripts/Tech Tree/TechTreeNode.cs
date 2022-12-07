@@ -133,9 +133,9 @@ public class TechTreeNode : MonoBehaviour, ISavable
     {
         nodeEffectText.text = description;
         if (hasGemCost)
-            nodeCostText.text = inventory.GetItemAmount(resource) + " / " + resourceCost + "\n" + inventory.GetItemAmount(gemResource) + " / " + gemCost;
+            nodeCostText.text = inventory.GetItemAmount(resource) + " / " + resourceCost + " " + resource.displayName + "s\n" + inventory.GetItemAmount(gemResource) + " / " + gemCost + " Gems";
         else
-            nodeCostText.text = inventory.GetItemAmount(resource) + " / " + resourceCost;
+            nodeCostText.text = inventory.GetItemAmount(resource) + " / " + resourceCost + " " + resource.displayName + "s";
     }
 
     public void SetTextToNull()
