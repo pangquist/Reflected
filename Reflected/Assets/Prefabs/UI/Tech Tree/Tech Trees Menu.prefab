@@ -742,7 +742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  description: Decreases the amount of charges required to Swap to the True Dimension
+    by 1.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -756,7 +757,7 @@ MonoBehaviour:
   - {fileID: 4523969312854852955}
   - {fileID: 2554683838231738605}
   resource: {fileID: 11400000, guid: 45cf331588cc0a94c86deeb7792edb24, type: 2}
-  resourceCost: 5
+  resourceCost: 10
   hasGemCost: 0
   gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
   gemCost: 0
@@ -982,7 +983,7 @@ MonoBehaviour:
   modifiedValue:
   - Health
   value:
-  - 0.1
+  - 2
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &3749479365419186035
@@ -1411,7 +1412,7 @@ MonoBehaviour:
   modifiedValue:
   - Health
   value:
-  - 0.1
+  - 2
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &8134699924749620331
@@ -2593,7 +2594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  description: Reduces the Cooldown of abilities in the True Dimension by 10%.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -2603,16 +2604,18 @@ MonoBehaviour:
   - {fileID: 2000516686591848417}
   - {fileID: 4673772985315411791}
   - {fileID: 6583572397303350118}
-  resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
-  resourceCost: 0
+  resource: {fileID: 11400000, guid: 45cf331588cc0a94c86deeb7792edb24, type: 2}
+  resourceCost: 10
   hasGemCost: 0
   gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - Cooldown
+  value:
+  - 0.1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &1451966067562642138
@@ -3675,7 +3678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Reduces the Cooldown of abilities in the True Dimension by 10%.
+  description: Decreases the amount of charges required to Swap to the True Dimension
+    by 1.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -3693,9 +3697,9 @@ MonoBehaviour:
   isPlaceable: 0
   isActive: 0
   modifiedValue:
-  - Cooldown
+  - Charges
   value:
-  - 0.1
+  - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &931997172221136776
@@ -4107,7 +4111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Reduces the Cooldown of abilities in the True Dimension by 10%.
+  description: Decreases the amount of charges required to Swap to the Mirror Dimension
+    by 1.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -4125,9 +4130,9 @@ MonoBehaviour:
   isPlaceable: 0
   isActive: 0
   modifiedValue:
-  - Cooldown
+  - Charges
   value:
-  - 0.1
+  - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &785793325008652055
@@ -4344,7 +4349,7 @@ MonoBehaviour:
   - Health
   - Damage Reduction
   value:
-  - 0.1
+  - 2
   - 0.1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
@@ -7592,7 +7597,7 @@ MonoBehaviour:
   - Health
   - Damage Reduction
   value:
-  - 0.1
+  - 2
   - 0.1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
@@ -8220,7 +8225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b2220db043d2a45af25da3f841a8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  description: Decreases the amount of charges required to Swap to the Mirror Dimension
+    by 1.
   deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
   activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
@@ -8230,16 +8236,18 @@ MonoBehaviour:
   - {fileID: 2633290739023729539}
   - {fileID: 7110399015950753652}
   - {fileID: 6583572397303350118}
-  resource: {fileID: 11400000, guid: e135c1d0b71e026438d99d450aa4c478, type: 2}
-  resourceCost: 0
+  resource: {fileID: 11400000, guid: 45cf331588cc0a94c86deeb7792edb24, type: 2}
+  resourceCost: 10
   hasGemCost: 0
   gemResource: {fileID: 11400000, guid: ca007e31c188b364e83c7798dc3ea1ba, type: 2}
   gemCost: 0
   isMirror: 0
   isPlaceable: 0
   isActive: 0
-  modifiedValue: []
-  value: []
+  modifiedValue:
+  - Charges
+  value:
+  - -1
   nodeEffectText: {fileID: 0}
   nodeCostText: {fileID: 0}
 --- !u!114 &2478559990609969700

@@ -8,6 +8,7 @@ public class Shop : MonoBehaviour
     [SerializeField] WeightedRandomList<GameObject> lootTableCollectables;
     [SerializeField] WeightedRandomList<Rarity> rarityTiers;
     [SerializeField] List<GameObject> shopItems;
+    [SerializeField] List<GameObject> healtItems;
     [SerializeField] Transform itemHolder;
     [SerializeField] ItemData payment;
     GameObject spawnedObject;
@@ -85,7 +86,7 @@ public class Shop : MonoBehaviour
     {
         for (int i = 0; i < numberOfPowerUps; i++)
         {
-            shopItems.Add(lootTablePowerUps.GetRandom());
+            shopItems.Add(lootTablePowerUps.GetRandomAndRemove());
             shopItems[i].GetComponent<InteractablePowerUp>().SetProperties(rarityTiers.GetRandom());
             //Debug.Log("Powerup " + i + ": value:" + shopItems[i].GetComponent<InteractablePowerUp>().GetValue() + ". amount: " + shopItems[i].GetComponent<InteractablePowerUp>().amount);
         }
@@ -95,7 +96,7 @@ public class Shop : MonoBehaviour
             shopItems.Add(lootTableCollectables.GetRandom());
             if (shopItems[i + numberOfPowerUps].GetComponent<Health>() != null)
             {
-                shopItems[i + numberOfPowerUps].GetComponent<Health>().SetProperties(rarityTiers.GetRandom());
+                shopItems[i + numberOfPowerUps].GetComponent<Health>().SetProperties();
             }
             else if(shopItems[i + numberOfPowerUps].GetComponent<MirrorCharge>() != null)
             {

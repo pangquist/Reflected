@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class SaveLoadSystem : MonoBehaviour
 {
-    public string SavePath => $"{Application.persistentDataPath}/save.txt";
+    public string SavePath => $"{Application.persistentDataPath}/save.txt"; 
 
     private void Awake()
     {

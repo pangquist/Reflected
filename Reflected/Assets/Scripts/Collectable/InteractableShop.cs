@@ -8,8 +8,18 @@ public class InteractableShop : Interactable
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
-        Player.OnObjectInteraction += Interact;
+        //Player.OnObjectInteraction += Interact;
         shopUi = FindObjectOfType<ShopUi>();
+    }
+
+    private void OnEnable()
+    {
+        Player.OnObjectInteraction += Interact;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnObjectInteraction -= Interact;
     }
 
     protected override void Interact()

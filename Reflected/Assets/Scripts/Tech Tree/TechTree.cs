@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,16 @@ public class TechTree : MonoBehaviour
 
     public List<TechTreeNode> GetActiveNodes()
     {
+        foreach(TechTreeNode node in GetComponentsInChildren<TechTreeNode>())
+        {
+            if (node.isActive)
+            {
+                if (!activeNodes.Contains(node))
+                {
+                    activeNodes.Add(node);
+                }
+            }
+        }
         return activeNodes;
     }
 }
