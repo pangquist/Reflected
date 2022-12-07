@@ -42,6 +42,7 @@ public class AiDirector : MonoBehaviour
     Rarity currentRarity;
 
     public static UnityEvent RoomCleared = new UnityEvent();
+    private UiManager uiManager;
 
     // Properties
 
@@ -69,6 +70,7 @@ public class AiDirector : MonoBehaviour
         activeRoom = false;
         inbetweenRooms = false;
         numberOfRoomsLeftOnMap = map.Rooms.Count;
+        uiManager = FindObjectOfType<UiManager>();
     }
 
     void Update()
@@ -111,7 +113,8 @@ public class AiDirector : MonoBehaviour
     {
         if (activeRoom) // Player is in a room with enemies
         {
-            timeToClearRoom += Time.deltaTime;
+            if (uiManager.GetMenuState() != UiManager.MenuState.Active)
+                timeToClearRoom += Time.deltaTime;
             playerCurrentHelathPercentage = player.GetHealthPercentage();
         }
         if (activeRoom && aliveEnemiesInRoom == 0) // Player kills last enemy in a room

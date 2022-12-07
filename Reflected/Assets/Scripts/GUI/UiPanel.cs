@@ -26,12 +26,16 @@ public class UiPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI clearedRoomsText;
     [SerializeField] TextMeshProUGUI averageTimeText;
 
+    [SerializeField] TextMeshProUGUI timerText;
+
 
     private PlayerStatSystem statSystem;
     private Player player;
     private AiDirector aiDirector;
+    private GameManager gameManager;
     void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();  
         inventory = FindObjectOfType<Inventory>();
         aiDirector = FindObjectOfType<AiDirector>();
     }
@@ -57,5 +61,7 @@ public class UiPanel : MonoBehaviour
         killCountText.text = "Kill Count: " + aiDirector.GetKillCount().ToString();
         clearedRoomsText.text = "Cleared Rooms: " + aiDirector.GetClearedRooms().ToString();
         averageTimeText.text = "Average Room Clear Time: " + aiDirector.GetAverageTime().ToString("0.00") + " s";
+
+        timerText.text = "Run Timer:" + gameManager.GetRunTimer().ToString("0.0");
     }
 }

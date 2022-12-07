@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using System.Runtime.CompilerServices;
+using System.Data;
 
 public class ShopUi : MonoBehaviour
 {
@@ -13,9 +14,20 @@ public class ShopUi : MonoBehaviour
     [SerializeField] GameObject shopPanel;
     [SerializeField] List<GameObject> buttonList;
     [SerializeField] List<GameObject> shopList;
+    [SerializeField] TextMeshProUGUI coinText;
     private GameObject[] shops;
     private Player player;
+    private Inventory inventory;
 
+    public void Start()
+    {
+        inventory = FindObjectOfType<Inventory>();
+    }
+
+    public void Update()
+    {
+        coinText.text = inventory.inventory[0].stackSize.ToString();
+    }
     public void SetPanelActive()
     {
         shop = GetClosestShop();
@@ -65,13 +77,5 @@ public class ShopUi : MonoBehaviour
         }
         return shop;
     }
-
-
-
-
-
-
-
-
 
 }

@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,16 +10,23 @@ using UnityEngine.UI;
 public class UiManager: MonoBehaviour
 {
 
-    enum UiState
+    public enum MenuState
+    {
+        Active,
+        Inactive,
+    }
+    public enum UiState
     {
         Active,
         Inactive,
     }
 
-    private UiState state;
+    public UiState state;
+    public MenuState menuState;
     [SerializeField] GameObject uiPanel;
     [SerializeField] GameObject CurrencyPanel;
     [SerializeField] GameObject roominfoPanel;
+    [SerializeField] GameObject timerPanel;
     [SerializeField] GameObject inGameMenu;
     [SerializeField] GameObject shopPanel;
     [SerializeField] GameObject upgradePanel;
@@ -32,7 +40,13 @@ public class UiManager: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //DontDestroyOnLoad(gameObject);
+        shopPanel.SetActive(false);
+        uiPanel.SetActive(false);
+        CurrencyPanel.SetActive(false);
+        roominfoPanel.SetActive(false);
+        timerPanel.SetActive(false);
+        interactText.SetActive(false);
+        inGameMenu.SetActive(false);
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponentInChildren<CinemachineFreeLook>();
     }
 
@@ -53,12 +67,14 @@ public class UiManager: MonoBehaviour
             CurrencyPanel.SetActive(true);
             uiPanel.SetActive(true);
             roominfoPanel.SetActive(true);
+            timerPanel.SetActive(true);
         }
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             uiPanel.SetActive(false);
             CurrencyPanel.SetActive(false);
             roominfoPanel.SetActive(false);
+            timerPanel.SetActive(false);
         }
     }
 
@@ -72,10 +88,12 @@ public class UiManager: MonoBehaviour
             }
             else if (!inGameMenu.activeSelf)
             {
+                Time.timeScale = 0;
                 shopPanel.SetActive(false);
                 uiPanel.SetActive(false);
                 CurrencyPanel.SetActive(false);
                 roominfoPanel.SetActive(false);
+                timerPanel.SetActive(false);
                 interactText.SetActive(false);
                 inGameMenu.SetActive(true);
             }
@@ -86,6 +104,8 @@ public class UiManager: MonoBehaviour
 
     void HandleMouse()
     {
+        if(inGameMenu.activeSelf)
+            menuState = MenuState.Active;
         if (inGameMenu.activeSelf || shopPanel.activeSelf || upgradePanel.activeSelf)
         {
             state = UiState.Active;
@@ -93,6 +113,7 @@ public class UiManager: MonoBehaviour
         else
         {
             state = UiState.Inactive;
+            menuState = MenuState.Inactive;
         }
           
         if(state == UiState.Active)
@@ -104,6 +125,7 @@ public class UiManager: MonoBehaviour
         }
         else
         {
+            Time.timeScale = 1;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             camera.enabled = true;
@@ -141,5 +163,10 @@ public class UiManager: MonoBehaviour
             payChestText.GetComponent<TextMeshProUGUI>().text = "Pay " + value + " coin to open the chest";
         else
             payChestText.GetComponent<TextMeshProUGUI>().text = "Pay " + value + " coins to open the chest";
+    }
+
+    public MenuState GetMenuState()
+    {
+        return menuState;
     }
 }
