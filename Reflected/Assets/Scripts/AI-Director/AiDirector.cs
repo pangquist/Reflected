@@ -37,12 +37,13 @@ public class AiDirector : MonoBehaviour
     [SerializeField] int temporaryCurrency;
 
 
-    EnemySpawner enemySpawner;    
+    EnemySpawner enemySpawner;
+    UiManager uiManager;
     LootPoolManager lootPool;
     Rarity currentRarity;
 
     public static UnityEvent RoomCleared = new UnityEvent();
-    private UiManager uiManager;
+    
 
     // Properties
 
@@ -64,13 +65,12 @@ public class AiDirector : MonoBehaviour
         if (!enemySpawner) enemySpawner = GetComponent<EnemySpawner>();
         if (!map) map = GameObject.Find("Map").GetComponent<Map>();
         if (!lootPool) lootPool = GameObject.Find("LootPoolManager").GetComponent<LootPoolManager>();
-
+        if (!uiManager) uiManager = FindObjectOfType<UiManager>();
         waveAmount = 1;
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
         numberOfRoomsLeftOnMap = map.Rooms.Count;
-        uiManager = FindObjectOfType<UiManager>();
     }
 
     void Update()

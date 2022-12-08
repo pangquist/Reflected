@@ -46,7 +46,7 @@ public class ExplosionAttackState : State
             //Play attack animation that will trigger the attack
             me.PlayAnimation("Explosion Attack");
 
-            //Reset attack timer
+            //Reset attack boolTimer
             attackStarted = true;
         }
     }

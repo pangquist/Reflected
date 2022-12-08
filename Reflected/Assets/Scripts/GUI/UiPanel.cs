@@ -28,13 +28,17 @@ public class UiPanel : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI timerText;
 
-
+    private float minute;
+    private float second;
+    private float boolTimer;
+    bool doOnce;
     private PlayerStatSystem statSystem;
     private Player player;
     private AiDirector aiDirector;
     private GameManager gameManager;
     void Awake()
     {
+        doOnce = true;
         gameManager = FindObjectOfType<GameManager>();  
         inventory = FindObjectOfType<Inventory>();
         aiDirector = FindObjectOfType<AiDirector>();
@@ -62,6 +66,24 @@ public class UiPanel : MonoBehaviour
         clearedRoomsText.text = "Cleared Rooms: " + aiDirector.GetClearedRooms().ToString();
         averageTimeText.text = "Average Room Clear Time: " + aiDirector.GetAverageTime().ToString("0.00") + " s";
 
-        timerText.text = "Run Timer:" + gameManager.GetRunTimer().ToString("0.0");
+        if (!doOnce && Mathf.Round(gameManager.GetRunTimer()) % 60 == 0)
+        {
+            minute++;
+            doOnce = true;
+        }
+
+        if (doOnce)
+        {
+            boolTimer += Time.deltaTime;
+
+            if (boolTimer >= 10)
+            {
+                doOnce = false;
+                boolTimer = 0;
+            }
+        }
+
+        second = gameManager.GetRunTimer() % 60;
+        timerText.text = "Run Timer: " + minute.ToString() + "m " + second.ToString("0.0") + "s";
     }
 }
