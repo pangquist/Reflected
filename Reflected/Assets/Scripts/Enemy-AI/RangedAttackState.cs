@@ -71,7 +71,7 @@ public class RangedAttackState : State
             //Play attack animation that will trigger the attack
             me.PlayAnimation("Projectile Attack");
 
-            //Reset attack timer
+            //Reset attack boolTimer
             attackTimer = 0f;
         }
     }

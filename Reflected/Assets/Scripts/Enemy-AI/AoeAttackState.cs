@@ -68,7 +68,7 @@ public class AoeAttackState : State
             //Play attack animation that will trigger the attack
             me.PlayAnimation("Fire AOE");
 
-            //Reset attack timer
+            //Reset attack boolTimer
             attackTimer = 0f;
         }
     }
