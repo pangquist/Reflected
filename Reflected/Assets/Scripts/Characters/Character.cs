@@ -139,8 +139,8 @@ public class Character : MonoBehaviour, IEffectable
         if (!effectParticles.ContainsKey(data))
         {
             effectParticles.Add(data, Instantiate(data.EffectParticles, transform));
-        }       
-        statusEffects.Add(new Effect(data, scale));        
+            statusEffects.Add(new Effect(data, scale));
+        }           
     }
 
     public void RemoveEffect(Effect status)
