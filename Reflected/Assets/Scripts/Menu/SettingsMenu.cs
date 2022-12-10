@@ -44,15 +44,17 @@ public class SettingsMenu : Menu
         UpdateOptionTexts();
     }
 
-    public void OnClick_Setting(int setting)
+    public void OnClick_Setting(int settingIndex)
     {
-        string option = settings.NextOption((Setting)setting);
-        EventSystem.current.currentSelectedGameObject.transform.GetComponentInChildren<TextMeshProUGUI>().text = option;
+        Setting setting = (Setting)settingIndex;
+        string option = settings.NextOption(setting);
+        grid.transform.GetChild(settingIndex).GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = option;
     }
 
     private void UpdateOptionTexts()
     {
-        SetSettingButtonText("Window Mode",          settings.GetString(    settings.GetWindowMode()));
+        SetSettingButtonText("Quality",              settings.GetString    (settings.GetQuality()));
+        SetSettingButtonText("Window Mode",          settings.GetString    (settings.GetWindowMode()));
         SetSettingButtonText("Sound Volume",         settings.GetPercentage(settings.GetSoundVolume()));
         SetSettingButtonText("Menu Music Volume",    settings.GetPercentage(settings.GetMenuMusicVolume()));
         SetSettingButtonText("In-Game Music Volume", settings.GetPercentage(settings.GetInGameMusicVolume()));

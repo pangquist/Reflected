@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 
 public enum Setting
 {
+    Quality,
     WindowMode,
     SoundVolume,
     MenuMusicVolume,
@@ -16,6 +17,7 @@ public class Settings : MonoBehaviour
 {
     // Options
 
+    public enum Quality { Low, Medium, High }
     public enum WindowMode { Windowed, Fullscreen }
 
     [Header("Increments")]
@@ -26,6 +28,7 @@ public class Settings : MonoBehaviour
     // Active options
 
     [Header("Active options")]
+    [SerializeField] Quality quality;
     [SerializeField] WindowMode windowMode;
     [SerializeField] float soundVolume;
     [SerializeField] float menuMusicVolume;
@@ -34,6 +37,7 @@ public class Settings : MonoBehaviour
     // Default options
 
     [Header("Default options")]
+    [SerializeField] Quality defaultQuality;
     [SerializeField] WindowMode defaultWindowMode;
     [SerializeField] float defaultSoundVolume;
     [SerializeField] float defaultMenuMusicVolume;
@@ -44,58 +48,71 @@ public class Settings : MonoBehaviour
 
     // Get option
 
+    public Quality GetQuality() => quality;
     public WindowMode GetWindowMode() => windowMode;
     public float GetSoundVolume() => soundVolume;
     public float GetMenuMusicVolume() => menuMusicVolume;
     public float GetInGameMusicVolume() => inGameMusicVolume;
 
-    void Start()
-    {
-
-    }
-
     public void ApplyDefaultSettings()
     {
+        quality = defaultQuality;
         windowMode = defaultWindowMode;
         soundVolume = defaultSoundVolume;
         menuMusicVolume = defaultMenuMusicVolume;
         inGameMusicVolume = defaultInGameMusicVolume;
+
+        ApplyQuality();
+        ApplyWindowMode();
+        ApplyVolume("SoundEffectVolume", soundVolume);
+        ApplyVolume("MenuMusicVolume", menuMusicVolume);
+        ApplyVolume("InGameMusicVolume", inGameMusicVolume);
     }
 
     public string NextOption(Setting setting)
     {
         switch (setting)
         {
+            case Setting.Quality:
+                Increment(ref quality);
+                ApplyQuality();
+                return GetString(quality);
+
             case Setting.WindowMode:
-                return Increment(ref windowMode);
+                Increment(ref windowMode);
+                ApplyWindowMode();
+                return GetString(windowMode);
 
             case Setting.SoundVolume:
-                    return GetVolumeValue(Increment(ref soundVolume, soundVolumeIncrement), "SoundEffectVolume");
+                Increment(ref soundVolume, soundVolumeIncrement);
+                ApplyVolume("SoundEffectVolume", soundVolume);
+                return GetPercentage(soundVolume);
 
             case Setting.MenuMusicVolume:
-                    return GetVolumeValue(Increment(ref menuMusicVolume, menuMusicVolumeIncrement), "MenuMusicVolume");
+                Increment(ref menuMusicVolume, menuMusicVolumeIncrement);
+                ApplyVolume("MenuMusicVolume", menuMusicVolume);
+                return GetPercentage(menuMusicVolume);
 
             case Setting.InGameMusicVolume:
-                    return GetVolumeValue(Increment(ref inGameMusicVolume, inGameMusicVolumeIncrement), "InGameMusicVolume");
+                Increment(ref inGameMusicVolume, inGameMusicVolumeIncrement);
+                ApplyVolume("InGameMusicVolume", inGameMusicVolume);
+                return GetPercentage(inGameMusicVolume);
         }
 
         return "Error";
     }
 
-    private string Increment(ref float value, float increment)
+    private void Increment(ref float value, float increment)
     {
         if (value >= 1.0f)
             value = 0.0f;
         else
             value = Mathf.Min(1.0f, value + increment);
-
-        return GetPercentage(value);
     }
 
-    private string Increment<T>(ref T value) where T : struct
+    private void Increment<T>(ref T value) where T : struct
     {
         value = value.GetNext();
-        return GetString(value);
     }
 
     public string GetPercentage(float value)
@@ -108,17 +125,20 @@ public class Settings : MonoBehaviour
         return value.ToString().SplitPascalCase();
     }
 
-    public string GetVolumeValue(string stringValue, string mixerName)
+    private void ApplyQuality()
     {
-        stringValue = stringValue.Split(' ')[0];
-        float value = float.Parse(stringValue);
+        QualitySettings.SetQualityLevel((int)quality, false);
+    }
 
-        if (value == 0)
-            value = 0.01f;
+    private void ApplyWindowMode()
+    {
+        
+    }
 
-        mixer.SetFloat(mixerName, Mathf.Log10(value / 100) * 30);
-
-        return stringValue + " %";
+    private void ApplyVolume(string mixerName, float value)
+    {
+        if (mixer != null)
+            mixer.SetFloat(mixerName, Mathf.Log10(value) * 30);
     }
 
 }
