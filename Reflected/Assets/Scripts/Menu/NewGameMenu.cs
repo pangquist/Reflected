@@ -35,7 +35,7 @@ public class NewGameMenu : Menu
         "did you know Filip is an anagram for Liipf",
         "when you are not in the room, the enemies in there worships Kevin",
         "Emil once finished the game without killing a single enemy",
-        "Pär is short for Päron",
+        "Pï¿½r is short for Pï¿½ron",
         "Marcus is mining bitcoin on your computer in the background while you play",
         "If you pirate the game, Valter will knock on your door. He is the danger",
         "If you play the sound of George in reverse, you will hear that it is actually Gustaf singing",
@@ -52,6 +52,9 @@ public class NewGameMenu : Menu
 
     protected override void Update()
     {
+        if (menuManager.ActiveMenu != this)
+            return;
+
         if (playerController.Back())
             OnClick_Back();
     }

@@ -11,6 +11,9 @@ public class CreditsMenu : Menu
 
     protected override void Update()
     {
+        if (menuManager.ActiveMenu != this)
+            return;
+
         if (playerController.Back())
             OnClick_Back();
     }

@@ -16,6 +16,9 @@ public class SettingsMenu : Menu
 
     protected override void Update()
     {
+        if (menuManager.ActiveMenu != this)
+            return;
+
         if (playerController.Back())
             OnClick_Back();
     }

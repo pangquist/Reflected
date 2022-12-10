@@ -8,8 +8,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private PlayerController playerController;
 
     private Dictionary<Menu.Type, Menu> menus;
+    private Menu activeMenu;
 
     public PlayerController PlayerController => playerController;
+    public Menu ActiveMenu => activeMenu;
 
     private void Start()
     {
@@ -22,6 +24,8 @@ public class MenuManager : MonoBehaviour
             { Menu.Type.Settings, settingsMenu },
             { Menu.Type.Credits, creditsMenu }
         };
+
+        activeMenu = startMenu;
 
         Vector2 pos = new Vector2();
 
@@ -51,9 +55,20 @@ public class MenuManager : MonoBehaviour
         pos.x -= 10000;
         menus[menu].gameObject.GetComponent<RectTransform>().anchoredPosition = pos;
 
+        activeMenu = null;
+        StartCoroutine(Coroutine_SetActiveMenu(menu));
 
         //callerMenu.gameObject.SetActive(false);
         //menus[menu].gameObject.SetActive(true);
     }
+
+    private IEnumerator Coroutine_SetActiveMenu(Menu.Type menu)
+    {
+        yield return null;
+        activeMenu = menus[menu];
+        yield return 0;
+    }
+
+
 
 }

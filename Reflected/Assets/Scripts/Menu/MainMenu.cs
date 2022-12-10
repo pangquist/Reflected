@@ -20,6 +20,9 @@ public class MainMenu : Menu
 
     protected override void Update()
     {
+        if (menuManager.ActiveMenu != this)
+            return;
+
         if (playerController.Back())
             OnClick_Exit();
     }

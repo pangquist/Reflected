@@ -11,6 +11,9 @@ public class StartMenu : Menu
 
     protected override void Update()
     {
+        if (menuManager.ActiveMenu != this)
+            return;
+
         if (playerController.Back())
             Exit.ExitApplication();
 
