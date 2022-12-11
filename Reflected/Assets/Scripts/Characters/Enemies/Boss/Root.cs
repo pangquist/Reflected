@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class Root : Enemy
 {
     [SerializeField] Collider swipeHitbox;
+    Boss boss;
     protected override void Awake()
     {
-        base.Awake();
         gameObject.SetActive(false);
+        base.Awake();
+        boss = FindObjectOfType<Boss>();
     }
 
     public override void TakeDamage(float damage)
@@ -41,6 +43,11 @@ public class Root : Enemy
     {
         anim.Play("Death");
         isDead = true;
+
+        if(boss.Roots().Count == 1)
+        {
+            boss.ToggleAbilityLock();
+        }
     }
 
     public void RemoveRootFromBoss()
@@ -68,6 +75,6 @@ public class Root : Enemy
 
     public void Slam()
     {
-        FindObjectOfType<Boss>().RootSlam(this);
+        boss.RootSlam(this);
     }
 }

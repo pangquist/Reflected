@@ -179,4 +179,9 @@ public class Boss : Enemy
     }
 
     public List<Root> Roots() => roots;
+
+    public void ToggleAbilityLock()
+    {
+        abilityLock= !abilityLock;
+    }
 }
