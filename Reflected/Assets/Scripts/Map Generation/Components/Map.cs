@@ -73,8 +73,8 @@ public class Map : MonoBehaviour
 
     public void Begin()
     {
-        StartRoom.gameObject.SetActive(true);
-        StartRoom.Activate(true);
+        BossRoom.gameObject.SetActive(true);
+        BossRoom.Activate(true);
 
         StartCoroutine(Coroutine_MovePlayer());
     }
@@ -94,9 +94,9 @@ public class Map : MonoBehaviour
         float shortestDistance = float.MaxValue;
         float tempDistance;
 
-        foreach (Transform spawnPoint in StartRoom.SpawnPointsParent)
+        foreach (Transform spawnPoint in BossRoom.SpawnPointsParent)
         {
-            tempDistance = Vector2.Distance(StartRoom.Rect.center, spawnPoint.position.XZ());
+            tempDistance = Vector2.Distance(BossRoom.Rect.center, spawnPoint.position.XZ());
 
             if (tempDistance < shortestDistance)
             {

@@ -32,7 +32,7 @@ public class Boss : Enemy
     protected override void Update()
     {
         cameraFocusPoint.transform.position = (transform.position + player.transform.position) / 2;
-        
+
         if (isDead)
             return;
 
@@ -59,7 +59,7 @@ public class Boss : Enemy
         Vector3 direction = (player.transform.position - rotateBody.transform.position).normalized;
         direction.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        while(Quaternion.Angle(rotateBody.transform.rotation, targetRotation) > 0.01f && !isDead)
+        while (Quaternion.Angle(rotateBody.transform.rotation, targetRotation) > 0.01f && !isDead)
         {
             //Quaternion nextRotation = Quaternion.Lerp(rotateBody.transform.rotation, targetRotation, Time.deltaTime);
             rotateBody.transform.rotation = Quaternion.RotateTowards(rotateBody.transform.rotation, targetRotation, Time.deltaTime);
@@ -76,12 +76,11 @@ public class Boss : Enemy
 
         while (abilityTimer <= 0)
         {
-            //Do Random Ability
             Ability chosenAbility = abilities[Random.Range(0, abilities.Count)];
             if (!chosenAbility.IsOnCooldown() && chosenAbility != lastAbility)
             {
                 chosenAbility.DoEffect();
-                //lastAbility = chosenAbility;
+                lastAbility = chosenAbility;
                 abilityTimer = chosenAbility.GetCastTime();
             }
         }
@@ -102,7 +101,7 @@ public class Boss : Enemy
         Vector3 spawnPosition = lootDropPosition.position + new Vector3(0, 1, 0);
         Instantiate(LootDropList.GetItem(LootDropList.Count - 1), spawnPosition, Quaternion.Euler(0, 0, 0));
     }
-    
+
     public void RemoveRoot(Root root)
     {
         roots.Remove(root);
@@ -132,7 +131,7 @@ public class Boss : Enemy
     {
         abilityLock = !abilityLock;
 
-        foreach(Root root in roots)
+        foreach (Root root in roots)
         {
             root.ToggleInvurnable();
         }
@@ -150,7 +149,7 @@ public class Boss : Enemy
 
     public void SpawnRoots()
     {
-        foreach(Root root in roots)
+        foreach (Root root in roots)
         {
             root.Spawn();
         }
@@ -160,7 +159,8 @@ public class Boss : Enemy
     {
         foreach (Root root in roots)
         {
-            root.Retract();
+            if (!root.Dead())
+                root.Retract();
         }
     }
 
@@ -168,7 +168,8 @@ public class Boss : Enemy
     {
         foreach (Root root in roots)
         {
-            root.Frenzy();
+            if (!root.Dead())
+                root.Frenzy();
         }
     }
 
