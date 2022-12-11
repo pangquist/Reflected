@@ -74,36 +74,41 @@ public class Map : MonoBehaviour
     public void Begin()
     {
         StartRoom.gameObject.SetActive(true);
-        StartRoom.Activate();
+        StartRoom.Activate(true);
 
-        Vector3 position = new Vector3(StartRoom.Rect.center.x, 10, StartRoom.Rect.center.y);
-        RaycastHit hit;
-
-        while (true)
-        {
-            if (Physics.Raycast(position, Vector3.down, out hit) && hit.collider.gameObject.GetComponentInParent<TerrainChunk>())
-            {
-                StartCoroutine(Coroutine_MovePlayer(position));
-                break;
-            }
-            else
-            {
-                position.x += 10;
-            }
-        }
+        StartCoroutine(Coroutine_MovePlayer());
     }
 
-    private IEnumerator Coroutine_MovePlayer(Vector3 position)
+    private IEnumerator Coroutine_MovePlayer()
     {
         Color fromColor = new Color(0f, 0f, 0f, 1f);
         Color toColor = new Color(0f, 0f, 0f, 0f);
 
         UiManager uiManager = GameObject.Find("Canvas").GetComponent<UiManager>();
         uiManager.Tint.color = fromColor;
-
         yield return null;
-        GameObject.Find("Player").transform.position = position;
+
+        // Find most center spawn point in start room
+
+        Vector3 mostCenterSpawnPosition = Vector3.zero;
+        float shortestDistance = float.MaxValue;
+        float tempDistance;
+
+        foreach (Transform spawnPoint in StartRoom.SpawnPointsParent)
+        {
+            tempDistance = Vector2.Distance(StartRoom.Rect.center, spawnPoint.position.XZ());
+
+            if (tempDistance < shortestDistance)
+            {
+                shortestDistance = tempDistance;
+                mostCenterSpawnPosition = spawnPoint.position;
+            }
+        }
+
+        GameObject.Find("Player").transform.position = mostCenterSpawnPosition;
         yield return new WaitForSeconds(0.3f);
+
+        // Fade screen from black to transparent
 
         float duration = 3f;
         float timer = 0f;

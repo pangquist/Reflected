@@ -52,7 +52,12 @@ public class AiDirector : MonoBehaviour
     public int GetKillCount() => numberOfEnemiesKilled;
     public int GetClearedRooms() => numberOfRoomsCleared;
 
-    void Start()
+    private void Awake()
+    {
+        Map.RoomEntered.AddListener(RoomEntered);
+    }
+
+    private void Start()
     {
         StartCoroutine(DelayedStart(0.2f));
     }
@@ -73,7 +78,7 @@ public class AiDirector : MonoBehaviour
         numberOfRoomsLeftOnMap = map.Rooms.Count;
     }
 
-    void Update()
+    private void Update()
     {
         CheckRoomActivity();
     }
@@ -145,18 +150,17 @@ public class AiDirector : MonoBehaviour
 
         timeToClearRoom = 0;
     }
-    public void EnterRoom() //called when a new room activates (from Room-script)
-    {  
+    public void RoomEntered() //called when a room is entered (by Map.RoomEntered event)
+    {
+        if (Map.ActiveRoom.Cleared || Map.ActiveRoom.Type == RoomType.Boss)
+            return;
+
         activeRoom = true;
         aliveEnemiesInRoom = 0;
         checkDifficulty();
         aliveEnemiesInRoom = amountOfEnemiesToSpawn * waveAmount;
 
         enemySpawner.SpawnEnemy(spawntime, amountOfEnemiesToSpawn, waveAmount, EnemyStatModifier());
-    }
-    public void EnterBossRoom()
-    {
-        Debug.Log("Activate Boss");
     }
     public void killEnemyInRoom() //called when enemy dies (from enemy-script)
     {

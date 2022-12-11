@@ -85,7 +85,7 @@ public class ObjectPlacer : MonoBehaviour
                             }
                         }
                         if (canPlace)
-                            Instantiate(pair.item, point, Quaternion.identity, room.ObjectsChild);
+                            Instantiate(pair.item, point, Quaternion.identity, room.DecorationsParent);
                     }
                 }
             }
@@ -166,7 +166,7 @@ public class ObjectPlacer : MonoBehaviour
 
                 if (CanPlace())
                 {
-                    Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.ObjectsChild);
+                    Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.SpawnPointsParent);
                     ++spawnPoints;
                 }
 

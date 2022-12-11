@@ -82,7 +82,7 @@ public class TerrainGenerator : MonoBehaviour
                     if (room.Rect.Inflated(1, 1).Overlaps(terrainRect))
                     {
                         // Instantiate a new TerrainChunk
-                        GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.TerrainChild);
+                        GameObject terrainChunk = Instantiate(terrainChunkPrefab, tilePosition, Quaternion.Euler(0, 180, 0), room.TerrainParent);
                         GenerateTerrainChunk(terrainChunk.GetComponent<TerrainChunk>(), room);
                         break;
                     }

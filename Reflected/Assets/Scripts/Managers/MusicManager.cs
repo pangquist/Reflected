@@ -31,6 +31,18 @@ public class MusicManager : MonoBehaviour
 
         currentTrack = trueMusic[intensityLevel];
         SetMusic(Dimension.True, 0);
+        Map.RoomEntered.AddListener(RoomEntered);
+    }
+
+    private void RoomEntered()
+    {
+        if (Map.ActiveRoom.Cleared)
+            return;
+
+        if (Map.ActiveRoom.Type == RoomType.Boss)
+            SetMusic(DimensionManager.CurrentDimension, 2);
+        else
+            SetMusic(DimensionManager.CurrentDimension, 1);
     }
 
     public void SwapMusicScore(Dimension dimension)

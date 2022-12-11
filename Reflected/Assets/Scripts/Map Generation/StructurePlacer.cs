@@ -157,7 +157,7 @@ public class StructurePlacer : MonoBehaviour
 
     private void InstantiateStructure(GameObject structurePrefab, Room room, RaycastHit raycastHit)
     {
-        Structure structure = Instantiate(structurePrefab.gameObject, room.ObjectsChild).GetComponent<Structure>();
+        Structure structure = Instantiate(structurePrefab.gameObject, room.StructuresParent).GetComponent<Structure>();
         structure.transform.position = raycastHit.point;
         structure.TerrainFlattener.Trigger();
         room.Structures.Add(structure);

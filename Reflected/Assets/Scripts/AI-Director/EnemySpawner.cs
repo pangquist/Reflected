@@ -48,12 +48,12 @@ public class EnemySpawner : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        //Debug.Log("Enemy spawned at frame " + Time.frameCount);
+        Debug.Log("Enemy spawned at frame " + Time.frameCount);
 
         GetBiasedEnemy();
         if (spawnTransforms.Count <= 0) GetSpawnlocations();
         spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-        Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0)).GetComponentInChildren<Enemy>();
+        Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.EnemiesParent).GetComponentInChildren<Enemy>();
         enemy.AdaptiveDifficulty(adaptiveDifficulty);
 
         spawnTransforms.Remove(spawnLocation);
@@ -77,14 +77,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void GetSpawnlocations()
     {
-        List<GameObject> spawns = new List<GameObject>();
-        spawns = GameObject.FindGameObjectsWithTag("SpawnPoint").ToList();
-
         spawnTransforms.Clear();
 
-        foreach (GameObject spawnPoint in spawns)
+        foreach (Transform spawnPoint in Map.ActiveRoom.SpawnPointsParent)
         {
-            if (spawnPoint.activeInHierarchy) spawnTransforms.Add(spawnPoint.transform);
+            spawnTransforms.Add(spawnPoint);
         }
     }
 

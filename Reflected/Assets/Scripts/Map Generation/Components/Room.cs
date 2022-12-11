@@ -9,9 +9,12 @@ public class Room : MonoBehaviour
 {
     [Header("References")]
 
-    [SerializeField] private Transform pathsChild;
-    [SerializeField] private Transform terrainChild;
-    [SerializeField] private Transform objectsChild;
+    [SerializeField] private Transform pathsParent;
+    [SerializeField] private Transform terrainParent;
+    [SerializeField] private Transform structuresParent;
+    [SerializeField] private Transform decorationsParent;
+    [SerializeField] private Transform spawnPointsParent;
+    [SerializeField] private Transform enemiesParent;
 
     [Header("Read Only")]
 
@@ -30,9 +33,12 @@ public class Room : MonoBehaviour
 
     // Properties
 
-    public Transform PathsChild => pathsChild;
-    public Transform TerrainChild => terrainChild;
-    public Transform ObjectsChild => objectsChild;
+    public Transform PathsParent => pathsParent;
+    public Transform TerrainParent => terrainParent;
+    public Transform StructuresParent => structuresParent;
+    public Transform DecorationsParent => decorationsParent;
+    public Transform SpawnPointsParent => spawnPointsParent;
+    public Transform EnemiesParent => enemiesParent;
 
     public Rect Rect => rect;
     public bool Cleared => cleared;
@@ -124,44 +130,46 @@ public class Room : MonoBehaviour
         }
 
         Map.ActiveRoom = null;
+        terrainParent.gameObject.SetActive(false);
+        structuresParent.gameObject.SetActive(false);
+        decorationsParent.gameObject.SetActive(false);
         gameObject.SetActive(false);
     }
 
     /// <summary>
-    /// Activates all connected chambers
+    /// Activates this room and all connecting chambers
     /// </summary>
-    public void Activate()
+    public void Activate(bool instant)
     {
-        Map.ActiveRoom = this;
-        Map.RoomEntered.Invoke();
+        StartCoroutine(Coroutine_Activate(instant));
+    }
+
+    private IEnumerator Coroutine_Activate(bool instant)
+    {
+        terrainParent.gameObject.SetActive(true);
+        if (!instant) yield return null;
+        structuresParent.gameObject.SetActive(true);
+        if (!instant) yield return null;
+        decorationsParent.gameObject.SetActive(true);
+        if (!instant) yield return null;
 
         foreach (Chamber chamber in chambers)
             chamber.gameObject.SetActive(true);
 
+        if (!instant) yield return null;
+        Map.ActiveRoom = this;
+
+        if (!cleared && type == RoomType.Start)
+            SetCleared(true);
+
+        Map.RoomEntered.Invoke();
+        if (!instant) yield return null;
+
         if (cleared)
-        {
             foreach (Chamber chamber in chambers)
                 chamber.Open(this);
-        }
-        else
-        {
-            if (type == RoomType.Monster || type == RoomType.Shop)
-            {
-                map.GameManager.AiDirector.EnterRoom();
-                GameObject.Find("Music Manager").GetComponent<MusicManager>().SetMusic(DimensionManager.CurrentDimension, 1);
-            }
 
-            else if (type == RoomType.Boss)
-            {
-                map.GameManager.AiDirector.EnterBossRoom();
-                GameObject.Find("Music Manager").GetComponent<MusicManager>().SetMusic(DimensionManager.CurrentDimension, 2);
-            }
-
-            else
-            {
-                SetCleared(true);
-            } 
-        }
+        yield return 0;
     }
 
     public void SetCleared(bool cleared)
@@ -184,6 +192,17 @@ public class Room : MonoBehaviour
             foreach (Chamber chamber in chambers)
                 chamber.Close(this);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        foreach (Vector3 pathPoint in pathPoints)
+            Gizmos.DrawSphere(pathPoint, 0.5f);
+
+        Gizmos.color = Color.red;
+        foreach (Transform spawnPoint in spawnPointsParent)
+            Gizmos.DrawSphere(spawnPoint.position, 1f);
     }
 
 }

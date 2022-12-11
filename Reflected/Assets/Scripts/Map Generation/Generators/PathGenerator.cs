@@ -86,7 +86,7 @@ public class PathGenerator : MonoBehaviour
 
     private PathCreator CreatePath(Room room, Chamber chamber1, Chamber chamber2)
     {
-        PathCreator path = Instantiate(pathPrefab, room.PathsChild).GetComponent<PathCreator>();
+        PathCreator path = Instantiate(pathPrefab, room.PathsParent).GetComponent<PathCreator>();
         path.name = "Path " + room.Paths.Count;
         room.Paths.Add(path);
 
@@ -109,7 +109,7 @@ public class PathGenerator : MonoBehaviour
 
     private PathCreator CreatePath(Room room, Chamber chamber)
     {
-        PathCreator path = Instantiate(pathPrefab, room.PathsChild).GetComponent<PathCreator>();
+        PathCreator path = Instantiate(pathPrefab, room.PathsParent).GetComponent<PathCreator>();
         path.name = "Path " + room.Paths.Count;
         room.Paths.Add(path);
 

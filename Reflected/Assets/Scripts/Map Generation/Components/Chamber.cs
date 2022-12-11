@@ -133,8 +133,9 @@ public class Chamber : MonoBehaviour
             openDoor.Room.Deactivate(this);
 
         // Activate next room
+        yield return null;
         closedDoor.Room.gameObject.SetActive(true);
-        closedDoor.Room.Activate();
+        closedDoor.Room.Activate(false);
 
         // Pause
         yield return new WaitForSeconds(pause);
