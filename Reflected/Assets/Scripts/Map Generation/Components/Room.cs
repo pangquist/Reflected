@@ -114,8 +114,20 @@ public class Room : MonoBehaviour
         if (Map.ActiveRoom != this)
             return;
 
-        if (!cleared && map.GameManager.AiDirector.AllEnemiesKilled)
-            SetCleared(true);
+        if (cleared)
+            return;
+
+        if (type == RoomType.Boss)
+        {
+            if (structuresParent.GetComponentInChildren<Boss>().Dead())
+                SetCleared(true);
+        }
+
+        else
+        {
+            if (map.GameManager.AiDirector.AllEnemiesKilled)
+                SetCleared(true);
+        }
     }
 
     /// <summary>
