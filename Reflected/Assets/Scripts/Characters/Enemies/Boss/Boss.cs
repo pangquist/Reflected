@@ -147,4 +147,35 @@ public class Boss : Enemy
         //cameraManager.NewFocus(cameraFocusPoint);
         //cameraManager.BossSettings();
     }
+
+    public void SpawnRoots()
+    {
+        foreach(Root root in roots)
+        {
+            root.Spawn();
+        }
+    }
+
+    public void RetractRoots()
+    {
+        foreach (Root root in roots)
+        {
+            root.Retract();
+        }
+    }
+
+    public void RootFrenzy()
+    {
+        foreach (Root root in roots)
+        {
+            root.Frenzy();
+        }
+    }
+
+    public void RootSlam(Root root)
+    {
+        GetComponent<RootFrenzy>().Frenzy(root);
+    }
+
+    public List<Root> Roots() => roots;
 }

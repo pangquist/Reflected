@@ -16,6 +16,10 @@ public class AbilityCooldowns : MonoBehaviour
     [SerializeField] Image ability2Overlay;
     [SerializeField] TextMeshProUGUI ability2Text;
 
+    [Header("Ability 3")]
+    [SerializeField] Image ability3Icon;
+    [SerializeField] TextMeshProUGUI ability3Text;
+
     [Header("Other")]
     [SerializeField] private ThirdPersonMovement thirdPersonMovement;
 
@@ -33,6 +37,8 @@ public class AbilityCooldowns : MonoBehaviour
 
         ability1Icon.sprite = player.GetSpecialAbility().GetIcon();
         ability2Icon.sprite = thirdPersonMovement.GetDash().GetIcon();
+
+        ability3Icon.sprite = player.GetSwapAbility().GetIcon();
     }
 
     // Update is called once per frame

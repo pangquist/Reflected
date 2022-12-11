@@ -212,6 +212,11 @@ public class Player : Character
         return specialAbility;
     }
 
+    public Ability GetSwapAbility()
+    {
+        return swapAbilities[0];
+    }
+
     public void PlayCurrentAbilityVFX()
     {
         currentAbility.PlayVFX();
