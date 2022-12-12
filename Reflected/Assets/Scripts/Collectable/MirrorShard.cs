@@ -12,6 +12,8 @@ public class MirrorShard : MonoBehaviour, ICollectable, IBuyable
     //The lines above allows for the action to be handled adding the item to the inventory
     //using ascriptable object in the collectable folder
 
+    [SerializeField] private AudioClip audioClip;
+
     private void Start()
     {
         Destroy(gameObject, 45);
@@ -19,7 +21,11 @@ public class MirrorShard : MonoBehaviour, ICollectable, IBuyable
 
     public void Collect()
     {
-        Debug.Log("You collected a mirror shard");
+        PopUpText popUptext = PopUpTextManager.NewBasic(transform.position, "+1 " + mirroShardData.displayName);
+        popUptext.Text.color = new Color(0f, 0.5f, 1f);
+
+        GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
+
         Destroy(gameObject);
         OnShardCollected?.Invoke(mirroShardData); //?. makes sure it's not null and that there are listeners to the event
     }

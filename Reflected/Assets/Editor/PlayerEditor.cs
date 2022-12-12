@@ -65,6 +65,8 @@ public class PlayerEditorTemplate : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("attackSpeed"));
         EditorGUILayout.Space();
         EditorGUILayout.PropertyField(serializedObject.FindProperty("currentWeapon"));
+        EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("damagedClips"));
     }
 
     void DisplayDimensionInfo()

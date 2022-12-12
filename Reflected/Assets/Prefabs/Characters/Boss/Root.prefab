@@ -175,22 +175,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 4
+  currentHealth: 0
   movementSpeed: 0
   damage: 0
   attackSpeed: 0
-  currentHealth: 0
   anim: {fileID: 0}
   currentWeapon: {fileID: 0}
+  damagedClips:
+  - {fileID: 8300000, guid: 605611dd6463bbc4090ab6408907d9e8, type: 3}
+  - {fileID: 8300000, guid: d7ea6b2cca581414e87717a0d085aa62, type: 3}
   HealthChanged:
     m_PersistentCalls:
       m_Calls: []
   Killed:
     m_PersistentCalls:
       m_Calls: []
+  baseProjectileSpeed: 0
+  baseAoeSize: {x: 0, y: 0, z: 0}
   combatTextOffset: {x: 0, y: 2, z: 0}
   combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
     type: 3}
-  aggroRange: 0
   LootDropList:
     list: []
   hitSounds:

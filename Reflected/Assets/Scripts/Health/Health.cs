@@ -15,6 +15,8 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
     public int amount;
     public string description;
 
+    [SerializeField] private AudioClip audioClip;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -31,6 +33,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
     {
         if (other.GetComponent<Player>())
         {
+            GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
             Destroy(gameObject);
             Debug.Log(amount);
             powerUpEffect.Apply(other.gameObject, amount); 

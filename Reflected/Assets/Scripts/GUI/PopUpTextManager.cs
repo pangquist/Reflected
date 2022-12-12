@@ -31,7 +31,7 @@ public class PopUpTextManager : MonoBehaviour
     {
         PopUpText popUpText = NewBasic(position, damage.ToString("0"));
         popUpText.Swing = true;
-        popUpText.Text.color = new Color(1f, 0.5f, 0f);
+        popUpText.Text.color = new Color(1f, 0.3f, 0f);
         popUpText.Speed = 1.5f;
         return popUpText;
     }
