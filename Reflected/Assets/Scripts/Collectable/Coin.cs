@@ -17,6 +17,8 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
     Vector3 targetPosition;
     float moveSpeed = 5f;
 
+    [SerializeField] private AudioClip audioClip;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();        
@@ -31,9 +33,14 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
 
     public void Collect()
     {
-        //Debug.Log("You collected a coin");
+        PopUpText popUptext = PopUpTextManager.NewBasic(transform.position, "+1 Coin");
+        popUptext.Text.color = new Color(1f, 0.9f, 0f);
+
+        GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
+
         Destroy(gameObject);
         OnCoinCollected?.Invoke(coinData);
+        gameObject.SetActive(false);
     }
 
     public void FixedUpdate()

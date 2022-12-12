@@ -10,6 +10,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
     [SerializeField] public float amount;
     [SerializeField] public int value;
     [SerializeField] public string description;
+    [SerializeField] private AudioClip audioClip;
     protected bool hasProperties;
     public static event HandlePowerupCollected OnPowerUPCollected;
     public delegate void HandlePowerupCollected(PowerUpEffect powerupData);
@@ -63,6 +64,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
     public void ApplyOnInteraction()
     {
         Player player = FindObjectOfType<Player>();
+        player.GetComponentInParent<AudioSource>().PlayOneShot(audioClip);
         Destroy(gameObject);
         powerUpEffect.Apply(player.gameObject, amount);
         OnPowerUPCollected?.Invoke(powerUpEffect);

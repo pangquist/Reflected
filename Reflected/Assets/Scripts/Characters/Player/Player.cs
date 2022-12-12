@@ -126,6 +126,7 @@ public class Player : Character
 
     public override void Heal(float amount)
     {
+        PopUpTextManager.NewHeal(transform.position + Vector3.up * 1.5f, amount);
         currentHealth += Mathf.Clamp(amount, 0, maxHealth + stats.GetMaxHealthIncrease() - currentHealth);
         HealthChanged.Invoke();
     }
@@ -182,6 +183,8 @@ public class Player : Character
         }
 
         HealthChanged.Invoke();
+        PopUpTextManager.NewDamage(transform.position + Vector3.up * 1.5f, damage);
+        PlayDamangedAudioClip();
     }
 
     public void Interact()

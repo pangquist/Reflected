@@ -11,6 +11,8 @@ public class Diamond : MonoBehaviour, ICollectable, IBuyable
     //The lines above allows for the action to be handled adding the item to the inventory
     //using ascriptable object in the collectable folder
 
+    [SerializeField] private AudioClip audioClip;
+
     private void Start()
     {
         //Destroy(gameObject, 30);
@@ -18,7 +20,11 @@ public class Diamond : MonoBehaviour, ICollectable, IBuyable
 
     public void Collect()
     {
-        Debug.Log("You collected a Diamond");
+        PopUpText popUptext = PopUpTextManager.NewBasic(transform.position, "+1 Diamond");
+        popUptext.Text.color = new Color(0f, 0.2f, 1f);
+
+        GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
+
         Destroy(gameObject);
         OnDiamondCollected?.Invoke(diamondData);
     }

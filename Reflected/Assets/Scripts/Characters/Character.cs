@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(AudioSource))]
 public class Character : MonoBehaviour, IEffectable
 {
     //Should these not be "base" properties? As they will be affected by the stat system increases/power-ups. OR are they the final calculation of said stats? -Kevin
@@ -22,6 +23,9 @@ public class Character : MonoBehaviour, IEffectable
     protected bool isDead;
 
     [SerializeField] protected Weapon currentWeapon;
+    [SerializeField] protected List<AudioClip> damagedClips;
+
+    protected AudioSource audioSource;
 
     public UnityEvent HealthChanged = new UnityEvent();
     public UnityEvent Killed = new UnityEvent();
@@ -32,6 +36,7 @@ public class Character : MonoBehaviour, IEffectable
             anim = GetComponent<Animator>();
         statusEffects = new List<Effect>();
         effectParticles = new Dictionary<StatusEffectData, GameObject>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected virtual void Update()
@@ -56,6 +61,14 @@ public class Character : MonoBehaviour, IEffectable
         }
 
         HealthChanged.Invoke();
+        PopUpTextManager.NewDamage(transform.position + Vector3.up * 1.5f, damage);
+        PlayDamangedAudioClip();
+    }
+
+    protected void PlayDamangedAudioClip()
+    {
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.PlayOneShot(damagedClips.GetRandom());
     }
 
     public virtual void Heal(float amount)

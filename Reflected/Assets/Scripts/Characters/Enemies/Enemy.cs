@@ -80,9 +80,6 @@ public class Enemy : Character
             parent.transform.rotation = Quaternion.LookRotation(direction);
         }
         */
-        
-        //Damage PopUp text
-        PopUpTextManager.NewDamage(transform.position + Vector3.up * 1.5f, damage);
 
         //Call base take damage function
         base.TakeDamage(damage);

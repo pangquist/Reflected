@@ -19,9 +19,6 @@ public class Root : Enemy
         if (invurnable || isDead)
             return;
 
-        CombatText text = Instantiate(combatTextCanvas.gameObject, transform.position + combatTextOffset, Quaternion.identity).GetComponent<CombatText>();
-        text.SetDamageText(damage);
-
         string clipName = anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
 
         if (clipName == "Idle")
@@ -37,6 +34,8 @@ public class Root : Enemy
         }
 
         HealthChanged.Invoke();
+        PopUpTextManager.NewDamage(transform.position + Vector3.up * 1.5f, damage);
+        PlayDamangedAudioClip();
     }
 
     protected override void Die()
