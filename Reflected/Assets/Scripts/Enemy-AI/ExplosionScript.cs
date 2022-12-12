@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExplosionScript : MonoBehaviour
 {
-    [SerializeField] private float upTime = 0.5f;
+    [SerializeField] private float upTime = 0.25f;
     [SerializeField] private StatusEffectData dotData;
     [SerializeField] private StatusEffectData slowData;
     private float despawnTimer;
@@ -23,7 +23,7 @@ public class ExplosionScript : MonoBehaviour
         despawnTimer += Time.deltaTime;
         if (despawnTimer >= upTime)
         {
-            Destroy(this.gameObject);
+            Destroy(transform.parent.gameObject);
             despawnTimer = 0f;
         }
     }
