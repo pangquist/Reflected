@@ -36,21 +36,39 @@ public class Sword : Weapon
             target.TakeDamage(GetDamage());
             hitEnemies.Add(target);
 
-            if (powerUpIndex > -1 && powerUpIndex < 2)
+            //if (powerUpIndex > -1 && powerUpIndex < 2)
+            //{
+            //    target.GetComponent<IEffectable>().ApplyEffect(statusEffectDatas[powerUpIndex], damage);
+            //    Debug.Log(statusEffectDatas[powerUpIndex]);
+            //}
+            //else if (powerUpIndex == 2)
+            //{
+            //    player.GetComponent<IEffectable>().ApplyEffect(statusEffectDatas[powerUpIndex], damage / 2);
+            //    Debug.Log(statusEffectDatas[powerUpIndex]);
+            //}
+
+            //if (powerUpEffects.ContainsKey("Burning"))
+            //{
+            //    target.GetComponent<IEffectable>().ApplyEffect(powerUpEffects["Burning"], damage);
+            //    Debug.Log(powerUpEffects["Burning"]);
+            //}
+
+            foreach (StatusEffectData effectData in statusEffectDatas)
             {
-                target.GetComponent<IEffectable>().ApplyEffect(statusEffectDatas[powerUpIndex], damage);
-                Debug.Log(statusEffectDatas[powerUpIndex]);
+                if(effectData.name == "Regenerate")
+                {
+                    player.GetComponent<IEffectable>().ApplyEffect(effectData, damage);
+                }
+                else
+                {
+                    target.GetComponent<IEffectable>().ApplyEffect(effectData, damage);
+                    //Debug.Log(effectData);
+                }
+                
             }
-            else if (powerUpIndex == 2)
-            {
-                player.GetComponent<IEffectable>().ApplyEffect(statusEffectDatas[powerUpIndex], damage / 2);
-                Debug.Log(statusEffectDatas[powerUpIndex]);
-            }
+
         }
     }
 
-    public void AddStatusEffect(StatusEffectData effect)
-    {
-        statusEffectDatas.Add(effect);
-    }
+    
 }

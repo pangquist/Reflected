@@ -73,9 +73,13 @@ public class Character : MonoBehaviour, IEffectable
 
     public virtual void Heal(float amount)
     {
-        currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
-        HealthChanged.Invoke();
-        PopUpTextManager.NewHeal(transform.position + Vector3.up * 1.5f, amount);
+        if (!isDead)
+        {
+            currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
+            HealthChanged.Invoke();
+            PopUpTextManager.NewHeal(transform.position + Vector3.up * 1.5f, amount);
+        }
+        
     }
 
     protected virtual void Die()
@@ -186,7 +190,7 @@ public class Character : MonoBehaviour, IEffectable
             if (statusEffects[i].effect.DOTAmount != 0 && statusEffects[i].currentEffectTime > statusEffects[i].nextTickTime)
             {
                 statusEffects[i].SetNextTickTime();
-                if (statusEffects[i].totalDamage > 0)
+                if (statusEffects[i].effect.DOTAmount > 0)
                     TakeDamage(statusEffects[i].effect.DOTAmount * maxHealth);
                 else
                     Heal(-1 * statusEffects[i].effect.DOTAmount * maxHealth);
@@ -219,7 +223,7 @@ public class Effect
     public float totalSlow;
 
 
-    public Effect(StatusEffectData effect, float scale)
+    public Effect(StatusEffectData effect, float scale) //Scale should be removed and everything that uses it
     {
         this.effect = effect;
         currentEffectTime = 0f;

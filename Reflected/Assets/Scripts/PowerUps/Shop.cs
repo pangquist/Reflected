@@ -16,8 +16,8 @@ public class Shop : MonoBehaviour
     //public Animator animator;
     [SerializeField] int numberOfCollectableItems = 2;
     [SerializeField] int numberOfPowerUps = 2;
-    int totalNumberOfItems;
     Inventory inventory;
+    List<string> shopItemDescriptions;
 
     private void Start()
     {
@@ -32,8 +32,8 @@ public class Shop : MonoBehaviour
                 pair.weight = 0;
             }
         }
+        shopItemDescriptions = new List<string>();
         PopulateShop();
-        //Destroy(gameObject, 200);
     }
 
     public bool BuyItem(int index) //Have to send in an index here for the shop to give you that item
@@ -77,6 +77,7 @@ public class Shop : MonoBehaviour
         }
         
         shopItems.RemoveAt(index);
+        shopItemDescriptions.RemoveAt(index);
         Debug.Log("Item should spawn...");
         spawnedObject.transform.parent = null;
         itemHolder.gameObject.SetActive(true);
@@ -88,6 +89,7 @@ public class Shop : MonoBehaviour
         {
             shopItems.Add(lootTablePowerUps.GetRandomAndRemove());
             shopItems[i].GetComponent<InteractablePowerUp>().SetProperties(rarityTiers.GetRandom());
+            shopItemDescriptions.Add(shopItems[i].GetComponent<IBuyable>().GetDescription());
             //Debug.Log("Powerup " + i + ": value:" + shopItems[i].GetComponent<InteractablePowerUp>().GetValue() + ". amount: " + shopItems[i].GetComponent<InteractablePowerUp>().amount);
         }
 
@@ -100,14 +102,19 @@ public class Shop : MonoBehaviour
             }
             else if(shopItems[i + numberOfPowerUps].GetComponent<MirrorCharge>() != null)
             {
-                shopItems[i + numberOfPowerUps].GetComponent<MirrorCharge>().SetProperties(rarityTiers.GetRandom());
+                shopItems[i + numberOfPowerUps].GetComponent<MirrorCharge>().SetProperties();
             }
+            shopItemDescriptions.Add(shopItems[i].GetComponent<IBuyable>().GetDescription());
         }
-        totalNumberOfItems = numberOfPowerUps + numberOfCollectableItems;
     }
 
     public List<GameObject> GetShopItems()
     {
         return shopItems;
     } 
+
+    public List<string> GetShopItemsDescriptions()
+    {
+        return shopItemDescriptions;
+    }
 }
