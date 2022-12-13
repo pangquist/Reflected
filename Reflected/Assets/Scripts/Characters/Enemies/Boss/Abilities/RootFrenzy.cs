@@ -31,7 +31,6 @@ public class RootFrenzy : Ability
         return true;
     }
 
-
     public void Frenzy(Root root)
     {
         bounds = root.SwipeHitbox().bounds;
@@ -42,15 +41,17 @@ public class RootFrenzy : Ability
 
             player.Stun(stunDuration);
         }
-        ParticleSystem particleSystem = Instantiate(vfxObject, root.SwipeHitbox().transform.position, root.SwipeHitbox().transform.rotation).GetComponent<ParticleSystem>();
+
+        ParticleSystem particleSystem = Instantiate(vfxObject, root.EffectTransform().position, root.EffectTransform().rotation).GetComponent<ParticleSystem>();
         particleSystem.transform.parent = null;
 
         root.gameObject.GetComponent<AudioSource>().PlayOneShot(abilitySounds[Random.Range(0, abilitySounds.Count)]);
 
 
         RaycastHit hit;
-        if (Physics.Raycast(particleSystem.transform.position + new Vector3(0, 2, 0), Vector3.down, out hit, Mathf.Infinity, groundMask))
+        if (Physics.Raycast(particleSystem.transform.position + new Vector3(0, 5, 0), Vector3.down, out hit, Mathf.Infinity, groundMask))
         {
+            particleSystem.transform.position = hit.point + new Vector3(0, -1, 0);
             ParticleSystemRenderer renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
             renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;
         }
