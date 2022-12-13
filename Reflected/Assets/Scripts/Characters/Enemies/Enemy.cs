@@ -71,16 +71,6 @@ public class Enemy : Character
             return;
         }
 
-        //Make the enemy look at the player when taking damage (Not needed? -Kevin)
-        /*
-        if (!GetComponent<Boss>())
-        {
-            Vector3 direction = (transform.position - player.transform.position).normalized;
-            direction.y = 0;
-            parent.transform.rotation = Quaternion.LookRotation(direction);
-        }
-        */
-
         //Call base take damage function
         base.TakeDamage(damage);
     }

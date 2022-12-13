@@ -25,8 +25,6 @@ public class Root : Enemy
         if (clipName == "Idle")
             anim.Play("Take Damage");
 
-        GetComponent<AudioSource>().PlayOneShot(damagedClips[Random.Range(0, damagedClips.Count)]);
-
         currentHealth -= Mathf.Clamp(damage, 0, currentHealth);
 
         if (currentHealth <= 0)
