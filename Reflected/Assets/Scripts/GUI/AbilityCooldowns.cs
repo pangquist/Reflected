@@ -38,7 +38,7 @@ public class AbilityCooldowns : MonoBehaviour
         ability1Icon.sprite = player.GetSpecialAbility().GetIcon();
         ability2Icon.sprite = thirdPersonMovement.GetDash().GetIcon();
 
-        ability3Icon.sprite = player.GetSwapAbility().GetIcon();
+        //ability3Icon.sprite = player.GetSwapAbility().GetIcon();
     }
 
     // Update is called once per frame

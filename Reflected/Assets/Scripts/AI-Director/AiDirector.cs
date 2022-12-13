@@ -22,6 +22,7 @@ public class AiDirector : MonoBehaviour
     [SerializeField] float timeToClearRoom;
     [SerializeField] float averageTimeToClearRoom;
     List<float> clearTimesList = new List<float>();
+    Queue<float> clearTimesQueue = new Queue<float>();
     [SerializeField] List<GameObject> chests;
 
     //Map-stats
@@ -142,6 +143,8 @@ public class AiDirector : MonoBehaviour
     private void UpdateRoomStatistics()
     {
         clearTimesList.Add(timeToClearRoom);
+        clearTimesQueue.Enqueue(timeToClearRoom);
+        if(clearTimesQueue.Count >= 4) clearTimesQueue.Dequeue();
         calculateAverageTime();
 
         numberOfRoomsCleared++;
@@ -168,12 +171,13 @@ public class AiDirector : MonoBehaviour
         numberOfEnemiesKilled++;
     }
     private float calculateAverageTime() => averageTimeToClearRoom = clearTimesList.Sum() / clearTimesList.Count();
+    private float calculateTimeStat() => clearTimesQueue.Sum() / clearTimesQueue.Count();
 
     private float EnemyStatModifier()
     {
         float extraStats = numberOfRoomsCleared * 0.3f;
 
-        if(averageTimeToClearRoom > 0) extraStats += 30f / calculateAverageTime();
+        if(averageTimeToClearRoom > 0) extraStats += 5f / calculateTimeStat();
         
         return extraStats;
     }
