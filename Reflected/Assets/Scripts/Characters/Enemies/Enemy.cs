@@ -109,7 +109,7 @@ public class Enemy : Character
         currentHealth = maxHealth;
         attackSpeed += attackSpeed * (extraDifficultyPercentage * 0.3f);
         movementSpeed += movementSpeed * (extraDifficultyPercentage * 0.1f);
-        damage += damage * extraDifficultyPercentage;
+        damage += damage * (extraDifficultyPercentage * 0.8f);
     }
 
     public virtual void LootDrop(Transform lootDropPosition)

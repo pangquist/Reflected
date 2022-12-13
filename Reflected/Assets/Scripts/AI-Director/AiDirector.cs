@@ -42,9 +42,10 @@ public class AiDirector : MonoBehaviour
     UiManager uiManager;
     LootPoolManager lootPool;
     Rarity currentRarity;
+    int eliteThreshold = 5;
 
     public static UnityEvent RoomCleared = new UnityEvent();
-    
+
 
     // Properties
 
@@ -95,7 +96,7 @@ public class AiDirector : MonoBehaviour
             maxSpawnAmount++;
             spawntime -= 0.1f;
         }
-        if(numberOfRoomsCleared % 3 == 0 && numberOfRoomsCleared > 0)
+        if (numberOfRoomsCleared % 3 == 0 && numberOfRoomsCleared > 0)
         {
             waveAmount++;
         }
@@ -136,6 +137,7 @@ public class AiDirector : MonoBehaviour
             SpawnChest();
 
             //RoomCleared.Invoke();
+            if (numberOfRoomsCleared <= eliteThreshold) enemySpawner.ActivateEliteEnemy();
 
             inbetweenRooms = false;
         }
@@ -144,7 +146,7 @@ public class AiDirector : MonoBehaviour
     {
         clearTimesList.Add(timeToClearRoom);
         clearTimesQueue.Enqueue(timeToClearRoom);
-        if(clearTimesQueue.Count >= 4) clearTimesQueue.Dequeue();
+        if (clearTimesQueue.Count >= 4) clearTimesQueue.Dequeue();
         calculateAverageTime();
 
         numberOfRoomsCleared++;
@@ -175,16 +177,17 @@ public class AiDirector : MonoBehaviour
 
     private float EnemyStatModifier()
     {
-        float extraStats = numberOfRoomsCleared * 0.3f;
+        float extraStats = numberOfRoomsCleared * 0.4f;
 
-        if(averageTimeToClearRoom > 0) extraStats += 5f / calculateTimeStat();
-        
+        if (averageTimeToClearRoom > 0) extraStats += (5f / calculateTimeStat());
+
         return extraStats;
     }
     private void SpawnChest()
     {
         currentRarity = lootPool.GetRandomRarity();
-        Vector3 spawnPosition = player.transform.position + new Vector3(5, 3, 0);
+        Vector3 spawnPosition = enemySpawner.GetSpawnLocations().position;
+        spawnPosition.y = 5;
         switch (currentRarity.rarity)
         {
             case "Common":
@@ -192,7 +195,7 @@ public class AiDirector : MonoBehaviour
                 break;
             case "Rare":
                 Instantiate(chests[1], spawnPosition, Quaternion.Euler(0, 0, 0));
-                break;                
+                break;
             case "Epic":
                 Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
                 break;
@@ -203,7 +206,7 @@ public class AiDirector : MonoBehaviour
                 Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0));
                 break;
         }
-        
-        
+
+
     }
 }
