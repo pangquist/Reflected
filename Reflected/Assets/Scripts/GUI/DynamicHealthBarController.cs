@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBarController : MonoBehaviour
+public class DynamicHealthBarController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject healthBarPrefab;
     [SerializeField] private Character character;
-
-    [Header("Values")]
-    [SerializeField] private HealthTextMode healthTextMode;
 
     [Header("Read Only")]
     [ReadOnly][SerializeField] private DynamicHealthBar healthBar;
@@ -24,28 +21,13 @@ public class HealthBarController : MonoBehaviour
         healthBar = Instantiate(healthBarPrefab, inWorldLayer).GetComponent<DynamicHealthBar>();
         healthBar.FollowInWorldObject.ObjectToFollow = transform;
 
-        if (healthTextMode == HealthTextMode.None)
-            healthBar.Text.text = "";
-
-        character.HealthChanged.AddListener(UpdateHealthBar);
+        character.HealthChanged.AddListener(() => healthBar.UpdateHealthBar(character));
         character.Killed.AddListener(DestroyHealthBar);
     }
 
     private void Start()
     {
-        UpdateHealthBar();
-    }
-
-    private void UpdateHealthBar()
-    {
-        healthBar.Slider.value = character.GetHealthPercentage();
-        healthBar.Fill.color = healthBar.Gradient.Evaluate(character.GetHealthPercentage());
-
-        if (healthTextMode == HealthTextMode.Current)
-            healthBar.Text.text = (int)(character.GetCurrentHealth() + 0.5f) + "";
-
-        else if (healthTextMode == HealthTextMode.Full)
-            healthBar.Text.text = (int)(character.GetCurrentHealth() + 0.5f) + "/" + (int)(character.GetMaxHealth() + 0.5f);
+        healthBar.UpdateHealthBar(character);
     }
 
     private void DestroyHealthBar()
