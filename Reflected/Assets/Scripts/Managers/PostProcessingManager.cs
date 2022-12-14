@@ -4,6 +4,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class PostProcessingManager : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class PostProcessingManager : MonoBehaviour
 
     private void Awake()
     {
+        if (SceneManager.GetActiveScene().name == "Start Scene")
+            return;
+
         playerHealthBar = GameObject.Find("Canvas").transform.GetComponentInChildren<StaticHealthBar>();
         playerHealthBar.Slider.onValueChanged.AddListener(UpdateVignetteTarget);
 
@@ -82,6 +86,9 @@ public class PostProcessingManager : MonoBehaviour
 
     private void OnEnable()
     {
+        if (SceneManager.GetActiveScene().name == "Start Scene")
+            return;
+
         vignetteIntensityTargetValue = 0f;
         trueVignette.intensity.value = 0f;
         mirrorVignette.intensity.value = 0f;
@@ -89,6 +96,9 @@ public class PostProcessingManager : MonoBehaviour
 
     private void OnDisable()
     {
+        if (SceneManager.GetActiveScene().name == "Start Scene")
+            return;
+
         vignetteIntensityTargetValue = 0f;
         trueVignette.intensity.value = 0f;
         mirrorVignette.intensity.value = 0f;
