@@ -45,6 +45,10 @@ public abstract class HealthBar : MonoBehaviour
 
     public void UpdateHealthBar(Character character)
     {
+        float oldValue = slider.value;
+
+        // Update slider
+
         slider.value = character.GetHealthPercentage();
         fill.color = gradient.Evaluate(slider.value / slider.maxValue);
 
@@ -54,28 +58,24 @@ public abstract class HealthBar : MonoBehaviour
             delayedFill.color = fill.color;
         }
 
+        // Update text
+
         if (healthTextMode == HealthTextMode.Current)
             text.text = (int)(character.GetCurrentHealth() + 0.5f) + "";
 
         else if (healthTextMode == HealthTextMode.Full)
             text.text = (int)(character.GetCurrentHealth() + 0.5f) + "/" + (int)(character.GetMaxHealth() + 0.5f);
 
-        SingleShake();
-    }
+        // Shake
 
-    public void SingleShake()
-    {
-        animator.SetTrigger("Single Shake");
-    }
+        if (oldValue > 0.2f && slider.value <= 0.2f && this is StaticHealthBar)
+            animator.SetTrigger("Start Shake");
 
-    public void StartShake()
-    {
-        animator.SetTrigger("Start Shake");
-    }
+        else if (oldValue <= 0.2f && slider.value > 0.2f && this is StaticHealthBar)
+            animator.SetTrigger("Stop Shake");
 
-    public void StopShake()
-    {
-        animator.SetTrigger("Stop Shake");
+        else if (oldValue > slider.value)
+            animator.SetTrigger("Single Shake");
     }
 
 }
