@@ -16,10 +16,8 @@ using UnityEngine.Events;
 /// </summary>
 public class DimensionManager : MonoBehaviour
 {
-    [Header("Post processing")]
-    [SerializeField] private Volume volume;
-    [SerializeField] private VolumeProfile trueProfile;
-    [SerializeField] private VolumeProfile mirrorProfile;
+    [Header("References")]
+    [SerializeField] private PostProcessingManager postProcessingManager;
 
     [Header("Lighting")]
     [SerializeField] private GameObject trueLighting;
@@ -29,7 +27,7 @@ public class DimensionManager : MonoBehaviour
     [SerializeField] private Material trueSkybox;
     [SerializeField] private Material mirrorSkybox;
 
-    //[Header("Music")]
+    [Header("Music")]
     [SerializeField] private MusicManager musicManager;
 
     [Header("Changeable")]
@@ -110,7 +108,10 @@ public class DimensionManager : MonoBehaviour
     {
         currentDimension = dimension;
 
-        volume.profile = True ? trueProfile : mirrorProfile;
+        if (True)
+            postProcessingManager.UseTrueProfile();
+        else
+            postProcessingManager.UseMirrorProfile();
 
         musicManager.SwapMusicScore(dimension);
 
