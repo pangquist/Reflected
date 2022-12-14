@@ -98,7 +98,7 @@ public class Enemy : Character
         maxHealth += maxHealth * extraDifficultyPercentage;
         currentHealth = maxHealth;
         attackSpeed += attackSpeed * (extraDifficultyPercentage * 0.3f);
-        movementSpeed += movementSpeed * (extraDifficultyPercentage * 0.1f);
+        movementSpeed += movementSpeed * (extraDifficultyPercentage * 0.2f);
         damage += damage * (extraDifficultyPercentage * 0.8f);
     }
 
