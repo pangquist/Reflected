@@ -179,7 +179,7 @@ public class AiDirector : MonoBehaviour
     {
         float extraStats = numberOfRoomsCleared * 0.4f;
 
-        if (averageTimeToClearRoom > 0) extraStats += (5f / calculateTimeStat());
+        if (averageTimeToClearRoom > 0) extraStats += (8f / calculateTimeStat());
 
         return extraStats;
     }
