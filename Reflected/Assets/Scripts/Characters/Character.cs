@@ -175,7 +175,7 @@ public class Character : MonoBehaviour, IEffectable
         //if (effectParticles != null) Destroy(effectParticles);
     }
 
-    public void HandleEffect()
+    public virtual void HandleEffect()
     {        
         for (int i = 0; i < statusEffects.Count; i++)
         {

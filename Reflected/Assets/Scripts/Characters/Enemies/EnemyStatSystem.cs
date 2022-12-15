@@ -20,7 +20,7 @@ public class EnemyStatSystem : StatSystem
 
     public void Start()
     {
-        baseIncrease = new List<float>() { 2f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
+        baseIncrease = new List<float>() { 5f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
         statList = new List<Stats>();
         statList = Enum.GetValues(typeof(Stats)).Cast<Stats>().ToList();
         lightBuffs = new Dictionary<Stats, float>();
@@ -34,21 +34,13 @@ public class EnemyStatSystem : StatSystem
         }
     }
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            SetNewStats(1, 1, true);
-        }
-    }
-
     //Note: Does stats buff the same of different stats depending on the dimension
-    public void SetNewStats(int nrOfStatsToIncrease, int difficulty, bool noDoubledipping )
+    public void SetNewStats(int nrOfStatsToIncrease, int difficulty, bool noDoubledipping ) //Not currently used
     {
         int iterations = 0;
         while(iterations < 2)
         {
-            Dictionary<Stats, float> buffPool = new Dictionary<Stats, float>(); // = baseBuffs; //Linked
+            Dictionary<Stats, float> buffPool = new Dictionary<Stats, float>(); 
             foreach (var item in baseBuffs)
             {
                 buffPool.Add(item.Key, item.Value);
@@ -115,7 +107,7 @@ public class EnemyStatSystem : StatSystem
         }
     }
 
-    public void ApplyNewStats(bool trueDimention)
+    public void ApplyNewStats(bool trueDimention) //Not used currently
     {
         ResetStats();
         Dictionary<Stats, float> activeStats;

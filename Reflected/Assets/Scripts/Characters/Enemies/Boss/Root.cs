@@ -76,4 +76,26 @@ public class Root : Enemy
     {
         boss.RootSlam(this);
     }
+
+    public override void HandleEffect()
+    {
+        for (int i = 0; i < statusEffects.Count; i++)
+        {
+            statusEffects[i].SetCurrentEffectTime(Time.deltaTime);
+            if (statusEffects[i].currentEffectTime >= statusEffects[i].effect.LifeTime)
+            {
+                RemoveEffect(statusEffects[i]);
+                continue;
+            }
+
+            if (statusEffects[i].effect.DOTAmount != 0 && statusEffects[i].currentEffectTime > statusEffects[i].nextTickTime)
+            {
+                statusEffects[i].SetNextTickTime();
+                if (statusEffects[i].effect.DOTAmount > 0)
+                    TakeDamage(statusEffects[i].effect.DOTAmount * maxHealth);
+                else
+                    Heal(-1 * statusEffects[i].effect.DOTAmount * maxHealth);
+            }
+        }
+    }
 }
