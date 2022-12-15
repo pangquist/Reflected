@@ -32,8 +32,8 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnTutorialDummy(Transform playerPos)
     {
         Vector3 spawnPos = playerPos.position;
-        spawnPos.x += 2; spawnPos.y += 2; spawnPos.z += 2;
-        Instantiate(tutorialDummy, spawnPos, Quaternion.Euler(0, 0, 0));
+        spawnPos.x += 3; spawnPos.y += 3; spawnPos.z += 3;
+        Instantiate(tutorialDummy, spawnPos, Quaternion.Euler(0, 225, 0));
     }
 
     public void SpawnEnemy(float spawnTime, int enemyAmount, int waveAmount, float enemyadaptiveDifficulty)
