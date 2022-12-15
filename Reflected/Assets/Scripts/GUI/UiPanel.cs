@@ -50,7 +50,7 @@ public class UiPanel : MonoBehaviour
         statSystem = player.GetComponent<PlayerStatSystem>();
         damageReductionText.text = "Damage Reduction: " + player.playerStats().GetDamageReduction().ToString();
         damageText.text = "Damage: " + (player.GetDamage() * player.playerStats().GetDamageIncrease()).ToString();
-        speedText.text = "Movement Speed: " + (player.GetMovementSpeed() * player.playerStats().GetMovementSpeed()).ToString();
+        speedText.text = "Movement Speed: " + (player.playerStats().GetMovementSpeed()).ToString();
         attackspeedText.text = "Attack Speed: " + (player.GetAttackSpeed() * player.playerStats().GetAttackSpeed()).ToString();
         cooldownDecrease.text = "Cooldown Decrease: " + player.playerStats().GetCooldownDecrease().ToString();
 
