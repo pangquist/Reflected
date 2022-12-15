@@ -32,6 +32,7 @@ public class Chamber : MonoBehaviour
     private static Player player;
 
     private float cooldownTimer;
+    private bool exited;
 
     // Properties
 
@@ -58,6 +59,7 @@ public class Chamber : MonoBehaviour
         this.room2 = room2;
         this.rect = rect;
         this.orientation = orientation;
+        exited = true;
 
         triggerBounds = new Bounds(
             new Vector3(rect.x + rect.width * 0.5f, Wall.Height * 0.5f, rect.y + rect.height * 0.5f) * MapGenerator.ChunkSize,
@@ -104,10 +106,11 @@ public class Chamber : MonoBehaviour
         float distanceToClosedDoor = Vector3.Distance(player.transform.position, closedDoor.transform.position);
 
         // If the player is closer to the closed door than the open door
-        if (distanceToClosedDoor < distanceToOpenDoor)
+        if (distanceToClosedDoor * (exited ? 0.75f : 2f) < distanceToOpenDoor)
         {
             // Start a room transition
             StartCoroutine(Coroutine_RoomTransition(openDoor, closedDoor));
+            StartCoroutine(Coroutine_WaitToBeExited(openDoor, closedDoor));
         }
     }
 
@@ -197,6 +200,20 @@ public class Chamber : MonoBehaviour
             yield return null;
 
         cooldownTimer = 0f;
+        yield return 0;
+    }
+
+    /// <summary>
+    /// Waits until the Player has exited this chamber
+    /// </summary>
+    private IEnumerator Coroutine_WaitToBeExited(Door openDoor, Door closedDoor)
+    {
+        exited = false;
+
+        while (triggerBounds.Contains(player.transform.position))
+            yield return null;
+
+        exited = true;
         yield return 0;
     }
 

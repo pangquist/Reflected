@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb419989fd7e574eba5405f412a26ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionObject: {fileID: 2894051019213340170, guid: 6afea9cc1d046264483148a765d74781,
+  explosionObject: {fileID: 4665629938220036726, guid: 9671c20472236bd4286dc715beb4e84c,
     type: 3}
   aoeSize: {x: 0, y: 0, z: 0}
   chaseRange: 2.5
@@ -202,6 +202,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5949956647844382403, guid: 544d3fb0fa0af406ab4b1334baae3029,
+        type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 7522623531136473033}
     - target: {fileID: 7038335989630218417, guid: 544d3fb0fa0af406ab4b1334baae3029,
         type: 3}
       propertyPath: character
@@ -2050,48 +2055,6 @@ CapsuleCollider:
   m_Height: 2.16
   m_Direction: 1
   m_Center: {x: 0, y: 1.1, z: 0}
---- !u!114 &7522623531136473033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6437360911744250498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f8ec940f670973459ddf18f039565fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 2
-  currentHealth: 2
-  movementSpeed: 4.5
-  damage: 0
-  attackSpeed: 0
-  anim: {fileID: 6437360911736979778}
-  currentWeapon: {fileID: 0}
-  damagedClips:
-  - {fileID: 8300000, guid: 0e270ecb84908054a9d6f727dbea974e, type: 3}
-  - {fileID: 8300000, guid: cd13436b01a4b5b4082c89e180d10dc3, type: 3}
-  - {fileID: 8300000, guid: 72a9b2a2a3eaa584d9ba3a8e2166f0fd, type: 3}
-  - {fileID: 8300000, guid: a37109c51cd477548ad1c882be3971d5, type: 3}
-  HealthChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  Killed:
-    m_PersistentCalls:
-      m_Calls: []
-  baseProjectileSpeed: 0
-  baseAoeSize: {x: 6, y: 4, z: 6}
-  combatTextOffset: {x: 0, y: 2, z: 0}
-  combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
-    type: 3}
-  LootDropList:
-    list: []
-  hitSounds: []
-  meleeAttackState: {fileID: 0}
-  rangedAttackState: {fileID: 0}
-  aoeAttackState: {fileID: 0}
-  explosionAttackState: {fileID: 0}
 --- !u!82 &2350433888095018797
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2188,6 +2151,48 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7522623531136473033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6437360911744250498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8ec940f670973459ddf18f039565fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 2
+  currentHealth: 2
+  movementSpeed: 4.5
+  damage: 0
+  attackSpeed: 0
+  anim: {fileID: 6437360911736979778}
+  currentWeapon: {fileID: 0}
+  damagedClips:
+  - {fileID: 8300000, guid: 0e270ecb84908054a9d6f727dbea974e, type: 3}
+  - {fileID: 8300000, guid: cd13436b01a4b5b4082c89e180d10dc3, type: 3}
+  - {fileID: 8300000, guid: 72a9b2a2a3eaa584d9ba3a8e2166f0fd, type: 3}
+  - {fileID: 8300000, guid: a37109c51cd477548ad1c882be3971d5, type: 3}
+  HealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  Killed:
+    m_PersistentCalls:
+      m_Calls: []
+  baseProjectileSpeed: 0
+  baseAoeSize: {x: 6, y: 4, z: 6}
+  combatTextOffset: {x: 0, y: 2, z: 0}
+  combatTextCanvas: {fileID: 9102418177554871336, guid: 675f3e91b8d5a3d4c82c0b74554b0dc3,
+    type: 3}
+  LootDropList:
+    list: []
+  hitSounds: []
+  meleeAttackState: {fileID: 0}
+  rangedAttackState: {fileID: 0}
+  aoeAttackState: {fileID: 0}
+  explosionAttackState: {fileID: 0}
 --- !u!4 &6437360911744741026 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3545357213934708329, guid: 8bc76e4542a5795498ba55db013e67fe,

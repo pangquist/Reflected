@@ -10,9 +10,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject enemyRange;
     [SerializeField] GameObject enemyAOE;
     [SerializeField] GameObject enemyDOT;
+    [SerializeField] GameObject enemyElite;
     GameObject enemyToSpawn;
 
     EnemyStatSystem enemyStatSystem;
+
+    bool spawnElite;
 
     List<Transform> spawnTransforms = new List<Transform>();
     Transform spawnLocation;
@@ -21,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        GetSpawnlocations();
+        GenerateSpawnLocation();
         enemyStatSystem = GameObject.Find("EnemyStatSystem").GetComponent<EnemyStatSystem>();
     }
 
@@ -34,29 +37,13 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnWave(float spawnTime, int enemyAmount, int waveAmount, float enemyAdaptiveDifficulty)
     {
-        GetSpawnlocations();
+        GenerateSpawnLocation();
 
         for (int i = 0; i < waveAmount; i++)
         {
             yield return new WaitForSeconds(spawnTime);
             SpawnFunction(enemyAmount, enemyAdaptiveDifficulty);
         }
-    }
-    private IEnumerator SpawnEnemy(float adaptiveDifficulty, int frameWait)
-    {
-        for (int i = 0; i <= frameWait; i++)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        Debug.Log("Enemy spawned at frame " + Time.frameCount);
-
-        GetBiasedEnemy();
-        if (spawnTransforms.Count <= 0) GetSpawnlocations();
-        spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-        Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.EnemiesParent).GetComponentInChildren<Enemy>();
-        enemy.AdaptiveDifficulty(adaptiveDifficulty);
-
-        spawnTransforms.Remove(spawnLocation);
     }
 
     private void SpawnFunction(int amount, float adaptiveDifficulty)
@@ -75,7 +62,33 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void GetSpawnlocations()
+    private IEnumerator SpawnEnemy(float adaptiveDifficulty, int frameWait)
+    {
+        for (int i = 0; i <= frameWait; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        //Debug.Log("Enemy spawned at frame " + Time.frameCount);
+
+        GetBiasedEnemy();
+        if (spawnTransforms.Count <= 0) GenerateSpawnLocation();
+        spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+        Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.EnemiesParent).GetComponentInChildren<Enemy>();
+        enemy.AdaptiveDifficulty(adaptiveDifficulty);
+
+        spawnTransforms.Remove(spawnLocation);
+    }
+
+    public void ActivateEliteEnemy() => spawnElite = true; 
+
+    public Transform GetSpawnLocations()
+    {
+        if (spawnTransforms.Count <= 0) GenerateSpawnLocation();
+        Transform spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
+        return spawnLocation;
+    }
+
+    private void GenerateSpawnLocation()
     {
         spawnTransforms.Clear();
 
@@ -95,19 +108,28 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            int percent = Random.Range(1, 100);
+            int percent = Random.Range(1, 101);
+
+            if (spawnElite && percent < 10)
+            {
+                enemyToSpawn = enemyElite;
+                return;
+            }
 
             if (percent < 33)
             {
                 enemyToSpawn = enemyRange;
+                return;
             }
             else if (percent > 66)
             {
                 enemyToSpawn = enemyAOE;
+                return;
             }
             else
             {
                 enemyToSpawn = enemyDOT;
+                return;
             }
         }
     }

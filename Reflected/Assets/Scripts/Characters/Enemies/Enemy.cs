@@ -15,7 +15,7 @@ public class Enemy : Character
     [SerializeField] protected Canvas combatTextCanvas;
 
     [SerializeField] protected WeightedRandomList<GameObject> LootDropList;
-    [SerializeField] protected List<AudioClip> hitSounds;
+    //[SerializeField] protected List<AudioClip> hitSounds;
     protected bool invurnable;
     GameObject parent;
     protected Player player;
@@ -71,16 +71,6 @@ public class Enemy : Character
             return;
         }
 
-        //Make the enemy look at the player when taking damage (Not needed? -Kevin)
-        /*
-        if (!GetComponent<Boss>())
-        {
-            Vector3 direction = (transform.position - player.transform.position).normalized;
-            direction.y = 0;
-            parent.transform.rotation = Quaternion.LookRotation(direction);
-        }
-        */
-
         //Call base take damage function
         base.TakeDamage(damage);
     }
@@ -108,8 +98,8 @@ public class Enemy : Character
         maxHealth += maxHealth * extraDifficultyPercentage;
         currentHealth = maxHealth;
         attackSpeed += attackSpeed * (extraDifficultyPercentage * 0.3f);
-        movementSpeed += movementSpeed * (extraDifficultyPercentage * 0.1f);
-        damage += damage * extraDifficultyPercentage;
+        movementSpeed += movementSpeed * (extraDifficultyPercentage * 0.2f);
+        damage += damage * (extraDifficultyPercentage * 0.8f);
     }
 
     public virtual void LootDrop(Transform lootDropPosition)

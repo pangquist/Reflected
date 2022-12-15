@@ -30,6 +30,7 @@ public class UiManager: MonoBehaviour
     [SerializeField] GameObject inGameMenu;
     [SerializeField] GameObject shopPanel;
     [SerializeField] GameObject upgradePanel;
+    [SerializeField] GameObject tutorialPanel;
     [SerializeField] GameObject interactText;
     [SerializeField] GameObject payChestText;
     [SerializeField] Image tint;
@@ -47,6 +48,7 @@ public class UiManager: MonoBehaviour
         timerPanel.SetActive(false);
         interactText.SetActive(false);
         inGameMenu.SetActive(false);
+        tutorialPanel.SetActive(false);
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponentInChildren<CinemachineFreeLook>();
     }
 
@@ -96,17 +98,16 @@ public class UiManager: MonoBehaviour
                 timerPanel.SetActive(false);
                 interactText.SetActive(false);
                 inGameMenu.SetActive(true);
+                tutorialPanel.SetActive(false);
             }
         }
-        
-
     }
 
     void HandleMouse()
     {
         if(inGameMenu.activeSelf)
             menuState = MenuState.Active;
-        if (inGameMenu.activeSelf || shopPanel.activeSelf || upgradePanel.activeSelf)
+        if (inGameMenu.activeSelf || shopPanel.activeSelf || upgradePanel.activeSelf || tutorialPanel.activeSelf)
         {
             state = UiState.Active;
         }
@@ -141,6 +142,12 @@ public class UiManager: MonoBehaviour
     {
         GameObject.Find("GameManager").GetComponent<GameManager>().Save();
         SceneManager.LoadScene(0);
+    }
+
+    public void TutorialMenu()
+    {
+        tutorialPanel.SetActive(true);
+        inGameMenu.SetActive(false);
     }
 
     public void Quit()

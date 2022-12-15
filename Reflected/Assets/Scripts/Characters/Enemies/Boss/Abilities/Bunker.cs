@@ -39,7 +39,7 @@ public class Bunker : Ability
 
         while (spawnedBolts < amountOfBolts)
         {
-            Debug.Log("Spawn bolt nr: " + (spawnedBolts + 1));
+            //Debug.Log("Spawn bolt nr: " + (spawnedBolts + 1));
 
             for (int i = 0; i < 2; i++)
             {

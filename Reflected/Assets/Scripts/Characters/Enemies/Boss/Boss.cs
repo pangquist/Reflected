@@ -29,6 +29,18 @@ public class Boss : Enemy
     [SerializeField] AudioClip deathSFX;
     [SerializeField] Transform lootDropTransform;
 
+    public enum Phase { One, Two }
+    [Range(0f, 1f)]
+    [SerializeField] float phaseTwoCooldownReduction;
+    Phase phase;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        cameraManager = FindObjectOfType<CameraManager>();
+        phase = Phase.One;
+    }
+
     protected override void Update()
     {
         cameraFocusPoint.transform.position = (transform.position + player.transform.position) / 2;
@@ -81,16 +93,19 @@ public class Boss : Enemy
             {
                 chosenAbility.DoEffect();
                 lastAbility = chosenAbility;
-                abilityTimer = chosenAbility.GetCastTime();
+                switch (phase)
+                {
+                    case Phase.One:
+                        abilityTimer = chosenAbility.GetCastTime();
+                        break;
+                    case Phase.Two:
+                        abilityTimer = chosenAbility.GetCastTime() * phaseTwoCooldownReduction;
+                        break;
+                }
             }
         }
     }
 
-    protected override void Awake()
-    {
-        base.Awake();
-        cameraManager = FindObjectOfType<CameraManager>();
-    }
 
     public void ToggleRotationLock() => rotateLock = !rotateLock;
 
@@ -106,7 +121,11 @@ public class Boss : Enemy
     {
         roots.Remove(root);
 
-        if (roots.Count == 0)
+        if(roots.Count == 2)
+        {
+            anim.SetBool("PhaseChange", true);
+        }
+        else if (roots.Count == 0)
         {
             Die();
         }
@@ -119,6 +138,7 @@ public class Boss : Enemy
 
     protected override void Die()
     {
+        anim.speed = 1f;
         base.Die();
         GetComponent<AudioSource>().PlayOneShot(deathSFX);
         LootDrop(lootDropTransform);
@@ -182,6 +202,19 @@ public class Boss : Enemy
 
     public void ToggleAbilityLock()
     {
-        abilityLock= !abilityLock;
+        abilityLock = !abilityLock;
+    }
+
+    public void PhaseTwo()
+    {
+        anim.speed = 1.2f;
+
+        foreach(Root root in roots)
+        {
+            root.GetComponent<Animator>().speed = 1.2f;
+        }
+
+        phase = Phase.Two;
+        anim.SetBool("PhaseChange", false);
     }
 }

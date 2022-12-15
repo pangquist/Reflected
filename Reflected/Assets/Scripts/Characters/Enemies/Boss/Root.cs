@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Root : Enemy
 {
     [SerializeField] Collider swipeHitbox;
+    [SerializeField] Transform effectTransform;
     Boss boss;
     protected override void Awake()
     {
@@ -23,8 +24,6 @@ public class Root : Enemy
 
         if (clipName == "Idle")
             anim.Play("Take Damage");
-
-        GetComponent<AudioSource>().PlayOneShot(hitSounds[Random.Range(0, hitSounds.Count)]);
 
         currentHealth -= Mathf.Clamp(damage, 0, currentHealth);
 
@@ -71,6 +70,7 @@ public class Root : Enemy
     }
 
     public Collider SwipeHitbox() => swipeHitbox;
+    public Transform EffectTransform() => effectTransform;
 
     public void Slam()
     {

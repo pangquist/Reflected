@@ -80,7 +80,10 @@ public class Bolt : MonoBehaviour
         if (Physics.Raycast(particleSystem.transform.position + new Vector3(0,2,0), Vector3.down, out hit, Mathf.Infinity, hitable))
         {
             ParticleSystemRenderer renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
-            renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;
+            if (hit.transform.gameObject.GetComponent<Renderer>())
+                renderer.material = hit.transform.gameObject.GetComponent<Renderer>().material;
+            else
+                Destroy(particleSystem);
         }
     }
 
