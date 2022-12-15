@@ -5,14 +5,13 @@ using UnityEngine;
 public abstract class Chest : MonoBehaviour
 {
     [SerializeField] protected WeightedRandomList<GameObject> powerups;
-    //[SerializeField] protected WeightedRandomList<Rarity> rarityTiers;
-    [SerializeField]  List<GameObject> pickablePowerUps;
+    [SerializeField] protected List<GameObject> pickablePowerUps;
     [SerializeField] protected Transform itemHolder;
     [SerializeField] protected Rarity myRarity;
     [SerializeField] bool trueDimension;
 
     protected GameObject spawnedObject;
-    protected GameObject chestPrefab;    
+    [SerializeField] protected List<string> pickablePowerUpsDescription;
     protected int numberOfPickablePowerups = 2;
 
     public bool isOpen;
@@ -36,7 +35,7 @@ public abstract class Chest : MonoBehaviour
         {
             powerups.Add(temp.list[i].item, temp.list[i].weight);
         }
-        
+        pickablePowerUpsDescription = new List<string>();
         animator = GetComponentInChildren<Animator>();
         SetItems();
     }
@@ -47,7 +46,7 @@ public abstract class Chest : MonoBehaviour
         {
             animator.SetTrigger("open");
         }
-        else
+        else if(!isOpen)
         {
             animator.SetTrigger("close");
         }
@@ -90,6 +89,7 @@ public abstract class Chest : MonoBehaviour
         spawnedObject.GetComponent<InteractablePowerUp>().SetProperties(myRarity);
         spawnedObject.transform.parent = null;
         itemHolder.gameObject.SetActive(true);
+        pickablePowerUps.Clear();
     }
 
     public List<GameObject> GetPickablePowerups()
@@ -110,13 +110,23 @@ public abstract class Chest : MonoBehaviour
             {
                 pickablePowerUps[i].GetComponent<InteractablePowerUp>().SetProperties(myRarity);
             }
-            
 
+            pickablePowerUpsDescription.Add(pickablePowerUps[i].GetComponent<IBuyable>().GetDescription());
         }
     }
 
     public List<GameObject> GetUpgradeItems()
     {
         return pickablePowerUps;
+    }
+
+    public List<string> GetPowerupDescriptions()
+    {
+        return pickablePowerUpsDescription;
+    }
+
+    public Rarity GetRarity()
+    {
+        return myRarity;
     }
 }

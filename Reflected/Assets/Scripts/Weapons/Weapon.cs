@@ -65,4 +65,9 @@ public abstract class Weapon : MonoBehaviour
 
         powerUpIndex = index;      
     }
+
+    public void AddStatusEffect(StatusEffectData effect)
+    {
+        statusEffectDatas.Add(effect);
+    }
 }
