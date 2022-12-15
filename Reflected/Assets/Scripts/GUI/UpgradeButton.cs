@@ -36,19 +36,19 @@ public class UpgradeButton : MonoBehaviour
         Debug.Log("trying to spawn item");
         upgradeUi.DeactiveWindow();
     }
-    public void SetButton(GameObject powerUp, int buttonIndex)
+    public void SetButton(Chest chest, int itemIndex)
     {
-        index = buttonIndex;
-        titleText.text = powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity;
-        descText.text = powerUp.GetComponent<InteractablePowerUp>().GetDescription();
+        index = itemIndex;
+        titleText.text = chest.GetRarity().rarity;
+        descText.text = chest.GetPowerupDescriptions()[itemIndex];
 
-        if (powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity == "Common")
+        if (chest.GetRarity().rarity == "Common")
             titleText.color = common;
-        else if (powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity == "Rare")
+        else if (chest.GetRarity().rarity == "Rare")
             titleText.color = rare;
-        else if (powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity == "Epic")
+        else if (chest.GetRarity().rarity == "Epic")
             titleText.color = epic;
-        else if (powerUp.GetComponent<InteractablePowerUp>().GetRarity().rarity == "Legendary")
+        else if (chest.GetRarity().rarity == "Legendary")
             titleText.color = legendary;
     }
 }
