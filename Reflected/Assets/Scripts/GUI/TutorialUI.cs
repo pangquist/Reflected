@@ -5,7 +5,7 @@ using UnityEngine;
 public class TutorialUI : MonoBehaviour
 {
     [SerializeField] GameObject tutorial;
-    [SerializeField] GameObject closeButton;
+    
 
     void Start()
     {
@@ -15,7 +15,6 @@ public class TutorialUI : MonoBehaviour
     public void SetPanelActive()
     {
         tutorial.SetActive(true);
-        closeButton.SetActive(true);
     }
 
     public void SetPanelInactive()
