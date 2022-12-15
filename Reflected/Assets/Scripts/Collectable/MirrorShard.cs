@@ -39,4 +39,9 @@ public class MirrorShard : MonoBehaviour, ICollectable, IBuyable
     {
         return mirroShardData.description;
     }
+
+    public void ScalePrice(int scale)
+    {
+        throw new NotImplementedException();
+    }
 }

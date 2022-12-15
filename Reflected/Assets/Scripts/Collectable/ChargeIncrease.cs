@@ -7,7 +7,7 @@ public class ChargeIncrease : PowerUpEffect
 {
     public override void Apply(GameObject target, float amount)
     {
-        //Debug.Log("Healing effect called for amount: " + amount);
+        Debug.Log("Charge effect called for amount: " + amount);
         if (target.GetComponent<Player>())
         {
             DimensionManager dimentionManager = FindObjectOfType<DimensionManager>();

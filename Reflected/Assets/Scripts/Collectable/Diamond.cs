@@ -38,4 +38,10 @@ public class Diamond : MonoBehaviour, ICollectable, IBuyable
     {
         return diamondData.description;
     }
+
+    public void ScalePrice(int scale)
+    {
+        throw new System.NotImplementedException();
+    }
+
 }
