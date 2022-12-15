@@ -78,6 +78,8 @@ public class AiDirector : MonoBehaviour
         activeRoom = false;
         inbetweenRooms = false;
         numberOfRoomsLeftOnMap = map.Rooms.Count;
+
+        enemySpawner.SpawnTutorialDummy(player.transform);
     }
 
     private void Update()
