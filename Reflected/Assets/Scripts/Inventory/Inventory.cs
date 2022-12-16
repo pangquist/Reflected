@@ -8,7 +8,6 @@ public class Inventory : MonoBehaviour, ISavable
 {
     [SerializeField] ItemDatabaseData dataBase;
     public List<InventoryItem> inventory = new List<InventoryItem>();
-    //[SerializeField]
     public Dictionary<ItemData, InventoryItem> itemDictionary = new Dictionary<ItemData, InventoryItem>();
 
     private void Awake()
@@ -19,8 +18,9 @@ public class Inventory : MonoBehaviour, ISavable
         
         if (array.Length > 1)
             Destroy(gameObject);
+              
 
-        if(inventory.Count <= 0)
+        if (inventory.Count <= 0)
         {
             for (int i = 0; i < dataBase.items.Length; i++)
             {
@@ -99,7 +99,6 @@ public class Inventory : MonoBehaviour, ISavable
     {
         return new SaveData()
         {
-            //coinAmount = inventory[0].stackSize,
             diamondAmount = inventory[1].stackSize,
             mirrorShardAmount = inventory[2].stackSize,
             trueMirrorShardAmount = inventory[3].stackSize
@@ -109,7 +108,6 @@ public class Inventory : MonoBehaviour, ISavable
     public void LoadState(object state)
     {
         var saveData = (SaveData)state;
-        //inventory[0].SetStackSize(saveData.coinAmount);
         inventory[1].SetStackSize(saveData.diamondAmount);
         inventory[2].SetStackSize(saveData.mirrorShardAmount);
         inventory[3].SetStackSize(saveData.trueMirrorShardAmount);
@@ -118,7 +116,6 @@ public class Inventory : MonoBehaviour, ISavable
     [Serializable]
     private struct SaveData
     {
-        //public int coinAmount;
         public int diamondAmount;
         public int mirrorShardAmount;
         public int trueMirrorShardAmount;

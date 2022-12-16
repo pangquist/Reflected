@@ -39,4 +39,18 @@ public class MirrorShard : MonoBehaviour, ICollectable, IBuyable
     {
         return mirroShardData.description;
     }
+
+    public void ScalePrice(int scale)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ApplyOnPurchase()
+    {
+        PopUpText popUptext = PopUpTextManager.NewBasic(transform.position, "+1 " + mirroShardData.displayName);
+        popUptext.Text.color = new Color(0f, 0.5f, 1f);
+
+        GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
+        OnShardCollected?.Invoke(mirroShardData); //?. makes sure it's not null and that there are listeners to the event
+    }
 }

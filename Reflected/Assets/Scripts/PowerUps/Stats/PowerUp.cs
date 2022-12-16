@@ -10,15 +10,52 @@ public class PowerUp : MonoBehaviour, IBuyable
     [SerializeField] public float amount;
     [SerializeField] public int value;
     [SerializeField] public string description;
-    //public WeightedRandomList<PowerUpEffect> RarityPool;
+    protected bool hasProperties;
+    public static event HandlePowerupCollected OnPowerUPCollected;
+    public delegate void HandlePowerupCollected(PowerUpEffect powerupData);
 
     private void Start()
     {
-        myRarity = rarityTiers.GetRandom();
-        amount = powerUpEffect.amount * myRarity.amountMultiplier;
-        value = powerUpEffect.value * myRarity.valueMultiplier;
-        description = powerUpEffect.description + amount.ToString();
-        Destroy(gameObject, 20);
+        if (!hasProperties)
+        {
+            myRarity = rarityTiers.GetRandom();
+            amount = powerUpEffect.amount * myRarity.amountMultiplier;
+            value = powerUpEffect.value * myRarity.valueMultiplier;
+            if (powerUpEffect.powerupName == "Max_Health")
+            {
+                description = powerUpEffect.description + " " + amount.ToString();
+            }
+            else if (powerUpEffect.diminishingReturn == "false")
+            {
+                description = powerUpEffect.description + " " + (amount * 100).ToString() + "% of players base value.";
+            }
+            else
+            {
+                description = powerUpEffect.description + " " + (amount * 100).ToString() + "%. (This effect has diminishing returns)";
+            }
+
+        }
+    }
+
+    public virtual void SetProperties(Rarity targetRarity)
+    {
+        //Debug.Log("Set properties " + targetRarity);
+        myRarity = targetRarity;
+        amount = powerUpEffect.amount * targetRarity.amountMultiplier;
+        value = powerUpEffect.value * targetRarity.valueMultiplier;
+        if (powerUpEffect.powerupName == "Max_Health")
+        {
+            description = powerUpEffect.description + " " + amount.ToString();
+        }
+        else if (powerUpEffect.diminishingReturn == "false")
+        {
+            description = powerUpEffect.description + " " + (amount * 100).ToString() + "% of players base value.";
+        }
+        else
+        {
+            description = powerUpEffect.description + " " + (amount * 100).ToString() + "%. (This effect deminishing returns)";
+        }
+        hasProperties = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,5 +80,18 @@ public class PowerUp : MonoBehaviour, IBuyable
     public Rarity GetRarity()
     {
         return myRarity;
+    }
+
+    public void ScalePrice(int scale)
+    {
+        value = powerUpEffect.value * myRarity.valueMultiplier * scale;
+    }
+
+    public void ApplyOnPurchase()
+    {
+        Player player = FindObjectOfType<Player>();
+        //player.GetComponentInParent<AudioSource>().PlayOneShot(audioClip);
+        powerUpEffect.Apply(player.gameObject, amount);
+        OnPowerUPCollected?.Invoke(powerUpEffect);
     }
 }

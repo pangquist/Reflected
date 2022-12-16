@@ -30,7 +30,10 @@ public class GameManager : MonoBehaviour
     public void Save()
     {
         GameObject saveLoadSystem = GameObject.Find("SaveLoadSystem");
-
+        GameObject inventory = GameObject.Find("Inventory");
+        if (inventory)
+            inventory.GetComponent<Inventory>().ResetTemporaryCollectables();
+            
         if (saveLoadSystem)
             saveLoadSystem.GetComponent<SaveLoadSystem>().Save();
         else

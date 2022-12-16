@@ -76,4 +76,15 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
     {
         return myRarity;
     }
+
+    public void ScalePrice(int scale)
+    {
+        value = powerUpEffect.value * scale; 
+    }
+
+    public void ApplyOnPurchase()
+    {
+        Player player = FindObjectOfType<Player>();
+        powerUpEffect.Apply(player.gameObject, amount);
+    }
 }
