@@ -5,8 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PowerUps/WeaponUpgrade")]
 public class WeaponUpgrade : PowerUpEffect
 {
+    [SerializeField] public StatusEffectData effect;
     public override void Apply(GameObject target, float amount)
     {
-        target.GetComponentInChildren<Sword>().SetWeaponIndex((int)amount);
+        target.GetComponentInChildren<Sword>().AddStatusEffect(effect);
     }
 }

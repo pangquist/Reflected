@@ -28,6 +28,7 @@ public class Room : MonoBehaviour
     [ReadOnly][SerializeField] private List<Structure> structures;
     [ReadOnly][SerializeField] private Stats trueStat;
     [ReadOnly][SerializeField] private Stats mirrorStat;
+    [ReadOnly][SerializeField] private float bossDistance;
 
     private static Map map;
 
@@ -50,6 +51,7 @@ public class Room : MonoBehaviour
     public List<Structure> Structures => structures;
     public Stats TrueStat => trueStat;
     public Stats MirrorStat => mirrorStat;
+    public float BossDistance { get { return bossDistance; } set { bossDistance = value; } }
 
     private void Awake()
     {

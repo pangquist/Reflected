@@ -174,8 +174,8 @@ public class Player : Character
 
         if (currentHealth <= 0)
         {
-            Die();
             SaveProgress();
+            Die();
         }
         else
         {

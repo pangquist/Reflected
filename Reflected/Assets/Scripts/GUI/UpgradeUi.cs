@@ -40,7 +40,7 @@ public class UpgradeUi : MonoBehaviour
             return;
         for (int i = 0; i < buttonList.Count; i++)
         {
-            buttonList[i].GetComponent<UpgradeButton>().SetButton(upgradeList[i], i);
+            buttonList[i].GetComponent<UpgradeButton>().SetButton(chest, i);
         }
     }
     public List<GameObject> GetButtonList()

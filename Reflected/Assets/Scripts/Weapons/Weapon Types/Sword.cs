@@ -36,21 +36,29 @@ public class Sword : Weapon
             target.TakeDamage(GetDamage());
             hitEnemies.Add(target);
 
-            if (powerUpIndex > -1 && powerUpIndex < 2)
+            foreach (StatusEffectData effectData in statusEffectDatas)
             {
-                target.GetComponent<IEffectable>().ApplyEffect(statusEffectDatas[powerUpIndex], damage);
-                Debug.Log(statusEffectDatas[powerUpIndex]);
+                if (effectData.name == "Regenerate")
+                {
+                    player.GetComponent<IEffectable>().ApplyEffect(effectData, damage);
+                }
+                else
+                {
+                    target.GetComponent<IEffectable>().ApplyEffect(effectData, damage);
+                    //Debug.Log(effectData);
+                }
+
             }
-            else if (powerUpIndex == 2)
-            {
-                player.GetComponent<IEffectable>().ApplyEffect(statusEffectDatas[powerUpIndex], damage / 2);
-                Debug.Log(statusEffectDatas[powerUpIndex]);
-            }
+
         }
     }
 
-    public void AddStatusEffect(StatusEffectData effect)
+    private void OnCollisionEnter(Collision other) // not working :(
     {
-        statusEffectDatas.Add(effect);
+        if (!other.gameObject.GetComponent<tutorialDummy>()) return;
+
+        other.gameObject.GetComponent<tutorialDummy>().TakeDamage(GetDamage());
+
+        //if (Vector3.Distance(other.gameObject.transform.position, gameObject.transform.position) < 1) other.gameObject.GetComponent<tutorialDummy>().TakeDamage(GetDamage());
     }
 }

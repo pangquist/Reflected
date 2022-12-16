@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2784408723942930386}
+  - component: {fileID: 2860060864552122764}
   - component: {fileID: 2784408723942930387}
   m_Layer: 0
   m_Name: Post Processing
@@ -25,13 +26,32 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2784408723942930385}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 656.36707, y: 345.52173, z: 51.569427}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2860060864552122764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2784408723942930385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21e7b9dd5c14b4f71a44d4ef3b129bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 2784408723942930387}
+  trueProfile: {fileID: 11400000, guid: 217bd7d566410423f8ece42029724984, type: 2}
+  mirrorProfile: {fileID: 11400000, guid: 795af24c2d3734bdb8d59790a7403373, type: 2}
+  maxHealthPercentage: 0.6
+  maxVignetteValue: 0.25
+  onDamagedVignetteIntensityIncrease: 0.15
+  vignetteFadeSpeed: 5
 --- !u!114 &2784408723942930387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,4 +68,4 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 82f9306c143aeb943ac7277d0016a8fb, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 217bd7d566410423f8ece42029724984, type: 2}

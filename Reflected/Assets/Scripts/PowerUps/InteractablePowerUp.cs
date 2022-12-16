@@ -29,7 +29,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
             }
             else if(powerUpEffect.diminishingReturn == "false")
             {
-                description = powerUpEffect.description + " " + (amount * 100).ToString() + "%.";
+                description = powerUpEffect.description + " " + (amount * 100).ToString() + "% of players base value.";
             }
             else
             {
@@ -52,7 +52,7 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
         }
         else if (powerUpEffect.diminishingReturn == "false")
         {
-            description = powerUpEffect.description + " " + (amount * 100).ToString() + "%.";
+            description = powerUpEffect.description + " " + (amount * 100).ToString() + "% of players base value.";
         }
         else
         {
@@ -70,6 +70,14 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
         OnPowerUPCollected?.Invoke(powerUpEffect);
     }
 
+    public void ApplyOnPurchase()
+    {
+        Player player = FindObjectOfType<Player>();
+        player.GetComponentInParent<AudioSource>().PlayOneShot(audioClip);
+        powerUpEffect.Apply(player.gameObject, amount);
+        OnPowerUPCollected?.Invoke(powerUpEffect);
+    }
+
     public int GetValue()
     {
         return value;
@@ -83,5 +91,10 @@ public class InteractablePowerUp : MonoBehaviour, IBuyable
     public Rarity GetRarity()
     {
         return myRarity;
+    }
+
+    public void ScalePrice(int scale)
+    {
+        value = powerUpEffect.value * myRarity.valueMultiplier * scale;
     }
 }

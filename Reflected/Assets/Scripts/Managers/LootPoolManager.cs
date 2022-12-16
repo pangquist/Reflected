@@ -12,6 +12,7 @@ public class LootPoolManager : MonoBehaviour
     [SerializeField] WeightedRandomList<GameObject> weaponPowerupPool;
     [SerializeField] WeightedRandomList<Rarity> rarityTiers;
     [SerializeField] Dictionary<PowerUpEffect, int> powerupPickAmount;
+    int nrOfLegendaries = 0;
 
     private void Start()
     {
@@ -33,7 +34,7 @@ public class LootPoolManager : MonoBehaviour
     {
         rarityTiers.IncreaseWeight(1, 1);
         rarityTiers.IncreaseWeight(2, 2);
-        if(rarityTiers.list[3].weight <= 8)
+        if(rarityTiers.list[3].weight <= 8 && rarityTiers.list[3].weight > 0)
             rarityTiers.IncreaseWeight(3, 1);
     }
 
@@ -49,20 +50,59 @@ public class LootPoolManager : MonoBehaviour
 
     private void AddPowerupPickRate(PowerUpEffect powerupEffectData)
     {
-        powerupPickAmount[powerupEffectData] += 1;
-        float average = AveragePickRate();
-        if(powerupPickAmount[powerupEffectData] >= average)
+        powerupPickAmount[powerupEffectData] += 1;        
+        if(powerupEffectData.type == "weapon")
         {
-            foreach (var pair in powerupPool.list)
+            nrOfLegendaries++;
+            if(nrOfLegendaries >= 2)
+            {
+                rarityTiers.list[3].SetWeight(0);
+            }
+
+            foreach (var pair in weaponPowerupPool.list)
             {
                 if (powerupEffectData == pair.item.GetComponent<InteractablePowerUp>().powerUpEffect)
                 {
-                    pair.SetWeight(pair.weight / 2);
+                    pair.SetWeight(0);
                 }
-
             }
         }
+        else
+        {
+            float average = AveragePickRate();
+            if (powerupPickAmount[powerupEffectData] >= average)
+            {
+                foreach (var pair in powerupPool.list) //For shop
+                {
+                    if (powerupEffectData == pair.item.GetComponent<InteractablePowerUp>().powerUpEffect)
+                    {
+                        pair.SetWeight(pair.weight / 2);
+                    }
+                }
 
+                if(powerupEffectData.type == "offensive") //For chests
+                {
+                    foreach (var pair in truePowerupPool.list)
+                    {
+                        if (powerupEffectData == pair.item.GetComponent<InteractablePowerUp>().powerUpEffect)
+                        {
+                            pair.SetWeight(pair.weight / 2);
+                        }
+                    }
+                }
+                else if(powerupEffectData.type == "defensive")
+                {
+                    foreach (var pair in mirrorPowerupPool.list)
+                    {
+                        if (powerupEffectData == pair.item.GetComponent<InteractablePowerUp>().powerUpEffect)
+                        {
+                            pair.SetWeight(pair.weight / 2);
+                        }
+                    }
+                }
+            }
+        }      
+       
     }
 
     public WeightedRandomList<GameObject> GetPowerupPool(bool dimension)

@@ -44,6 +44,7 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
         {
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
             rb.velocity = new Vector3(targetDirection.x, targetDirection.y, targetDirection.z) * moveSpeed;
+            //moveSpeed += Time.deltaTime * 1;
         }
     }
 
@@ -53,7 +54,7 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
         hasTarget = true;
     }
 
-    public void SetProperties(Rarity targetRarity)
+    public void SetProperties()
     {
         amount = (int)powerUpEffect.amount;
         value = powerUpEffect.value;
@@ -74,5 +75,16 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
     public Rarity GetRarity()
     {
         return myRarity;
+    }
+
+    public void ScalePrice(int scale)
+    {
+        value = powerUpEffect.value * scale; 
+    }
+
+    public void ApplyOnPurchase()
+    {
+        Player player = FindObjectOfType<Player>();
+        powerUpEffect.Apply(player.gameObject, amount);
     }
 }

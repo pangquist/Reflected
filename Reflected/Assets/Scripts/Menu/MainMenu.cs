@@ -10,12 +10,12 @@ public class MainMenu : Menu
 
     private void Awake()
     {
-        GameObject.Find("SaveLoadSystem").GetComponent<SaveLoadSystem>().Load();
+        //GameObject.Find("SaveLoadSystem").GetComponent<SaveLoadSystem>().Load();
     }
 
     protected override void Start()
     {
-        CheckForSavedRun();
+        //CheckForSavedRun();
     }
 
     protected override void Update()
@@ -29,7 +29,7 @@ public class MainMenu : Menu
 
     protected override void OnEnable()
     {
-        CheckForSavedRun();
+        //CheckForSavedRun();
     }
 
     protected override void OnDisable()
@@ -37,12 +37,12 @@ public class MainMenu : Menu
 
     }
 
-    private void CheckForSavedRun()
-    {
-        bool savedRun = false;
+    //private void CheckForSavedRun()
+    //{
+    //    bool savedRun = false;
 
-        transform.Find("Buttons").Find("Continue").GetComponent<Button>().SetEnabled(savedRun);
-    }
+    //    transform.Find("Buttons").Find("Continue").GetComponent<Button>().SetEnabled(savedRun);
+    //}
 
     public void OnClick_Continue()
     {
