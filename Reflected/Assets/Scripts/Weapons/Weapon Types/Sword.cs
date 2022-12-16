@@ -38,7 +38,7 @@ public class Sword : Weapon
 
             foreach (StatusEffectData effectData in statusEffectDatas)
             {
-                if(effectData.name == "Regenerate")
+                if (effectData.name == "Regenerate")
                 {
                     player.GetComponent<IEffectable>().ApplyEffect(effectData, damage);
                 }
@@ -47,11 +47,18 @@ public class Sword : Weapon
                     target.GetComponent<IEffectable>().ApplyEffect(effectData, damage);
                     //Debug.Log(effectData);
                 }
-                
+
             }
 
         }
     }
 
-    
+    private void OnCollisionEnter(Collision other) // not working :(
+    {
+        if (!other.gameObject.GetComponent<tutorialDummy>()) return;
+
+        other.gameObject.GetComponent<tutorialDummy>().TakeDamage(GetDamage());
+
+        //if (Vector3.Distance(other.gameObject.transform.position, gameObject.transform.position) < 1) other.gameObject.GetComponent<tutorialDummy>().TakeDamage(GetDamage());
+    }
 }
