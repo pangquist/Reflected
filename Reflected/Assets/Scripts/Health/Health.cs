@@ -78,4 +78,10 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
     {
         throw new NotImplementedException();
     }
+
+    public void ApplyOnPurchase()
+    {
+        Player player = FindObjectOfType<Player>();
+        powerUpEffect.Apply(player.gameObject, amount);
+    }
 }

@@ -86,4 +86,12 @@ public class PowerUp : MonoBehaviour, IBuyable
     {
         value = powerUpEffect.value * myRarity.valueMultiplier * scale;
     }
+
+    public void ApplyOnPurchase()
+    {
+        Player player = FindObjectOfType<Player>();
+        //player.GetComponentInParent<AudioSource>().PlayOneShot(audioClip);
+        powerUpEffect.Apply(player.gameObject, amount);
+        OnPowerUPCollected?.Invoke(powerUpEffect);
+    }
 }

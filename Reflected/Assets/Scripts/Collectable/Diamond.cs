@@ -44,4 +44,12 @@ public class Diamond : MonoBehaviour, ICollectable, IBuyable
         throw new System.NotImplementedException();
     }
 
+    public void ApplyOnPurchase()
+    {
+        PopUpText popUptext = PopUpTextManager.NewBasic(transform.position, "+1 Diamond");
+        popUptext.Text.color = new Color(0f, 0.2f, 1f);
+
+        GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
+        OnDiamondCollected?.Invoke(diamondData);
+    }
 }
