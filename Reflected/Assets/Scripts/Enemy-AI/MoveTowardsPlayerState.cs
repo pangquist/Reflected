@@ -7,8 +7,8 @@ public class MoveTowardsPlayerState : State
 {
     //Range to player in which the enemy will attack
     [SerializeField] private float meleeAttackRange = 2f;
-    [SerializeField] private float rangedAttackRange = 15f;
-    [SerializeField] private float aoeAttackRange = 15f;
+    [SerializeField] private float rangedAttackRange = 20f;
+    [SerializeField] private float aoeAttackRange = 20f;
     [SerializeField] private float explosionAttackRange = 2f; 
     
     [Header("Current Movement Speed")]

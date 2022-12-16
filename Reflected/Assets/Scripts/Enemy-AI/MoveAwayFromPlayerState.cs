@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class MoveAwayFromPlayerState : State
 {
     //Range to player in which the enemy will stop fleeing. (Reposition to attack)
-    [SerializeField] private float rangedFleeRange = 15f;
-    [SerializeField] private float aoeFleeRange = 15;
+    [SerializeField] private float rangedFleeRange = 12.5f;
+    [SerializeField] private float aoeFleeRange = 12.5f;
 
     //Variables for the semi random fleeing behavior.
     private float fleeTimer = 0f;

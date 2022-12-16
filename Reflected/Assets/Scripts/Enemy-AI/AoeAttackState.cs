@@ -20,8 +20,8 @@ public class AoeAttackState : State
     [SerializeField] private Vector3 aoeSize;
 
     [Header("Base POSITIONING Values")]
-    [SerializeField] private float fleeRange = 7f;
-    [SerializeField] private float chaseRange = 20f;
+    [SerializeField] private float fleeRange = 5f;
+    [SerializeField] private float chaseRange = 25f;
 
     //Variables for setting up aoe
     private Vector3 playerPos;

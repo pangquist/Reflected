@@ -21,8 +21,8 @@ public class RangedAttackState : State
     [SerializeField] private float projectileForce; //Projectile speed
 
     [Header("Base POSITIONING Values")]
-    [SerializeField] private float baseFleeRange = 7f;
-    [SerializeField] private float baseChaseRange = 20f;
+    [SerializeField] private float baseFleeRange = 5f;
+    [SerializeField] private float baseChaseRange = 25f;
 
     //Variables for setting up projectile
     private Transform firePoint;
