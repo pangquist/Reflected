@@ -45,7 +45,8 @@ public class ChangeableObject : MonoBehaviour
     {
         for (int i = 0; i < objects.Length; i++)
         {
-            objects[i].GetComponent<MeshFilter>().mesh = trueMeshes[i];
+            if (objects[i])
+                objects[i].GetComponent<MeshFilter>().mesh = trueMeshes[i];
         }
     }
 
