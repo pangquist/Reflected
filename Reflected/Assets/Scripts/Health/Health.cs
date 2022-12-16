@@ -40,6 +40,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         }
     }
 
+
     public void FixedUpdate()
     {
         if (hasTarget)
@@ -71,5 +72,16 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
     public string GetDescription()
     {
         return description;
+    }
+
+    public void ScalePrice(int scale)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ApplyOnPurchase()
+    {
+        Player player = FindObjectOfType<Player>();
+        powerUpEffect.Apply(player.gameObject, amount);
     }
 }

@@ -70,17 +70,28 @@ public class Shop : MonoBehaviour
 
     void SpawnItem(int index)
     {
-        spawnedObject = Instantiate(shopItems[index], itemHolder.position, itemHolder.rotation);
-        if (spawnedObject.GetComponent<InteractablePowerUp>())
-        {
-            spawnedObject.GetComponent<InteractablePowerUp>().SetProperties(shopItems[index].GetComponent<InteractablePowerUp>().GetRarity());
-        }
+        //spawnedObject = Instantiate(shopItems[index], itemHolder.position, itemHolder.rotation);
+        //if (spawnedObject.GetComponent<InteractablePowerUp>())
+        //{
+        //    spawnedObject.GetComponent<InteractablePowerUp>().SetProperties(shopItems[index].GetComponent<InteractablePowerUp>().GetRarity());
+        //}
+
+        //if (shopItems[index].GetComponent<InteractablePowerUp>())
+        //{
+        //    shopItems[index].GetComponent<InteractablePowerUp>().ApplyOnPurchase();
+        //}
+        //else
+        //{
+        //    spawnedObject = Instantiate(shopItems[index], itemHolder.position, itemHolder.rotation);
+        //    spawnedObject.transform.parent = null;
+        //    itemHolder.gameObject.SetActive(true);
+        //}
+        shopItems[index].GetComponent<IBuyable>().ApplyOnPurchase();
         
         shopItems.RemoveAt(index);
         shopItemDescriptions.RemoveAt(index);
         Debug.Log("Item should spawn...");
-        spawnedObject.transform.parent = null;
-        itemHolder.gameObject.SetActive(true);
+        
     }
 
     void PopulateShop()
