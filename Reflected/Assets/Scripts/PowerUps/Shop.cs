@@ -76,17 +76,17 @@ public class Shop : MonoBehaviour
         //    spawnedObject.GetComponent<InteractablePowerUp>().SetProperties(shopItems[index].GetComponent<InteractablePowerUp>().GetRarity());
         //}
 
-        if (shopItems[index].GetComponent<InteractablePowerUp>())
-        {
-            shopItems[index].GetComponent<InteractablePowerUp>().ApplyOnPurchase();
-        }
-        else
-        {
-            spawnedObject = Instantiate(shopItems[index], itemHolder.position, itemHolder.rotation);
-            spawnedObject.transform.parent = null;
-            itemHolder.gameObject.SetActive(true);
-        }
-
+        //if (shopItems[index].GetComponent<InteractablePowerUp>())
+        //{
+        //    shopItems[index].GetComponent<InteractablePowerUp>().ApplyOnPurchase();
+        //}
+        //else
+        //{
+        //    spawnedObject = Instantiate(shopItems[index], itemHolder.position, itemHolder.rotation);
+        //    spawnedObject.transform.parent = null;
+        //    itemHolder.gameObject.SetActive(true);
+        //}
+        shopItems[index].GetComponent<IBuyable>().ApplyOnPurchase();
         
         shopItems.RemoveAt(index);
         shopItemDescriptions.RemoveAt(index);
