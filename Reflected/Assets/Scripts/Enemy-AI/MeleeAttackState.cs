@@ -49,7 +49,7 @@ public class MeleeAttackState : State
             firePoint = thisEnemy.firePoint;
 
             //Play attack animation that will trigger attack
-            me.PlayAnimation("Bite Attack");
+            me.PlayAnimation("Melee Attack");
             attackTimer = 0f;
         }
     }

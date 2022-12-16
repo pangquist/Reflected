@@ -19,7 +19,17 @@ public class MoveTowardsPlayerState : State
         switch (thisEnemy.currentCombatBehavior)
         {
             case AiManager2.CombatBehavior.CloseCombat:
-                if (thisEnemy.distanceTo(player.transform) <= meleeAttackRange)
+                if (thisEnemy.Elite())
+                {
+                    if (thisEnemy.distanceTo(player.transform) <= meleeAttackRange + 1)
+                    {
+                        thisEnemy.SetMeleeAttackState();
+                        agent.isStopped = true;
+                        me.PlayAnimation("Idle");
+                        return;
+                    }
+                }
+                else if (thisEnemy.distanceTo(player.transform) <= meleeAttackRange)
                 {
                     thisEnemy.SetMeleeAttackState();
                     agent.isStopped = true;

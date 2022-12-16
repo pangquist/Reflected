@@ -12,6 +12,7 @@ public class AiManager2 : MonoBehaviour
     //Enum for enemy combat behavior.
     public enum CombatBehavior { CloseCombat, RangedCombat, AoeCombat, ExplosionCombat };
     public CombatBehavior currentCombatBehavior;
+    [SerializeField] private bool elite;
 
     //Initialize the currently active state.
     private State activeState;
@@ -107,5 +108,10 @@ public class AiManager2 : MonoBehaviour
     public float distanceTo(Transform target)
     {
         return Vector3.Distance(transform.position, target.position);
+    }
+
+    public bool Elite()
+    {
+        return elite;
     }
 }
