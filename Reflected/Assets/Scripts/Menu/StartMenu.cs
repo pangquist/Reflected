@@ -20,6 +20,7 @@ public class StartMenu : Menu
         else if (Input.anyKeyDown)
         {
             menuManager.SwapMenu(this, Type.Main);
+            GameObject.Find("SaveLoadSystem").GetComponent<SaveLoadSystem>().Load();
             this.gameObject.SetActive(false);
         }
             

@@ -156,7 +156,7 @@ public class TechTreeNode : MonoBehaviour, ISavable
     public void LoadState(object state)
     {
         var saveData = (SaveData)state;
-        //SetIsPlaceable(saveData.placeable);
+        SetIsPlaceable(saveData.placeable);
         SetIsActive(saveData.active);
     }
 

@@ -30,6 +30,7 @@ public class TechTreesMenu : Menu
 
     public void OnClick_Back()
     {
+        GameObject.Find("SaveLoadSystem").GetComponent<SaveLoadSystem>().Save();
         menuManager.SwapMenu(this, Type.Main);
     }
 }

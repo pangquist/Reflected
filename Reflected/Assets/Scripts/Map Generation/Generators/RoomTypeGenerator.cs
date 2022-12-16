@@ -51,6 +51,15 @@ public class RoomTypeGenerator : MonoBehaviour
         DetermineStartRoom(map);
         DetermineBossRoom(map);
         DetermineShopRooms(map);
+        DetermineBossDistance(map);
+    }
+
+    private void DetermineBossDistance(Map map)
+    {
+        foreach(Room room in map.Rooms)
+        {
+            room.BossDistance = Vector2.Distance(room.Rect.center, Map.BossRoom.Rect.center);
+        }
     }
 
     private void DetermineStartRoom(Map map)
