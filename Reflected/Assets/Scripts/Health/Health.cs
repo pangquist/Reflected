@@ -31,22 +31,27 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Player>())
+        if (other.GetComponent<Player>() )
         {
-            GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
-            Destroy(gameObject);
-            Debug.Log(amount);
-            powerUpEffect.Apply(other.gameObject, amount); 
+            if (other.GetComponent<Player>().GetMaxHealth() != other.GetComponent<Player>().GetMaxHealth())
+            {
+                GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
+                Destroy(gameObject);
+                Debug.Log(amount);
+                powerUpEffect.Apply(other.gameObject, amount);
+            }            
         }
     }
 
 
     public void FixedUpdate()
     {
-        if (hasTarget)
+        Player player = FindObjectOfType<Player>();
+        if (hasTarget && player.GetMaxHealth() != player.GetCurrentHealth())
         {
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
             rb.velocity = new Vector3(targetDirection.x, targetDirection.y, targetDirection.z) * moveSpeed;
+            moveSpeed *= 1.01f;
         }
     }
 
