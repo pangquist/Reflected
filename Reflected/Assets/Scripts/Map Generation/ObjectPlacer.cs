@@ -31,7 +31,6 @@ public class ObjectPlacer : MonoBehaviour
 
     [Header("Objects")]
     [SerializeField] ObjectList[] objects;
-    [SerializeField] ObjectList[] bossRangeObjects;
 
     public static UnityEvent Finished = new UnityEvent();
 
@@ -54,22 +53,14 @@ public class ObjectPlacer : MonoBehaviour
 
         Rect center = new Rect(room.Rect.position + room.Rect.size / 4, room.Rect.size / 2);
 
-        for(int k = 0; k < objects.Length; k++)
+        for (int k = 0; k < objects.Length; k++)
         {
             List<Vector3> pointList = terrainObjectPoints[k];
 
-            if(pointList.Count > 0)
+            if (pointList.Count > 0)
             {
                 enemySpawns.AddRange(pointList);
-
-                if(room.BossDistance < 200 && bossRangeObjects[k].terrainObjects.Count > 0)
-                {
-                    spawnObjects = bossRangeObjects[k].terrainObjects.list;
-                }
-                else
-                {
-                    spawnObjects = objects[k].terrainObjects.list;
-                }
+                spawnObjects = objects[k].terrainObjects.list;
 
                 foreach (WeightedRandomList<UnityEngine.GameObject>.Pair pair in spawnObjects)
                 {
@@ -99,6 +90,7 @@ public class ObjectPlacer : MonoBehaviour
                 }
             }
         }
+
         PlaceEnemySpawnPoints(enemySpawns, room);
     }
 
@@ -110,7 +102,8 @@ public class ObjectPlacer : MonoBehaviour
 
         List<float> terrainHeights = new List<float>();
         List<List<Vector3>> terrainObjectPoints = new List<List<Vector3>>();
-        foreach(ObjectList objectList in objects)
+
+        foreach (ObjectList objectList in objects)
         {
             terrainObjectPoints.Add(new List<Vector3>());
         }
