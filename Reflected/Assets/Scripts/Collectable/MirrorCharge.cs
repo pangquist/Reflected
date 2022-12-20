@@ -16,6 +16,8 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
     string description;
     int value;
 
+    [SerializeField] private AudioClip audioClip;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -35,8 +37,11 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
             DimensionManager dimentionManager = FindObjectOfType<DimensionManager>();
             if(dimentionManager.GetCurrentCharges() < dimentionManager.GetMaxCharges())
             {
+                PopUpText popUptext = PopUpTextManager.NewBasic(transform.position, "+1 Mirror Charge");
+                popUptext.Text.color = new Color(0.7f, 0.5f, 0.3f);
+
+                GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
                 Destroy(gameObject);
-                Debug.Log(amount);
                 powerUpEffect.Apply(other.gameObject, amount);
             }            
         }
