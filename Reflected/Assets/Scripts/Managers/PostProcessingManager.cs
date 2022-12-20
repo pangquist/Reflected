@@ -27,14 +27,14 @@ public class PostProcessingManager : MonoBehaviour
 
     private void Awake()
     {
+        trueProfile.TryGet<Vignette>(out trueVignette);
+        mirrorProfile.TryGet<Vignette>(out mirrorVignette);
+
         if (SceneManager.GetActiveScene().name == "Start Scene")
             return;
 
         playerHealthBar = GameObject.Find("Canvas").transform.GetComponentInChildren<StaticHealthBar>();
         playerHealthBar.Slider.onValueChanged.AddListener(UpdateVignetteTarget);
-
-        trueProfile.TryGet<Vignette>(out trueVignette);
-        mirrorProfile.TryGet<Vignette>(out mirrorVignette);
     }
 
     public void SwapProfile()
