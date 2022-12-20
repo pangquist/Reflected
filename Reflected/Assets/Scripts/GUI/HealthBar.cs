@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.Events;
 using UnityEngine.TextCore.Text;
 
 public abstract class HealthBar : MonoBehaviour
