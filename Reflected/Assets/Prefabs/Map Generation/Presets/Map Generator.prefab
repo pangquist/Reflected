@@ -140,7 +140,7 @@ MonoBehaviour:
   testWeightBoss2: 1
   testWeightBoss3: 1
   testWeightBoss4: 1
-  nrOfShopRooms: 6
+  nrOfShopRooms: 2
   shopRoomFitnessThreshold: 0.6
   testWeightShop1: 1
   testWeightShop2: 1
@@ -503,9 +503,6 @@ MonoBehaviour:
       - item: {fileID: 7772125742368962591, guid: ed1ff2e7a60e84cf28d1dc1e42186e0b,
           type: 3}
         weight: 1.5
-      - item: {fileID: 9105275470698348348, guid: e6fa1bcc77d2249f387bc1aab2f51ac0,
-          type: 3}
-        weight: 0.2
   - terrain: Sand
     terrainObjects:
       list: []
@@ -524,9 +521,6 @@ MonoBehaviour:
       - item: {fileID: 527581394202791689, guid: 4a7be64aa8953144d90bcc190968ea0e,
           type: 3}
         weight: 5
-      - item: {fileID: 2691361745396747541, guid: 2f6b990605ce94426897267350f21a73,
-          type: 3}
-        weight: 0.3
       - item: {fileID: 2691361745396747541, guid: 2f6b990605ce94426897267350f21a73,
           type: 3}
         weight: 0.3
@@ -554,6 +548,28 @@ MonoBehaviour:
       - item: {fileID: 6735598766905415452, guid: 00cfb07e14a084d998c4fd65dc390eb4,
           type: 3}
         weight: 1
+  bossRangeObjects:
+  - terrain: Underwater
+    terrainObjects:
+      list: []
+  - terrain: Sand
+    terrainObjects:
+      list: []
+  - terrain: Grass 1
+    terrainObjects:
+      list:
+      - item: {fileID: 3139779991866619763, guid: b7c77d6659b6bd64b979c8cc83331dbf,
+          type: 3}
+        weight: 1
+  - terrain: Grass 2
+    terrainObjects:
+      list:
+      - item: {fileID: 3139779991866619763, guid: 2ea0e34b5c4d9f247b538d252ec6d396,
+          type: 3}
+        weight: 1
+  - terrain: Grass 3
+    terrainObjects:
+      list: []
 --- !u!114 &5090313322264181225
 MonoBehaviour:
   m_ObjectHideFlags: 0
