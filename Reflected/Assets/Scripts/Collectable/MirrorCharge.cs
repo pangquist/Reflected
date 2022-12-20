@@ -11,10 +11,10 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
     bool hasTarget, hasProperties;
     Vector3 targetPosition;
     float moveSpeed = 5f;
+    float acceleration = 1.01f;
     int amount;
     string description;
     int value;
-    Rarity myRarity;
 
     private void Awake()
     {
@@ -43,19 +43,24 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
     }
 
     public void FixedUpdate()
-    {
+    {        
         if (hasTarget)
         {
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
             rb.velocity = new Vector3(targetDirection.x, targetDirection.y, targetDirection.z) * moveSpeed;
-            moveSpeed *= 1.01f;
+            moveSpeed *= acceleration;
         }
     }
 
     public void SetTarget(Vector3 position)
     {
-        targetPosition = position;
-        hasTarget = true;
+        DimensionManager dimentionManager = FindObjectOfType<DimensionManager>();
+        if (dimentionManager.GetCurrentCharges() < dimentionManager.GetMaxCharges())
+        {
+            targetPosition = position;
+            hasTarget = true;
+        }
+        
     }
 
     public void SetProperties()
@@ -74,11 +79,6 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
     public string GetDescription()
     {
         return description;
-    }
-
-    public Rarity GetRarity()
-    {
-        return myRarity;
     }
 
     public void ScalePrice(int scale)
