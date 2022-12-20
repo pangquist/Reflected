@@ -19,10 +19,10 @@ public class Sword : Weapon
         if (!playerController.DamageLocked())
             return;
 
-        Enemy target;
+        GameObject target;
 
-        if (other.GetComponent<Enemy>())
-            target = other.GetComponent<Enemy>();
+        if (other.GetComponent<Enemy>() || other.GetComponent<tutorialDummy>())
+            target = other.gameObject;
         else if (other.GetComponent<Destructible>())
         {
             other.GetComponent<Destructible>().DestroyAnimation();
@@ -33,7 +33,15 @@ public class Sword : Weapon
 
         if (!hitEnemies.Contains(target))
         {
-            target.TakeDamage(GetDamage());
+            if(target.GetComponent<Enemy>())
+            {
+                target.GetComponent<Enemy>().TakeDamage(GetDamage());
+            }
+            else if(target.GetComponent<tutorialDummy>())
+            {
+                target.GetComponent<tutorialDummy>().TakeDamage(GetDamage());
+            }
+
             hitEnemies.Add(target);
 
             foreach (StatusEffectData effectData in statusEffectDatas)

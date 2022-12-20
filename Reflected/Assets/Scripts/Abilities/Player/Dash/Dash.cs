@@ -50,7 +50,7 @@ public class Dash : Ability
         if (!isDashing)
             return;
 
-        if (other.GetComponent<Enemy>())
+        if (other.GetComponent<Enemy>() || other.GetComponent<tutorialDummy>())
         {
             //if (other.GetComponent<Boss>() || other.GetComponent<Root>())
             //    return;
@@ -59,7 +59,10 @@ public class Dash : Ability
             GetComponent<Animator>().Play("Headbutt");
 
             //Make a new dash that damages the enemy and remove this (can be a power up or upgrade?)
-            other.GetComponent<Enemy>().TakeDamage(2);
+            if (other.GetComponent<Enemy>())
+                other.GetComponent<Enemy>().TakeDamage(GetComponent<Player>().GetDamage());
+            else if(other.GetComponent<tutorialDummy>())
+                other.GetComponent<tutorialDummy>().TakeDamage(GetComponent<Player>().GetDamage());
         }
     }
 

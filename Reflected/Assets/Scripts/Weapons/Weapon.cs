@@ -9,7 +9,7 @@ public abstract class Weapon : MonoBehaviour
     protected float damage;
     protected float speed;
 
-    [SerializeField] protected List<Enemy> hitEnemies;
+    [SerializeField] protected List<GameObject> hitEnemies;
 
     protected PlayerController playerController;
 
@@ -29,7 +29,7 @@ public abstract class Weapon : MonoBehaviour
 
         player = FindObjectOfType<Player>();
 
-        hitEnemies = new List<Enemy>();
+        hitEnemies = new List<GameObject>();
 
         powerUpIndex = -1;
     }
