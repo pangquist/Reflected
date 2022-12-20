@@ -31,9 +31,9 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Player>() )
+        if (other.GetComponent<Player>())
         {
-            if (other.GetComponent<Player>().GetMaxHealth() != other.GetComponent<Player>().GetMaxHealth())
+            if (other.GetComponent<Player>().GetMaxHealth() > other.GetComponent<Player>().GetCurrentHealth())
             {
                 GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
                 Destroy(gameObject);
@@ -47,7 +47,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
     public void FixedUpdate()
     {
         Player player = FindObjectOfType<Player>();
-        if (hasTarget && player.GetMaxHealth() != player.GetCurrentHealth())
+        if (hasTarget && player.GetMaxHealth() > player.GetCurrentHealth())
         {
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
             rb.velocity = new Vector3(targetDirection.x, targetDirection.y, targetDirection.z) * moveSpeed;

@@ -32,9 +32,13 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
     {
         if (other.GetComponent<Player>())
         {
-            Destroy(gameObject);
-            Debug.Log(amount);
-            powerUpEffect.Apply(other.gameObject, amount);
+            DimensionManager dimentionManager = FindObjectOfType<DimensionManager>();
+            if(dimentionManager.GetCurrentCharges() < dimentionManager.GetMaxCharges())
+            {
+                Destroy(gameObject);
+                Debug.Log(amount);
+                powerUpEffect.Apply(other.gameObject, amount);
+            }            
         }
     }
 
@@ -82,7 +86,7 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
         value = powerUpEffect.value * scale; 
     }
 
-    public void ApplyOnPurchase()
+    public void ApplyOnPurchase() //Could check the current charges of the player here too
     {
         Player player = FindObjectOfType<Player>();
         powerUpEffect.Apply(player.gameObject, amount);
