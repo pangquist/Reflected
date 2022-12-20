@@ -27,7 +27,7 @@ public class ExplosionAttackState : State
 
     public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        if (thisEnemy.distanceTo(player.transform) >= chaseRange && !attackStarted)
+        if (thisEnemy.distanceTo(player.transform.position) >= chaseRange && !attackStarted)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
