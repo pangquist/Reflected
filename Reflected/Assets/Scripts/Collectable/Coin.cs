@@ -16,7 +16,7 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
     bool hasTarget;
     Vector3 targetPosition;
     float moveSpeed = 5f;
-    float acceleration = 1.01f;
+    float acceleration = 1.1f;
 
     [SerializeField] private AudioClip audioClip;
 
@@ -27,8 +27,6 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
 
     private void Start()
     {
-        //coinData.amount = UnityEngine.Random.Range(1, 5);
-        //coinData.value = coinData.amount;
         Destroy(gameObject, 20);
     }
 

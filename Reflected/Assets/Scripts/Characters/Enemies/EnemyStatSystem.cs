@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
 public class EnemyStatSystem : StatSystem
 {
     Stats stat;
     Dictionary<Stats, float> lightBuffs, darkBuffs, baseBuffs;
     List<Stats> statList;
     List<float> baseIncrease;
+
+    public delegate void StatsChanged();
+    public static event StatsChanged OnStatsChanged;
 
     private void Awake()
     {
@@ -20,7 +22,7 @@ public class EnemyStatSystem : StatSystem
 
     public void Start()
     {
-        baseIncrease = new List<float>() { 5f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
+        baseIncrease = new List<float>() { 1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
         statList = new List<Stats>();
         statList = Enum.GetValues(typeof(Stats)).Cast<Stats>().ToList();
         lightBuffs = new Dictionary<Stats, float>();
@@ -75,6 +77,8 @@ public class EnemyStatSystem : StatSystem
             SetRoomStats(Map.ActiveRoom.TrueStat);
         else
             SetRoomStats(Map.ActiveRoom.MirrorStat);
+
+        OnStatsChanged?.Invoke();
     }
 
     private void SetRoomStats(Stats statIncrease)
@@ -105,6 +109,11 @@ public class EnemyStatSystem : StatSystem
                 AddAreaOfEffect(baseBuffs[statIncrease]);
                 break;
         }
+    }
+
+    public void IncreaseHealthBuff()
+    {
+        baseBuffs[Stats.Health]++;
     }
 
     public void ApplyNewStats(bool trueDimention) //Not used currently
