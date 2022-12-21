@@ -31,9 +31,7 @@ public class ShopUi : MonoBehaviour
     public void SetPanelActive()
     {
         shop = GetClosestShop();
-        shopPanel.SetActive(true);
-        for (int i = 0; i < buttonList.Count; i++)
-            buttonList[i].SetActive(true);
+        shopPanel.SetActive(true);   
         SetButtons();
     }
 
@@ -42,12 +40,13 @@ public class ShopUi : MonoBehaviour
         shopPanel.SetActive(false);
     }
 
-    private void SetButtons()
+    public void SetButtons()
     {
         shopList = shop.GetShopItems();
 
         for (int i = 0; i < buttonList.Count; i++)
         {
+            buttonList[i].SetActive(true);
             if (i < shopList.Count)
                 buttonList[i].GetComponent<ShopButton>().SetButton(shopList[i], i);
             else
