@@ -12,6 +12,7 @@ using UnityEngine;
 /// </summary>
 public class ChangeableObject : MonoBehaviour
 {
+    [SerializeField] int numberOfChildren;
     [SerializeField] GameObject[] objects;
 
     [SerializeField] List<Mesh> trueMeshes = new List<Mesh>();
@@ -22,7 +23,7 @@ public class ChangeableObject : MonoBehaviour
     void Awake()
     {
         if (hasChildren)
-            objects = new GameObject[transform.childCount + 1];
+            objects = new GameObject[numberOfChildren + 1];
         else
             objects = new GameObject[1];
     }
@@ -35,7 +36,7 @@ public class ChangeableObject : MonoBehaviour
         if (!hasChildren)
             return;
 
-        for (int i = 0; i < gameObject.transform.childCount; i++)
+        for (int i = 0; i < numberOfChildren; i++)
         {
             objects[i + 1] = gameObject.transform.GetChild(i).gameObject;
         }
