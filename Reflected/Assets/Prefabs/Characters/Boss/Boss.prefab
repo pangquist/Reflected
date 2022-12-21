@@ -329,6 +329,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   currentWeapon: {fileID: 0}
   damagedClips: []
+  upgradedDamagedClips: []
   HealthChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -345,12 +346,6 @@ MonoBehaviour:
     - item: {fileID: 3663983349818802338, guid: 2bdfe34f451d870469649a3199306873,
         type: 3}
       weight: 1
-  hitSounds:
-  - {fileID: 8300000, guid: de127248f397dc54f9eb5bd8e9d825e3, type: 3}
-  - {fileID: 8300000, guid: 5431e9bd8108a724389776b6c157abef, type: 3}
-  - {fileID: 8300000, guid: 6fb4e722ea3a3634abc5105186c20fab, type: 3}
-  - {fileID: 8300000, guid: 1899fdb9bfa352042b29f7e36ede0f6c, type: 3}
-  - {fileID: 8300000, guid: e6e608135f5bc2b4ea209599382ca308, type: 3}
   meleeAttackState: {fileID: 0}
   rangedAttackState: {fileID: 0}
   aoeAttackState: {fileID: 0}
@@ -372,6 +367,7 @@ MonoBehaviour:
   healthBarCanvas: {fileID: 7562547720828675294}
   cameraFocusPoint: {fileID: 2333262652298985782}
   deathSFX: {fileID: 8300000, guid: 0538cbeb1a1a3ce47af6bf9d90c6e64e, type: 3}
+  phaseTwoSFX: {fileID: 8300000, guid: 319aa546db88a8446a6f0d6e8ac22f09, type: 3}
   lootDropTransform: {fileID: 6976209725148607582}
   phaseTwoCooldownReduction: 0.8
 --- !u!114 &1320225154
@@ -1404,6 +1400,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Advanced Root
       objectReference: {fileID: 0}
+    - target: {fileID: 8138375043048786905, guid: 6cd4d6153d104e744946a065e166ed32,
+        type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8890396980040221514, guid: 6cd4d6153d104e744946a065e166ed32,
         type: 3}
       propertyPath: m_RootOrder
@@ -1679,6 +1680,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Advanced Root
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138375043048786905, guid: 6cd4d6153d104e744946a065e166ed32,
+        type: 3}
+      propertyPath: maxHealth
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8890396980040221514, guid: 6cd4d6153d104e744946a065e166ed32,
         type: 3}
@@ -2521,7 +2527,7 @@ PrefabInstance:
     - target: {fileID: 3433517204768926519, guid: 64c65e5390c00124986bb14ae3877deb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3433517204768926519, guid: 64c65e5390c00124986bb14ae3877deb,
         type: 3}
@@ -4248,6 +4254,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Advanced Root
       objectReference: {fileID: 0}
+    - target: {fileID: 8138375043048786905, guid: 6cd4d6153d104e744946a065e166ed32,
+        type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8890396980040221514, guid: 6cd4d6153d104e744946a065e166ed32,
         type: 3}
       propertyPath: m_RootOrder
@@ -4334,6 +4345,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Advanced Root
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138375043048786905, guid: 6cd4d6153d104e744946a065e166ed32,
+        type: 3}
+      propertyPath: maxHealth
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8890396980040221514, guid: 6cd4d6153d104e744946a065e166ed32,
         type: 3}
