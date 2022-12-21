@@ -35,6 +35,7 @@ public class PostProcessingManager : MonoBehaviour
 
         player = GameObject.Find("Player").GetComponentInChildren<Player>();
         player.HealthChanged.AddListener(UpdateVignetteTarget);
+        oldPlayerHealth = player.GetCurrentHealth();
     }
 
     public void SwapProfile()
