@@ -194,22 +194,23 @@ public class AiDirector : MonoBehaviour
         currentRarity = lootPool.GetRandomRarity();
         Vector3 spawnPosition = enemySpawner.GetSpawnLocations().position;
         spawnPosition.y += 5;
+
         switch (currentRarity.rarity)
         {
             case "Common":
-                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.transform);
                 break;
             case "Rare":
-                Instantiate(chests[1], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[1], spawnPosition, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.transform);
                 break;
             case "Epic":
-                Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.transform);
                 break;
             case "Legendary":
-                Instantiate(chests[3], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[3], spawnPosition, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.transform);
                 break;
             default:
-                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.transform);
                 break;
         }
 
