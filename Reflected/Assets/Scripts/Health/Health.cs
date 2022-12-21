@@ -12,7 +12,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
     bool hasTarget, hasProperties;
     Vector3 targetPosition;
     float moveSpeed = 5f;
-    float acceleration = 1.01f;
+    float acceleration = 1.1f;
     int amount;
     string description;
 

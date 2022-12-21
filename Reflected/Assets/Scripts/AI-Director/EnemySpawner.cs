@@ -39,6 +39,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy(float spawnTime, int enemyAmount, int waveAmount, float enemyadaptiveDifficulty)
     {
+        enemyStatSystem.IncreaseHealthBuff();
         StartCoroutine(SpawnWave(spawnTime, enemyAmount, waveAmount, enemyadaptiveDifficulty));
     }
 

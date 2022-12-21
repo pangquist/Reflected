@@ -19,7 +19,7 @@ public class Enemy : Character
     protected bool invurnable;
     GameObject parent;
     protected Player player;
-
+    EnemyStatSystem statSystem;
     //protected float aggroRange;
 
     bool doOnce;
@@ -31,7 +31,9 @@ public class Enemy : Character
 
     protected override void Awake()
     {
-        currentHealth = maxHealth;
+        statSystem = FindObjectOfType<EnemyStatSystem>();
+        
+        currentHealth = maxHealth + statSystem.GetMaxHealthIncrease();
         base.Awake();
         player = FindObjectOfType<Player>();
         parent = gameObject.transform.parent.gameObject;
@@ -60,6 +62,16 @@ public class Enemy : Character
         base.Update();
     }
 
+    private void OnEnable()
+    {
+        EnemyStatSystem.OnStatsChanged += UpdateEnemyHealth;
+    }
+
+    private void OnDisable()
+    {
+        EnemyStatSystem.OnStatsChanged -= UpdateEnemyHealth;
+    }
+
     public override void TakeDamage(float damage)
     {
         if (invurnable)
@@ -71,8 +83,28 @@ public class Enemy : Character
             return;
         }
 
+        damage = Mathf.FloorToInt(damage * statSystem.GetDamageReduction());
         //Call base take damage function
         base.TakeDamage(damage);
+    }
+
+    public void UpdateEnemyHealth()
+    {
+        if(statSystem.GetMaxHealthIncrease() > 0)
+        {
+            Heal(statSystem.GetMaxHealthIncrease());
+        }
+        else if(currentHealth > GetMaxHealth())
+        {
+            currentHealth = GetMaxHealth();
+        }
+    }
+
+    public override void Heal(float amount)
+    {
+        PopUpTextManager.NewHeal(transform.position + Vector3.up * 1.5f, amount);
+        currentHealth += Mathf.Clamp(amount, 0, maxHealth + statSystem.GetMaxHealthIncrease() - currentHealth);
+        HealthChanged.Invoke();
     }
 
     protected override void Die()
@@ -96,7 +128,7 @@ public class Enemy : Character
     public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instantiated (from the EnemySpanwer-script)
     {
         maxHealth += maxHealth * extraDifficultyPercentage;
-        currentHealth = maxHealth;
+        currentHealth = maxHealth + statSystem.GetMaxHealthIncrease();
         attackSpeed += attackSpeed * (extraDifficultyPercentage * 0.3f);
         movementSpeed += movementSpeed * (extraDifficultyPercentage * 0.2f);
         damage += damage * (extraDifficultyPercentage * 0.8f);
@@ -113,6 +145,16 @@ public class Enemy : Character
     public virtual void ToggleInvurnable()
     {
         invurnable = !invurnable;
+    }
+
+    public override float GetHealthPercentage()
+    {
+        return currentHealth / (maxHealth + statSystem.GetMaxHealthIncrease());
+    }
+
+    public override float GetMaxHealth()
+    {
+        return maxHealth + statSystem.GetMaxHealthIncrease();
     }
 
     public void DoAttack() //Called from the animation, that then calls the correct attack depending on enemy type.
