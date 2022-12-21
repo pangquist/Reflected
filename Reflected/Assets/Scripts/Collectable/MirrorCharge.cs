@@ -11,10 +11,12 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
     bool hasTarget, hasProperties;
     Vector3 targetPosition;
     float moveSpeed = 5f;
+    float acceleration = 1.01f;
     int amount;
     string description;
     int value;
-    Rarity myRarity;
+
+    [SerializeField] private AudioClip audioClip;
 
     private void Awake()
     {
@@ -32,26 +34,38 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
     {
         if (other.GetComponent<Player>())
         {
-            Destroy(gameObject);
-            Debug.Log(amount);
-            powerUpEffect.Apply(other.gameObject, amount);
+            DimensionManager dimentionManager = FindObjectOfType<DimensionManager>();
+            if(dimentionManager.GetCurrentCharges() < dimentionManager.GetMaxCharges())
+            {
+                PopUpText popUptext = PopUpTextManager.NewBasic(transform.position, "+1 Mirror Charge");
+                popUptext.Text.color = new Color(0.7f, 0.5f, 0.3f);
+
+                GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
+                Destroy(gameObject);
+                powerUpEffect.Apply(other.gameObject, amount);
+            }            
         }
     }
 
     public void FixedUpdate()
-    {
+    {        
         if (hasTarget)
         {
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
             rb.velocity = new Vector3(targetDirection.x, targetDirection.y, targetDirection.z) * moveSpeed;
-            //moveSpeed += Time.deltaTime * 1;
+            moveSpeed *= acceleration;
         }
     }
 
     public void SetTarget(Vector3 position)
     {
-        targetPosition = position;
-        hasTarget = true;
+        DimensionManager dimentionManager = FindObjectOfType<DimensionManager>();
+        if (dimentionManager.GetCurrentCharges() < dimentionManager.GetMaxCharges())
+        {
+            targetPosition = position;
+            hasTarget = true;
+        }
+        
     }
 
     public void SetProperties()
@@ -72,17 +86,12 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
         return description;
     }
 
-    public Rarity GetRarity()
-    {
-        return myRarity;
-    }
-
     public void ScalePrice(int scale)
     {
         value = powerUpEffect.value * scale; 
     }
 
-    public void ApplyOnPurchase()
+    public void ApplyOnPurchase() //Could check the current charges of the player here too
     {
         Player player = FindObjectOfType<Player>();
         powerUpEffect.Apply(player.gameObject, amount);

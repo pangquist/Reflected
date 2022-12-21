@@ -34,8 +34,9 @@ public class RangedAttackState : State
         attackRate = baseAttackRate / me.GetAttackSpeed() / enemyStatSystem.GetAttackSpeed() / me.MovementPenalty();
 
         //If too close, move away from target.
-        if (thisEnemy.distanceTo(player.transform) <= baseFleeRange)
+        if (thisEnemy.distanceTo(player.transform.position) <= baseFleeRange)
         {
+            Debug.Log("Switch to FLEE from Attack");
             thisEnemy.SetMoveAwayState();
             agent.isStopped = false;
             me.PlayAnimation("Walk Forward In Place");
@@ -43,8 +44,9 @@ public class RangedAttackState : State
         }
 
         //If too far away, move towards target.
-        else if (thisEnemy.distanceTo(player.transform) >= baseChaseRange)
+        else if (thisEnemy.distanceTo(player.transform.position) >= baseChaseRange)
         {
+            Debug.Log("Switch to CHASE from Attack");
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
             me.PlayAnimation("Walk Forward In Place");

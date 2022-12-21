@@ -13,7 +13,11 @@ public class AiDirector : MonoBehaviour
     [SerializeField] int amountOfEnemiesToSpawn;
     [SerializeField] int waveAmount;
     [SerializeField] int difficultySteps;
+    int eliteThreshold = 5;
     int minSpawnAmount, maxSpawnAmount;
+    const int SpawnAmountCAP = 10;
+    const int WaveAmountCAP = 4;
+
 
     //Room-stats
     bool inbetweenRooms;
@@ -42,7 +46,6 @@ public class AiDirector : MonoBehaviour
     UiManager uiManager;
     LootPoolManager lootPool;
     Rarity currentRarity;
-    int eliteThreshold = 5;
 
     public static UnityEvent RoomCleared = new UnityEvent();
 
@@ -77,6 +80,7 @@ public class AiDirector : MonoBehaviour
         checkDifficulty();
         activeRoom = false;
         inbetweenRooms = false;
+
         numberOfRoomsLeftOnMap = map.Rooms.Count;
 
         enemySpawner.SpawnTutorialDummy(player.transform);
@@ -90,17 +94,18 @@ public class AiDirector : MonoBehaviour
     private void checkDifficulty()
     {
         startDiffuculty();
-        difficultySteps = numberOfEnemiesKilled / 15;
+        difficultySteps = numberOfEnemiesKilled / 12;
 
         for (int i = 0; i < difficultySteps; i++)
         {
-            minSpawnAmount++;
-            maxSpawnAmount++;
+            if (maxSpawnAmount < SpawnAmountCAP) maxSpawnAmount++;
+            if (minSpawnAmount < SpawnAmountCAP) minSpawnAmount++;
+
             spawntime -= 0.1f;
         }
         if (numberOfRoomsCleared % 3 == 0 && numberOfRoomsCleared > 0)
         {
-            waveAmount++;
+            if (waveAmount < WaveAmountCAP) waveAmount++;
         }
         if (numberOfRoomsCleared % 2 == 0 && numberOfRoomsCleared > 0)
         {
@@ -139,7 +144,7 @@ public class AiDirector : MonoBehaviour
             SpawnChest();
 
             //RoomCleared.Invoke();
-            if (numberOfRoomsCleared <= eliteThreshold) enemySpawner.ActivateEliteEnemy();
+            if (numberOfRoomsCleared >= eliteThreshold) enemySpawner.ActivateEliteEnemy();
 
             inbetweenRooms = false;
         }
@@ -163,7 +168,6 @@ public class AiDirector : MonoBehaviour
             return;
 
         activeRoom = true;
-        aliveEnemiesInRoom = 0;
         checkDifficulty();
         aliveEnemiesInRoom = amountOfEnemiesToSpawn * waveAmount;
 
@@ -189,23 +193,24 @@ public class AiDirector : MonoBehaviour
     {
         currentRarity = lootPool.GetRandomRarity();
         Vector3 spawnPosition = enemySpawner.GetSpawnLocations().position;
-        spawnPosition.y = 10;
+        spawnPosition.y += 5;
+
         switch (currentRarity.rarity)
         {
             case "Common":
-                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.transform);
                 break;
             case "Rare":
-                Instantiate(chests[1], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[1], spawnPosition, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.transform);
                 break;
             case "Epic":
-                Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[2], spawnPosition, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.transform);
                 break;
             case "Legendary":
-                Instantiate(chests[3], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[3], spawnPosition, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.transform);
                 break;
             default:
-                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0));
+                Instantiate(chests[0], spawnPosition, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.transform);
                 break;
         }
 

@@ -19,22 +19,23 @@ public class PostProcessingManager : MonoBehaviour
     [SerializeField] private float onDamagedVignetteIntensityIncrease;
     [SerializeField] private float vignetteFadeSpeed;
 
-    private StaticHealthBar playerHealthBar;
+    private Player player;
     private Vignette trueVignette;
     private Vignette mirrorVignette;
     private float vignetteIntensityTargetValue;
-    private float oldHealthPercentage;
+    private float oldPlayerHealth;
 
     private void Awake()
     {
+        trueProfile.TryGet<Vignette>(out trueVignette);
+        mirrorProfile.TryGet<Vignette>(out mirrorVignette);
+
         if (SceneManager.GetActiveScene().name == "Start Scene")
             return;
 
-        playerHealthBar = GameObject.Find("Canvas").transform.GetComponentInChildren<StaticHealthBar>();
-        playerHealthBar.Slider.onValueChanged.AddListener(UpdateVignetteTarget);
-
-        trueProfile.TryGet<Vignette>(out trueVignette);
-        mirrorProfile.TryGet<Vignette>(out mirrorVignette);
+        player = GameObject.Find("Player").GetComponentInChildren<Player>();
+        player.HealthChanged.AddListener(UpdateVignetteTarget);
+        oldPlayerHealth = player.GetCurrentHealth();
     }
 
     public void SwapProfile()
@@ -70,18 +71,16 @@ public class PostProcessingManager : MonoBehaviour
         }
     }
 
-    private void UpdateVignetteTarget(float sliderValue)
+    private void UpdateVignetteTarget()
     {
-        float healthPercentage = (sliderValue / playerHealthBar.Slider.maxValue);
-
-        if (oldHealthPercentage > healthPercentage)
+        if (player.GetCurrentHealth() < oldPlayerHealth)
         {
             trueVignette  .intensity.value = Mathf.Min(  trueVignette.intensity.max,   trueVignette.intensity.value + onDamagedVignetteIntensityIncrease);
             mirrorVignette.intensity.value = Mathf.Min(mirrorVignette.intensity.max, mirrorVignette.intensity.value + onDamagedVignetteIntensityIncrease);
         }
 
-        oldHealthPercentage = healthPercentage;
-        vignetteIntensityTargetValue = Mathf.Abs(1 - healthPercentage.ValueToPercentageClamped(0f, maxHealthPercentage)).PercentageToValue(0f, maxVignetteValue);
+        oldPlayerHealth = player.GetCurrentHealth();
+        vignetteIntensityTargetValue = Mathf.Abs(1 - player.GetHealthPercentage().ValueToPercentageClamped(0f, maxHealthPercentage)).PercentageToValue(0f, maxVignetteValue);
     }
 
     private void OnEnable()

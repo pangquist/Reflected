@@ -10,7 +10,7 @@ public class MoveAwayFromPlayerState : State
     [SerializeField] private float aoeFleeRange = 12.5f;
 
     //Variables for the semi random fleeing behavior.
-    private float fleeTimer = 0f;
+    private float fleeTimer = 1000f;
     private float changeTime = 1f;
 
     [Header("Current Movement Speed")]
@@ -28,21 +28,25 @@ public class MoveAwayFromPlayerState : State
                 break;
 
             case AiManager2.CombatBehavior.RangedCombat:
-                if (thisEnemy.distanceTo(player.transform) >= rangedFleeRange)
+                if (thisEnemy.distanceTo(player.transform.position) >= rangedFleeRange)
                 {
-                    thisEnemy.SetRangedAttackState();
+                    Debug.Log("Switch to ATTACK from Flee");
                     agent.isStopped = true;
                     me.PlayAnimation("Idle");
+                    fleeTimer = 1000f;
+                    thisEnemy.SetRangedAttackState();
                     return;
                 }
                 break;
 
             case AiManager2.CombatBehavior.AoeCombat:
-                if (thisEnemy.distanceTo(player.transform) >= aoeFleeRange)
+                if (thisEnemy.distanceTo(player.transform.position) >= aoeFleeRange)
                 {
-                    thisEnemy.SetAoeAttackState();
                     agent.isStopped = true;
                     me.PlayAnimation("Idle");
+                    fleeTimer = 1000f;
+                    agent.speed /= 1.2f;
+                    thisEnemy.SetAoeAttackState();
                     return;
                 }
                 break;
@@ -52,10 +56,10 @@ public class MoveAwayFromPlayerState : State
         }
 
         //Set movement speed from base, statsystem and debuff.
-        movementSpeed = me.GetMovementSpeed() * enemyStatSystem.GetMovementSpeed() * thisEnemy.me.MovementPenalty();
+        movementSpeed = (me.GetMovementSpeed() * enemyStatSystem.GetMovementSpeed() * thisEnemy.me.MovementPenalty()) + 1f;
         agent.speed = movementSpeed;
 
-        DoMoveAway(player.transform, agent);
+        DoMoveAway(player.transform, agent, thisEnemy);
     }
 
     /// <summary>
@@ -64,17 +68,18 @@ public class MoveAwayFromPlayerState : State
     /// </summary>
     /// <param name="target"></param>
     /// <param name="agent"></param>
-    private void DoMoveAway(Transform target, NavMeshAgent agent)
+    private void DoMoveAway(Transform target, NavMeshAgent agent, AiManager2 thisEnemy)
     {
-        int multiplier = 1;
+        float multiplier = 1.5f;
+        Vector3 moveTo = transform.position + (transform.position - target.position + new Vector3(Random.Range(-3, 3), 0, Random.Range(-3, 3)) * multiplier);
+
+        Debug.Log(thisEnemy.distanceTo(moveTo));
 
         fleeTimer += Time.deltaTime;
-        if (fleeTimer >= changeTime)
+        if (fleeTimer >= changeTime || thisEnemy.distanceTo(moveTo) <= 2f)
         {
-            Vector3 moveTo = transform.position + ((transform.position - target.position + new Vector3(Random.Range(-3, 3), 0, Random.Range(-3, 3)) * multiplier));
             agent.destination = moveTo;
             fleeTimer = 0f;
         }
-
     }
 }

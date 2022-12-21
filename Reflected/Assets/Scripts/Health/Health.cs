@@ -7,13 +7,14 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
 {
     public PowerUpEffect powerUpEffect;
     //Check ui for health that the player gets back for the description and not the powerup effect
-
+  
     Rigidbody rb;
     bool hasTarget, hasProperties;
     Vector3 targetPosition;
     float moveSpeed = 5f;
-    public int amount;
-    public string description;
+    float acceleration = 1.01f;
+    int amount;
+    string description;
 
     [SerializeField] private AudioClip audioClip;
 
@@ -24,7 +25,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         {
             float totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
             amount = (int)((totalplayerhealth * powerUpEffect.amount));
-            description = powerUpEffect.description + " " + (amount * 100).ToString() + "% of your current HP.";
+            description = powerUpEffect.description + " " + (amount * 100).ToString() + "% of your current HP."; 
         }
         Destroy(gameObject, 20);
     }
@@ -33,27 +34,33 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
     {
         if (other.GetComponent<Player>())
         {
-            GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
-            Destroy(gameObject);
-            Debug.Log(amount);
-            powerUpEffect.Apply(other.gameObject, amount);
+            if (other.GetComponent<Player>().GetMaxHealth() > other.GetComponent<Player>().GetCurrentHealth())
+            {
+                GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
+                Destroy(gameObject);
+                powerUpEffect.Apply(other.gameObject, amount);
+            }            
         }
     }
 
-
     public void FixedUpdate()
-    {
+    {        
         if (hasTarget)
         {
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
             rb.velocity = new Vector3(targetDirection.x, targetDirection.y, targetDirection.z) * moveSpeed;
+            moveSpeed *= acceleration;
         }
     }
 
     public void SetTarget(Vector3 position)
     {
-        targetPosition = position;
-        hasTarget = true;
+        Player player = FindObjectOfType<Player>();
+        if(player.GetMaxHealth() > player.GetCurrentHealth())
+        {
+            targetPosition = position;
+            hasTarget = true;
+        }        
     }
 
     public void SetProperties()

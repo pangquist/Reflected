@@ -8,7 +8,6 @@ public class Shop : MonoBehaviour
     [SerializeField] WeightedRandomList<GameObject> lootTableCollectables;
     [SerializeField] WeightedRandomList<Rarity> rarityTiers;
     [SerializeField] List<GameObject> shopItems;
-    [SerializeField] List<GameObject> healtItems;
     [SerializeField] Transform itemHolder;
     [SerializeField] ItemData payment;
     GameObject spawnedObject;
@@ -127,5 +126,13 @@ public class Shop : MonoBehaviour
     public List<string> GetShopItemsDescriptions()
     {
         return shopItemDescriptions;
+    }
+
+    private void AdjustPrice(int numberOfRoomsCleared)
+    {
+        foreach (GameObject item in shopItems)
+        {
+            item.GetComponent<IBuyable>().ScalePrice(numberOfRoomsCleared);
+        }
     }
 }

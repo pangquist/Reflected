@@ -60,13 +60,4 @@ public class Sword : Weapon
 
         }
     }
-
-    private void OnCollisionEnter(Collision other) // not working :(
-    {
-        if (!other.gameObject.GetComponent<tutorialDummy>()) return;
-
-        other.gameObject.GetComponent<tutorialDummy>().TakeDamage(GetDamage());
-
-        //if (Vector3.Distance(other.gameObject.transform.position, gameObject.transform.position) < 1) other.gameObject.GetComponent<tutorialDummy>().TakeDamage(GetDamage());
-    }
 }

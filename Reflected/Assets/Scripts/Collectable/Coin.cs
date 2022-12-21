@@ -16,6 +16,7 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
     bool hasTarget;
     Vector3 targetPosition;
     float moveSpeed = 5f;
+    float acceleration = 1.01f;
 
     [SerializeField] private AudioClip audioClip;
 
@@ -49,7 +50,7 @@ public class Coin : MonoBehaviour, ICollectable, IMagnetic
         {
             Vector3 targetDirection = (targetPosition - transform.position).normalized;
             rb.velocity = new Vector3(targetDirection.x, targetDirection.y, targetDirection.z) * moveSpeed;
-            //moveSpeed += Time.deltaTime * 1;
+            moveSpeed *= acceleration;
         }
     }
 
