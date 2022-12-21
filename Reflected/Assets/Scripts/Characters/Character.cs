@@ -24,6 +24,7 @@ public class Character : MonoBehaviour, IEffectable
 
     [SerializeField] protected Weapon currentWeapon;
     [SerializeField] protected List<AudioClip> damagedClips;
+    [SerializeField] protected List<AudioClip> upgradedDamagedClips;
 
     protected AudioSource audioSource;
 
