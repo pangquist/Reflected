@@ -27,7 +27,7 @@ public class ExplosionAttackState : State
 
     public override void DoState(AiManager2 thisEnemy, Enemy me, Player player, NavMeshAgent agent, EnemyStatSystem enemyStatSystem)
     {
-        if (thisEnemy.distanceTo(player.transform) >= chaseRange && !attackStarted)
+        if (thisEnemy.distanceTo(player.transform.position) >= chaseRange && !attackStarted)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
@@ -46,7 +46,7 @@ public class ExplosionAttackState : State
             //Play attack animation that will trigger the attack
             me.PlayAnimation("Explosion Attack");
 
-            //Reset attack boolTimer
+            //Reset attack bool
             attackStarted = true;
         }
     }
@@ -56,8 +56,14 @@ public class ExplosionAttackState : State
         GameObject currentExplosion = Instantiate(explosionObject, transform.position+offSet, Quaternion.identity);
         if (currentExplosion != null)
         {
-            currentExplosion.GetComponent<ExplosionScript>().SetUp(aoeSize, dotData, slowData);
+            currentExplosion.GetComponentInChildren<ExplosionScript>().SetUp(aoeSize, dotData, slowData);
             me.TakeDamage(999f);
+        }
+        else
+        {
+            Debug.Log("CurrentExplosion is null. Explosion was not instantiated correctly. Check code/prefab.");
+            me.TakeDamage(404f);
+            Debug.Log("Enemy killed to not break game.");
         }
     }
 

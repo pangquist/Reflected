@@ -27,6 +27,7 @@ public class EnemySpawner : MonoBehaviour
     {
         GenerateSpawnLocation();
         enemyStatSystem = GameObject.Find("EnemyStatSystem").GetComponent<EnemyStatSystem>();
+        spawnElite = false;
     }
 
     public void SpawnTutorialDummy(Transform playerPos)
@@ -117,18 +118,18 @@ public class EnemySpawner : MonoBehaviour
         {
             int percent = Random.Range(1, 101);
 
-            if (spawnElite && percent < 10)
+            if (spawnElite && percent < 15)
             {
                 enemyToSpawn = enemyElite;
                 return;
             }
 
-            if (percent < 33)
+            if (percent < 40)
             {
                 enemyToSpawn = enemyRange;
                 return;
             }
-            else if (percent > 66)
+            else if (percent > 70)
             {
                 enemyToSpawn = enemyAOE;
                 return;

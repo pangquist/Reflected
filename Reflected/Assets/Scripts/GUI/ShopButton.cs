@@ -36,9 +36,10 @@ public class ShopButton : MonoBehaviour
         shop = shopUi.GetClosestShop();
         if (shop.BuyItem(index))
         {
-            buttonList[index].SetActive(false); 
+            buttonList[index].SetActive(false);
+            shopUi.SetPanelActive();
         }
-
+       
     }
     public void SetButton(GameObject powerUp, int buttonIndex)
     {

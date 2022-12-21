@@ -105,9 +105,9 @@ public class AiManager2 : MonoBehaviour
     public State GetActiveState() => activeState;
 
     //Distance checker that behaviors use to transistion between behaviors.
-    public float distanceTo(Transform target)
+    public float distanceTo(Vector3 target)
     {
-        return Vector3.Distance(transform.position, target.position);
+        return Vector3.Distance(transform.position, target);
     }
 
     public bool Elite()

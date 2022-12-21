@@ -32,7 +32,7 @@ public class AoeAttackState : State
         attackRate = baseAttackRate / me.GetAttackSpeed() / enemyStatSystem.GetAttackSpeed() / me.MovementPenalty();
 
         //If ranged and too close, move away from target.
-        if (thisEnemy.distanceTo(player.transform) <= fleeRange)
+        if (thisEnemy.distanceTo(player.transform.position) <= fleeRange)
         {
             thisEnemy.SetMoveAwayState();
             agent.isStopped = false;
@@ -41,7 +41,7 @@ public class AoeAttackState : State
         }
 
         //If ranged and too far away, move towards target.
-        else if (thisEnemy.distanceTo(player.transform) >= chaseRange)
+        else if (thisEnemy.distanceTo(player.transform.position) >= chaseRange)
         {
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;

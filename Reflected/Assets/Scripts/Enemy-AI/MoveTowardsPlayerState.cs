@@ -21,7 +21,7 @@ public class MoveTowardsPlayerState : State
             case AiManager2.CombatBehavior.CloseCombat:
                 if (thisEnemy.Elite())
                 {
-                    if (thisEnemy.distanceTo(player.transform) <= meleeAttackRange + 1)
+                    if (thisEnemy.distanceTo(player.transform.position) <= meleeAttackRange + 1)
                     {
                         thisEnemy.SetMeleeAttackState();
                         agent.isStopped = true;
@@ -29,7 +29,7 @@ public class MoveTowardsPlayerState : State
                         return;
                     }
                 }
-                else if (thisEnemy.distanceTo(player.transform) <= meleeAttackRange)
+                else if (thisEnemy.distanceTo(player.transform.position) <= meleeAttackRange)
                 {
                     thisEnemy.SetMeleeAttackState();
                     agent.isStopped = true;
@@ -39,8 +39,9 @@ public class MoveTowardsPlayerState : State
                 break;
 
             case AiManager2.CombatBehavior.RangedCombat:
-                if (thisEnemy.distanceTo(player.transform) <= rangedAttackRange)
+                if (thisEnemy.distanceTo(player.transform.position) <= rangedAttackRange)
                 {
+                    Debug.Log("Switch to ATTACK from Chase");
                     thisEnemy.SetRangedAttackState();
                     agent.isStopped = true;
                     me.PlayAnimation("Idle");
@@ -49,7 +50,7 @@ public class MoveTowardsPlayerState : State
                 break;
 
             case AiManager2.CombatBehavior.AoeCombat:
-                if (thisEnemy.distanceTo(player.transform) <= aoeAttackRange)
+                if (thisEnemy.distanceTo(player.transform.position) <= aoeAttackRange)
                 {
                     thisEnemy.SetAoeAttackState();
                     agent.isStopped = true;
@@ -59,7 +60,7 @@ public class MoveTowardsPlayerState : State
                 break;
 
             case AiManager2.CombatBehavior.ExplosionCombat:
-                if(thisEnemy.distanceTo(player.transform) <= explosionAttackRange)
+                if(thisEnemy.distanceTo(player.transform.position) <= explosionAttackRange)
                 {
                     thisEnemy.SetExplosionAttackState();
                     agent.isStopped = true;
