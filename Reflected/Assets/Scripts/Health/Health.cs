@@ -7,7 +7,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
 {
     public PowerUpEffect powerUpEffect;
     //Check ui for health that the player gets back for the description and not the powerup effect
-  
+
     Rigidbody rb;
     bool hasTarget, hasProperties;
     Vector3 targetPosition;
@@ -24,7 +24,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
         {
             float totalplayerhealth = FindObjectOfType<PlayerStatSystem>().GetMaxHealthIncrease() + FindObjectOfType<Player>().GetMaxHealth();
             amount = (int)((totalplayerhealth * powerUpEffect.amount));
-            description = powerUpEffect.description + " " + (amount * 100).ToString() + "% of your current HP."; 
+            description = powerUpEffect.description + " " + (amount * 100).ToString() + "% of your current HP.";
         }
         Destroy(gameObject, 20);
     }
@@ -36,7 +36,7 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
             GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
             Destroy(gameObject);
             Debug.Log(amount);
-            powerUpEffect.Apply(other.gameObject, amount); 
+            powerUpEffect.Apply(other.gameObject, amount);
         }
     }
 

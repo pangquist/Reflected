@@ -24,6 +24,7 @@ public class Character : MonoBehaviour, IEffectable
 
     [SerializeField] protected Weapon currentWeapon;
     [SerializeField] protected List<AudioClip> damagedClips;
+    [SerializeField] protected List<AudioClip> upgradedDamagedClips;
 
     protected AudioSource audioSource;
 
@@ -68,6 +69,7 @@ public class Character : MonoBehaviour, IEffectable
     protected void PlayDamangedAudioClip()
     {
         audioSource.pitch = Random.Range(0.9f, 1.1f);
+        if()
         audioSource.PlayOneShot(damagedClips.GetRandom());
     }
 
