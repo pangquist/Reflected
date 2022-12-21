@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class tutorialDummy : Character
 {
-    // Start is called before the first frame update
     void Awake()
     {
         currentHealth = maxHealth;
