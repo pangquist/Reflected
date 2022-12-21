@@ -27,6 +27,7 @@ public class Boss : Enemy
     CameraManager cameraManager;
     [SerializeField] Transform cameraFocusPoint;
     [SerializeField] AudioClip deathSFX;
+    [SerializeField] AudioClip phaseTwoSFX;
     [SerializeField] Transform lootDropTransform;
 
     public enum Phase { One, Two }
@@ -216,5 +217,11 @@ public class Boss : Enemy
 
         phase = Phase.Two;
         anim.SetBool("PhaseChange", false);
+        
+    }
+
+    public void PlayerPhaseTwoSFX()
+    {
+        audioSource.PlayOneShot(phaseTwoSFX);
     }
 }
