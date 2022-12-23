@@ -14,7 +14,7 @@ public class MapGenerator : MonoBehaviour
 
     [Header("Seed")]
 
-    [SerializeField] private int seed;
+    [SerializeField] public int seed;
 
     [Header("References")]
 
@@ -38,19 +38,19 @@ public class MapGenerator : MonoBehaviour
 
     [Range(10, 500)]
     [Tooltip("In chunks")]
-    [SerializeField] private int minMapSizeX;
+    [SerializeField] public int minMapSizeX;
 
     [Range(10, 500)]
     [Tooltip("In chunks")]
-    [SerializeField] private int maxMapSizeX;
+    [SerializeField] public int maxMapSizeX;
 
     [Range(10, 500)]
     [Tooltip("In chunks")]
-    [SerializeField] private int minMapSizeZ;
+    [SerializeField] public int minMapSizeZ;
 
     [Range(10, 500)]
     [Tooltip("In chunks")]
-    [SerializeField] private int maxMapSizeZ;
+    [SerializeField] public int maxMapSizeZ;
 
     [Range(1, 20)]
     [SerializeField] private int chunkSize;
@@ -98,7 +98,7 @@ public class MapGenerator : MonoBehaviour
             StartCoroutine(Coroutine_BulkGenerate());
     }
 
-    private void Generate()
+    public void Generate()
     {
         // Prepare
 

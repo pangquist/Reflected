@@ -6,7 +6,10 @@ public class Chamber : MonoBehaviour
 {
     [Header("References")]
 
-    [SerializeField] private Transform terrainChild;
+    [SerializeField] private Transform terrainParent;
+    [SerializeField] private Transform structuresParent;
+    [SerializeField] private Transform decorationsParent;
+    [SerializeField] private Transform spawnPointsParent;
 
     [Header("Values")]
 
@@ -36,7 +39,10 @@ public class Chamber : MonoBehaviour
 
     // Properties
 
-    public Transform TerrainChild => terrainChild;
+    public Transform TerrainParent => terrainParent;
+    public Transform StructuresParent => structuresParent;
+    public Transform DecorationsParent => decorationsParent;
+    public Transform SpawnPointsParent => spawnPointsParent;
 
     public Orientation Orientation => orientation;
     public List<Wall> Walls => walls;
@@ -106,7 +112,7 @@ public class Chamber : MonoBehaviour
         float distanceToClosedDoor = Vector3.Distance(player.transform.position, closedDoor.transform.position);
 
         // If the player is closer to the closed door than the open door
-        if (distanceToClosedDoor * (exited ? 0.75f : 2f) < distanceToOpenDoor)
+        if (distanceToClosedDoor * (exited ? 0.8f : 2f) < distanceToOpenDoor)
         {
             // Start a room transition
             StartCoroutine(Coroutine_RoomTransition(openDoor, closedDoor));

@@ -38,20 +38,25 @@ public class ObjectPlacer : MonoBehaviour
     {
         foreach (Room room in map.Rooms)
         {
-            PlaceDecorations(room);
+            PlaceDecorations(true, room.Rect, room.DecorationsParent, room.SpawnPointsParent, room.PathPoints);
+        }
+
+        foreach (Chamber chamber in map.Chambers)
+        {
+            PlaceDecorations(false, chamber.Rect, chamber.DecorationsParent, chamber.SpawnPointsParent, chamber.Room1.PathPoints.And(chamber.Room2.PathPoints));
         }
 
         Finished.Invoke();
         Physics.SyncTransforms();
     }
 
-    private void PlaceDecorations(Room room)
+    private void PlaceDecorations(bool room, Rect rect, Transform decorationsParent, Transform spawnPointsParent, List<Vector3> pathPoints)
     {
-        List<List<Vector3>> terrainObjectPoints = CreateRayCastPoints(room);
+        List<List<Vector3>> terrainObjectPoints = CreateRayCastPoints(rect, pathPoints);
         List<Vector3> enemySpawns = new List<Vector3>();
         List<WeightedRandomList<UnityEngine.GameObject>.Pair> spawnObjects;
 
-        Rect center = new Rect(room.Rect.position + room.Rect.size / 4, room.Rect.size / 2);
+        Rect center = new Rect(rect.position + rect.size / 4, rect.size / 2);
 
         for (int k = 0; k < objects.Length; k++)
         {
@@ -64,7 +69,7 @@ public class ObjectPlacer : MonoBehaviour
 
                 foreach (WeightedRandomList<UnityEngine.GameObject>.Pair pair in spawnObjects)
                 {
-                    for (int i = 0; i < pair.weight * objectMultiplier * room.Rect.Area() * 0.001f; i++)
+                    for (int i = 0; i < pair.weight * objectMultiplier * rect.Area() * 0.001f; i++)
                     {
                         Vector3 point = pointList[Random.Range(0, pointList.Count)];
                         bool canPlace = true;
@@ -85,19 +90,20 @@ public class ObjectPlacer : MonoBehaviour
                             }
                         }
                         if (canPlace)
-                            Instantiate(pair.item, point, Quaternion.identity, room.DecorationsParent);
+                            Instantiate(pair.item, point, Quaternion.identity, decorationsParent);
                     }
                 }
             }
         }
 
-        PlaceEnemySpawnPoints(enemySpawns, room);
+        if (room)
+            PlaceEnemySpawnPoints(enemySpawns, spawnPointsParent);
     }
 
-    private List<List<Vector3>> CreateRayCastPoints(Room room)
+    private List<List<Vector3>> CreateRayCastPoints(Rect rect, List<Vector3> pathPoints)
     {
-        Vector3 start = new Vector3(room.Rect.position.x + wallPadding, 0, room.Rect.position.y + wallPadding);
-        Vector3 end = new Vector3(room.Rect.position.x + room.Rect.width - wallPadding, 0, room.Rect.position.y + room.Rect.height - wallPadding);
+        Vector3 start = new Vector3(rect.position.x + wallPadding, 0, rect.position.y + wallPadding);
+        Vector3 end = new Vector3(rect.position.x + rect.width - wallPadding, 0, rect.position.y + rect.height - wallPadding);
         TerrainType[] terrainTypes = terrainGenerator.TerrainTypes();
 
         List<float> terrainHeights = new List<float>();
@@ -119,7 +125,7 @@ public class ObjectPlacer : MonoBehaviour
                 bool canPlace = true;
                 Vector3 coordinate = new Vector3(i, 100f, j);
 
-                foreach (Vector3 pathPoint in room.PathPoints)
+                foreach (Vector3 pathPoint in pathPoints)
                 {
                     if (Vector2.Distance(pathPoint.XZ(), coordinate.XZ()) < PathGenerator.Radius)
                     {
@@ -151,7 +157,7 @@ public class ObjectPlacer : MonoBehaviour
         return terrainObjectPoints;
     }
 
-    private void PlaceEnemySpawnPoints(List<Vector3> raycastOrigins, Room room)
+    private void PlaceEnemySpawnPoints(List<Vector3> raycastOrigins, Transform spawnPointsParent)
     {
         int spawnPoints = 0;
         int attempts = 0;
@@ -167,7 +173,7 @@ public class ObjectPlacer : MonoBehaviour
 
                 if (CanPlace())
                 {
-                    Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, room.SpawnPointsParent);
+                    Instantiate(enemySpawnPoint, hit.point, Quaternion.identity, spawnPointsParent);
                     ++spawnPoints;
                 }
 
@@ -182,7 +188,7 @@ public class ObjectPlacer : MonoBehaviour
         }
 
         if (spawnPoints < enemySpawnPoints)
-            Debug.LogWarning(room + " only got " + spawnPoints + "/" + enemySpawnPoints + " enemy spawn points after " + attempts + "/" + maxSpawnPointAttempts + " attempts.");
+            Debug.LogWarning(spawnPointsParent + " from " + spawnPointsParent.parent + " only got " + spawnPoints + "/" + enemySpawnPoints + " enemy spawn points after " + attempts + "/" + maxSpawnPointAttempts + " attempts.");
     }
 
 }

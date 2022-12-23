@@ -21,7 +21,7 @@ public class MechanicalDecoration : MonoBehaviour
 
         Room room = transform.parent.parent.GetComponent<Room>();
 
-        if (room.BossDistance < 200)
+        if (room && room.BossDistance < 200)
             mechanicalVersions.GetRandom().SetActive(true);
         else
             normalVersion.SetActive(true);
