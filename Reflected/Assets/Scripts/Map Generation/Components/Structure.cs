@@ -40,6 +40,9 @@ public class Structure : MonoBehaviour
 
     private void DestroyDecorationObstructors()
     {
+        if (decorationObstructors == null)
+            return;
+
         foreach(Collider collider in decorationObstructors.GetComponentsInChildren<Collider>())
         {
             collider.enabled = false;

@@ -75,8 +75,6 @@ MonoBehaviour:
   minMapSizeZ: 70
   maxMapSizeZ: 80
   chunkSize: 8
-  trials: 1
-  interval: 0
   log: 
   timerLog: 
 --- !u!114 &5090313322264181278
@@ -137,14 +135,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapGenerator: {fileID: 5090313322264181279}
   testWeightBoss1: 1
-  testWeightBoss2: 1
+  testWeightBoss2: 0.75
   testWeightBoss3: 1
   testWeightBoss4: 1
   nrOfShopRooms: 4
-  shopRoomFitnessThreshold: 0.6
-  testWeightShop1: 1
-  testWeightShop2: 1
-  testWeightShop3: 2
+  shopRoomFitnessThreshold: 0.7
+  testWeightShop1: 0.5
+  testWeightShop2: 0.5
+  testWeightShop3: 1
 --- !u!114 &5090313322264181267
 MonoBehaviour:
   m_ObjectHideFlags: 0

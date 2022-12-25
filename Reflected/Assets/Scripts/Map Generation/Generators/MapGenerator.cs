@@ -55,14 +55,6 @@ public class MapGenerator : MonoBehaviour
     [Range(1, 20)]
     [SerializeField] private int chunkSize;
 
-    [Header("Testing")]
-
-    [Min(1)]
-    [SerializeField] private int trials;
-
-    [Range(0f, 2f)]
-    [SerializeField] private float interval;
-
     [Header("Read Only")]
 
     [TextArea()]
@@ -88,14 +80,19 @@ public class MapGenerator : MonoBehaviour
     public StructurePlacer   StructurePlacer   => structurePlacer;
     public ObjectPlacer      ObjectPlacer      => objectPlacer;
 
+    private void Awake()
+    {
+        GameManager.NewMap.AddListener(OnNewMap);
+    }
+
     private void Start()
     {
         ChunkSize = chunkSize;
 
-        if (trials == 1)
-            Generate();
-        else
-            StartCoroutine(Coroutine_BulkGenerate());
+        if (seed == 0)
+            seed = (int)System.DateTime.Now.Ticks;
+
+        Generate();
     }
 
     public void Generate()
@@ -107,12 +104,12 @@ public class MapGenerator : MonoBehaviour
         log = "Map generation log\n";
         timerLog = "";
 
-        int newSeed = seed != 0 ? seed : (int)System.DateTime.Now.Ticks;
-        Random.InitState(newSeed);
-        terrainGenerator.SetRandomSeed(newSeed);
-        Log("Seed: " + newSeed);
+        Random.InitState(seed);
+        terrainGenerator.SetRandomSeed(seed);
+        Log("Seed: " + seed);
 
         Destroy(GameObject.Find("Map"));
+        Physics.SyncTransforms();
 
         // Initialize map
 
@@ -181,31 +178,6 @@ public class MapGenerator : MonoBehaviour
 #endif
     }
 
-    private IEnumerator Coroutine_BulkGenerate()
-    {
-        float cooldown = 0f;
-        int completedTrials = 0;
-
-        while (completedTrials < trials)
-        {
-            cooldown += Time.deltaTime;
-
-            if (cooldown >= interval)
-            {
-                Generate();
-                if (completedTrials % 10 == 0)
-                    Debug.Log(completedTrials + " trials completed.");
-                cooldown -= interval;
-                ++completedTrials;
-            }
-            
-            yield return null;
-        }
-
-        Debug.Log("All trials completed.");
-        yield return 0;
-    }
-
     public void Log(string text)
     {
         log += "\n" + text;
@@ -225,5 +197,15 @@ public class MapGenerator : MonoBehaviour
         generator.Invoke(map);
         stopwatch.Stop();
         timerLog += "\n" + generatorName + ": \t" + stopwatch.ElapsedMilliseconds + " milliseconds";
+    }
+
+    private void OnNewMap()
+    {
+        int increment = 15;
+        minMapSizeX += increment;
+        maxMapSizeX += increment;
+        minMapSizeZ += increment;
+        maxMapSizeZ += increment;
+        seed += 1;
     }
 }

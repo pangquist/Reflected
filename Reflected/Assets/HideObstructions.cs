@@ -12,13 +12,20 @@ public class HideObstructions : MonoBehaviour
     private void Awake()
     {
         camera = this.gameObject.transform;
+        GameManager.NewMap.AddListener(OnNewMap);
     }
 
-    void Update()
+    private void Update()
     {
         GetAllObjectsInTheWay();
         ShowObjects();
         HideObjects();
+    }
+
+    private void OnNewMap()
+    {
+        currentlyInTheWay.Clear();
+        alreadyHidden.Clear();
     }
 
     private void GetAllObjectsInTheWay()

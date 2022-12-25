@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     private float runTimer;
     public AiDirector AiDirector => aiDirector;
     public EnemySpawner EnemySpawner => enemySpawner;
+
+    public static UnityEvent NewMap = new UnityEvent();
 
     private void Start()
     {
@@ -43,5 +46,12 @@ public class GameManager : MonoBehaviour
     public float GetRunTimer()
     {
         return runTimer;
+    }
+
+    [ContextMenu("New Map")]
+    public void NextMap()
+    {
+        NewMap.Invoke();
+        GameObject.Find("Map Generator").GetComponent<MapGenerator>().Generate();
     }
 }

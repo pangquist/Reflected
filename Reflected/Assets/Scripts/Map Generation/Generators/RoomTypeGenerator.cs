@@ -168,30 +168,30 @@ public class RoomTypeGenerator : MonoBehaviour
             if (roomFitness.Count == 0)
                 break;
 
-            // Test 1: Distance to start room (more is better)
-
-            orderedArray = roomFitness.OrderBy(pair => Vector2.Distance(pair.Key.Rect.center, Map.StartRoom.Rect.center)).ToArray();
-            OrderToFitness(testWeightShop1);
-
-            // Test 2: Distance to boss room (more is better)
-
-            orderedArray = roomFitness.OrderBy(pair => Vector2.Distance(pair.Key.Rect.center, Map.BossRoom.Rect.center)).ToArray();
-            OrderToFitness(testWeightShop2);
-
-            // Test 3: Distance to other shop rooms (more is better)
-
-            foreach (Room room in shopRooms)
+            // Perform tests on all potential shop rooms
+            foreach (Room room in roomFitness.Keys.ToList())
             {
-                orderedArray = roomFitness.OrderBy(pair => Vector2.Distance(pair.Key.Rect.center, room.Rect.center)).ToArray();
-                OrderToFitness(testWeightShop3);
-            }
+                float tempDistance = 0f;
+                float minDistance = float.MaxValue;
 
-            // Adds fitness to potential shop rooms based of the order orderedArray (higher index = more fitness)
-            void OrderToFitness(float weight)
-            {
-                for (int i = 0; i < orderedArray.Length; ++i)
+                // Test 1: Distance to start room (more is better)
+                CheckDistance(Map.StartRoom, testWeightShop1);
+
+                // Test 2: Distance to boss room (more is better)
+                CheckDistance(Map.BossRoom , testWeightShop2);
+
+                // Test 3: Distance to other shop rooms (more is better)
+                foreach (Room otherRoom in shopRooms)
+                    CheckDistance(otherRoom, testWeightShop3);
+
+                roomFitness[room] = minDistance;
+
+                void CheckDistance(Room otherRoom, float testWeight)
                 {
-                    roomFitness[orderedArray[i].Key] += (float)i / (orderedArray.Length - 1) * weight;
+                    tempDistance = Vector2.Distance(room.Rect.center, otherRoom.Rect.center) / testWeight;
+
+                    if (tempDistance < minDistance)
+                        minDistance = tempDistance;
                 }
             }
 
