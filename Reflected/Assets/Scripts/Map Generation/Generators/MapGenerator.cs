@@ -82,7 +82,7 @@ public class MapGenerator : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.NewMap.AddListener(OnNewMap);
+        GameManager.DestroyingMap.AddListener(OnDestroyingMap);
     }
 
     private void Start()
@@ -107,9 +107,6 @@ public class MapGenerator : MonoBehaviour
         Random.InitState(seed);
         terrainGenerator.SetRandomSeed(seed);
         Log("Seed: " + seed);
-
-        Destroy(GameObject.Find("Map"));
-        Physics.SyncTransforms();
 
         // Initialize map
 
@@ -199,7 +196,7 @@ public class MapGenerator : MonoBehaviour
         timerLog += "\n" + generatorName + ": \t" + stopwatch.ElapsedMilliseconds + " milliseconds";
     }
 
-    private void OnNewMap()
+    private void OnDestroyingMap()
     {
         int increment = 15;
         minMapSizeX += increment;

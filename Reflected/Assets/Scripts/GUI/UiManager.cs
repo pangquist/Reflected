@@ -34,9 +34,11 @@ public class UiManager: MonoBehaviour
     [SerializeField] GameObject interactText;
     [SerializeField] GameObject payChestText;
     [SerializeField] Image tint;
+    [SerializeField] TextMeshProUGUI tintText;
     private CinemachineFreeLook camera;
 
     public Image Tint => tint;
+    public TextMeshProUGUI TintText => tintText;
 
     // Start is called before the first frame update
     void Start()

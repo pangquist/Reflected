@@ -178,7 +178,7 @@ public class RoomTypeGenerator : MonoBehaviour
                 CheckDistance(Map.StartRoom, testWeightShop1);
 
                 // Test 2: Distance to boss room (more is better)
-                CheckDistance(Map.BossRoom , testWeightShop2);
+                CheckDistance(Map.BossRoom, testWeightShop2);
 
                 // Test 3: Distance to other shop rooms (more is better)
                 foreach (Room otherRoom in shopRooms)

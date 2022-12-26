@@ -64,13 +64,13 @@ public class Minimap : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.NewMap.AddListener(OnNewMap);
+        GameManager.DestroyingMap.AddListener(OnDestroyingMap);
         MapGenerator.Finished.AddListener(Initialize);
         Map.RoomEntered.AddListener(RevealRoom);
         Map.RoomCleared.AddListener(RevealChambers);
     }
 
-    private void OnNewMap()
+    private void OnDestroyingMap()
     {
         components.Clear();
         components.Add(playerComponent);

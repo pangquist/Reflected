@@ -12,7 +12,7 @@ public class HideObstructions : MonoBehaviour
     private void Awake()
     {
         camera = this.gameObject.transform;
-        GameManager.NewMap.AddListener(OnNewMap);
+        GameManager.DestroyingMap.AddListener(OnDestroyingMap);
     }
 
     private void Update()
@@ -22,10 +22,10 @@ public class HideObstructions : MonoBehaviour
         HideObjects();
     }
 
-    private void OnNewMap()
+    private void OnDestroyingMap()
     {
-        currentlyInTheWay.Clear();
         alreadyHidden.Clear();
+        currentlyInTheWay.Clear();
     }
 
     private void GetAllObjectsInTheWay()
@@ -41,9 +41,9 @@ public class HideObstructions : MonoBehaviour
         var hitsForward = Physics.SphereCastAll(rayForward, radius, cameraPlayerDistance);
         var hitsBackward = Physics.SphereCastAll(rayBackward, radius, cameraPlayerDistance);
 
-        foreach(var hit in hitsForward)
+        foreach (var hit in hitsForward)
         {
-            if(hit.collider.gameObject.TryGetComponent(out MeshRenderer mesh) && hit.collider.gameObject.tag == "Decoration")
+            if (hit.collider.gameObject.TryGetComponent(out MeshRenderer mesh) && hit.collider.gameObject.tag == "Decoration")
             {
                 if (!currentlyInTheWay.Contains(hit.collider.gameObject))
                 {
@@ -68,7 +68,7 @@ public class HideObstructions : MonoBehaviour
     {
         for (int i = 0; i < currentlyInTheWay.Count; i++)
         {
-            if(currentlyInTheWay[i].TryGetComponent(out MeshRenderer mesh))
+            if (currentlyInTheWay[i].TryGetComponent(out MeshRenderer mesh))
             {
                 if (!alreadyHidden.Contains(currentlyInTheWay[i]))
                 {
