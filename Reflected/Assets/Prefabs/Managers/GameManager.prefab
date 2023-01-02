@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4854665978762768390}
   - component: {fileID: 8883285849506592928}
   - component: {fileID: 1342714239502989496}
+  - component: {fileID: 6339123698853753275}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -67,7 +68,7 @@ MonoBehaviour:
   activeRoom: 0
   aliveEnemiesInRoom: 0
   timeToClearRoom: 0.0063825
-  avergaeTimeToClearRoom: 0
+  averageTimeToClearRoom: 0
   chests:
   - {fileID: 7803070432480520542, guid: 3af474247756a8649b738db7af6acd15, type: 3}
   - {fileID: 4434172993695460419, guid: 87a36a85cce218946a46a8e41ba4c17b, type: 3}
@@ -91,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be7d1a98e03c27f46ace46efb583276e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialDummy: {fileID: 0}
   enemyClose: {fileID: 3967780735622217405, guid: a6ef236ed9d6e5543a238deed3a04f8c,
     type: 3}
   enemyRange: {fileID: 3967780735622217405, guid: a6ef236ed9d6e5543a238deed3a04f8c,
@@ -98,4 +100,18 @@ MonoBehaviour:
   enemyAOE: {fileID: 3967780735622217405, guid: a6ef236ed9d6e5543a238deed3a04f8c,
     type: 3}
   enemyDOT: {fileID: 0}
+  enemyElite: {fileID: 0}
   spawnBias: 60
+--- !u!114 &6339123698853753275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934046450394026571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 766d55df8c09b45c38fc24a2d7c47137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderPath: Screenshots/
