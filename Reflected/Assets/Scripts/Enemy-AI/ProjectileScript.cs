@@ -46,7 +46,11 @@ public class ProjectileScript : MonoBehaviour
                 healthComponent.TakeDamage(damageAmount);
             }
 
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+        }
+        else if (other.tag == "Ground" || other.tag == "Decoration")
+        {
+            Destroy(gameObject);
         }
     }
 }
