@@ -86,8 +86,6 @@ public class AiManager2 : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(distanceTo(player.transform.position));
-
         //Run the currently active state if the enemy is alive. This way the AI will stop when the enemy dies.
         if (!me.Dead())
         {
