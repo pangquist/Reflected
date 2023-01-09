@@ -28,8 +28,20 @@ public class MeleeAttackState : State
         attackRate = baseAttackRate / me.GetAttackSpeed() / enemyStatSystem.GetAttackSpeed() / me.MovementPenalty();
 
         //If player is too far away, chase the player.
-        if (thisEnemy.distanceTo(player.transform.position) >= chaseRange)
+        if (thisEnemy.Elite())
         {
+            if (thisEnemy.distanceTo(player.transform.position) >= chaseRange + 2f)
+            {
+                Debug.Log("Attack -> MoveTowards");
+                thisEnemy.SetMoveTowardState();
+                agent.isStopped = false;
+                me.PlayAnimation("Walk Forward In Place");
+                return;
+            }
+        }
+        else if (thisEnemy.distanceTo(player.transform.position) >= chaseRange)
+        {
+            Debug.Log("Error Attack");
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
             me.PlayAnimation("Walk Forward In Place");

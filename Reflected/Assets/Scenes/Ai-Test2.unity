@@ -295,6 +295,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   currentWeapon: {fileID: 0}
   damagedClips: []
+  upgradedDamagedClips: []
   HealthChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1501,7 +1502,7 @@ PrefabInstance:
     - target: {fileID: 756528810924743122, guid: 7075d0cbf30e27442ae91d8acc34e196,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3507614303673962640, guid: 7075d0cbf30e27442ae91d8acc34e196,
         type: 3}
@@ -2759,11 +2760,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Elite Melee
-      objectReference: {fileID: 0}
-    - target: {fileID: 1004689055206618278, guid: 558e31477e2c54244ade7082ac6c9840,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1004689055206618300, guid: 558e31477e2c54244ade7082ac6c9840,
         type: 3}
