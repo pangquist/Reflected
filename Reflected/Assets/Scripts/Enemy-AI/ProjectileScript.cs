@@ -48,7 +48,7 @@ public class ProjectileScript : MonoBehaviour
 
             Destroy(gameObject);
         }
-        else if (other.tag == "Ground" || other.tag == "Decoration")
+        else if (other.tag == "Ground" || other.tag == "Structure")
         {
             Destroy(gameObject);
         }
