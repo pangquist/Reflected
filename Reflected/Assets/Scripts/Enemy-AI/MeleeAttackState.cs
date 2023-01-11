@@ -32,7 +32,6 @@ public class MeleeAttackState : State
         {
             if (thisEnemy.distanceTo(player.transform.position) >= chaseRange + 2f)
             {
-                Debug.Log("Attack -> MoveTowards");
                 thisEnemy.SetMoveTowardState();
                 agent.isStopped = false;
                 me.PlayAnimation("Walk Forward In Place");
@@ -41,7 +40,6 @@ public class MeleeAttackState : State
         }
         else if (thisEnemy.distanceTo(player.transform.position) >= chaseRange)
         {
-            Debug.Log("Error Attack");
             thisEnemy.SetMoveTowardState();
             agent.isStopped = false;
             me.PlayAnimation("Walk Forward In Place");
