@@ -34,16 +34,13 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
     {
         if (other.GetComponent<Player>())
         {
-            DimensionManager dimentionManager = FindObjectOfType<DimensionManager>();
-            if(dimentionManager.GetCurrentCharges() < dimentionManager.GetMaxCharges())
-            {
-                PopUpText popUptext = PopUpTextManager.NewBasic(transform.position, "+1 Mirror Charge");
-                popUptext.Text.color = new Color(0.7f, 0.5f, 0.3f);
+            PopUpText popUptext = PopUpTextManager.NewBasic(transform.position, "+1 Mirror Charge");
+            popUptext.Text.color = new Color(0.7f, 0.5f, 0.3f);
 
-                GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
-                Destroy(gameObject);
-                powerUpEffect.Apply(other.gameObject, amount);
-            }            
+            GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
+            Destroy(gameObject);
+            powerUpEffect.Apply(other.gameObject, amount);
+
         }
     }
 
@@ -59,13 +56,13 @@ public class MirrorCharge : MonoBehaviour, IBuyable, IMagnetic
 
     public void SetTarget(Vector3 position)
     {
-        DimensionManager dimentionManager = FindObjectOfType<DimensionManager>();
-        if (dimentionManager.GetCurrentCharges() < dimentionManager.GetMaxCharges())
-        {
-            targetPosition = position;
-            hasTarget = true;
-        }
-        
+        //DimensionManager dimentionManager = FindObjectOfType<DimensionManager>();
+        //if (dimentionManager.GetCurrentCharges() < dimentionManager.GetMaxCharges())
+        //{
+            
+        //}
+        targetPosition = position;
+        hasTarget = true;
     }
 
     public void SetProperties()

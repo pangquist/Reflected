@@ -27,19 +27,16 @@ public class Health : MonoBehaviour, IMagnetic, IBuyable
             amount = (int)((totalplayerhealth * powerUpEffect.amount));
             description = powerUpEffect.description + " " + (amount * 100).ToString() + "% of your current HP."; 
         }
-        Destroy(gameObject, 20);
+        Destroy(gameObject, 10);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Player>())
         {
-            if (other.GetComponent<Player>().GetMaxHealth() > other.GetComponent<Player>().GetCurrentHealth())
-            {
-                GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
-                Destroy(gameObject);
-                powerUpEffect.Apply(other.gameObject, amount);
-            }            
+            GameObject.Find("Player").GetComponent<AudioSource>().PlayOneShot(audioClip);
+            Destroy(gameObject);
+            powerUpEffect.Apply(other.gameObject, amount);
         }
     }
 
