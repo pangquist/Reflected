@@ -82,8 +82,6 @@ public class AiDirector : MonoBehaviour
         inbetweenRooms = false;
 
         numberOfRoomsLeftOnMap = map.Rooms.Count;
-
-        enemySpawner.SpawnTutorialDummy(player.transform);
     }
 
     private void Update()

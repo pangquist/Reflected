@@ -30,13 +30,6 @@ public class EnemySpawner : MonoBehaviour
         spawnElite = false;
     }
 
-    public void SpawnTutorialDummy(Transform playerPos)
-    {
-        Vector3 spawnPos = playerPos.position;
-        spawnPos.x += 3; spawnPos.y += 3; spawnPos.z += 3;
-        Instantiate(tutorialDummy, spawnPos, Quaternion.Euler(0, 225, 0), Map.StartRoom.DecorationsParent);
-    }
-
     public void SpawnEnemy(float spawnTime, int enemyAmount, int waveAmount, float enemyadaptiveDifficulty)
     {
         enemyStatSystem.IncreaseHealthBuff();
