@@ -14,6 +14,14 @@ public class Sword : Weapon
     [Header("Sword Properties")]
     [SerializeField] Collider hitBox;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!playerController.DamageLocked())
+            return;
+
+        other.GetComponent<Destructible>()?.DestroyAnimation();
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (!playerController.DamageLocked())
@@ -23,21 +31,16 @@ public class Sword : Weapon
 
         if (other.GetComponent<Enemy>() || other.GetComponent<tutorialDummy>())
             target = other.gameObject;
-        else if (other.GetComponent<Destructible>())
-        {
-            other.GetComponent<Destructible>().DestroyAnimation();
-            return;
-        }
         else
             return;
 
         if (!hitEnemies.Contains(target))
         {
-            if(target.GetComponent<Enemy>())
+            if (target.GetComponent<Enemy>())
             {
                 target.GetComponent<Enemy>().TakeDamage(GetDamage());
             }
-            else if(target.GetComponent<tutorialDummy>())
+            else if (target.GetComponent<tutorialDummy>())
             {
                 target.GetComponent<tutorialDummy>().TakeDamage(GetDamage());
             }

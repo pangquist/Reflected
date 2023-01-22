@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4858987837966146408}
   - component: {fileID: 4858987837965343560}
   - component: {fileID: 4858987837964376456}
+  - component: {fileID: -9186830553231590981}
   - component: {fileID: 9158025347320446973}
   - component: {fileID: 7473854241066781673}
   - component: {fileID: -3445069257722479700}
@@ -87,6 +88,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-9186830553231590981
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4858987837966370632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: f81deb958887e4e429ded035b43db140, type: 3}
 --- !u!114 &9158025347320446973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae20fe18dfefb714bb45909c3947f2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfChildren: 0
   objects: []
   trueMeshes:
   - {fileID: 4300000, guid: a6a383974abe0cf41be5076f71ca567c, type: 3}
@@ -141,6 +157,6 @@ MonoBehaviour:
   randomizeRotationY: 1
   randomizeRotationZ: 0
   randomizeScale: 1
-  minScale: 0.8
-  maxScale: 1.5
+  minScale: 0.5
+  maxScale: 1.3
   scaleBias: -0.4

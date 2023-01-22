@@ -8,6 +8,9 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject[] mapGenerators;
+    [SerializeField] private int currentMapGenerator;
+
     [SerializeField] private AiDirector aiDirector;
     [SerializeField] private EnemySpawner enemySpawner;
     private UiManager uiManager;
@@ -19,7 +22,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Diamond.OnDiamondCollected += OnDiamondCollected;
+        Diamond.OnDiamondCollected += (ItemData itemData) => NextMap(); 
+
+        GameObject mapGenerator = Instantiate(mapGenerators[currentMapGenerator]);
+        mapGenerator.name = "Map Generator";
+        mapGenerator.transform.SetSiblingIndex(0);
     }
 
     private void Start()
@@ -54,7 +61,8 @@ public class GameManager : MonoBehaviour
         return runTimer;
     }
 
-    private void OnDiamondCollected(ItemData itemData)
+    [ContextMenu("Next map")]
+    private void NextMap()
     {
         StartCoroutine(Coroutine_NextMap());
     }
@@ -80,6 +88,7 @@ public class GameManager : MonoBehaviour
         uiManager.Tint.color = toColor;
         uiManager.TintText.gameObject.SetActive(true);
         uiManager.TintText.text = "New map generating...";
+        yield return null;
 
         // Destroy map
 
@@ -87,10 +96,22 @@ public class GameManager : MonoBehaviour
         Destroy(GameObject.Find("Map"));
         yield return null;
 
-        // Generate new map
+        // Next map generator
+
+        MapGenerator mapGenerator = GameObject.Find("Map Generator").GetComponent<MapGenerator>();
+        int oldSeed = mapGenerator.seed;
+        currentMapGenerator = Mathf.Min(currentMapGenerator + 1, mapGenerators.Length - 1);
+        Destroy(mapGenerator.gameObject);
+
+        mapGenerator = Instantiate(mapGenerators[currentMapGenerator]).GetComponent<MapGenerator>();
+        mapGenerator.name = "Map Generator";
+        mapGenerator.transform.SetSiblingIndex(0);
+        mapGenerator.seed = oldSeed + 1;
+        yield return null;
+
+        // (The map generator will generate a new map using its Start method)
 
         uiManager.TintText.gameObject.SetActive(false);
-        GameObject.Find("Map Generator").GetComponent<MapGenerator>().Generate();
         yield return 0;
     }
 }

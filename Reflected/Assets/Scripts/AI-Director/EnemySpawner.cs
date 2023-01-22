@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        GenerateSpawnLocation();
+        //GenerateSpawnLocation();
         enemyStatSystem = GameObject.Find("EnemyStatSystem").GetComponent<EnemyStatSystem>();
         spawnElite = false;
     }

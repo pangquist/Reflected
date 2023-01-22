@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Destructible : MonoBehaviour
 {
+    [SerializeField] private int hitsToDestroy = 1;
+
     private bool beingDestroyed;
 
     private void Awake()
@@ -21,14 +23,26 @@ public class Destructible : MonoBehaviour
         if (beingDestroyed)
             return;
 
-        // Play animation that destroys the object instead of calling Destroy(gameObject).
-        if (GetComponent<Animator>())
+        Animator animator = GetComponent<Animator>();
+
+        hitsToDestroy--;
+
+        if (hitsToDestroy > 0)
         {
-            GetComponent<Animator>().Play("Destroy");
-            beingDestroyed = true;
+            // Play damaged animation
+            animator?.Play("Damage");
         }
+
         else
-            Destroy(gameObject);
+        {
+            beingDestroyed = true;
+
+            // Play animation that destroys the object instead of calling Destroy(gameObject).
+            if (animator)
+                animator.Play("Destroy");
+            else
+                Destroy(gameObject);
+        }
     }
 
     public void DestroyObject()

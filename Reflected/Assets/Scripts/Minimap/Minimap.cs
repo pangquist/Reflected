@@ -81,6 +81,13 @@ public class Minimap : MonoBehaviour
         Map map = GameObject.Find("Map").GetComponent<Map>();
         worldTransform.sizeDelta = new Vector2(map.SizeX, map.SizeZ) * MapGenerator.ChunkSize;
 
+        Dimension oldDimension = DimensionManager.CurrentDimension;
+
+        if (DimensionManager.Mirror)
+        {
+            GameObject.Find("Dimension Manager").GetComponent<DimensionManager>().SetDimension(Dimension.True);
+        }
+
         foreach (MinimapComponent component in components)
         {
             if (component.Controller.HasCustomUpdate)
@@ -98,6 +105,11 @@ public class Minimap : MonoBehaviour
                     component.Hide();
                 }
             }
+        }
+
+        if (oldDimension == Dimension.Mirror)
+        {
+            GameObject.Find("Dimension Manager").GetComponent<DimensionManager>().SetDimension(oldDimension);
         }
 
         playerComponent = components.Find(component => component.Controller.Layer == MinimapLayer.Player);
