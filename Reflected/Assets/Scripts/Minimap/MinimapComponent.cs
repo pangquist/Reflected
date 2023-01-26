@@ -185,8 +185,17 @@ public class MinimapComponent : MonoBehaviour
 
     private void CustomUpdate_RoomType()
     {
-        Room room = controller.GetComponent<Room>();
-
+        Room room = null;
+        try
+        {
+            room = controller.GetComponent<Room>();
+        }
+        catch
+        {
+            gameObject.name += " Crash";
+            return;
+        }
+        
         if (room.Type == RoomType.Start)
         {
             SetSprite(minimap.GetSprite("Compass"));

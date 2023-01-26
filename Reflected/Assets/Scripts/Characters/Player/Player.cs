@@ -36,6 +36,9 @@ public class Player : Character
     public delegate void InteractWithObject();
     public static event InteractWithObject OnObjectInteraction;
 
+    public delegate void HealthAtMax(bool needHealth);
+    public static event HealthAtMax OnHealthMaxed;
+
     bool swapOne;
     bool swapTwo;
     bool swapThree;
@@ -128,6 +131,10 @@ public class Player : Character
     {
         PopUpTextManager.NewHeal(transform.position + Vector3.up * 1.5f, amount);
         currentHealth += Mathf.Clamp(amount, 0, maxHealth + stats.GetMaxHealthIncrease() - currentHealth);
+        if(currentHealth >= GetMaxHealth())
+        {
+            OnHealthMaxed?.Invoke(false);
+        }
         HealthChanged.Invoke();
     }
 
@@ -169,7 +176,10 @@ public class Player : Character
     {
         if (isDead)
             return;
-        
+        if(currentHealth >= GetMaxHealth())
+        {
+            OnHealthMaxed?.Invoke(true);
+        }
         currentHealth -= Mathf.Clamp(Mathf.CeilToInt(damage * stats.GetDamageReduction()), 0, currentHealth);
 
         if (currentHealth <= 0)

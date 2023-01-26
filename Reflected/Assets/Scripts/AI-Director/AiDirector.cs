@@ -82,8 +82,6 @@ public class AiDirector : MonoBehaviour
         inbetweenRooms = false;
 
         numberOfRoomsLeftOnMap = map.Rooms.Count;
-
-        enemySpawner.SpawnTutorialDummy(player.transform);
     }
 
     private void Update()
@@ -193,7 +191,7 @@ public class AiDirector : MonoBehaviour
     {
         currentRarity = lootPool.GetRandomRarity();
         Vector3 spawnPosition = enemySpawner.GetSpawnLocations().position;
-        spawnPosition.y += 5;
+        //spawnPosition.y += 5;
 
         switch (currentRarity.rarity)
         {

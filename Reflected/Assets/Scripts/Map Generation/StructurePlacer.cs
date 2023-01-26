@@ -10,6 +10,7 @@ public class StructurePlacer : MonoBehaviour
     [SerializeField] private MapGenerator mapGenerator;
 
     [Header("Predetermined structures")]
+    [SerializeField] private WeightedRandomList<GameObject> startStructurePrefabs;
     [SerializeField] private WeightedRandomList<GameObject> shopStructurePrefabs;
     [SerializeField] private WeightedRandomList<GameObject> bossStructurePrefabs;
 
@@ -130,7 +131,6 @@ public class StructurePlacer : MonoBehaviour
                     return true;
             return false;
         }
-
     }
 
     private float Coverage(Room room)
@@ -145,7 +145,11 @@ public class StructurePlacer : MonoBehaviour
 
     private void PredeterminedStructures(Room room)
     {
-        if (room.Type == RoomType.Shop)
+        if (room.Type == RoomType.Start)
+        {
+            InstantiateStructure(startStructurePrefabs.GetRandom(), room, room.Rect.center, true);
+        }
+        else if (room.Type == RoomType.Shop)
         {
             InstantiateStructure(shopStructurePrefabs.GetRandom(), room, room.Rect.center, true);
         }

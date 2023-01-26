@@ -38,14 +38,37 @@ public class LootPoolManager : MonoBehaviour
             rarityTiers.IncreaseWeight(3, 1);
     }
 
+    public void SetHealthItemWeighs(bool enableHealthItems)
+    {
+        if (enableHealthItems)
+        {
+            collectablePool.SetWeight(1, 3);
+            collectablePool.SetWeight(5, 2);
+            collectablePool.SetWeight(6, 1);
+            
+        }
+        else
+        {
+            foreach (var pair in collectablePool.list)
+            {
+                if (pair.item.GetComponent<Health>())
+                {
+                    pair.weight = 0;
+                }
+            }
+        }
+    }
+
     private void OnEnable()
     {
         InteractablePowerUp.OnPowerUPCollected += AddPowerupPickRate;
+        Player.OnHealthMaxed += SetHealthItemWeighs;
     }
 
     private void OnDisable()
     {
         InteractablePowerUp.OnPowerUPCollected -= AddPowerupPickRate;
+        Player.OnHealthMaxed -= SetHealthItemWeighs;
     }
 
     private void AddPowerupPickRate(PowerUpEffect powerupEffectData)

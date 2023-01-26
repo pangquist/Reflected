@@ -154,11 +154,16 @@ public class DimensionManager : MonoBehaviour
     public void GainCharges(int addCharges)
     {
         currentCharges = Mathf.Clamp(currentCharges + addCharges, 0, maximumCharges);
+        if(currentCharges >= GetMaxCharges())
+        {
+            LootDropList.SetWeight(4, 0);
+        }
     }
 
     public void ResetCharges()
     {
         currentCharges = 0;
+        LootDropList.SetWeight(4, 2);
     }
 
     public void SetStatSystem(PlayerStatSystem newStatSystem)

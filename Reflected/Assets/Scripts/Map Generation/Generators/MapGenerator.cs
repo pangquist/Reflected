@@ -80,11 +80,6 @@ public class MapGenerator : MonoBehaviour
     public StructurePlacer   StructurePlacer   => structurePlacer;
     public ObjectPlacer      ObjectPlacer      => objectPlacer;
 
-    private void Awake()
-    {
-        GameManager.DestroyingMap.AddListener(OnDestroyingMap);
-    }
-
     private void Start()
     {
         ChunkSize = chunkSize;
@@ -196,13 +191,4 @@ public class MapGenerator : MonoBehaviour
         timerLog += "\n" + generatorName + ": \t" + stopwatch.ElapsedMilliseconds + " milliseconds";
     }
 
-    private void OnDestroyingMap()
-    {
-        int increment = 15;
-        minMapSizeX += increment;
-        maxMapSizeX += increment;
-        minMapSizeZ += increment;
-        maxMapSizeZ += increment;
-        seed += 1;
-    }
 }

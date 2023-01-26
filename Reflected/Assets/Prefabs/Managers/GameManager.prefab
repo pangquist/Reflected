@@ -47,6 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5379925cf4dfa43a57c5b759aad3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapGenerators:
+  - {fileID: 5090313322264181224, guid: 8570821d04d614f35a888ae745c59aa6, type: 3}
+  - {fileID: 278959687627470505, guid: 5d1a766a8f80447dfbec20c1f94785bd, type: 3}
+  - {fileID: 9031476834437416622, guid: ce571813664834a6db20ea29e9d9b3c8, type: 3}
+  currentMapGenerator: 0
   aiDirector: {fileID: 8883285849506592928}
   enemySpawner: {fileID: 1342714239502989496}
 --- !u!114 &8883285849506592928
@@ -114,4 +119,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766d55df8c09b45c38fc24a2d7c47137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageFormat: 0
   folderPath: Screenshots/
