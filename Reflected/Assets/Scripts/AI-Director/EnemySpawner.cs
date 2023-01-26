@@ -7,14 +7,15 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject tutorialDummy;
-    [SerializeField] GameObject enemyClose;
-    [SerializeField] GameObject enemyRange;
-    [SerializeField] GameObject enemyAOE;
-    [SerializeField] GameObject enemyDOT;
-    [SerializeField] GameObject enemyElite;
-    GameObject enemyToSpawn;
+    //[SerializeField] GameObject enemyClose;
+    //[SerializeField] GameObject enemyRange;
+    //[SerializeField] GameObject enemyAOE;
+    //[SerializeField] GameObject enemyDOT;
+    //[SerializeField] GameObject enemyElite;
+    string enemyToSpawn;
 
     EnemyStatSystem enemyStatSystem;
+    ObjectPool objectPool;
 
     bool spawnElite;
 
@@ -27,6 +28,7 @@ public class EnemySpawner : MonoBehaviour
     {
         //GenerateSpawnLocation();
         enemyStatSystem = GameObject.Find("EnemyStatSystem").GetComponent<EnemyStatSystem>();
+        objectPool = GetComponent<ObjectPool>();
         spawnElite = false;
     }
 
@@ -74,8 +76,7 @@ public class EnemySpawner : MonoBehaviour
         GetBiasedEnemy();
         if (spawnTransforms.Count <= 0) GenerateSpawnLocation();
         spawnLocation = spawnTransforms[Random.Range(0, spawnTransforms.Count)];
-        Enemy enemy = Instantiate(enemyToSpawn, spawnLocation.position, Quaternion.Euler(0, 0, 0), Map.ActiveRoom.EnemiesParent).GetComponentInChildren<Enemy>();
-        enemy.AdaptiveDifficulty(adaptiveDifficulty);
+        objectPool.ActivateEnemy(enemyToSpawn, spawnLocation, adaptiveDifficulty);
 
         spawnTransforms.Remove(spawnLocation);
     }
@@ -105,7 +106,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (percentage <= spawnBias)
         {
-            enemyToSpawn = enemyClose;
+            enemyToSpawn = "close";
         }
         else
         {
@@ -113,23 +114,23 @@ public class EnemySpawner : MonoBehaviour
 
             if (spawnElite && percent < 15)
             {
-                enemyToSpawn = enemyElite;
+                enemyToSpawn = "elite";
                 return;
             }
 
             if (percent < 40)
             {
-                enemyToSpawn = enemyRange;
+                enemyToSpawn = "range";
                 return;
             }
             else if (percent > 70)
             {
-                enemyToSpawn = enemyAOE;
+                enemyToSpawn = "AOE";
                 return;
             }
             else
             {
-                enemyToSpawn = enemyDOT;
+                enemyToSpawn = "DOT";
                 return;
             }
         }

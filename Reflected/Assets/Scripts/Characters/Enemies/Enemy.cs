@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class Enemy : Character
 {
@@ -23,11 +25,18 @@ public class Enemy : Character
     //protected float aggroRange;
 
     bool doOnce;
+    bool active;
 
     [SerializeField] MeleeAttackState meleeAttackState;
     [SerializeField] RangedAttackState rangedAttackState;
     [SerializeField] AoeAttackState aoeAttackState;
     [SerializeField] ExplosionAttackState explosionAttackState;
+
+    private float startingMaxHealth;
+    private float startingCurrentHealth;
+    private float startingMovementSpeed;
+    private float startingDamage;
+    private float startingAttackSpeed;
 
     protected override void Awake()
     {
@@ -55,6 +64,12 @@ public class Enemy : Character
         {
             explosionAttackState = GetComponentInParent<ExplosionAttackState>();
         }
+
+        startingMaxHealth = maxHealth;
+        startingCurrentHealth = currentHealth;
+        startingAttackSpeed = attackSpeed; 
+        startingDamage = damage;
+        startingMovementSpeed = movementSpeed;
     }
 
     protected override void Update()
@@ -122,8 +137,33 @@ public class Enemy : Character
             LootDrop(transform);
 
         //Call base die function
-        base.Die();
+        //base.Die();
+
+        anim.Play("Death");
+        isDead = true;
+        Deactivate(ObjectPool.holdingPoint);
     }
+
+    public void Activate(Vector3 spawnPoint, float adaptiveDifficulty)
+    {
+        active = true;
+        isDead = false;
+        AdaptiveDifficulty(adaptiveDifficulty);
+        gameObject.transform.position = spawnPoint;
+        gameObject.SetActive(true);
+    }
+
+    public void Deactivate(Vector3 holdingPoint)
+    {
+        active = false;
+        maxHealth = startingMaxHealth;
+        damage = startingDamage;
+        movementSpeed = startingMovementSpeed;
+        attackSpeed = startingAttackSpeed;
+        gameObject.transform.position = holdingPoint;
+    }
+
+    public bool isActive() { return active; }
 
     public void AdaptiveDifficulty(float extraDifficultyPercentage) //called when instantiated (from the EnemySpanwer-script)
     {

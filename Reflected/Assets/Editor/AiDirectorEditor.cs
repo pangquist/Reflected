@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 
-/// <summary>
-/// EditorTemplate description
-/// </summary>
+// < summary >
+// EditorTemplate description
+// </ summary >
 [CustomEditor(typeof(AiDirector))]
 public class AiDirectorEditor : Editor
 {
@@ -46,7 +46,7 @@ public class AiDirectorEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("amountOfEnemiesToSpawn"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("waveAmount"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("difficultySteps"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("avergaeTimeToClearRoom"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("averageTimeToClearRoom"));
         EditorGUILayout.Space();
         EditorGUILayout.TextField("Room Statistics");
         EditorGUILayout.PropertyField(serializedObject.FindProperty("aliveEnemiesInRoom"));

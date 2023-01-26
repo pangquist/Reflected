@@ -141,7 +141,7 @@ public class Chamber : MonoBehaviour
         if (map.SingleActiveRoom)
             openDoor.Room.Deactivate(this);
 
-        // Activate next room
+        // ActivateEnemy next room
         yield return null;
         closedDoor.Room.gameObject.SetActive(true);
         closedDoor.Room.Activate(false);

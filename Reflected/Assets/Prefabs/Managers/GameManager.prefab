@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4854665978762768390}
   - component: {fileID: 8883285849506592928}
   - component: {fileID: 1342714239502989496}
+  - component: {fileID: 867915877}
   - component: {fileID: 6339123698853753275}
   m_Layer: 0
   m_Name: GameManager
@@ -97,16 +98,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be7d1a98e03c27f46ace46efb583276e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialDummy: {fileID: 0}
-  enemyClose: {fileID: 3967780735622217405, guid: a6ef236ed9d6e5543a238deed3a04f8c,
+  tutorialDummy: {fileID: 7619241973894877691, guid: 999b683f3c862b24c92ae6db78babe82,
     type: 3}
-  enemyRange: {fileID: 3967780735622217405, guid: a6ef236ed9d6e5543a238deed3a04f8c,
-    type: 3}
-  enemyAOE: {fileID: 3967780735622217405, guid: a6ef236ed9d6e5543a238deed3a04f8c,
-    type: 3}
-  enemyDOT: {fileID: 0}
-  enemyElite: {fileID: 0}
   spawnBias: 60
+--- !u!114 &867915877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3934046450394026571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a973b1590298c44d8fba530577de30f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyClose: {fileID: 9211019161338975208, guid: 673512fa5909aba4d8c105984efbe7ba,
+    type: 3}
+  enemyRange: {fileID: 756528810924743122, guid: 7075d0cbf30e27442ae91d8acc34e196,
+    type: 3}
+  enemyAOE: {fileID: 2231473038681938532, guid: 95f1f315310598740ad9b322d688501d,
+    type: 3}
+  enemyDOT: {fileID: 7522623531807832832, guid: 8bfdefbc262470845a81516bcad31d4c,
+    type: 3}
+  enemyElite: {fileID: 1004689055206618278, guid: 558e31477e2c54244ade7082ac6c9840,
+    type: 3}
+  amount: 20
 --- !u!114 &6339123698853753275
 MonoBehaviour:
   m_ObjectHideFlags: 0

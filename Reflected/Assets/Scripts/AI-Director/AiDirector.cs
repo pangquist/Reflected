@@ -15,7 +15,7 @@ public class AiDirector : MonoBehaviour
     [SerializeField] int difficultySteps;
     int eliteThreshold = 5;
     int minSpawnAmount, maxSpawnAmount;
-    const int SpawnAmountCAP = 10;
+    const int SpawnAmountCAP = 8;
     const int WaveAmountCAP = 4;
 
 
@@ -191,7 +191,7 @@ public class AiDirector : MonoBehaviour
     {
         currentRarity = lootPool.GetRandomRarity();
         Vector3 spawnPosition = enemySpawner.GetSpawnLocations().position;
-        //spawnPosition.y += 5;
+        spawnPosition.y += 5;
 
         switch (currentRarity.rarity)
         {
