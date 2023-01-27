@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Enemy : Character
 {
+    //List of audioclips for enemy attacks
+    [Header("AudioClips for respective attacks")]
+    [SerializeField] List<AudioClip> rangedClips;
+    [SerializeField] List<AudioClip> meleeClips;
+    [SerializeField] List<AudioClip> explosionChargeClips;
+    [SerializeField] List<AudioClip> mistClips;
+    [SerializeField] List<AudioClip> explosionClips;
+
     [Header("Enemy Specific Properties (If Relevant)")]
     [SerializeField] protected float baseProjectileSpeed;
     [SerializeField] protected Vector3 baseAoeSize;
@@ -175,6 +183,36 @@ public class Enemy : Character
         {
             explosionAttackState.DoAttack(this);
         }
+    }
+
+    public void PlayAttackSFX() //Called from the animation
+    {
+        if (parent.tag == "Melee")
+        {
+            GetComponent<AudioSource>().PlayOneShot(meleeClips.GetRandom());
+        }
+        else if (parent.tag == "Ranged")
+        {
+            GetComponent<AudioSource>().PlayOneShot(rangedClips.GetRandom());
+        }
+        else if (parent.tag == "AOE")
+        {
+            GetComponent<AudioSource>().PlayOneShot(rangedClips.GetRandom());
+        }
+        else if (parent.tag == "Explosion")
+        {
+            GetComponent<AudioSource>().PlayOneShot(explosionChargeClips.GetRandom());
+        }
+    }
+
+    public void PlayExplosionSFX() //Called from the animation
+    {
+        GetComponent<AudioSource>().PlayOneShot(explosionClips.GetRandom());
+    }
+
+    public void PlayAoeSFX() //Called from the animation
+    {
+        GetComponent<AudioSource>().PlayOneShot(mistClips.GetRandom());
     }
 
     public float GetProjectileSpeed()
