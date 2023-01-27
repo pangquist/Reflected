@@ -187,12 +187,16 @@ public class Enemy : Character
 
     public void PlayAttackSFX() //Called from the animation
     {
+        GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
+
         if (parent.tag == "Melee")
         {
             GetComponent<AudioSource>().PlayOneShot(meleeClips.GetRandom());
         }
         else if (parent.tag == "Ranged")
         {
+            GetComponent<AudioSource>().volume = 0.25f; //Not sure it works. Find different solution or manually make files lower volume
+            //Look for Debug.Logs and remove them.
             GetComponent<AudioSource>().PlayOneShot(rangedClips.GetRandom());
         }
         else if (parent.tag == "AOE")
@@ -203,6 +207,9 @@ public class Enemy : Character
         {
             GetComponent<AudioSource>().PlayOneShot(explosionChargeClips.GetRandom());
         }
+
+        GetComponent<AudioSource>().pitch = 1f;
+        GetComponent<AudioSource>().volume = 1f; //Maybe this fucks it up.
     }
 
     public void PlayExplosionSFX() //Called from the animation
