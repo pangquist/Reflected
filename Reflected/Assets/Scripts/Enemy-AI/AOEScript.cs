@@ -11,6 +11,7 @@ public class AOEScript : MonoBehaviour
 
     private Rigidbody rb;
     [SerializeField] private float damageAmount = 1; //Base damage 
+    [SerializeField] List<AudioClip> mistClips;
 
     void Start()
     {
@@ -53,5 +54,11 @@ public class AOEScript : MonoBehaviour
             }
             damageTimer = 0f;
         }
+    }
+
+    public void PlayAoeSFX() //Called from the animation
+    {
+        GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
+        GetComponent<AudioSource>().PlayOneShot(mistClips.GetRandom());
     }
 }
