@@ -48,11 +48,11 @@ public class UiPanel : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
         statSystem = player.GetComponent<PlayerStatSystem>();
-        damageReductionText.text = "Damage Reduction: " + player.playerStats().GetDamageReduction().ToString();
+        damageReductionText.text = "Damage Reduction: +" + ((1 - player.playerStats().GetDamageReduction()) * 100).ToString() + " %";
         damageText.text = "Damage: " + (player.GetDamage() * player.playerStats().GetDamageIncrease()).ToString();
-        speedText.text = "Movement Speed: " + (player.playerStats().GetMovementSpeed()).ToString();
-        attackspeedText.text = "Attack Speed: " + (player.GetAttackSpeed() * player.playerStats().GetAttackSpeed()).ToString();
-        cooldownDecrease.text = "Cooldown Decrease: " + player.playerStats().GetCooldownDecrease().ToString();
+        speedText.text = "Movement Speed: +" + ((1 - player.playerStats().GetMovementSpeed()) * 100).ToString() + " %";
+        attackspeedText.text = "Attack Speed: +" + ((1 - player.playerStats().GetAttackSpeed()) * 100).ToString() + " %"; //player.GetAttackSpeed() * 
+        cooldownDecrease.text = "Cooldown Decrease: -" + ((1 - player.playerStats().GetCooldownDecrease()) * 100).ToString() + " %";
 
         if (inventory == null)
             return;

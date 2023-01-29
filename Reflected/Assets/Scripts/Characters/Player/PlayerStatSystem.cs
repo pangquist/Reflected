@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerStatSystem : StatSystem //, ISavable
 {
     Player player;
-    bool first;
+    bool first; //Need a better name for this
     [SerializeField] UpgradeManager upgradeManager;
 
     private void Start()
@@ -75,6 +75,7 @@ public class PlayerStatSystem : StatSystem //, ISavable
             else if (pair.Key == "Health")
             {
                 SubtractMaxHealth(pair.Value);
+                player.TakeDamage(pair.Value);
             }
             else if (pair.Key == "Attack Speed")
             {
@@ -114,6 +115,7 @@ public class PlayerStatSystem : StatSystem //, ISavable
             else if (pair.Key == "Health")
             {
                 AddMaxHealth(pair.Value);
+                player.Heal(pair.Value);
             }
             else if (pair.Key == "Attack Speed")
             {
