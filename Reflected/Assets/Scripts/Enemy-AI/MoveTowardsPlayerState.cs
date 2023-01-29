@@ -23,7 +23,6 @@ public class MoveTowardsPlayerState : State
                 {
                     if (thisEnemy.distanceTo(player.transform.position) <= meleeAttackRange + 2f)
                     {
-                        Debug.Log("MoveTowards -> Attack");
                         thisEnemy.SetMeleeAttackState();
                         agent.isStopped = true;
                         me.PlayAnimation("Idle");
@@ -32,7 +31,6 @@ public class MoveTowardsPlayerState : State
                 }
                 else if (thisEnemy.distanceTo(player.transform.position) <= meleeAttackRange)
                 {
-                    Debug.Log("Error MoveTowards");
                     thisEnemy.SetMeleeAttackState();
                     agent.isStopped = true;
                     me.PlayAnimation("Idle");
@@ -43,7 +41,6 @@ public class MoveTowardsPlayerState : State
             case AiManager2.CombatBehavior.RangedCombat:
                 if (thisEnemy.distanceTo(player.transform.position) <= rangedAttackRange)
                 {
-                    Debug.Log("Switch to ATTACK from Chase");
                     thisEnemy.SetRangedAttackState();
                     agent.isStopped = true;
                     me.PlayAnimation("Idle");

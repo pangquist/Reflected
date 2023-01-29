@@ -30,7 +30,6 @@ public class MoveAwayFromPlayerState : State
             case AiManager2.CombatBehavior.RangedCombat:
                 if (thisEnemy.distanceTo(player.transform.position) >= rangedFleeRange)
                 {
-                    Debug.Log("Switch to ATTACK from Flee");
                     agent.isStopped = true;
                     me.PlayAnimation("Idle");
                     fleeTimer = 1000f;
@@ -72,8 +71,6 @@ public class MoveAwayFromPlayerState : State
     {
         float multiplier = 1.5f;
         Vector3 moveTo = transform.position + (transform.position - target.position + new Vector3(Random.Range(-3, 3), 0, Random.Range(-3, 3)) * multiplier);
-
-        Debug.Log(thisEnemy.distanceTo(moveTo));
 
         fleeTimer += Time.deltaTime;
         if (fleeTimer >= changeTime || thisEnemy.distanceTo(moveTo) <= 2f)

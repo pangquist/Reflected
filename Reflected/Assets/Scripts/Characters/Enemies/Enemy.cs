@@ -9,7 +9,6 @@ public class Enemy : Character
     [SerializeField] List<AudioClip> rangedClips;
     [SerializeField] List<AudioClip> meleeClips;
     [SerializeField] List<AudioClip> explosionChargeClips;
-    //[SerializeField] List<AudioClip> mistClips; //Moved to AOEScript
     [SerializeField] List<AudioClip> explosionClips;
 
     [Header("Enemy Specific Properties (If Relevant)")]
@@ -195,8 +194,6 @@ public class Enemy : Character
         }
         else if (parent.tag == "Ranged")
         {
-            //GetComponent<AudioSource>().volume = 0.25f; //Not sure it works. Find different solution or manually make files lower volume
-            //Look for Debug.Logs and remove them.
             GetComponent<AudioSource>().PlayOneShot(rangedClips.GetRandom());
         }
         else if (parent.tag == "AOE")
@@ -207,9 +204,6 @@ public class Enemy : Character
         {
             GetComponent<AudioSource>().PlayOneShot(explosionChargeClips.GetRandom());
         }
-
-        //GetComponent<AudioSource>().pitch = 1f;
-        //GetComponent<AudioSource>().volume = 1f; //Maybe this fucks it up.
     }
 
     public void PlayExplosionSFX() //Called from the animation
@@ -217,14 +211,6 @@ public class Enemy : Character
         GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
         GetComponent<AudioSource>().PlayOneShot(explosionClips.GetRandom());
     }
-
-    /*
-    public void PlayAoeSFX() //Called from the animation
-    {
-        GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
-        GetComponent<AudioSource>().PlayOneShot(mistClips.GetRandom());
-    }
-    */
 
     public float GetProjectileSpeed()
     {

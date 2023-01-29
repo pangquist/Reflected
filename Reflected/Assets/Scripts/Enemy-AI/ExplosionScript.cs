@@ -46,7 +46,7 @@ public class ExplosionScript : MonoBehaviour
                 {
                     effectable.ApplyEffect(dotData, 1);
                     effectable.ApplyEffect(slowData, 2);
-                    Debug.Log("Effects applied to player");
+                    //Debug.Log("Effects applied to player");
                 }
 
                 playerHit = true;
