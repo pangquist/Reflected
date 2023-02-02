@@ -35,9 +35,9 @@ public class Boss : Enemy
     [SerializeField] float phaseTwoCooldownReduction;
     Phase phase;
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         cameraManager = FindObjectOfType<CameraManager>();
         phase = Phase.One;
     }

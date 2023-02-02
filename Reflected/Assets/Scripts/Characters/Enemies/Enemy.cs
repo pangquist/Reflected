@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -38,12 +39,13 @@ public class Enemy : Character
     private float startingDamage;
     private float startingAttackSpeed;
 
-    protected override void Awake()
+    protected override void Start()
     {
+        active = false;
         statSystem = FindObjectOfType<EnemyStatSystem>();
         
         currentHealth = maxHealth + statSystem.GetMaxHealthIncrease();
-        base.Awake();
+        base.Start();
         player = FindObjectOfType<Player>();
         parent = gameObject.transform.parent.gameObject;
 
@@ -161,6 +163,7 @@ public class Enemy : Character
         movementSpeed = startingMovementSpeed;
         attackSpeed = startingAttackSpeed;
         gameObject.transform.position = holdingPoint;
+        gameObject.SetActive(false);
     }
 
     public bool isActive() { return active; }

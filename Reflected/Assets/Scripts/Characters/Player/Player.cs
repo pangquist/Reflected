@@ -44,10 +44,10 @@ public class Player : Character
     bool swapThree;
     bool swapFour;
 
-    protected override void Awake()
+    protected override void Start()
     {
         currentHealth = maxHealth + stats.GetMaxHealthIncrease();
-        base.Awake();
+        base.Start();
         Cursor.lockState = CursorLockMode.Locked;
 
         dimensionManager = GameObject.Find("Dimension Manager").GetComponent<DimensionManager>();

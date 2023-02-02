@@ -8,10 +8,10 @@ public class Root : Enemy
     [SerializeField] Collider swipeHitbox;
     [SerializeField] Transform effectTransform;
     Boss boss;
-    protected override void Awake()
+    protected override void Start()
     {
         gameObject.SetActive(false);
-        base.Awake();
+        base.Start();
         boss = FindObjectOfType<Boss>();
     }
 

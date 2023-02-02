@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Rendering;
 
 public class ObjectPool : MonoBehaviour
 {
-    private ObjectPool<GameObject> closePool;
-    private ObjectPool<GameObject> rangePool;
-    private ObjectPool<GameObject> aoePool;
-    private ObjectPool<GameObject> dotPool;
-    private ObjectPool<GameObject> elitePool;
+    //private ObjectPool<GameObject> closePool;
+    //private ObjectPool<GameObject> rangePool;
+    //private ObjectPool<GameObject> aoePool;
+    //private ObjectPool<GameObject> dotPool;
+    //private ObjectPool<GameObject> elitePool;
 
-    //List<GameObject> enemyCloseList = new List<GameObject>();
-    //List<GameObject> enemyRangeList = new List<GameObject>();
-    //List<GameObject> enemyAOEList = new List<GameObject>();
-    //List<GameObject> enemyDOTList = new List<GameObject>();
-    //List<GameObject> enemyEliteList = new List<GameObject>();
+    List<Enemy> enemyCloseList = new List<Enemy>();
+    List<Enemy> enemyRangeList = new List<Enemy>();
+    List<Enemy> enemyAOEList = new List<Enemy>();
+    List<Enemy> enemyDOTList = new List<Enemy>();
+    List<Enemy> enemyEliteList = new List<Enemy>();
 
     [SerializeField] GameObject enemyClose;
     [SerializeField] GameObject enemyRange;
@@ -23,61 +24,113 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] GameObject enemyDOT;
     [SerializeField] GameObject enemyElite;
 
+    GameObject parent;
+
     [SerializeField] int amount;
     static public Vector3 holdingPoint = new Vector3(-50, -50, -50);
 
     void Start()
     {
-        closePool = new ObjectPool<GameObject>(createClose(), ActivateEnemy());
-        rangePool = new ObjectPool<GameObject>(createRange(), ActivateEnemy());
-        aoePool = new ObjectPool<GameObject>(createAoe(), ActivateEnemy());
-        dotPool = new ObjectPool<GameObject>(createDot(), ActivateEnemy());
-        elitePool = new ObjectPool<GameObject>(createElite(), ActivateEnemy());
+        parent = GameObject.Find("EnemyHolder");
+        StartCoroutine(DelayedStart(0.3f));
+
+        //closePool = new ObjectPool<GameObject>(createClose(), ActivateEnemy());
+        //rangePool = new ObjectPool<GameObject>(createRange(), ActivateEnemy());
+        //aoePool = new ObjectPool<GameObject>(createAoe(), ActivateEnemy());
+        //dotPool = new ObjectPool<GameObject>(createDot(), ActivateEnemy());
+        //elitePool = new ObjectPool<GameObject>(createElite(), ActivateEnemy());
     }
 
-    private GameObject createClose() { return Instantiate(enemyClose); }
-    private GameObject createRange() { return Instantiate(enemyRange); }
-    private GameObject createAoe() { return Instantiate(enemyAOE); }
-    private GameObject createDot() { return Instantiate(enemyDOT); }
-    private GameObject createElite() { return Instantiate(enemyElite); }
+    //private GameObject createClose() { return Instantiate(enemyClose); }
+    //private GameObject createRange() { return Instantiate(enemyRange); }
+    //private GameObject createAoe() { return Instantiate(enemyAOE); }
+    //private GameObject createDot() { return Instantiate(enemyDOT); }
+    //private GameObject createElite() { return Instantiate(enemyElite); }
 
-
-
-    //private void CreatePool()
-    //{
-    //    for (int i = 0; i < amount; i++)
-    //    {
-    //        //GameObject c = Instantiate(enemyClose, holdingPoint, Quaternion.Euler(0, 0, 0));
-    //        //c.GetComponent<Enemy>().Deactivate(holdingPoint);
-    //        //enemyCloseList.Add(c);
-    //        //GameObject r = Instantiate(enemyRange, holdingPoint, Quaternion.Euler(0, 0, 0));
-    //        //r.GetComponent<Enemy>().Deactivate(holdingPoint);
-    //        //enemyRangeList.Add(r);
-    //        //GameObject a = Instantiate(enemyAOE, holdingPoint, Quaternion.Euler(0, 0, 0));
-    //        //a.GetComponent<Enemy>().Deactivate(holdingPoint);
-    //        //enemyAOEList.Add(a);
-    //        //GameObject d = Instantiate(enemyDOT, holdingPoint, Quaternion.Euler(0, 0, 0));
-    //        //d.GetComponent<Enemy>().Deactivate(holdingPoint);
-    //        //enemyDOTList.Add(d);
-    //        //GameObject e = Instantiate(enemyElite, holdingPoint, Quaternion.Euler(0, 0, 0));
-    //        //e.GetComponent<Enemy>().Deactivate(holdingPoint);
-    //        //enemyEliteList.Add(e);
-
-    //        //enemyCloseList[i].GetComponent<Enemy>().Deactivate(holdingPoint);
-    //        //enemyCloseList[i].SetActive(false);
-    //        //enemyRangeList[i].GetComponent<Enemy>().Deactivate(holdingPoint);
-    //        //enemyRangeList[i].SetActive(false);
-    //        //enemyAOEList[i].GetComponent<Enemy>().Deactivate(holdingPoint);
-    //        //enemyAOEList[i].SetActive(false);
-    //        //enemyDOTList[i].GetComponent<Enemy>().Deactivate(holdingPoint);
-    //        //enemyDOTList[i].SetActive(false);
-    //        //enemyEliteList[i].GetComponent<Enemy>().Deactivate(holdingPoint);
-    //        //enemyEliteList[i].SetActive(false);
-    //    }
-    //}
-
-    public void ActivateEnemy(Transform spawnPoint, float adaptiveDifficulty)
+    private IEnumerator DelayedStart(float delay)
     {
-        gameObject.GetComponent<Enemy>().Activate(spawnPoint.position, adaptiveDifficulty);
+        yield return new WaitForSeconds(delay);
+
+        CreatePool();
+    }
+
+    private void CreatePool()
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            Enemy c = Instantiate(enemyClose, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
+            c.Deactivate(holdingPoint);
+            enemyCloseList.Add(c);
+
+            Enemy r = Instantiate(enemyRange, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
+            r.Deactivate(holdingPoint);
+            enemyRangeList.Add(r);
+
+            Enemy a = Instantiate(enemyAOE, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
+            a.Deactivate(holdingPoint);
+            enemyAOEList.Add(a);
+
+            Enemy d = Instantiate(enemyDOT, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
+            d.Deactivate(holdingPoint);
+            enemyDOTList.Add(d);
+
+            Enemy e = Instantiate(enemyElite, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
+            e.Deactivate(holdingPoint);
+            enemyEliteList.Add(e);
+        }
+    }
+
+    public void ActivateEnemy(string enemyToSpawn, Transform spawnPoint, float adaptiveDifficulty)
+    {
+        if(enemyToSpawn == "close")
+        {
+            foreach (Enemy enemy in enemyCloseList)
+            {
+                if (enemy.isActive()) continue;
+
+                enemy.Activate(spawnPoint.position, adaptiveDifficulty);
+                return;
+            }
+        }
+        if (enemyToSpawn == "range")
+        {
+            foreach (Enemy enemy in enemyRangeList)
+            {
+                if (enemy.isActive()) continue;
+
+                enemy.Activate(spawnPoint.position, adaptiveDifficulty);
+                return;
+            }
+        }
+        if (enemyToSpawn == "DOT")
+        {
+            foreach (Enemy enemy in enemyDOTList)
+            {
+                if (enemy.isActive()) continue;
+
+                enemy.Activate(spawnPoint.position, adaptiveDifficulty);
+                return;
+            }
+        }
+        if (enemyToSpawn == "AOE")
+        {
+            foreach (Enemy enemy in enemyAOEList)
+            {
+                if (enemy.isActive()) continue;
+
+                enemy.Activate(spawnPoint.position, adaptiveDifficulty);
+                return;
+            }
+        }
+        if (enemyToSpawn == "elite")
+        {
+            foreach (Enemy enemy in enemyEliteList)
+            {
+                if (enemy.isActive()) continue;
+
+                enemy.Activate(spawnPoint.position, adaptiveDifficulty);
+                return;
+            }
+        }
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class tutorialDummy : Character
 {
-    void Awake()
+    void Start()
     {
         currentHealth = maxHealth;
-        base.Awake();
+        base.Start();
     }
 
     void Update()

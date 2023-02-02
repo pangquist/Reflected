@@ -7,6 +7,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject tutorialDummy;
+
     //[SerializeField] GameObject enemyClose;
     //[SerializeField] GameObject enemyRange;
     //[SerializeField] GameObject enemyAOE;
@@ -27,8 +28,8 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         //GenerateSpawnLocation();
+        objectPool = GameObject.FindObjectOfType<ObjectPool>();
         enemyStatSystem = GameObject.Find("EnemyStatSystem").GetComponent<EnemyStatSystem>();
-        objectPool = GetComponent<ObjectPool>();
         spawnElite = false;
     }
 

@@ -87,10 +87,13 @@ public class AiManager2 : MonoBehaviour
     private void Update()
     {
         //Run the currently active state if the enemy is alive. This way the AI will stop when the enemy dies.
-        if (!me.Dead())
+        if (me == null)
+        {
+            me = GetComponentInChildren<Enemy>();
+        }
+        if (!me.Dead() && me.isActive())
         {
             activeState.DoState(this, me, player, agent, enemyStatSystem);
-
         }
     }
 

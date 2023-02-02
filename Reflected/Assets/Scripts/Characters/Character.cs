@@ -31,7 +31,7 @@ public class Character : MonoBehaviour, IEffectable
     public UnityEvent HealthChanged = new UnityEvent();
     public UnityEvent Killed = new UnityEvent();
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         if (this.GetType() != typeof(Player))
             anim = GetComponent<Animator>();
