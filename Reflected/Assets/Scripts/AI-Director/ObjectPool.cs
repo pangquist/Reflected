@@ -32,7 +32,7 @@ public class ObjectPool : MonoBehaviour
     void Start()
     {
         parent = GameObject.Find("EnemyHolder");
-        StartCoroutine(DelayedStart(0.3f));
+        StartCoroutine(CreatePool(1f));
 
         //closePool = new ObjectPool<GameObject>(createClose(), ActivateEnemy());
         //rangePool = new ObjectPool<GameObject>(createRange(), ActivateEnemy());
@@ -47,38 +47,65 @@ public class ObjectPool : MonoBehaviour
     //private GameObject createDot() { return Instantiate(enemyDOT); }
     //private GameObject createElite() { return Instantiate(enemyElite); }
 
-    private IEnumerator DelayedStart(float delay)
+    private IEnumerator CreatePool(float delay)
     {
         yield return new WaitForSeconds(delay);
 
-        CreatePool();
-    }
-
-    private void CreatePool()
-    {
         for (int i = 0; i < amount; i++)
         {
             Enemy c = Instantiate(enemyClose, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
-            c.Deactivate(holdingPoint);
             enemyCloseList.Add(c);
 
             Enemy r = Instantiate(enemyRange, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
-            r.Deactivate(holdingPoint);
             enemyRangeList.Add(r);
 
             Enemy a = Instantiate(enemyAOE, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
-            a.Deactivate(holdingPoint);
             enemyAOEList.Add(a);
 
             Enemy d = Instantiate(enemyDOT, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
-            d.Deactivate(holdingPoint);
             enemyDOTList.Add(d);
 
             Enemy e = Instantiate(enemyElite, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
-            e.Deactivate(holdingPoint);
             enemyEliteList.Add(e);
+
+
+            yield return new WaitForEndOfFrame();
+
+            c.Deactivate(holdingPoint);
+            r.Deactivate(holdingPoint);
+            a.Deactivate(holdingPoint);
+            d.Deactivate(holdingPoint);
+            e.Deactivate(holdingPoint);
         }
     }
+
+    //private void CreatePool()
+    //{
+    //    for (int i = 0; i < amount; i++)
+    //    {
+    //        Enemy c = Instantiate(enemyClose, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
+    //        enemyCloseList.Add(c);
+
+    //        Enemy r = Instantiate(enemyRange, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
+    //        enemyRangeList.Add(r);
+
+    //        Enemy a = Instantiate(enemyAOE, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
+    //        enemyAOEList.Add(a);
+
+    //        Enemy d = Instantiate(enemyDOT, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
+    //        enemyDOTList.Add(d);
+
+    //        Enemy e = Instantiate(enemyElite, holdingPoint, Quaternion.identity, parent.transform).GetComponentInChildren<Enemy>();
+    //        enemyEliteList.Add(e);
+
+
+    //        c.Deactivate(holdingPoint);
+    //        r.Deactivate(holdingPoint);
+    //        a.Deactivate(holdingPoint);
+    //        d.Deactivate(holdingPoint);
+    //        e.Deactivate(holdingPoint);
+    //    }
+    //}
 
     public void ActivateEnemy(string enemyToSpawn, Transform spawnPoint, float adaptiveDifficulty)
     {

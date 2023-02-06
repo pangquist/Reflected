@@ -40,7 +40,7 @@ public class AiManager2 : MonoBehaviour
         //If scripts not assigned in inspecter, assign them here.
         if (me == null)
         {
-            me = GetComponentInChildren<Enemy>();
+                me = gameObject.GetComponentInChildren<Enemy>();
         }
         if (player == null)
         {
@@ -87,11 +87,7 @@ public class AiManager2 : MonoBehaviour
     private void Update()
     {
         //Run the currently active state if the enemy is alive. This way the AI will stop when the enemy dies.
-        if (me == null)
-        {
-            me = GetComponentInChildren<Enemy>();
-        }
-        if (!me.Dead() && me.isActive())
+        if (!me.Dead() && me.isActive()) 
         {
             activeState.DoState(this, me, player, agent, enemyStatSystem);
         }
