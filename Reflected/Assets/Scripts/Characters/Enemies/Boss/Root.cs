@@ -7,6 +7,7 @@ public class Root : Enemy
 {
     [SerializeField] Collider swipeHitbox;
     [SerializeField] Transform effectTransform;
+    [SerializeField] int healthPerRoomCleared;
     Boss boss;
     protected override void Awake()
     {
@@ -57,6 +58,12 @@ public class Root : Enemy
     {
         gameObject.SetActive(true);
         anim.Play("Spawn");
+
+        AiDirector director = FindObjectOfType<AiDirector>();
+
+        maxHealth = maxHealth + healthPerRoomCleared * director.GetClearedRooms();
+        currentHealth = maxHealth;
+        HealthChanged.Invoke();
     }
 
     public void Retract()

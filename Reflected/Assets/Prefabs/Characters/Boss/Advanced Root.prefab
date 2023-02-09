@@ -3644,7 +3644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e82429ee3a8d494eba26fc8351381d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 80
+  maxHealth: 120
   currentHealth: 0
   movementSpeed: 0
   damage: 0
@@ -3657,12 +3657,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0da85b7c29e198b47b7c4fc602f29491, type: 3}
   - {fileID: 8300000, guid: f9fe160f459bd024382008a61a02905b, type: 3}
   - {fileID: 8300000, guid: 5226f88e73349174981de7e9ae2c2c5c, type: 3}
+  upgradedDamagedClips: []
   HealthChanged:
     m_PersistentCalls:
       m_Calls: []
   Killed:
     m_PersistentCalls:
       m_Calls: []
+  rangedClips: []
+  meleeClips: []
+  explosionChargeClips: []
+  explosionClips: []
   baseProjectileSpeed: 0
   baseAoeSize: {x: 0, y: 0, z: 0}
   combatTextOffset: {x: 0, y: 0, z: 0}
@@ -3676,6 +3681,7 @@ MonoBehaviour:
   explosionAttackState: {fileID: 0}
   swipeHitbox: {fileID: 3058322375362919916}
   effectTransform: {fileID: 3781346088162650660}
+  healthPerRoomCleared: 10
 --- !u!65 &4214482942180045581
 BoxCollider:
   m_ObjectHideFlags: 0

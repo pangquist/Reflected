@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e82429ee3a8d494eba26fc8351381d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 120
   currentHealth: 0
   movementSpeed: 0
   damage: 0
@@ -184,12 +184,17 @@ MonoBehaviour:
   damagedClips:
   - {fileID: 8300000, guid: 605611dd6463bbc4090ab6408907d9e8, type: 3}
   - {fileID: 8300000, guid: d7ea6b2cca581414e87717a0d085aa62, type: 3}
+  upgradedDamagedClips: []
   HealthChanged:
     m_PersistentCalls:
       m_Calls: []
   Killed:
     m_PersistentCalls:
       m_Calls: []
+  rangedClips: []
+  meleeClips: []
+  explosionChargeClips: []
+  explosionClips: []
   baseProjectileSpeed: 0
   baseAoeSize: {x: 0, y: 0, z: 0}
   combatTextOffset: {x: 0, y: 2, z: 0}
@@ -197,16 +202,13 @@ MonoBehaviour:
     type: 3}
   LootDropList:
     list: []
-  hitSounds:
-  - {fileID: 8300000, guid: c55aa165944608641a7f3cc1bc5f7198, type: 3}
-  - {fileID: 8300000, guid: e8a2306a49a2e0d479a50ca423a17b2c, type: 3}
-  - {fileID: 8300000, guid: 0da85b7c29e198b47b7c4fc602f29491, type: 3}
-  - {fileID: 8300000, guid: f9fe160f459bd024382008a61a02905b, type: 3}
-  - {fileID: 8300000, guid: 5226f88e73349174981de7e9ae2c2c5c, type: 3}
   meleeAttackState: {fileID: 0}
   rangedAttackState: {fileID: 0}
   aoeAttackState: {fileID: 0}
   explosionAttackState: {fileID: 0}
+  swipeHitbox: {fileID: 0}
+  effectTransform: {fileID: 0}
+  healthPerRoomCleared: 10
 --- !u!95 &2949683403134966841
 Animator:
   serializedVersion: 4
