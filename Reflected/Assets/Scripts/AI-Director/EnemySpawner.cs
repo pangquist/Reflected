@@ -8,11 +8,6 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject tutorialDummy;
 
-    //[SerializeField] GameObject enemyClose;
-    //[SerializeField] GameObject enemyRange;
-    //[SerializeField] GameObject enemyAOE;
-    //[SerializeField] GameObject enemyDOT;
-    //[SerializeField] GameObject enemyElite;
     string enemyToSpawn;
 
     EnemyStatSystem enemyStatSystem;

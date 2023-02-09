@@ -43,8 +43,6 @@ public class Enemy : Character
     {
         active = false;
         statSystem = FindObjectOfType<EnemyStatSystem>();
-        
-        currentHealth = maxHealth + statSystem.GetMaxHealthIncrease();
         base.Start();
         player = FindObjectOfType<Player>();
         parent = gameObject.transform.parent.gameObject;
@@ -150,9 +148,10 @@ public class Enemy : Character
     {
         active = true;
         isDead = false;
+        doOnce = false;
         AdaptiveDifficulty(adaptiveDifficulty);
-        gameObject.transform.position = spawnPoint;
-        gameObject.SetActive(true);
+        parent.transform.position = spawnPoint;
+        parent.SetActive(true);
     }
 
     public void Deactivate(Vector3 holdingPoint)
@@ -162,8 +161,8 @@ public class Enemy : Character
         damage = startingDamage;
         movementSpeed = startingMovementSpeed;
         attackSpeed = startingAttackSpeed;
-        gameObject.transform.position = holdingPoint;
-        gameObject.SetActive(false);
+        parent.transform.position = holdingPoint;
+        parent.SetActive(false);
     }
 
     public bool isActive() { return active; }

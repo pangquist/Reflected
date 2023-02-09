@@ -181,9 +181,9 @@ public class AiDirector : MonoBehaviour
 
     private float EnemyStatModifier()
     {
-        float extraStats = numberOfRoomsCleared * 0.4f;
+        float extraStats = numberOfRoomsCleared * 0.5f;
 
-        if (averageTimeToClearRoom > 0) extraStats += (8f / calculateTimeStat());
+        if (averageTimeToClearRoom > 0) extraStats += (5f / calculateTimeStat());
 
         return extraStats;
     }
