@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UiManager: MonoBehaviour
+public class UiManager : MonoBehaviour
 {
 
     public enum MenuState
@@ -26,6 +27,7 @@ public class UiManager: MonoBehaviour
     [SerializeField] GameObject uiPanel;
     [SerializeField] GameObject CurrencyPanel;
     [SerializeField] GameObject roominfoPanel;
+    [SerializeField] GameObject endScreenPanel;
     [SerializeField] GameObject timerPanel;
     [SerializeField] GameObject inGameMenu;
     [SerializeField] GameObject shopPanel;
@@ -86,30 +88,33 @@ public class UiManager: MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (inGameMenu.activeSelf)
+            if (!endScreenPanel.activeSelf)
             {
-                inGameMenu.SetActive(false);
-            }
-            else if (!inGameMenu.activeSelf)
-            {
-                Time.timeScale = 0;
-                shopPanel.SetActive(false);
-                uiPanel.SetActive(false);
-                CurrencyPanel.SetActive(false);
-                roominfoPanel.SetActive(false);
-                timerPanel.SetActive(false);
-                interactText.SetActive(false);
-                inGameMenu.SetActive(true);
-                tutorialPanel.SetActive(false);
+                if (inGameMenu.activeSelf)
+                {
+                    inGameMenu.SetActive(false);
+                }
+                else if (!inGameMenu.activeSelf)
+                {
+                    Time.timeScale = 0;
+                    shopPanel.SetActive(false);
+                    uiPanel.SetActive(false);
+                    CurrencyPanel.SetActive(false);
+                    roominfoPanel.SetActive(false);
+                    timerPanel.SetActive(false);
+                    interactText.SetActive(false);
+                    inGameMenu.SetActive(true);
+                    tutorialPanel.SetActive(false);
+                }
             }
         }
     }
 
     void HandleMouse()
     {
-        if(inGameMenu.activeSelf)
+        if (inGameMenu.activeSelf)
             menuState = MenuState.Active;
-        if (inGameMenu.activeSelf || shopPanel.activeSelf || upgradePanel.activeSelf || tutorialPanel.activeSelf)
+        if (inGameMenu.activeSelf || shopPanel.activeSelf || upgradePanel.activeSelf || tutorialPanel.activeSelf || endScreenPanel.activeSelf)
         {
             state = UiState.Active;
         }
@@ -118,8 +123,8 @@ public class UiManager: MonoBehaviour
             state = UiState.Inactive;
             menuState = MenuState.Inactive;
         }
-          
-        if(state == UiState.Active)
+
+        if (state == UiState.Active)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

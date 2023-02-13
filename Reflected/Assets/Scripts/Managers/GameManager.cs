@@ -22,8 +22,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Diamond.OnDiamondCollected += (ItemData itemData) => NextMap(); 
-
         GameObject mapGenerator = Instantiate(mapGenerators[currentMapGenerator]);
         mapGenerator.name = "Map Generator";
         mapGenerator.transform.SetSiblingIndex(0);
@@ -62,7 +60,7 @@ public class GameManager : MonoBehaviour
     }
 
     [ContextMenu("Next map")]
-    private void NextMap()
+    public void NextMap()
     {
         StartCoroutine(Coroutine_NextMap());
     }
