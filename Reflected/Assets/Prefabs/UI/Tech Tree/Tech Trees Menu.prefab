@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1775156978}
   - component: {fileID: 1775156977}
   - component: {fileID: 1775156976}
+  - component: {fileID: 4190322940260007166}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -38,8 +39,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 257.2, y: -236}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 947, y: -110}
+  m_SizeDelta: {x: 352, y: 329}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1775156980
 CanvasRenderer:
@@ -69,7 +70,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 000b2ecfbe89c8744b949adbd554be71, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -93,9 +94,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Decreases the amount of charges required to Swap to the True Dimension
     by 1.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 8594729556542927706}
@@ -217,6 +218,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4190322940260007166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775156974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &673055943404873439
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +244,7 @@ GameObject:
   - component: {fileID: 7503542232891154023}
   - component: {fileID: 7565869159622224966}
   - component: {fileID: 6621455826152272512}
+  - component: {fileID: 277628125939981474}
   m_Layer: 5
   m_Name: LL
   m_TagString: Untagged
@@ -255,8 +269,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -237}
-  m_SizeDelta: {x: 100, y: 200}
+  m_AnchoredPosition: {x: 681, y: -123}
+  m_SizeDelta: {x: 305, y: 651}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4064310056046225339
 CanvasRenderer:
@@ -286,7 +300,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b5a538813fc4d87498ae641ad8dd7e8e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -310,9 +324,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Decreases the amount of charges required to Swap to the Mirror Dimension
     by 1.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 4673772985315411791}
@@ -433,6 +447,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &277628125939981474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673055943404873439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1230523797407207175
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +473,7 @@ GameObject:
   - component: {fileID: 185490196664019555}
   - component: {fileID: 2016807632414026600}
   - component: {fileID: 4296707606374004520}
+  - component: {fileID: 1374449174578771692}
   m_Layer: 5
   m_Name: UL7
   m_TagString: Untagged
@@ -471,8 +498,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -4.299988}
-  m_SizeDelta: {x: 30, y: 120}
+  m_AnchoredPosition: {x: 540, y: 349}
+  m_SizeDelta: {x: 154, y: 297}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1062002423157734516
 CanvasRenderer:
@@ -502,7 +529,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 520cd2021e97beb4f8ea02b75dbe542b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -525,9 +552,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Damage and Attack Speed in the True Dimension by 10% each.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 972815017597061298}
@@ -651,6 +678,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1374449174578771692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230523797407207175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1317265918365371146
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +704,7 @@ GameObject:
   - component: {fileID: 6583572397303350118}
   - component: {fileID: 2351792191180318415}
   - component: {fileID: 3124430924959583521}
+  - component: {fileID: 3304655858317636735}
   m_Layer: 5
   m_Name: LL7
   m_TagString: Untagged
@@ -689,8 +729,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -446}
-  m_SizeDelta: {x: 40, y: 150}
+  m_AnchoredPosition: {x: 586, y: -745}
+  m_SizeDelta: {x: 127, y: 515}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3018883511744874850
 CanvasRenderer:
@@ -720,7 +760,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: fa3c9cf0a42e9b04d9c70b95700f4c0e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -744,9 +784,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Decreases the amount of charges required to Swap to the True Dimension
     by 1.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 7503542232891154023}
@@ -871,6 +911,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &3304655858317636735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317265918365371146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1719517983193237582
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,6 +937,7 @@ GameObject:
   - component: {fileID: 1817089581863810261}
   - component: {fileID: 3749479365419186035}
   - component: {fileID: 2391151901218059152}
+  - component: {fileID: 2481901367673346781}
   m_Layer: 5
   m_Name: LR1
   m_TagString: Untagged
@@ -909,8 +962,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 263, y: -448}
-  m_SizeDelta: {x: 190, y: 20}
+  m_AnchoredPosition: {x: 880, y: -662}
+  m_SizeDelta: {x: 474, y: 153}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7006525526631918281
 CanvasRenderer:
@@ -940,7 +993,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f4554e51d40fd97468b4299c6a8ac8b0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -963,9 +1016,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Health in the True Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 5786376671243386862}
@@ -1087,6 +1140,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2481901367673346781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719517983193237582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1946761095777092090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,6 +1166,7 @@ GameObject:
   - component: {fileID: 2554683838231738605}
   - component: {fileID: 2747280549334508698}
   - component: {fileID: 1900562482689235123}
+  - component: {fileID: 5372285142538457988}
   m_Layer: 5
   m_Name: LLCorner
   m_TagString: Untagged
@@ -1125,8 +1191,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4, y: -475}
-  m_SizeDelta: {x: 110, y: 120}
+  m_AnchoredPosition: {x: 239, y: -768}
+  m_SizeDelta: {x: 382, y: 520}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2505363647370052741
 CanvasRenderer:
@@ -1156,7 +1222,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 66143f911b19b6e48a60550224fec8c7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1179,9 +1245,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Slow all nearby enemies every time you swap dimension.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 2073435897575035142}
@@ -1301,6 +1367,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5372285142538457988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946761095777092090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1957529696784379574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,6 +1393,7 @@ GameObject:
   - component: {fileID: 842100925212992960}
   - component: {fileID: 8134699924749620331}
   - component: {fileID: 2283986926312364817}
+  - component: {fileID: 7238027277286040084}
   m_Layer: 5
   m_Name: LR3
   m_TagString: Untagged
@@ -1339,8 +1418,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 363, y: -475}
-  m_SizeDelta: {x: 90, y: 120}
+  m_AnchoredPosition: {x: 1060, y: -767}
+  m_SizeDelta: {x: 312, y: 463}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7744534812986619750
 CanvasRenderer:
@@ -1370,7 +1449,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 2a2e342e9fba09c4cb60888e15b36bb8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1393,9 +1472,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Health in the Mirror Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 1817089581863810261}
@@ -1516,6 +1595,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7238027277286040084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957529696784379574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2722516576045991564
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,7 +2287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2722516577062555594
@@ -2220,7 +2311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.05882353, g: 0.05882353, b: 0.05882353, a: 0.9411765}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0.9411765}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2300,6 +2391,7 @@ GameObject:
   - component: {fileID: 2633290739023729539}
   - component: {fileID: 9167445076072618364}
   - component: {fileID: 5178226119317015435}
+  - component: {fileID: 8150819050662475959}
   m_Layer: 5
   m_Name: LR6
   m_TagString: Untagged
@@ -2324,8 +2416,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 265, y: -476}
-  m_SizeDelta: {x: 90, y: 120}
+  m_AnchoredPosition: {x: 850, y: -767}
+  m_SizeDelta: {x: 277, y: 467}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5355696689907924788
 CanvasRenderer:
@@ -2355,7 +2447,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 984cd7d6badaeb04ab004b2cf1b5ace2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2378,9 +2470,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Reduces the Cooldown of abilities in the Mirror Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 1817089581863810261}
@@ -2503,6 +2595,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8150819050662475959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2808027420345250359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2951757937830907437
 GameObject:
   m_ObjectHideFlags: 0
@@ -2517,6 +2621,7 @@ GameObject:
   - component: {fileID: 7110399015950753652}
   - component: {fileID: 1451966067562642138}
   - component: {fileID: 1831287538742744502}
+  - component: {fileID: 2499790582078445665}
   m_Layer: 5
   m_Name: LL4
   m_TagString: Untagged
@@ -2541,8 +2646,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170, y: -515}
-  m_SizeDelta: {x: 90, y: 20}
+  m_AnchoredPosition: {x: 683, y: -933}
+  m_SizeDelta: {x: 219, y: 116}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6217232134168223725
 CanvasRenderer:
@@ -2572,7 +2677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: edd8d5fce4c82ec47808620290bb4a52, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2595,9 +2700,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Reduces the Cooldown of abilities in the True Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 2633290739023729539}
@@ -2719,6 +2824,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2499790582078445665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2951757937830907437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3127222606981248665
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,6 +2850,7 @@ GameObject:
   - component: {fileID: 4878887813269588265}
   - component: {fileID: 1362264989482311502}
   - component: {fileID: 4396382881444029368}
+  - component: {fileID: 7057030801124132171}
   m_Layer: 5
   m_Name: UR7
   m_TagString: Untagged
@@ -2757,8 +2875,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 455.5, y: -4.299988}
-  m_SizeDelta: {x: 25, y: 90}
+  m_AnchoredPosition: {x: 1435.9, y: 344.8}
+  m_SizeDelta: {x: 126, y: 175}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5830032380806799349
 CanvasRenderer:
@@ -2788,7 +2906,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ca4835a824423f44797d57ed424c561e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2811,9 +2929,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Attack Speed in the Mirror Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 5585299130983735661}
@@ -2934,6 +3052,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7057030801124132171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127222606981248665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3487921958263411267
 GameObject:
   m_ObjectHideFlags: 0
@@ -2948,6 +3078,7 @@ GameObject:
   - component: {fileID: 2958878037048592787}
   - component: {fileID: 7430353864944711490}
   - component: {fileID: 6529240805839941434}
+  - component: {fileID: 8310086513917679200}
   m_Layer: 5
   m_Name: UL
   m_TagString: Untagged
@@ -2972,8 +3103,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157, y: -132}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchoredPosition: {x: 771, y: 153}
+  m_SizeDelta: {x: 474, y: 342}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7027223954642235853
 CanvasRenderer:
@@ -3003,7 +3134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b83dad954c50b1347b2bc323333db8e7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3026,9 +3157,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Damage and Attack Speed in the Mirror Dimension by 10% each.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 972815017597061298}
@@ -3152,6 +3283,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8310086513917679200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3487921958263411267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3546318350187164928
 GameObject:
   m_ObjectHideFlags: 0
@@ -3166,6 +3309,7 @@ GameObject:
   - component: {fileID: 5585299130983735661}
   - component: {fileID: 6260887222157814430}
   - component: {fileID: 2132666393551131678}
+  - component: {fileID: 3991285098176577816}
   m_Layer: 5
   m_Name: UR1
   m_TagString: Untagged
@@ -3190,8 +3334,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 515, y: -236}
-  m_SizeDelta: {x: 80, y: 100}
+  m_AnchoredPosition: {x: 1551, y: -170.20001}
+  m_SizeDelta: {x: 244, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5906552408666691541
 CanvasRenderer:
@@ -3221,7 +3365,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4ce773e8b92f5704882424b238728484, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3245,9 +3389,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Increases Movement Speed and Damage Reduction in the Mirror Dimension
     by 10% each.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 8040092997483870721}
@@ -3372,6 +3516,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &3991285098176577816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546318350187164928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3633539084161317789
 GameObject:
   m_ObjectHideFlags: 0
@@ -3386,6 +3542,7 @@ GameObject:
   - component: {fileID: 3844904739197405285}
   - component: {fileID: 3443766484619092756}
   - component: {fileID: 6840490624305067682}
+  - component: {fileID: 7646643544786510259}
   m_Layer: 5
   m_Name: UR
   m_TagString: Untagged
@@ -3410,8 +3567,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 362, y: -134}
-  m_SizeDelta: {x: 100, y: 200}
+  m_AnchoredPosition: {x: 1165, y: 141.79999}
+  m_SizeDelta: {x: 335, y: 540}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &619267913071277183
 CanvasRenderer:
@@ -3441,7 +3598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 2b105a1830410a043b86e1e95a38fd78, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3464,9 +3621,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Movement Speed  in the True Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 6002000361635193990}
@@ -3587,6 +3744,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7646643544786510259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633539084161317789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3948032433060395109
 GameObject:
   m_ObjectHideFlags: 0
@@ -3601,6 +3770,7 @@ GameObject:
   - component: {fileID: 8234022312413031792}
   - component: {fileID: 931997172221136776}
   - component: {fileID: 2813122287440376108}
+  - component: {fileID: 8774014410342521090}
   m_Layer: 5
   m_Name: LL3
   m_TagString: Untagged
@@ -3625,8 +3795,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4, y: -237}
-  m_SizeDelta: {x: 110, y: 120}
+  m_AnchoredPosition: {x: 315, y: -172}
+  m_SizeDelta: {x: 327, y: 372}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8178149737207372673
 CanvasRenderer:
@@ -3656,7 +3826,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7f6732887414f664ca7eaa62b6080aad, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3680,9 +3850,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Decreases the amount of charges required to Swap to the True Dimension
     by 1.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 2073435897575035142}
@@ -3803,6 +3973,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8774014410342521090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948032433060395109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3958597074670000574
 GameObject:
   m_ObjectHideFlags: 0
@@ -3817,6 +3999,7 @@ GameObject:
   - component: {fileID: 8129330217812322673}
   - component: {fileID: 7423796981213370497}
   - component: {fileID: 326940671463305679}
+  - component: {fileID: 7336688110803937000}
   m_Layer: 5
   m_Name: UR6
   m_TagString: Untagged
@@ -3841,8 +4024,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 361, y: -5}
-  m_SizeDelta: {x: 90, y: 90}
+  m_AnchoredPosition: {x: 1134, y: 340}
+  m_SizeDelta: {x: 331, y: 167}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5131320068158041051
 CanvasRenderer:
@@ -3872,7 +4055,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 743be5a6b5a86924292d6c386b7ac80b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3895,9 +4078,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Attack and Movement Speed in the True Dimension by 10% each.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 9087844950784071298}
@@ -4020,6 +4203,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7336688110803937000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958597074670000574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4237948542860835978
 GameObject:
   m_ObjectHideFlags: 0
@@ -4034,6 +4229,7 @@ GameObject:
   - component: {fileID: 2000516686591848417}
   - component: {fileID: 785793325008652055}
   - component: {fileID: 2727933561658937634}
+  - component: {fileID: 3657163965522394102}
   m_Layer: 5
   m_Name: LL2
   m_TagString: Untagged
@@ -4058,8 +4254,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170, y: -543.7}
-  m_SizeDelta: {x: 90, y: 50}
+  m_AnchoredPosition: {x: 665, y: -1015}
+  m_SizeDelta: {x: 222, y: 222}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &601950847893507190
 CanvasRenderer:
@@ -4089,7 +4285,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1f9233e2c6e19ce45b12979eefe8cb50, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4113,9 +4309,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Decreases the amount of charges required to Swap to the Mirror Dimension
     by 1.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 2633290739023729539}
@@ -4236,6 +4432,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &3657163965522394102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4237948542860835978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4254669835530431460
 GameObject:
   m_ObjectHideFlags: 0
@@ -4250,6 +4458,7 @@ GameObject:
   - component: {fileID: 8594729556542927706}
   - component: {fileID: 8880536078067490913}
   - component: {fileID: 5702168985870108326}
+  - component: {fileID: 8032348980149141259}
   m_Layer: 5
   m_Name: LR
   m_TagString: Untagged
@@ -4274,8 +4483,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 257, y: -343}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchoredPosition: {x: 869, y: -343}
+  m_SizeDelta: {x: 546, y: 360}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5531375955327853608
 CanvasRenderer:
@@ -4305,7 +4514,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e7e3ea1f506f68a408e33bb9bf47e780, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4329,9 +4538,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Increases Health and Damage Reduction in the Mirror Dimension by 10%
     each.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 1817089581863810261}
@@ -4454,6 +4663,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8032348980149141259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254669835530431460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4982134902694069095
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,6 +4689,7 @@ GameObject:
   - component: {fileID: 1088216025484818248}
   - component: {fileID: 3592374178363797697}
   - component: {fileID: 7969313016227846107}
+  - component: {fileID: 1232658481759918322}
   m_Layer: 5
   m_Name: UL6
   m_TagString: Untagged
@@ -4492,8 +4714,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5, y: -129}
-  m_SizeDelta: {x: 40, y: 70}
+  m_AnchoredPosition: {x: 293, y: 88}
+  m_SizeDelta: {x: 208, y: 220}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5797554647805575342
 CanvasRenderer:
@@ -4523,7 +4745,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 18c3dac5d6af284459ae803b0f4ea4dc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4546,9 +4768,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Damage in the True Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 972815017597061298}
@@ -4669,6 +4891,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1232658481759918322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4982134902694069095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5019943075921394595
 GameObject:
   m_ObjectHideFlags: 0
@@ -4683,6 +4917,7 @@ GameObject:
   - component: {fileID: 7310602429281827960}
   - component: {fileID: 2191520947078919952}
   - component: {fileID: 8508661037359494183}
+  - component: {fileID: 757395415320273944}
   m_Layer: 5
   m_Name: LR5
   m_TagString: Untagged
@@ -4707,8 +4942,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 464, y: -344}
-  m_SizeDelta: {x: 90, y: 60}
+  m_AnchoredPosition: {x: 1319, y: -378}
+  m_SizeDelta: {x: 301, y: 241}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6950999013468746632
 CanvasRenderer:
@@ -4738,7 +4973,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7be6e02a4082f754cab685e66f145cbc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4761,9 +4996,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Damage Reduction in the Mirror Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 593720869656895117}
@@ -4886,6 +5121,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &757395415320273944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019943075921394595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5178120812302448549
 GameObject:
   m_ObjectHideFlags: 0
@@ -4900,6 +5147,7 @@ GameObject:
   - component: {fileID: 1869105304471382692}
   - component: {fileID: 5304183467367743570}
   - component: {fileID: 6463826475545795574}
+  - component: {fileID: 5775367263142154840}
   m_Layer: 5
   m_Name: UL4
   m_TagString: Untagged
@@ -4924,8 +5172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2, y: -207.8}
-  m_SizeDelta: {x: 150, y: 20}
+  m_AnchoredPosition: {x: 316, y: -87}
+  m_SizeDelta: {x: 470, y: 121}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2362511337143708968
 CanvasRenderer:
@@ -4955,7 +5203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7cb2e2453f6b0f047b8be6e9c5e716f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4978,9 +5226,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Reduces the Cooldown of abilities in the Mirror Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 972815017597061298}
@@ -5102,6 +5350,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5775367263142154840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5178120812302448549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5314007915056336876
 GameObject:
   m_ObjectHideFlags: 0
@@ -5116,6 +5376,7 @@ GameObject:
   - component: {fileID: 2073435897575035142}
   - component: {fileID: 7838153518683614610}
   - component: {fileID: 9107057473683403438}
+  - component: {fileID: 4330773398484523598}
   m_Layer: 5
   m_Name: LL1
   m_TagString: Untagged
@@ -5140,8 +5401,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4, y: -366}
-  m_SizeDelta: {x: 110, y: 100}
+  m_AnchoredPosition: {x: 315, y: -489}
+  m_SizeDelta: {x: 331, y: 357}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1812002372877551913
 CanvasRenderer:
@@ -5171,7 +5432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b1c3319507177474a81546eeae5ea37b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5195,9 +5456,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Decreases the amount of charges required to Swap to the Mirror Dimension
     by 1.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 8234022312413031792}
@@ -5319,6 +5580,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4330773398484523598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5314007915056336876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5484988752572517078
 GameObject:
   m_ObjectHideFlags: 0
@@ -5333,6 +5606,7 @@ GameObject:
   - component: {fileID: 972815017597061298}
   - component: {fileID: 1415348276875955279}
   - component: {fileID: 4664435308787231694}
+  - component: {fileID: 6400409628266904717}
   m_Layer: 5
   m_Name: UL1
   m_TagString: Untagged
@@ -5357,8 +5631,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -130}
-  m_SizeDelta: {x: 100, y: 70}
+  m_AnchoredPosition: {x: 464, y: 107}
+  m_SizeDelta: {x: 340, y: 256}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1521975453373092691
 CanvasRenderer:
@@ -5388,7 +5662,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bc4933537e26775489efde2f4ae34630, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5411,9 +5685,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Damage in the Mirror Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 1869105304471382692}
@@ -5535,6 +5809,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &6400409628266904717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5484988752572517078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5691568816589990189
 GameObject:
   m_ObjectHideFlags: 0
@@ -5549,6 +5835,7 @@ GameObject:
   - component: {fileID: 593720869656895117}
   - component: {fileID: 7544102183521643708}
   - component: {fileID: 5502952552895337408}
+  - component: {fileID: 4755154039988778676}
   m_Layer: 5
   m_Name: LR2
   m_TagString: Untagged
@@ -5573,8 +5860,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 488, y: -412}
-  m_SizeDelta: {x: 70, y: 50}
+  m_AnchoredPosition: {x: 1370, y: -553}
+  m_SizeDelta: {x: 258, y: 261}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7620105966259585556
 CanvasRenderer:
@@ -5604,7 +5891,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b26dc88c8bb824147a8dc8d6138fd1e0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5627,9 +5914,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Damage Reduction in the True Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 5786376671243386862}
@@ -5751,6 +6038,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4755154039988778676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5691568816589990189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5914765227785942708
 GameObject:
   m_ObjectHideFlags: 0
@@ -5765,6 +6064,7 @@ GameObject:
   - component: {fileID: 3161971782288946045}
   - component: {fileID: 6441981309002697265}
   - component: {fileID: 3687780697096504258}
+  - component: {fileID: 5584899369007585465}
   m_Layer: 5
   m_Name: UR5
   m_TagString: Untagged
@@ -5789,8 +6089,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 468, y: -235}
-  m_SizeDelta: {x: 40, y: 100}
+  m_AnchoredPosition: {x: 1378, y: -136.20001}
+  m_SizeDelta: {x: 224, y: 283}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &679740416195534081
 CanvasRenderer:
@@ -5820,7 +6120,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 9ed0683d704ad0e438471fc869d2b20f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5843,9 +6143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Movement Speed  in the Mirror Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 5585299130983735661}
@@ -5966,6 +6266,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5584899369007585465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5914765227785942708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5995840818041383638
 GameObject:
   m_ObjectHideFlags: 0
@@ -5980,6 +6292,7 @@ GameObject:
   - component: {fileID: 8040092997483870721}
   - component: {fileID: 6519874898876663127}
   - component: {fileID: 8174812473026316604}
+  - component: {fileID: 8217021564975815512}
   m_Layer: 5
   m_Name: UR2
   m_TagString: Untagged
@@ -6004,8 +6317,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 532.8, y: -131}
-  m_SizeDelta: {x: 60, y: 100}
+  m_AnchoredPosition: {x: 1610.2, y: 127.79999}
+  m_SizeDelta: {x: 216, y: 307}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7755754415769640052
 CanvasRenderer:
@@ -6035,7 +6348,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b05841417614f354c98841d9c8245053, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6058,9 +6371,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Movement Speed  in the True Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 7606717066356875660}
@@ -6181,6 +6494,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8217021564975815512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5995840818041383638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6471688985975182589
 GameObject:
   m_ObjectHideFlags: 0
@@ -6195,6 +6520,7 @@ GameObject:
   - component: {fileID: 1839161026264638703}
   - component: {fileID: 3546764191954782301}
   - component: {fileID: 1926532055036472662}
+  - component: {fileID: 4003495431280869156}
   m_Layer: 5
   m_Name: LRCorner
   m_TagString: Untagged
@@ -6219,8 +6545,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 487.3, y: -475}
-  m_SizeDelta: {x: 110, y: 120}
+  m_AnchoredPosition: {x: 1432, y: -770}
+  m_SizeDelta: {x: 424, y: 515}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &287979446923451257
 CanvasRenderer:
@@ -6250,7 +6576,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 12a5bf9884ecfad49b419b018da27d34, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6273,9 +6599,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: You are fully healed when swapping Dimension.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 593720869656895117}
@@ -6396,6 +6722,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4003495431280869156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6471688985975182589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6570544887639431372
 GameObject:
   m_ObjectHideFlags: 0
@@ -6410,6 +6748,7 @@ GameObject:
   - component: {fileID: 6002000361635193990}
   - component: {fileID: 7770185765395166516}
   - component: {fileID: 1870115131161563233}
+  - component: {fileID: 5545362332419880430}
   m_Layer: 5
   m_Name: UR3
   m_TagString: Untagged
@@ -6434,8 +6773,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 466.7, y: -131.4}
-  m_SizeDelta: {x: 60, y: 100}
+  m_AnchoredPosition: {x: 1438.9, y: 156.79999}
+  m_SizeDelta: {x: 192, y: 342}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1355084177571038412
 CanvasRenderer:
@@ -6465,7 +6804,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c5378cf7ca642ec46ba45aa229be10bc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6488,9 +6827,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Movement Speed  in the Mirror Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 8040092997483870721}
@@ -6613,6 +6952,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5545362332419880430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6570544887639431372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6875878568282272203
 GameObject:
   m_ObjectHideFlags: 0
@@ -6627,6 +6978,7 @@ GameObject:
   - component: {fileID: 9087844950784071298}
   - component: {fileID: 7800922908112485826}
   - component: {fileID: 4666369634098115369}
+  - component: {fileID: 476359694743414804}
   m_Layer: 5
   m_Name: UL3
   m_TagString: Untagged
@@ -6651,8 +7003,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 263.8, y: -4.899994}
-  m_SizeDelta: {x: 90, y: 120}
+  m_AnchoredPosition: {x: 843, y: 325}
+  m_SizeDelta: {x: 334, y: 265}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8246913205076733361
 CanvasRenderer:
@@ -6682,7 +7034,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: fc2b2a40339606f46b1c8b622cc60b07, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6705,9 +7057,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Attack and Movement Speed in the True Dimension by 10% each.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 7550279715545850774}
@@ -6831,6 +7183,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &476359694743414804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6875878568282272203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7486123716041932783
 GameObject:
   m_ObjectHideFlags: 0
@@ -6845,6 +7209,7 @@ GameObject:
   - component: {fileID: 4833546419326189010}
   - component: {fileID: 6808865605902104593}
   - component: {fileID: 8177187014602093907}
+  - component: {fileID: 4002117546713519423}
   m_Layer: 5
   m_Name: ULCorner
   m_TagString: Untagged
@@ -6869,8 +7234,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4, y: -4.200012}
-  m_SizeDelta: {x: 110, y: 120}
+  m_AnchoredPosition: {x: 252, y: 385}
+  m_SizeDelta: {x: 351, y: 355}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2535835888382159808
 CanvasRenderer:
@@ -6900,7 +7265,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 42e7c97541b5c6a4183973de0da99439, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6923,9 +7288,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Damage all nearby enemies every time you swap dimension.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 972815017597061298}
@@ -7046,6 +7411,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4002117546713519423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7486123716041932783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7886799817597637582
 GameObject:
   m_ObjectHideFlags: 0
@@ -7060,6 +7437,7 @@ GameObject:
   - component: {fileID: 8554960056134347234}
   - component: {fileID: 73627363996425587}
   - component: {fileID: 3518139935473408608}
+  - component: {fileID: 4890881096209274486}
   m_Layer: 5
   m_Name: LR7
   m_TagString: Untagged
@@ -7084,8 +7462,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 564, y: -342}
-  m_SizeDelta: {x: 30, y: 120}
+  m_AnchoredPosition: {x: 1584, y: -368}
+  m_SizeDelta: {x: 213, y: 433}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4357896624054854657
 CanvasRenderer:
@@ -7115,7 +7493,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 05e124a3d38733b4899afdba539979e5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7139,9 +7517,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Increases Movement Speed and Damage Reduction in the True Dimension
     by 10% each.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 5585299130983735661}
@@ -7265,6 +7643,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4890881096209274486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7886799817597637582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8329007153388281331
 GameObject:
   m_ObjectHideFlags: 0
@@ -7279,6 +7669,7 @@ GameObject:
   - component: {fileID: 2548620773824865915}
   - component: {fileID: 5085153061879735174}
   - component: {fileID: 3383794957808528589}
+  - component: {fileID: 1280170779857493169}
   m_Layer: 5
   m_Name: UR4
   m_TagString: Untagged
@@ -7303,8 +7694,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 362, y: -103}
-  m_SizeDelta: {x: 120, y: 20}
+  m_AnchoredPosition: {x: 1124.9, y: 209.79999}
+  m_SizeDelta: {x: 436, y: 129}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5439156635561792125
 CanvasRenderer:
@@ -7334,7 +7725,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 42460e0fb4fadd949b8c7a52e9f549b6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7357,9 +7748,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Attack Speed in the True Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 9087844950784071298}
@@ -7482,6 +7873,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1280170779857493169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329007153388281331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8383857797665823379
 GameObject:
   m_ObjectHideFlags: 0
@@ -7496,6 +7899,7 @@ GameObject:
   - component: {fileID: 5786376671243386862}
   - component: {fileID: 4318722087861153489}
   - component: {fileID: 4636505672491533426}
+  - component: {fileID: 7886392146098037267}
   m_Layer: 5
   m_Name: LR4
   m_TagString: Untagged
@@ -7520,8 +7924,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 462, y: -413}
-  m_SizeDelta: {x: 20, y: 180}
+  m_AnchoredPosition: {x: 1320, y: -593}
+  m_SizeDelta: {x: 188, y: 658}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2429926782824043822
 CanvasRenderer:
@@ -7551,7 +7955,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c6db3b3e3ab8bec4ebe4740838ca6a6b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7575,9 +7979,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Increases Health and Damage Reduction in the True Dimension by 10%
     each.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 1817089581863810261}
@@ -7702,6 +8106,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7886392146098037267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383857797665823379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8414041354746325757
 GameObject:
   m_ObjectHideFlags: 0
@@ -7716,6 +8132,7 @@ GameObject:
   - component: {fileID: 3134547261100236958}
   - component: {fileID: 5323996590082749818}
   - component: {fileID: 5466945901134593761}
+  - component: {fileID: 5984952440415579893}
   m_Layer: 5
   m_Name: UL5
   m_TagString: Untagged
@@ -7740,8 +8157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157.99998, y: -5.200012}
-  m_SizeDelta: {x: 100, y: 60}
+  m_AnchoredPosition: {x: 642, y: 328}
+  m_SizeDelta: {x: 253, y: 155}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3521818025210300470
 CanvasRenderer:
@@ -7771,7 +8188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1e34f384b1b608a4fa07a7ce45b24a5b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7794,9 +8211,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Attack Speed in the True Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 7550279715545850774}
@@ -7917,6 +8334,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5984952440415579893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8414041354746325757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8662989653109599921
 GameObject:
   m_ObjectHideFlags: 0
@@ -7931,6 +8360,7 @@ GameObject:
   - component: {fileID: 4523969312854852955}
   - component: {fileID: 9028805842903537096}
   - component: {fileID: 2916109344028803126}
+  - component: {fileID: 2201122670461747912}
   m_Layer: 5
   m_Name: LL6
   m_TagString: Untagged
@@ -7955,8 +8385,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 121, y: -237}
-  m_SizeDelta: {x: 20, y: 200}
+  m_AnchoredPosition: {x: 588, y: -174}
+  m_SizeDelta: {x: 160, y: 589}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8543940318924495606
 CanvasRenderer:
@@ -7986,7 +8416,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 495f392ae3cf9794db48fd925df74f38, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8010,9 +8440,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Decreases the amount of charges required to Swap to the True Dimension
     by 1.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 2073435897575035142}
@@ -8134,6 +8564,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2201122670461747912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662989653109599921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8865011186392946212
 GameObject:
   m_ObjectHideFlags: 0
@@ -8148,6 +8590,7 @@ GameObject:
   - component: {fileID: 4673772985315411791}
   - component: {fileID: 2478559990609969700}
   - component: {fileID: 6245205202127517743}
+  - component: {fileID: 6664728988642069232}
   m_Layer: 5
   m_Name: LL5
   m_TagString: Untagged
@@ -8172,8 +8615,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 168, y: -447}
-  m_SizeDelta: {x: 90, y: 60}
+  m_AnchoredPosition: {x: 662, y: -719}
+  m_SizeDelta: {x: 256, y: 244}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4386730830219791420
 CanvasRenderer:
@@ -8203,7 +8646,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4cd55b2772cb5804c90a4588a2533194, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8227,9 +8670,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Decreases the amount of charges required to Swap to the Mirror Dimension
     by 1.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 1817089581863810261}
@@ -8351,6 +8794,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &6664728988642069232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865011186392946212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8963452977858655279
 GameObject:
   m_ObjectHideFlags: 0
@@ -8365,6 +8820,7 @@ GameObject:
   - component: {fileID: 7550279715545850774}
   - component: {fileID: 5714519234365244813}
   - component: {fileID: 6138857593036438871}
+  - component: {fileID: 914615500956629715}
   m_Layer: 5
   m_Name: UL2
   m_TagString: Untagged
@@ -8389,8 +8845,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 158, y: -71.7}
-  m_SizeDelta: {x: 100, y: 50}
+  m_AnchoredPosition: {x: 629, y: 211}
+  m_SizeDelta: {x: 233, y: 146}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1459964970640508684
 CanvasRenderer:
@@ -8420,7 +8876,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f9eba745b4c09124aac929dc7380bc6e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8443,9 +8899,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Increases Attack Speed in the Mirror Dimension by 10%.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 9087844950784071298}
@@ -8566,6 +9022,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &914615500956629715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8963452977858655279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9019749978714151776
 GameObject:
   m_ObjectHideFlags: 0
@@ -8580,6 +9048,7 @@ GameObject:
   - component: {fileID: 7606717066356875660}
   - component: {fileID: 3240724453264450484}
   - component: {fileID: 3540694149332276024}
+  - component: {fileID: 6482064823751818733}
   m_Layer: 5
   m_Name: URCorner
   m_TagString: Untagged
@@ -8604,8 +9073,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 487.3, y: -4.200012}
-  m_SizeDelta: {x: 110, y: 120}
+  m_AnchoredPosition: {x: 1517.9, y: 369.8}
+  m_SizeDelta: {x: 354, y: 269}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &414943558829995060
 CanvasRenderer:
@@ -8635,7 +9104,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e8d334a58c05d25459dcdc88a9447378, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8658,9 +9127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Dimension stat modifiers are doubled for a time after swapping.
-  deactivatedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-  canBeActivatedColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-  activatedColor: {r: 0.27637196, g: 0.6698113, b: 0.13585795, a: 1}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 1}
+  canBeActivatedColor: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 1}
+  activatedColor: {r: 1, g: 1, b: 1, a: 1}
   techTree: {fileID: 3394559597376095408}
   nextNode:
   - {fileID: 2548620773824865915}
@@ -8782,6 +9251,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &6482064823751818733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9019749978714151776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68597f62ca907546bd25045967a96d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1274730771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8983,6 +9464,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8285620779383528560, guid: c9a7ce486cfa94803a82678cacaa9eb8,
         type: 3}
+      propertyPath: m_margin.z
+      value: 654.0747
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285620779383528560, guid: c9a7ce486cfa94803a82678cacaa9eb8,
+        type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: b4cd7390defe24e388ce2643e8688d7d,
@@ -9096,12 +9582,12 @@ PrefabInstance:
     - target: {fileID: 8285620779383528567, guid: c9a7ce486cfa94803a82678cacaa9eb8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 250
+      value: 77
       objectReference: {fileID: 0}
     - target: {fileID: 8285620779383528567, guid: c9a7ce486cfa94803a82678cacaa9eb8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -898
+      value: -245
       objectReference: {fileID: 0}
     - target: {fileID: 8285620779383528567, guid: c9a7ce486cfa94803a82678cacaa9eb8,
         type: 3}
@@ -9680,6 +10166,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8285620779383528560, guid: c9a7ce486cfa94803a82678cacaa9eb8,
         type: 3}
+      propertyPath: m_margin.z
+      value: 404.61987
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285620779383528560, guid: c9a7ce486cfa94803a82678cacaa9eb8,
+        type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: b4cd7390defe24e388ce2643e8688d7d,
@@ -9793,12 +10284,12 @@ PrefabInstance:
     - target: {fileID: 8285620779383528567, guid: c9a7ce486cfa94803a82678cacaa9eb8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 250
+      value: 77
       objectReference: {fileID: 0}
     - target: {fileID: 8285620779383528567, guid: c9a7ce486cfa94803a82678cacaa9eb8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -935
+      value: -361
       objectReference: {fileID: 0}
     - target: {fileID: 8285620779383528567, guid: c9a7ce486cfa94803a82678cacaa9eb8,
         type: 3}
@@ -9830,10 +10321,40 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2722516577062555607}
     m_Modifications:
+    - target: {fileID: 423977964175657389, guid: 075afce88e27f4475b11e14151f8bc82,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 495235586873435625, guid: 075afce88e27f4475b11e14151f8bc82,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5831185
+      objectReference: {fileID: 0}
+    - target: {fileID: 495235586873435625, guid: 075afce88e27f4475b11e14151f8bc82,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5831185
+      objectReference: {fileID: 0}
+    - target: {fileID: 495235586873435625, guid: 075afce88e27f4475b11e14151f8bc82,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5831185
+      objectReference: {fileID: 0}
     - target: {fileID: 495235586873435625, guid: 075afce88e27f4475b11e14151f8bc82,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -19
+      objectReference: {fileID: 0}
+    - target: {fileID: 495235586873435625, guid: 075afce88e27f4475b11e14151f8bc82,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 495235586873435625, guid: 075afce88e27f4475b11e14151f8bc82,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 3094626205515665551, guid: 075afce88e27f4475b11e14151f8bc82,
         type: 3}
@@ -9918,12 +10439,12 @@ PrefabInstance:
     - target: {fileID: 3094626205515665551, guid: 075afce88e27f4475b11e14151f8bc82,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 401
+      value: 416
       objectReference: {fileID: 0}
     - target: {fileID: 3094626205515665551, guid: 075afce88e27f4475b11e14151f8bc82,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -240
+      value: -253
       objectReference: {fileID: 0}
     - target: {fileID: 3094626205515665551, guid: 075afce88e27f4475b11e14151f8bc82,
         type: 3}
