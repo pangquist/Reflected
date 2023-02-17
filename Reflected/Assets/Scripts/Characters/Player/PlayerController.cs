@@ -17,16 +17,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] ThirdPersonMovement movement;
 
     [SerializeField] Player player;
-
     [SerializeField] bool movementLocked;
     [SerializeField] bool actionLocked;
     [SerializeField] bool damageLocked;
     [SerializeField] bool dead;
+    private UiManager uiManager;
 
     void Awake()
     {
         playerControls = new PlayerControls();
         playerControls.Player.Enable();
+        uiManager = FindObjectOfType<UiManager>();
     }
 
     void Update()
@@ -170,7 +171,8 @@ public class PlayerController : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        uiManager.EnableCursor();
+        uiManager.EnableDeathPanel();
     }
 
     public void GravityOn()

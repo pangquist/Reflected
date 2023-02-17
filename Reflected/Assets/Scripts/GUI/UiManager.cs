@@ -28,6 +28,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] GameObject CurrencyPanel;
     [SerializeField] GameObject roominfoPanel;
     [SerializeField] GameObject endScreenPanel;
+    [SerializeField] GameObject deathPanel;
     [SerializeField] GameObject timerPanel;
     [SerializeField] GameObject inGameMenu;
     [SerializeField] GameObject shopPanel;
@@ -112,9 +113,9 @@ public class UiManager : MonoBehaviour
 
     void HandleMouse()
     {
-        if (inGameMenu.activeSelf)
+        if (inGameMenu.activeSelf || deathPanel.activeSelf)
             menuState = MenuState.Active;
-        if (inGameMenu.activeSelf || shopPanel.activeSelf || upgradePanel.activeSelf || tutorialPanel.activeSelf || endScreenPanel.activeSelf)
+        if (inGameMenu.activeSelf || deathPanel.activeSelf || shopPanel.activeSelf || upgradePanel.activeSelf || tutorialPanel.activeSelf || endScreenPanel.activeSelf)
         {
             state = UiState.Active;
         }
@@ -138,6 +139,16 @@ public class UiManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             camera.enabled = true;
         }
+
+        
+    }
+
+    public void EnableCursor()
+    {
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        camera.enabled = false;
     }
 
     public void Continue()
@@ -161,6 +172,11 @@ public class UiManager : MonoBehaviour
     {
         GameObject.Find("GameManager").GetComponent<GameManager>().Save();
         Exit.ExitApplication();
+    }
+
+    public void EnableDeathPanel()
+    {
+        deathPanel.SetActive(true);
     }
 
     public void ShowInteractText(bool boolean)
